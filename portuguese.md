@@ -47,9 +47,13 @@ Com experiência em Qualidade de Software, meus últimos anos foram focados em m
 ```
 
 ## Experiência Profissional
-- XP Inc
+- iConnections
     - Engenheiro de Qualidade
-    - _Abril/2020 - ate o momento_
+    - _Abril/2025 - ate o momento_
+
+- XP Inc
+    - Especialista em Engenharia de Qualidade de Software
+    - _Abril/2020 - Abril/2025_
 
 - Grupo Netshoes
     - System Administrator
