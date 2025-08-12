@@ -47,9 +47,13 @@ With a background in quality assurance, my last few years have been focused on i
 
 
 ## Professional Experience
+- iConnections
+    - Quality Assurance Engineer
+    - _April/2025 - until now_
+
 - XP Inc
-    - Quality Engineer
-    - _April/2020 - until now_
+    - Staff Quality Assurance Engineer
+    - _April/2020 - April/2025_
 
 - Grupo Netshoes
     - System Administrator
