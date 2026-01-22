@@ -15,18 +15,18 @@ Com experiência em Qualidade de Software, meus últimos anos foram focados em m
 ## Habilidades em Destaque
 
 ```markdown
-- IDE:
+- IDE
     - Cursor
     - Visual Studio Code
     - Antigravity
-- Languages:
+- Languages
     - Bash/Shell Script
     - TypeScript/Javascript
     - Python
     - C#
     - Java
     - Go
-- Frameworks testing:
+- Frameworks testing
     - Playwright
     - Cypress
     - Appium
@@ -64,10 +64,10 @@ Com experiência em Qualidade de Software, meus últimos anos foram focados em m
     - New Relic
     - Sensu
 - GitHub
-- Infrastructure as Code (IaC):
+- Infrastructure as Code (IaC)
     - Ansible
     - Terraform
-- Caches:
+- Caches
     - Redis
     - Memcached
 ```

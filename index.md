@@ -14,18 +14,18 @@ With a background in quality assurance, my last few years have been focused on i
 ## Skill Highlights
 
 ```markdown
-- IDE:
+- IDE
     - Cursor
     - Visual Studio Code
     - Antigravity
-- Languages:
+- Languages
     - Bash/Shell Script
     - TypeScript/Javascript
     - Python
     - C#
     - Java
     - Go
-- Frameworks testing:
+- Frameworks testing
     - Playwright
     - Cypress
     - Appium
@@ -63,10 +63,10 @@ With a background in quality assurance, my last few years have been focused on i
     - New Relic
     - Sensu
 - GitHub
-- Infrastructure as Code (IaC):
+- Infrastructure as Code (IaC)
     - Ansible
     - Terraform
-- Caches:
+- Caches
     - Redis
     - Memcached
 ```
