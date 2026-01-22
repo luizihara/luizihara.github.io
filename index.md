@@ -14,35 +14,60 @@ With a background in quality assurance, my last few years have been focused on i
 ## Skill Highlights
 
 ```markdown
+- IDE
+    - Cursor
+    - Visual Studio Code
+    - Antigravity
+- Languages
+    - Bash / Shell Script
+    - TypeScript / JavaScript
+    - Python
+    - C#
+    - Java
+    - Go
+- Test Automation Frameworks
+    - Playwright
+    - Cypress
+    - Appium
+    - WebdriverIO
+    - Selenium
 - DevOps
 - CI/CD
+    - Azure DevOps
     - Jenkins
-- Container
+    - CircleCI
+    - GitHub Actions
+- Containers
     - Kubernetes
+    - Docker
 - Cloud
-    - Windows Azure
+    - Microsoft Azure
+    - Google Cloud Platform
     - Amazon Web Services
 - Linux
     - Ubuntu
-    - CentOS
-    - Red Hat Linux
-- Stress tests
+    - Red Hat Enterprise Linux (RHEL)
+- Performance / Load Testing
+    - k6
     - Tsung
-    - Jmeter
-    - K6
+    - JMeter
     - Locust
 - CDN
     - Akamai
     - Azion
+    - Cloudflare
 - Monitoring
+    - Grafana
+    - Datadog
+    - Dynatrace
     - New Relic
     - Sensu
-    - Grafana
-- GitHub
-- Ansible
-- Terraform
-- Redis
-- Bash/Shell Script
+- Infrastructure as Code (IaC)
+    - Ansible
+    - Terraform
+- Caches
+    - Redis
+    - Memcached
 ```
 
 
@@ -88,3 +113,9 @@ With a background in quality assurance, my last few years have been focused on i
     - _August/2009 - April/2011_
         - Client:
             - Caixa Econômica Federal
+
+## Projects from FIAP MBA - AI Business Leadership
+- [Advocacy e Influência](fiap.advocacyeinfluencia/)
+- [Capacitação Organizacional IA](fiap.capacitacaoorganizacional/index-1.html)
+- [Capacitação Organizacional IA 2](fiap.capacitacaoorganizacional/index-2.html)
+- [Capacitação Organizacional IA 3](fiap.capacitacaoorganizacional/index-3.html)
