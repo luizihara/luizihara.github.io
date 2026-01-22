@@ -14,35 +14,61 @@ With a background in quality assurance, my last few years have been focused on i
 ## Skill Highlights
 
 ```markdown
+- IDE:
+    - Cursor
+    - Visual Studio Code
+    - Antigravity
+- Languages:
+    - Bash/Shell Script
+    - TypeScript/Javascript
+    - Python
+    - C#
+    - Java
+    - Go
+- Frameworks testing:
+    - Playwright
+    - Cypress
+    - Appium
+    - WebdriverIO
+    - Selenium
 - DevOps
 - CI/CD
+    - Azure Devops
     - Jenkins
+    - CircleCI
+    - GitHub Actions
 - Container
     - Kubernetes
+    - Docker
 - Cloud
     - Windows Azure
+    - Google Cloud Platform
     - Amazon Web Services
 - Linux
     - Ubuntu
-    - CentOS
     - Red Hat Linux
 - Stress tests
+    - K6
     - Tsung
     - Jmeter
-    - K6
     - Locust
 - CDN
     - Akamai
     - Azion
+    - Cloudflare
 - Monitoring
+    - Grafana
+    - DataDog
+    - Dynatrace
     - New Relic
     - Sensu
-    - Grafana
 - GitHub
-- Ansible
-- Terraform
-- Redis
-- Bash/Shell Script
+- Infrastructure as Code (IaC):
+    - Ansible
+    - Terraform
+- Caches:
+    - Redis
+    - Memcached
 ```
 
 
