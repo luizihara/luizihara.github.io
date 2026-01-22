@@ -19,13 +19,13 @@ With a background in quality assurance, my last few years have been focused on i
     - Visual Studio Code
     - Antigravity
 - Languages
-    - Bash/Shell Script
-    - TypeScript/Javascript
+    - Bash / Shell Script
+    - TypeScript / JavaScript
     - Python
     - C#
     - Java
     - Go
-- Frameworks testing
+- Test Automation Frameworks
     - Playwright
     - Cypress
     - Appium
@@ -33,24 +33,24 @@ With a background in quality assurance, my last few years have been focused on i
     - Selenium
 - DevOps
 - CI/CD
-    - Azure Devops
+    - Azure DevOps
     - Jenkins
     - CircleCI
     - GitHub Actions
-- Container
+- Containers
     - Kubernetes
     - Docker
 - Cloud
-    - Windows Azure
+    - Microsoft Azure
     - Google Cloud Platform
     - Amazon Web Services
 - Linux
     - Ubuntu
-    - Red Hat Linux
-- Stress tests
-    - K6
+    - Red Hat Enterprise Linux (RHEL)
+- Performance / Load Testing
+    - k6
     - Tsung
-    - Jmeter
+    - JMeter
     - Locust
 - CDN
     - Akamai
@@ -58,11 +58,10 @@ With a background in quality assurance, my last few years have been focused on i
     - Cloudflare
 - Monitoring
     - Grafana
-    - DataDog
+    - Datadog
     - Dynatrace
     - New Relic
     - Sensu
-- GitHub
 - Infrastructure as Code (IaC)
     - Ansible
     - Terraform
