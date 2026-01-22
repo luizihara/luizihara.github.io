@@ -88,3 +88,9 @@ With a background in quality assurance, my last few years have been focused on i
     - _August/2009 - April/2011_
         - Client:
             - Caixa Econômica Federal
+
+## Projects from FIAP MBA - AI Business Leadership
+- [Advocacy e Influência](fiap.advocacyeinfluencia.github.io/)
+- [Capacitação Organizacional IA](fiap.capacitacaoorganizacionalIA.github.io/)
+- [Capacitação Organizacional IA 2](fiap.capacitacaoorganizacionalIA2.github.io/)
+- [Capacitação Organizacional IA 3](fiap.capacitacaoorganizacionalIA3.github.io/)

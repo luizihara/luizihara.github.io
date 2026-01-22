@@ -88,3 +88,9 @@ Com experiência em Qualidade de Software, meus últimos anos foram focados em m
     - _Agosto/2009 - Abril/2011_
         - Cliente:
             - Caixa Econômica Federal
+
+## Projetos da FIAP MBA - AI Business Leadership
+- [Advocacy e Influência](fiap.advocacyeinfluencia.github.io/)
+- [Capacitação Organizacional IA](fiap.capacitacaoorganizacionalIA.github.io/)
+- [Capacitação Organizacional IA 2](fiap.capacitacaoorganizacionalIA2.github.io/)
+- [Capacitação Organizacional IA 3](fiap.capacitacaoorganizacionalIA3.github.io/)
