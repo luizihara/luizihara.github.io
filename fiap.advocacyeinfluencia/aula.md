@@ -12,5 +12,3 @@
 - Leonardo Marinho  
 
 **Data de entrega:** 25 de outubro de 2025
-
-**URL:** https://luizihara.github.io/fiap.advocacyeinfluencia.github.io/

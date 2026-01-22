@@ -15,6 +15,3 @@
  - Stefan Ramos - RM368851
 
 **Data de entrega:** 29 de outubro de 2025
-
-**URL:** https://luizihara.github.io/fiap.capacitacaoorganizacionalIA2.github.io
-

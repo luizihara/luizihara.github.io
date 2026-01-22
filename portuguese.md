@@ -90,7 +90,7 @@ Com experiência em Qualidade de Software, meus últimos anos foram focados em m
             - Caixa Econômica Federal
 
 ## Projetos da FIAP MBA - AI Business Leadership
-- [Advocacy e Influência](fiap.advocacyeinfluencia.github.io/)
-- [Capacitação Organizacional IA](fiap.capacitacaoorganizacionalIA.github.io/)
-- [Capacitação Organizacional IA 2](fiap.capacitacaoorganizacionalIA2.github.io/)
-- [Capacitação Organizacional IA 3](fiap.capacitacaoorganizacionalIA3.github.io/)
+- [Advocacy e Influência](fiap.advocacyeinfluencia/)
+- [Capacitação Organizacional IA](fiap.capacitacaoorganizacional/index-1.html)
+- [Capacitação Organizacional IA 2](fiap.capacitacaoorganizacional/index-2.html)
+- [Capacitação Organizacional IA 3](fiap.capacitacaoorganizacional/index-3.html)

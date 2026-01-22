@@ -18,10 +18,11 @@ luizihara.github.io/
 ├── portuguese.md             # Portuguese version of the homepage
 ├── ROOT.md                   # Project documentation (this file)
 │
-├── fiap.advocacyeinfluencia.github.io/       # FIAP Project: Advocacy & Influence
-├── fiap.capacitacaoorganizacionalIA.github.io/ # FIAP Project: Org Capacity (IA)
-├── fiap.capacitacaoorganizacionalIA2.github.io/ # FIAP Project: Org Capacity (IA - 2)
-└── fiap.capacitacaoorganizacionalIA3.github.io/ # FIAP Project: Org Capacity (IA - 3)
+├── fiap.advocacyeinfluencia/                 # FIAP Project: Advocacy & Influence
+└── fiap.capacitacaoorganizacional/           # FIAP Project: Org Capacity (IA)
+    ├── index-1.html                          # Part 1
+    ├── index-2.html                          # Part 2
+    └── index-3.html                          # Part 3
 ```
 
 ## 🚀 How to Run/Deploy

@@ -17,6 +17,3 @@
 
 
 **Data de entrega:** 12 de novembro de 2025
-
-**URL:** https://luizihara.github.io/fiap.capacitacaoorganizacionalIA3.github.io
-
