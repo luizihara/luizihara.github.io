@@ -121,3 +121,4 @@ With a background in quality assurance, my last few years have been focused on i
 - [Capacitação Organizacional IA 3](fiap.capacitacaoorganizacional/index-3.html)
 - [Monetização e Go-to-Market](fiap.monetizacaoego-to-market/index-1.html)
 - [Arquitetura de Agentes](fiap.arquiteturaagentes/index.html)
+- [Arquitetura de Agentes 2](fiap.arquiteturaagentes/index-2.html)

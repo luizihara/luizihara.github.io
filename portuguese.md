@@ -121,3 +121,4 @@ Com experiência em Qualidade de Software, meus últimos anos foram focados em m
 - [Capacitação Organizacional IA 3](fiap.capacitacaoorganizacional/index-3.html)
 - [Monetização e Go-to-Market](fiap.monetizacaoego-to-market/index-1.html)
 - [Arquitetura de Agentes](fiap.arquiteturaagentes/index.html)
+- [Arquitetura de Agentes 2](fiap.arquiteturaagentes/index-2.html)
