@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinâmica Prática V - Arquitetura de Agentes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        fiap: {
+                            pink: '#ed145b',
+                            dark: '#0a0a0a',
+                            gray: '#1f1f1f',
+                            text: '#e0e0e0'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #050505;
+            color: #e0e0e0;
+            background-image: radial-gradient(circle at 10% 20%, rgba(237, 20, 91, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(237, 20, 91, 0.05) 0%, transparent 20%);
+        }
+
+        .glass-card {
+            background: rgba(31, 31, 31, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .nav-item.active {
+            border-left: 4px solid #ed145b;
+            background: linear-gradient(90deg, rgba(237, 20, 91, 0.1) 0%, transparent 100%);
+            color: white;
+        }
+
+        /* Diagram Animation */
+        .agent-node {
+            transition: all 0.3s ease;
+        }
+
+        .agent-node:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(237, 20, 91, 0.4);
+            border-color: #ed145b;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ed145b;
+        }
+    </style>
+</head>
+
+<body class="flex h-screen overflow-hidden">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-fiap-dark border-r border-gray-800 flex flex-col hidden md:flex z-50">
+        <div class="p-6">
+            <h1 class="text-2xl font-bold text-white tracking-tighter">FIAP <span class="text-fiap-pink">AI</span></h1>
+            <p class="text-xs text-gray-500 mt-1 font-semibold">Arquitetura de Agentes</p>
+            <p class="text-[10px] text-gray-600 mt-1">Prof. Carlos A. Stefano Filho</p>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto py-4">
+            <ul class="space-y-1">
+                <li><a href="#intro"
+                        class="nav-item block py-3 px-6 text-sm hover:text-white text-gray-400 transition-all active">1.
+                        Contexto & Cenário</a></li>
+                <li><a href="#architecture"
+                        class="nav-item block py-3 px-6 text-sm hover:text-white text-gray-400 transition-all">2.
+                        Arquitetura Agêntica</a></li>
+                <li><a href="#defense"
+                        class="nav-item block py-3 px-6 text-sm hover:text-white text-gray-400 transition-all">3. Defesa
+                        da Solução</a></li>
+                <li><a href="#kpis"
+                        class="nav-item block py-3 px-6 text-sm hover:text-white text-gray-400 transition-all">4. KPIs &
+                        Métricas</a></li>
+                <li><a href="#roi"
+                        class="nav-item block py-3 px-6 text-sm hover:text-white text-gray-400 transition-all">5. ROI
+                        Detalhado</a></li>
+                <li><a href="#ethics"
+                        class="nav-item block py-3 px-6 text-sm hover:text-white text-gray-400 transition-all">6. Ética
+                        & Governança</a></li>
+            </ul>
+        </nav>
+
+        <div class="p-6 border-t border-gray-800">
+            <h4 class="text-[10px] uppercase font-bold text-fiap-pink mb-3 tracking-wider">Integrantes</h4>
+            <ul class="space-y-2">
+                <li class="text-xs text-gray-400 flex justify-between">
+                    <span>Luiz Ihara</span>
+                    <span class="text-gray-600 font-mono">368484</span>
+                </li>
+                <li class="text-xs text-gray-400 flex justify-between">
+                    <span>Filipe Fragoso</span>
+                    <span class="text-gray-600 font-mono">368500</span>
+                </li>
+                <li class="text-xs text-gray-400 flex justify-between">
+                    <span>Pedro Martins</span>
+                    <span class="text-gray-600 font-mono">368543</span>
+                </li>
+                <li class="text-xs text-gray-400 flex justify-between">
+                    <span>Daniel Caminha</span>
+                    <span class="text-gray-600 font-mono">366740</span>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Mobile Header -->
+    <div
+        class="md:hidden fixed top-0 w-full bg-fiap-dark border-b border-gray-800 z-50 p-4 flex justify-between items-center">
+        <span class="font-bold text-fiap-pink">FIAP AI</span>
+        <span class="text-xs text-gray-400">Versão Mobile</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1 h-full overflow-y-auto relative scroll-smooth md:p-0 pt-16" id="main-content">
+
+        <!-- Section 1: Contexto -->
+        <section id="intro" class="min-h-screen flex flex-col justify-center p-8 md:p-16 border-b border-gray-900">
+            <div class="max-w-4xl mx-auto w-full">
+                <div
+                    class="inline-block px-3 py-1 rounded-full bg-pink-900/30 border border-pink-800 text-fiap-pink text-xs font-semibold mb-4">
+                    ETAPA 1: SELEÇÃO DO CENÁRIO
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white leading-tight">
+                    Suporte ao Cliente Multi-Nível <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-fiap-pink to-purple-600">Fintech
+                        Digital Bank</span>
+                </h1>
+                <p class="text-lg text-gray-400 mb-8 leading-relaxed max-w-2xl">
+                    O cenário escolhido foca na automação inteligente do suporte bancário. O desafio é escalar desde
+                    consultas simples (saldo) até disputas complexas de fraude, garantindo segurança e empatia através
+                    de uma orquestração de agentes especializados.
+                </p>
+
+                <!-- Info Block Added -->
+                <div class="flex flex-col md:flex-row gap-6 mb-8 border-t border-gray-800 pt-6">
+                    <div>
+                        <span class="block text-xs font-bold text-fiap-pink uppercase mb-1">Disciplina</span>
+                        <span class="text-sm text-white">Arquitetura de Agentes</span>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-fiap-pink uppercase mb-1">Docente</span>
+                        <span class="text-sm text-white">Prof. Carlos Alberto Stefano Filho</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                    <div class="glass-card p-6 rounded-xl">
+                        <h3 class="text-white font-semibold mb-2 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-fiap-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                </path>
+                            </svg>
+                            O Problema
+                        </h3>
+                        <p class="text-sm text-gray-400">Chatbots tradicionais falham em contextos complexos (ex:
+                            fraudes), gerando frustração e alto volume de transbordo para humanos, elevando o custo
+                            operacional.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl">
+                        <h3 class="text-white font-semibold mb-2 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-fiap-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            A Solução
+                        </h3>
+                        <p class="text-sm text-gray-400">Um sistema multi-agente onde um "Supervisor" classifica a
+                            intenção e delega para "Especialistas" (Transacional, Segurança, Consultivo), mantendo o
+                            contexto.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Arquitetura -->
+        <section id="architecture"
+            class="min-h-screen flex flex-col justify-center p-8 md:p-16 border-b border-gray-900 bg-black/40">
+            <div class="max-w-5xl mx-auto w-full">
+                <div
+                    class="inline-block px-3 py-1 rounded-full bg-blue-900/30 border border-blue-800 text-blue-400 text-xs font-semibold mb-4">
+                    ETAPA 2: ORQUESTRAÇÃO
+                </div>
+                <h2 class="text-3xl font-bold mb-8 text-white">Fluxo de Orquestração Hierárquica</h2>
+
+                <p class="text-gray-400 mb-8">
+                    Escolhemos o padrão de <strong>Orquestração Supervisor/Router</strong>. Um agente central recebe a
+                    demanda, analisa a intenção e roteia para o especialista adequado.
+                </p>
+
+                <!-- Visual Architecture Diagram -->
+                <div class="relative w-full bg-gray-900/50 rounded-2xl p-8 border border-gray-800 overflow-hidden">
+                    <!-- Grid Background -->
+                    <div class="absolute inset-0"
+                        style="background-image: radial-gradient(#333 1px, transparent 1px); background-size: 20px 20px; opacity: 0.3;">
+                    </div>
+
+                    <div class="relative z-10 flex flex-col items-center gap-12">
+
+                        <!-- User Input -->
+                        <div class="flex flex-col items-center">
+                            <div
+                                class="bg-gray-800 text-white px-4 py-2 rounded-lg text-sm border border-gray-700 mb-2">
+                                Cliente: "Não reconheço uma compra de R$500"</div>
+                            <div class="h-8 w-px bg-gray-600"></div>
+                            <div
+                                class="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-gray-600">
+                            </div>
+                        </div>
+
+                        <!-- Supervisor Node -->
+                        <div
+                            class="agent-node bg-indigo-900/40 backdrop-blur border border-indigo-500 p-4 rounded-xl w-64 text-center cursor-pointer group">
+                            <div class="text-indigo-300 text-xs font-bold uppercase tracking-wider mb-1">Orquestrador
+                            </div>
+                            <h3 class="text-white font-bold text-lg">Supervisor (Router)</h3>
+                            <p class="text-gray-400 text-xs mt-2 group-hover:text-white transition-colors">Analisa
+                                intenção e sentimento. Decide quem resolve.</p>
+                        </div>
+
+                        <!-- Connections -->
+                        <div class="flex justify-between w-full max-w-2xl relative h-8">
+                            <div class="absolute top-0 left-1/2 w-px h-8 bg-gray-600 -translate-x-1/2"></div>
+                            <div class="absolute top-8 left-[16%] w-[68%] h-px bg-gray-600 border-t border-gray-600">
+                            </div> <!-- Horizontal connector -->
+
+                            <!-- Down connectors -->
+                            <div class="absolute top-8 left-[16%] w-px h-8 bg-gray-600"></div>
+                            <div class="absolute top-8 left-1/2 w-px h-8 bg-gray-600"></div>
+                            <div class="absolute top-8 right-[16%] w-px h-8 bg-gray-600"></div>
+                        </div>
+
+                        <!-- Worker Nodes -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl mt-4">
+                            <!-- Agent 1 -->
+                            <div class="agent-node bg-gray-800/80 border border-gray-700 p-4 rounded-xl text-center">
+                                <div
+                                    class="w-10 h-10 bg-green-900/50 text-green-400 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <h4 class="font-bold text-white text-sm">Agente de Saldo</h4>
+                                <p class="text-xs text-gray-500 mt-1">Leitura simples de DB. Respostas rápidas.</p>
+                            </div>
+
+                            <!-- Agent 2 -->
+                            <div
+                                class="agent-node bg-fiap-pink/10 border border-fiap-pink p-4 rounded-xl text-center shadow-[0_0_15px_rgba(237,20,91,0.15)]">
+                                <div
+                                    class="w-10 h-10 bg-fiap-pink text-white rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <h4 class="font-bold text-white text-sm">Agente de Fraude</h4>
+                                <p class="text-xs text-gray-500 mt-1">Raciocínio complexo. Coleta evidências e inicia
+                                    bloqueio.</p>
+                                <span class="block mt-2 text-[10px] text-fiap-pink uppercase font-bold">Caminho
+                                    Ativo</span>
+                            </div>
+
+                            <!-- Agent 3 -->
+                            <div class="agent-node bg-gray-800/80 border border-gray-700 p-4 rounded-xl text-center">
+                                <div
+                                    class="w-10 h-10 bg-purple-900/50 text-purple-400 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <h4 class="font-bold text-white text-sm">Handoff Humano</h4>
+                                <p class="text-xs text-gray-500 mt-1">Escalado se o score de confiança for baixo.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="text-white font-bold mb-2">Por que Hierárquico?</h4>
+                        <p class="text-sm text-gray-400">Permite especialização. O agente de fraude precisa de um prompt
+                            de sistema diferente (mais cauteloso, investigativo) do que o agente de saldo (rápido,
+                            direto). Isso evita alucinações.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-2">Vantagens vs. Desvantagens</h4>
+                        <ul class="text-sm text-gray-400 space-y-1 list-disc list-inside">
+                            <li><span class="text-green-400">Vantagem:</span> Maior acurácia e segurança.</li>
+                            <li><span class="text-green-400">Vantagem:</span> Modularidade (fácil adicionar novos
+                                especialistas).</li>
+                            <li><span class="text-red-400">Desvantagem:</span> Latência (uma camada extra de
+                                processamento no Router).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Defesa da Ideia -->
+        <section id="defense" class="min-h-screen flex flex-col justify-center p-8 md:p-16 border-b border-gray-900">
+            <div class="max-w-4xl mx-auto w-full">
+                <h2 class="text-3xl font-bold mb-8 text-white">Por que uma Solução Agêntica?</h2>
+
+                <div class="grid gap-6">
+                    <div class="glass-card p-8 rounded-xl border-l-4 border-l-fiap-pink">
+                        <h3 class="text-xl font-bold text-white mb-3">Além da Automação Rígida</h3>
+                        <p class="text-gray-300 mb-4">
+                            Sistemas tradicionais (IF/ELSE) falham na ambiguidade. Um cliente dizendo "Meu cartão sumiu,
+                            acho que deixei no Uber, mas talvez esteja em casa" trava um bot comum.
+                        </p>
+                        <p class="text-gray-300">
+                            <strong>A defesa:</strong> Agentes com LLMs possuem capacidade de <em>raciocínio</em>
+                            (Reasoning). O agente pode inferir que o risco é moderado e sugerir um "bloqueio temporário"
+                            em vez de cancelamento total, adaptando-se ao contexto do usuário.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h4 class="text-white font-bold text-sm mb-2">Memória Contextual</h4>
+                            <p class="text-xs text-gray-400">O agente lembra que o cliente viajou para o exterior na
+                                semana passada, contextualizando a fraude.</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h4 class="text-white font-bold text-sm mb-2">Uso de Ferramentas</h4>
+                            <p class="text-xs text-gray-400">Capacidade de consultar APIs de geolocalização e histórico
+                                em tempo real de forma autônoma.</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h4 class="text-white font-bold text-sm mb-2">Flexibilidade</h4>
+                            <p class="text-xs text-gray-400">Lida com erros de digitação e mudanças de assunto sem
+                                reiniciar o fluxo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: KPIs -->
+        <section id="kpis"
+            class="min-h-screen flex flex-col justify-center p-8 md:p-16 border-b border-gray-900 bg-black/40">
+            <div class="max-w-4xl mx-auto w-full">
+                <h2 class="text-3xl font-bold mb-8 text-white">KPIs de Negócio & Sucesso</h2>
+                <p class="text-gray-400 mb-8">Como vamos medir se a solução realmente entrega valor?</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- KPI 1 -->
+                    <div class="glass-card p-6 rounded-xl hover:bg-gray-800 transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">FCR</h3>
+                                <p class="text-xs text-gray-500 uppercase tracking-wide">First Contact Resolution</p>
+                            </div>
+                            <span class="text-green-400 bg-green-900/30 px-2 py-1 rounded text-xs">+25% Meta</span>
+                        </div>
+                        <p class="text-sm text-gray-300">Porcentagem de tickets resolvidos pelo agente sem intervenção
+                            humana. <br><strong>Medição:</strong> Log da conversa onde `handoff_flag == false`.</p>
+                    </div>
+
+                    <!-- KPI 2 -->
+                    <div class="glass-card p-6 rounded-xl hover:bg-gray-800 transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">TMA</h3>
+                                <p class="text-xs text-gray-500 uppercase tracking-wide">Tempo Médio de Atendimento</p>
+                            </div>
+                            <span class="text-blue-400 bg-blue-900/30 px-2 py-1 rounded text-xs">-40% Meta</span>
+                        </div>
+                        <p class="text-sm text-gray-300">Redução no tempo total da jornada do cliente. Agentes processam
+                            dados instantaneamente.<br><strong>Medição:</strong> Timestamp Start vs. End.</p>
+                    </div>
+
+                    <!-- KPI 3 -->
+                    <div class="glass-card p-6 rounded-xl hover:bg-gray-800 transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">CSAT / NPS</h3>
+                                <p class="text-xs text-gray-500 uppercase tracking-wide">Satisfação do Cliente</p>
+                            </div>
+                            <span class="text-fiap-pink bg-pink-900/30 px-2 py-1 rounded text-xs">> 60</span>
+                        </div>
+                        <p class="text-sm text-gray-300">Qualidade percebida da interação.<br><strong>Medição:</strong>
+                            Pesquisa de 1 clique ao final do chat ("Como foi seu atendimento?").</p>
+                    </div>
+
+                    <!-- KPI 4 -->
+                    <div class="glass-card p-6 rounded-xl hover:bg-gray-800 transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">Custo por Ticket</h3>
+                                <p class="text-xs text-gray-500 uppercase tracking-wide">Eficiência Financeira</p>
+                            </div>
+                            <span class="text-yellow-400 bg-yellow-900/30 px-2 py-1 rounded text-xs">R$ 2 vs R$
+                                15</span>
+                        </div>
+                        <p class="text-sm text-gray-300">Comparativo do custo de token LLM vs. minuto do operador
+                            humano.<br><strong>Medição:</strong> Custo API / Total Tickets.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: ROI -->
+        <section id="roi" class="min-h-screen flex flex-col justify-center p-8 md:p-16 border-b border-gray-900">
+            <div class="max-w-6xl mx-auto w-full">
+                <h2 class="text-3xl font-bold mb-6 text-white">Estimativa de ROI (Return on Investment)</h2>
+                <p class="text-gray-400 mb-8 max-w-2xl">
+                    Análise financeira detalhada considerando CAPEX (Investimento Inicial) e OPEX (Custo Operacional). A
+                    solução visa reduzir custos operacionais massivos enquanto aumenta a disponibilidade.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Column 1: Calculation Logic -->
+                    <div class="space-y-6">
+                        <!-- Economia Mensal Card -->
+                        <div
+                            class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 shadow-xl relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-fiap-pink/10 rounded-bl-full -mr-8 -mt-8">
+                            </div>
+
+                            <h3
+                                class="text-xl font-semibold text-white mb-6 border-b border-gray-700 pb-4 relative z-10">
+                                Economia Operacional Mensal</h3>
+
+                            <div class="space-y-4 relative z-10">
+                                <div class="flex justify-between items-center text-sm border-b border-gray-800 pb-2">
+                                    <span class="text-gray-400">Volume de Tickets</span>
+                                    <span class="text-white font-mono">100.000 / mês</span>
+                                </div>
+                                <div class="flex justify-between items-center text-sm border-b border-gray-800 pb-2">
+                                    <span class="text-gray-400">Taxa de Contenção (AI Resolves)</span>
+                                    <span class="text-fiap-pink font-bold">40% (40k tickets)</span>
+                                </div>
+                                <div class="flex justify-between items-center text-sm border-b border-gray-800 pb-2">
+                                    <span class="text-gray-400">Delta Custo (Humano - AI)</span>
+                                    <span class="text-green-400 font-mono">R$ 15,00 - R$ 2,50 = R$ 12,50</span>
+                                </div>
+
+                                <div class="mt-6 pt-4">
+                                    <p class="text-gray-400 text-xs uppercase tracking-wide mb-1">Economia Líquida
+                                        Mensal</p>
+                                    <div class="text-4xl font-bold text-white tracking-tight">
+                                        R$ 500.000<span class="text-base text-gray-500 font-normal">/mês</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CAPEX Breakdown -->
+                        <div class="glass-card p-6 rounded-xl border-l-4 border-l-blue-500">
+                            <h4 class="text-white font-bold mb-3 flex items-center gap-2">
+                                CAPEX: Investimento Inicial (Setup)
+                            </h4>
+                            <ul class="space-y-2 text-sm text-gray-400">
+                                <li class="flex justify-between">
+                                    <span>Desenvolvimento & Integração</span>
+                                    <span class="text-white">R$ 120.000</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span>Fine-Tuning & Prompt Engineering</span>
+                                    <span class="text-white">R$ 50.000</span>
+                                </li>
+                                <li class="flex justify-between border-t border-gray-700 pt-2 mt-2 font-bold">
+                                    <span class="text-blue-400">Total Setup</span>
+                                    <span class="text-white">R$ 170.000</span>
+                                </li>
+                            </ul>
+                            <div class="mt-4 bg-blue-900/20 p-3 rounded text-xs text-blue-300">
+                                <strong>Payback Time:</strong> Menos de 1 mês (considerando economia de 500k/mês).
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Projections & Intangibles -->
+                    <div class="space-y-6">
+
+                        <!-- Visual Comparison Chart -->
+                        <div class="glass-card p-6 rounded-xl">
+                            <h4 class="text-white font-bold mb-6">Projeção Acumulada (12 Meses)</h4>
+
+                            <div class="space-y-6">
+                                <!-- Scenario A: Human Only -->
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span class="text-gray-400">Cenário Tradicional (100% Humano)</span>
+                                        <span class="text-gray-400">R$ 18.0 Milhões</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 rounded-full h-4 overflow-hidden">
+                                        <div class="bg-gray-600 h-4 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Scenario B: Hybrid AI -->
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span class="text-white font-bold">Cenário Híbrido (AI + Humano)</span>
+                                        <span class="text-fiap-pink font-bold">R$ 12.0 Milhões</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 rounded-full h-4 overflow-hidden relative mb-2">
+                                        <div class="bg-fiap-pink h-4 rounded-full relative z-10" style="width: 66%">
+                                        </div>
+                                    </div>
+                                    <!-- Savings Indicator moved outside -->
+                                    <div class="flex justify-end items-center gap-2">
+                                        <div class="h-px w-8 bg-gray-700"></div>
+                                        <span
+                                            class="text-xs text-green-400 font-bold bg-green-900/20 px-2 py-1 rounded border border-green-900/50">
+                                            Economia Total: R$ 6.0 Milhões
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-4 italic">
+                                *Considerando OPEX de tokens e manutenção da plataforma.
+                            </p>
+                        </div>
+
+                        <!-- Intangible Gains -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
+                                <h5 class="text-green-400 font-bold text-sm mb-2">Escalabilidade Infinita</h5>
+                                <p class="text-xs text-gray-400">Ao contrário de humanos, agentes escalam
+                                    instantaneamente em picos (ex: Black Friday) sem custo de hora extra.</p>
+                            </div>
+                            <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
+                                <h5 class="text-purple-400 font-bold text-sm mb-2">Data Intelligence</h5>
+                                <p class="text-xs text-gray-400">Conversas estruturadas viram insights para o time de
+                                    Produto (ex: "30% reclamam da UX do Pix").</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Ética -->
+        <section id="ethics" class="min-h-screen flex flex-col justify-center p-8 md:p-16">
+            <div class="max-w-4xl mx-auto w-full">
+                <h2 class="text-3xl font-bold mb-8 text-white">Aspectos Éticos & Governança</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Ethical Pillar 1 -->
+                    <div>
+                        <h3 class="text-fiap-pink font-bold text-lg mb-3">1. Transparência & Identidade</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            O agente deve, obrigatoriamente, identificar-se como uma Inteligência Artificial no início
+                            da interação. O usuário tem o "Direito à Explicação": se um reembolso for negado, o agente
+                            deve explicar os critérios (dentro dos limites de segurança).
+                        </p>
+                    </div>
+
+                    <!-- Ethical Pillar 2 -->
+                    <div>
+                        <h3 class="text-fiap-pink font-bold text-lg mb-3">2. Human-in-the-Loop (HITL)</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Para ações críticas, como <strong>bloqueio de contas</strong> ou negação de crédito, a IA
+                            deve atuar apenas como recomendadora. A decisão final ou a revisão facilitada deve ser
+                            humana para evitar danos catastróficos por "falsos positivos".
+                        </p>
+                    </div>
+
+                    <!-- Ethical Pillar 3 -->
+                    <div>
+                        <h3 class="text-fiap-pink font-bold text-lg mb-3">3. Viés Algorítmico</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Monitoramento constante para garantir que o modelo de detecção de fraude não penalize
+                            desproporcionalmente perfis demográficos específicos baseados em CEP ou idade.
+                        </p>
+                    </div>
+
+                    <!-- Ethical Pillar 4 -->
+                    <div>
+                        <h3 class="text-fiap-pink font-bold text-lg mb-3">4. Privacidade (LGPD)</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Dados sensíveis (PII) devem ser anonimizados antes de serem processados pelo modelo de
+                            orquestração se este for externo. Uso de LLMs hospedados em infraestrutura privada (Azure
+                            OpenAI/AWS Bedrock) é mandatório.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-12 pt-8 border-t border-gray-800 text-center">
+                    <p class="text-gray-500 text-sm">FIAP AI Architecture • 2026</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Simple Intersection Observer for active nav items
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Remove active class from all
+                    navItems.forEach(item => {
+                        item.classList.remove('active');
+                        item.classList.remove('text-white');
+                        item.classList.add('text-gray-400');
+                    });
+
+                    // Add active class to current
+                    const id = entry.target.getAttribute('id');
+                    const activeLink = document.querySelector(`.nav-item[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                        activeLink.classList.add('text-white');
+                        activeLink.classList.remove('text-gray-400');
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+
+</html>
