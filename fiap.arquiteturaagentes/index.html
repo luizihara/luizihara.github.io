@@ -76,6 +76,67 @@
             background: #ed145b;
         }
     </style>
+
+    <!-- Visit Badge Styles -->
+    <style>
+        .floating-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0a0a0a;
+            /* fiap.dark */
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(237, 20, 91, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            border: 1px solid #ed145b;
+            /* fiap.pink */
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        .floating-badge a {
+            color: #ed145b;
+            /* fiap.pink */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .floating-badge a:hover {
+            text-decoration: underline;
+        }
+
+        .close-badge {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            line-height: 1;
+        }
+
+        .close-badge:hover {
+            color: #fff;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 
 <body class="flex h-screen overflow-hidden">
@@ -657,6 +718,22 @@
             observer.observe(section);
         });
     </script>
+    <script>
+        function closeBadge() {
+            document.getElementById('visit-badge').style.display = 'none';
+        }
+    </script>
+
+    <!-- O Balãozinho -->
+    <div id="visit-badge" class="floating-badge">
+        <span class="badge-icon">🌐</span>
+        <span>
+            Você está visitando o site de
+            <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
+        </span>
+        <button class="close-badge" onclick="closeBadge()" title="Fechar">×</button>
+    </div>
+
 </body>
 
 </html>

@@ -42,3 +42,89 @@ To add a new sub-project (e.g., another FIAP repository):
 - **Static Gen**: Jekyll
 - **Theme**: Cayman
 - **Sub-projects**: HTML5, CSS3, JavaScript (Vanilla, Chart.js, Tailwind via CDN)
+
+## 🎨 Standardization Rules
+
+### 1. Site Visit Badge (O Balãozinho)
+All `.html` pages in this repository MUST include a floating "Visit Badge" in the bottom-right corner. This badge informs visitors they are browsing `luizihara.github.io`.
+
+**Requirements:**
+- **Position**: Fixed at bottom-right (`bottom: 20px`, `right: 20px`).
+- **Functionality**: Must have a close button (`×`) that hides the element.
+- **Theming**: The badge colors (background, border, text, shadow) **MUST be adapted** to match the specific color palette of the page/project it is inserted into. Do not use a hardcoded default if it clashes with the page design.
+
+**Standard Code Snippet (Adapt Colors):**
+
+```html
+<!-- Visit Badge Styles -->
+<style>
+    .floating-badge {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        /* ADAPT COLORS HERE: */
+        background-color: #181818; /* e.g. dark background */
+        color: #ffffff;
+        border: 1px solid #FFC600; /* e.g. highlight color */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        /* ------------------ */
+        padding: 12px 20px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 1000;
+        font-family: sans-serif; /* Use project font */
+        font-size: 14px;
+        animation: slideIn 0.5s ease-out forwards;
+    }
+
+    .floating-badge a {
+        /* ADAPT LINK COLOR: */
+        color: #FFC600; 
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .floating-badge a:hover {
+        text-decoration: underline;
+    }
+
+    .close-badge {
+        background: none;
+        border: none;
+        color: inherit;
+        opacity: 0.7;
+        font-size: 20px;
+        cursor: pointer;
+        margin-left: 10px;
+        line-height: 1;
+    }
+
+    .close-badge:hover {
+        opacity: 1;
+    }
+
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<!-- Visit Badge Script -->
+<script>
+    function closeBadge() {
+        document.getElementById('visit-badge').style.display = 'none';
+    }
+</script>
+
+<!-- Badge Element (Place at end of body) -->
+<div id="visit-badge" class="floating-badge">
+    <span class="badge-icon">🌐</span>
+    <span>
+        Você está visitando o site de 
+        <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
+    </span>
+    <button class="close-badge" onclick="closeBadge()" title="Fechar">×</button>
+</div>
+```

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +14,12 @@
         /* Configuração de fonte e cores de base (usando tema escuro para um visual mais profissional) */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d1117; /* Fundo escuro */
-            color: #e6e6e6; /* Texto claro */
+            background-color: #0d1117;
+            /* Fundo escuro */
+            color: #e6e6e6;
+            /* Texto claro */
         }
+
         /* Estilos personalizados para o título principal */
         .header-title {
             background-image: linear-gradient(to right, #4f46e5, #9333ea);
@@ -24,19 +28,88 @@
             color: transparent;
             font-weight: 800;
         }
+
         /* Estilo para links do LinkedIn */
         .linkedin-link {
             display: flex;
             align-items: center;
-            color: #0a66c2; /* Cor oficial do LinkedIn */
+            color: #0a66c2;
+            /* Cor oficial do LinkedIn */
             font-weight: 600;
             transition: color 0.2s;
         }
+
         .linkedin-link:hover {
             color: #1a86e2;
         }
     </style>
+
+    <!-- Visit Badge Styles -->
+    <style>
+        .floating-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1f2937;
+            /* gray-800 */
+            color: #e6e6e6;
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+            /* indigo shadow */
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            border: 1px solid #4f46e5;
+            /* indigo-600 */
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        .floating-badge a {
+            color: #4f46e5;
+            /* indigo-600 */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .floating-badge a:hover {
+            color: #818cf8;
+            /* indigo-400 */
+            text-decoration: underline;
+        }
+
+        .close-badge {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            /* gray-400 */
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            line-height: 1;
+        }
+
+        .close-badge:hover {
+            color: #fff;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
+
 <body class="p-4 md:p-8">
 
     <!-- Cabeçalho Principal -->
@@ -51,34 +124,44 @@
 
     <!-- Container dos Perfis: Grid Responsivo -->
     <main>
-        <section id="profiles" class="grid gap-6 lg:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mb-16">
+        <section id="profiles"
+            class="grid gap-6 lg:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mb-16">
             <!-- Participante 1: Luiz Ricardo -->
-            <div class="profile-card bg-gray-800 p-6 rounded-xl shadow-2xl border-t-4 border-indigo-500 hover:shadow-indigo-500/50 transition-shadow duration-300">
+            <div
+                class="profile-card bg-gray-800 p-6 rounded-xl shadow-2xl border-t-4 border-indigo-500 hover:shadow-indigo-500/50 transition-shadow duration-300">
                 <h2 class="text-2xl font-bold mb-3 text-indigo-300">
                     <span class="mr-2">🧠</span> 1. Luiz Ricardo R. P. I.
                 </h2>
                 <div class="space-y-4 text-sm">
                     <!-- Cargo Atual -->
                     <p class="text-gray-300">
-                        <span class="font-semibold text-indigo-400">💼 Cargo:</span> Quality Assurance Engineer na iConnections
+                        <span class="font-semibold text-indigo-400">💼 Cargo:</span> Quality Assurance Engineer na
+                        iConnections
                     </p>
-                    
+
                     <!-- Resumo -->
                     <p class="bg-gray-700 p-3 rounded-lg">
-                        <span class="font-semibold text-gray-100 block mb-1">📝 Resumo:</span> 
-                        QA Fullstack com forte background em infraestrutura e DevOps, especialista em SonarQube, automação de testes, e integração de qualidade em pipelines CI/CD. Possui ampla experiência em empresas de tecnologia e e-commerce (XP Inc., Netshoes, Dotz, FCamara).
+                        <span class="font-semibold text-gray-100 block mb-1">📝 Resumo:</span>
+                        QA Fullstack com forte background em infraestrutura e DevOps, especialista em SonarQube,
+                        automação de testes, e integração de qualidade em pipelines CI/CD. Possui ampla experiência em
+                        empresas de tecnologia e e-commerce (XP Inc., Netshoes, Dotz, FCamara).
                     </p>
-                    
+
                     <!-- Formação -->
                     <p>
-                        <span class="font-semibold text-gray-100">🎓 Formação:</span> MBA em AI Business Leadership (FIAP)
+                        <span class="font-semibold text-gray-100">🎓 Formação:</span> MBA em AI Business Leadership
+                        (FIAP)
                     </p>
-                    
+
                     <!-- LinkedIn Link -->
                     <p class="pt-1">
                         <a href="https://www.linkedin.com/in/luiz-ihara/" target="_blank" class="linkedin-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1 text-blue-500">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="mr-1 text-blue-500">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                </path>
                                 <rect width="4" height="12" x="2" y="9"></rect>
                                 <circle cx="4" cy="4" r="2"></circle>
                             </svg>
@@ -88,38 +171,49 @@
 
                     <!-- Definição de Perfil -->
                     <p class="text-sm text-gray-400 border-l-2 border-indigo-500 pl-3">
-                        <span class="font-semibold text-gray-200 block mb-1">💬 Perfil:</span> Engenheiro de Qualidade Fullstack com mentalidade DevOps e foco em automação, performance e análise estática de código. Perfil técnico, estruturado e orientado a eficiência.
+                        <span class="font-semibold text-gray-200 block mb-1">💬 Perfil:</span> Engenheiro de Qualidade
+                        Fullstack com mentalidade DevOps e foco em automação, performance e análise estática de código.
+                        Perfil técnico, estruturado e orientado a eficiência.
                     </p>
                 </div>
             </div>
 
             <!-- Participante 2: Filipe Augusto -->
-            <div class="profile-card bg-gray-800 p-6 rounded-xl shadow-2xl border-t-4 border-purple-500 hover:shadow-purple-500/50 transition-shadow duration-300">
+            <div
+                class="profile-card bg-gray-800 p-6 rounded-xl shadow-2xl border-t-4 border-purple-500 hover:shadow-purple-500/50 transition-shadow duration-300">
                 <h2 class="text-2xl font-bold mb-3 text-purple-300">
                     <span class="mr-2">💼</span> 2. Filipe Augusto de Souza Fragoso
                 </h2>
                 <div class="space-y-4 text-sm">
                     <!-- Cargo Atual -->
                     <p class="text-gray-300">
-                        <span class="font-semibold text-purple-400">💼 Cargo:</span> Software Technical Leader no Mercado Livre
+                        <span class="font-semibold text-purple-400">💼 Cargo:</span> Software Technical Leader no
+                        Mercado Livre
                     </p>
-                    
+
                     <!-- Resumo -->
                     <p class="bg-gray-700 p-3 rounded-lg">
-                        <span class="font-semibold text-gray-100 block mb-1">📝 Resumo:</span> 
-                        Tech Manager e Líder de Engenharia com foco em mobile development (iOS/Android), Flutter, e gestão de times. Possui experiência como Tech Lead na FARFETCH e iOS Engineer na Netshoes, além de background técnico em arquitetura MVVM, Swift, e engenharia de produto.
+                        <span class="font-semibold text-gray-100 block mb-1">📝 Resumo:</span>
+                        Tech Manager e Líder de Engenharia com foco em mobile development (iOS/Android), Flutter, e
+                        gestão de times. Possui experiência como Tech Lead na FARFETCH e iOS Engineer na Netshoes, além
+                        de background técnico em arquitetura MVVM, Swift, e engenharia de produto.
                     </p>
-                    
+
                     <!-- Formação -->
                     <p>
-                        <span class="font-semibold text-gray-100">🎓 Formação:</span> Bacharel em Ciência da Computação pela USP
+                        <span class="font-semibold text-gray-100">🎓 Formação:</span> Bacharel em Ciência da Computação
+                        pela USP
                     </p>
 
                     <!-- LinkedIn Link -->
                     <p class="pt-1">
                         <a href="https://www.linkedin.com/in/filipe-fragoso/" target="_blank" class="linkedin-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1 text-blue-500">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="mr-1 text-blue-500">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                </path>
                                 <rect width="4" height="12" x="2" y="9"></rect>
                                 <circle cx="4" cy="4" r="2"></circle>
                             </svg>
@@ -129,38 +223,49 @@
 
                     <!-- Definição de Perfil -->
                     <p class="text-sm text-gray-400 border-l-2 border-purple-500 pl-3">
-                        <span class="font-semibold text-gray-200 block mb-1">💬 Perfil:</span> Líder técnico com perfil híbrido — forte bagagem em desenvolvimento mobile e gestão de equipes. Entusiasta de IA e transformação digital. Capacidade de alinhar tecnologia e estratégia de produto.
+                        <span class="font-semibold text-gray-200 block mb-1">💬 Perfil:</span> Líder técnico com perfil
+                        híbrido — forte bagagem em desenvolvimento mobile e gestão de equipes. Entusiasta de IA e
+                        transformação digital. Capacidade de alinhar tecnologia e estratégia de produto.
                     </p>
                 </div>
             </div>
-            
+
             <!-- Participante 3: Daniel Vasserman -->
-            <div class="profile-card bg-gray-800 p-6 rounded-xl shadow-2xl border-t-4 border-pink-500 hover:shadow-pink-500/50 transition-shadow duration-300">
+            <div
+                class="profile-card bg-gray-800 p-6 rounded-xl shadow-2xl border-t-4 border-pink-500 hover:shadow-pink-500/50 transition-shadow duration-300">
                 <h2 class="text-2xl font-bold mb-3 text-pink-300">
                     <span class="mr-2">🧩</span> 3. Daniel Vasserman
                 </h2>
                 <div class="space-y-4 text-sm">
                     <!-- Cargo Atual -->
                     <p class="text-gray-300">
-                        <span class="font-semibold text-pink-400">💼 Cargo:</span> Head of Corporate Innovation & Partnerships na 100 Open Startups
+                        <span class="font-semibold text-pink-400">💼 Cargo:</span> Head of Corporate Innovation &
+                        Partnerships na 100 Open Startups
                     </p>
-                    
+
                     <!-- Resumo -->
                     <p class="bg-gray-700 p-3 rounded-lg">
-                        <span class="font-semibold text-gray-100 block mb-1">📝 Resumo:</span> 
-                        Executivo de inovação aberta e novos negócios, com mais de 10 anos conectando startups e grandes empresas. Especialista em ecossistemas de inovação, parcerias estratégicas e inteligência artificial aplicada a negócios.
+                        <span class="font-semibold text-gray-100 block mb-1">📝 Resumo:</span>
+                        Executivo de inovação aberta e novos negócios, com mais de 10 anos conectando startups e grandes
+                        empresas. Especialista em ecossistemas de inovação, parcerias estratégicas e inteligência
+                        artificial aplicada a negócios.
                     </p>
-                    
+
                     <!-- Formação -->
                     <p>
-                        <span class="font-semibold text-gray-100">🎓 Formação:</span> Executive MBA em Inteligência Artificial (FIAP) e programa do MIT (Global Start-up Labs)
+                        <span class="font-semibold text-gray-100">🎓 Formação:</span> Executive MBA em Inteligência
+                        Artificial (FIAP) e programa do MIT (Global Start-up Labs)
                     </p>
 
                     <!-- LinkedIn Link -->
                     <p class="pt-1">
                         <a href="https://www.linkedin.com/in/daniel-vasserman/" target="_blank" class="linkedin-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1 text-blue-500">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="mr-1 text-blue-500">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                </path>
                                 <rect width="4" height="12" x="2" y="9"></rect>
                                 <circle cx="4" cy="4" r="2"></circle>
                             </svg>
@@ -170,38 +275,49 @@
 
                     <!-- Definição de Perfil -->
                     <p class="text-sm text-gray-400 border-l-2 border-pink-500 pl-3">
-                        <span class="font-semibold text-gray-200 block mb-1">💬 Perfil:</span> Estrategista de inovação com perfil corporativo e relacional. Atua como ponte entre startups e grandes corporações. Enfoca IA e inovação aberta como motor de transformação organizacional.
+                        <span class="font-semibold text-gray-200 block mb-1">💬 Perfil:</span> Estrategista de inovação
+                        com perfil corporativo e relacional. Atua como ponte entre startups e grandes corporações.
+                        Enfoca IA e inovação aberta como motor de transformação organizacional.
                     </p>
                 </div>
             </div>
 
             <!-- Participante 4: Gustavo Lapa David -->
-            <div class="profile-card bg-gray-800 p-6 rounded-xl shadow-2xl border-t-4 border-green-500 hover:shadow-green-500/50 transition-shadow duration-300">
+            <div
+                class="profile-card bg-gray-800 p-6 rounded-xl shadow-2xl border-t-4 border-green-500 hover:shadow-green-500/50 transition-shadow duration-300">
                 <h2 class="text-2xl font-bold mb-3 text-green-300">
                     <span class="mr-2">🧠</span> 4. Gustavo Lapa David
                 </h2>
                 <div class="space-y-4 text-sm">
                     <!-- Cargo Atual -->
                     <p class="text-gray-300">
-                        <span class="font-semibold text-green-400">💼 Cargo:</span> Analista de Controles Internos no Bradesco
+                        <span class="font-semibold text-green-400">💼 Cargo:</span> Analista de Controles Internos no
+                        Bradesco
                     </p>
-                    
+
                     <!-- Resumo -->
                     <p class="bg-gray-700 p-3 rounded-lg">
-                        <span class="font-semibold text-gray-100 block mb-1">📝 Resumo:</span> 
-                        Profissional sênior de controles internos e governança, com experiência em gestão de riscos, compliance e auditoria. Certificado em ISO 31000:2018 e com formação sólida em Inteligência Artificial aplicada à liderança estratégica (MBA FIAP).
+                        <span class="font-semibold text-gray-100 block mb-1">📝 Resumo:</span>
+                        Profissional sênior de controles internos e governança, com experiência em gestão de riscos,
+                        compliance e auditoria. Certificado em ISO 31000:2018 e com formação sólida em Inteligência
+                        Artificial aplicada à liderança estratégica (MBA FIAP).
                     </p>
-                    
+
                     <!-- Formação -->
                     <p>
-                        <span class="font-semibold text-gray-100">🎓 Formação:</span> MBA em AI Business Leadership (FIAP)
+                        <span class="font-semibold text-gray-100">🎓 Formação:</span> MBA em AI Business Leadership
+                        (FIAP)
                     </p>
 
                     <!-- LinkedIn Link -->
                     <p class="pt-1">
                         <a href="https://www.linkedin.com/in/gustavo-lapa/" target="_blank" class="linkedin-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1 text-blue-500">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="mr-1 text-blue-500">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                </path>
                                 <rect width="4" height="12" x="2" y="9"></rect>
                                 <circle cx="4" cy="4" r="2"></circle>
                             </svg>
@@ -211,13 +327,16 @@
 
                     <!-- Definição de Perfil -->
                     <p class="text-sm text-gray-400 border-l-2 border-green-500 pl-3">
-                        <span class="font-semibold text-gray-200 block mb-1">💬 Perfil:</span> Analista orientado a processos e conformidade, combinando experiência em instituições financeiras com interesse crescente em IA e automação de riscos.
+                        <span class="font-semibold text-gray-200 block mb-1">💬 Perfil:</span> Analista orientado a
+                        processos e conformidade, combinando experiência em instituições financeiras com interesse
+                        crescente em IA e automação de riscos.
                     </p>
                 </div>
             </div>
 
             <!-- Participante 5: Kisy Florio Joaquim Trevisan -->
-            <div class="profile-card bg-gray-800 p-6 rounded-xl shadow-2xl border-t-4 border-yellow-500 hover:shadow-yellow-500/50 transition-shadow duration-300">
+            <div
+                class="profile-card bg-gray-800 p-6 rounded-xl shadow-2xl border-t-4 border-yellow-500 hover:shadow-yellow-500/50 transition-shadow duration-300">
                 <h2 class="text-2xl font-bold mb-3 text-yellow-300">
                     <span class="mr-2">🌱</span> 5. Kisy Florio J. Trevisan
                 </h2>
@@ -226,23 +345,31 @@
                     <p class="text-gray-300">
                         <span class="font-semibold text-yellow-400">💼 Cargo:</span> Não especificado no perfil
                     </p>
-                    
+
                     <!-- Resumo -->
                     <p class="bg-gray-700 p-3 rounded-lg">
-                        <span class="font-semibold text-gray-100 block mb-1">📝 Resumo:</span> 
-                        Perfil inicial ou em desenvolvimento, com presença no LinkedIn mas sem atividades ou histórico profissional visível. Indica potencial foco em tecnologia ou áreas correlatas, considerando o contexto dos demais perfis.
+                        <span class="font-semibold text-gray-100 block mb-1">📝 Resumo:</span>
+                        Perfil inicial ou em desenvolvimento, com presença no LinkedIn mas sem atividades ou histórico
+                        profissional visível. Indica potencial foco em tecnologia ou áreas correlatas, considerando o
+                        contexto dos demais perfis.
                     </p>
-                    
+
                     <!-- Formação -->
                     <p>
-                        <span class="font-semibold text-gray-100">🎓 Formação:</span> Em andamento (Implícito pelo contexto do grupo)
+                        <span class="font-semibold text-gray-100">🎓 Formação:</span> Em andamento (Implícito pelo
+                        contexto do grupo)
                     </p>
 
                     <!-- LinkedIn Link -->
                     <p class="pt-1">
-                        <a href="https://www.linkedin.com/in/kisy-florio-joaquim-trevisan-828806334/" target="_blank" class="linkedin-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1 text-blue-500">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <a href="https://www.linkedin.com/in/kisy-florio-joaquim-trevisan-828806334/" target="_blank"
+                            class="linkedin-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="mr-1 text-blue-500">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                </path>
                                 <rect width="4" height="12" x="2" y="9"></rect>
                                 <circle cx="4" cy="4" r="2"></circle>
                             </svg>
@@ -252,7 +379,9 @@
 
                     <!-- Definição de Perfil -->
                     <p class="text-sm text-gray-400 border-l-2 border-yellow-500 pl-3">
-                        <span class="font-semibold text-gray-200 block mb-1">💬 Perfil:</span> Profissional em início de jornada — perfil ainda em construção, com provável foco em formação e entrada no mercado de tecnologia ou inovação.
+                        <span class="font-semibold text-gray-200 block mb-1">💬 Perfil:</span> Profissional em início de
+                        jornada — perfil ainda em construção, com provável foco em formação e entrada no mercado de
+                        tecnologia ou inovação.
                     </p>
                 </div>
             </div>
@@ -263,7 +392,7 @@
             <h2 class="text-3xl font-bold text-center mb-8 text-white">Análise de Competências do Time</h2>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                
+
                 <!-- Gráfico 1: Competências Críticas para IA (image_e28b31.png) -->
                 <div class="bg-gray-800 p-6 rounded-xl shadow-2xl border-t-4 border-indigo-500">
                     <h3 class="text-xl font-semibold mb-4 text-indigo-300">Competências Críticas para IA</h3>
@@ -290,23 +419,35 @@
 
             </div>
         </section>
-        
+
         <!-- SEÇÃO DE TABELAS DE DADOS -->
         <section id="data-tables" class="pt-12 mt-8 border-t border-gray-700">
             <h2 class="text-3xl font-bold text-center mb-8 text-white">Dados da Avaliação em Tabela (Escala 1-3)</h2>
-            
+
             <!-- Tabela 1: Competências Críticas para IA -->
             <div class="mb-10 bg-gray-800 p-6 rounded-xl shadow-xl border-t-4 border-indigo-500 overflow-x-auto">
                 <h3 class="text-xl font-semibold mb-4 text-indigo-300">Tabela 1: Competências Críticas para IA</h3>
                 <table class="min-w-full divide-y divide-gray-700">
                     <thead class="bg-gray-700">
                         <tr>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tl-lg">Competência</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">Luiz</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">Daniel</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">Gustavo</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">Kisy</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tr-lg">Filipe</th>
+                            <th
+                                class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tl-lg">
+                                Competência</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                Luiz</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                Daniel</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                Gustavo</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                Kisy</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tr-lg">
+                                Filipe</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-700">
@@ -327,7 +468,8 @@
                             <td class="px-4 py-3 whitespace-nowrap text-center text-gray-200">1</td>
                         </tr>
                         <tr class="bg-gray-800 hover:bg-gray-700 transition duration-150">
-                            <td class="px-4 py-3 whitespace-nowrap font-medium text-indigo-300">Pensamento Algorítmico</td>
+                            <td class="px-4 py-3 whitespace-nowrap font-medium text-indigo-300">Pensamento Algorítmico
+                            </td>
                             <td class="px-4 py-3 whitespace-nowrap text-center text-gray-200">2</td>
                             <td class="px-4 py-3 whitespace-nowrap text-center text-gray-200">2</td>
                             <td class="px-4 py-3 whitespace-nowrap text-center text-gray-200">2</td>
@@ -344,17 +486,30 @@
                 <table class="min-w-full divide-y divide-gray-700">
                     <thead class="bg-gray-700">
                         <tr>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tl-lg">Competência</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">Luiz</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">Daniel</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">Gustavo</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">Kisy</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tr-lg">Filipe</th>
+                            <th
+                                class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tl-lg">
+                                Competência</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                Luiz</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                Daniel</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                Gustavo</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                Kisy</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tr-lg">
+                                Filipe</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-700">
                         <tr class="bg-gray-800 hover:bg-gray-700 transition duration-150">
-                            <td class="px-4 py-3 whitespace-nowrap font-medium text-purple-300">IA e Machine Learning</td>
+                            <td class="px-4 py-3 whitespace-nowrap font-medium text-purple-300">IA e Machine Learning
+                            </td>
                             <td class="px-4 py-3 whitespace-nowrap text-center text-gray-200">1</td>
                             <td class="px-4 py-3 whitespace-nowrap text-center text-gray-200">1</td>
                             <td class="px-4 py-3 whitespace-nowrap text-center text-gray-200">1</td>
@@ -370,7 +525,8 @@
                             <td class="px-4 py-3 whitespace-nowrap text-center text-gray-200">2</td>
                         </tr>
                         <tr class="bg-gray-800 hover:bg-gray-700 transition duration-150">
-                            <td class="px-4 py-3 whitespace-nowrap font-medium text-purple-300">Automação de Processos</td>
+                            <td class="px-4 py-3 whitespace-nowrap font-medium text-purple-300">Automação de Processos
+                            </td>
                             <td class="px-4 py-3 whitespace-nowrap text-center text-gray-200">3</td>
                             <td class="px-4 py-3 whitespace-nowrap text-center text-gray-200">2</td>
                             <td class="px-4 py-3 whitespace-nowrap text-center text-gray-200">3</td>
@@ -387,17 +543,30 @@
                 <table class="min-w-full divide-y divide-gray-700">
                     <thead class="bg-gray-700">
                         <tr>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tl-lg">Competência</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">Luiz</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">Daniel</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">Gustavo</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">Kisy</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tr-lg">Filipe</th>
+                            <th
+                                class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tl-lg">
+                                Competência</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                Luiz</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                Daniel</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                Gustavo</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                Kisy</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tr-lg">
+                                Filipe</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-700">
                         <tr class="bg-gray-800 hover:bg-gray-700 transition duration-150">
-                            <td class="px-4 py-3 whitespace-nowrap font-medium text-green-300">Inteligência Emocional</td>
+                            <td class="px-4 py-3 whitespace-nowrap font-medium text-green-300">Inteligência Emocional
+                            </td>
                             <td class="px-4 py-3 whitespace-nowrap text-center text-gray-200">3</td>
                             <td class="px-4 py-3 whitespace-nowrap text-center text-gray-200">2</td>
                             <td class="px-4 py-3 whitespace-nowrap text-center text-gray-200">1</td>
@@ -478,7 +647,7 @@
                     pointLabels: { color: 'white', font: { size: 12 } },
                     suggestedMin: 1, // Mínimo da escala
                     suggestedMax: 3, // Máximo da escala
-                    ticks: { 
+                    ticks: {
                         stepSize: 1, // Passos de 1 em 1
                         color: '#bbb',
                         backdropColor: '#0d1117' // Cor de fundo dos rótulos dos ticks
@@ -500,12 +669,28 @@
         }
 
         // Renderiza os gráficos após o carregamento do DOM
-        window.onload = function() {
+        window.onload = function () {
             createRadarChart('chartIA', dataIA);
             createRadarChart('chartDigital', dataDigital);
             createRadarChart('chartHumana', dataHumana);
         };
     </script>
-</body>
-</html>
+    <script>
+        function closeBadge() {
+            document.getElementById('visit-badge').style.display = 'none';
+        }
+    </script>
 
+    <!-- O Balãozinho -->
+    <div id="visit-badge" class="floating-badge">
+        <span class="badge-icon">🌐</span>
+        <span>
+            Você está visitando o site de
+            <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
+        </span>
+        <button class="close-badge" onclick="closeBadge()" title="Fechar">×</button>
+    </div>
+
+</body>
+
+</html>

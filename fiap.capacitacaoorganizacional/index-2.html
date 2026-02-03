@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,25 +10,96 @@
     <!-- Configuração do Tema e Fonte Inter -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f4f7f9;
         }
+
         /* Definição de Cores Personalizadas para as Cards */
         .card-chatbot {
-            border-top: 5px solid #10b981; /* Emerald */
+            border-top: 5px solid #10b981;
+            /* Emerald */
         }
+
         .card-fraude {
-            border-top: 5px solid #ef4444; /* Red */
+            border-top: 5px solid #ef4444;
+            /* Red */
         }
+
         .card-marketing {
-            border-top: 5px solid #3b82f6; /* Blue */
+            border-top: 5px solid #3b82f6;
+            /* Blue */
         }
+
         .shadow-custom {
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
     </style>
+
+    <!-- Visit Badge Styles -->
+    <style>
+        .floating-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ffffff;
+            color: #1f2937;
+            /* gray-800 */
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            border: 1px solid #e5e7eb;
+            /* gray-200 */
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        .floating-badge a {
+            color: #10b981;
+            /* emerald-500 */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .floating-badge a:hover {
+            text-decoration: underline;
+        }
+
+        .close-badge {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            /* gray-400 */
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            line-height: 1;
+        }
+
+        .close-badge:hover {
+            color: #111;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
+
 <body class="p-4 md:p-8">
 
     <div class="max-w-7xl mx-auto">
@@ -64,7 +136,12 @@
             <div class="bg-white rounded-xl shadow-custom p-6 transition duration-300 hover:shadow-xl card-chatbot">
                 <div class="flex items-center mb-4">
                     <!-- Icone (Chat) -->
-                    <svg class="w-10 h-10 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.805A17.91 17.91 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                    <svg class="w-10 h-10 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.805A17.91 17.91 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                        </path>
+                    </svg>
                     <h3 class="text-2xl font-bold text-gray-800">1. Chatbot de Atendimento</h3>
                 </div>
 
@@ -87,7 +164,8 @@
 
                 <div class="pt-4 border-t border-gray-100">
                     <h4 class="text-lg font-semibold text-gray-700 mb-2">Justificativa da Escolha:</h4>
-                    <p class="text-sm text-gray-600">Melhor ROI (150%) em curto prazo e baixo risco de execução. Impacto direto e quantificável na eficiência operacional e na satisfação básica do cliente.</p>
+                    <p class="text-sm text-gray-600">Melhor ROI (150%) em curto prazo e baixo risco de execução. Impacto
+                        direto e quantificável na eficiência operacional e na satisfação básica do cliente.</p>
                 </div>
             </div>
 
@@ -95,7 +173,12 @@
             <div class="bg-white rounded-xl shadow-custom p-6 transition duration-300 hover:shadow-xl card-fraude">
                 <div class="flex items-center mb-4">
                     <!-- Icone (Shield) -->
-                    <svg class="w-10 h-10 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 4.016A11.91 11.91 0 001 12c0 2.973 1.343 5.766 3.618 7.618A11.956 11.956 0 0012 21.056c2.534-.416 4.97-1.464 7.082-2.918A11.91 11.91 0 0023 12c0-2.973-1.343-5.766-3.618-7.618z"></path></svg>
+                    <svg class="w-10 h-10 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 4.016A11.91 11.91 0 001 12c0 2.973 1.343 5.766 3.618 7.618A11.956 11.956 0 0012 21.056c2.534-.416 4.97-1.464 7.082-2.918A11.91 11.91 0 0023 12c0-2.973-1.343-5.766-3.618-7.618z">
+                        </path>
+                    </svg>
                     <h3 class="text-2xl font-bold text-gray-800">2. Detecção de Fraudes (ML)</h3>
                 </div>
 
@@ -118,7 +201,9 @@
 
                 <div class="pt-4 border-t border-gray-100">
                     <h4 class="text-lg font-semibold text-gray-700 mb-2">Justificativa da Escolha:</h4>
-                    <p class="text-sm text-gray-600">Alto valor estratégico e de proteção. O retorno de R$ 8M/ano compensa a implementação mais lenta. É um projeto de defesa e compliance de alto impacto financeiro e reputacional.</p>
+                    <p class="text-sm text-gray-600">Alto valor estratégico e de proteção. O retorno de R$ 8M/ano
+                        compensa a implementação mais lenta. É um projeto de defesa e compliance de alto impacto
+                        financeiro e reputacional.</p>
                 </div>
             </div>
 
@@ -126,7 +211,11 @@
             <div class="bg-white rounded-xl shadow-custom p-6 transition duration-300 hover:shadow-xl card-marketing">
                 <div class="flex items-center mb-4">
                     <!-- Icone (Target/Bullseye) -->
-                    <svg class="w-10 h-10 text-blue-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13l-3 3m0 0l-3-3m3 3V8m0 0a4 4 0 110 8 4 4 0 010-8z"></path></svg>
+                    <svg class="w-10 h-10 text-blue-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 13l-3 3m0 0l-3-3m3 3V8m0 0a4 4 0 110 8 4 4 0 010-8z"></path>
+                    </svg>
                     <h3 class="text-2xl font-bold text-gray-800">3. Personalização de Marketing</h3>
                 </div>
 
@@ -149,7 +238,9 @@
 
                 <div class="pt-4 border-t border-gray-100">
                     <h4 class="text-lg font-semibold text-gray-700 mb-2">Justificativa da Escolha:</h4>
-                    <p class="text-sm text-gray-600">Alto alinhamento estratégico com crescimento (Receita). O aumento de 25% na conversão tem um potencial de retorno (ROI) muito alto. O desafio dos dados é contornável com um plano de coleta focado.</p>
+                    <p class="text-sm text-gray-600">Alto alinhamento estratégico com crescimento (Receita). O aumento
+                        de 25% na conversão tem um potencial de retorno (ROI) muito alto. O desafio dos dados é
+                        contornável com um plano de coleta focado.</p>
                 </div>
             </div>
         </div>
@@ -161,6 +252,22 @@
 
     </div>
 
-</body>
-</html>
+    <script>
+        function closeBadge() {
+            document.getElementById('visit-badge').style.display = 'none';
+        }
+    </script>
 
+    <!-- O Balãozinho -->
+    <div id="visit-badge" class="floating-badge">
+        <span class="badge-icon">🌐</span>
+        <span>
+            Você está visitando o site de
+            <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
+        </span>
+        <button class="close-badge" onclick="closeBadge()" title="Fechar">×</button>
+    </div>
+
+</body>
+
+</html>
