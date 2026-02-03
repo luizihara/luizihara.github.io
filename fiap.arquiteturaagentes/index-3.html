@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitPrime - Dinâmica Prática II</title>
+
+    <!-- Google Fonts: Montserrat (Headers) & Roboto (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        fitBlack: '#181818',
+                        fitDark: '#0a0a0a',
+                        fitYellow: '#FFC600',
+                        fitYellowHover: '#E6B200',
+                        fitGray: '#2A2A2A'
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+        }
+
+        .text-highlight {
+            color: #FFC600;
+        }
+
+        .bg-highlight {
+            background-color: #FFC600;
+            color: #000000;
+        }
+
+        .section-title {
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFC600;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-fitYellow selection:text-black">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-sm border-b border-fitGray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <span class="font-display font-black text-2xl tracking-tighter italic">
+                        FIT<span class="text-highlight">PRIME</span>
+                    </span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#intro"
+                            class="hover:text-fitYellow px-3 py-2 rounded-md text-sm font-bold uppercase transition">Contexto</a>
+                        <a href="#analise"
+                            class="hover:text-fitYellow px-3 py-2 rounded-md text-sm font-bold uppercase transition">Análise</a>
+                        <a href="#equipe"
+                            class="bg-fitYellow text-black hover:bg-fitYellowHover px-4 py-2 rounded-full text-sm font-bold uppercase transition shadow-[0_0_15px_rgba(255,198,0,0.3)]">
+                            Grupo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="intro" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Abstract Background Shape -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-fitYellow opacity-10 blur-[100px] rounded-full">
+        </div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-fitGray opacity-50 blur-[80px] rounded-full">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center lg:text-left">
+                <span
+                    class="inline-block py-1 px-3 rounded bg-fitGray text-fitYellow text-xs font-bold tracking-widest uppercase mb-4">
+                    Arquitetura de Agentes
+                </span>
+                <h1 class="text-5xl lg:text-7xl font-display font-black text-white leading-tight mb-6">
+                    DINÂMICA <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-fitYellow to-yellow-200">PRÁTICA
+                        II</span>
+                </h1>
+                <p class="mt-4 max-w-2xl text-xl text-gray-400 font-light mx-auto lg:mx-0">
+                    A expansão da "FitPrime": Transição de Agentes Reativos para Agentes Baseados em Modelo.
+                </p>
+                <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <div class="flex items-center gap-3 text-gray-300">
+                        <i class="fas fa-chalkboard-teacher text-fitYellow"></i>
+                        <span class="font-medium">Prof. Carlos Alberto Stefano Filho</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Context Section -->
+    <section class="bg-fitBlack py-16 border-y border-fitGray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2
+                        class="text-3xl font-display font-bold mb-6 text-white uppercase border-l-4 border-fitYellow pl-4">
+                        O Cenário Atual
+                    </h2>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        A FitPrime cresceu com um modelo de negócios simples: abrir unidades em locais de alto fluxo. As
+                        decisões eram reativas: demanda alta gerava nova unidade; ociosidade gerava promoção.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed">
+                        Porém, com concorrentes digitais e mudança no comportamento do consumidor, o modelo de "reflexo"
+                        não basta mais. O novo CEO propõe um sistema baseado em dados, geolocalização e modelos
+                        preditivos.
+                    </p>
+                </div>
+                <div class="bg-fitDark p-8 rounded-2xl border border-fitGray shadow-2xl relative">
+                    <div
+                        class="absolute -top-4 -right-4 bg-fitYellow text-black font-bold px-4 py-2 rounded shadow-lg uppercase text-sm">
+                        Novo Objetivo
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-fitYellow mt-1 mr-3"></i>
+                            <span class="text-gray-300">Dados de geolocalização e renda</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-chart-line text-fitYellow mt-1 mr-3"></i>
+                            <span class="text-gray-300">Modelos preditivos de demanda</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-project-diagram text-fitYellow mt-1 mr-3"></i>
+                            <span class="text-gray-300">Simulações de cenários</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Q&A Section -->
+    <section id="analise" class="py-20 bg-fitDark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-display font-black text-white uppercase mb-2">Análise do Grupo</h2>
+                <div class="h-1 w-24 bg-fitYellow mx-auto"></div>
+            </div>
+
+            <!-- Grid for Questions -->
+            <div class="space-y-12">
+
+                <!-- Q1 & Q2 Row -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Q1 -->
+                    <div
+                        class="group bg-fitBlack p-8 rounded-xl border border-fitGray hover:border-fitYellow transition duration-300">
+                        <div class="text-fitYellow text-5xl font-black opacity-20 mb-[-20px] ml-[-10px]">01</div>
+                        <h3 class="text-xl font-bold text-white mb-4 relative z-10">Comportamento Atual</h3>
+                        <p class="text-gray-400 text-sm mb-4 italic">No cenário atual, a FitPrime se comporta mais como
+                            um agente de reflexo simples ou baseado em modelo?</p>
+                        <div class="bg-fitGray/30 p-4 rounded-lg border-l-2 border-fitYellow">
+                            <p class="text-white font-medium">Como agente de reflexo simples.</p>
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div
+                        class="group bg-fitBlack p-8 rounded-xl border border-fitGray hover:border-fitYellow transition duration-300">
+                        <div class="text-fitYellow text-5xl font-black opacity-20 mb-[-20px] ml-[-10px]">02</div>
+                        <h3 class="text-xl font-bold text-white mb-4 relative z-10">Sinais Observados</h3>
+                        <p class="text-gray-400 text-sm mb-4 italic">Que sinais mostram isso?</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center text-gray-300">
+                                <i class="fas fa-arrow-right text-xs text-fitYellow mr-2"></i> Baseado puramente em
+                                reação.
+                            </li>
+                            <li class="flex items-start text-gray-300">
+                                <i class="fas fa-arrow-right text-xs text-fitYellow mr-2 mt-1"></i>
+                                <span>Exemplo: parece um robô que limpa a casa, repetindo as mesmas ações sem adaptação
+                                    real ao ambiente.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Q3: Benefits (Card Grid) -->
+                <div class="bg-fitBlack rounded-2xl p-8 md:p-12 border border-fitGray">
+                    <div class="flex items-center mb-8">
+                        <div class="text-fitYellow text-5xl font-black opacity-20 mr-[-10px]">03</div>
+                        <h3 class="text-2xl font-bold text-white ml-6">Benefícios Competitivos</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Benefit Item -->
+                        <div
+                            class="flex flex-col items-center text-center p-4 bg-fitDark rounded-lg hover:bg-zinc-900 transition">
+                            <div
+                                class="w-12 h-12 bg-fitYellow rounded-full flex items-center justify-center text-black text-xl mb-3 font-bold">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <h4 class="font-bold text-white mb-1">Marketing</h4>
+                            <p class="text-sm text-gray-400">Comunicação e atração de público mais eficientes.</p>
+                        </div>
+                        <!-- Benefit Item -->
+                        <div
+                            class="flex flex-col items-center text-center p-4 bg-fitDark rounded-lg hover:bg-zinc-900 transition">
+                            <div
+                                class="w-12 h-12 bg-fitYellow rounded-full flex items-center justify-center text-black text-xl mb-3 font-bold">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h4 class="font-bold text-white mb-1">Nicho</h4>
+                            <p class="text-sm text-gray-400">Campanhas direcionadas por necessidades específicas.</p>
+                        </div>
+                        <!-- Benefit Item -->
+                        <div
+                            class="flex flex-col items-center text-center p-4 bg-fitDark rounded-lg hover:bg-zinc-900 transition">
+                            <div
+                                class="w-12 h-12 bg-fitYellow rounded-full flex items-center justify-center text-black text-xl mb-3 font-bold">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <h4 class="font-bold text-white mb-1">Financeiro</h4>
+                            <p class="text-sm text-gray-400">Maior retorno financeiro e otimização do portfólio.</p>
+                        </div>
+                        <!-- Benefit Item -->
+                        <div
+                            class="flex flex-col items-center text-center p-4 bg-fitDark rounded-lg hover:bg-zinc-900 transition sm:col-span-2 lg:col-span-3">
+                            <div
+                                class="w-12 h-12 bg-fitYellow rounded-full flex items-center justify-center text-black text-xl mb-3 font-bold">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <h4 class="font-bold text-white mb-1">Previsibilidade</h4>
+                            <p class="text-sm text-gray-400">Assertividade nas decisões de abrir ou fechar unidades.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q4: Risks -->
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                    <div class="lg:col-span-2">
+                        <div class="sticky top-24">
+                            <div class="text-fitYellow text-6xl font-black opacity-10 absolute -top-4 -left-4">04</div>
+                            <h3 class="text-3xl font-display font-black text-white mb-6 uppercase">Riscos e <span
+                                    class="text-fitYellow">Custos</span></h3>
+                            <p class="text-gray-400 mb-6">A transição para um modelo complexo não é isenta de desafios.
+                                Identificamos os principais pontos de fricção.</p>
+                            <i class="fas fa-exclamation-triangle text-fitYellow text-6xl opacity-20"></i>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-3 space-y-4">
+                        <!-- Risk Item -->
+                        <div class="bg-fitGray p-5 rounded-lg border-l-4 border-red-500">
+                            <h4 class="font-bold text-white text-lg mb-1">Tecnologia e Implementação</h4>
+                            <p class="text-gray-400 text-sm">Altos custos iniciais de infraestrutura.</p>
+                        </div>
+                        <!-- Risk Item -->
+                        <div class="bg-fitGray p-5 rounded-lg border-l-4 border-red-500">
+                            <h4 class="font-bold text-white text-lg mb-1">Capital Humano</h4>
+                            <p class="text-gray-400 text-sm">Escassez e custo de cientistas de dados, ou necessidade de
+                                treinar liderança acostumada com decisões reativas.</p>
+                        </div>
+                        <!-- Risk Item -->
+                        <div class="bg-fitGray p-5 rounded-lg border-l-4 border-red-500">
+                            <h4 class="font-bold text-white text-lg mb-1">Qualidade dos Dados (GIGO)</h4>
+                            <p class="text-gray-400 text-sm">"Garbage In, Garbage Out". Dados desatualizados levam a
+                                prejuízos maiores que a intuição.</p>
+                        </div>
+                        <!-- Risk Item -->
+                        <div class="bg-fitGray p-5 rounded-lg border-l-4 border-red-500">
+                            <h4 class="font-bold text-white text-lg mb-1">Privacidade & Cultura</h4>
+                            <p class="text-gray-400 text-sm">Riscos regulatórios (LGPD) e resistência interna à mudança.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q5: Complexity -->
+                <div
+                    class="bg-gradient-to-r from-fitGray to-black p-8 rounded-2xl border border-fitYellow/30 text-center">
+                    <div class="text-fitYellow text-sm font-bold tracking-widest uppercase mb-2">Questão 05</div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-6">Ponto de Ruptura: Complexidade vs.
+                        Agilidade</h3>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
+                        <div class="p-4 bg-black/50 rounded hover:bg-black transition">
+                            <i class="fas fa-pause-circle text-fitYellow mb-2 text-xl"></i>
+                            <h5 class="font-bold text-white text-sm">Paralisia por Análise</h5>
+                        </div>
+                        <div class="p-4 bg-black/50 rounded hover:bg-black transition">
+                            <i class="fas fa-cogs text-fitYellow mb-2 text-xl"></i>
+                            <h5 class="font-bold text-white text-sm">Overfitting (Excesso de Ajuste)</h5>
+                        </div>
+                        <div class="p-4 bg-black/50 rounded hover:bg-black transition">
+                            <i class="fas fa-balance-scale text-fitYellow mb-2 text-xl"></i>
+                            <h5 class="font-bold text-white text-sm">Custo vs. Retorno</h5>
+                        </div>
+                        <div class="p-4 bg-black/50 rounded hover:bg-black transition">
+                            <i class="fas fa-cube text-fitYellow mb-2 text-xl"></i>
+                            <h5 class="font-bold text-white text-sm">Rigidez do Modelo</h5>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="equipe" class="py-16 bg-fitBlack border-t border-fitGray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-display font-black text-white uppercase text-center mb-12">
+                Equipe <span class="text-fitYellow">Técnica</span>
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Student Card -->
+                <div
+                    class="flex items-center space-x-4 bg-fitDark p-4 rounded-lg border border-fitGray hover:border-fitYellow transition duration-300">
+                    <div
+                        class="w-12 h-12 bg-fitYellow rounded-full flex items-center justify-center font-bold text-black text-lg">
+                        LI
+                    </div>
+                    <div>
+                        <p class="text-white font-bold uppercase">Luiz Ihara</p>
+                        <p class="text-fitYellow text-sm font-mono">RM368484</p>
+                    </div>
+                </div>
+                <!-- Student Card -->
+                <div
+                    class="flex items-center space-x-4 bg-fitDark p-4 rounded-lg border border-fitGray hover:border-fitYellow transition duration-300">
+                    <div
+                        class="w-12 h-12 bg-fitYellow rounded-full flex items-center justify-center font-bold text-black text-lg">
+                        DC
+                    </div>
+                    <div>
+                        <p class="text-white font-bold uppercase">Daniel Caminha</p>
+                        <p class="text-fitYellow text-sm font-mono">RM366740</p>
+                    </div>
+                </div>
+                <!-- Student Card -->
+                <div
+                    class="flex items-center space-x-4 bg-fitDark p-4 rounded-lg border border-fitGray hover:border-fitYellow transition duration-300">
+                    <div
+                        class="w-12 h-12 bg-fitYellow rounded-full flex items-center justify-center font-bold text-black text-lg">
+                        GS
+                    </div>
+                    <div>
+                        <p class="text-white font-bold uppercase">Gisela Sutto</p>
+                        <p class="text-fitYellow text-sm font-mono">RM368719</p>
+                    </div>
+                </div>
+                <!-- Student Card -->
+                <div
+                    class="flex items-center space-x-4 bg-fitDark p-4 rounded-lg border border-fitGray hover:border-fitYellow transition duration-300">
+                    <div
+                        class="w-12 h-12 bg-fitYellow rounded-full flex items-center justify-center font-bold text-black text-lg">
+                        WS
+                    </div>
+                    <div>
+                        <p class="text-white font-bold uppercase">Wellington Silva</p>
+                        <p class="text-fitYellow text-sm font-mono">RM366555</p>
+                    </div>
+                </div>
+                <!-- Student Card -->
+                <div
+                    class="flex items-center space-x-4 bg-fitDark p-4 rounded-lg border border-fitGray hover:border-fitYellow transition duration-300">
+                    <div
+                        class="w-12 h-12 bg-fitYellow rounded-full flex items-center justify-center font-bold text-black text-lg">
+                        LM
+                    </div>
+                    <div>
+                        <p class="text-white font-bold uppercase">Leonardo Marinho</p>
+                        <p class="text-fitYellow text-sm font-mono">RM368315</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8 border-t-4 border-fitYellow">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-500 text-sm">
+                &copy; 2026 FitPrime. Estudo de Caso Acadêmico. <br>
+                Arquitetura de Agentes - Prof. Carlos Alberto Stefano Filho.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Smooth Scroll Script -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
