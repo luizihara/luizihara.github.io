@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Luiz Ihara - Senior QA & DevOps Engineer</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-white overflow-x-hidden">
+    <div
+        class="relative flex h-auto min-h-screen w-full flex-col max-w-4xl mx-auto bg-white dark:bg-[#111418] border-x border-slate-100 dark:border-slate-800 shadow-xl">
+        <!-- Top App Bar -->
+        <div
+            class="flex items-center bg-white dark:bg-[#111418] p-4 pb-2 justify-between sticky top-0 z-10 border-b border-slate-100 dark:border-slate-800">
+            <div class="flex w-12 shrink-0"></div>
+            <h2
+                class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">
+                Resume</h2>
+            <div class="flex w-12 items-center justify-end">
+                <button
+                    class="text-primary text-base font-bold leading-normal tracking-[0.015em] shrink-0 hover:opacity-80 transition-opacity"
+                    onclick="window.print()">
+                    Print
+                </button>
+            </div>
+        </div>
+
+        <!-- Profile Header -->
+        <div class="flex p-6 flex-col items-center text-center">
+            <!-- Profile Image Placeholder (Initials if no image) -->
+            <div
+                class="flex items-center justify-center rounded-full h-32 w-32 mb-4 ring-4 ring-slate-50 dark:ring-slate-800 shadow-sm bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 text-4xl font-bold">
+                LI
+            </div>
+
+            <div class="flex flex-col justify-center items-center gap-1">
+                <h1 class="text-[#111418] dark:text-white text-2xl font-bold leading-tight tracking-[-0.015em]">Luiz
+                    Ihara</h1>
+                <p class="text-primary font-medium text-lg leading-normal">Staff Quality Engineer | AI Automation |
+                    DevOps Engineer</p>
+                <div class="flex items-center gap-1 text-[#617589] dark:text-slate-400 text-sm mt-1">
+                    <span class="material-symbols-outlined text-[18px]">location_on</span>
+                    <span>São Paulo, Brazil</span>
+                </div>
+            </div>
+
+            <!-- Quick Actions (Icons) -->
+            <div class="flex gap-4 mt-6 w-full justify-center">
+                <a href="mailto:luiz.ihara@gmail.com"
+                    class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 p-3 rounded-full hover:bg-primary hover:text-white transition-colors"
+                    title="Email">
+                    <span class="material-symbols-outlined text-xl">mail</span>
+                </a>
+                <a href="https://linkedin.com/in/luiz-ihara/" target="_blank"
+                    class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 p-3 rounded-full hover:bg-primary hover:text-white transition-colors"
+                    title="LinkedIn">
+                    <span class="material-symbols-outlined text-xl">link</span>
+                </a>
+                <a href="https://github.com/luizihara" target="_blank"
+                    class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 p-3 rounded-full hover:bg-primary hover:text-white transition-colors"
+                    title="GitHub">
+                    <span class="material-symbols-outlined text-xl">code</span>
+                </a>
+            </div>
+        </div>
+        <div class="h-2 bg-slate-50 dark:bg-slate-900 w-full"></div>
+
+        <!-- Professional Summary -->
+        <div class="flex flex-col p-6">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-1 h-6 bg-primary rounded-full"></div>
+                <h3 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Summary
+                </h3>
+            </div>
+            <p class="text-slate-600 dark:text-slate-300 text-base font-normal leading-relaxed">
+            <p class="text-slate-600 dark:text-slate-300 text-base font-normal leading-relaxed text-justify">
+                Experienced Quality Engineering and DevOps professional with a strong track record in designing and
+                delivering high-quality, scalable test automation and performance solutions. Over a decade of hands-on
+                experience in QA, infrastructure automation (IaC), CI/CD, and performance/stress testing across
+                distributed back-end and front-end systems.
+            </p>
+            <p class="text-slate-600 dark:text-slate-300 text-base font-normal leading-relaxed text-justify mt-3">
+                In the current phase of my career, I’m heavily focused on AI-augmented testing and automation workflows,
+                leveraging modern tools and intelligent agents to drive test design, execution, and optimization. I
+                architect and implement automated test strategies using Playwright and WebdriverIO enhanced with AI
+                capabilities, as well as performance testing with k6 supported by AI-assisted scripting and analysis.
+            </p>
+            <p class="text-slate-600 dark:text-slate-300 text-base font-normal leading-relaxed text-justify mt-3">
+                My core strengths include end-to-end automation development, performance validation, cloud and container
+                environments, and integrating smart automation agents that improve quality, feedback loops, and
+                observability across the software delivery lifecycle. Passionate about helping teams build resilient
+                systems and applying AI to streamline complex testing challenges.
+            </p>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="flex flex-col p-6 pt-0">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-1 h-6 bg-primary rounded-full"></div>
+                <h3 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Technical
+                    Skills</h3>
+            </div>
+
+            <div class="flex flex-col gap-6">
+                <!-- Methodologies & Core -->
+                <div>
+                    <h4 class="text-xs font-bold text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-widest">Core
+                        & Methodologies</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">DevOps</span>
+                    </div>
+                </div>
+
+                <!-- Languages -->
+                <div>
+                    <h4 class="text-xs font-bold text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-widest">
+                        Languages</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Bash
+                            / Shell Script</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">TypeScript
+                            / JavaScript</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Python</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">C#</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Java</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Go</span>
+                    </div>
+                </div>
+
+                <!-- Test Automation -->
+                <div>
+                    <h4 class="text-xs font-bold text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-widest">Test
+                        Automation</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Playwright</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Cypress</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Appium</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">WebdriverIO</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Selenium</span>
+                    </div>
+                </div>
+
+                <!-- Cloud & Infrastructure -->
+                <div>
+                    <h4 class="text-xs font-bold text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-widest">
+                        Cloud & Infrastructure</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Microsoft
+                            Azure</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">GCP</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">AWS</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Kubernetes</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Docker</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Terraform</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Ansible</span>
+                    </div>
+                </div>
+
+                <!-- CI/CD -->
+                <div>
+                    <h4 class="text-xs font-bold text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-widest">
+                        CI/CD</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Azure
+                            DevOps</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Jenkins</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">CircleCI</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">GitHub
+                            Actions</span>
+                    </div>
+                </div>
+
+                <!-- Performance & Monitoring -->
+                <div>
+                    <h4 class="text-xs font-bold text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-widest">
+                        Performance & Monitoring</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">k6</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">JMeter</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Locust</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Tsung</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Grafana</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Datadog</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Dynatrace</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">New
+                            Relic</span>
+                    </div>
+                </div>
+                <!-- Tools & Others -->
+                <div>
+                    <h4 class="text-xs font-bold text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-widest">
+                        Tools & Systems</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Cursor</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">VS
+                            Code</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Ubuntu</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">RHEL</span>
+                        <span
+                            class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700">Redis</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="h-2 bg-slate-50 dark:bg-slate-900 w-full"></div>
+
+        <!-- Experience Timeline -->
+        <div class="flex flex-col p-6">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-1 h-6 bg-primary rounded-full"></div>
+                <h3 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">
+                    Experience</h3>
+            </div>
+            <div class="relative pl-4 border-l-2 border-slate-100 dark:border-slate-800 space-y-8">
+
+                <!-- Job 1 -->
+                <div class="relative">
+                    <div
+                        class="absolute -left-[21px] top-1.5 h-3 w-3 rounded-full border-2 border-white dark:border-[#111418] bg-primary">
+                    </div>
+                    <div class="flex flex-col gap-1 mb-2">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-[#111418] dark:text-white font-bold text-base">Quality Engineer</h4>
+                            <span
+                                class="text-slate-400 text-xs font-medium whitespace-nowrap bg-slate-50 dark:bg-slate-800 px-2 py-1 rounded">Apr
+                                2025 — Present</span>
+                        </div>
+                        <p class="text-primary font-medium text-sm">iConnections</p>
+                    </div>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="relative">
+                    <div
+                        class="absolute -left-[21px] top-1.5 h-3 w-3 rounded-full border-2 border-white dark:border-[#111418] bg-slate-300 dark:bg-slate-600">
+                    </div>
+                    <div class="flex flex-col gap-1 mb-2">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-[#111418] dark:text-white font-bold text-base">Specialist QA Engineer</h4>
+                            <span
+                                class="text-slate-400 text-xs font-medium whitespace-nowrap bg-slate-50 dark:bg-slate-800 px-2 py-1 rounded">Apr
+                                2020 — Apr 2025</span>
+                        </div>
+                        <p class="text-primary font-medium text-sm">XP Inc</p>
+                    </div>
+                    <ul
+                        class="list-disc list-outside ml-4 text-slate-600 dark:text-slate-300 text-sm space-y-1.5 marker:text-slate-400">
+                        <li>Focused on software quality engineering and performance optimization.</li>
+                        <li>Implemented stress testing strategies for improved application resilience.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="relative">
+                    <div
+                        class="absolute -left-[21px] top-1.5 h-3 w-3 rounded-full border-2 border-white dark:border-[#111418] bg-slate-300 dark:bg-slate-600">
+                    </div>
+                    <div class="flex flex-col gap-1 mb-2">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-[#111418] dark:text-white font-bold text-base">System Administrator</h4>
+                            <span
+                                class="text-slate-400 text-xs font-medium whitespace-nowrap bg-slate-50 dark:bg-slate-800 px-2 py-1 rounded">Oct
+                                2015 — May 2020</span>
+                        </div>
+                        <p class="text-primary font-medium text-sm">Grupo Netshoes</p>
+                    </div>
+                    <ul
+                        class="list-disc list-outside ml-4 text-slate-600 dark:text-slate-300 text-sm space-y-1.5 marker:text-slate-400">
+                        <li>Managed virtualization with Terraform and Ansible.</li>
+                        <li>Developed stress test scripts to simulate high load.</li>
+                        <li>Established CI/CD pipelines in Jenkins with Groovy.</li>
+                        <li>Implemented monitoring with New Relic, Sensu, and Grafana.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 4 -->
+                <div class="relative">
+                    <div
+                        class="absolute -left-[21px] top-1.5 h-3 w-3 rounded-full border-2 border-white dark:border-[#111418] bg-slate-300 dark:bg-slate-600">
+                    </div>
+                    <div class="flex flex-col gap-1 mb-2">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-[#111418] dark:text-white font-bold text-base">SDET</h4>
+                            <span
+                                class="text-slate-400 text-xs font-medium whitespace-nowrap bg-slate-50 dark:bg-slate-800 px-2 py-1 rounded">Mar
+                                2014 — Oct 2015</span>
+                        </div>
+                        <p class="text-primary font-medium text-sm">FCamara</p>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm">
+                        Consultant for clients like LTM and Cnova. Created test automation frameworks in C#.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        <div class="h-2 bg-slate-50 dark:bg-slate-900 w-full"></div>
+
+        <!-- Education Grid -->
+        <div class="grid grid-cols-1 gap-6 p-6">
+            <div class="flex flex-col">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-1 h-6 bg-primary rounded-full"></div>
+                    <h3 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">
+                        Education</h3>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="flex gap-4 items-start">
+                        <div class="mt-1 bg-slate-100 dark:bg-slate-800 p-2 rounded-lg text-primary">
+                            <span class="material-symbols-outlined text-xl">school</span>
+                        </div>
+                        <div>
+                            <h4 class="text-[#111418] dark:text-white font-bold text-sm">MBA in AI Business Leadership
+                            </h4>
+                            <p class="text-slate-500 dark:text-slate-400 text-xs mt-0.5">FIAP</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="mt-1 bg-slate-100 dark:bg-slate-800 p-2 rounded-lg text-primary">
+                            <span class="material-symbols-outlined text-xl">school</span>
+                        </div>
+                        <div>
+                            <h4 class="text-[#111418] dark:text-white font-bold text-sm">Software Engineering</h4>
+                            <p class="text-slate-500 dark:text-slate-400 text-xs mt-0.5">Estacio</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Section -->
+            <div class="flex flex-col">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-1 h-6 bg-primary rounded-full"></div>
+                    <h3 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">
+                        Academic Projects</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <a href="fiap.advocacyeinfluencia/index.html"
+                        class="block bg-slate-50 dark:bg-slate-800 p-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+                        <h4 class="font-bold text-sm text-[#111418] dark:text-white">Advocacy & Influence</h4>
+                        <p class="text-xs text-slate-500">Transformação Digital</p>
+                    </a>
+                    <a href="fiap.capacitacaoorganizacional/index-1.html"
+                        class="block bg-slate-50 dark:bg-slate-800 p-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+                        <h4 class="font-bold text-sm text-[#111418] dark:text-white">Capacitação Org. (Pt 1)</h4>
+                        <p class="text-xs text-slate-500">AI Business Leadership</p>
+                    </a>
+                    <a href="fiap.capacitacaoorganizacional/index-2.html"
+                        class="block bg-slate-50 dark:bg-slate-800 p-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+                        <h4 class="font-bold text-sm text-[#111418] dark:text-white">Capacitação Org. (Pt 2)</h4>
+                        <p class="text-xs text-slate-500">Painel de Priorização</p>
+                    </a>
+                    <a href="fiap.capacitacaoorganizacional/index-3.html"
+                        class="block bg-slate-50 dark:bg-slate-800 p-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+                        <h4 class="font-bold text-sm text-[#111418] dark:text-white">Capacitação Org. (Pt 3)</h4>
+                        <p class="text-xs text-slate-500">Jogo de Métricas</p>
+                    </a>
+                    <a href="fiap.monetizacaoego-to-market/index-1.html"
+                        class="block bg-slate-50 dark:bg-slate-800 p-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+                        <h4 class="font-bold text-sm text-[#111418] dark:text-white">Monetization & GTM</h4>
+                        <p class="text-xs text-slate-500">Native vs. Adapted</p>
+                    </a>
+                    <a href="fiap.arquiteturaagentes/index.html"
+                        class="block bg-slate-50 dark:bg-slate-800 p-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+                        <h4 class="font-bold text-sm text-[#111418] dark:text-white">Agentic Arch. (Pt 1)</h4>
+                        <p class="text-xs text-slate-500">Automação Inteligente</p>
+                    </a>
+                    <a href="fiap.arquiteturaagentes/index-2.html"
+                        class="block bg-slate-50 dark:bg-slate-800 p-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+                        <h4 class="font-bold text-sm text-[#111418] dark:text-white">Agentic Arch. (Pt 2)</h4>
+                        <p class="text-xs text-slate-500">Sistemas Multi-Agente</p>
+                    </a>
+                    <a href="fiap.arquiteturaagentes/index-3.html"
+                        class="block bg-slate-50 dark:bg-slate-800 p-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+                        <h4 class="font-bold text-sm text-[#111418] dark:text-white">Agentic Arch. (Pt 3)</h4>
+                        <p class="text-xs text-slate-500">Orquestração de IA</p>
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- Footer Padding -->
+        <div class="h-8 bg-white dark:bg-[#111418]"></div>
+    </div>
+
+    <!-- Visit Badge Removed -->
+</body>
+
+</html>
