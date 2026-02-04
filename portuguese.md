@@ -123,3 +123,6 @@ Com experiência em Qualidade de Software, meus últimos anos foram focados em m
 - [Arquitetura de Agentes](fiap.arquiteturaagentes/index.html)
 - [Arquitetura de Agentes 2](fiap.arquiteturaagentes/index-2.html)
 - [Arquitetura de Agentes 3](fiap.arquiteturaagentes/index-3.html)
+
+## TCC
+- [Career ai](fiap.tcc/index.html)

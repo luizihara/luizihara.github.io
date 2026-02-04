@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career AI | Apresentação do Projeto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Efeito de gradiente sutil no fundo */
+        .bg-tech-dark {
+            background-color: #0f172a;
+            background-image: radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+                radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+    </style>
+</head>
+
+<body class="bg-tech-dark text-slate-200 antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- NAV / HEADER -->
+    <nav class="w-full py-6 px-4 sm:px-12 flex justify-between items-center border-b border-white/10">
+        <div class="text-2xl font-bold tracking-tighter text-white">
+            Career<span class="text-indigo-500">AI</span>
+        </div>
+        <div class="text-sm font-medium text-slate-400">
+            MVP / TCC - 2026
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="max-w-6xl mx-auto px-4 py-20 text-center">
+        <span
+            class="inline-block py-1 px-3 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-bold tracking-widest uppercase mb-6 border border-indigo-500/20">
+            Gestão Ativa de Carreira
+        </span>
+        <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
+            Seu Mentor de Carreira <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Potencializado por
+                IA</span>
+        </h1>
+        <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Uma plataforma de inteligência estratégica para profissionais de tecnologia que buscam relevância, combate à
+            obsolescência e direção na era da IA.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#entregas"
+                class="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold transition-all shadow-lg shadow-indigo-500/20">
+                Ver Entregas do Projeto
+            </a>
+            <a href="#conceito"
+                class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg font-semibold transition-all backdrop-blur-sm">
+                Entender a Solução
+            </a>
+        </div>
+    </header>
+
+    <!-- A DOR (CONTEXTO) -->
+    <section id="conceito" class="py-16 bg-slate-900/50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-white mb-6">O Problema: <br>A Obsolescência Silenciosa</h2>
+                    <p class="text-slate-400 mb-4 text-lg">
+                        Profissionais seniores de TI (30-40+ anos) enfrentam um paradoxo: possuem experiência de
+                        negócio, mas temem ser ultrapassados pela velocidade da Inteligência Artificial.
+                    </p>
+                    <p class="text-slate-400 mb-6 text-lg">
+                        Mentorias humanas são caras e esporádicas. Cursos gravados (LinkedIn Learning) são genéricos e
+                        sem contexto. Falta um meio-termo estratégico.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-slate-300">
+                            <i class="fas fa-check-circle text-indigo-500 mr-3"></i> Falta de tempo para curadoria de
+                            conteúdo.
+                        </li>
+                        <li class="flex items-center text-slate-300">
+                            <i class="fas fa-check-circle text-indigo-500 mr-3"></i> Necessidade de feedback contínuo,
+                            não pontual.
+                        </li>
+                        <li class="flex items-center text-slate-300">
+                            <i class="fas fa-check-circle text-indigo-500 mr-3"></i> Medo da estagnação salarial.
+                        </li>
+                    </ul>
+                </div>
+                <div class="relative">
+                    <!-- Ilustração abstrata de interface -->
+                    <div class="glass-card p-6 rounded-xl border border-white/10">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="h-4 bg-white/10 rounded w-3/4"></div>
+                            <div class="h-4 bg-white/10 rounded w-1/2"></div>
+                            <div
+                                class="h-24 bg-indigo-500/20 rounded border border-indigo-500/30 p-4 flex items-center justify-center text-indigo-300 text-sm">
+                                "Analisando seu perfil no LinkedIn e gaps de mercado..."
+                            </div>
+                            <div class="h-4 bg-white/10 rounded w-5/6"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PILARES DA SOLUÇÃO -->
+    <section class="py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white">Nossa Solução Técnica</h2>
+                <p class="text-slate-400 mt-4">Orquestração via N8N + Mixture of Experts (MoE)</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card p-8 rounded-2xl">
+                    <div class="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-brain text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Diagnóstico Profundo</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Não usamos formulários estáticos. Integramos dados públicos (Deep Research) e do LinkedIn para
+                        gerar um "Raio-X" de Hard e Soft Skills instantâneo.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card p-8 rounded-2xl">
+                    <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-comments text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Diário Conversacional</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Um mentor que lembra de você. O sistema mantém memória de longo prazo das suas conversas, dores
+                        e evoluções semanais.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card p-8 rounded-2xl">
+                    <div class="w-12 h-12 bg-cyan-600 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Arbitragem de Custo</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Democratizamos a mentoria de alto nível. Mais barato que um headhunter humano, mas infinitamente
+                        mais personalizado que um curso EAD.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTEGRANTES -->
+    <section class="py-16 border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h2 class="text-2xl font-bold text-white mb-10">Time de Fundadores</h2>
+            <div class="flex flex-wrap justify-center gap-8 md:gap-12">
+
+                <!-- INTEGRANTE 1 -->
+                <div class="group flex flex-col items-center">
+                    <div
+                        class="w-24 h-24 bg-slate-800 rounded-full flex items-center justify-center border-2 border-slate-700 group-hover:border-indigo-500 transition-colors shadow-lg shadow-black/30">
+                        <i class="fas fa-user text-slate-500 group-hover:text-white text-3xl"></i>
+                    </div>
+                    <h4 class="mt-4 font-bold text-white text-lg">Luiz Ihara</h4>
+                    <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Co-Founder</span>
+                    <span
+                        class="text-xs text-indigo-400 mt-1 font-mono bg-indigo-500/10 px-2 py-0.5 rounded">RM368484</span>
+                </div>
+
+                <!-- INTEGRANTE 2 -->
+                <div class="group flex flex-col items-center">
+                    <div
+                        class="w-24 h-24 bg-slate-800 rounded-full flex items-center justify-center border-2 border-slate-700 group-hover:border-indigo-500 transition-colors shadow-lg shadow-black/30">
+                        <i class="fas fa-user text-slate-500 group-hover:text-white text-3xl"></i>
+                    </div>
+                    <h4 class="mt-4 font-bold text-white text-lg">Filipe Fragoso</h4>
+                    <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Co-Founder</span>
+                    <span
+                        class="text-xs text-indigo-400 mt-1 font-mono bg-indigo-500/10 px-2 py-0.5 rounded">RM368500</span>
+                </div>
+
+                <!-- INTEGRANTE 3 -->
+                <div class="group flex flex-col items-center">
+                    <div
+                        class="w-24 h-24 bg-slate-800 rounded-full flex items-center justify-center border-2 border-slate-700 group-hover:border-indigo-500 transition-colors shadow-lg shadow-black/30">
+                        <i class="fas fa-user text-slate-500 group-hover:text-white text-3xl"></i>
+                    </div>
+                    <h4 class="mt-4 font-bold text-white text-lg">Daniel Caminha</h4>
+                    <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Co-Founder</span>
+                    <span
+                        class="text-xs text-indigo-400 mt-1 font-mono bg-indigo-500/10 px-2 py-0.5 rounded">RM366740</span>
+                </div>
+
+                <!-- INTEGRANTE 4 -->
+                <div class="group flex flex-col items-center">
+                    <div
+                        class="w-24 h-24 bg-slate-800 rounded-full flex items-center justify-center border-2 border-slate-700 group-hover:border-indigo-500 transition-colors shadow-lg shadow-black/30">
+                        <i class="fas fa-user text-slate-500 group-hover:text-white text-3xl"></i>
+                    </div>
+                    <h4 class="mt-4 font-bold text-white text-lg">Pedro Martins</h4>
+                    <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Co-Founder</span>
+                    <span
+                        class="text-xs text-indigo-400 mt-1 font-mono bg-indigo-500/10 px-2 py-0.5 rounded">RM368543</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ENTREGAS DO TRABALHO (FOOTER STYLE) -->
+    <section id="entregas" class="bg-black py-16 mt-10 border-t border-indigo-500/30">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-8">
+                <h2 class="text-2xl font-bold text-white flex items-center">
+                    <i class="fas fa-folder-open text-indigo-500 mr-3"></i> Entregas e Artefatos
+                </h2>
+                <span class="text-sm text-slate-500 mt-2 md:mt-0">Documentação oficial e links funcionais</span>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+
+                <!-- Link 1 -->
+                <a href="https://careerflow-ai-942599469996.us-west1.run.app/" target="_blank"
+                    class="flex items-center p-4 bg-slate-900 rounded-lg border border-slate-800 hover:border-indigo-500 hover:bg-slate-800 transition-all group">
+                    <div class="bg-indigo-500/10 p-3 rounded text-indigo-400 group-hover:text-indigo-300">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-white font-semibold">MVP Funcional (Deploy)</h4>
+                        <p class="text-xs text-slate-500">Versão rodando no Google Cloud Run</p>
+                    </div>
+                    <i class="fas fa-external-link-alt ml-auto text-slate-600 group-hover:text-white"></i>
+                </a>
+
+                <!-- Link 2 -->
+                <a href="https://v0-mentoring-mobile-app-mockups.vercel.app/" target="_blank"
+                    class="flex items-center p-4 bg-slate-900 rounded-lg border border-slate-800 hover:border-indigo-500 hover:bg-slate-800 transition-all group">
+                    <div class="bg-purple-500/10 p-3 rounded text-purple-400 group-hover:text-purple-300">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-white font-semibold">Protótipo UX/UI</h4>
+                        <p class="text-xs text-slate-500">Mockups de alta fidelidade (V0.dev)</p>
+                    </div>
+                    <i class="fas fa-external-link-alt ml-auto text-slate-600 group-hover:text-white"></i>
+                </a>
+
+                <!-- Link 3 -->
+                <a href="index-2.html" target="_blank"
+                    class="flex items-center p-4 bg-slate-900 rounded-lg border border-slate-800 hover:border-indigo-500 hover:bg-slate-800 transition-all group">
+                    <div class="bg-green-500/10 p-3 rounded text-green-400">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-white font-semibold">ENTREGÁVEL PARCIAL 1 — DEFINIÇÃO E VALIDAÇÃO DO PROBLEMA
+                        </h4>
+                        <p class="text-xs text-slate-500">Comprovar que o grupo está trabalhando sobre um problema real,
+                            relevante e bem delimitado, validado a partir do contexto e do usuário, antes de avançar
+                            para a solução.</p>
+                    </div>
+                </a>
+
+                <!-- Link 4 -->
+                <div class="flex items-center p-4 bg-slate-900 rounded-lg border border-slate-800 group opacity-75">
+                    <div class="bg-yellow-500/10 p-3 rounded text-yellow-400">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-white font-semibold">Fluxos e Jornada</h4>
+                        <p class="text-xs text-slate-500">Mapeamento da jornada do usuário</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-8 pt-8 border-t border-slate-800 text-center text-xs text-slate-600">
+                <p>&copy; 2026 Career AI Project. Desenvolvido para fins acadêmicos e validação de MVP.</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
