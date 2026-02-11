@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerFlow AI - UX Artifacts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+
+        .card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: #64748b;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .tag-evidence {
+            background-color: #065f46;
+            color: #6ee7b7;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .tag-hypothesis {
+            background-color: #7c2d12;
+            color: #fdba74;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+        }
+
+        .brand-gradient {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="antialiased min-h-screen p-6 md:p-12">
+
+    <div class="max-w-6xl mx-auto">
+
+        <!-- Header -->
+        <header class="mb-12 flex flex-col md:flex-row justify-between items-center border-b border-slate-800 pb-8">
+            <div class="text-center md:text-left">
+                <h1 class="text-3xl md:text-4xl font-bold text-white mb-2">UX Strategy Artifacts</h1>
+                <p class="text-slate-400 text-lg">Projeto: <span class="font-bold text-blue-400">CareerFlow AI</span>
+                    (MVP Mentoria)</p>
+            </div>
+            <div class="mt-4 md:mt-0 flex flex-col items-end space-y-2">
+                <div
+                    class="flex items-center space-x-3 bg-slate-900 px-5 py-3 rounded-xl border border-slate-700 shadow-lg">
+                    <div class="bg-blue-500/20 p-2 rounded-lg">
+                        <i data-lucide="cpu" class="w-6 h-6 text-blue-400"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Status</p>
+                        <p class="text-sm font-semibold text-white">Fase de Definição de MVP</p>
+                    </div>
+                </div>
+                <!-- Student Info Block -->
+                <div class="text-right text-xs text-slate-400 mt-2">
+                    <p class="font-bold text-blue-400">Matéria: Monetização e Go-to-Market</p>
+                    <p class="mb-2">Professora Tatiana Aparecida Coelho Rocha</p>
+                    <ul class="space-y-0.5">
+                        <li>Luiz Ihara - RM368484</li>
+                        <li>Filipe Fragoso - RM368500</li>
+                        <li>Daniel Caminha - RM366740</li>
+                        <li>Pedro Martins - RM368543</li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- TAREFA 1: PROTO-PERSONAS -->
+        <section class="mb-20">
+            <div class="flex items-center mb-6">
+                <span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded mr-3">STEP 1</span>
+                <h2 class="text-2xl font-bold text-white">Proto-Personas: O "Líder em Risco" & "O Sobrevivente"</h2>
+            </div>
+            <p class="text-slate-400 mb-8 max-w-3xl">Baseado nos arquivos <em>"Cenários 2035"</em> e <em>"Resumo da
+                    Reunião (12/01/2026)"</em>.</p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- Persona 1: O Líder em Risco -->
+                <div class="card p-8 relative overflow-hidden group">
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-blue-500/20">
+                    </div>
+
+                    <div class="flex items-center mb-6 relative z-10">
+                        <div
+                            class="w-16 h-16 rounded-full bg-slate-800 border-2 border-blue-500 flex items-center justify-center text-white font-bold text-2xl mr-4 shadow-lg shadow-blue-900/20">
+                            LR</div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Roberto, o Líder em Risco</h3>
+                            <p class="text-sm text-blue-400 font-medium">Sênior (40+) • Gestor de TI • Alto Poder
+                                Aquisitivo</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6 relative z-10">
+                        <div class="bg-slate-900/50 p-4 rounded-lg border-l-4 border-blue-500">
+                            <h4 class="text-xs font-bold text-slate-500 uppercase mb-2 flex items-center"><i
+                                    data-lucide="quote" class="w-3 h-3 mr-1"></i> Evidência (Arquivo: Cenários 2035)
+                            </h4>
+                            <p class="italic text-slate-200">"Tenho vergonha de admitir para meus pares que não sei usar
+                                ferramentas novas [de IA]."</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-3">
+                            <div class="bg-slate-800 p-4 rounded-lg">
+                                <span class="text-blue-400 font-bold text-sm block mb-2 flex items-center"><i
+                                        data-lucide="crosshair" class="w-4 h-4 mr-2"></i> Objetivos</span>
+                                <ul class="list-disc list-inside text-sm text-slate-300 space-y-1">
+                                    <li>Manter a relevância executiva sem precisar voltar a codar. <span
+                                            class="tag-hypothesis">Hipótese</span></li>
+                                    <li>Aprender a "gerir a IA" e não ser substituído por ela. <span
+                                            class="tag-evidence">Evidência</span></li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-800 p-4 rounded-lg">
+                                <span class="text-rose-400 font-bold text-sm block mb-2 flex items-center"><i
+                                        data-lucide="frown" class="w-4 h-4 mr-2"></i> Dores</span>
+                                <ul class="list-disc list-inside text-sm text-slate-300 space-y-1">
+                                    <li>Medo silencioso da obsolescência técnica. <span
+                                            class="tag-evidence">Evidência</span></li>
+                                    <li>Falta de tempo para cursos longos (Udemy/Alura). <span
+                                            class="tag-hypothesis">Hipótese</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-500 uppercase mb-2">Comportamento de Compra</h4>
+                            <p class="text-sm text-slate-300">Tem o "cartão de crédito na mão" e urgência estratégica.
+                                Valoriza privacidade (Diário Conversacional) para não expor suas fraquezas publicamente.
+                                <span class="tag-evidence">Evidência (Reunião 12/01)</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Persona 2: O Sobrevivente -->
+                <div class="card p-8 relative overflow-hidden group">
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-emerald-500/20">
+                    </div>
+
+                    <div class="flex items-center mb-6 relative z-10">
+                        <div
+                            class="w-16 h-16 rounded-full bg-slate-800 border-2 border-emerald-500 flex items-center justify-center text-white font-bold text-2xl mr-4 shadow-lg shadow-emerald-900/20">
+                            SB</div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Juliana, a Sobrevivente</h3>
+                            <p class="text-sm text-emerald-400 font-medium">Pleno/Sênior (30+) • Dev Back-end • Foco em
+                                Empregabilidade</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6 relative z-10">
+                        <div class="bg-slate-900/50 p-4 rounded-lg border-l-4 border-emerald-500">
+                            <h4 class="text-xs font-bold text-slate-500 uppercase mb-2 flex items-center"><i
+                                    data-lucide="quote" class="w-3 h-3 mr-1"></i> Evidência (Arquivo: Cenários 2035)
+                            </h4>
+                            <p class="italic text-slate-200">"Não sei orquestrar agentes de IA no N8N e me sinto
+                                ultrapassada. Minha vaga pode ser eliminada por automação."</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-3">
+                            <div class="bg-slate-800 p-4 rounded-lg">
+                                <span class="text-blue-400 font-bold text-sm block mb-2 flex items-center"><i
+                                        data-lucide="crosshair" class="w-4 h-4 mr-2"></i> Objetivos</span>
+                                <ul class="list-disc list-inside text-sm text-slate-300 space-y-1">
+                                    <li>Transição rápida de carreira ou especialização em IA. <span
+                                            class="tag-evidence">Evidência</span></li>
+                                    <li>Diagnóstico claro de quais skills faltam (Gap Analysis). <span
+                                            class="tag-hypothesis">Hipótese</span></li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-800 p-4 rounded-lg">
+                                <span class="text-rose-400 font-bold text-sm block mb-2 flex items-center"><i
+                                        data-lucide="frown" class="w-4 h-4 mr-2"></i> Dores</span>
+                                <ul class="list-disc list-inside text-sm text-slate-300 space-y-1">
+                                    <li>Ansiedade financeira e medo de layoff. <span
+                                            class="tag-hypothesis">Hipótese</span></li>
+                                    <li>Headhunters humanos são caros demais ou inacessíveis. <span
+                                            class="tag-evidence">Evidência (Descrição do Projeto)</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-500 uppercase mb-2">Comportamento de Compra</h4>
+                            <p class="text-sm text-slate-300">Menor sensibilidade a ticket alto recorrente, mas alta
+                                propensão a pagar por "Planos de Salvação" (Diagnósticos One-off) ou ferramentas que
+                                garantam emprego rápido. <span class="tag-evidence">Evidência Analítica</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAREFA 2: AUDITORIA DE PERSONA -->
+        <section class="mb-20">
+            <div class="flex items-center mb-6">
+                <span class="bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded mr-3">STEP 2</span>
+                <h2 class="text-2xl font-bold text-white">Auditoria Crítica (Exemplo Prático)</h2>
+            </div>
+
+            <div class="bg-slate-800/30 border border-slate-700 rounded-xl p-8">
+                <div class="flex items-start mb-6">
+                    <div class="bg-yellow-500/20 p-3 rounded-lg mr-4">
+                        <i data-lucide="alert-triangle" class="w-6 h-6 text-yellow-500"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Persona Auditada: "Enzo, o Universitário Rico"</h3>
+                        <p class="text-slate-400 text-sm mt-1">Status: <span
+                                class="text-red-400 font-bold">REPROVADA</span> baseada nos documentos do projeto.</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Problemas -->
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-white border-b border-slate-700 pb-2">1. Problemas Encontrados</h4>
+
+                        <div class="bg-red-900/20 border border-red-900/50 p-4 rounded text-sm">
+                            <span class="text-red-400 font-bold block mb-1">Inconsistência de Negócio [Alto
+                                Impacto]</span>
+                            <p class="text-slate-300">A persona assume que o estudante pagará R$ 100/mês pela
+                                assinatura.
+                                <br><em class="text-slate-500">Conflito com o arquivo "Resumo Reunião 07/01":
+                                    Universitários não são o público pagante principal, apenas camada gratuita para
+                                    marketing.</em>
+                            </p>
+                        </div>
+
+                        <div class="bg-red-900/20 border border-red-900/50 p-4 rounded text-sm">
+                            <span class="text-red-400 font-bold block mb-1">Viés de Escopo [Médio Impacto]</span>
+                            <p class="text-slate-300">Foca em "aprender a programar do zero".
+                                <br><em class="text-slate-500">Conflito com "Descrição Oficial": O foco é Gestão de
+                                    Carreira e Mentoria, não cursos técnicos de entrada (commodities).</em>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Soluções -->
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-white border-b border-slate-700 pb-2">2. Ajustes Recomendados</h4>
+                        <ul class="space-y-3 text-sm text-slate-300">
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2 mt-0.5"></i>
+                                <span><strong>Mudar Foco:</strong> Reclassificar universitários como usuários "Freemium"
+                                    para treinar o algoritmo (Data Flywheel).</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2 mt-0.5"></i>
+                                <span><strong>Validar com Dados:</strong> Rodar teste A/B de landing page focada em
+                                    "Primeiro Emprego" vs "Transição Sênior" para provar a tese de conversão.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2 mt-0.5"></i>
+                                <span><strong>Ajustar Dor:</strong> A dor não é "aprender a codar", é "saber o que o
+                                    mercado quer de um júnior hoje" (Deep Research de Vagas).</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAREFA 3: MAPA DE VALOR -->
+        <section class="mb-12">
+            <div class="flex items-center mb-6">
+                <span class="bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded mr-3">STEP 3</span>
+                <h2 class="text-2xl font-bold text-white">Mapa de Valor (Contexto: CareerFlow AI)</h2>
+            </div>
+
+            <!-- Cards de Definição -->
+            <div class="grid lg:grid-cols-3 gap-6 mb-8">
+                <!-- Coluna 1 -->
+                <div class="card p-5 border-t-4 border-blue-500">
+                    <h3 class="font-bold text-white text-lg mb-2 flex items-center"><i data-lucide="box"
+                            class="mr-2 text-blue-500 w-5 h-5"></i> Produto (Features)</h3>
+                    <ul class="text-sm text-slate-400 space-y-2 list-disc list-inside">
+                        <li>Diagnóstico de Gaps via IA</li>
+                        <li>Diário Conversacional (WhatsApp/Web)</li>
+                        <li>Deep Research de Vagas Reais</li>
+                        <li>Orquestração via N8N (Back-end)</li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 2 -->
+                <div class="card p-5 border-t-4 border-rose-500">
+                    <h3 class="font-bold text-white text-lg mb-2 flex items-center"><i data-lucide="shield-check"
+                            class="mr-2 text-rose-500 w-5 h-5"></i> Aliviadores de Dor</h3>
+                    <ul class="text-sm text-slate-400 space-y-2 list-disc list-inside">
+                        <li>Preço acessível (vs Headhunter Humano)</li>
+                        <li>Privacidade (sem julgamento humano)</li>
+                        <li>Curadoria (fim da paralisia por análise)</li>
+                        <li>Disponibilidade 24/7</li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3 -->
+                <div class="card p-5 border-t-4 border-emerald-500">
+                    <h3 class="font-bold text-white text-lg mb-2 flex items-center"><i data-lucide="zap"
+                            class="mr-2 text-emerald-500 w-5 h-5"></i> Criadores de Ganho</h3>
+                    <ul class="text-sm text-slate-400 space-y-2 list-disc list-inside">
+                        <li>Plano de Ação Personalizado</li>
+                        <li>Sensação de Controle da Carreira</li>
+                        <li>Preparo para Liderança</li>
+                        <li>Economia de Tempo (Clipping)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Mapeamento 1:1 -->
+            <div class="card p-8">
+                <h3 class="text-lg font-bold text-white mb-6">Mapeamento 1:1 (Fit Solução-Problema)</h3>
+                <div class="overflow-x-auto rounded-lg border border-slate-700">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="bg-slate-900 text-xs uppercase font-bold text-slate-400 tracking-wider">
+                            <tr>
+                                <th class="p-4 border-b border-slate-700">Contexto do Usuário (Job/Pain/Gain)</th>
+                                <th class="p-4 border-b border-slate-700 w-24 text-center">Tipo</th>
+                                <th class="p-4 border-b border-slate-700">Solução CareerFlow (Feature Específica)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-700 bg-slate-800/50">
+                            <!-- Linha 1 -->
+                            <tr class="hover:bg-slate-800 transition-colors">
+                                <td class="p-4">
+                                    <span class="block text-white font-medium">"Headhunters cobram 50% a 2 salários, é
+                                        inviável para mim."</span>
+                                    <span class="text-xs text-slate-500">Fonte: Resumo Reunião 12/01</span>
+                                </td>
+                                <td class="p-4 text-center"><span
+                                        class="bg-rose-900/30 text-rose-400 border border-rose-900 px-2 py-1 rounded text-xs font-bold">DOR</span>
+                                </td>
+                                <td class="p-4 font-medium text-white">
+                                    <div class="flex items-center">
+                                        <i data-lucide="arrow-right" class="w-4 h-4 mr-2 text-rose-500"></i>
+                                        Reliever: Arbitragem de Custo (Assinatura Mensal Acessível via IA).
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Linha 2 -->
+                            <tr class="hover:bg-slate-800 transition-colors">
+                                <td class="p-4">
+                                    <span class="block text-white font-medium">"Tenho medo de expor minhas fraquezas
+                                        técnicas para um mentor humano."</span>
+                                    <span class="text-xs text-slate-500">Fonte: Cenários 2035 (Persona Líder)</span>
+                                </td>
+                                <td class="p-4 text-center"><span
+                                        class="bg-rose-900/30 text-rose-400 border border-rose-900 px-2 py-1 rounded text-xs font-bold">DOR</span>
+                                </td>
+                                <td class="p-4 font-medium text-white">
+                                    <div class="flex items-center">
+                                        <i data-lucide="arrow-right" class="w-4 h-4 mr-2 text-rose-500"></i>
+                                        Reliever: Privacidade Total do Diário Conversacional (Sem julgamento).
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Linha 3 -->
+                            <tr class="hover:bg-slate-800 transition-colors">
+                                <td class="p-4">
+                                    <span class="block text-white font-medium">"Preciso saber exatamente o que estudar
+                                        para não perder tempo."</span>
+                                    <span class="text-xs text-slate-500">Fonte: Descrição Oficial</span>
+                                </td>
+                                <td class="p-4 text-center"><span
+                                        class="bg-emerald-900/30 text-emerald-400 border border-emerald-900 px-2 py-1 rounded text-xs font-bold">GANHO</span>
+                                </td>
+                                <td class="p-4 font-medium text-white">
+                                    <div class="flex items-center">
+                                        <i data-lucide="arrow-right" class="w-4 h-4 mr-2 text-emerald-500"></i>
+                                        Creator: Diagnóstico de Gaps + Plano de Ação Curado (Mixture of Experts).
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <footer class="text-center border-t border-slate-800 pt-8 pb-8">
+            <p class="text-slate-500 text-xs">CareerFlow AI 2026</p>
+        </footer>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+    <!-- Visit Badge Styles -->
+    <style>
+        .floating-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1e293b;
+            /* slate-800 */
+            color: #ffffff;
+            border: 1px solid #3b82f6;
+            /* blue-500 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            padding: 12px 20px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        .floating-badge a {
+            color: #3b82f6;
+            /* blue-500 */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .floating-badge a:hover {
+            text-decoration: underline;
+        }
+
+        .close-badge {
+            background: none;
+            border: none;
+            color: inherit;
+            opacity: 0.7;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            line-height: 1;
+        }
+
+        .close-badge:hover {
+            opacity: 1;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <!-- Visit Badge Script -->
+    <script>
+        function closeBadge() {
+            document.getElementById('visit-badge').style.display = 'none';
+        }
+    </script>
+
+    <!-- Badge Element -->
+    <div id="visit-badge" class="floating-badge">
+        <span class="badge-icon">🌐</span>
+        <span>
+            Você está visitando o site de
+            <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
+        </span>
+        <button class="close-badge" onclick="closeBadge()" title="Fechar">×</button>
+    </div>
+</body>
+
+</html>
