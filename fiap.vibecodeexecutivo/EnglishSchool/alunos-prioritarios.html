@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alunos Prioritários</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --fiap-pink: #ED145B; --fiap-black: #000000; --fiap-white: #FFFFFF; --fiap-gray: #333333; }
+        body { font-family: 'Roboto', sans-serif; background-color: #F4F4F4; margin: 0; padding: 0; color: var(--fiap-gray); }
+        header { background-color: var(--fiap-black); padding: 2rem; border-bottom: 4px solid var(--fiap-pink); color: var(--fiap-white); text-align: center; }
+        header h1 { margin: 0; font-weight: 900; text-transform: uppercase; }
+        header h1 span { color: var(--fiap-pink); }
+        .container { max-width: 1000px; margin: 2rem auto; padding: 2rem; background: var(--fiap-white); border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn-back { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; color: var(--fiap-pink); text-decoration: none; font-weight: bold; background: rgba(237, 20, 91, 0.1); padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.2s; }
+        .btn-back:hover { background: rgba(237, 20, 91, 0.2); }
+        
+        .priority-card { display: flex; align-items: center; gap: 1.5rem; background: #fff5f8; border: 1px solid #ffd1df; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; }
+        .priority-icon { font-size: 2rem; color: var(--fiap-pink); }
+        .priority-info { flex-grow: 1; }
+        .priority-info h3 { margin: 0 0 0.5rem 0; color: #cc0000; }
+        .priority-info p { margin: 0; font-size: 0.9rem; color: #555; }
+        .priority-actions button { background: var(--fiap-pink); color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        .priority-actions button:hover { background: #cc0044; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Alunos <span>Prioritários</span></h1>
+    </header>
+    <div class="container">
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar ao Dashboard</a>
+        <h2>Lista de Foco Triplo (Risco Alto + Inadimplência + Baixa Frequência)</h2>
+        <p>Estes alunos requerem intervenção imediata da diretoria.</p>
+        
+        <div class="priority-card">
+            <div class="priority-icon"><i class="fas fa-user-times"></i></div>
+            <div class="priority-info">
+                <h3>Ademar Neto (ID: A102)</h3>
+                <p><strong>Faturas Atrasadas:</strong> 2 | <strong>Frequência:</strong> 70% | <strong>Risco:</strong> Alto</p>
+                <p><em>Justificativa:</em> Múltiplas faltas seguidas e inadimplência recorrente.</p>
+            </div>
+            <div class="priority-actions">
+                <button><i class="fas fa-phone"></i> Ligar Agora</button>
+            </div>
+        </div>
+
+        <div class="priority-card">
+            <div class="priority-icon"><i class="fas fa-user-times"></i></div>
+            <div class="priority-info">
+                <h3>Daniel Castanho (ID: A105)</h3>
+                <p><strong>Faturas Atrasadas:</strong> 3 | <strong>Frequência:</strong> 45% | <strong>Risco:</strong> Alto</p>
+                <p><em>Justificativa:</em> Queda drástica de frequência no último mês.</p>
+            </div>
+            <div class="priority-actions">
+                <button><i class="fas fa-phone"></i> Ligar Agora</button>
+            </div>
+        </div>
+
+        <div class="priority-card">
+            <div class="priority-icon"><i class="fas fa-user-times"></i></div>
+            <div class="priority-info">
+                <h3>Filipe Fragoso (ID: A111)</h3>
+                <p><strong>Faturas Atrasadas:</strong> 4 | <strong>Frequência:</strong> 30% | <strong>Risco:</strong> Alto</p>
+                <p><em>Justificativa:</em> Inadimplência severa e quase abandonou o curso.</p>
+            </div>
+            <div class="priority-actions">
+                <button><i class="fas fa-phone"></i> Ligar Agora</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

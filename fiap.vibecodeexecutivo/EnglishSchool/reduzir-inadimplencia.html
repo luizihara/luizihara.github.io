@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reduzir Inadimplência</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root { --fiap-pink: #ED145B; --fiap-black: #000000; --fiap-white: #FFFFFF; --fiap-gray: #333333; }
+        body { font-family: 'Roboto', sans-serif; background-color: #F4F4F4; margin: 0; padding: 0; color: var(--fiap-gray); }
+        header { background-color: var(--fiap-black); padding: 2rem; border-bottom: 4px solid var(--fiap-pink); color: var(--fiap-white); text-align: center; }
+        header h1 { margin: 0; font-weight: 900; text-transform: uppercase; }
+        header h1 span { color: var(--fiap-pink); }
+        .container { max-width: 1000px; margin: 2rem auto; padding: 2rem; background: var(--fiap-white); border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn-back { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; color: var(--fiap-pink); text-decoration: none; font-weight: bold; background: rgba(237, 20, 91, 0.1); padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.2s; }
+        .btn-back:hover { background: rgba(237, 20, 91, 0.2); }
+        .chart-container { position: relative; height: 35vh; width: 100%; margin: 2rem 0; display: flex; justify-content: center; }
+        .action-list { margin-top: 2rem; list-style: none; padding: 0; }
+        .action-list li { background: #fff5f8; border-left: 4px solid var(--fiap-pink); padding: 1rem; margin-bottom: 1rem; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Reduzir <span>Inadimplência</span></h1>
+    </header>
+    <div class="container">
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar ao Dashboard</a>
+        <h2>Status Atual das Faturas do Mês</h2>
+        
+        <div class="chart-container">
+            <canvas id="inadimplenciaChart"></canvas>
+        </div>
+
+        <h2>Ações Recomendadas</h2>
+        <ul class="action-list">
+            <li><strong>Dia 5 após o vencimento:</strong> Enviar lembrete amigável via WhatsApp sugerindo renegociação sem juros.</li>
+            <li><strong>Dia 15 após o vencimento:</strong> Ligação da secretaria para entender se houve problema técnico ou financeiro.</li>
+            <li><strong>Dia 30 após o vencimento:</strong> Bloqueio temporário de novos conteúdos de aula, mantendo acesso ao portal financeiro.</li>
+        </ul>
+    </div>
+    
+    <script>
+        const ctx = document.getElementById('inadimplenciaChart').getContext('2d');
+        const inadimplenciaChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pagas em dia', 'Atraso de 1 a 15 dias', 'Atraso Crítico (> 15 dias)'],
+                datasets: [{
+                    data: [75, 15, 10],
+                    backgroundColor: ['#2eb82e', '#ffa64d', '#ED145B']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+</body>
+</html>

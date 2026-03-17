@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolução de Pagamentos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root { --fiap-pink: #ED145B; --fiap-black: #000000; --fiap-white: #FFFFFF; --fiap-gray: #333333; }
+        body { font-family: 'Roboto', sans-serif; background-color: #F4F4F4; margin: 0; padding: 0; color: var(--fiap-gray); }
+        header { background-color: var(--fiap-black); padding: 2rem; border-bottom: 4px solid var(--fiap-pink); color: var(--fiap-white); text-align: center; }
+        header h1 { margin: 0; font-weight: 900; text-transform: uppercase; }
+        header h1 span { color: var(--fiap-pink); }
+        .container { max-width: 1000px; margin: 2rem auto; padding: 2rem; background: var(--fiap-white); border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn-back { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; color: var(--fiap-pink); text-decoration: none; font-weight: bold; background: rgba(237, 20, 91, 0.1); padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.2s; }
+        .btn-back:hover { background: rgba(237, 20, 91, 0.2); }
+        .chart-container { position: relative; height: 40vh; width: 100%; margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Evolução de <span>Pagamentos</span></h1>
+    </header>
+    <div class="container">
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar ao Dashboard</a>
+        <h2>Receita e Inadimplência ao longo dos meses</h2>
+        <p>Abaixo está a projeção mockada da evolução do recebimento de faturas vs. valores em atraso.</p>
+        
+        <div class="chart-container">
+            <canvas id="pagamentosChart"></canvas>
+        </div>
+    </div>
+    
+    <script>
+        const ctx = document.getElementById('pagamentosChart').getContext('2d');
+        const pagamentosChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [
+                    {
+                        label: 'Recebido (R$)',
+                        data: [12000, 15000, 14000, 16000, 15500, 13000],
+                        backgroundColor: '#2eb82e'
+                    },
+                    {
+                        label: 'Em Atraso (R$)',
+                        data: [3000, 2500, 4000, 1500, 2000, 5000],
+                        backgroundColor: '#ED145B'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { stacked: true },
+                    y: { stacked: true }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

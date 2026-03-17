@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo de Dados - Retenção de Alunos</title>
+    <!-- Fontes do Google (Roboto) -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Roboto', sans-serif; background-color: #F4F4F4; margin: 0; padding: 0; color: #333; }
+        header { background-color: #000; padding: 2rem; border-bottom: 4px solid #ED145B; color: #FFF; text-align: center; }
+        header h1 { margin: 0; font-weight: 900; text-transform: uppercase; }
+        header h1 span { color: #ED145B; }
+        .container { max-width: 1000px; margin: 2rem auto; padding: 2rem; background: #FFF; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn-back { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; color: #ED145B; text-decoration: none; font-weight: bold; background: rgba(237, 20, 91, 0.1); padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.2s; }
+        .btn-back:hover { background: rgba(237, 20, 91, 0.2); }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Modelo de Dados <span>DER</span></h1>
+    </header>
+    <div class="container">
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar ao Dashboard</a>
+        <div style="text-align: center;">
+            <pre class="mermaid">
+erDiagram
+    %% Entidade Central
+    ALUNOS {
+        int aluno_id PK
+    }
+
+    %% Bloco Acadêmico e de Engajamento
+    CURSOS ||--o{ TURMAS : "oferece"
+    TURMAS ||--o{ MATRICULAS : "possui"
+    TURMAS ||--o{ AULAS : "ministra"
+    TURMAS ||--o{ AVALIACOES_APLICADAS : "aplica"
+    
+    ALUNOS ||--o{ MATRICULAS : "realiza"
+    
+    AULAS ||--o{ PRESENCAS : "registra"
+    ALUNOS ||--o{ PRESENCAS : "possui"
+    
+    AVALIACOES_APLICADAS ||--o{ NOTAS : "gera"
+    ALUNOS ||--o{ NOTAS : "obtem"
+
+    %% Bloco Financeiro
+    ALUNOS ||--o{ CONTRATOS : "assina"
+    CONTRATOS ||--o{ FATURAS : "gera"
+    FATURAS ||--o{ PAGAMENTOS : "recebe"
+            </pre>
+        </div>
+    </div>
+    
+    <!-- Mermaid JS scripts para renderização visual do DER a partir do texto -->
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+</html>

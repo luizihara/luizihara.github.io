@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Retenção de Alunos</title>
+    <!-- Fontes do Google (Roboto) -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --fiap-pink: #ED145B;
+            --fiap-black: #000000;
+            --fiap-dark-gray: #1A1A1A;
+            --fiap-gray: #333333;
+            --fiap-light-gray: #F4F4F4;
+            --fiap-white: #FFFFFF;
+            
+            --risk-high: #ff4d4d;
+            --risk-high-bg: rgba(255, 77, 77, 0.1);
+            --risk-medium: #ffa64d;
+            --risk-low: #2eb82e;
+            
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: var(--fiap-light-gray);
+            color: var(--fiap-gray);
+            line-height: 1.6;
+        }
+
+        /* Tema Escuro no Cabeçalho estilo FIAP */
+        header {
+            background-color: var(--fiap-black);
+            padding: 2rem;
+            border-bottom: 4px solid var(--fiap-pink);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: var(--fiap-white);
+        }
+
+        header h1 {
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        header h1 span {
+            color: var(--fiap-pink);
+        }
+
+        .student-info {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--fiap-pink);
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .student-info p {
+            font-size: 0.95rem;
+            color: #E0E0E0;
+        }
+
+        .student-info strong {
+            color: var(--fiap-pink);
+            margin-right: 0.3rem;
+        }
+
+        /* Layout Principal */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Seção Principal (KPIs e Tabela) */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* KPIs */
+        .kpi-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .kpi-card {
+            background-color: var(--fiap-white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            border-left: 5px solid var(--fiap-dark-gray);
+            transition: transform 0.2s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .kpi-card.alert {
+            border-left-color: var(--risk-high);
+        }
+
+        .kpi-card.warning {
+            border-left-color: var(--fiap-pink);
+        }
+
+        .kpi-icon {
+            font-size: 2.5rem;
+            color: var(--fiap-gray);
+            opacity: 0.8;
+        }
+
+        .kpi-card.alert .kpi-icon { color: var(--risk-high); }
+        .kpi-card.warning .kpi-icon { color: var(--fiap-pink); }
+
+        .kpi-data h3 {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-data p {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--fiap-black);
+            line-height: 1.2;
+        }
+
+        /* Tabela de Alunos */
+        .table-card {
+            background-color: var(--fiap-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .table-header {
+            background-color: var(--fiap-dark-gray);
+            color: var(--fiap-white);
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-header h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #EEEEEE;
+        }
+
+        th {
+            background-color: #FAFAFA;
+            font-weight: 700;
+            color: #555;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        tbody tr {
+            transition: background-color 0.2s;
+        }
+
+        tbody tr:hover {
+            background-color: #F9F9F9;
+        }
+
+        /* Destaques na linha da tabela */
+        tr.row-danger {
+            background-color: var(--risk-high-bg);
+            border-left: 4px solid var(--risk-high);
+        }
+
+        tr.row-danger:hover {
+            background-color: rgba(255, 77, 77, 0.15);
+        }
+
+        .badge {
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--fiap-white);
+            display: inline-block;
+            text-align: center;
+        }
+
+        .badge-high { background-color: var(--risk-high); }
+        .badge-medium { background-color: var(--risk-medium); }
+        .badge-low { background-color: var(--risk-low); }
+
+        .faturas-ok { color: var(--risk-low); font-weight: bold; }
+        .faturas-bad { color: var(--risk-high); font-weight: bold; }
+
+        /* Sidebar / Painel Lateral */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .model-card {
+            background-color: var(--fiap-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            border-top: 4px solid var(--fiap-pink);
+        }
+
+        .model-card h3 {
+            font-size: 1.2rem;
+            color: var(--fiap-black);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .model-placeholder {
+            background-color: #F8F9FA;
+            border: 2px dashed #CCCCCC;
+            border-radius: var(--border-radius);
+            padding: 2rem 1rem;
+            text-align: center;
+            color: #888;
+            font-size: 0.95rem;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .model-placeholder i {
+            font-size: 3rem;
+            color: #DDDDDD;
+        }
+
+        /* O Balãozinho (Visit Badge) */
+        .floating-badge {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--fiap-white);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--fiap-black);
+            font-size: 14px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            border-left: 4px solid var(--fiap-pink);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .floating-badge.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+
+        .floating-badge .badge-icon {
+            font-size: 1.5rem;
+        }
+
+        .floating-badge a {
+            color: var(--fiap-pink);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .floating-badge a:hover {
+            text-decoration: underline;
+        }
+
+        .floating-badge .close-badge {
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 0.5rem;
+            line-height: 1;
+        }
+
+        .floating-badge .close-badge:hover {
+            color: var(--fiap-pink);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho Principal FIAP -->
+    <header>
+        <h1>Painel de <span>Retenção de Alunos</span></h1>
+        <div class="student-info">
+            <p><strong>Aluno:</strong> Luiz Ihara (RM 368484)</p>
+            <p><strong>Turma:</strong> FIAP 2ABL</p>
+            <p><strong>Professor:</strong> William Luis Domingues</p>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="main-content">
+            <!-- Cards de KPIs -->
+            <div class="kpi-container">
+                <div class="kpi-card">
+                    <div class="kpi-icon"><i class="fas fa-users"></i></div>
+                    <div class="kpi-data">
+                        <h3>Total de Alunos</h3>
+                        <p id="kpi-total">0</p>
+                    </div>
+                </div>
+                <div class="kpi-card warning">
+                    <div class="kpi-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <div class="kpi-data">
+                        <h3>Inadimplentes</h3>
+                        <p id="kpi-inadimplentes">0</p>
+                    </div>
+                </div>
+                <div class="kpi-card alert">
+                    <div class="kpi-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div class="kpi-data">
+                        <h3>Risco Alto de Evasão</h3>
+                        <p id="kpi-risco-alto">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabela de Alunos -->
+            <div class="table-card">
+                <div class="table-header">
+                    <h2>Relação de Alunos (Foco em Retenção)</h2>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome do Aluno</th>
+                                <th>Faturas Atrasadas</th>
+                                <th>Frequência</th>
+                                <th>Risco de Evasão</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-alunos">
+                            <!-- JS vai popular as linhas aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Lateral (Relatórios e Modelo de Dados) -->
+        <aside class="sidebar">
+            <div class="model-card" style="margin-bottom: 2rem;">
+                <h3><i class="fas fa-chart-pie"></i> Relatórios Analíticos</h3>
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">
+                    Acesse painéis detalhados de retenção e saúde financeira.
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                    <a href="evolucao-pagamentos.html" style="background:#f9f9f9; border: 1px solid #eee; padding: 1rem; text-decoration: none; color: var(--fiap-black); border-radius: 4px; font-weight: bold; border-left: 4px solid var(--risk-low); transition: 0.2s;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='#f9f9f9'"><i class="fas fa-chart-line" style="color: var(--risk-low); width: 20px;"></i> Evolução de Pagamentos</a>
+                    
+                    <a href="reduzir-inadimplencia.html" style="background:#f9f9f9; border: 1px solid #eee; padding: 1rem; text-decoration: none; color: var(--fiap-black); border-radius: 4px; font-weight: bold; border-left: 4px solid var(--risk-medium); transition: 0.2s;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='#f9f9f9'"><i class="fas fa-hand-holding-usd" style="color: var(--risk-medium); width: 20px;"></i> Reduzir Inadimplência</a>
+                    
+                    <a href="prevenir-desistencia.html" style="background:#f9f9f9; border: 1px solid #eee; padding: 1rem; text-decoration: none; color: var(--fiap-black); border-radius: 4px; font-weight: bold; border-left: 4px solid var(--risk-medium); transition: 0.2s;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='#f9f9f9'"><i class="fas fa-user-graduate" style="color: var(--risk-medium); width: 20px;"></i> Prevenir Desistência</a>
+                    
+                    <a href="alunos-prioritarios.html" style="background:#f9f9f9; border: 1px solid #eee; padding: 1rem; text-decoration: none; color: var(--fiap-black); border-radius: 4px; font-weight: bold; border-left: 4px solid var(--risk-high); transition: 0.2s;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='#f9f9f9'"><i class="fas fa-exclamation-circle" style="color: var(--risk-high); width: 20px;"></i> Alunos Prioritários</a>
+                </div>
+            </div>
+
+            <div class="model-card">
+                <h3><i class="fas fa-project-diagram"></i> Modelo de Dados</h3>
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">
+                    Referência arquitetural do banco de dados relacional para o sistema de retenção da escola de inglês.
+                </p>
+                <div class="model-placeholder" style="border: none; background: #FFF; padding-top: 1rem; min-height: 150px;">
+                    <i class="fas fa-project-diagram" style="font-size: 3rem; color: var(--fiap-pink); margin-bottom: 0.5rem;"></i>
+                    <p style="text-align: center;">Visualize interativamente o Modelo de Dados (DER) com relacionamentos.</p>
+                    <a href="modelo.html" style="display:inline-block; margin-top:1.5rem; background:var(--fiap-pink); color:white; padding:0.6rem 1.2rem; text-decoration:none; border-radius:4px; font-weight:bold; transition: background 0.3s;" onmouseover="this.style.background='#ff1f6b'" onmouseout="this.style.background='var(--fiap-pink)'"><i class="fas fa-external-link-alt"></i> Acessar Modelo de Dados</a>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- O Balãozinho -->
+    <div id="visit-badge" class="floating-badge">
+        <span class="badge-icon">🌐</span>
+        <span>
+            Você está visitando o site de
+            <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
+        </span>
+        <button class="close-badge" onclick="closeBadge()" title="Fechar">×</button>
+    </div>
+
+    <!-- Lógica JavaScript (Vanilla) -->
+    <script>
+        // Mock de dados da turma (Baseado no alunos.txt)
+        const mockAlunos = [
+            { id: "A101", nome: "Adelson Almeida", faturasAtrasadas: 0, frequencia: 95, risco: "Baixo" },
+            { id: "A102", nome: "Ademar Neto", faturasAtrasadas: 2, frequencia: 70, risco: "Alto" },
+            { id: "A103", nome: "Andreza Ananias", faturasAtrasadas: 0, frequencia: 88, risco: "Médio" },
+            { id: "A104", nome: "Camila Neves", faturasAtrasadas: 0, frequencia: 100, risco: "Baixo" },
+            { id: "A105", nome: "Daniel Castanho", faturasAtrasadas: 3, frequencia: 45, risco: "Alto" },
+            { id: "A106", nome: "Daniel Caminha", faturasAtrasadas: 1, frequencia: 82, risco: "Médio" },
+            { id: "A107", nome: "Daniel Vasserman", faturasAtrasadas: 0, frequencia: 92, risco: "Baixo" },
+            { id: "A108", nome: "Daniele Tupinambás", faturasAtrasadas: 0, frequencia: 90, risco: "Baixo" },
+            { id: "A109", nome: "Davi Ruela", faturasAtrasadas: 1, frequencia: 60, risco: "Alto" },
+            { id: "A110", nome: "Evandro Leal", faturasAtrasadas: 0, frequencia: 100, risco: "Baixo" },
+            { id: "A111", nome: "Fabio Araújo", faturasAtrasadas: 0, frequencia: 75, risco: "Médio" },
+            { id: "A112", nome: "FILEMOM ANDRADE", faturasAtrasadas: 0, frequencia: 85, risco: "Baixo" },
+            { id: "A113", nome: "Filipe Fragoso", faturasAtrasadas: 4, frequencia: 30, risco: "Alto" },
+            { id: "A114", nome: "Gisela Sutto", faturasAtrasadas: 0, frequencia: 98, risco: "Baixo" },
+            { id: "A115", nome: "Gustavo David", faturasAtrasadas: 0, frequencia: 100, risco: "Baixo" },
+            { id: "A116", nome: "Ivy Dalmazzo", faturasAtrasadas: 0, frequencia: 94, risco: "Baixo" },
+            { id: "A117", nome: "José Costa", faturasAtrasadas: 0, frequencia: 88, risco: "Médio" },
+            { id: "A118", nome: "Kisy Trevisan", faturasAtrasadas: 0, frequencia: 100, risco: "Baixo" },
+            { id: "A119", nome: "Larissa Trentin", faturasAtrasadas: 0, frequencia: 95, risco: "Baixo" },
+            { id: "A120", nome: "Leandro Castro", faturasAtrasadas: 1, frequencia: 78, risco: "Médio" },
+            { id: "A121", nome: "Leonardo Marinho", faturasAtrasadas: 0, frequencia: 92, risco: "Baixo" },
+            { id: "A122", nome: "LUCAS OLIVEIRA", faturasAtrasadas: 0, frequencia: 85, risco: "Baixo" },
+            { id: "A123", nome: "Luiz Pivatti", faturasAtrasadas: 0, frequencia: 96, risco: "Baixo" },
+            { id: "A124", nome: "Luiz Ihara", faturasAtrasadas: 0, frequencia: 99, risco: "Baixo" },
+            { id: "A125", nome: "Marcelo Eugenio", faturasAtrasadas: 0, frequencia: 90, risco: "Baixo" },
+            { id: "A126", nome: "MARCO SALERNO", faturasAtrasadas: 2, frequencia: 65, risco: "Alto" },
+            { id: "A127", nome: "Matheus Carvalho", faturasAtrasadas: 1, frequencia: 75, risco: "Médio" },
+            { id: "A128", nome: "Mauro Santos", faturasAtrasadas: 0, frequencia: 100, risco: "Baixo" },
+            { id: "A129", nome: "Miguel Moraes", faturasAtrasadas: 0, frequencia: 88, risco: "Médio" },
+            { id: "A130", nome: "murilo santos", faturasAtrasadas: 0, frequencia: 92, risco: "Baixo" },
+            { id: "A131", nome: "Pedro Martins", faturasAtrasadas: 0, frequencia: 95, risco: "Baixo" },
+            { id: "A132", nome: "Rafael Vido", faturasAtrasadas: 0, frequencia: 89, risco: "Médio" },
+            { id: "A133", nome: "Stefan Sales", faturasAtrasadas: 1, frequencia: 80, risco: "Médio" },
+            { id: "A134", nome: "Stéfanny Rocha", faturasAtrasadas: 0, frequencia: 97, risco: "Baixo" },
+            { id: "A135", nome: "Stefano Martins", faturasAtrasadas: 0, frequencia: 100, risco: "Baixo" },
+            { id: "A136", nome: "Thiago Baena", faturasAtrasadas: 0, frequencia: 92, risco: "Baixo" },
+            { id: "A137", nome: "Wellington Silva", faturasAtrasadas: 0, frequencia: 85, risco: "Baixo" },
+            { id: "A138", nome: "Yasmin Gaudard", faturasAtrasadas: 0, frequencia: 94, risco: "Baixo" }
+        ];
+
+        // Referências DOM
+        const tabelaBody = document.getElementById('tabela-alunos');
+        const kpiTotal = document.getElementById('kpi-total');
+        const kpiInadimplentes = document.getElementById('kpi-inadimplentes');
+        const kpiRiscoAlto = document.getElementById('kpi-risco-alto');
+
+        // Renderização e Cálculos
+        function renderDashboard() {
+            let totalInadimplentes = 0;
+            let totalRiscoAlto = 0;
+
+            tabelaBody.innerHTML = '';
+
+            mockAlunos.forEach(aluno => {
+                // Lógica dos KPIs
+                let isInadimplente = aluno.faturasAtrasadas > 0;
+                let isRiscoAlto = aluno.risco === "Alto";
+
+                if (isInadimplente) totalInadimplentes++;
+                if (isRiscoAlto) totalRiscoAlto++;
+
+                // Lógica Visual da Tabela
+                let tr = document.createElement('tr');
+                
+                // Destacar linhas perigosas (Inadimplente ou Risco Alto)
+                if (isInadimplente || isRiscoAlto) {
+                    tr.classList.add('row-danger');
+                }
+
+                // Badge de Risco
+                let badgeClass = '';
+                if (aluno.risco === 'Alto') badgeClass = 'badge-high';
+                else if (aluno.risco === 'Médio') badgeClass = 'badge-medium';
+                else badgeClass = 'badge-low';
+
+                // Formatar faturas
+                let faturasHTML = aluno.faturasAtrasadas === 0 
+                    ? `<span class="faturas-ok"><i class="fas fa-check-circle"></i> Em dia</span>`
+                    : `<span class="faturas-bad"><i class="fas fa-times-circle"></i> ${aluno.faturasAtrasadas} atrasada(s)</span>`;
+
+                // Botão de ação
+                let acaoBtn = (isInadimplente || isRiscoAlto) 
+                    ? `<button style="background:var(--fiap-pink); color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer;" title="Contatar Secretaria"><i class="fas fa-envelope"></i> Contatar</button>`
+                    : `<button style="background:#E0E0E0; color:#555; border:none; padding:5px 10px; border-radius:4px; cursor:default;" disabled>Ver Perfil</button>`;
+
+                tr.innerHTML = `
+                    <td><strong>${aluno.id}</strong></td>
+                    <td>${aluno.nome}</td>
+                    <td>${faturasHTML}</td>
+                    <td>${aluno.frequencia}%</td>
+                    <td><span class="badge ${badgeClass}">${aluno.risco}</span></td>
+                    <td>${acaoBtn}</td>
+                `;
+
+                tabelaBody.appendChild(tr);
+            });
+
+            // Atualiza KPIs
+            kpiTotal.textContent = mockAlunos.length;
+            kpiInadimplentes.textContent = totalInadimplentes;
+            kpiRiscoAlto.textContent = totalRiscoAlto;
+        }
+
+        // Inicializar Dashboard
+        document.addEventListener('DOMContentLoaded', renderDashboard);
+
+        // Lógica do Badge
+        function closeBadge() {
+            document.getElementById('visit-badge').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
