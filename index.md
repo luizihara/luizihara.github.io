@@ -124,7 +124,8 @@ With a background in quality assurance, my last few years have been focused on i
 - [Arquitetura de Agentes](fiap.arquiteturaagentes/index.html)
 - [Arquitetura de Agentes 2](fiap.arquiteturaagentes/index-2.html)
 - [Arquitetura de Agentes 3](fiap.arquiteturaagentes/index-3.html)
-- [Vibe Coding Executivo](fiap.vibecodeexecutivo/EnglishSchool/index.html)
+- [Vibe Coding Executivo - English School](fiap.vibecodeexecutivo/EnglishSchool/index.html)
+- [Vibe Coding Executivo](fiap.vibecodeexecutivo/index.html)
 
 
 ## TCC

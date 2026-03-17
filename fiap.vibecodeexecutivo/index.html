@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrega de Trabalho - Luiz Ihara</title>
+
+    <!-- Tailwind CSS para estilização profissional e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Mermaid.js para renderizar o diagrama ER automaticamente -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'neutral', // Tema neutro/profissional para o diagrama
+            securityLevel: 'loose',
+        });
+    </script>
+    <!-- Visit Badge Styles -->
+    <style>
+        .floating-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #312e81;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(49, 46, 129, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            border: 1px solid #4338ca;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        .floating-badge a {
+            color: #fbbf24;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .floating-badge a:hover {
+            text-decoration: underline;
+        }
+
+        .close-badge {
+            background: none;
+            border: none;
+            color: #a5b4fc;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            line-height: 1;
+        }
+
+        .close-badge:hover {
+            color: #fff;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen pb-12">
+
+    <!-- CABEÇALHO DA ATIVIDADE -->
+    <header class="bg-slate-900 text-white py-10 px-6 shadow-md border-b-4 border-blue-500">
+        <div class="max-w-5xl mx-auto">
+            <h1 class="text-2xl md:text-3xl font-bold mb-4 leading-tight text-slate-100">
+                Modelagem de Relacionamentos e Chaves: Cenários de Negócio em Bancos de Dados
+            </h1>
+            <div class="flex flex-col md:flex-row md:gap-8 text-slate-300">
+                <p class="text-lg">
+                    <span class="font-semibold text-blue-400">Aluno:</span> Luiz Ihara
+                    <span class="bg-slate-700 text-slate-200 text-sm py-1 px-2 rounded ml-2">RM 368484</span>
+                </p>
+                <p class="text-lg mt-2 md:mt-0">
+                    <span class="font-semibold text-blue-400">Professor:</span> William Luis Domingues
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="max-w-5xl mx-auto px-6 mt-10 space-y-10">
+
+        <!-- SEÇÃO: CENÁRIO -->
+        <section class="bg-white rounded-xl p-8 shadow-sm border border-slate-200">
+            <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
+                <div class="bg-blue-100 text-blue-700 p-2 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800">Cenário Escolhido</h2>
+            </div>
+
+            <div class="prose max-w-none text-slate-600">
+                <h3 class="text-xl font-bold text-slate-700 mb-2">Cenário 5 – Gestão de Pessoas (RH)</h3>
+                <p class="mb-4">Uma empresa quer organizar melhor sua gestão de pessoas.</p>
+                <p class="mb-4">Vamos pensar num APP para isso de forma que seja possível responder as perguntas abaixo.
+                    Se sim, o APP está em linha com o que a empresa quer.</p>
+
+                <ul class="list-disc pl-6 space-y-2 mt-4 text-slate-700 font-medium">
+                    <li>Quem trabalha na empresa hoje?</li>
+                    <li>Em quais áreas as pessoas atuam?</li>
+                    <li>Quem lidera quem?</li>
+                    <li>Como registrar mudanças ao longo do tempo?</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: DIAGRAMA VISUAL -->
+        <section class="bg-white rounded-xl p-8 shadow-sm border border-slate-200">
+            <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
+                <div class="bg-emerald-100 text-emerald-700 p-2 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800">Modelo Entidade-Relacionamento</h2>
+            </div>
+
+            <p class="text-slate-500 mb-8">Abaixo está a representação visual da modelagem de dados proposta para
+                resolver o cenário do RH, atendendo ao histórico de mudanças e cardinalidade (1:N).</p>
+
+            <!-- A div com a classe 'mermaid' desenha o gráfico automaticamente -->
+            <div
+                class="mermaid flex justify-center w-full overflow-x-auto py-4 bg-slate-50 rounded-lg border border-slate-100">
+                erDiagram
+                FUNCIONARIO {
+                int id PK
+                string nome_completo
+                string email
+                date data_admissao
+                string status
+                }
+                DEPARTAMENTO {
+                int id PK
+                string nome_departamento
+                }
+                CARGO {
+                int id PK
+                string titulo_cargo
+                }
+                HISTORICO_ALOCACAO {
+                int id PK
+                int funcionario_id FK
+                int departamento_id FK
+                int cargo_id FK
+                int gestor_id FK
+                date data_inicio
+                date data_fim
+                }
+
+                FUNCIONARIO ||--o{ HISTORICO_ALOCACAO : "1 : N (possui)"
+                DEPARTAMENTO ||--o{ HISTORICO_ALOCACAO : "1 : N (aloca)"
+                CARGO ||--o{ HISTORICO_ALOCACAO : "1 : N (define)"
+                FUNCIONARIO ||--o{ HISTORICO_ALOCACAO : "1 : N (gerencia como líder)"
+            </div>
+        </section>
+
+        <!-- SEÇÃO: CÓDIGO FONTE (TEXTO) -->
+        <section class="bg-white rounded-xl p-8 shadow-sm border border-slate-200">
+            <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
+                <div class="bg-indigo-100 text-indigo-700 p-2 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800">Código erDiagram (Mermaid)</h2>
+            </div>
+
+            <p class="text-slate-500 mb-4">Código utilizado para gerar a modelagem acima, definindo as entidades,
+                atributos, chaves (PK/FK) e as cardinalidades de relacionamento.</p>
+
+            <div class="bg-slate-800 rounded-lg p-6 overflow-x-auto border border-slate-900 shadow-inner">
+                <pre><code class="text-emerald-400 font-mono text-sm leading-relaxed">erDiagram
+    FUNCIONARIO {
+        int id PK
+        string nome_completo
+        string email
+        date data_admissao
+        string status
+    }
+    DEPARTAMENTO {
+        int id PK
+        string nome_departamento
+    }
+    CARGO {
+        int id PK
+        string titulo_cargo
+    }
+    HISTORICO_ALOCACAO {
+        int id PK
+        int funcionario_id FK
+        int departamento_id FK
+        int cargo_id FK
+        int gestor_id FK
+        date data_inicio
+        date data_fim
+    }
+
+    FUNCIONARIO ||--o{ HISTORICO_ALOCACAO : "1 : N (possui)"
+    DEPARTAMENTO ||--o{ HISTORICO_ALOCACAO : "1 : N (aloca)"
+    CARGO ||--o{ HISTORICO_ALOCACAO : "1 : N (define)"
+    FUNCIONARIO ||--o{ HISTORICO_ALOCACAO : "1 : N (gerencia como líder)"
+</code></pre>
+            </div>
+        </section>
+
+    </main>
+
+
+    <script>
+        function closeBadge() {
+            document.getElementById('visit-badge').style.display = 'none';
+        }
+    </script>
+    <!-- O Balãozinho -->
+    <div id="visit-badge" class="floating-badge">
+        <span class="badge-icon">🌐</span>
+        <span>
+            Você está visitando o site de
+            <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
+        </span>
+        <button class="close-badge" onclick="closeBadge()" title="Fechar">×</button>
+    </div>
+</body>
+
+</html>
