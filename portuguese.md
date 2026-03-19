@@ -126,6 +126,10 @@ Com experiência em Qualidade de Software, meus últimos anos foram focados em m
 - [Arquitetura de Agentes 3](fiap.arquiteturaagentes/index-3.html)
 - [Vibe Coding Executivo - English School](fiap.vibecodeexecutivo/EnglishSchool/index.html)
 - [Vibe Coding Executivo](fiap.vibecodeexecutivo/index.html)
+- [Vibe Coding Executivo - Reserva Assentos](fiap.vibecodeexecutivo/ReservaAssento/index.html)
+- [Vibe Coding Executivo - Cinema](fiap.vibecodeexecutivo/Cinema/index.html)
+- [Vibe Coding Executivo - Bingo](fiap.vibecodeexecutivo/Bingo/index.html)
+- [Vibe Coding Executivo - Jogo da Vida](fiap.vibecodeexecutivo/JogoDaVida/index.html)
 
 ## TCC
 - [Career ai](fiap.tcc/index.html)

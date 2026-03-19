@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Draw & Guess - O Desafio do Desenho</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            /* Evita scroll acidental no mobile enquanto desenha */
+            overscroll-behavior-y: contain;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        #draw-canvas {
+            touch-action: none;
+            /* Previne scroll no canvas durante o toque */
+            cursor: crosshair;
+            background-color: #ffffff;
+            box-shadow: inset 0 0 0 2px #e2e8f0;
+        }
+
+        .tool-btn.active {
+            border-color: #0ea5e9;
+            background-color: #e0f2fe;
+            transform: scale(1.1);
+        }
+
+        .color-btn.active {
+            transform: scale(1.25);
+            box-shadow: 0 0 0 2px white, 0 0 0 4px currentColor;
+        }
+
+        /* Animação do Loader */
+        .ai-scanning {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-scanning::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to bottom, rgba(14, 165, 233, 0) 0%, rgba(14, 165, 233, 0.2) 50%, rgba(14, 165, 233, 0) 100%);
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            0% {
+                transform: translateY(-50%);
+            }
+
+            100% {
+                transform: translateY(50%);
+            }
+        }
+
+        /* Visit Badge Styles */
+        .floating-badge {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #312e81;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(49, 46, 129, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            border: 1px solid #4338ca;
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        .floating-badge a {
+            color: #fbbf24;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .floating-badge a:hover {
+            text-decoration: underline;
+        }
+
+        .close-badge {
+            background: none;
+            border: none;
+            color: #a5b4fc;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            line-height: 1;
+        }
+
+        .close-badge:hover {
+            color: #fff;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="text-slate-800 flex flex-col items-center justify-center p-4">
+
+    <!-- App Container -->
+    <div
+        class="w-full max-w-2xl glass-panel rounded-3xl overflow-hidden flex flex-col transition-all duration-300 relative min-h-[600px]">
+
+        <!-- Header -->
+        <header
+            class="bg-brand-600 text-white p-4 text-center shadow-md relative z-10 flex items-center justify-center gap-2">
+            <i data-lucide="palette" class="w-6 h-6"></i>
+            <h1 class="text-2xl font-bold tracking-wide">Draw & Guess</h1>
+        </header>
+
+        <!-- SCREEN: START -->
+        <div id="screen-start" class="flex-1 flex flex-col items-center justify-center p-8 text-center animate-fade-in">
+            <div
+                class="w-32 h-32 bg-brand-100 text-brand-500 rounded-full flex items-center justify-center mb-6 shadow-inner">
+                <i data-lucide="pen-tool" class="w-16 h-16"></i>
+            </div>
+            <h2 class="text-3xl font-extrabold text-slate-800 mb-4">Pronto para desenhar?</h2>
+            <p class="text-slate-600 mb-8 max-w-md text-lg">
+                Você receberá uma palavra e terá <strong>30 segundos</strong> para desenhá-la. Nossa "IA" vai tentar
+                adivinhar e dar uma nota de 0 a 10!
+            </p>
+            <button onclick="startGame()"
+                class="bg-brand-500 hover:bg-brand-600 text-white font-bold text-xl py-4 px-10 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 active:scale-95 flex items-center gap-2">
+                <i data-lucide="play" class="w-6 h-6"></i>
+                Jogar Agora
+            </button>
+        </div>
+
+        <!-- SCREEN: PLAY -->
+        <div id="screen-play" class="hidden flex-1 flex flex-col p-4 animate-fade-in relative">
+            <div class="flex justify-between items-center mb-4">
+                <div class="bg-slate-100 px-4 py-2 rounded-2xl shadow-sm border border-slate-200">
+                    <span class="text-slate-500 text-sm font-semibold uppercase tracking-wider block">Desenhe:</span>
+                    <span id="word-to-draw" class="text-2xl font-bold text-brand-600 capitalize">Gato</span>
+                </div>
+
+                <div
+                    class="flex items-center gap-2 bg-rose-50 px-4 py-2 rounded-2xl shadow-sm border border-rose-100 text-rose-600">
+                    <i data-lucide="timer" class="w-5 h-5"></i>
+                    <span id="timer" class="text-2xl font-bold font-mono">30</span>
+                    <span class="text-sm font-bold">s</span>
+                </div>
+            </div>
+
+            <!-- Canvas Container -->
+            <div class="relative flex-1 bg-white rounded-2xl overflow-hidden shadow-sm border-2 border-slate-200 mb-4 h-64 md:h-80 w-full"
+                id="canvas-wrapper">
+                <canvas id="draw-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
+            </div>
+
+            <!-- Toolbar -->
+            <div
+                class="flex flex-wrap items-center justify-between gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                <!-- Colors -->
+                <div class="flex gap-2">
+                    <button class="color-btn active w-8 h-8 rounded-full bg-black text-black transition-transform"
+                        onclick="setColor('#000000', this)"></button>
+                    <button class="color-btn w-8 h-8 rounded-full bg-red-500 text-red-500 transition-transform"
+                        onclick="setColor('#ef4444', this)"></button>
+                    <button class="color-btn w-8 h-8 rounded-full bg-blue-500 text-blue-500 transition-transform"
+                        onclick="setColor('#3b82f6', this)"></button>
+                    <button class="color-btn w-8 h-8 rounded-full bg-green-500 text-green-500 transition-transform"
+                        onclick="setColor('#22c55e', this)"></button>
+                </div>
+
+                <!-- Tools -->
+                <div class="flex gap-2">
+                    <button
+                        class="tool-btn active p-2 rounded-xl border-2 border-transparent text-slate-600 hover:bg-slate-200 transition-all"
+                        onclick="setTool('pen', this)" title="Pincel">
+                        <i data-lucide="pen" class="w-5 h-5"></i>
+                    </button>
+                    <button
+                        class="tool-btn p-2 rounded-xl border-2 border-transparent text-slate-600 hover:bg-slate-200 transition-all"
+                        onclick="setTool('eraser', this)" title="Borracha">
+                        <i data-lucide="eraser" class="w-5 h-5"></i>
+                    </button>
+                    <div class="w-px bg-slate-300 mx-1"></div>
+                    <button class="p-2 rounded-xl text-slate-600 hover:bg-red-100 hover:text-red-600 transition-all"
+                        onclick="clearCanvas()" title="Limpar Tudo">
+                        <i data-lucide="trash-2" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-4 flex justify-end">
+                <button onclick="finishDrawing()"
+                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-xl shadow hover:shadow-lg transition-all transform hover:-translate-y-1 active:scale-95 flex items-center gap-2 w-full md:w-auto justify-center">
+                    <i data-lucide="check-circle" class="w-5 h-5"></i>
+                    Terminei!
+                </button>
+            </div>
+        </div>
+
+        <!-- SCREEN: EVALUATING -->
+        <div id="screen-evaluate"
+            class="hidden flex-1 flex flex-col items-center justify-center p-8 text-center animate-fade-in ai-scanning bg-slate-50">
+            <div class="relative w-24 h-24 mb-6">
+                <div class="absolute inset-0 border-4 border-slate-200 rounded-full"></div>
+                <div class="absolute inset-0 border-4 border-brand-500 rounded-full border-t-transparent animate-spin">
+                </div>
+                <i data-lucide="cpu"
+                    class="w-10 h-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-brand-600"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-800 mb-2">Analisando sua arte...</h2>
+            <p class="text-slate-500">Nossa rede neural está tentando adivinhar.</p>
+        </div>
+
+        <!-- SCREEN: RESULT -->
+        <div id="screen-result"
+            class="hidden flex-1 flex flex-col items-center justify-center p-8 text-center animate-fade-in">
+            <div id="result-icon" class="w-20 h-20 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                <!-- Ícone inserido via JS -->
+            </div>
+
+            <h2 class="text-3xl font-extrabold text-slate-800 mb-2" id="result-title">Análise Concluída</h2>
+
+            <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 w-full max-w-sm mb-6 mt-4">
+                <div class="mb-4">
+                    <p class="text-slate-500 text-sm uppercase font-bold tracking-wider mb-1">Palpite da IA</p>
+                    <p class="text-2xl font-bold text-slate-800 capitalize" id="ai-guess">...</p>
+                </div>
+
+                <div class="w-full h-px bg-slate-100 my-4"></div>
+
+                <div>
+                    <p class="text-slate-500 text-sm uppercase font-bold tracking-wider mb-1">Nota de Precisão</p>
+                    <div class="flex items-center justify-center gap-1">
+                        <span class="text-5xl font-black" id="ai-score-value">0</span>
+                        <span class="text-xl text-slate-400 font-bold">/10</span>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="resetGame()"
+                class="bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-lg transition-all transform hover:-translate-y-1 active:scale-95 flex items-center gap-2">
+                <i data-lucide="rotate-ccw" class="w-5 h-5"></i>
+                Jogar Novamente
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        // Inicializa os ícones do Lucide
+        lucide.createIcons();
+
+        // --- Variáveis Globais de Jogo ---
+        const words = ['gato', 'bicicleta', 'casa', 'árvore', 'avião', 'peixe', 'carro', 'sol', 'flor', 'cachorro'];
+        let currentWord = '';
+        let timeLeft = 30;
+        let timerInterval = null;
+
+        // --- Variáveis do Canvas ---
+        const canvas = document.getElementById('draw-canvas');
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        const canvasWrapper = document.getElementById('canvas-wrapper');
+
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        let brushColor = '#000000';
+        let brushSize = 4;
+        let isEraser = false;
+
+        // --- Navegação de Telas ---
+        function showScreen(screenId) {
+            ['screen-start', 'screen-play', 'screen-evaluate', 'screen-result'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(screenId).classList.remove('hidden');
+        }
+
+        // --- Lógica do Jogo ---
+        function startGame() {
+            // Escolhe palavra aleatória
+            currentWord = words[Math.floor(Math.random() * words.length)];
+            document.getElementById('word-to-draw').innerText = currentWord;
+
+            // Inicia Timer
+            timeLeft = 30;
+            document.getElementById('timer').innerText = timeLeft;
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    finishDrawing();
+                }
+            }, 1000);
+
+            showScreen('screen-play');
+            
+            // Wait for display to update before calculating canvas dimensions
+            setTimeout(() => {
+                resizeCanvas();
+                clearCanvas();
+                
+                // Reseta ferramentas
+                document.querySelector('.color-btn').click(); // Volta pro preto
+                document.querySelector('.tool-btn').click(); // Volta pro pincel
+            }, 50);
+        }
+
+        function finishDrawing() {
+            clearInterval(timerInterval);
+            showScreen('screen-evaluate');
+
+            // Simula o tempo de processamento da "IA" (2.5 segundos)
+            setTimeout(evaluateDrawing, 2500);
+        }
+
+        function resetGame() {
+            showScreen('screen-start');
+        }
+
+        // --- Simulação da "IA" ---
+        function evaluateDrawing() {
+            const isBlank = isCanvasBlank();
+
+            let score = 0;
+            let guess = '';
+            let iconColorClass = '';
+            let iconHtml = '';
+            let title = '';
+
+            if (isBlank) {
+                score = 0;
+                guess = "Nada (Tela em branco)";
+                title = "Faltou desenhar!";
+                iconColorClass = "bg-rose-100 text-rose-500";
+                iconHtml = '<i data-lucide="frown" class="w-10 h-10"></i>';
+            } else {
+                // Se desenhou, dá uma nota aleatória boa para incentivar (protótipo)
+                // Maior chance de adivinhar certo
+                const successRate = Math.random();
+
+                if (successRate > 0.3) {
+                    // "Adivinhou"
+                    score = Math.floor(Math.random() * 4) + 7; // 7 a 10
+                    guess = currentWord;
+                    title = "Uau, impressionante!";
+                    iconColorClass = "bg-green-100 text-green-500";
+                    iconHtml = '<i data-lucide="check" class="w-10 h-10"></i>';
+                } else {
+                    // "Errou"
+                    score = Math.floor(Math.random() * 5) + 2; // 2 a 6
+                    let wrongWords = words.filter(w => w !== currentWord);
+                    guess = wrongWords[Math.floor(Math.random() * wrongWords.length)];
+                    title = "Hmmm, quase...";
+                    iconColorClass = "bg-amber-100 text-amber-500";
+                    iconHtml = '<i data-lucide="help-circle" class="w-10 h-10"></i>';
+                }
+            }
+
+            // Atualiza UI de Resultados
+            document.getElementById('ai-guess').innerText = guess;
+
+            const scoreEl = document.getElementById('ai-score-value');
+            scoreEl.innerText = score;
+            scoreEl.className = `text-5xl font-black ${score >= 7 ? 'text-green-500' : (score > 0 ? 'text-amber-500' : 'text-rose-500')}`;
+
+            document.getElementById('result-title').innerText = title;
+
+            const iconContainer = document.getElementById('result-icon');
+            iconContainer.className = `w-20 h-20 rounded-full flex items-center justify-center mb-4 shadow-lg ${iconColorClass}`;
+            iconContainer.innerHTML = iconHtml;
+
+            lucide.createIcons(); // Recria os ícones recém inseridos
+            showScreen('screen-result');
+        }
+
+        // Verifica se o canvas está totalmente branco
+        function isCanvasBlank() {
+            const pixelBuffer = new Uint32Array(
+                ctx.getImageData(0, 0, canvas.width, canvas.height).data.buffer
+            );
+            return !pixelBuffer.some(color => color !== 0 && color !== 0xFFFFFFFF);
+        }
+
+        // --- Lógica do Canvas ---
+        function resizeCanvas() {
+            // Garante que a resolução interna do canvas corresponda ao tamanho exibido
+            const rect = canvasWrapper.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+
+            // Preenche fundo branco
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Configurações do pincel
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+        }
+
+        // Chama resize quando a janela mudar de tamanho
+        window.addEventListener('resize', () => {
+            if (!document.getElementById('screen-play').classList.contains('hidden')) {
+                // Nota: Redimensionar apaga o canvas. Num app real, salvaríamos a imagem e restauraríamos.
+                // Aqui apenas ignoramos o redimensionamento drástico durante o jogo para manter simples.
+            }
+        });
+
+        // Pegar coordenadas exatas considerando scroll e larguras reais
+        function getCoordinates(e) {
+            const rect = canvas.getBoundingClientRect();
+            // Calcula o fator de escala caso o CSS defina um tamanho diferente da resolução interna do canvas
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            
+            // Suporte para touch ou mouse
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            return {
+                x: (clientX - rect.left) * scaleX,
+                y: (clientY - rect.top) * scaleY
+            };
+        }
+
+        function startPosition(e) {
+            e.preventDefault(); // Previne scroll no touch
+            isDrawing = true;
+            const pos = getCoordinates(e);
+            lastX = pos.x;
+            lastY = pos.y;
+            draw(e); // Desenha um ponto se apenas clicar
+        }
+
+        function endPosition() {
+            isDrawing = false;
+            ctx.beginPath(); // Reseta o caminho para não conectar com o próximo traço
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+
+            const pos = getCoordinates(e);
+
+            ctx.lineWidth = isEraser ? 20 : brushSize;
+            ctx.strokeStyle = isEraser ? '#ffffff' : brushColor;
+
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+
+            lastX = pos.x;
+            lastY = pos.y;
+        }
+
+        // Eventos Mouse
+        canvas.addEventListener('mousedown', startPosition);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', endPosition);
+        canvas.addEventListener('mouseout', endPosition);
+
+        // Eventos Touch (Mobile)
+        canvas.addEventListener('touchstart', startPosition, { passive: false });
+        canvas.addEventListener('touchmove', draw, { passive: false });
+        canvas.addEventListener('touchend', endPosition);
+        canvas.addEventListener('touchcancel', endPosition);
+
+        // --- Ferramentas ---
+        function setColor(color, btnElement) {
+            isEraser = false;
+            brushColor = color;
+
+            // Atualiza UI
+            document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            // Garante que o botão de ferramenta ativo seja o pincel
+            document.querySelectorAll('.tool-btn')[0].classList.add('active');
+            document.querySelectorAll('.tool-btn')[1].classList.remove('active');
+        }
+
+        function setTool(tool, btnElement) {
+            if (tool === 'eraser') {
+                isEraser = true;
+            } else {
+                isEraser = false;
+            }
+
+            // Atualiza UI
+            document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+        }
+
+        window.clearCanvas = function () {
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // Inicializa para garantir que não quebre na tela inicial (embora oculta)
+        window.onload = () => {
+            // Inicialização básica pronta
+        };
+
+    </script>
+
+    <script>
+        function closeBadge() {
+            const badge = document.getElementById('visit-badge');
+            if (badge) badge.style.display = 'none';
+        }
+    </script>
+    <!-- O Balãozinho -->
+    <div id="visit-badge" class="floating-badge">
+        <span class="badge-icon">🌐</span>
+        <span>
+            <strong>Vibe Coding Executivo</strong><br>
+            Professor: William Luis Domingues<br>
+            Aluno: Luiz Ihara RM368484<br>
+            <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
+        </span>
+        <!-- <button class="close-badge" onclick="closeBadge()" title="Fechar">×</button> -->
+    </div>
+</body>
+
+</html>

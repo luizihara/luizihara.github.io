@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineTicket</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- React & ReactDOM (UMD via CDN) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel para compilar JSX no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        /* Visit Badge Styles */
+        .floating-badge {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #312e81;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(49, 46, 129, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            border: 1px solid #4338ca;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .floating-badge a {
+            color: #fbbf24;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .floating-badge a:hover {
+            text-decoration: underline;
+        }
+
+        .close-badge {
+            background: none;
+            border: none;
+            color: #a5b4fc;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            line-height: 1;
+        }
+
+        .close-badge:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200 font-sans selection:bg-indigo-500/30">
+    
+    <div id="root"></div>
+
+    <!-- Script do Baloazinho -->
+    <script>
+        function closeBadge() {
+            const badge = document.getElementById('visit-badge');
+            if (badge) badge.style.display = 'none';
+        }
+    </script>
+    
+    <!-- O Balãozinho (Fora do React, puro HTML) -->
+    <div id="visit-badge" class="floating-badge">
+        <span class="badge-icon">🌐</span>
+        <span>
+            <strong>Vibe Coding Executivo</strong><br>
+            Professor: William Luis Domingues<br>
+            Aluno: Luiz Ihara RM368484<br>
+            <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
+        </span>
+        <!-- <button class="close-badge" onclick="closeBadge()" title="Fechar">×</button> -->
+    </div>
+
+    <!-- Código React transpilado pelo Babel -->
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- DADOS MOCKADOS ---
+        const FILMES = [
+            { id: 1, titulo: 'O Vingador do Futuro', genero: 'Ação/Ficção', duracao: '120 min', classificacao: '14+' },
+            { id: 2, titulo: 'Comédia em Família', genero: 'Comédia', duracao: '95 min', classificacao: 'Livre' },
+            { id: 3, titulo: 'O Mistério da Meia-Noite', genero: 'Suspense', duracao: '110 min', classificacao: '16+' },
+        ];
+
+        const SESSOES = ['18:00', '20:00', '22:00'];
+        const ASSENTOS_MOCK_POR_SESSAO = {
+            '18:00': ['A3', 'B2', 'B3', 'C5'],
+            '20:00': ['A1', 'A5', 'B3', 'C2', 'C4'],
+            '22:00': ['C1', 'C2', 'C3', 'C4', 'C5', 'A3', 'B3']
+        };
+        const PRECO_INGRESSO = 20;
+
+        // --- COMPONENTES DA APLICAÇÃO ---
+        const MovieCard = ({ filme, selecionado, onSelect }) => (
+            <button onClick={() => onSelect(filme)}
+                className={`flex flex-col text-left p-4 rounded-xl border-2 transition-all duration-200 ${
+                    selecionado
+                    ? 'border-indigo-500 bg-indigo-500/10'
+                    : 'border-slate-700 bg-slate-800 hover:border-slate-500 hover:bg-slate-700'
+                }`}
+            >
+                <div className="flex items-start justify-between w-full mb-2">
+                    <h3 className="font-bold text-lg text-slate-100">{filme.titulo}</h3>
+                    {selecionado && <i className="fa-solid fa-circle-check text-indigo-500 text-xl"></i>}
+                </div>
+                <div className="flex flex-wrap gap-2 text-xs font-medium mt-auto">
+                    <span className="bg-slate-900/50 text-slate-300 px-2 py-1 rounded-md">{filme.genero}</span>
+                    <span className="bg-slate-900/50 text-slate-300 px-2 py-1 rounded-md flex items-center gap-1">
+                        <i className="fa-regular fa-clock"></i> {filme.duracao}
+                    </span>
+                    <span className={`px-2 py-1 rounded-md ${filme.classificacao === 'Livre' ? 'bg-green-500/20 text-green-400' : 'bg-orange-500/20 text-orange-400'}`}>
+                        {filme.classificacao}
+                    </span>
+                </div>
+            </button>
+        );
+
+        const SeatMap = ({ sessao, assentosSelecionados, onToggleAssento }) => {
+            const fileiras = ['A', 'B', 'C'];
+            const colunas = [1, 2, 3, 4, 5];
+            const assentosOcupados = sessao ? (ASSENTOS_MOCK_POR_SESSAO[sessao] || []) : [];
+
+            return (
+                <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex flex-col items-center">
+                    <div className="w-full max-w-sm h-8 bg-gradient-to-t from-indigo-500/30 to-transparent rounded-t-[50%] border-t-2 border-indigo-500 mb-8 flex items-center justify-center shadow-[0_-10px_30px_rgba(99,102,241,0.2)]">
+                        <span className="text-indigo-300 text-xs tracking-[0.3em] font-semibold uppercase">Tela do Cinema</span>
+                    </div>
+
+                    <div className="grid gap-4">
+                        {fileiras.map((fileira) => (
+                            <div key={fileira} className="flex gap-2 sm:gap-4 items-center">
+                                <span className="text-slate-500 font-bold w-4 text-center">{fileira}</span>
+                                <div className="flex gap-2 sm:gap-3">
+                                    {colunas.map((coluna) => {
+                                        const id = `${fileira}${coluna}`;
+                                        const isOcupado = assentosOcupados.includes(id);
+                                        const isSelecionado = assentosSelecionados.includes(id);
+
+                                        return (
+                                            <button key={id} disabled={isOcupado} onClick={() => onToggleAssento(id)}
+                                                className={`w-8 h-8 sm:w-10 sm:h-10 rounded-t-lg rounded-b-sm flex items-center justify-center text-xs font-bold transition-all
+                                                ${isOcupado
+                                                    ? 'bg-slate-900 text-slate-700 cursor-not-allowed border border-slate-800'
+                                                    : isSelecionado
+                                                        ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/30 scale-110'
+                                                        : 'bg-slate-600 text-slate-300 hover:bg-indigo-400 hover:text-white hover:scale-105'
+                                                }`}
+                                            >
+                                                {coluna}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mt-8 text-sm">
+                        <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 bg-slate-600 rounded-t-sm"></div>
+                            <span className="text-slate-400">Livre</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 bg-indigo-500 rounded-t-sm shadow-sm shadow-indigo-500/40"></div>
+                            <span className="text-slate-200">Selecionado</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 bg-slate-900 border border-slate-700 rounded-t-sm"></div>
+                            <span className="text-slate-500">Ocupado</span>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- COMPONENTE PRINCIPAL ---
+        function App() {
+            const [passo, setPasso] = useState('SELECAO');
+            const [filme, setFilme] = useState(null);
+            const [sessao, setSessao] = useState(null);
+            const [assentos, setAssentos] = useState([]);
+            const [nomeCliente, setNomeCliente] = useState('');
+            const [erroAssento, setErroAssento] = useState(false);
+            const [isCarregando, setIsCarregando] = useState(false);
+
+            const totalReserva = assentos.length * PRECO_INGRESSO;
+            const podeIrParaCheckout = filme && sessao && assentos.length > 0;
+            const podeFinalizarCompra = nomeCliente.trim().length > 2;
+
+            const handleToggleAssento = (id) => {
+                setErroAssento(false);
+                if (assentos.includes(id)) {
+                    setAssentos(prev => prev.filter(a => a !== id));
+                } else {
+                    if (assentos.length >= 5) {
+                        setErroAssento(true);
+                        setTimeout(() => setErroAssento(false), 3000);
+                        return;
+                    }
+                    setAssentos(prev => [...prev, id]);
+                }
+            };
+
+            const handleFinalizarCompra = (e) => {
+                e.preventDefault();
+                if (!podeFinalizarCompra) return;
+                setIsCarregando(true);
+                setTimeout(() => {
+                    setIsCarregando(false);
+                    setPasso('CONFIRMACAO');
+                }, 1000);
+            };
+
+            const handleNovaCompra = () => {
+                setFilme(null);
+                setSessao(null);
+                setAssentos([]);
+                setNomeCliente('');
+                setPasso('SELECAO');
+            };
+
+            return (
+                <div className="min-h-screen">
+                    <header className="bg-slate-900 border-b border-slate-800 sticky top-0 z-10">
+                        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center gap-2">
+                            <i className="fa-solid fa-film text-indigo-500 text-xl"></i>
+                            <h1 className="text-xl font-bold bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+                                CineTicket
+                            </h1>
+                        </div>
+                    </header>
+
+                    <main className="max-w-6xl mx-auto p-4 md:p-6 lg:p-8">
+                        {passo === 'SELECAO' && (
+                            <div className="flex flex-col lg:flex-row gap-8">
+                                <div className="flex-1 space-y-10">
+                                    <section>
+                                        <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+                                            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-indigo-500/20 text-indigo-400 text-sm">1</span>
+                                            Escolha o Filme
+                                        </h2>
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                            {FILMES.map(f => (
+                                                <MovieCard key={f.id} filme={f} selecionado={filme?.id === f.id} onSelect={(f) => { setFilme(f); setSessao(null); setAssentos([]); }} />
+                                            ))}
+                                        </div>
+                                    </section>
+
+                                    <section className={!filme ? 'opacity-40 pointer-events-none transition-opacity' : 'transition-opacity'}>
+                                        <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+                                            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-indigo-500/20 text-indigo-400 text-sm">2</span>
+                                            Horário da Sessão
+                                        </h2>
+                                        <div className="flex flex-wrap gap-3">
+                                            {SESSOES.map(s => (
+                                                <button key={s} onClick={() => { if(sessao !== s) { setSessao(s); setAssentos([]); } }}
+                                                    className={`px-6 py-3 rounded-xl font-medium border-2 transition-all ${
+                                                        sessao === s ? 'border-indigo-500 bg-indigo-500 text-white shadow-lg shadow-indigo-500/30' : 'border-slate-700 bg-slate-800 text-slate-300 hover:border-slate-500 hover:bg-slate-700'
+                                                    }`}
+                                                >
+                                                    {s}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </section>
+
+                                    <section className={!sessao ? 'hidden' : 'animate-in fade-in slide-in-from-top-4 duration-500'}>
+                                        <div className="flex items-center justify-between mb-4">
+                                            <h2 className="text-xl font-bold flex items-center gap-2">
+                                                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-indigo-500/20 text-indigo-400 text-sm">3</span>
+                                                Escolha seus Assentos
+                                            </h2>
+                                            <span className="text-sm text-slate-400 bg-slate-900 px-3 py-1 rounded-full border border-slate-800">
+                                                Máximo: 5 ingressos
+                                            </span>
+                                        </div>
+                                        <SeatMap sessao={sessao} assentosSelecionados={assentos} onToggleAssento={handleToggleAssento} />
+                                        {erroAssento && (
+                                            <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-2 text-red-400">
+                                                <i className="fa-solid fa-circle-exclamation text-xl"></i>
+                                                <p className="text-sm">Você atingiu o limite máximo de 5 assentos por compra.</p>
+                                            </div>
+                                        )}
+                                    </section>
+                                </div>
+
+                                <div className="w-full lg:w-96">
+                                    <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sticky top-24 shadow-xl">
+                                        <h3 className="text-lg font-bold mb-6 pb-4 border-b border-slate-800 flex items-center gap-2">
+                                            <i className="fa-solid fa-ticket text-indigo-400 text-xl"></i>
+                                            Resumo da Reserva
+                                        </h3>
+                                        <div className="space-y-4 mb-6">
+                                            <div>
+                                                <p className="text-sm text-slate-500 mb-1">Filme</p>
+                                                <p className="font-medium text-slate-200">{filme ? filme.titulo : <span className="text-slate-700 italic">Nenhum selecionado</span>}</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-slate-500 mb-1">Horário</p>
+                                                <p className="font-medium text-slate-200">{sessao || <span className="text-slate-700 italic">Nenhum selecionado</span>}</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-slate-500 mb-1 flex justify-between">Assentos ({assentos.length})</p>
+                                                <p className="font-medium text-slate-200">
+                                                    {assentos.length > 0 ? assentos.join(', ') : <span className="text-slate-700 italic">Nenhum selecionado</span>}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="pt-4 border-t border-slate-800 space-y-3 mb-8">
+                                            <div className="flex justify-between text-sm text-slate-400">
+                                                <span>Preço por ingresso</span>
+                                                <span>R$ {PRECO_INGRESSO},00</span>
+                                            </div>
+                                            <div className="flex justify-between items-center text-lg font-bold text-white">
+                                                <span>Total</span>
+                                                <span className="text-2xl text-indigo-400">R$ {totalReserva},00</span>
+                                            </div>
+                                        </div>
+                                        <button onClick={() => setPasso('CHECKOUT')}
+                                            disabled={!podeIrParaCheckout}
+                                            className="w-full py-4 rounded-xl font-bold flex justify-center items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/20 active:scale-[0.98]"
+                                        >
+                                            Ir para Checkout
+                                            <i className="fa-solid fa-chevron-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {passo === 'CHECKOUT' && (
+                            <div className="max-w-md mx-auto mt-10">
+                                <button onClick={() => setPasso('SELECAO')} className="text-slate-400 hover:text-white mb-6 flex items-center gap-1 transition-colors text-sm font-medium">
+                                    ← Voltar para seleção
+                                </button>
+                                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
+                                    <div className="w-12 h-12 bg-indigo-500/20 rounded-full flex items-center justify-center mb-6">
+                                        <i className="fa-solid fa-user text-indigo-400 text-xl"></i>
+                                    </div>
+                                    <h2 className="text-2xl font-bold text-white mb-2">Finalizar Compra</h2>
+                                    <p className="text-slate-400 text-sm mb-8">Informe seus dados para confirmar os ingressos.</p>
+                                    <div className="bg-slate-950 p-4 rounded-xl mb-8 border border-slate-800 flex justify-between items-center">
+                                        <div>
+                                            <p className="text-sm text-slate-500">Total a pagar</p>
+                                            <p className="text-xl font-bold text-indigo-400">R$ {totalReserva},00</p>
+                                        </div>
+                                        <div className="text-right">
+                                            <p className="text-sm text-slate-500">Ingressos</p>
+                                            <p className="font-medium">{assentos.length}x</p>
+                                        </div>
+                                    </div>
+                                    <form onSubmit={handleFinalizarCompra} className="space-y-6">
+                                        <div>
+                                            <label htmlFor="nome" className="block text-sm font-medium text-slate-300 mb-2">Nome Completo</label>
+                                            <input id="nome" type="text" value={nomeCliente} onChange={(e) => setNomeCliente(e.target.value)}
+                                                placeholder="Ex: João da Silva"
+                                                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                                                required
+                                            />
+                                        </div>
+                                        <button type="submit" disabled={!podeFinalizarCompra || isCarregando}
+                                            className="w-full py-4 rounded-xl font-bold flex justify-center items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed bg-green-600 hover:bg-green-500 text-white shadow-lg shadow-green-600/20 active:scale-[0.98]">
+                                            {isCarregando ? (
+                                                <><i className="fa-solid fa-spinner fa-spin"></i> Processando...</>
+                                            ) : (
+                                                'Finalizar Compra'
+                                            )}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        )}
+
+                        {passo === 'CONFIRMACAO' && (
+                            <div className="max-w-lg mx-auto mt-10 text-center">
+                                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl relative overflow-hidden">
+                                    <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500"></div>
+                                    <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                                        <i className="fa-solid fa-circle-check text-green-500 text-4xl"></i>
+                                    </div>
+                                    <h2 className="text-3xl font-bold text-white mb-2">Reserva Confirmada!</h2>
+                                    <p className="text-slate-400 mb-8">Bom filme, {nomeCliente.split(' ')[0]}! Aqui estão os detalhes do seu ingresso.</p>
+                                    <div className="bg-slate-950/50 rounded-xl border border-slate-800 p-6 text-left space-y-4 mb-8">
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <p className="text-sm text-slate-500 mb-1">Filme</p>
+                                                <p className="font-bold text-white">{filme?.titulo}</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-slate-500 mb-1">Horário</p>
+                                                <p className="font-bold text-white">{sessao}</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-slate-500 mb-1">Assentos</p>
+                                                <div className="flex flex-wrap gap-1">
+                                                    {assentos.map(a => (
+                                                        <span key={a} className="bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded text-sm font-medium">
+                                                            {a}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-slate-500 mb-1">Valor Pago</p>
+                                                <p className="font-bold text-green-400">R$ {totalReserva},00</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center justify-center gap-2 text-sm text-slate-500 mb-8">
+                                        <i className="fa-solid fa-circle-info"></i>
+                                        <p>Apresente este comprovante na entrada da sala.</p>
+                                    </div>
+                                    <button onClick={handleNovaCompra}
+                                        className="w-full py-4 rounded-xl font-bold flex justify-center items-center gap-2 transition-all bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 active:scale-[0.98]">
+                                        Nova Compra
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </main>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

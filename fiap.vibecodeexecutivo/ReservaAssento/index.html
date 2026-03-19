@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIRAV - Reserva de Assentos</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Seat styling */
+        .seat {
+            transition: all 0.2s ease;
+        }
+
+        .seat.available {
+            border: 2px solid #cbd5e1;
+            background-color: white;
+            color: #64748b;
+            cursor: pointer;
+        }
+
+        .seat.available:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+
+        .seat.selected {
+            background-color: #22c55e;
+            /* Green */
+            border: 2px solid #16a34a;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(34, 197, 94, 0.4);
+        }
+
+        .seat.occupied {
+            background-color: #e2e8f0;
+            border: 2px solid #cbd5e1;
+            color: #94a3b8;
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        .seat.occupied::after {
+            content: "\f00d";
+            /* FontAwesome X */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            color: #94a3b8;
+        }
+
+        /* Plane fuselage shape */
+        .plane-fuselage {
+            border: 4px solid #e2e8f0;
+            border-top-left-radius: 50% 100px;
+            border-top-right-radius: 50% 100px;
+            padding: 40px 20px 20px;
+            background: #f8fafc;
+            position: relative;
+        }
+
+        /* Aisle */
+        .seat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr) 20px repeat(3, 1fr);
+            gap: 10px;
+            justify-items: center;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Visit Badge Styles */
+        .floating-badge {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #312e81;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(49, 46, 129, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            border: 1px solid #4338ca;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        .floating-badge a {
+            color: #fbbf24;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .floating-badge a:hover {
+            text-decoration: underline;
+        }
+
+        .close-badge {
+            background: none;
+            border: none;
+            color: #a5b4fc;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            line-height: 1;
+        }
+
+        .close-badge:hover {
+            color: #fff;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800 h-screen flex flex-col overflow-hidden">
+
+    <!-- Navbar -->
+    <header class="bg-white shadow-sm z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <!-- Símbolo da Cruz de Malta (Amarela) -->
+                <svg viewBox="0 0 100 100" class="w-8 h-8 text-yellow-500" fill="currentColor">
+                    <path
+                        d="M50,42 L25,5 L75,5 Z M58,50 L95,25 L95,75 Z M50,58 L75,95 L25,95 Z M42,50 L5,75 L5,25 Z M42,42 L58,42 L58,58 L42,58 Z" />
+                </svg>
+                <!-- Nome da empresa (Azul) -->
+                <h1 class="font-bold text-2xl tracking-tight text-blue-700">GIRAV</h1>
+            </div>
+            <div id="timer-container"
+                class="hidden flex items-center gap-2 bg-gray-100 px-4 py-1.5 rounded-full font-medium transition-colors">
+                <i class="fa-regular fa-clock"></i>
+                <span id="timer-text">03:00</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col md:flex-row overflow-hidden max-w-7xl mx-auto w-full">
+
+        <!-- Left Side: Dynamic Flow -->
+        <div id="flow-container" class="flex-1 overflow-y-auto p-4 md:p-8 pb-32 md:pb-8">
+            <!-- Content will be injected here by JS -->
+        </div>
+
+        <!-- Right Side: Summary Sidebar -->
+        <div class="w-full md:w-96 bg-white border-l border-gray-200 shadow-xl flex flex-col z-20 absolute md:relative bottom-0 max-h-[50vh] md:max-h-full transition-transform transform translate-y-full md:translate-y-0"
+            id="summary-sidebar">
+            <!-- Mobile Toggle Handle -->
+            <div class="md:hidden w-full flex justify-center p-2 bg-gray-50 border-b cursor-pointer"
+                onclick="toggleMobileSummary()">
+                <div class="w-12 h-1.5 bg-gray-300 rounded-full"></div>
+            </div>
+
+            <div class="p-6 flex-1 overflow-y-auto">
+                <h2 class="text-lg font-bold mb-4 text-gray-800 border-b pb-2">Resumo da Reserva</h2>
+
+                <div id="summary-content" class="space-y-4">
+                    <!-- Dynamic Summary Content -->
+                </div>
+            </div>
+
+            <div class="p-6 border-t border-gray-100 bg-gray-50" id="summary-footer">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-500">Total</span>
+                    <span class="text-2xl font-bold text-brand-600" id="total-price">R$ 0,00</span>
+                </div>
+                <button id="btn-checkout" onclick="goToCheckout()" disabled
+                    class="w-full bg-brand-600 hover:bg-brand-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-lg transition-colors flex justify-center items-center gap-2">
+                    Ir para checkout <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Notification Modal (Replaces standard alerts) -->
+    <div id="notification-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
+        <div
+            class="bg-white rounded-xl shadow-2xl p-6 max-w-sm w-full transform transition-all animate-fade-in text-center">
+            <div id="notification-icon" class="text-4xl mb-4"></div>
+            <h3 id="notification-title" class="text-lg font-bold text-gray-900 mb-2"></h3>
+            <p id="notification-message" class="text-gray-600 mb-6"></p>
+            <button onclick="closeNotification()"
+                class="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                Entendi
+            </button>
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // --- DATA & STATE ---
+        const FLIGHTS = [
+            { id: 1, airline: 'Azul', number: 'AD4090', origin: 'VCP (Campinas)', destination: 'CNF (Belo Horizonte)', duration: '1h 15m', logo: 'fa-plane' },
+            { id: 2, airline: 'Gol', number: 'G31050', origin: 'CGH (São Paulo)', destination: 'BSB (Brasília)', duration: '1h 45m', logo: 'fa-plane' },
+            { id: 3, airline: 'Latam', number: 'LA3020', origin: 'GRU (Guarulhos)', destination: 'SDU (Rio de Janeiro)', duration: '1h 05m', logo: 'fa-plane' }
+        ];
+
+        const TIMES = ['08:00', '14:00', '20:00'];
+        const PRICE_PER_SEAT = 200;
+        const MAX_SEATS = 5;
+        const TIMER_SECONDS = 180; // 3 minutes
+
+        // Seat Data Mock per Time
+        const OCCUPIED_BY_TIME = {
+            '08:00': ['1A', '1F', '2C', '3D', '3E'],
+            '14:00': ['1B', '1C', '2A', '2B', '3A', '3E', '3F'],
+            '20:00': ['1D', '1E', '2D', '2E', '2F', '3B', '3C']
+        };
+
+        // App State
+        let state = {
+            step: 'selection', // 'selection', 'checkout', 'loading', 'confirmation'
+            flight: null,
+            time: null,
+            selectedSeats: [],
+            passengerName: '',
+            paymentMethod: '',
+            timerId: null,
+            timeLeft: TIMER_SECONDS,
+            timerActive: false
+        };
+
+        // --- DOM ELEMENTS ---
+        const flowContainer = document.getElementById('flow-container');
+        const summaryContent = document.getElementById('summary-content');
+        const totalPriceEl = document.getElementById('total-price');
+        const btnCheckout = document.getElementById('btn-checkout');
+        const timerContainer = document.getElementById('timer-container');
+        const timerText = document.getElementById('timer-text');
+        const notificationModal = document.getElementById('notification-modal');
+
+        // --- RENDER FUNCTIONS ---
+
+        function renderApp() {
+            if (state.step === 'selection') {
+                renderSelectionFlow();
+                document.getElementById('summary-sidebar').classList.remove('hidden');
+            } else if (state.step === 'checkout') {
+                renderCheckoutFlow();
+                document.getElementById('summary-sidebar').classList.remove('hidden');
+            } else if (state.step === 'loading') {
+                renderLoading();
+                document.getElementById('summary-sidebar').classList.add('hidden');
+            } else if (state.step === 'confirmation') {
+                renderConfirmation();
+                document.getElementById('summary-sidebar').classList.add('hidden');
+            }
+
+            updateSummary();
+        }
+
+        function renderSelectionFlow() {
+            let html = `
+                <div class="max-w-3xl mx-auto space-y-8 animate-fade-in">
+                    <!-- Flights Section -->
+                    <section>
+                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="bg-brand-600 text-white w-6 h-6 rounded-full inline-flex items-center justify-center text-sm">1</span> Selecione seu Voo</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            ${FLIGHTS.map(f => `
+                                <div onclick="selectFlight(${f.id})" class="cursor-pointer border-2 rounded-xl p-4 transition-all bg-white hover:shadow-md ${state.flight?.id === f.id ? 'border-brand-600 ring-2 ring-brand-100' : 'border-gray-200'}">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="font-bold text-gray-800">${f.airline}</span>
+                                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">${f.number}</span>
+                                    </div>
+                                    <div class="text-sm text-gray-600 mt-2 space-y-1">
+                                        <p><i class="fa-solid fa-location-dot w-4 text-center text-gray-400"></i> ${f.origin}</p>
+                                        <p><i class="fa-solid fa-flag-checkered w-4 text-center text-gray-400"></i> ${f.destination}</p>
+                                        <p class="mt-2 text-xs font-medium text-gray-500"><i class="fa-regular fa-clock w-4 text-center"></i> Duração: ${f.duration}</p>
+                                    </div>
+                                    ${state.flight?.id === f.id ? '<div class="mt-3 text-brand-600 text-sm font-medium flex items-center gap-1"><i class="fa-solid fa-check-circle"></i> Selecionado</div>' : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+            `;
+
+            if (state.flight) {
+                html += `
+                    <!-- Times Section -->
+                    <section class="animate-fade-in">
+                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="bg-brand-600 text-white w-6 h-6 rounded-full inline-flex items-center justify-center text-sm">2</span> Selecione o Horário</h2>
+                        <div class="flex flex-wrap gap-3">
+                            ${TIMES.map(t => `
+                                <button onclick="selectTime('${t}')" class="px-6 py-3 rounded-lg font-medium transition-all ${state.time === t ? 'bg-brand-600 text-white shadow-md' : 'bg-white border-2 border-gray-200 text-gray-700 hover:border-brand-300'}">
+                                    <i class="fa-regular fa-clock mr-2"></i>${t}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </section>
+                `;
+            }
+
+            if (state.time) {
+                html += `
+                    <!-- Seats Section -->
+                    <section class="animate-fade-in">
+                        <div class="flex justify-between items-end mb-4">
+                            <h2 class="text-xl font-bold flex items-center gap-2"><span class="bg-brand-600 text-white w-6 h-6 rounded-full inline-flex items-center justify-center text-sm">3</span> Escolha seus Assentos</h2>
+                            <span class="text-sm text-gray-500 font-medium">Máx 5 assentos</span>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center">
+                            
+                            <!-- Legend -->
+                            <div class="flex gap-4 mb-8 text-sm">
+                                <div class="flex items-center gap-1"><div class="w-4 h-4 rounded border-2 border-gray-300 bg-white"></div> Disponível</div>
+                                <div class="flex items-center gap-1"><div class="w-4 h-4 rounded border-2 border-green-600 bg-green-500"></div> Selecionado</div>
+                                <div class="flex items-center gap-1"><div class="w-4 h-4 rounded border-2 border-gray-300 bg-gray-200 flex items-center justify-center"><i class="fa-solid fa-xmark text-[8px] text-gray-400"></i></div> Ocupado</div>
+                            </div>
+
+                            <!-- Plane layout -->
+                            <div class="plane-fuselage w-full max-w-sm">
+                                <div class="text-center text-gray-400 text-sm font-bold tracking-widest mb-6 uppercase">Cabine</div>
+                                
+                                <div class="seat-grid">
+                                    <!-- Headers -->
+                                    <div class="font-bold text-gray-400 w-10 text-center">A</div>
+                                    <div class="font-bold text-gray-400 w-10 text-center">B</div>
+                                    <div class="font-bold text-gray-400 w-10 text-center">C</div>
+                                    <div></div> <!-- Aisle -->
+                                    <div class="font-bold text-gray-400 w-10 text-center">D</div>
+                                    <div class="font-bold text-gray-400 w-10 text-center">E</div>
+                                    <div class="font-bold text-gray-400 w-10 text-center">F</div>
+
+                                    ${renderSeatGrid()}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                `;
+            }
+
+            html += `</div>`;
+            flowContainer.innerHTML = html;
+        }
+
+        function renderSeatGrid() {
+            let gridHtml = '';
+            for (let r = 1; r <= 3; r++) {
+                for (let c of ['A', 'B', 'C']) {
+                    gridHtml += createSeatElement(`${r}${c}`);
+                }
+
+                // Aisle with row number
+                gridHtml += `<div class="flex items-center justify-center text-gray-300 font-bold text-sm">${r}</div>`;
+
+                for (let c of ['D', 'E', 'F']) {
+                    gridHtml += createSeatElement(`${r}${c}`);
+                }
+            }
+            return gridHtml;
+        }
+
+        function createSeatElement(id) {
+            const occupiedForTime = state.time ? (OCCUPIED_BY_TIME[state.time] || []) : [];
+            const isOccupied = occupiedForTime.includes(id);
+            const isSelected = state.selectedSeats.includes(id);
+            let classes = 'seat w-10 h-10 rounded-t-lg rounded-b-sm flex items-center justify-center text-sm font-medium select-none ';
+
+            if (isOccupied) {
+                classes += 'occupied';
+                return `<div class="${classes}" title="Assento Ocupado"></div>`;
+            } else if (isSelected) {
+                classes += 'selected';
+                return `<div class="${classes}" onclick="toggleSeat('${id}')">${id}</div>`;
+            } else {
+                classes += 'available';
+                return `<div class="${classes}" onclick="toggleSeat('${id}')">${id}</div>`;
+            }
+        }
+
+        function renderCheckoutFlow() {
+            const total = state.selectedSeats.length * PRICE_PER_SEAT;
+            const html = `
+                <div class="max-w-xl mx-auto space-y-6 animate-fade-in bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex items-center gap-3 mb-6">
+                        <button onclick="goBackToSelection()" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-colors">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                        <h2 class="text-2xl font-bold text-gray-800">Checkout</h2>
+                    </div>
+
+                    <div class="bg-brand-50 rounded-xl p-4 border border-brand-100 mb-6">
+                        <h3 class="font-semibold text-brand-700 mb-2">Resumo Rápido</h3>
+                        <p class="text-sm text-gray-700">${state.flight.airline} • ${state.time} • ${state.selectedSeats.length} Assento(s) • Total: R$ ${total},00</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Nome completo do passageiro</label>
+                            <input type="text" id="input-name" value="${state.passengerName}" oninput="updateCheckoutData()" placeholder="Digite como está no documento" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Forma de Pagamento</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="payment" value="PIX" ${state.paymentMethod === 'PIX' ? 'checked' : ''} onchange="updateCheckoutData()" class="peer sr-only">
+                                    <div class="rounded-lg border-2 border-gray-200 px-4 py-4 hover:bg-gray-50 peer-checked:border-brand-500 peer-checked:bg-brand-50 transition-all flex flex-col items-center justify-center gap-2">
+                                        <i class="fa-brands fa-pix text-2xl text-teal-500"></i>
+                                        <span class="font-medium text-gray-700">PIX</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="payment" value="Cartão de Crédito" ${state.paymentMethod === 'Cartão de Crédito' ? 'checked' : ''} onchange="updateCheckoutData()" class="peer sr-only">
+                                    <div class="rounded-lg border-2 border-gray-200 px-4 py-4 hover:bg-gray-50 peer-checked:border-brand-500 peer-checked:bg-brand-50 transition-all flex flex-col items-center justify-center gap-2">
+                                        <i class="fa-regular fa-credit-card text-2xl text-gray-600"></i>
+                                        <span class="font-medium text-gray-700">Cartão de Crédito</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            flowContainer.innerHTML = html;
+        }
+
+        function renderLoading() {
+            flowContainer.innerHTML = `
+                <div class="h-full flex flex-col items-center justify-center text-center animate-fade-in mt-20">
+                    <div class="loader mb-6"></div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Processando reserva...</h2>
+                    <p class="text-gray-500">Estamos confirmando seus assentos e pagamento.</p>
+                </div>
+            `;
+        }
+
+        function renderConfirmation() {
+            flowContainer.innerHTML = `
+                <div class="max-w-2xl mx-auto mt-10 bg-white p-8 rounded-2xl shadow-xl border border-gray-100 text-center animate-fade-in relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-green-500"></div>
+                    
+                    <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+                        <i class="fa-solid fa-check text-4xl"></i>
+                    </div>
+                    
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Reserva Confirmada!</h2>
+                    <p class="text-gray-500 mb-8">Sua passagem foi emitida com sucesso. Boa viagem!</p>
+                    
+                    <div class="bg-gray-50 rounded-xl p-6 text-left mb-8 border border-gray-100">
+                        <div class="grid grid-cols-2 gap-y-4 gap-x-6">
+                            <div>
+                                <span class="block text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Passageiro</span>
+                                <span class="font-semibold text-gray-800">${state.passengerName}</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Código da Reserva</span>
+                                <span class="font-bold text-brand-600">${Math.random().toString(36).substring(2, 8).toUpperCase()}</span>
+                            </div>
+                            <div class="col-span-2 border-t border-gray-200 pt-4 mt-2"></div>
+                            <div>
+                                <span class="block text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Voo</span>
+                                <span class="font-semibold text-gray-800">${state.flight.airline} ${state.flight.number}</span>
+                                <span class="block text-sm text-gray-500">${state.flight.origin} <i class="fa-solid fa-arrow-right text-xs mx-1"></i> ${state.flight.destination}</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Horário</span>
+                                <span class="font-semibold text-gray-800">${state.time}</span>
+                            </div>
+                            <div class="col-span-2 border-t border-gray-200 pt-4 mt-2"></div>
+                            <div>
+                                <span class="block text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Assentos Reservados (${state.selectedSeats.length})</span>
+                                <div class="flex flex-wrap gap-2 mt-1">
+                                    ${state.selectedSeats.map(s => `<span class="bg-brand-100 text-brand-700 px-2 py-1 rounded text-sm font-bold">${s}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Pagamento</span>
+                                <span class="font-semibold text-gray-800">${state.paymentMethod}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="resetApp()" class="bg-gray-800 hover:bg-gray-900 text-white font-medium py-3 px-8 rounded-lg transition-colors inline-flex items-center gap-2 shadow-lg">
+                        <i class="fa-solid fa-rotate-right"></i> Fazer Nova Reserva
+                    </button>
+                </div>
+            `;
+        }
+
+        function updateSummary() {
+            // Update Summary Content
+            let content = '';
+
+            if (!state.flight) {
+                content = `
+                    <div class="text-center py-8 text-gray-400">
+                        <i class="fa-solid fa-plane-up text-4xl mb-3 opacity-50"></i>
+                        <p>Selecione um voo para iniciar sua reserva.</p>
+                    </div>`;
+            } else {
+                content += `
+                    <div class="flex items-start gap-3 bg-gray-50 p-3 rounded-lg border border-gray-100">
+                        <div class="bg-brand-100 text-brand-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i class="fa-solid fa-plane"></i></div>
+                        <div>
+                            <p class="text-xs text-gray-500 uppercase font-bold">Voo Selecionado</p>
+                            <p class="font-semibold text-gray-800">${state.flight.airline} ${state.flight.number}</p>
+                            <p class="text-xs text-gray-500">${state.flight.origin} -> ${state.flight.destination}</p>
+                        </div>
+                    </div>
+                `;
+
+                if (state.time) {
+                    content += `
+                        <div class="flex items-start gap-3 bg-gray-50 p-3 rounded-lg border border-gray-100 mt-2">
+                            <div class="bg-brand-100 text-brand-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i class="fa-regular fa-clock"></i></div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase font-bold">Horário</p>
+                                <p class="font-semibold text-gray-800">${state.time}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                if (state.selectedSeats.length > 0) {
+                    content += `
+                        <div class="flex items-start gap-3 bg-gray-50 p-3 rounded-lg border border-gray-100 mt-2">
+                            <div class="bg-brand-100 text-brand-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i class="fa-solid fa-chair"></i></div>
+                            <div class="w-full">
+                                <div class="flex justify-between items-center mb-1">
+                                    <p class="text-xs text-gray-500 uppercase font-bold">Assentos (${state.selectedSeats.length})</p>
+                                    <p class="text-xs text-gray-500">R$ 200/cada</p>
+                                </div>
+                                <div class="flex flex-wrap gap-1">
+                                    ${state.selectedSeats.map(s => `<span class="bg-brand-600 text-white text-xs px-2 py-0.5 rounded font-medium">${s}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            summaryContent.innerHTML = content;
+
+            // Update Total Price
+            const total = state.selectedSeats.length * PRICE_PER_SEAT;
+            totalPriceEl.textContent = `R$ ${total},00`;
+
+            // Update Button State
+            if (state.step === 'selection') {
+                btnCheckout.innerHTML = `Ir para checkout <i class="fa-solid fa-arrow-right"></i>`;
+                btnCheckout.onclick = goToCheckout;
+
+                // Enable checkout only if Flight, Time AND at least 1 seat is selected
+                if (state.flight && state.time && state.selectedSeats.length > 0) {
+                    btnCheckout.disabled = false;
+                } else {
+                    btnCheckout.disabled = true;
+                }
+            } else if (state.step === 'checkout') {
+                btnCheckout.innerHTML = `<i class="fa-solid fa-lock"></i> Finalizar Reserva`;
+                btnCheckout.onclick = finishReservation;
+
+                // Enable finish if name and payment are filled
+                if (state.passengerName.trim() !== '' && state.paymentMethod !== '') {
+                    btnCheckout.disabled = false;
+                } else {
+                    btnCheckout.disabled = true;
+                }
+            }
+        }
+
+
+        // --- ACTIONS ---
+
+        function selectFlight(id) {
+            state.flight = FLIGHTS.find(f => f.id === id);
+            // Reset dependent states
+            state.time = null;
+            clearSeats();
+            renderApp();
+        }
+
+        function selectTime(time) {
+            state.time = time;
+            clearSeats();
+            renderApp();
+        }
+
+        function toggleSeat(id) {
+            const index = state.selectedSeats.indexOf(id);
+
+            if (index > -1) {
+                // Deselect
+                state.selectedSeats.splice(index, 1);
+            } else {
+                // Select
+                if (state.selectedSeats.length >= MAX_SEATS) {
+                    showNotification('Limite Atingido', 'Você pode selecionar no máximo 5 assentos por reserva.', 'fa-solid fa-circle-exclamation text-amber-500');
+                    return;
+                }
+                state.selectedSeats.push(id);
+
+                // Start timer on first seat selection
+                if (!state.timerActive) {
+                    startTimer();
+                }
+            }
+
+            // If no seats are selected, stop and reset timer
+            if (state.selectedSeats.length === 0 && state.timerActive) {
+                stopTimer();
+            }
+
+            renderApp();
+        }
+
+        function clearSeats() {
+            state.selectedSeats = [];
+            stopTimer();
+        }
+
+        function goToCheckout() {
+            state.step = 'checkout';
+            // Show sidebar on mobile explicitly if moving to checkout
+            document.getElementById('summary-sidebar').classList.remove('translate-y-full');
+            renderApp();
+        }
+
+        function goBackToSelection() {
+            state.step = 'selection';
+            renderApp();
+        }
+
+        function updateCheckoutData() {
+            const nameInput = document.getElementById('input-name');
+            const paymentInputs = document.getElementsByName('payment');
+
+            state.passengerName = nameInput.value;
+
+            for (let radio of paymentInputs) {
+                if (radio.checked) {
+                    state.paymentMethod = radio.value;
+                    break;
+                }
+            }
+
+            updateSummary(); // Just update button state
+        }
+
+        function finishReservation() {
+            stopTimer(false); // Stop timer, don't clear seats
+            state.step = 'loading';
+            renderApp();
+
+            // Simulate API Call / Processing
+            setTimeout(() => {
+                state.step = 'confirmation';
+                renderApp();
+            }, 1000);
+        }
+
+        function resetApp() {
+            stopTimer();
+            state = {
+                step: 'selection',
+                flight: null,
+                time: null,
+                selectedSeats: [],
+                passengerName: '',
+                paymentMethod: '',
+                timerId: null,
+                timeLeft: TIMER_SECONDS,
+                timerActive: false
+            };
+            renderApp();
+        }
+
+        // --- TIMER LOGIC ---
+
+        function startTimer() {
+            state.timerActive = true;
+            state.timeLeft = TIMER_SECONDS;
+            timerContainer.classList.remove('hidden');
+            timerContainer.classList.remove('bg-red-100', 'text-red-600');
+            timerContainer.classList.add('bg-brand-50', 'text-brand-600');
+
+            updateTimerDisplay();
+
+            state.timerId = setInterval(() => {
+                state.timeLeft--;
+                updateTimerDisplay();
+
+                if (state.timeLeft <= 60 && state.timeLeft > 0) {
+                    timerContainer.classList.remove('bg-brand-50', 'text-brand-600');
+                    timerContainer.classList.add('bg-red-100', 'text-red-600', 'animate-pulse');
+                }
+
+                if (state.timeLeft <= 0) {
+                    handleTimeout();
+                }
+            }, 1000);
+        }
+
+        function stopTimer(clearSeatsFlag = true) {
+            clearInterval(state.timerId);
+            state.timerActive = false;
+            state.timeLeft = TIMER_SECONDS;
+            timerContainer.classList.add('hidden');
+            timerContainer.classList.remove('animate-pulse');
+
+            if (clearSeatsFlag) {
+                state.selectedSeats = [];
+            }
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(state.timeLeft / 60);
+            const seconds = state.timeLeft % 60;
+            timerText.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function handleTimeout() {
+            stopTimer(true); // Stop and clear seats
+
+            if (state.step === 'checkout') {
+                state.step = 'selection';
+            }
+
+            renderApp();
+            showNotification('Tempo Esgotado!', 'O tempo limite de 3 minutos para concluir a reserva expirou. Seus assentos foram liberados.', 'fa-regular fa-clock text-red-500');
+        }
+
+        // --- NOTIFICATION & UTILS ---
+
+        function showNotification(title, message, iconClass) {
+            document.getElementById('notification-title').textContent = title;
+            document.getElementById('notification-message').textContent = message;
+            document.getElementById('notification-icon').className = iconClass + ' text-4xl mb-4';
+            document.getElementById('notification-modal').classList.remove('hidden');
+        }
+
+        function closeNotification() {
+            document.getElementById('notification-modal').classList.add('hidden');
+        }
+
+        // Mobile Summary Drawer Logic
+        function toggleMobileSummary() {
+            const sidebar = document.getElementById('summary-sidebar');
+            sidebar.classList.toggle('translate-y-full');
+            // Move up just enough to show the handle and total when "closed"
+            if (sidebar.classList.contains('translate-y-full')) {
+                sidebar.style.transform = `translateY(calc(100% - 100px))`;
+            } else {
+                sidebar.style.transform = `translateY(0)`;
+            }
+        }
+
+        // Initialize mobile state properly on load and resize
+        function handleResize() {
+            const sidebar = document.getElementById('summary-sidebar');
+            if (window.innerWidth >= 768) { // md breakpoint
+                sidebar.style.transform = '';
+                sidebar.classList.remove('translate-y-full');
+            } else {
+                sidebar.classList.add('translate-y-full');
+                sidebar.style.transform = `translateY(calc(100% - 100px))`; // Peak out on mobile
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        // --- INIT ---
+        handleResize(); // Set initial mobile drawer state
+        renderApp();
+
+    </script>
+
+    <script>
+        function closeBadge() {
+            document.getElementById('visit-badge').style.display = 'none';
+        }
+    </script>
+    <!-- O Balãozinho -->
+    <div id="visit-badge" class="floating-badge">
+        <span class="badge-icon">🌐</span>
+        <span>
+            <strong>Vibe Coding Executivo</strong><br>
+            Professor: William Luis Domingues<br>
+            Aluno: Luiz Ihara RM368484<br>
+            <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
+        </span>
+        <!-- <button class="close-badge" onclick="closeBadge()" title="Fechar">×</button> -->
+    </div>
+
+</body>
+
+</html>

@@ -126,7 +126,10 @@ With a background in quality assurance, my last few years have been focused on i
 - [Arquitetura de Agentes 3](fiap.arquiteturaagentes/index-3.html)
 - [Vibe Coding Executivo - English School](fiap.vibecodeexecutivo/EnglishSchool/index.html)
 - [Vibe Coding Executivo](fiap.vibecodeexecutivo/index.html)
-
+- [Vibe Coding Executivo - Reserva Assentos](fiap.vibecodeexecutivo/ReservaAssento/index.html)
+- [Vibe Coding Executivo - Cinema](fiap.vibecodeexecutivo/Cinema/index.html)
+- [Vibe Coding Executivo - Bingo](fiap.vibecodeexecutivo/Bingo/index.html)
+- [Vibe Coding Executivo - Imagem Acao](fiap.vibecodeexecutivo/ImagemAcao/index.html)
 
 ## TCC
 - [Career ai](fiap.tcc/index.html)

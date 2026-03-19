@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Bingo Moderno</title>
+    <!-- Tailwind CSS para estilização moderna e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti para animação de vitória -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'pop': 'pop 0.3s ease-out forwards',
+                        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        pop: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos adicionais para efeitos específicos */
+        body {
+            background-color: #0f172a;
+            background-image: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+            color: #f8fafc;
+        }
+
+        .number-cell {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .marked {
+            background-color: #3b82f6;
+            color: white;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+            transform: scale(0.95);
+            font-weight: bold;
+        }
+
+        .winner-card {
+            border-color: #fbbf24;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.6);
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes pulse-border {
+            0% {
+                box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(251, 191, 36, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(251, 191, 36, 0);
+            }
+        }
+
+        /* Scrollbar customizada para o histórico */
+        .history-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .history-scroll::-webkit-scrollbar-track {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+
+        .history-scroll::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+
+        .history-scroll::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        /* Visit Badge Styles */
+        .floating-badge {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #312e81;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(49, 46, 129, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            border: 1px solid #4338ca;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        .floating-badge a {
+            color: #fbbf24;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .floating-badge a:hover {
+            text-decoration: underline;
+        }
+
+        .close-badge {
+            background: none;
+            border: none;
+            color: #a5b4fc;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            line-height: 1;
+        }
+
+        .close-badge:hover {
+            color: #fff;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col font-sans">
+
+    <!-- Cabeçalho -->
+    <header class="py-6 bg-slate-900 border-b border-slate-800 shadow-lg text-center">
+        <h1
+            class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 flex justify-center items-center gap-3">
+            <i class="fa-solid fa-dice"></i> Bingo Master
+        </h1>
+        <p class="text-slate-400 mt-2">Sorteio automático e marcação inteligente</p>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="flex-grow container mx-auto px-4 py-8 flex flex-col gap-8">
+
+        <!-- Painel Superior (Controles e Sorteio) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- Controles do Jogo -->
+            <div
+                class="bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700 flex flex-col justify-center gap-4">
+                <h2 class="text-xl font-bold text-white mb-2 border-b border-slate-700 pb-2"><i
+                        class="fa-solid fa-gamepad mr-2"></i> Controles</h2>
+
+                <button id="btn-start" onclick="startGame()"
+                    class="w-full py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 transition-colors font-bold text-white shadow-lg flex justify-center items-center gap-2">
+                    <i class="fa-solid fa-play"></i> Iniciar Jogo
+                </button>
+
+                <button id="btn-draw" onclick="drawNumber()" disabled
+                    class="w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-500 disabled:bg-slate-700 disabled:text-slate-500 transition-colors font-bold text-white shadow-lg flex justify-center items-center gap-2">
+                    <i class="fa-solid fa-gem"></i> Sortear Número
+                </button>
+
+                <button id="btn-reset" onclick="resetGame()"
+                    class="w-full py-3 rounded-lg bg-red-600 hover:bg-red-500 transition-colors font-bold text-white shadow-lg flex justify-center items-center gap-2 mt-4">
+                    <i class="fa-solid fa-rotate-right"></i> Reiniciar Jogo
+                </button>
+            </div>
+
+            <!-- Display do Número Sorteado -->
+            <div
+                class="bg-gradient-to-br from-indigo-900 to-purple-900 p-6 rounded-2xl shadow-xl border border-purple-700 flex flex-col items-center justify-center relative overflow-hidden">
+                <div
+                    class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20">
+                </div>
+                <h2 class="text-lg font-semibold text-purple-200 uppercase tracking-wider mb-2 z-10">Número Sorteado
+                </h2>
+                <div id="current-number"
+                    class="text-7xl font-extrabold text-white bg-white/10 w-32 h-32 rounded-full flex items-center justify-center border-4 border-purple-400 shadow-[0_0_30px_rgba(168,85,247,0.5)] z-10 transition-transform duration-300">
+                    --
+                </div>
+                <p id="game-status" class="mt-4 text-emerald-400 font-semibold z-10">Aguardando início...</p>
+            </div>
+
+            <!-- Histórico de Sorteios -->
+            <div class="bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700 flex flex-col">
+                <h2
+                    class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2 flex justify-between items-center">
+                    <span><i class="fa-solid fa-clock-rotate-left mr-2"></i> Histórico</span>
+                    <span id="draw-count" class="text-sm bg-slate-700 px-2 py-1 rounded-md text-slate-300">0/75</span>
+                </h2>
+                <div id="history-container"
+                    class="flex-grow flex flex-wrap content-start gap-2 overflow-y-auto max-h-[160px] history-scroll pr-2">
+                    <!-- Bolinhas sorteadas aparecerão aqui -->
+                    <p class="text-slate-500 italic w-full text-center mt-4">Nenhum número sorteado ainda.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Área das Cartelas -->
+        <div>
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                <i class="fa-solid fa-border-all text-blue-400"></i> Cartelas em Jogo
+            </h2>
+            <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                <!-- Cartelas geradas pelo JS -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal de BINGO -->
+    <div id="bingo-modal"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex-col items-center justify-center p-4">
+        <div
+            class="bg-slate-800 border-2 border-yellow-400 rounded-3xl p-8 max-w-md w-full text-center shadow-[0_0_50px_rgba(251,191,36,0.3)] animate-pop">
+            <h2
+                class="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-600 mb-2">
+                BINGO!</h2>
+            <p id="winner-text" class="text-2xl text-white font-semibold mb-8">Cartela X venceu!</p>
+            <i class="fa-solid fa-trophy text-7xl text-yellow-400 mb-8 drop-shadow-[0_0_15px_rgba(251,191,36,0.8)]"></i>
+            <button onclick="closeModalAndReset()"
+                class="w-full py-4 rounded-xl bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 transition-all font-bold text-slate-900 text-lg shadow-lg">
+                Jogar Novamente
+            </button>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="py-6 text-center border-t border-slate-800 text-slate-500 text-sm mt-auto">
+        <p>Desenvolvido para Exercício de Lógica e Front-End</p>
+    </footer>
+
+    <!-- Lógica do Jogo -->
+    <script>
+        // --- ESTADO DO JOGO ---
+        let gameState = 'idle'; // idle, playing, finished
+        let drawnNumbers = [];
+        let availableNumbers = [];
+        let cards = [];
+        const TOTAL_NUMBERS = 75;
+        const NUMBERS_PER_CARD = 25;
+
+        // Elementos DOM
+        const btnStart = document.getElementById('btn-start');
+        const btnDraw = document.getElementById('btn-draw');
+        const currentNumberEl = document.getElementById('current-number');
+        const historyContainer = document.getElementById('history-container');
+        const cardsContainer = document.getElementById('cards-container');
+        const statusEl = document.getElementById('game-status');
+        const drawCountEl = document.getElementById('draw-count');
+        const modal = document.getElementById('bingo-modal');
+        const winnerText = document.getElementById('winner-text');
+
+        // --- FUNÇÕES DE INICIALIZAÇÃO ---
+
+        // Gera array com números de 1 a max
+        function createAvailableNumbers(max) {
+            let nums = [];
+            for (let i = 1; i <= max; i++) {
+                nums.push(i);
+            }
+            return nums;
+        }
+
+        // Sorteia N números únicos de um array disponível
+        function getRandomNumbers(count, pool) {
+            let result = [];
+            let poolCopy = [...pool];
+            for (let i = 0; i < count; i++) {
+                if (poolCopy.length === 0) break;
+                const randomIndex = Math.floor(Math.random() * poolCopy.length);
+                result.push(poolCopy[randomIndex]);
+                poolCopy.splice(randomIndex, 1);
+            }
+            return result;
+        }
+
+        // Inicializa/Gera as 4 cartelas
+        function generateCards() {
+            cards = [];
+            const allPossibleNumbers = createAvailableNumbers(TOTAL_NUMBERS);
+
+            for (let i = 1; i <= 4; i++) {
+                const cardNumbers = getRandomNumbers(NUMBERS_PER_CARD, allPossibleNumbers);
+                cards.push({
+                    id: i,
+                    numbers: cardNumbers.map(n => ({ value: n, marked: false })),
+                    isWinner: false
+                });
+            }
+            renderCards();
+        }
+
+        // --- RENDERIZAÇÃO ---
+
+        function renderCards() {
+            cardsContainer.innerHTML = '';
+
+            cards.forEach(card => {
+                // Criação do HTML da Cartela
+                const cardDiv = document.createElement('div');
+                cardDiv.className = `bg-slate-800 border-2 ${card.isWinner ? 'winner-card' : 'border-slate-700'} rounded-2xl overflow-hidden shadow-lg transition-all duration-300`;
+                cardDiv.id = `card-${card.id}`;
+
+                // Cabeçalho da cartela
+                const headerClass = card.isWinner ? 'bg-yellow-500 text-slate-900' : 'bg-slate-700 text-white';
+                const header = document.createElement('div');
+                header.className = `${headerClass} py-3 px-4 font-bold text-center flex justify-between items-center transition-colors`;
+                header.innerHTML = `
+                    <span>Cartela ${card.id}</span>
+                    <span class="text-xs bg-black/20 px-2 py-1 rounded-full">${card.numbers.filter(n => n.marked).length}/${NUMBERS_PER_CARD}</span>
+                `;
+                cardDiv.appendChild(header);
+
+                // Grid 5x5
+                const grid = document.createElement('div');
+                grid.className = 'grid grid-cols-5 gap-1 p-3 bg-slate-800';
+
+                card.numbers.forEach((numObj, index) => {
+                    const cell = document.createElement('div');
+                    const isMarked = numObj.marked;
+                    cell.className = `number-cell aspect-square flex items-center justify-center text-lg rounded-md border border-slate-600/50 cursor-default ${isMarked ? 'marked' : 'bg-slate-700 text-slate-300'}`;
+                    cell.innerText = numObj.value;
+                    // Adiciona animação se foi marcado recentemente
+                    if (isMarked && drawnNumbers[drawnNumbers.length - 1] === numObj.value) {
+                        cell.classList.add('animate-pop');
+                    }
+                    grid.appendChild(cell);
+                });
+
+                cardDiv.appendChild(grid);
+                cardsContainer.appendChild(cardDiv);
+            });
+        }
+
+        function renderHistory() {
+            if (drawnNumbers.length === 0) {
+                historyContainer.innerHTML = '<p class="text-slate-500 italic w-full text-center mt-4">Nenhum número sorteado ainda.</p>';
+            } else {
+                historyContainer.innerHTML = '';
+                drawnNumbers.forEach(num => {
+                    const ball = document.createElement('div');
+                    ball.className = 'w-10 h-10 rounded-full bg-slate-700 border-2 border-slate-500 text-white flex items-center justify-center font-bold text-sm animate-pop';
+                    ball.innerText = num;
+                    historyContainer.appendChild(ball);
+                });
+                // Rola para o final do histórico
+                historyContainer.scrollTop = historyContainer.scrollHeight;
+            }
+            drawCountEl.innerText = `${drawnNumbers.length}/${TOTAL_NUMBERS}`;
+        }
+
+        // --- CONTROLE DO FLUXO DO JOGO ---
+
+        function startGame() {
+            if (gameState === 'playing') return;
+
+            gameState = 'playing';
+            availableNumbers = createAvailableNumbers(TOTAL_NUMBERS);
+            drawnNumbers = [];
+
+            // UI Updates
+            btnStart.disabled = true;
+            btnStart.classList.replace('bg-emerald-600', 'bg-slate-700');
+            btnStart.classList.replace('text-white', 'text-slate-500');
+
+            btnDraw.disabled = false;
+
+            currentNumberEl.innerText = '?';
+            statusEl.innerText = 'Jogo em andamento!';
+            statusEl.classList.replace('text-emerald-400', 'text-blue-400');
+
+            renderHistory();
+            generateCards(); // Gera cartelas limpas ao iniciar
+        }
+
+        function drawNumber() {
+            if (gameState !== 'playing' || availableNumbers.length === 0) return;
+
+            // Sorteio
+            const randomIndex = Math.floor(Math.random() * availableNumbers.length);
+            const drawn = availableNumbers.splice(randomIndex, 1)[0];
+
+            drawnNumbers.push(drawn);
+
+            // Animação e Update UI (Número Grande)
+            currentNumberEl.style.transform = 'scale(0.5)';
+            currentNumberEl.style.opacity = '0';
+
+            setTimeout(() => {
+                currentNumberEl.innerText = drawn;
+                currentNumberEl.style.transform = 'scale(1.1)';
+                currentNumberEl.style.opacity = '1';
+
+                setTimeout(() => {
+                    currentNumberEl.style.transform = 'scale(1)';
+                }, 150);
+            }, 150);
+
+            // Atualiza histórico
+            renderHistory();
+
+            // Marca cartelas e verifica bingo
+            markCardsAndCheckWin(drawn);
+        }
+
+        function markCardsAndCheckWin(drawnNum) {
+            let hasWinner = false;
+            let winningCards = [];
+
+            cards.forEach(card => {
+                // Marca o número se existir
+                const numberObj = card.numbers.find(n => n.value === drawnNum);
+                if (numberObj) {
+                    numberObj.marked = true;
+                }
+
+                // Verifica se ganhou (todos true)
+                const isFull = card.numbers.every(n => n.marked);
+                if (isFull) {
+                    card.isWinner = true;
+                    hasWinner = true;
+                    winningCards.push(card.id);
+                }
+            });
+
+            // Re-renderiza cartelas para atualizar marcações
+            renderCards();
+
+            if (hasWinner) {
+                handleBingo(winningCards);
+            }
+        }
+
+        function handleBingo(winningCards) {
+            gameState = 'finished';
+            btnDraw.disabled = true;
+
+            statusEl.innerText = 'Temos um Vencedor!';
+            statusEl.classList.replace('text-blue-400', 'text-yellow-400');
+
+            // Prepara texto do modal
+            if (winningCards.length === 1) {
+                winnerText.innerText = `Cartela ${winningCards[0]} venceu!`;
+            } else {
+                winnerText.innerText = `Empate! Cartelas ${winningCards.join(' e ')} venceram!`;
+            }
+
+            // Mostra Modal com delay para ver a última marcação
+            setTimeout(() => {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                triggerConfetti();
+            }, 600);
+        }
+
+        function resetGame() {
+            gameState = 'idle';
+            drawnNumbers = [];
+            availableNumbers = [];
+
+            // Restaura Botões
+            btnStart.disabled = false;
+            btnStart.classList.replace('bg-slate-700', 'bg-emerald-600');
+            btnStart.classList.replace('text-slate-500', 'text-white');
+
+            btnDraw.disabled = true;
+
+            // Restaura Displays
+            currentNumberEl.innerText = '--';
+            statusEl.innerText = 'Aguardando início...';
+            statusEl.classList.replace('text-blue-400', 'text-emerald-400');
+            statusEl.classList.replace('text-yellow-400', 'text-emerald-400');
+
+            generateCards();
+            renderHistory();
+        }
+
+        function closeModalAndReset() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            resetGame();
+        }
+
+        function triggerConfetti() {
+            const duration = 3000;
+            const end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#fbbf24', '#3b82f6', '#ec4899']
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#fbbf24', '#3b82f6', '#ec4899']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        // Inicializa estado visual (cartelas vazias)
+        window.onload = generateCards;
+
+    </script>
+
+    <script>
+        function closeBadge() {
+            const badge = document.getElementById('visit-badge');
+            if (badge) badge.style.display = 'none';
+        }
+    </script>
+    <!-- O Balãozinho -->
+    <div id="visit-badge" class="floating-badge">
+        <span class="badge-icon">🌐</span>
+        <span>
+            <strong>Vibe Coding Executivo</strong><br>
+            Professor: William Luis Domingues<br>
+            Aluno: Luiz Ihara RM368484<br>
+            <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
+        </span>
+        <!-- <button class="close-badge" onclick="closeBadge()" title="Fechar">×</button> -->
+    </div>
+</body>
+
+</html>
