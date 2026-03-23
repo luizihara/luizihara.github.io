@@ -130,6 +130,7 @@ With a background in quality assurance, my last few years have been focused on i
 - [Vibe Coding Executivo - Cinema](fiap.vibecodeexecutivo/Cinema/index.html)
 - [Vibe Coding Executivo - Bingo](fiap.vibecodeexecutivo/Bingo/index.html)
 - [Vibe Coding Executivo - Imagem Acao](fiap.vibecodeexecutivo/ImagemAcao/index.html)
+- [Gestão de Produto](fiap.GestaoProduto/controleViagem.html)
 
 ## TCC
 - [Career ai](fiap.tcc/index.html)

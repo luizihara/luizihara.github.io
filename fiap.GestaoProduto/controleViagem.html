@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento de Discovery - TechNova Consulting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos adicionais para melhorar a tipografia */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        h2 {
+            color: #1e40af;
+            /* blue-800 */
+        }
+    </style>
+
+    <!-- Visit Badge Styles -->
+    <style>
+        .floating-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            border: 1px solid #6366f1;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        .floating-badge a {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .floating-badge a:hover {
+            text-decoration: underline;
+        }
+
+        .close-badge {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            line-height: 1;
+        }
+
+        .close-badge:hover {
+            color: #fff;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800 antialiased py-8 px-4 sm:px-6 lg:px-8">
+
+    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
+
+        <!-- Cabeçalho Institucional -->
+        <header class="bg-slate-800 text-white p-6 sm:p-8 border-b-4 border-blue-600">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight">Trabalho Acadêmico</h1>
+                    <p class="text-slate-300 font-medium mt-1">Disciplina: <span class="text-white">Gestão de
+                            Produto</span></p>
+                    <p class="text-slate-300 font-medium">Professor: <span class="text-white">Willian Domingues</span>
+                    </p>
+                </div>
+                <div
+                    class="bg-slate-700/50 p-4 rounded-lg border border-slate-600 w-full sm:w-auto text-left sm:text-right">
+                    <p class="text-sm text-slate-300 uppercase tracking-wider font-semibold mb-1">Aluno</p>
+                    <p class="text-lg font-bold text-white">Luiz Ihara</p>
+                    <p class="text-slate-300 text-sm mt-1">RM: <span
+                            class="font-mono bg-slate-800 px-2 py-0.5 rounded text-blue-300">368484</span></p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Conteúdo do Documento -->
+        <main class="p-6 sm:p-10">
+            <div class="mb-10 text-center">
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">Documento de Discovery</h1>
+                <p class="text-xl text-gray-600 font-medium">Gestão de Despesas de Viagem - TechNova Consulting</p>
+                <div class="h-1 w-24 bg-blue-600 mx-auto mt-6 rounded"></div>
+            </div>
+
+            <!-- Seção 1 -->
+            <section class="mb-10">
+                <h2 class="text-2xl font-bold mb-4 flex items-center">
+                    <span
+                        class="bg-blue-100 text-blue-800 w-8 h-8 rounded-full inline-flex items-center justify-center mr-3 text-lg">1</span>
+                    O Problema Principal
+                </h2>
+                <div class="bg-red-50 border-l-4 border-red-500 p-5 rounded-r-lg">
+                    <p class="text-gray-700 leading-relaxed text-lg">
+                        O processo de prestação de contas de viagens corporativas na TechNova é altamente
+                        descentralizado, manual e desorganizado. A ausência de um fluxo padronizado de envio de
+                        comprovantes e a falta de clareza nas políticas de gastos geram gargalos operacionais,
+                        retrabalho constante para a equipe financeira e subjetividade nas aprovações.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Seção 2 -->
+            <section class="mb-10">
+                <h2 class="text-2xl font-bold mb-4 flex items-center">
+                    <span
+                        class="bg-blue-100 text-blue-800 w-8 h-8 rounded-full inline-flex items-center justify-center mr-3 text-lg">2</span>
+                    Os Usuários Envolvidos
+                </h2>
+                <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-3">
+                    <div
+                        class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                        <h3 class="font-bold text-gray-900 mb-2 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                            Funcionários (Viajantes)
+                        </h3>
+                        <p class="text-gray-600 text-sm">Realizam as viagens, guardam os recibos e tentam solicitar o
+                            reembolso.</p>
+                    </div>
+                    <div
+                        class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                        <h3 class="font-bold text-gray-900 mb-2 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            Gestores das Áreas
+                        </h3>
+                        <p class="text-gray-600 text-sm">Responsáveis por aprovar as despesas de sua equipe, muitas
+                            vezes sem critérios claros ou sem todos os comprovantes.</p>
+                    </div>
+                    <div
+                        class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                        <h3 class="font-bold text-gray-900 mb-2 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            Equipe Financeira
+                        </h3>
+                        <p class="text-gray-600 text-sm">Recebe as solicitações, faz a conferência manual das regras e
+                            comprovantes, solicita correções e programa os pagamentos.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 3 -->
+            <section class="mb-10">
+                <h2 class="text-2xl font-bold mb-4 flex items-center">
+                    <span
+                        class="bg-blue-100 text-blue-800 w-8 h-8 rounded-full inline-flex items-center justify-center mr-3 text-lg">3</span>
+                    O Fluxo Atual de Despesas (As-Is)
+                </h2>
+                <div class="bg-white border border-gray-200 rounded-lg p-6">
+                    <ol class="relative border-l border-gray-300 ml-3">
+                        <li class="mb-5 ml-6">
+                            <span
+                                class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-4 ring-white text-blue-800 text-xs font-bold">1</span>
+                            <p class="text-gray-700">O funcionário realiza os pagamentos durante a viagem.</p>
+                        </li>
+                        <li class="mb-5 ml-6">
+                            <span
+                                class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-4 ring-white text-blue-800 text-xs font-bold">2</span>
+                            <p class="text-gray-700">Após o retorno, ele junta os comprovantes físicos e digitais.</p>
+                        </li>
+                        <li class="mb-5 ml-6">
+                            <span
+                                class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-4 ring-white text-blue-800 text-xs font-bold">3</span>
+                            <p class="text-gray-700">O envio para o financeiro é feito de forma não padronizada (e-mail
+                                com as informações no corpo do texto, planilhas anexadas, fotos avulsas ou múltiplos
+                                PDFs).</p>
+                        </li>
+                        <li class="mb-5 ml-6">
+                            <span
+                                class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-4 ring-white text-blue-800 text-xs font-bold">4</span>
+                            <p class="text-gray-700">O analista financeiro confere manualmente os dados (valores, datas,
+                                motivos e comprovantes).</p>
+                        </li>
+                        <li class="mb-5 ml-6">
+                            <span
+                                class="absolute flex items-center justify-center w-6 h-6 bg-yellow-100 rounded-full -left-3 ring-4 ring-white text-yellow-800 text-xs font-bold">5</span>
+                            <p class="text-gray-700">Em caso de divergência ou falta de recibo, inicia-se uma longa
+                                troca de e-mails para correção.</p>
+                        </li>
+                        <li class="mb-5 ml-6">
+                            <span
+                                class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-4 ring-white text-blue-800 text-xs font-bold">6</span>
+                            <p class="text-gray-700">O gestor da área aprova a despesa (frequentemente por e-mail,
+                                tomando decisões subjetivas sobre valores e exceções).</p>
+                        </li>
+                        <li class="mb-5 ml-6">
+                            <span
+                                class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-4 ring-white text-blue-800 text-xs font-bold">7</span>
+                            <p class="text-gray-700">A informação retorna ao financeiro para programação do reembolso.
+                            </p>
+                        </li>
+                        <li class="ml-6">
+                            <span
+                                class="absolute flex items-center justify-center w-6 h-6 bg-green-100 rounded-full -left-3 ring-4 ring-white text-green-800 text-xs font-bold">8</span>
+                            <p class="text-gray-700">O pagamento é depositado na conta do funcionário.</p>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Seção 4 -->
+            <section class="mb-10">
+                <h2 class="text-2xl font-bold mb-4 flex items-center">
+                    <span
+                        class="bg-blue-100 text-blue-800 w-8 h-8 rounded-full inline-flex items-center justify-center mr-3 text-lg">4</span>
+                    As Maiores Dores do Processo
+                </h2>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-red-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <p class="text-gray-700"><strong class="text-gray-900">Desorganização e Retrabalho:</strong>
+                            Informações chegam por diversos canais e formatos, exigindo idas e vindas constantes.</p>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-red-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <p class="text-gray-700"><strong class="text-gray-900">Falta de Política Clara
+                                (Compliance):</strong> Regras de limite de gastos existem na teoria, mas não são
+                            centralizadas ou de conhecimento de todos, baseando-se no "bom senso".</p>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-red-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <p class="text-gray-700"><strong class="text-gray-900">Aprovações Subjetivas e
+                                Inconsistentes:</strong> Gestores aprovam gastos baseados em critérios próprios, criando
+                            situações onde o que é aprovado para um não é para outro.</p>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-red-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <p class="text-gray-700"><strong class="text-gray-900">Lentidão:</strong> A troca de e-mails e a
+                            conferência manual tornam o processo arrastado, atrasando o reembolso do funcionário.</p>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-red-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <p class="text-gray-700"><strong class="text-gray-900">Risco de Perda de Comprovantes:</strong>
+                            A dependência de anexos e fotos soltas facilita o extravio de documentos fiscais.</p>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Seção 5 -->
+            <section>
+                <h2 class="text-2xl font-bold mb-4 flex items-center">
+                    <span
+                        class="bg-blue-100 text-blue-800 w-8 h-8 rounded-full inline-flex items-center justify-center mr-3 text-lg">5</span>
+                    Oportunidades para um Produto Digital
+                </h2>
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <div class="bg-green-50 border border-green-200 p-5 rounded-lg">
+                        <h3 class="font-bold text-green-900 mb-2">Centralização de Uploads</h3>
+                        <p class="text-green-800 text-sm">Um aplicativo ou portal onde o funcionário possa escanear e
+                            subir recibos na hora (usando a câmera do celular), eliminando e-mails e anexos soltos.</p>
+                    </div>
+                    <div class="bg-green-50 border border-green-200 p-5 rounded-lg">
+                        <h3 class="font-bold text-green-900 mb-2">Políticas Embutidas (Travas)</h3>
+                        <p class="text-green-800 text-sm">O sistema deve ter as políticas de gastos parametrizadas. Se
+                            um jantar exceder o limite, o aplicativo alerta o usuário antes mesmo de ele enviar,
+                            cortando o retrabalho do financeiro.</p>
+                    </div>
+                    <div class="bg-green-50 border border-green-200 p-5 rounded-lg">
+                        <h3 class="font-bold text-green-900 mb-2">Workflow Automático de Aprovação</h3>
+                        <p class="text-green-800 text-sm">Um fluxo onde a solicitação vai direto para um painel do
+                            gestor, com aprovação em um clique e alertas de despesas fora do padrão.</p>
+                    </div>
+                    <div class="bg-green-50 border border-green-200 p-5 rounded-lg">
+                        <h3 class="font-bold text-green-900 mb-2">Dashboards de Visibilidade</h3>
+                        <p class="text-green-800 text-sm">Telas para a liderança e o financeiro acompanharem os gastos
+                            por projeto, equipe e categoria em tempo real, eliminando planilhas consolidadas
+                            manualmente.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Rodapé -->
+        <footer class="bg-gray-50 border-t border-gray-200 p-6 text-center text-sm text-gray-500">
+            Trabalho de Gestão de Produto &copy; 2026 - Luiz Ihara
+        </footer>
+    </div>
+    <script>
+        function closeBadge() {
+            document.getElementById('visit-badge').style.display = 'none';
+        }
+    </script>
+
+    <!-- O Balãozinho -->
+    <div id="visit-badge" class="floating-badge">
+        <span class="badge-icon">🌐</span>
+        <span>
+            Você está visitando o site de
+            <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
+        </span>
+        <button class="close-badge" onclick="closeBadge()" title="Fechar">×</button>
+    </div>
+</body>
+
+</html>
