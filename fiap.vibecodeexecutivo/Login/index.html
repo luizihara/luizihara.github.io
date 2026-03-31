@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Auth Client — Aplicação para consumo de API de Login e Validação de Token" />
+  <title>Auth Client</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --bg-primary: #0a0e1a;
+      --bg-secondary: #111827;
+      --bg-card: rgba(17, 24, 39, 0.7);
+      --bg-card-hover: rgba(30, 41, 59, 0.8);
+      --bg-glass: rgba(255, 255, 255, 0.04);
+      --bg-glass-border: rgba(255, 255, 255, 0.08);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent: #6366f1;
+      --accent-light: #818cf8;
+      --accent-glow: rgba(99, 102, 241, 0.25);
+      --success: #10b981;
+      --success-bg: rgba(16, 185, 129, 0.12);
+      --danger: #ef4444;
+      --danger-bg: rgba(239, 68, 68, 0.12);
+      --warning: #f59e0b;
+      --warning-bg: rgba(245, 158, 11, 0.12);
+      --info: #3b82f6;
+      --info-bg: rgba(59, 130, 246, 0.12);
+      --border: rgba(255, 255, 255, 0.06);
+      --border-accent: rgba(99, 102, 241, 0.3);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 30px var(--accent-glow);
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(ellipse at 30% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 70% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .navbar-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .navbar-brand .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent), #a855f7);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: white;
+      font-weight: 700;
+    }
+    .navbar-links {
+      display: flex;
+      gap: 4px;
+    }
+    .nav-link {
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      background: none;
+      white-space: nowrap;
+    }
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-glass);
+    }
+    .nav-link.active {
+      color: var(--accent-light);
+      background: rgba(99, 102, 241, 0.1);
+    }
+
+    /* ===== MOBILE NAV ===== */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 4px;
+    }
+    @media (max-width: 640px) {
+      .navbar-links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(10, 14, 26, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        padding: 8px 16px;
+        gap: 2px;
+      }
+      .navbar-links.open { display: flex; }
+      .mobile-menu-btn { display: block; }
+      .nav-link { padding: 12px 14px; }
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main-content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== SECTIONS / VIEWS ===== */
+    .view { display: none; }
+    .view.active {
+      display: block;
+      animation: fadeIn 0.35s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    .page-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .page-subtitle {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--bg-glass-border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+    .card:hover { border-color: rgba(255, 255, 255, 0.12); }
+    .card-glow {
+      border-color: var(--border-accent);
+      box-shadow: var(--shadow-glow);
+    }
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-title .icon {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+    }
+
+    /* ===== FORM ELEMENTS ===== */
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-family: var(--font);
+      font-size: 0.92rem;
+      transition: var(--transition);
+      outline: none;
+    }
+    .form-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .form-input::placeholder { color: var(--text-muted); }
+    textarea.form-input {
+      resize: vertical;
+      min-height: 80px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: var(--radius-md);
+      font-family: var(--font);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #7c3aed);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(99, 102, 241, 0.45);
+    }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-secondary {
+      background: var(--bg-glass);
+      color: var(--text-secondary);
+      border-color: var(--border);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .btn-danger {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+    .btn-danger:hover {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.35);
+    }
+    .btn-success {
+      background: var(--success-bg);
+      color: var(--success);
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+    .btn-success:hover {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+    .btn-sm {
+      padding: 7px 14px;
+      font-size: 0.78rem;
+    }
+    .btn-block { width: 100%; }
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    /* ===== LOADING SPINNER ===== */
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-top: 2px solid currentColor;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ===== BADGES ===== */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+    .badge-success { background: var(--success-bg); color: var(--success); }
+    .badge-danger { background: var(--danger-bg); color: var(--danger); }
+    .badge-warning { background: var(--warning-bg); color: var(--warning); }
+    .badge-info { background: var(--info-bg); color: var(--info); }
+
+    /* ===== SESSION CARD ===== */
+    .session-field {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .session-field:last-child { border-bottom: none; }
+    .session-field-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .session-field-value {
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      max-width: 60%;
+      text-align: right;
+      word-break: break-all;
+    }
+    .token-display {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .token-text {
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 0.82rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--accent-light);
+    }
+
+    /* ===== TOAST ===== */
+    .toast-container {
+      position: fixed;
+      top: 80px;
+      right: 24px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 380px;
+    }
+    .toast {
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(16px);
+      border: 1px solid;
+      font-size: 0.85rem;
+      font-weight: 500;
+      animation: slideIn 0.35s ease, fadeOut 0.4s ease 2.6s forwards;
+      box-shadow: var(--shadow-md);
+    }
+    .toast-success {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.3);
+      color: var(--success);
+    }
+    .toast-error {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.3);
+      color: var(--danger);
+    }
+    .toast-info {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: rgba(59, 130, 246, 0.3);
+      color: var(--info);
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; transform: translateX(40px); }
+    }
+
+    /* ===== CTA (Home no-session) ===== */
+    .cta-container {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .cta-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      background: linear-gradient(135deg, var(--accent), #7c3aed);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
+    }
+    .cta-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .cta-text {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+    }
+
+    /* ===== DASHBOARD GRID ===== */
+    .dash-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .dash-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 24px 16px;
+      background: var(--bg-glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: var(--font);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .dash-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+    .dash-btn .dash-icon {
+      font-size: 1.5rem;
+    }
+
+    /* ===== VALIDATION RESULT ===== */
+    .result-card {
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .result-card.result-success {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    .result-card.result-error {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+    .result-message {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .result-meta {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .result-meta-item {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .result-meta-item strong {
+      color: var(--text-secondary);
+    }
+
+    /* ===== LOGS ===== */
+    .logs-filters {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .form-select {
+      padding: 9px 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: var(--font);
+      font-size: 0.82rem;
+      outline: none;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .form-select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    .form-select option { background: var(--bg-secondary); }
+    .log-item {
+      background: var(--bg-glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      margin-bottom: 8px;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .log-item:hover { border-color: rgba(255, 255, 255, 0.12); }
+    .log-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      cursor: pointer;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .log-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .log-endpoint {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent-light);
+    }
+    .log-time {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .log-duration {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+    .log-details {
+      display: none;
+      padding: 0 18px 18px;
+      border-top: 1px solid var(--border);
+    }
+    .log-details.open { display: block; }
+    .log-detail-section {
+      margin-top: 14px;
+    }
+    .log-detail-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .log-detail-content {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      white-space: pre-wrap;
+      word-break: break-all;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--text-muted);
+    }
+    .empty-state .empty-icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      opacity: 0.4;
+    }
+
+    /* ===== SETTINGS URL DISPLAY ===== */
+    .url-preview {
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: var(--radius-sm);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.78rem;
+      color: var(--accent-light);
+      word-break: break-all;
+    }
+
+    /* ===== RESPONSIVE HELPERS ===== */
+    @media (max-width: 640px) {
+      .main-content { padding: 20px 16px 60px; }
+      .page-title { font-size: 1.4rem; }
+      .card { padding: 20px; }
+      .result-meta { flex-direction: column; gap: 8px; }
+      .session-field { flex-direction: column; align-items: flex-start; gap: 4px; }
+      .session-field-value { max-width: 100%; text-align: left; }
+      .token-text { max-width: 180px; }
+      .toast-container { left: 16px; right: 16px; max-width: none; }
+    }
+
+    /* ===== PULSE ANIMATION ===== */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .pulse { animation: pulse 1.5s infinite; }
+
+    /* ===== VISIT BADGE ===== */
+    .floating-badge {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #312e81;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(49, 46, 129, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1000;
+      border: 1px solid #4338ca;
+      font-family: var(--font);
+      font-size: 14px;
+      animation: badgeSlideIn 0.5s ease-out forwards;
+    }
+    .floating-badge a {
+      color: #fbbf24;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .floating-badge a:hover {
+      text-decoration: underline;
+    }
+    @keyframes badgeSlideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a class="navbar-brand" onclick="navigate('home')">
+        <span class="logo-icon">🔐</span>
+        Auth Client
+      </a>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+      <div class="navbar-links" id="navbar-links">
+        <button class="nav-link" data-view="home" onclick="navigate('home')">🏠 Home</button>
+        <button class="nav-link" data-view="login" onclick="navigate('login')">🔑 Login</button>
+        <button class="nav-link" data-view="validate" onclick="navigate('validate')">✅ Validar</button>
+        <button class="nav-link" data-view="settings" onclick="navigate('settings')">⚙️ Config</button>
+        <button class="nav-link" data-view="logs" onclick="navigate('logs')">📋 Logs</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== TOAST CONTAINER ===== -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <div class="main-content">
+
+    <!-- ===== HOME ===== -->
+    <section class="view" id="view-home">
+      <h1 class="page-title">Dashboard</h1>
+      <p class="page-subtitle">Visão geral da sua sessão de autenticação</p>
+
+      <!-- Session active -->
+      <div id="home-session-active" style="display:none">
+        <div class="card card-glow">
+          <div class="card-title">
+            <span class="icon" style="background:var(--success-bg);color:var(--success)">🔓</span>
+            Sessão Atual
+            <span id="home-session-badge" class="badge" style="margin-left:auto"></span>
+          </div>
+          <div>
+            <div class="session-field">
+              <span class="session-field-label">Token</span>
+              <span class="session-field-value">
+                <span class="token-display">
+                  <span class="token-text" id="home-token-display"></span>
+                  <button class="btn btn-secondary btn-sm" onclick="copyToken()" title="Copiar token">📋</button>
+                </span>
+              </span>
+            </div>
+            <div class="session-field">
+              <span class="session-field-label">Emitido em</span>
+              <span class="session-field-value" id="home-issued-at"></span>
+            </div>
+            <div class="session-field">
+              <span class="session-field-label">Expira em</span>
+              <span class="session-field-value" id="home-expires-at"></span>
+            </div>
+            <div class="session-field">
+              <span class="session-field-label">Validade</span>
+              <span class="session-field-value" id="home-valid-for"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-grid">
+          <button class="dash-btn" onclick="navigate('login')">
+            <span class="dash-icon">🔑</span> Login
+          </button>
+          <button class="dash-btn" onclick="navigate('validate')">
+            <span class="dash-icon">✅</span> Validar Token
+          </button>
+          <button class="dash-btn" onclick="navigate('settings')">
+            <span class="dash-icon">⚙️</span> Configurações
+          </button>
+          <button class="dash-btn" onclick="navigate('logs')">
+            <span class="dash-icon">📋</span> Logs
+          </button>
+          <button class="dash-btn" onclick="handleClearSession()" style="border-color:rgba(239,68,68,0.2);color:var(--danger)">
+            <span class="dash-icon">🗑️</span> Limpar Sessão
+          </button>
+        </div>
+      </div>
+
+      <!-- No session -->
+      <div id="home-no-session" style="display:none">
+        <div class="card">
+          <div class="cta-container">
+            <div class="cta-icon">🔐</div>
+            <h2 class="cta-title">Nenhuma sessão ativa</h2>
+            <p class="cta-text">Faça login com sua matrícula e senha para começar</p>
+            <button class="btn btn-primary" onclick="navigate('login')" style="font-size:1rem;padding:14px 36px">
+              🔑 Fazer Login
+            </button>
+            <div class="dash-grid" style="margin-top:28px;max-width:320px;margin-left:auto;margin-right:auto">
+              <button class="dash-btn" onclick="navigate('settings')">
+                <span class="dash-icon">⚙️</span> Config
+              </button>
+              <button class="dash-btn" onclick="navigate('logs')">
+                <span class="dash-icon">📋</span> Logs
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LOGIN ===== -->
+    <section class="view" id="view-login">
+      <h1 class="page-title">Login</h1>
+      <p class="page-subtitle">Autentique-se com matrícula e senha para obter um token</p>
+
+      <div class="card">
+        <div class="card-title">
+          <span class="icon" style="background:rgba(99,102,241,0.12);color:var(--accent-light)">🔑</span>
+          Credenciais
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="login-matricula">Matrícula</label>
+          <input type="text" class="form-input" id="login-matricula" placeholder="Digite sua matrícula" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="login-senha">Senha</label>
+          <input type="text" class="form-input" id="login-senha" placeholder="Digite sua senha" autocomplete="off" />
+        </div>
+        <button class="btn btn-primary btn-block" id="btn-login" onclick="handleLogin()">
+          🔑 Entrar
+        </button>
+      </div>
+
+      <!-- Login result card -->
+      <div id="login-result" style="display:none">
+        <div class="card card-glow">
+          <div class="card-title">
+            <span class="icon" style="background:var(--success-bg);color:var(--success)">✅</span>
+            Sessão Criada
+          </div>
+          <div>
+            <div class="session-field">
+              <span class="session-field-label">Token</span>
+              <span class="session-field-value">
+                <span class="token-display">
+                  <span class="token-text" id="login-token-display"></span>
+                  <button class="btn btn-secondary btn-sm" onclick="copyToken()">📋</button>
+                </span>
+              </span>
+            </div>
+            <div class="session-field">
+              <span class="session-field-label">Emitido em</span>
+              <span class="session-field-value" id="login-issued-at"></span>
+            </div>
+            <div class="session-field">
+              <span class="session-field-label">Expira em</span>
+              <span class="session-field-value" id="login-expires-at"></span>
+            </div>
+            <div class="session-field">
+              <span class="session-field-label">Validade</span>
+              <span class="session-field-value" id="login-valid-for"></span>
+            </div>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-success btn-sm" onclick="navigate('validate')">✅ Validar Token Agora</button>
+            <button class="btn btn-secondary btn-sm" onclick="copyToken()">📋 Copiar Token</button>
+            <button class="btn btn-danger btn-sm" onclick="handleClearSession()">🗑️ Limpar Sessão</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VALIDATE TOKEN ===== -->
+    <section class="view" id="view-validate">
+      <h1 class="page-title">Validar Token</h1>
+      <p class="page-subtitle">Verifique se um token ainda é válido junto à API</p>
+
+      <div class="card">
+        <div class="card-title">
+          <span class="icon" style="background:rgba(16,185,129,0.12);color:var(--success)">✅</span>
+          Token
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="validate-token">Token</label>
+          <textarea class="form-input" id="validate-token" placeholder="Cole ou digite o token aqui" rows="3"></textarea>
+        </div>
+        <button class="btn btn-primary btn-block" id="btn-validate" onclick="handleValidate()">
+          ✅ Validar
+        </button>
+      </div>
+
+      <div id="validate-result"></div>
+    </section>
+
+    <!-- ===== SETTINGS ===== -->
+    <section class="view" id="view-settings">
+      <h1 class="page-title">Configurações</h1>
+      <p class="page-subtitle">Configure a URL base da API de autenticação</p>
+
+      <div class="card">
+        <div class="card-title">
+          <span class="icon" style="background:rgba(245,158,11,0.12);color:var(--warning)">⚙️</span>
+          URL Base da API
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="settings-baseurl">URL Base</label>
+          <input type="url" class="form-input" id="settings-baseurl" placeholder="https://..." />
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" id="btn-save-url" onclick="handleSaveUrl()">💾 Salvar</button>
+          <button class="btn btn-secondary" id="btn-reset-url" onclick="handleResetUrl()">🔄 Restaurar Padrão</button>
+        </div>
+        <div class="url-preview" id="url-preview"></div>
+      </div>
+    </section>
+
+    <!-- ===== LOGS ===== -->
+    <section class="view" id="view-logs">
+      <h1 class="page-title">Logs</h1>
+      <p class="page-subtitle">Auditoria de todas as chamadas realizadas à API</p>
+
+      <div class="logs-filters">
+        <select class="form-select" id="filter-endpoint" onchange="renderLogs()">
+          <option value="all">Todos os endpoints</option>
+          <option value="auth-login">auth-login</option>
+          <option value="auth-validate">auth-validate</option>
+        </select>
+        <select class="form-select" id="filter-status" onchange="renderLogs()">
+          <option value="all">Todos os status</option>
+          <option value="200">200 (OK)</option>
+          <option value="401">401 (Unauthorized)</option>
+          <option value="403">403 (Forbidden)</option>
+          <option value="404">404 (Not Found)</option>
+          <option value="0">0 (Erro de Rede)</option>
+        </select>
+        <button class="btn btn-danger btn-sm" onclick="handleClearLogs()" style="margin-left:auto">🗑️ Limpar Logs</button>
+      </div>
+
+      <div id="logs-list"></div>
+    </section>
+
+  </div>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    /* =====================================================
+       CONSTANTS
+       ===================================================== */
+    const DEFAULT_BASE_URL = 'https://uhiesbvdbwuzlortrogi.supabase.co/functions/v1/';
+    const LS_BASE_URL = 'AUTH_API_BASE_URL';
+    const LS_SESSION = 'AUTH_SESSION';
+    const LS_LOGS = 'AUTH_LOGS';
+
+    /* =====================================================
+       BASE URL (Storage)
+       ===================================================== */
+    function getBaseUrl() {
+      return localStorage.getItem(LS_BASE_URL) || DEFAULT_BASE_URL;
+    }
+
+    function saveBaseUrl(url) {
+      if (url && !url.endsWith('/')) url += '/';
+      localStorage.setItem(LS_BASE_URL, url);
+    }
+
+    function resetBaseUrl() {
+      localStorage.removeItem(LS_BASE_URL);
+    }
+
+    /* =====================================================
+       SESSION (Storage)
+       ===================================================== */
+    function getSession() {
+      try {
+        const raw = localStorage.getItem(LS_SESSION);
+        return raw ? JSON.parse(raw) : null;
+      } catch { return null; }
+    }
+
+    function saveSession(data) {
+      localStorage.setItem(LS_SESSION, JSON.stringify(data));
+    }
+
+    function clearSession() {
+      localStorage.removeItem(LS_SESSION);
+    }
+
+    function isSessionValid() {
+      const s = getSession();
+      if (!s || !s.expires_at) return false;
+      return new Date(s.expires_at) > new Date();
+    }
+
+    /* =====================================================
+       LOGS (Storage)
+       ===================================================== */
+    function generateId() {
+      return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+    }
+
+    function getLogs() {
+      try {
+        const raw = localStorage.getItem(LS_LOGS);
+        return raw ? JSON.parse(raw) : [];
+      } catch { return []; }
+    }
+
+    function saveLog(entry) {
+      const logs = getLogs();
+      logs.unshift(entry);
+      // Keep max 500 logs
+      if (logs.length > 500) logs.length = 500;
+      localStorage.setItem(LS_LOGS, JSON.stringify(logs));
+    }
+
+    function clearLogs() {
+      localStorage.removeItem(LS_LOGS);
+    }
+
+    /* =====================================================
+       API CLIENT
+       ===================================================== */
+    async function apiPost(endpoint, body, meta = {}) {
+      const baseUrl = getBaseUrl();
+      const url = baseUrl + endpoint;
+      const start = performance.now();
+      let status = 0;
+      let rawText = '';
+      let data = null;
+      let ok = false;
+
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        status = res.status;
+        rawText = await res.text();
+        ok = res.ok;
+        try { data = JSON.parse(rawText); } catch { data = rawText; }
+      } catch (err) {
+        status = 0;
+        rawText = 'NETWORK_ERROR';
+        data = null;
+        ok = false;
+      }
+
+      const duration_ms = Math.round(performance.now() - start);
+
+      // Log
+      saveLog({
+        id: generateId(),
+        created_at: new Date().toISOString(),
+        base_url: baseUrl,
+        endpoint,
+        method: 'POST',
+        request_body: body,
+        status_code: status,
+        response_body: rawText,
+        success: ok,
+        duration_ms,
+        matricula: meta.matricula || null,
+        token: meta.token || null,
+      });
+
+      return { ok, status, data, rawText, duration_ms };
+    }
+
+    /* =====================================================
+       NAVIGATION (Hash-based SPA)
+       ===================================================== */
+    function navigate(view) {
+      window.location.hash = '#' + view;
+      // Close mobile menu
+      document.getElementById('navbar-links').classList.remove('open');
+    }
+
+    function handleRoute() {
+      const hash = window.location.hash.replace('#', '') || 'home';
+      const views = document.querySelectorAll('.view');
+      views.forEach(v => v.classList.remove('active'));
+
+      const target = document.getElementById('view-' + hash);
+      if (target) {
+        target.classList.add('active');
+      } else {
+        document.getElementById('view-home').classList.add('active');
+      }
+
+      // Update nav links
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('active', link.dataset.view === hash);
+      });
+
+      // Lifecycle hooks
+      if (hash === 'home') renderHome();
+      if (hash === 'validate') prefillToken();
+      if (hash === 'settings') renderSettings();
+      if (hash === 'logs') renderLogs();
+    }
+
+    window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('DOMContentLoaded', handleRoute);
+
+    function toggleMobileMenu() {
+      document.getElementById('navbar-links').classList.toggle('open');
+    }
+
+    /* =====================================================
+       TOAST SYSTEM
+       ===================================================== */
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'toast toast-' + type;
+      toast.textContent = message;
+      container.appendChild(toast);
+      setTimeout(() => { toast.remove(); }, 3000);
+    }
+
+    /* =====================================================
+       UTILITY: Format date
+       ===================================================== */
+    function fmtDate(iso) {
+      if (!iso) return '—';
+      try {
+        const d = new Date(iso);
+        return d.toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'medium' });
+      } catch { return iso; }
+    }
+
+    /* =====================================================
+       HOME VIEW
+       ===================================================== */
+    function renderHome() {
+      const session = getSession();
+      const activeEl = document.getElementById('home-session-active');
+      const noSessionEl = document.getElementById('home-no-session');
+
+      if (session && session.token) {
+        activeEl.style.display = 'block';
+        noSessionEl.style.display = 'none';
+
+        document.getElementById('home-token-display').textContent = session.token;
+        document.getElementById('home-issued-at').textContent = fmtDate(session.issued_at);
+        document.getElementById('home-expires-at').textContent = fmtDate(session.expires_at);
+        document.getElementById('home-valid-for').textContent = (session.valid_for_minutes || 30) + ' minutos';
+
+        const badge = document.getElementById('home-session-badge');
+        const valid = isSessionValid();
+        badge.textContent = valid ? '● Válida' : '● Expirada';
+        badge.className = 'badge ' + (valid ? 'badge-success' : 'badge-danger');
+      } else {
+        activeEl.style.display = 'none';
+        noSessionEl.style.display = 'block';
+      }
+    }
+
+    /* =====================================================
+       LOGIN HANDLER
+       ===================================================== */
+    async function handleLogin() {
+      const matricula = document.getElementById('login-matricula').value.trim();
+      const senha = document.getElementById('login-senha').value.trim();
+
+      if (!matricula || !senha) {
+        showToast('Preencha matrícula e senha', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('btn-login');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> Autenticando...';
+
+      const result = await apiPost('auth-login', { matricula, senha }, { matricula });
+
+      btn.disabled = false;
+      btn.innerHTML = '🔑 Entrar';
+
+      if (result.ok && result.status === 200) {
+        const d = result.data;
+        const sessionData = {
+          matricula,
+          token: d.token || d.Token || '',
+          issued_at: d.issued_at || d.issuedAt || '',
+          expires_at: d.expires_at || d.expiresAt || '',
+          valid_for_minutes: d.valid_for_minutes || d.validForMinutes || 30,
+        };
+        saveSession(sessionData);
+
+        // Show result card
+        const resultEl = document.getElementById('login-result');
+        resultEl.style.display = 'block';
+        document.getElementById('login-token-display').textContent = sessionData.token;
+        document.getElementById('login-issued-at').textContent = fmtDate(sessionData.issued_at);
+        document.getElementById('login-expires-at').textContent = fmtDate(sessionData.expires_at);
+        document.getElementById('login-valid-for').textContent = sessionData.valid_for_minutes + ' minutos';
+
+        showToast('Login realizado com sucesso!', 'success');
+      } else {
+        document.getElementById('login-result').style.display = 'none';
+        const messages = {
+          404: 'Usuário não encontrado',
+          403: 'Usuário inativo',
+          401: 'Senha inválida',
+          0: 'Erro de conexão com a API',
+        };
+        const msg = messages[result.status] || 'Erro ao autenticar (status ' + result.status + ')';
+        showToast(msg, 'error');
+      }
+    }
+
+    /* =====================================================
+       VALIDATE TOKEN HANDLER
+       ===================================================== */
+    function prefillToken() {
+      const session = getSession();
+      const field = document.getElementById('validate-token');
+      if (session && session.token && !field.value) {
+        field.value = session.token;
+      }
+    }
+
+    async function handleValidate() {
+      const token = document.getElementById('validate-token').value.trim();
+      if (!token) {
+        showToast('Informe um token para validar', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('btn-validate');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> Validando...';
+
+      const result = await apiPost('auth-validate', { token }, { token });
+      const now = new Date();
+
+      btn.disabled = false;
+      btn.innerHTML = '✅ Validar';
+
+      const messages = {
+        200: 'OI, que bom ter você aqui',
+        401: 'que pena que seu token expirou',
+        404: 'Token não foi encontrado',
+      };
+
+      const msg = messages[result.status] || (result.status === 0 ? 'Erro de conexão' : 'Resposta inesperada (status ' + result.status + ')');
+      const isSuccess = result.status === 200;
+
+      document.getElementById('validate-result').innerHTML = `
+        <div class="result-card ${isSuccess ? 'result-success' : 'result-error'}">
+          <div style="font-size:2rem;margin-bottom:12px">${isSuccess ? '🎉' : '⚠️'}</div>
+          <div class="result-message" style="color:${isSuccess ? 'var(--success)' : 'var(--danger)'}">
+            ${msg}
+          </div>
+          <div class="result-meta">
+            <span class="result-meta-item">
+              Status: <strong><span class="badge ${isSuccess ? 'badge-success' : 'badge-danger'}">${result.status}</span></strong>
+            </span>
+            <span class="result-meta-item">
+              Data/Hora: <strong>${fmtDate(now.toISOString())}</strong>
+            </span>
+            <span class="result-meta-item">
+              Tempo: <strong>${result.duration_ms}ms</strong>
+            </span>
+          </div>
+        </div>
+      `;
+    }
+
+    /* =====================================================
+       SETTINGS HANDLERS
+       ===================================================== */
+    function renderSettings() {
+      const input = document.getElementById('settings-baseurl');
+      input.value = getBaseUrl();
+      updateUrlPreview();
+    }
+
+    function updateUrlPreview() {
+      const url = getBaseUrl();
+      document.getElementById('url-preview').innerHTML =
+        '<strong style="color:var(--text-muted);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.5px">URL ativa:</strong><br/>' + url;
+    }
+
+    function handleSaveUrl() {
+      const url = document.getElementById('settings-baseurl').value.trim();
+      if (!url) {
+        showToast('URL não pode estar vazia', 'error');
+        return;
+      }
+      saveBaseUrl(url);
+      document.getElementById('settings-baseurl').value = getBaseUrl();
+      updateUrlPreview();
+      showToast('URL salva com sucesso!', 'success');
+    }
+
+    function handleResetUrl() {
+      resetBaseUrl();
+      document.getElementById('settings-baseurl').value = getBaseUrl();
+      updateUrlPreview();
+      showToast('URL restaurada para o padrão', 'info');
+    }
+
+    /* =====================================================
+       LOGS VIEW
+       ===================================================== */
+    function renderLogs() {
+      const logs = getLogs();
+      const filterEndpoint = document.getElementById('filter-endpoint').value;
+      const filterStatus = document.getElementById('filter-status').value;
+
+      let filtered = logs;
+      if (filterEndpoint !== 'all') {
+        filtered = filtered.filter(l => l.endpoint === filterEndpoint);
+      }
+      if (filterStatus !== 'all') {
+        filtered = filtered.filter(l => String(l.status_code) === filterStatus);
+      }
+
+      const listEl = document.getElementById('logs-list');
+
+      if (filtered.length === 0) {
+        listEl.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">📭</div>
+            <p>Nenhum log registrado</p>
+          </div>
+        `;
+        return;
+      }
+
+      listEl.innerHTML = filtered.map((log, i) => {
+        const badgeClass = log.success ? 'badge-success' : (log.status_code === 0 ? 'badge-warning' : 'badge-danger');
+        const reqBody = typeof log.request_body === 'object' ? JSON.stringify(log.request_body, null, 2) : log.request_body;
+        let resBody = log.response_body;
+        try {
+          const parsed = JSON.parse(resBody);
+          resBody = JSON.stringify(parsed, null, 2);
+        } catch {}
+
+        return `
+          <div class="log-item">
+            <div class="log-header" onclick="toggleLogDetail('log-detail-${i}')">
+              <div class="log-header-left">
+                <span class="badge ${badgeClass}">${log.status_code}</span>
+                <span class="log-endpoint">${log.endpoint}</span>
+                <span class="log-time">${fmtDate(log.created_at)}</span>
+              </div>
+              <span class="log-duration">${log.duration_ms}ms</span>
+            </div>
+            <div class="log-details" id="log-detail-${i}">
+              ${log.base_url ? `
+              <div class="log-detail-section">
+                <div class="log-detail-label">Base URL</div>
+                <div class="log-detail-content">${log.base_url}</div>
+              </div>` : ''}
+              ${log.matricula ? `
+              <div class="log-detail-section">
+                <div class="log-detail-label">Matrícula</div>
+                <div class="log-detail-content">${log.matricula}</div>
+              </div>` : ''}
+              <div class="log-detail-section">
+                <div class="log-detail-label">Request Body</div>
+                <div class="log-detail-content">${escapeHtml(reqBody)}</div>
+              </div>
+              <div class="log-detail-section">
+                <div class="log-detail-label">Response Body</div>
+                <div class="log-detail-content">${escapeHtml(resBody)}</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleLogDetail(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('open');
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function handleClearLogs() {
+      if (!confirm('Tem certeza que deseja limpar todos os logs?')) return;
+      clearLogs();
+      renderLogs();
+      showToast('Logs limpos com sucesso', 'info');
+    }
+
+    /* =====================================================
+       SESSION ACTIONS
+       ===================================================== */
+    function handleClearSession() {
+      clearSession();
+      document.getElementById('login-result').style.display = 'none';
+      renderHome();
+      showToast('Sessão removida', 'info');
+    }
+
+    async function copyToken() {
+      const session = getSession();
+      if (!session || !session.token) {
+        showToast('Nenhum token disponível', 'error');
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(session.token);
+        showToast('Token copiado!', 'success');
+      } catch {
+        // Fallback
+        const ta = document.createElement('textarea');
+        ta.value = session.token;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast('Token copiado!', 'success');
+      }
+    }
+
+    /* =====================================================
+       KEYBOARD SHORTCUT: Enter to submit
+       ===================================================== */
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const hash = window.location.hash.replace('#', '') || 'home';
+        if (hash === 'login' && (e.target.id === 'login-matricula' || e.target.id === 'login-senha')) {
+          handleLogin();
+        }
+      }
+    });
+  </script>
+
+    <!-- O Balãozinho -->
+    <div id="visit-badge" class="floating-badge">
+        <span class="badge-icon">🌐</span>
+        <span>
+            <strong>Vibe Coding Executivo</strong><br>
+            Professor: William Luis Domingues<br>
+            Aluno: Luiz Ihara RM368484<br>
+            <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
+        </span>
+        <!-- <button class="close-badge" onclick="closeBadge()" title="Fechar">×</button> -->
+    </div>
+</body>
+</html>
