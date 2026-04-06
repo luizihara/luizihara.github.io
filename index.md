@@ -132,6 +132,7 @@ With a background in quality assurance, my last few years have been focused on i
 - [Vibe Coding Executivo - Imagem Acao](fiap.vibecodeexecutivo/ImagemAcao/index.html)
 - [Vibe Coding Executivo - Login](fiap.vibecodeexecutivo/Login/index.html)
 - [Gestão de Produto](fiap.GestaoProduto/controleViagem.html)
+- [Viagem Pro](fiap.vibecodeexecutivo/ViagemPro/index.html)
 
 ## TCC
 - [Career ai](fiap.tcc/index.html)

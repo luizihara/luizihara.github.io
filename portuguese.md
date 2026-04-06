@@ -132,6 +132,7 @@ Com experiência em Qualidade de Software, meus últimos anos foram focados em m
 - [Vibe Coding Executivo - Jogo da Vida](fiap.vibecodeexecutivo/JogoDaVida/index.html)
 - [Vibe Coding Executivo - Login](fiap.vibecodeexecutivo/Login/index.html)
 - [Gestão de Produto](fiap.GestaoProduto/controleViagem.html)
+- [Viagem Pro](fiap.vibecodeexecutivo/ViagemPro/index.html)
 
 ## TCC
 - [Career ai](fiap.tcc/index.html)
