@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViagemPro - Levantamento de Requisitos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f111a;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.4);
+            --secondary: #8b5cf6;
+            --accent: #22d3ee;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15), transparent 25%);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            display: grid;
+            gap: 2rem;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            opacity: 0.8;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .tr-rf:hover td { background: rgba(255, 255, 255, 0.02); }
+
+        .persona {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+        }
+
+        .persona-icon {
+            font-size: 2rem;
+        }
+
+        .persona-info strong {
+            display: block;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .persona-info span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        .interview-qa {
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 2px solid var(--primary);
+        }
+
+        .interview-q {
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .interview-a {
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" style="position: absolute; top: 20px; left: 20px; text-decoration: none; font-weight: 600; font-family: sans-serif; background: #1e40af; color: white; padding: 8px 16px; border-radius: 8px; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 9999; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">← Voltar para Central</a>
+
+    <header>
+        <h1>ViagemPro</h1>
+        <div class="subtitle">Levantamento e Discovery de Requisitos — Projeto B2B</div>
+        <div style="margin-top: 1rem;">
+            <span class="badge">Autor: Luiz Ricardo (2ABL)</span>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Contexto das Personas -->
+        <div class="glass-card">
+            <h2>👥 Personas Entrevistadas</h2>
+            
+            <div class="persona">
+                <div class="persona-icon">🧳</div>
+                <div class="persona-info">
+                    <strong>Carla Mendes</strong>
+                    <span>Diretora de Operações (ViagemPro). Foco em SLA, retenção e eficiência interna.</span>
+                </div>
+            </div>
+            
+            <div class="persona">
+                <div class="persona-icon">💼</div>
+                <div class="persona-info">
+                    <strong>Roberto Faria</strong>
+                    <span>Gerente de RH (Cliente Corporativo). Foco em aprovações, compliance e controle.</span>
+                </div>
+            </div>
+
+            <div class="persona">
+                <div class="persona-icon">✈️</div>
+                <div class="persona-info">
+                    <strong>Juliana Costa</strong>
+                    <span>Analista e Viajante Frequente. Foco em experiência, agilidade e autonomia mobile.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Requisitos Funcionais -->
+        <div class="glass-card">
+            <h2>⚙️ Requisitos Funcionais (RF)</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Requisito</th>
+                            <th>Critério de Aceitação</th>
+                            <th>Origem (Persona)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tr-rf">
+                            <td><span class="badge">RF-01</span></td>
+                            <td>Rastreamento de Status</td>
+                            <td>Permitir a visualização exata da etapa da solicitação (ex: em aprovação, emitida).</td>
+                            <td>Carla / Juliana</td>
+                        </tr>
+                        <tr class="tr-rf">
+                            <td><span class="badge">RF-02</span></td>
+                            <td>Integração GDS e Consolidadores</td>
+                            <td>Consulta e emissão/cancelamento automático direto com cia. aérea e hotéis.</td>
+                            <td>Carla</td>
+                        </tr>
+                        <tr class="tr-rf">
+                            <td><span class="badge">RF-03</span></td>
+                            <td>Validação Preventiva</td>
+                            <td>Bloquear emissão ou exigir justificativa na hora caso viole a política da empresa.</td>
+                            <td>Roberto</td>
+                        </tr>
+                        <tr class="tr-rf">
+                            <td><span class="badge">RF-04</span></td>
+                            <td>Roteamento Automático</td>
+                            <td>Identificadas hierarquias no ERP/RH para rotear as aprovações aos gestores certos.</td>
+                            <td>Roberto</td>
+                        </tr>
+                        <tr class="tr-rf">
+                            <td><span class="badge">RF-05</span></td>
+                            <td>Dashboard de Orçamento</td>
+                            <td>Visão em tempo real do orçamento consumido por centro de custo ao gestor.</td>
+                            <td>Roberto</td>
+                        </tr>
+                        <tr class="tr-rf">
+                            <td><span class="badge">RF-06</span></td>
+                            <td>Trilha de Auditoria</td>
+                            <td>Histórico imutável de solicitação, aprovação (quem/quando) e alterações.</td>
+                            <td>Roberto</td>
+                        </tr>
+                        <tr class="tr-rf">
+                            <td><span class="badge">RF-07</span></td>
+                            <td>Canal de Chat Unificado</td>
+                            <td>Chat centralizado no aplicativo para suporte durante imprevistos na viagem.</td>
+                            <td>Juliana</td>
+                        </tr>
+                        <tr class="tr-rf">
+                            <td><span class="badge">RF-08</span></td>
+                            <td>Remarcação Autônoma</td>
+                            <td>Usuário pode selecionar novos voos da política via app em caso de cancelamentos.</td>
+                            <td>Juliana</td>
+                        </tr>
+                        <tr class="tr-rf">
+                            <td><span class="badge">RF-09</span></td>
+                            <td>Notificações Push</td>
+                            <td>Alertas em tempo real sobre status do voo, portão e aprovações no smartphone.</td>
+                            <td>Juliana</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Requisitos Não Funcionais -->
+        <div class="glass-card">
+            <h2>🛡️ Requisitos Não Funcionais (RNF)</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Categoria</th>
+                            <th>Descrição & Justificativa</th>
+                            <th>Origem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tr-rf">
+                            <td><span class="badge">RNF-01</span></td>
+                            <td>Escalabilidade</td>
+                            <td><strong>Descrição:</strong> Processar 18k-22k emissões mensais sem degradar.<br>
+                                <span style="font-size:0.85rem;color:var(--text-muted)">Justificativa: Evitar lentidão vista no legado durante alto volume.</span></td>
+                            <td>Carla</td>
+                        </tr>
+                        <tr class="tr-rf">
+                            <td><span class="badge">RNF-02</span></td>
+                            <td>Desempenho</td>
+                            <td><strong>Descrição:</strong> Resposta máxima de 2 segundos para ações do usuário.<br>
+                                <span style="font-size:0.85rem;color:var(--text-muted)">Justificativa: Viagens sob pressa (aeroporto) não toleram latência grossa.</span></td>
+                            <td>Juliana</td>
+                        </tr>
+                        <tr class="tr-rf">
+                            <td><span class="badge">RNF-03</span></td>
+                            <td>Disponibilidade</td>
+                            <td><strong>Descrição:</strong> Balanceamento inteligente nos picos (9h-11h30 / 14h-17h).<br>
+                                <span style="font-size:0.85rem;color:var(--text-muted)">Justificativa: Horários cruciais para aprovação e check-in.</span></td>
+                            <td>Carla</td>
+                        </tr>
+                        <tr class="tr-rf">
+                            <td><span class="badge">RNF-04</span></td>
+                            <td>Usabilidade</td>
+                            <td><strong>Descrição:</strong> Padrão Mobile First, responsivo em redes instáveis.<br>
+                                <span style="font-size:0.85rem;color:var(--text-muted)">Justificativa: 80% das interações via celular em trânsito.</span></td>
+                            <td>Juliana</td>
+                        </tr>
+                        <tr class="tr-rf">
+                            <td><span class="badge">RNF-05</span></td>
+                            <td>Interoperabilidade</td>
+                            <td><strong>Descrição:</strong> APIs para ERPs / Folhas de PGTO para os clientes da agência.<br>
+                                <span style="font-size:0.85rem;color:var(--text-muted)">Justificativa: Essencial para governança e controle automático.</span></td>
+                            <td>Roberto</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

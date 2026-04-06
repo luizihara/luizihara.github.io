@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt de Sistema - Design Visual</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: rgba(22, 27, 34, 0.7);
+            --primary: #3b82f6;
+            --text-main: #c9d1d9;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg-color); color: var(--text-main); padding: 3rem; display: flex; flex-direction: column; align-items: center; }
+        h1 { color: #fff; margin-bottom: 2rem; font-size: 2rem; }
+        .terminal { background: #010409; border: 1px solid #30363d; border-radius: 12px; width: 100%; max-width: 900px; overflow: hidden; }
+        .terminal-header { background: #161b22; padding: 1rem; border-bottom: 1px solid #30363d; color: #8b949e; font-family: 'Fira Code', monospace; }
+        pre { padding: 2rem; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.95rem; line-height: 1.6; color: #e5e5e5; white-space: pre-wrap; }
+        .btn-copy { background: var(--primary); color: white; padding: 1rem 2rem; border: none; border-radius: 8px; margin-top: 2rem; cursor: pointer; font-weight: 600; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+    <a href="index.html" style="position: absolute; top: 20px; left: 20px; text-decoration: none; font-weight: 600; font-family: sans-serif; background: #1e40af; color: white; padding: 8px 16px; border-radius: 8px; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 9999; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">← Voltar para Central</a>
+    <h1>🎨 Prompt Resultante: Design System (Arquivo 6)</h1>
+    <p style="margin-bottom: 2rem; color: #8b949e;">Resultado da interpretação do Meta Prompt (Arq 6) sobre as escolhas do Design Visual (Arq 3).</p>
+    
+    <div class="terminal">
+        <div class="terminal-header">design_system_prompt.txt</div>
+        <pre><code id="code-content">Crie um Design System rigoroso para a aplicação corporativa ViagemPro B2B, adotando as seguintes características:
+
+- **Estilo visual**: Clean & Minimalista (foco total na legibilidade dos dados financeiros e de conformidade de RH). Tema estritamente Claro (Light Mode) para otimizar a experiência em horas prolongadas de navegação diária de analistas e gestores.
+- **Tipografia**: Família *Inter* (Google Fonts) para garantir hierarquia sólida em tabelas de dados, formulários e fluxos de aprovação.
+- **Paleta de cores**: Azul Corporativo dominante (Primary: #1E40AF). Cores semânticas devem destacar aprovações (Verde/Success) e quebras de política de viagem (Vermelho/Alert). O background deve se manter em cinzas/tons extremamente neutros para dar destaque aos cards e painéis operativos.
+- **Espaçamento e layout**: Layout de densidade Equilibrado (Moderado). Painel central emoldurado por uma Navegação Lateral (Sidebar expansível) e responsivo *mobile-first* (para o Viajante). Os botões e formulários (inputs) devem portar um arredondamento Suave (border-radius de 8px), evitando pontas excessivas para manter uma interface amigável porém corporativa.
+- **Componentes**: Utilizar massivamente a iconografia da biblioteca *Lucide React*.
+- **Tom e experiência**: Animações devem ser restritas à categoria Sutil (apenas hovers, modais de *fade* e microinterações instantâneas), garantindo a máxima percepção de performance (resposta < 2 segundos). O contraste das tipografias deve respeitar os critérios mínimos de acessibilidade corporativa (WCAG AA).
+
+O design deve ser consistente, escalável e adequado para interfaces modernas digitais de alto volume transacional B2B e governança orgânica corporativa.</code></pre>
+    </div>
+
+    <button class="btn-copy" onclick="navigator.clipboard.writeText(document.getElementById('code-content').innerText); this.innerText='✅ Prompt Copiado!';">📋 Copiar para o Lovable</button>
+</body>
+</html>

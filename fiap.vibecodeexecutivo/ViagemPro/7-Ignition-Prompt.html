@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt de Ignição - Arquitetura Fullstack</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: rgba(22, 27, 34, 0.7);
+            --primary: #10b981;
+            --text-main: #c9d1d9;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg-color); color: var(--text-main); padding: 3rem; display: flex; flex-direction: column; align-items: center; }
+        h1 { color: #fff; margin-bottom: 2rem; font-size: 2rem; }
+        .terminal { background: #010409; border: 1px solid #30363d; border-radius: 12px; width: 100%; max-width: 900px; overflow: hidden; }
+        .terminal-header { background: #161b22; padding: 1rem; border-bottom: 1px solid #30363d; color: #8b949e; font-family: 'Fira Code', monospace; }
+        pre { padding: 2rem; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.95rem; line-height: 1.6; color: #e5e5e5; white-space: pre-wrap; }
+        .btn-copy { background: var(--primary); color: #000; padding: 1rem 2rem; border: none; border-radius: 8px; margin-top: 2rem; cursor: pointer; font-weight: 700; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+    <a href="index.html" style="position: absolute; top: 20px; left: 20px; text-decoration: none; font-weight: 600; font-family: sans-serif; background: #1e40af; color: white; padding: 8px 16px; border-radius: 8px; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 9999; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">← Voltar para Central</a>
+    <h1>🚀 Prompt Final: Ignição Fullstack (Arquivo 7)</h1>
+    <p style="margin-bottom: 2rem; color: #8b949e;">Resultado da interpretação do Meta Prompt de Ignição (Arq 7) rodando sobre o PRD/SBP da ViagemPro B2B.</p>
+    
+    <div class="terminal">
+        <div class="terminal-header">ignition_prompt.md</div>
+        <pre><code id="code-content">1. VISÃO GERAL DO PROJETO
+──────────────────────────────────────
+Construa o ViagemPro B2B, uma plataforma de gestão de viagens corporativas. Seu propósito central é descentralizar integrações diretas (GDS/aviação) para analistas e automatizar a política de compliance/limite orçamentário para o ecossistema RH (B2B cliente). Resolve os gargalos manuais e a falta de autonomia mobile do viajante, zerando violações com orçamentos em tempo real.
+
+2. STACK TÉCNICA
+──────────────────────────────────────
+- Frontend: React (via Lovable) com Tailwind, responsivo (mobile-first traveller).
+- Backend, Banco de Dados Relacional e RLS: Supabase.
+- Autenticação e Perfis: Supabase Auth gerenciado ativamente.
+- Real-time/Chats: Integração nativa do Supabase (Sockets) para Support Desk.
+
+3. MODELO DE DADOS — TABELAS DO SUPABASE
+──────────────────────────────────────
+Construa exatamente o ERD a seguir, aplicando strict FKs:
+
+companies: Empresas B2B clientes
+    - id | uuid | PK
+    - corporate_name | text | req 
+    - cnpj | varchar(14) | req
+    - status | varchar | req (active/suspended)
+
+profiles: Perfis de todos usuários da plataforma 
+    - id | uuid | PK (ref auth.users)
+    - company_id | uuid | FK companies
+    - full_name, cpf, phone | text 
+
+user_roles: Políticas e Mapeamento de Cargo
+    - id | uuid | PK
+    - profile_id | uuid | FK profiles 
+    - role | varchar | req (admin_platform, company_manager, travel_consultant, traveler)
+
+cost_centers: Rastreabilidade Orçamentária RH
+    - id | uuid | PK
+    - company_id | uuid | FK companies
+    - budget_limit | decimal(15,2) | req
+    
+travel_policies: Compliance / Validação Preventiva
+    - id | uuid | PK
+    - company_id | uuid | FK companies
+    - max_booking_value | decimal(15,2)
+    - min_advance_days | int
+
+bookings: Core Transacional (Reservas)
+    - id | uuid | PK
+    - traveler_profile_id | uuid | FK profiles
+    - agency_consultant_id | uuid | FK profiles
+    - cost_center_id | uuid | FK cost_centers | req
+    - origin, destination, status | text
+    - is_out_of_policy | boolean | req
+    - violation_reason | text
+
+booking_status_history: Auditoria Intransponível
+    - id | uuid | PK
+    - booking_id | uuid | FK bookings
+    - changed_by | uuid | FK profiles 
+
+support_tickets & support_messages: Canal Chat
+    - FK ticket para bookings. FK message para tickets (1:N chat engine).
+
+4. FUNCIONALIDADES E REGRAS DE NEGÓCIO
+──────────────────────────────────────
+- **Touchless Booking**: Reserva deve disparar checagem contra matriz de `travel_policies`. Acima do teto de valor, ela transita de 'draft' para 'pending_approval' vinculando o alerta ao RH (`company_manager`). 
+- **Verificação Orçamentária**: Bookings aprovados debitam do `budget_limit` da tabela `cost_centers` relacionada. O limite não pode ultrapassar.
+- **Suporte In-app**: Durante "cancelamentos" do GDS, Viajante interage com operadoras (ViagemPro consultores) através do sistema de sub-tickets mobile (socket / supabase watch).
+
+5. AUTENTICAÇÃO E RLS
+──────────────────────────────────────
+- Login via Magic Link e Senha B2B Email.
+- O RLS (Row Level Security) deve estar ativo em TODOS os registros. `travelers` veem apenas seus bookings. `company_managers` veem tudo do próprio `company_id`. `admin_platform` vê everything.
+
+6. TELAS E NAVEGAÇÃO
+──────────────────────────────────────
+- **Dashboard Gerencial HR (Desktop):** Métricas de economia, SLA, painéis de Orçamento (cost center vs burnout). Grid de Viagens "Pending Approval".
+- **Traveller Core (Mobile):** Tela de Inserção de Nova Viagem + Área "Meus Voos". Alertas modais e acesso instantâneo ao chat de reagendamento e e-tickets. 
+- **Agency Desk (Desktop):** Fila de chamados de suporte emergencial e painel emissor manual.
+
+7. INSTRUÇÕES FINAIS PARA O LOVABLE
+──────────────────────────────────────
+- Crie todas as tabelas no Supabase antes de construir qualquer tela.
+- Use Row Level Security (RLS) impenetrável baseando-se por company_id.
+- Quando terminar as views, apresente um sumário analítico contendo SQLs gerados!</code></pre>
+    </div>
+
+    <button class="btn-copy" onclick="navigator.clipboard.writeText(document.getElementById('code-content').innerText); this.innerText='✅ Ignição Copiada!';">🚀 Copiar Prompt de Ignição</button>
+</body>
+</html>

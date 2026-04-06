@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurador System Prompt - ViagemPro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: rgba(22, 27, 34, 0.7);
+            --card-border: rgba(48, 54, 61, 0.8);
+            --primary: #10b981;
+            --primary-glow: rgba(16, 185, 129, 0.3);
+            --secondary: #3b82f6;
+            --accent: #8b5cf6;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --code-bg: #010409;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(16, 185, 129, 0.1), transparent 30%),
+                radial-gradient(circle at 90% 90%, rgba(59, 130, 246, 0.1), transparent 30%);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            max-width: 800px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            display: grid;
+            gap: 2.5rem;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+            animation: slideUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .glass-card:nth-child(1) { animation-delay: 0.1s; }
+        .glass-card:nth-child(2) { animation-delay: 0.2s; }
+        .glass-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .glass-card h2 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-item {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--card-border);
+            padding: 1.2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            border-color: var(--primary-glow);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .info-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .highlight-text {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Editor-style Code Block */
+        .terminal {
+            background: var(--code-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .terminal-header {
+            background: #161b22;
+            padding: 0.8rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+
+        .terminal-title {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-left: 10px;
+            font-family: 'Fira Code', monospace;
+        }
+
+        pre {
+            padding: 1.5rem;
+            overflow-x: auto;
+            color: #e5e5e5;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .code-keyword { color: #ff7b72; }
+        .code-string { color: #a5d6ff; }
+        .code-comment { color: #8b949e; font-style: italic; }
+        .code-variable { color: #79c0ff; }
+        .code-property { color: #d2a8ff; }
+
+        .btn-copy {
+            background: var(--primary);
+            color: #000;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            width: auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .btn-copy:hover {
+            transform: translateY(-2px);
+            background: #0ea5e9; /* Secondary hover */
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+    </style>
+</head>
+<body>
+    <a href="index.html" style="position: absolute; top: 20px; left: 20px; text-decoration: none; font-weight: 600; font-family: sans-serif; background: #1e40af; color: white; padding: 8px 16px; border-radius: 8px; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 9999; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">← Voltar para Central</a>
+
+    <header>
+        <h1>System Prompt — Exercício</h1>
+        <div class="subtitle">Decisões Arquitetônicas & System Prompt Gerado</div>
+    </header>
+
+    <div class="container">
+
+        <!-- Informações do Projeto -->
+        <div class="glass-card">
+            <h2>🎯 Sobre o Meu Projeto</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">Nome do Sistema</span>
+                    <span class="info-value highlight-text">ViagemPro B2B</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">O que o sistema faz</span>
+                    <span class="info-value">Gestão completa de viagens corporativas com autonomia e workflow de aprovação.</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Autor / Aluno</span>
+                    <span class="info-value">Luiz Ricardo (2ABL)</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Setor</span>
+                    <span class="info-value">Viagens Corporativas / B2B</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Ferramenta & BD</span>
+                    <span class="info-value">Lovable + Supabase</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Escolhas Estratégicas -->
+        <div class="glass-card">
+            <h2>🧠 Decisões Arquitetônicas Resumidas</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">Q1: Data e Hora</span>
+                    <span class="info-value">TIMESTAMP completo (essencial p/ voos/logs) <br><small>Exibição: Padrão Brasil (DD/MM/YYYY)</small></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Q2: Números e Dinheiro</span>
+                    <span class="info-value">DECIMAL com 2 casas<br><small>Formatado R$ X.XXX,XX (Padrão BR)</small></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Q3: Chaves e Nomes (Q3/Q4)</span>
+                    <span class="info-value">UUID (Segurança). Multi-tenant (Multi-empresas) <br><small>Tabelas no: Plural (Inglês preferencial p/ IA)</small></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Q4: Segurança & Acesso</span>
+                    <span class="info-value">Supabase Auth (Criptografado).<br><small>Perfis: Admin, Gestor, Consultor, Viajante</small></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Q5: Regras de Negócio</span>
+                    <span class="info-value">Soft Delete. Obrigatoriedade dupla (tela/banco).<br><small>Auditoria Total (Histórico de transições)</small></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terminal System Prompt -->
+        <div class="glass-card">
+            <h2>🤖 System Prompt a ser colado no Lovable</h2>
+            <p style="margin-bottom: 1rem; color: var(--text-muted);">
+                A configuração final traduzida para a Inteligência Artificial. Este prompt instrui o Lovable sobre como estruturar o Supabase.
+            </p>
+            
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                    <div class="terminal-title">system_prompt.md</div>
+                </div>
+                <pre><code><span class="code-keyword"># MEU SISTEMA</span>
+Você é um especialista em banco de dados e vai me ajudar a construir
+o sistema chamado <span class="code-string">[ViagemPro B2B]</span>.
+
+O que o sistema faz: <span class="code-string">[Gestão automatizada de viagens corporativas, fluxo de aprovação e remanejamento com integração B2B e autonomia mobile.]</span>
+Setor: <span class="code-string">[Viagens Corporativas / Turismo B2B]</span>
+Ferramenta: Lovable com Supabase
+Aluno: <span class="code-string">[Luiz Ricardo - 2ABL]</span>
+
+<span class="code-keyword"># CONVENÇÕES DO BANCO DE DADOS</span>
+
+<span class="code-property">## ID (chave primária de todas as tabelas)</span>
+Tipo: <span class="code-variable">[UUID]</span>
+Nome da coluna: id
+
+<span class="code-property">## Campos automáticos em TODAS as tabelas</span>
+- created_at: data e hora de criação (automático)
+- updated_at: data e hora da última alteração (automático)
+- deleted_at: exclusão lógica <span class="code-comment">(soft delete obrigatório por compliance)</span>
+- created_by: id do usuário que criou
+
+<span class="code-property">## Datas e Horários</span>
+- Armazenamento: <span class="code-variable">[TIMESTAMP com fuso horário (tz)]</span>
+- Exibição na tela: <span class="code-variable">[Padrão Brasil - DD/MM/YYYY]</span>
+- Fuso horário: <span class="code-variable">[America/Sao_Paulo]</span>
+- Campos de hora: <span class="code-variable">[HH:MM - obrigatórios para horários de voos]</span>
+
+<span class="code-property">## Números e Dinheiro</span>
+- Números inteiros: <span class="code-variable">[INT]</span> ou <span class="code-variable">[BIGINT]</span> para relações transacionais
+- Valores monetários: <span class="code-variable">[DECIMAL(15,2)]</span>
+- Exibição de dinheiro: <span class="code-variable">[R$ 1.250,90]</span>
+- Percentuais: guardar como decimal (0.10 = 10%)
+
+<span class="code-property">## Campos de Texto</span>
+- Nomes de pessoas e empresas: <span class="code-variable">[VARCHAR(150)]</span>
+- Descrições e observações: <span class="code-variable">[TEXT sem limite (crucial para atendimento exceções)]</span>
+- Capitalização: <span class="code-variable">[salvar como digitado]</span>
+- E-mail: VARCHAR(255), único por usuário, sempre em minúsculas
+- Telefone: <span class="code-variable">[VARCHAR(20) com código internacional]</span>
+- Endereço: campos separados (rua, número, bairro, cidade, state, postal_code)
+- Documentos Brasileiros (obrigatórios agência de viagem):
+  - CPF: VARCHAR(11) só dígitos
+  - CNPJ: VARCHAR(14) só dígitos
+
+<span class="code-property">## Relacionamentos entre tabelas</span>
+- Quando apagar registro pai: <span class="code-variable">[BLOQUEAR se tiver filhos e aplicar Soft Delete]</span>
+- Nome das chaves estrangeiras: {nome_da_tabela}_id
+
+<span class="code-property">## Nomes de tabelas e colunas</span>
+- Padrão de escrita: <span class="code-variable">[snake_case]</span>
+- Idioma do código e DB: <span class="code-variable">[Inglês - EN]</span> <span class="code-comment">/* Melhor adoção para GenAI */</span>
+- Tabelas no: <span class="code-variable">[plural]</span> <span class="code-comment">(ex: bookings, companies, users)</span>
+
+<span class="code-property">## Segurança e Arquitetura B2B</span>
+- Autenticação e senha: <span class="code-variable">[Supabase Auth]</span>
+- Multitenancy: Sistema Multi-empresa baseada na tabela `companies` via RLS.
+- Perfis de usuário: <span class="code-variable">[admin_platform, company_manager, travel_consultant, traveler]</span>
+
+<span class="code-property">## Status, Validações e Auditoria</span>
+- Campos de status: <span class="code-variable">[texto com valores válidos CHECK (ex: pending, approved, booked, cancelled)]</span>
+- Campos obrigatórios: aplicar <span class="code-variable">[NOT NULL]</span> no banco E validação na tela.
+- Histórico de Auditoria: Criar tabela de histórico de transições de status (`audit_logs` ou `{entity}_history`). <span class="code-comment">Crucial para o RH do cliente.</span>
+
+<span class="code-property">## Performance</span>
+- Volume esperado: <span class="code-variable">[médio a grande (240.000 logs anuais mínimo)]</span>
+- Índices automáticos em: todas as FKs + email + document + status + created_at
+- Paginação: <span class="code-variable">[20 por página para relatórios]</span> e <span class="code-variable">[Scroll infinito no Feed mobile.</span>
+
+<span class="code-keyword"># REGRAS DO ASSISTENTE</span>
+1. Nunca crie tabelas sem confirmar as entidades comigo primeiro.
+2. Sempre siga as convenções acima em TODAS as tabelas.
+3. Explique cada decisão de modelagem.
+4. Se tiver dúvida, faça perguntas antes de gerar código.
+5. Em casos de erros, seja resiliente e aponte soluções lógicas.
+
+<span class="code-keyword"># AULA ATUAL</span>
+[Aula 1 — Discovery e Início de Modelagem]
+
+<span class="code-keyword"># O QUE FAZER NESTA AULA</span>
+[Você deve criar a Modelagem SQL Inicial do sistema baseando-se no discovery (RF e RNF) já conduzido, incluindo tabelas para Empresas, Usuários/Perfis e Reservas/Bookings.]
+</code></pre>
+            </div>
+            
+            <button class="btn-copy" onclick="copyCode()">📋 Copiar System Prompt</button>
+        </div>
+
+        <!-- Histórico do Chat -->
+        <div class="glass-card" style="animation-delay: 0.4s;">
+            <h2>💬 Validação da Arquitetura (Chat AI)</h2>
+            <p style="margin-bottom: 1.5rem; color: var(--text-muted);">
+                Passo a passo da iteração com a Inteligência Artificial para garantir o alinhamento com os Requisitos de Negócio.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                
+                <!-- Lovable Message -->
+                <div style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--secondary); padding: 1.5rem; border-radius: 0 12px 12px 0;">
+                    <strong style="color: var(--secondary); display: block; margin-bottom: 0.5rem; font-size: 1.1rem;">🤖 Proposta do Lovable:</strong>
+                    <div style="color: var(--text-main); font-size: 0.95rem;">
+                        <p>Vamos começar pela modelagem! Antes de criar qualquer tabela, preciso confirmar as entidades. Aqui está minha proposta inicial para a Aula 1:</p>
+                        <ul style="margin: 0.8rem 0 0.8rem 1.5rem;">
+                            <li><code>companies</code> — Empresas (clientes B2B)</li>
+                            <li><code>user_roles</code> — Perfis de acesso (segurança)</li>
+                            <li><code>profiles</code> — Dados complementares do usuário</li>
+                            <li><code>bookings</code> — Reservas de viagem</li>
+                            <li><code>booking_status_history</code> — Auditoria de transições</li>
+                            <li><code>approval_flows</code> — Fluxo de aprovação</li>
+                        </ul>
+                        <p>Confirma essas 6 entidades para eu gerar o SQL? Quer adicionar ou remover alguma?</p>
+                    </div>
+                </div>
+
+                <!-- User Message -->
+                <div style="background: rgba(16, 185, 129, 0.1); border-right: 4px solid var(--primary); padding: 1.5rem; border-radius: 12px 0 0 12px; text-align: right;">
+                    <strong style="color: var(--primary); display: block; margin-bottom: 0.5rem; font-size: 1.1rem;">👤 Nossa Resposta Assertiva (Arquiteto de Software):</strong>
+                    <div style="color: var(--text-main); font-size: 0.95rem; text-align: left;">
+                        <p>Sua modelagem proposta está excelente e muito aderente ao nosso escopo B2B, em especial a separação de segurança e a tabela para auditoria.</p>
+                        <p style="margin-top: 0.8rem;">Entretanto, precisamos garantir a total cobertura dos nossos requisitos de Discovery. Por favor, <strong>ajuste a proposta</strong> incluindo as seguintes entidades:</p>
+                        <ul style="margin: 0.8rem 0 0.8rem 1.5rem;">
+                            <li><strong>travel_policies:</strong> Entidade vital para suportar o requisito de Validação Preventiva (RF-03).</li>
+                            <li><strong>cost_centers:</strong> Necessário para o Dashboard de Orçamentos de Gestores (RF-05).</li>
+                            <li><strong>support_chats:</strong> Necessário para suprir o Canal de Comunicação Centralizado do Viajante (RF-07).</li>
+                        </ul>
+                        <p><strong>Ajustes em bookings:</strong></p>
+                        <ul style="margin: 0.8rem 0 0.8rem 1.5rem;">
+                            <li>Incluir vínculo obrigatório com <code>cost_center_id</code>.</li>
+                            <li>Incluir campos para exceções: <code>is_out_of_policy</code> e <code>policy_violation_reason</code>.</li>
+                        </ul>
+                        <p>Pode atualizar arquitetura com essas premissas para eu confirmar, para então procedermos para a geração do SQL!</p>
+                    </div>
+                </div>
+
+                <!-- Lovable Final Response -->
+                <div style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--secondary); padding: 1.5rem; border-radius: 0 12px 12px 0;">
+                    <strong style="color: var(--secondary); display: block; margin-bottom: 0.5rem; font-size: 1.1rem;">🤖 Aceite do Lovable (Arquitetura Final):</strong>
+                    <div style="color: var(--text-main); font-size: 0.95rem;">
+                        <p>Perfeito! Aqui está a arquitetura atualizada com as entidades corretas:</p>
+                        <ul style="margin: 0.8rem 0 0.8rem 1.5rem;">
+                            <li><code>companies</code> — Empresas clientes B2B</li>
+                            <li><code>profiles</code> — Dados do usuário (extensão do auth.users)</li>
+                            <li><code>user_roles</code> — Perfis de acesso (tabela separada)</li>
+                            <li><code>cost_centers</code> — Centros de custo (RF-05) com budget associado</li>
+                            <li><code>travel_policies</code> — Políticas de viagem (RF-03) para validação preventiva</li>
+                            <li><code>bookings</code> — Reservas de viagem vinculadas ao cost_center </li>
+                            <li><code>booking_status_history</code> — Auditoria de transições</li>
+                            <li><code>approval_flows</code> — Fluxo de aprovação</li>
+                            <li><code>support_chats</code> — Dividida estrategicamente em <code>support_tickets</code> e <code>support_messages</code></li>
+                        </ul>
+                        <p style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; margin-bottom: 0.8rem;">
+                            companies ──┬── profiles ──── user_roles<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── cost_centers<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── travel_policies<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── approval_flows<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── bookings ──┬── booking_status_history<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── support_tickets ── support_messages
+                        </p>
+                        <p>Total: <strong>10 tabelas</strong> perfeitamente mapeadas. Confirma para eu gerar o SQL completo?</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function copyCode() {
+            const codeText = document.querySelector('pre code').innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                const btn = document.querySelector('.btn-copy');
+                const originalText = btn.innerText;
+                btn.innerText = '✅ Copiado com sucesso!';
+                btn.style.background = '#22c55e';
+                
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = 'var(--primary)';
+                }, 2500);
+            });
+        }
+    </script>
+</body>
+</html>

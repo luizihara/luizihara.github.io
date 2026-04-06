@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System - ViagemPro B2B</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #e2e8f0;
+            --primary: #1e40af; /* Azul Corporativo */
+            --primary-glow: rgba(30, 64, 175, 0.15);
+            --secondary: #3b82f6;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --success: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            max-width: 800px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            display: grid;
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            position: relative;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 1rem;
+        }
+
+        .question-number {
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .option {
+            border: 2px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: relative;
+        }
+
+        .option.selected {
+            border-color: var(--primary);
+            background: var(--primary-glow);
+        }
+
+        .option.selected::before {
+            content: '✓';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--success);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .option-title {
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 1.1rem;
+        }
+
+        .option-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .color-preview {
+            width: 100%;
+            height: 60px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .observation {
+            margin-top: 1.5rem;
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-generate {
+            display: block;
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            margin-top: 2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 6px var(--primary-glow);
+            transition: background 0.3s ease;
+        }
+
+        .btn-generate:hover {
+            background: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" style="position: absolute; top: 20px; left: 20px; text-decoration: none; font-weight: 600; font-family: sans-serif; background: #1e40af; color: white; padding: 8px 16px; border-radius: 8px; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 9999; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">← Voltar para Central</a>
+
+    <header>
+        <h1>Design System Visual</h1>
+        <div class="subtitle">Decisões de UI/UX para o ViagemPro B2B — Clean, Corporativo e Moderno</div>
+        <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">Autor: Luiz Ricardo (2ABL)</p>
+    </header>
+
+    <div class="container">
+        <!-- Q0: Sistema -->
+        <div class="card">
+            <div class="question-header">
+                <div class="question-number">0</div>
+                <h2>Identificação do Sistema</h2>
+            </div>
+            <div class="observation">
+                <strong>Nome:</strong> ViagemPro B2B<br>
+                <strong>O que faz:</strong> Gestão completa de viagens corporativas com autonomia, relatórios em tempo real e workflow de aprovação flexível para empresas clientes (B2B).
+            </div>
+        </div>
+
+        <!-- Q1: Cor Principal -->
+        <div class="card">
+            <div class="question-header">
+                <div class="question-number">1</div>
+                <h2>Qual é a cor principal do seu app?</h2>
+            </div>
+            <div class="options-grid">
+                <div class="option selected">
+                    <div class="color-preview" style="background:#1E40AF;"></div>
+                    <span class="option-title">Azul Corporativo (#1E40AF)</span>
+                    <span class="option-desc">Confiança e seriedade. Ideal para B2B e sistema financeiro integrado.</span>
+                </div>
+            </div>
+            <div class="observation">
+                <strong>Motivo da escolha:</strong> Sistemas B2B com aprovações e auditoria (como a ViagemPro) exigem que os gestores de RH sintam confiança e segurança. O Azul transmite isso de forma irrefutável.
+            </div>
+        </div>
+
+        <!-- Q2: Fonte -->
+        <div class="card">
+            <div class="question-header">
+                <div class="question-number">2</div>
+                <h2>Qual fonte usar no app?</h2>
+            </div>
+            <div class="options-grid">
+                <div class="option selected">
+                    <span class="option-title">Inter ★</span>
+                    <span class="option-desc">A fonte da internet moderna. Funciona perfeitamente em telas de dados e relatórios.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q3: Estilo -->
+        <div class="card">
+            <div class="question-header">
+                <div class="question-number">3</div>
+                <h2>Qual é o estilo visual do app?</h2>
+            </div>
+            <div class="options-grid">
+                <div class="option selected">
+                    <span class="option-title">Clean & Minimalista ★</span>
+                    <span class="option-desc">Muito espaço em branco, elementos simples. Foca a atenção nos dados (Dashboard de orçamento e aprovação). Não cansa o consultor.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q4: Cantos -->
+        <div class="card">
+            <div class="question-header">
+                <div class="question-number">4</div>
+                <h2>Como serão os cantos dos botões e campos?</h2>
+            </div>
+            <div class="options-grid">
+                <div class="option selected">
+                    <span class="option-title">▢ Suave (8px)</span>
+                    <span class="option-desc">Levemente arredondado. Um equilíbrio perfeito entre a seriedade corporativa e o amigável.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q5: Tema -->
+        <div class="card">
+            <div class="question-header">
+                <div class="question-number">5</div>
+                <h2>O app será claro, escuro ou os dois?</h2>
+            </div>
+            <div class="options-grid">
+                <div class="option selected">
+                    <span class="option-title">☀ Claro (Light Mode)</span>
+                    <span class="option-desc">Sistemas como ERP e aprovação de B2B geralmente apresentam melhor leitura de faturas em fundos claros (padrão SaaS corporativo).</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q6: Navegação -->
+        <div class="card">
+            <div class="question-header">
+                <div class="question-number">6</div>
+                <h2>Como o usuário vai navegar entre as telas?</h2>
+            </div>
+            <div class="options-grid">
+                <div class="option selected">
+                    <span class="option-title">Sidebar (Menu Lateral) ★</span>
+                    <span class="option-desc">Ideal para separar os módulos: Dashboard RH, Minhas Viagens, Aprovações, Políticas e Suporte.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q7: Layout -->
+        <div class="card">
+            <div class="question-header">
+                <div class="question-number">7</div>
+                <h2>O layout será espaçoso ou compacto?</h2>
+            </div>
+            <div class="options-grid">
+                <div class="option selected">
+                    <span class="option-title">Equilibrado (Moda) ★</span>
+                    <span class="option-desc">Padding moderado. Permite uma leitura clara do viajante no celular sem espremer, e visualização boa no desktop para o RH.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q8: Ícones -->
+        <div class="card">
+            <div class="question-header">
+                <div class="question-number">8</div>
+                <h2>Qual biblioteca de ícones usar?</h2>
+            </div>
+            <div class="options-grid">
+                <div class="option selected">
+                    <span class="option-title">Lucide React ★</span>
+                    <span class="option-desc">Leve, moderno, traços finos. Excelente para compor a estética clean e profissional.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q9: Animações -->
+        <div class="card">
+            <div class="question-header">
+                <div class="question-number">9</div>
+                <h2>O app vai ter animações?</h2>
+            </div>
+            <div class="options-grid">
+                <div class="option selected">
+                    <span class="option-title">Sutil ★</span>
+                    <span class="option-desc">Feedback imediato de cliques e *fade-in* de informações de voo, garantindo fluidez sem gerar delay (atendendo ao RNF-02 de latência).</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q10: Acessibilidade -->
+        <div class="card">
+            <div class="question-header">
+                <div class="question-number">10</div>
+                <h2>Qual o nível de acessibilidade necessário?</h2>
+            </div>
+            <div class="options-grid">
+                <div class="option selected">
+                    <span class="option-title">WCAG AA ★</span>
+                    <span class="option-desc">Como o app será usado por funcionários de diversas empresas clientes em trânsito, a acessibilidade corporativa mínima (contraste, uso de teclado) é mandatória.</span>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-generate" onclick="alert('Configurações do Design System validadas para ViagemPro! Arquivo salvo.')">✨ Validar Escolhas (Exportar)</button>
+
+    </div>
+
+</body>
+</html>

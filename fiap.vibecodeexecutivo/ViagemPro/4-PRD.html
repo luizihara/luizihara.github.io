@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRD & Service Blueprint - ViagemPro B2B</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f1f5f9;
+            --surface: #ffffff;
+            --border: #e2e8f0;
+            --primary: #1e40af;
+            --secondary: #3b82f6;
+            --accent: #10b981;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --alert-bg: #fee2e2;
+            --alert-text: #991b1b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 3rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .document-wrapper {
+            width: 100%;
+            max-width: 1100px;
+            background: var(--surface);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .document-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 4rem 3rem;
+            color: white;
+            position: relative;
+        }
+
+        .document-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .document-header h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .meta-stamp {
+            position: absolute;
+            bottom: -20px;
+            right: 3rem;
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            font-weight: 600;
+            display: flex;
+            gap: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .section {
+            padding: 3rem;
+            border-bottom: 1px solid var(--border);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .section-title span.number {
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        h3 { font-size: 1.1rem; color: var(--text-main); margin-bottom: 0.8rem; font-weight: 600; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        
+        .box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: border-color 0.2s;
+        }
+        
+        .box:hover { border-color: var(--secondary); }
+        .box p { font-size: 0.95rem; color: #334155; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th { background: #f8fafc; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.8rem; }
+        
+        .priority-m { color: #dc2626; font-weight: bold; }
+        .priority-s { color: #d97706; font-weight: bold; }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #e0e7ff;
+            color: var(--primary);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .blueprint-container {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .blueprint-table th { background: var(--primary); color: white; border-right: 1px solid rgba(255,255,255,0.2); }
+        .blueprint-table td { border-right: 1px solid var(--border); vertical-align: top; }
+        .bp-layer { font-weight: 600; background: #f8fafc; text-transform: uppercase; font-size: 0.75rem; color: var(--text-muted); border-right: none;}
+        
+        .line-visibility {
+            border-bottom: 2px dashed var(--secondary) !important;
+            background: rgba(59, 130, 246, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" style="position: absolute; top: 20px; left: 20px; text-decoration: none; font-weight: 600; font-family: sans-serif; background: #1e40af; color: white; padding: 8px 16px; border-radius: 8px; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 9999; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">← Voltar para Central</a>
+
+    <div class="document-wrapper">
+        <header class="document-header">
+            <h1>PRD & Service Blueprint</h1>
+            <h2>ViagemPro B2B — Plataforma de Gestão de Viagens Corporativas</h2>
+            
+            <div class="meta-stamp">
+                <div>
+                    <span style="display:block; font-size:0.7rem; color:var(--text-muted); text-transform:uppercase;">Product Manager</span>
+                    Luiz Ricardo (2ABL)
+                </div>
+                <div>
+                    <span style="display:block; font-size:0.7rem; color:var(--text-muted); text-transform:uppercase;">Status</span>
+                    Arquitetura e Discovery
+                </div>
+                <div>
+                    <span style="display:block; font-size:0.7rem; color:var(--text-muted); text-transform:uppercase;">Versão</span>
+                    v1.0 Final
+                </div>
+            </div>
+        </header>
+
+        <!-- SEÇÃO 1: PRD -->
+        <div class="section" style="margin-top: 1rem;">
+            <div class="section-title"><span class="number">1.0</span> Product Requirements Document (PRD)</div>
+            
+            <div class="grid-2">
+                <div class="box">
+                    <h3>🔍 O Problema</h3>
+                    <p>Clientes corporativos da agência ViagemPro não possuem visibilidade financeira e governança nas compras de passagens aéreas e hóteis. O processo interno da agência é totalmente manual, gerando não-cumprimento do SLA (tempo de resposta longo) e alto risco operacional devido à perda de histórico, impactando os gestores de RH das empresas e o viajante final que não tem suporte em situações de cancelamento (imprevistos logísticos).</p>
+                </div>
+                <div class="box">
+                    <h3>🚀 A Visão do Produto</h3>
+                    <p>Ser a plataforma mais conectada e analítica do ecossistema de viagens corporativas do Brasil, proporcionando total conformidade (compliance) em segundos para as empresas clientes e oferecendo uma jornada impecável (UX/Apoio) para o viajante corporativo em trânsito.</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">1.3 Objetivos (OKRs)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Objetivo Estratégico (O)</th>
+                        <th>Key Result 1 (KR1)</th>
+                        <th>Key Result 2 (KR2)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Zerar a Intervenção Manual de Retrabalho</strong></td>
+                        <td>Aumentar % de emissão touchless via GDS de 0% para 70%</td>
+                        <td>Reduzir tempo de resolução de imprevisto de horas para &lt; 10 min</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Governança de Dados Total para B2B</strong></td>
+                        <td>Alcançar 100% de reservas rastreadas a um "Centro de Custo"</td>
+                        <td>Reduzir violações acidentais de política ('out-of-policy') em 90%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 2rem;">1.4 Personas-Alvo</h3>
+            <div class="grid-3">
+                <div class="box">
+                    <h4 style="color:var(--primary); margin-bottom:10px;">💼 Roberto (RH Cleinte)</h4>
+                    <p><strong>Dores:</strong> Falta de rastreabilidade de orçamentos, aprovações perdidas via email.<br><strong>Ganhos:</strong> Auditoria transparente, relatórios de Budget em tempo-real.</p>
+                </div>
+                <div class="box">
+                    <h4 style="color:var(--primary); margin-bottom:10px;">🧳 Carla (Dir. Operações)</h4>
+                    <p><strong>Dores:</strong> SLA estourado, dependência alta de intervenção humana (22.000 tickets mês).<br><strong>Ganhos:</strong> Agência altamente escalável, retenção de contratos.</p>
+                </div>
+                <div class="box">
+                    <h4 style="color:var(--primary); margin-bottom:10px;">✈️ Juliana (Viajante)</h4>
+                    <p><strong>Dores:</strong> Sem suporte ativo no celular para desmarcar ou replanejar voo cancelado.<br><strong>Ganhos:</strong> Notificações Push, Autonomia mobile 100% responsiva.</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">1.5 Funcionalidades (Épicos)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Épico</th>
+                        <th>História de Usuário</th>
+                        <th>Prior.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Validação SLA</td>
+                        <td>Como Gestor de RH, quero <strong>bloqueios automáticos</strong> em reservas que excedam a política da minha empresa para garantir compliance.</td>
+                        <td class="priority-m">MUST</td>
+                    </tr>
+                    <tr>
+                        <td>Integração GDS</td>
+                        <td>Como Consultor Operacional, quero <strong>aprovadas</strong> e <strong>emitidas</strong> as passagens sem precisar digitar manualmente, para reduzir gargalos no pico.</td>
+                        <td class="priority-m">MUST</td>
+                    </tr>
+                    <tr>
+                        <td>Suporte Live</td>
+                        <td>Como Viajante, quero <strong>reagendar meu voo cancelado via modal mobile (chat in-app)</strong> sem precisar ligar, para salvar tempo no aeroporto.</td>
+                        <td class="priority-s">SHOULD</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SEÇÃO 2: PSS -->
+        <div class="section">
+            <div class="section-title"><span class="number">2.0</span> PSS (Product Service System)</div>
+            <div class="box">
+                <h3 style="color:var(--primary)">Atores do Sistema & Fluxo de Valor</h3>
+                <p style="margin-bottom: 1rem;">O ecossistema é sustentado por 4 atores: O <strong>Cliente Corporativo (RH)</strong> entrega capital (contratos) e regras e recebe controle orçamentário. O <strong>Viajante</strong> consome a infraestrutura e entrega engajamento. A <strong>ViagemPro (Operações)</strong> fornece suporte e infra em troca de SLA cumprido. As APIs Externas (GDS e Cia Aérea) recebem integrações e entregam o inventário (passagens em tempo real).</p>
+                <div style="background: white; padding: 10px; font-family: monospace; border: 1px solid #ccc; font-size: 0.9rem; text-align: center;">
+                    [ EMPRESA (RH) / Orçamento ] ──&gt; ( Plataforma ViagemPro App & Supabase DB ) &lt;── [ GDS (Companhias Aéreas) ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ VIAJANTE Mobile (Interações & Chat) ]
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 3: Blueprint -->
+        <div class="section">
+            <div class="section-title"><span class="number">3.0</span> Service Blueprint (A Jornada do Viajante e Aprovação)</div>
+            <p>Jornada Mapeada: "Da Descoberta da viagem até a emissão e reação a um imprevisto".</p>
+            
+            <div class="blueprint-container">
+                <table class="blueprint-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">Camada</th>
+                            <th>Etapa 1: Solicitação</th>
+                            <th>Etapa 2: Aprovação RH</th>
+                            <th>Etapa 3: Emissão Automática</th>
+                            <th>Etapa 4: Voo Cancelado (Suporte)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="bp-layer">Emoção do Usuário</td>
+                            <td style="text-align:center; font-size:1.5rem;">😊</td>
+                            <td style="text-align:center; font-size:1.5rem;">😐</td>
+                            <td style="text-align:center; font-size:1.5rem;">🤩</td>
+                            <td style="text-align:center; font-size:1.5rem;">😕 → 😊</td>
+                        </tr>
+                        <tr>
+                            <td class="bp-layer">Ação do Cliente (Viajante/RH)</td>
+                            <td>Viajante seleciona destino e voo dentro do teto. Seleciona o 'Centro de Custo'.</td>
+                            <td>Gestor de RH recebe alerta, vê extrato de budget e clica em 'Aprovar Reserva'.</td>
+                            <td>Viajante acompanha tudo via App na área "Minhas Viagens".</td>
+                            <td>Viajante recebe Notificação Push de voo cancelado no aeroporto; acessa modal de reagendamento / chat in-app.</td>
+                        </tr>
+                        <tr class="line-visibility">
+                            <td colspan="5" style="text-align: center; color: var(--secondary); font-size: 0.8rem; font-weight: bold; background: transparent;">━━━━━ LINHA DE VISIBILIDADE DO CLIENTE ━━━━━</td>
+                        </tr>
+                        <tr>
+                            <td class="bp-layer">Frontstage (Visível UI)</td>
+                            <td>Renderiza lista de voos GDS no Frontend; Faz verificação preventiva visual de Rastreio (`travel_policies`).</td>
+                            <td>Painel gerencial exibindo SLA e Orçamento dinâmico com cores intuitivas.</td>
+                            <td>E-mail automático e atualização de Badge no celular confimando ticket.</td>
+                            <td>Plataforma abre `support_ticket` e conecta via chat Socket em tempo real o Operador (ViagemPro).</td>
+                        </tr>
+                        <tr>
+                            <td class="bp-layer">Backstage (Bastidor SQL/API)</td>
+                            <td>Supabase `bookings` é gravada com status `pending_approval`.</td>
+                            <td>Role `company_manager` invoca mutação SQL, atualizando para `approved` e `audit_history` capta a transação.</td>
+                            <td>Backend faz push na API de GDS (Amadeus/Sabre). Recebe Locator. Status vira `booked`.</td>
+                            <td>Operações priorizam chat pela flag "Passageiro no Aeroporto".</td>
+                        </tr>
+                        <tr>
+                            <td class="bp-layer">Sistemas / Suporte</td>
+                            <td>Integração API GDS / API Banco de Dados (Supabase).</td>
+                            <td>RLS Policy no BD validando Autorização e Hierarquia.</td>
+                            <td>Integração Financeira p/ faturar na `companies`.</td>
+                            <td>Servidor Node/WebSocket para real-time chat. API de Push Notificator.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3>✅ Assinaturas de Validação</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Documento estruturado pronto para transição de engenharia com a IA Generativa (Lovable). Requirements englobam a base para as 10 entidades modeladas relacionalmente.</p>
+                <div style="margin-top: 1rem;">
+                    <span class="badge">Aprovado: Product Manager</span>
+                    <span class="badge">Aprovado: Tech Lead</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
