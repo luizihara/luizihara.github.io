@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luiz Ihara - Profile</title>
+    <!-- Google Fonts: Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Definindo a paleta de cores como variáveis */
+            --color-black: #000000;
+            --color-beige: #EAE0C8;
+            --color-black-transparent: rgba(0, 0, 0, 0.1);
+            --color-beige-transparent: rgba(234, 224, 200, 0.1);
+            --color-beige-bold: rgba(234, 224, 200, 0.3);
+            --color-black-bold: rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- DARK THEME --- */
+        html.dark-theme {
+            --bg-color: var(--color-black);
+            --text-color: var(--color-beige);
+            --card-bg: var(--color-beige-transparent);
+            --card-border: var(--color-beige-bold);
+            --badge-bg: var(--color-beige);
+            --badge-text: var(--color-black);
+            --hover-highlight: var(--color-beige);
+            --hover-text: var(--color-black);
+        }
+
+        /* --- LIGHT THEME --- */
+        html.light-theme {
+            --bg-color: var(--color-beige);
+            --text-color: var(--color-black);
+            --card-bg: var(--color-black-transparent);
+            --card-border: var(--color-black-bold);
+            --badge-bg: var(--color-black);
+            --badge-text: var(--color-beige);
+            --hover-highlight: var(--color-black);
+            --hover-text: var(--color-beige);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.4s ease;
+            line-height: 1.6;
+        }
+
+        /* Componentes de Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px;
+        }
+
+        /* Cabeçalho */
+        header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 20px 0;
+            gap: 20px;
+        }
+
+        /* Switchers de Tema e Idioma */
+        .control-btn {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--card-border);
+            border-radius: 30px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-btn:hover {
+            background-color: var(--hover-highlight);
+            color: var(--hover-text);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 60px;
+        }
+
+        .profile-img-container {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--text-color);
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img-container:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            border-color: var(--text-color);
+        }
+
+        /* Bento Grid Layout */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: minmax(150px, auto);
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .bento-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-box:hover {
+            transform: translateY(-5px);
+            background: var(--color-black-transparent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        html.dark-theme .bento-box:hover {
+            background: var(--color-beige-transparent);
+        }
+
+        h2.bento-title {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Spans para a Grid */
+        .span-2 { grid-column: span 2; }
+        .span-4 { grid-column: span 4; }
+
+        /* Tags para Skills */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+        
+        .skill-tag:hover {
+            transform: scale(1.05);
+        }
+
+        /* Listas sem decoração */
+        ul.clean-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul.clean-list li {
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 10px;
+        }
+
+        ul.clean-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .job-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .job-company {
+            opacity: 0.8;
+            font-weight: 600;
+        }
+        
+        .job-date {
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        .project-link {
+            display: inline-block;
+            color: var(--badge-bg);
+            background-color: var(--badge-text);
+            padding: 4px 12px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin: 4px;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            font-weight: 600;
+        }
+
+        .project-link:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        /* i18n Logic - Classes */
+        html[lang="pt-BR"] .lang-en { display: none; }
+        html[lang="en"] .lang-pt { display: none; }
+
+        /* Logic for Themes Avatar Images */
+        html.dark-theme .light-only-img { display: none; }
+        html.dark-theme .dark-only-img { display: block; }
+        html.light-theme .dark-only-img { display: none; }
+        html.light-theme .light-only-img { display: block; }
+
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            .span-2, .span-4 {
+                grid-column: span 1;
+            }
+            .container {
+                padding: 15px 20px;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            .profile-img-container {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Controls -->
+        <header>
+            <button class="control-btn" onclick="toggleLanguage()">
+                <span class="lang-pt">🇺🇸 Switch to English</span>
+                <span class="lang-en">🇧🇷 Mudar para Português</span>
+            </button>
+            <button class="control-btn" onclick="toggleTheme()">
+                <span class="dark-only">☀️ Light Mode</span>
+                <span class="light-only">🌙 Dark Mode</span>
+            </button>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="profile-img-container">
+                <img src="luiz_photo.png" alt="Luiz R R P Ihara">
+            </div>
+            <h1>Luiz R R P Ihara</h1>
+            <div class="subtitle">
+                Quality Engineer [AI-Driven Testing | Automation | Performance]
+            </div>
+            <div class="social-links">
+                <a href="mailto:luiz.ihara@gmail.com">luiz.ihara@gmail.com</a> |
+                <a href="https://github.com/luizihara" target="_blank">GitHub</a> |
+                <a href="https://www.linkedin.com/in/luiz-ihara/" target="_blank">LinkedIn</a>
+            </div>
+        </section>
+
+        <!-- Bento Grid Layout -->
+        <div class="bento-grid">
+            
+            <!-- About Me -->
+            <div class="bento-box span-2">
+                <h2 class="bento-title lang-pt">Sobre Mim</h2>
+                <h2 class="bento-title lang-en">About Me</h2>
+                <div class="lang-pt">
+                    <p>Engenheiro de Qualidade com forte experiência em performance, escalabilidade e confiabilidade de sistemas end-to-end em aplicações backend, frontend e mobile. Nos últimos anos, meu foco tem sido melhorar o desempenho e a resiliência de sistemas por meio de testes de estresse e validação em ambientes Linux, garantindo que a infraestrutura lide com cenários de alto tráfego com segurança.</p>
+                    <p>Especialista em projetar e escalar estratégias de testes, bem como na construção de frameworks de automação utilizando Java, JavaScript, Python, Go e Shell Script. Trabalhei extensivamente com pipelines de CI/CD, implementando quality gates e guardrails de testes para assegurar confiabilidade e consistência por todo o ciclo de entrega de software.</p>
+                    <p>Possuo sólida vivência em engenharia de infraestrutura e plataforma, incluindo a gestão de ambientes em nuvem, máquinas virtuais e clusters Kubernetes. Entusiasta de Infraestrutura como Código (IaC), implementei soluções de automação através de ferramentas como Terraform e Ansible visando melhor escalabilidade, redução de operações manuais e aumento da resiliência dos sistemas.</p>
+                    <p>Também liderei iniciativas com foco em qualidade de código e governança de plataforma sustentando ambientes de grande porte contendo milhares de projetos em múltiplas tecnologias, garantindo altos padrões de manutenibilidade e eficiência de engenharia.</p>
+                    <p>Mais recentemente, tenho utilizado abordagens orientadas por IA para acelerar a geração de testes, aprimorar a cobertura e aumentar a produtividade geral da engenharia, ajudando as equipes a entregar com maior segurança e velocidade. Adicionalmente, atuo no desenho e implementação de soluções em testes sintéticos para ampliar a observabilidade e a detecção proativa de anomalias em ambientes produtivos.</p>
+                    <p>Gosto de colaborar com os times, compartilhar conhecimento e de continuamente explorar novas ferramentas e tecnologias para propagar a evolução nas práticas de engenharia de qualidade. Fora do trabalho, meu passatempo é descobrir novos restaurantes ao lado da minha esposa, pilotar motos na estrada e jogar videogames.</p>
+                </div>
+                <div class="lang-en">
+                    <p>Quality Engineer with strong experience in performance, scalability, and end-to-end system reliability across backend, frontend, and mobile applications. Over the past few years, I have focused on improving system performance and resilience through stress testing and validation in Linux environments, ensuring systems can handle high-traffic scenarios with confidence.</p>
+                    <p>Experienced in designing and scaling test strategies, as well as building automation frameworks using Java, JavaScript, Python, Go, and Shell Script. I have worked extensively with CI/CD pipelines, implementing quality gates and testing guardrails to ensure reliability and consistency throughout the software delivery lifecycle.</p>
+                    <p>Strong background in infrastructure and platform engineering, including managing cloud environments, virtual machines, and Kubernetes clusters. Passionate about Infrastructure as Code, I have implemented automation solutions using tools such as Terraform and Ansible to improve scalability, reduce manual operations, and enhance system resilience.</p>
+                    <p>I have also led initiatives around code quality and platform governance, supporting large-scale environments with thousands of projects across multiple technologies, ensuring high standards of maintainability and engineering efficiency.</p>
+                    <p>More recently, I have been leveraging AI-driven approaches to accelerate test generation, improve coverage, and enhance overall engineering productivity, helping teams deliver with greater confidence and speed. Additionally, I design and implement synthetic testing solutions to improve observability and proactively detect issues in production environments.</p>
+                    <p>I enjoy collaborating with teams, sharing knowledge, and continuously exploring new tools and technologies to evolve quality engineering practices. Outside of work, I enjoy exploring new restaurants with my wife, riding motorcycles on the road, and playing video games.</p>
+                </div>
+            </div>
+
+            <!-- Professional Experience -->
+            <div class="bento-box span-2">
+                <h2 class="bento-title lang-pt">Experiência Profissional</h2>
+                <h2 class="bento-title lang-en">Professional Experience</h2>
+                <ul class="clean-list">
+                    <li>
+                        <div class="job-title">
+                            <span class="lang-pt">Engenheiro de Qualidade</span>
+                            <span class="lang-en">Quality Assurance Engineer</span>
+                            <span class="job-date"><span class="lang-pt">Abril/2025 - Momento</span><span class="lang-en">April/2025 - Present</span></span>
+                        </div>
+                        <div class="job-company">iConnections</div>
+                        <div style="font-size: 0.9rem; margin-top: 10px; opacity: 0.8;">
+                            <div class="lang-pt">
+                                <p style="margin-top:0;">Liderando iniciativas de arquitetura da qualidade em testes de backend, frontend, mobile e performance, garantindo estratégias de validação escaláveis e confiáveis em toda a plataforma.</p>
+                                <p>Aplicando abordagens baseadas em IA para acelerar a criação de testes, melhorar a cobertura e elevar a eficiência da engenharia e a qualidade do produto.</p>
+                                <p style="margin-bottom:0;">Projetando e implementando soluções de testes sintéticos para fortalecer a observabilidade e permitir a detecção proativa de problemas em produção.</p>
+                            </div>
+                            <div class="lang-en">
+                                <p style="margin-top:0;">Leading quality architecture initiatives across backend, frontend, mobile, and performance testing, ensuring scalable and reliable validation strategies across the platform.</p>
+                                <p>Applying AI-driven approaches to accelerate test creation, improve coverage, and elevate engineering efficiency and product quality.</p>
+                                <p style="margin-bottom:0;">Designing and implementing synthetic testing solutions to strengthen observability and enable proactive detection of production issues.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="job-title">
+                            <span class="lang-pt">Especialista QA</span>
+                            <span class="lang-en">Staff QA Engineer</span>
+                            <span class="job-date"><span class="lang-pt">Abril/2020 - Abril/2025</span><span class="lang-en">April/2020 - April/2025</span></span>
+                        </div>
+                        <div class="job-company">XP Inc</div>
+                        <div style="font-size: 0.9rem; margin-top: 10px; opacity: 0.8;">
+                            <span class="lang-pt">Liderei a plataforma SonarQube como Tech Lead, sendo responsável pela governança de qualidade de código de mais de 3.000 projetos em diversas stacks (.NET, JavaScript, Golang, Python e Java). Impulsionei estratégias de escalabilidade, confiabilidade e integração contínua (CI/CD), capacitando equipes de engenharia a adotarem altos padrões de qualidade e a melhorarem a manutenibilidade geral do software. Fui o dono da manutenção e evolução dos pipelines de CI/CD construídos no Azure DevOps, com forte foco na implementação de guardrails de teste em toda a esteira. Estabeleci quality gates e processos de validação automatizados para garantir confiabilidade, consistência e altos padrões durante todo o ciclo de vida de entrega de software.</span>
+                            <span class="lang-en">Led the SonarQube platform as Tech Lead, owning code quality governance for 3,000+ projects across multiple stacks (.NET, JavaScript, Golang, Python, and Java). Drove scalability, reliability, and CI/CD integration strategies, empowering engineering teams to adopt high-quality standards and improve overall software maintainability. Owned the maintenance and evolution of CI/CD pipelines built on Azure DevOps, with a strong focus on implementing testing guardrails across the entire pipeline. Established quality gates and automated validation processes to ensure reliability, consistency, and high standards throughout the software delivery lifecycle.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="job-title">
+                            SRE / DevOps Engineer
+                            <span class="job-date"><span class="lang-pt">Outubro/2015 - Maio/2020</span><span class="lang-en">October/2015 - March/2020</span></span>
+                        </div>
+                        <div class="job-company">Grupo Netshoes</div>
+                        <div style="font-size: 0.9rem; margin-top: 10px; opacity: 0.8;">
+                            <div class="lang-pt">
+                                <p style="margin-top:0;">Liderei as iniciativas de engenharia de qualidade como Tech Lead, projetando e implementando um framework escalável de automação de testes (Java, Selenium, REST Assured) e estabelecendo pipelines de CI no Jenkins para garantir a execução consistente e confiável dos testes.</p>
+                                <p style="margin-bottom:0;">Fiz a transição para atuar como SRE / DevOps Engineer, assumindo a liderança do principal serviço de alto tráfego da empresa (homepage). Impulsionei melhorias de confiabilidade e escalabilidade implementando a automação da infraestrutura com Terraform e Ansible, permitindo um escalonamento eficiente e aprimorando significativamente a resiliência geral do sistema.</p>
+                            </div>
+                            <div class="lang-en">
+                                <p style="margin-top:0;">Led quality engineering initiatives as a Tech Lead, designing and implementing a scalable test automation framework (Java, Selenium, REST Assured) and establishing CI pipelines in Jenkins to ensure consistent and reliable test execution.</p>
+                                <p style="margin-bottom:0;">Transitioned into an SRE / DevOps Engineer role, owning the company’s core high-traffic service (homepage). Drove reliability and scalability improvements by implementing infrastructure automation with Terraform and Ansible, enabling efficient scaling and enhancing overall system resilience.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="job-title">
+                            Software Developer in Test
+                            <span class="job-date"><span class="lang-pt">Março/2014 - Outubro/2015</span><span class="lang-en">March/2014 - October/2015</span></span>
+                        </div>
+                        <div class="job-company">Fcamara (LTM, Cnova)</div>
+                    </li>
+                    <li>
+                        <div class="job-title">
+                            QA Analyst
+                            <span class="job-date"><span class="lang-pt">Outubro/2012 - Março/2014</span><span class="lang-en">October/2012 - March/2014</span></span>
+                        </div>
+                        <div class="job-company">Dotz</div>
+                    </li>
+                    <li>
+                        <div class="job-title">
+                            QA Analyst
+                            <span class="job-date"><span class="lang-pt">Abril/2011 - Outubro/2012</span><span class="lang-en">April/2011 - October/2012</span></span>
+                        </div>
+                        <div class="job-company">Spread (Claro)</div>
+                    </li>
+                    <li>
+                        <div class="job-title">
+                            QA Analyst
+                            <span class="job-date"><span class="lang-pt">Agosto/2009 - Abril/2011</span><span class="lang-en">August/2009 - April/2011</span></span>
+                        </div>
+                        <div class="job-company">RSI Informática (Caixa)</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Skills -->
+            <div class="bento-box span-4">
+                <h2 class="bento-title lang-pt">Habilidades em Destaque</h2>
+                <h2 class="bento-title lang-en">Skill Highlights</h2>
+                <div class="skills-container">
+                    <!-- Languages -->
+                    <span class="skill-tag">Bash / Shell Script</span>
+                    <span class="skill-tag">TypeScript / JavaScript</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">C#</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">Go</span>
+                    <!-- Frameworks -->
+                    <span class="skill-tag">Playwright</span>
+                    <span class="skill-tag">Cypress</span>
+                    <span class="skill-tag">Appium</span>
+                    <span class="skill-tag">WebdriverIO</span>
+                    <span class="skill-tag">Selenium</span>
+                    <!-- CI/CD & Cloud -->
+                    <span class="skill-tag">DevOps</span>
+                    <span class="skill-tag">Azure DevOps</span>
+                    <span class="skill-tag">Jenkins</span>
+                    <span class="skill-tag">CircleCI</span>
+                    <span class="skill-tag">GitHub Actions</span>
+                    <!-- Infra -->
+                    <span class="skill-tag">Kubernetes</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Microsoft Azure</span>
+                    <span class="skill-tag">GCP</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Linux (Ubuntu / RHEL)</span>
+                    <!-- Perf -->
+                    <span class="skill-tag">k6</span>
+                    <span class="skill-tag">Tsung</span>
+                    <span class="skill-tag">JMeter</span>
+                    <span class="skill-tag">Locust</span>
+                    <!-- Others -->
+                    <span class="skill-tag">Akamai</span>
+                    <span class="skill-tag">Azion</span>
+                    <span class="skill-tag">Cloudflare</span>
+                    <span class="skill-tag">Grafana</span>
+                    <span class="skill-tag">Datadog</span>
+                    <span class="skill-tag">Ansible</span>
+                    <span class="skill-tag">Terraform</span>
+                    <span class="skill-tag">Redis</span>
+                </div>
+            </div>
+
+            <!-- FIAP Projects -->
+            <div class="bento-box span-4">
+                <h2 class="bento-title">FIAP MBA - AI Business Leadership Projects</h2>
+                
+                <div style="margin-bottom: 30px;">
+                    <a href="fiap.tcc/index.html" class="project-link" style="font-size: 1.1rem; padding: 8px 16px;">🎯 TCC: Career AI</a>
+                </div>
+
+                <h3 style="font-size: 1.1rem; margin-top: 0; margin-bottom: 10px; opacity: 0.8; font-weight: 600;">Vibe Coding Executivo</h3>
+                <div style="margin-bottom: 25px;">
+                    <a href="fiap.vibecodeexecutivo/index.html" class="project-link">Vibe Coding (Principal)</a>
+                    <a href="fiap.vibecodeexecutivo/ViagemPro/index.html" class="project-link">Viagem Pro</a>
+                    <a href="fiap.vibecodeexecutivo/Login/index.html" class="project-link">App Login</a>
+                    <a href="fiap.vibecodeexecutivo/Cinema/index.html" class="project-link">Cinema</a>
+                    <a href="fiap.vibecodeexecutivo/ReservaAssento/index.html" class="project-link">Reserva Assentos</a>
+                    <a href="fiap.vibecodeexecutivo/Bingo/index.html" class="project-link">Bingo</a>
+                    <a href="fiap.vibecodeexecutivo/JogoDaVida/index.html" class="project-link">Jogo da Vida</a>
+                    <a href="fiap.vibecodeexecutivo/EnglishSchool/index.html" class="project-link">English School</a>
+                </div>
+
+                <h3 style="font-size: 1.1rem; margin-top: 0; margin-bottom: 10px; opacity: 0.8; font-weight: 600;">Capacitação Organizacional IA</h3>
+                <div style="margin-bottom: 25px;">
+                    <a href="fiap.capacitacaoorganizacional/index-1.html" class="project-link">Capacitação Org. IA 1</a>
+                    <a href="fiap.capacitacaoorganizacional/index-2.html" class="project-link">Capacitação Org. IA 2</a>
+                    <a href="fiap.capacitacaoorganizacional/index-3.html" class="project-link">Capacitação Org. IA 3</a>
+                </div>
+
+                <h3 style="font-size: 1.1rem; margin-top: 0; margin-bottom: 10px; opacity: 0.8; font-weight: 600;">Arquitetura de Agentes</h3>
+                <div style="margin-bottom: 25px;">
+                    <a href="fiap.arquiteturaagentes/index.html" class="project-link">Arquitetura de Agentes 1</a>
+                    <a href="fiap.arquiteturaagentes/index-2.html" class="project-link">Arquitetura de Agentes 2</a>
+                    <a href="fiap.arquiteturaagentes/index-3.html" class="project-link">Arquitetura de Agentes 3</a>
+                </div>
+
+                <h3 style="font-size: 1.1rem; margin-bottom: 10px; opacity: 0.8; font-weight: 600;">Outros Projetos</h3>
+                <div>
+                    <a href="fiap.GestaoProduto/controleViagem.html" class="project-link">Gestão de Produto</a>
+                    <a href="fiap.monetizacaoego-to-market/index-1.html" class="project-link">Monetização 1</a>
+                    <a href="fiap.monetizacaoego-to-market/index-2.html" class="project-link">Monetização 2</a>
+                    <a href="fiap.advocacyeinfluencia/" class="project-link">Advocacy e Influência</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Scripts -->
+    <script>
+        // Language Toggle Logic
+        function toggleLanguage() {
+            const html = document.documentElement;
+            if (html.lang === 'pt-BR') {
+                html.lang = 'en';
+            } else {
+                html.lang = 'pt-BR';
+            }
+        }
+
+        // Theme Toggle Logic
+        // Dark theme uses .dark-theme, Light theme uses .light-theme
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark-theme')) {
+                html.classList.remove('dark-theme');
+                html.classList.add('light-theme');
+                document.querySelector('.dark-only').style.display = 'none';
+                document.querySelector('.light-only').style.display = 'inline';
+            } else {
+                html.classList.remove('light-theme');
+                html.classList.add('dark-theme');
+                document.querySelector('.dark-only').style.display = 'inline';
+                document.querySelector('.light-only').style.display = 'none';
+            }
+        }
+
+        // Initialize Theme Controls visually
+        document.addEventListener('DOMContentLoaded', () => {
+            const html = document.documentElement;
+            if (html.classList.contains('dark-theme')) {
+                document.querySelector('.light-only').style.display = 'none';
+            } else {
+                document.querySelector('.dark-only').style.display = 'none';
+            }
+        });
+
+    </script>
+</body>
+</html>
