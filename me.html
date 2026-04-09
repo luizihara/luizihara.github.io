@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luiz Ihara - Profile</title>
+    <!-- SEO & Open Graph Meta Tags -->
+    <meta name="description" content="Profile of Luiz Ihara - Quality Engineer, Performance, and Automation specialist.">
+    <meta property="og:title" content="Luiz Ihara - Quality Engineer">
+    <meta property="og:description" content="Profile of Luiz Ihara - Quality Engineer, Performance, and Automation specialist.">
+    <meta property="og:image" content="luiz_photo.png">
+    <meta property="og:type" content="profile">
     <!-- Google Fonts: Outfit -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -134,17 +140,52 @@
             opacity: 0.9;
         }
 
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
         .social-links a {
             color: var(--text-color);
             text-decoration: none;
-            margin: 0 10px;
             font-weight: 600;
             border-bottom: 2px solid transparent;
             transition: border-color 0.3s ease;
+            display: flex;
+            align-items: center;
         }
 
         .social-links a:hover {
             border-color: var(--text-color);
+        }
+
+        .highlight-text {
+            font-weight: 700;
+            color: var(--text-color);
+            position: relative;
+            z-index: 1;
+            white-space: nowrap;
+        }
+        
+        .highlight-text::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 2px;
+            width: 100%;
+            height: 30%;
+            background-color: var(--badge-bg);
+            opacity: 0.3;
+            z-index: -1;
+            transition: height 0.3s ease;
+        }
+        
+        html.dark-theme .highlight-text::after {
+            background-color: var(--badge-bg);
+            opacity: 0.4;
         }
 
         /* Bento Grid Layout */
@@ -162,9 +203,14 @@
             border-radius: 20px;
             padding: 30px;
             backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s ease-out, box-shadow 0.3s ease, background 0.3s ease;
             position: relative;
             overflow: hidden;
+        }
+
+        .reveal-hidden {
+            opacity: 0;
+            transform: translateY(40px);
         }
 
         .bento-box:hover {
@@ -188,25 +234,73 @@
         .span-2 { grid-column: span 2; }
         .span-4 { grid-column: span 4; }
 
-        /* Tags para Skills */
-        .skills-container {
+        /* Tabela de Skills Ousada */
+        .skills-table {
+            display: flex;
+            flex-direction: column;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+        }
+
+        .skill-row {
+            display: flex;
+            border-bottom: 1px solid var(--card-border);
+            transition: background-color 0.4s ease;
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        html.dark-theme .skill-row {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .skill-row:hover {
+            background-color: var(--card-bg);
+        }
+
+        .skill-row:last-child {
+            border-bottom: none;
+        }
+
+        .skill-category {
+            flex: 0 0 160px;
+            padding: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            border-right: 1px solid var(--card-border);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        .skill-items {
+            flex: 1;
+            padding: 20px;
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
+            align-items: center;
         }
 
         .skill-tag {
             background-color: var(--badge-bg);
             color: var(--badge-text);
-            padding: 6px 12px;
-            border-radius: 20px;
+            padding: 8px 16px;
+            border-radius: 30px;
             font-size: 0.85rem;
             font-weight: 600;
-            transition: transform 0.2s ease;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
         .skill-tag:hover {
-            transform: scale(1.05);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            background-color: var(--text-color);
+            color: var(--bg-color);
         }
 
         /* Listas sem decoração */
@@ -264,9 +358,110 @@
             opacity: 0.9;
         }
 
+        /* FIAP Projects Grid */
+        .project-category-header {
+            font-size: 1.1rem;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+            font-weight: 700;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .project-mini-card {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--card-border);
+            padding: 10px 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .project-mini-card:hover {
+            background-color: var(--badge-text);
+            color: var(--badge-bg);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .tcc-highlight {
+            grid-column: 1 / -1;
+            padding: 14px;
+            font-size: 1.1rem;
+            background-color: var(--badge-text);
+            color: var(--badge-bg);
+        }
+
         /* i18n Logic - Classes */
-        html[lang="pt-BR"] .lang-en { display: none !important; }
-        html[lang="en"] .lang-pt { display: none !important; }
+        .lang-pt, .lang-en, .lang-es, .lang-it { display: none !important; }
+        
+        html[lang="pt-BR"] .lang-pt,
+        html[lang="en"] .lang-en,
+        html[lang="es"] .lang-es,
+        html[lang="it"] .lang-it { display: block !important; }
+        
+        /* Flex override for inline elements */
+        html[lang="pt-BR"] span.lang-pt, 
+        html[lang="en"] span.lang-en, 
+        html[lang="es"] span.lang-es, 
+        html[lang="it"] span.lang-it,
+        html[lang="pt-BR"] a.lang-pt, 
+        html[lang="en"] a.lang-en, 
+        html[lang="es"] a.lang-es, 
+        html[lang="it"] a.lang-it { display: inline-block !important; }
+
+        /* Back to top button */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-color);
+            border-radius: 30px;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            
+            /* Hidden until scrolled */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #back-to-top:hover {
+            transform: translateY(-3px);
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
 
         /* Logic for Themes Avatar Images */
         html.dark-theme .light-only-img { display: none; }
@@ -291,7 +486,7 @@
                 background-color: #ffffff !important;
                 color: #000000 !important;
             }
-            header {
+            header, #back-to-top {
                 display: none !important;
             }
             .bento-grid {
@@ -312,9 +507,21 @@
             a {
                 text-decoration: none !important;
             }
+            .skills-table {
+                border: 1px solid #ccc !important;
+            }
+            .skill-row {
+                background-color: #fff !important;
+                border-bottom: 1px solid #ccc !important;
+            }
+            .skill-category {
+                border-right: 1px solid #ccc !important;
+            }
             .skill-tag, .project-link {
                 border: 1px solid #999 !important;
                 background-color: #f0f0f0 !important;
+                box-shadow: none !important;
+                transform: none !important;
             }
             .profile-img-container {
                 border: 2px solid #000000 !important;
@@ -343,6 +550,20 @@
                 width: 150px;
                 height: 150px;
             }
+            .skill-row {
+                flex-direction: column;
+            }
+            .skill-category {
+                border-right: none;
+                border-bottom: 1px dashed var(--card-border);
+                padding: 15px 20px 10px 20px;
+                flex: none;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .skill-items {
+                padding: 15px 20px;
+            }
         }
     </style>
 </head>
@@ -351,10 +572,12 @@
     <div class="container">
         <!-- Controls -->
         <header>
-            <button class="control-btn" onclick="toggleLanguage()">
-                <span class="lang-pt">🇺🇸 Switch to English</span>
-                <span class="lang-en">🇧🇷 Mudar para Português</span>
-            </button>
+            <select class="control-btn" id="language-switcher" onchange="changeLanguage(this.value)" style="cursor: pointer; padding-right: 10px;">
+                <option value="pt-BR">🇧🇷 Português</option>
+                <option value="en">🇺🇸 English</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="it">🇮🇹 Italiano</option>
+            </select>
             <button class="control-btn" onclick="toggleTheme()">
                 <span class="dark-only">☀️ Light Mode</span>
                 <span class="light-only">🌙 Dark Mode</span>
@@ -368,12 +591,24 @@
             </div>
             <h1>Luiz R R P Ihara</h1>
             <div class="subtitle">
-                Quality Engineer [AI-Driven Testing | Automation | Performance]
+                <span class="lang-pt">Engenheiro de Qualidade [Testes baseados em IA | Automação | Performance]</span>
+                <span class="lang-en">Quality Engineer [AI-Driven Testing | Automation | Performance]</span>
+                <span class="lang-es">Ingeniero de Calidad [Pruebas guiadas por IA | Automatización | Rendimiento]</span>
+                <span class="lang-it">Ingegnere della Qualità [Test guidati dall'IA | Automazione | Prestazioni]</span>
             </div>
             <div class="social-links">
-                <a href="mailto:luiz.ihara@gmail.com">luiz.ihara@gmail.com</a> |
-                <a href="https://github.com/luizihara" target="_blank">GitHub</a> |
-                <a href="https://www.linkedin.com/in/luiz-ihara/" target="_blank">LinkedIn</a>
+                <a href="mailto:luiz.ihara@gmail.com">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    luiz.ihara@gmail.com
+                </a>
+                <a href="https://github.com/luizihara" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/luiz-ihara/" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    LinkedIn
+                </a>
             </div>
         </section>
 
@@ -384,21 +619,39 @@
             <div class="bento-box span-2">
                 <h2 class="bento-title lang-pt">Sobre Mim</h2>
                 <h2 class="bento-title lang-en">About Me</h2>
+                <h2 class="bento-title lang-es">Sobre Mí</h2>
+                <h2 class="bento-title lang-it">Su di Me</h2>
                 <div class="lang-pt">
-                    <p>Engenheiro de Qualidade com forte experiência em performance, escalabilidade e confiabilidade de sistemas end-to-end em aplicações backend, frontend e mobile. Nos últimos anos, meu foco tem sido melhorar o desempenho e a resiliência de sistemas por meio de testes de estresse e validação em ambientes Linux, garantindo que a infraestrutura lide com cenários de alto tráfego com segurança.</p>
-                    <p>Especialista em projetar e escalar estratégias de testes, bem como na construção de frameworks de automação utilizando Java, JavaScript, Python, Go e Shell Script. Trabalhei extensivamente com pipelines de CI/CD, implementando quality gates e guardrails de testes para assegurar confiabilidade e consistência por todo o ciclo de entrega de software.</p>
-                    <p>Possuo sólida vivência em engenharia de infraestrutura e plataforma, incluindo a gestão de ambientes em nuvem, máquinas virtuais e clusters Kubernetes. Entusiasta de Infraestrutura como Código (IaC), implementei soluções de automação através de ferramentas como Terraform e Ansible visando melhor escalabilidade, redução de operações manuais e aumento da resiliência dos sistemas.</p>
+                    <p>Engenheiro de Qualidade com forte experiência em <strong class="highlight-text">performance, escalabilidade e confiabilidade</strong> de sistemas end-to-end em aplicações backend, frontend e mobile. Nos últimos anos, meu foco tem sido melhorar o desempenho e a resiliência de sistemas por meio de testes de estresse e validação em ambientes Linux, garantindo que a infraestrutura lide com cenários de <strong class="highlight-text">alto tráfego com segurança</strong>.</p>
+                    <p>Especialista em projetar e escalar estratégias de testes, bem como na construção de frameworks de automação utilizando <strong class="highlight-text">Java, JavaScript, Python, Go e Shell Script</strong>. Trabalhei extensivamente com pipelines de <strong class="highlight-text">CI/CD</strong>, implementando quality gates e guardrails de testes para assegurar confiabilidade e consistência por todo o ciclo de entrega de software.</p>
+                    <p>Possuo sólida vivência em <strong class="highlight-text">engenharia de infraestrutura</strong> e plataforma, incluindo a gestão de ambientes em nuvem, máquinas virtuais e clusters <strong class="highlight-text">Kubernetes</strong>. Entusiasta de <strong class="highlight-text">Infraestrutura como Código (IaC)</strong>, implementei soluções de automação através de ferramentas como Terraform e Ansible visando melhor escalabilidade, redução de operações manuais e aumento da resiliência dos sistemas.</p>
                     <p>Também liderei iniciativas com foco em qualidade de código e governança de plataforma sustentando ambientes de grande porte contendo milhares de projetos em múltiplas tecnologias, garantindo altos padrões de manutenibilidade e eficiência de engenharia.</p>
-                    <p>Mais recentemente, tenho utilizado abordagens orientadas por IA para acelerar a geração de testes, aprimorar a cobertura e aumentar a produtividade geral da engenharia, ajudando as equipes a entregar com maior segurança e velocidade. Adicionalmente, atuo no desenho e implementação de soluções em testes sintéticos para ampliar a observabilidade e a detecção proativa de anomalias em ambientes produtivos.</p>
+                    <p>Mais recentemente, tenho utilizado abordagens <strong class="highlight-text">orientadas por IA</strong> para acelerar a geração de testes, aprimorar a cobertura e aumentar a produtividade geral da engenharia, ajudando as equipes a entregar com maior segurança e velocidade. Adicionalmente, atuo no desenho e implementação de soluções em testes sintéticos para ampliar a <strong class="highlight-text">observabilidade e a detecção proativa</strong> de anomalias em ambientes produtivos.</p>
                     <p>Gosto de colaborar com os times, compartilhar conhecimento e de continuamente explorar novas ferramentas e tecnologias para propagar a evolução nas práticas de engenharia de qualidade. Fora do trabalho, meu passatempo é descobrir novos restaurantes ao lado da minha esposa, pilotar motos na estrada e jogar videogames.</p>
                 </div>
                 <div class="lang-en">
-                    <p>Quality Engineer with strong experience in performance, scalability, and end-to-end system reliability across backend, frontend, and mobile applications. Over the past few years, I have focused on improving system performance and resilience through stress testing and validation in Linux environments, ensuring systems can handle high-traffic scenarios with confidence.</p>
-                    <p>Experienced in designing and scaling test strategies, as well as building automation frameworks using Java, JavaScript, Python, Go, and Shell Script. I have worked extensively with CI/CD pipelines, implementing quality gates and testing guardrails to ensure reliability and consistency throughout the software delivery lifecycle.</p>
-                    <p>Strong background in infrastructure and platform engineering, including managing cloud environments, virtual machines, and Kubernetes clusters. Passionate about Infrastructure as Code, I have implemented automation solutions using tools such as Terraform and Ansible to improve scalability, reduce manual operations, and enhance system resilience.</p>
+                    <p>Quality Engineer with strong experience in <strong class="highlight-text">performance, scalability, and reliability</strong> across end-to-end backend, frontend, and mobile applications. Over the past few years, I have focused on improving system performance and resilience through stress testing and validation in Linux environments, ensuring systems can handle <strong class="highlight-text">high-traffic scenarios</strong> with confidence.</p>
+                    <p>Experienced in designing and scaling test strategies, as well as building automation frameworks using <strong class="highlight-text">Java, JavaScript, Python, Go, and Shell Script</strong>. I have worked extensively with <strong class="highlight-text">CI/CD</strong> pipelines, implementing quality gates and testing guardrails to ensure reliability and consistency throughout the software delivery lifecycle.</p>
+                    <p>Strong background in <strong class="highlight-text">infrastructure and platform engineering</strong>, including managing cloud environments, virtual machines, and <strong class="highlight-text">Kubernetes clusters</strong>. Passionate about <strong class="highlight-text">Infrastructure as Code (IaC)</strong>, I have implemented automation solutions using tools such as Terraform and Ansible to improve scalability, reduce manual operations, and enhance system resilience.</p>
                     <p>I have also led initiatives around code quality and platform governance, supporting large-scale environments with thousands of projects across multiple technologies, ensuring high standards of maintainability and engineering efficiency.</p>
-                    <p>More recently, I have been leveraging AI-driven approaches to accelerate test generation, improve coverage, and enhance overall engineering productivity, helping teams deliver with greater confidence and speed. Additionally, I design and implement synthetic testing solutions to improve observability and proactively detect issues in production environments.</p>
+                    <p>More recently, I have been leveraging <strong class="highlight-text">AI-driven approaches</strong> to accelerate test generation, improve coverage, and enhance overall engineering productivity, helping teams deliver with greater confidence and speed. Additionally, I design and implement synthetic testing solutions to improve <strong class="highlight-text">observability and proactively detect issues</strong> in production environments.</p>
                     <p>I enjoy collaborating with teams, sharing knowledge, and continuously exploring new tools and technologies to evolve quality engineering practices. Outside of work, I enjoy exploring new restaurants with my wife, riding motorcycles on the road, and playing video games.</p>
+                </div>
+                <div class="lang-es">
+                    <p>Ingeniero de Calidad con gran experiencia en <strong class="highlight-text">rendimiento, escalabilidad y confiabilidad</strong> de sistemas de extremo a extremo en aplicaciones backend, frontend y móviles. En los últimos años, me he centrado en mejorar el rendimiento y la resiliencia de los sistemas a través de pruebas de estrés y validación en entornos Linux, garantizando que la infraestructura maneje escenarios de <strong class="highlight-text">alto tráfico con seguridad</strong>.</p>
+                    <p>Experto en diseñar y escalar estrategias de pruebas, así como en la construcción de frameworks de automatización utilizando <strong class="highlight-text">Java, JavaScript, Python, Go y Shell Script</strong>. He trabajado extensamente con canalizaciones <strong class="highlight-text">CI/CD</strong>, implementando quality gates y barreras de prueba para garantizar confiabilidad y consistencia a lo largo de todo el ciclo de entrega de software.</p>
+                    <p>Poseo sólida experiencia en ingeniería de <strong class="highlight-text">infraestructura y plataforma</strong>, incluyendo la gestión de entornos en la nube, máquinas virtuales y <strong class="highlight-text">clústeres Kubernetes</strong>. Entusiasta de la <strong class="highlight-text">Infraestructura como Código (IaC)</strong>, implementé soluciones de automatización a través de herramientas como Terraform y Ansible para mejorar la escalabilidad, reducir operaciones manuales y aumentar la resiliencia de los sistemas.</p>
+                    <p>También lideré iniciativas centradas en la calidad del código y la gobernanza de la plataforma que respaldan entornos a gran escala que contienen miles de proyectos en múltiples tecnologías, garantizando altos estándares de mantenibilidad y eficiencia de ingeniería.</p>
+                    <p>Más recientemente, he utilizado enfoques <strong class="highlight-text">impulsados por IA</strong> para acelerar la generación de pruebas, mejorar la cobertura y aumentar la productividad general de la ingeniería, ayudando a los equipos a entregar con mayor confianza y velocidad. Adicionalmente, diseño e implemento soluciones en pruebas sintéticas para ampliar la <strong class="highlight-text">observabilidad y la detección proactiva</strong> de anomalías en entornos de producción.</p>
+                    <p>Disfruto colaborando con los equipos, compartiendo conocimientos y explorando continuamente nuevas tecnologías para evolucionar las prácticas de ingeniería de calidad. Fuera del trabajo, mi pasatiempo es explorar restaurantes junto a mi esposa, andar en motocicleta por carretera y jugar videojuegos.</p>
+                </div>
+                <div class="lang-it">
+                    <p>Ingegnere della Qualità con solida esperienza in <strong class="highlight-text">prestazioni, scalabilità e affidabilità</strong> dei sistemi end-to-end nelle applicazioni backend, frontend e mobili. Negli ultimi anni, mi sono concentrato sul miglioramento delle prestazioni e della resilienza dei sistemi attraverso test di stress e validazione in ambienti Linux, assicurando che l'infrastruttura gestisca in sicurezza scenari di <strong class="highlight-text">alto traffico</strong>.</p>
+                    <p>Esperto nella progettazione e scalabilità di strategie di testing, nonché nella creazione di framework di automazione utilizzando <strong class="highlight-text">Java, JavaScript, Python, Go e Shell Script</strong>. Ho lavorato a lungo con pipeline <strong class="highlight-text">CI/CD</strong>, implementando quality gates e guardrail di test per garantire affidabilità e coerenza in tutto il ciclo di consegna del software.</p>
+                    <p>Possiedo un solido background in <strong class="highlight-text">ingegneria delle infrastrutture</strong> e delle piattaforme, inclusa la gestione di ambienti cloud, macchine virtuali e <strong class="highlight-text">cluster Kubernetes</strong>. Appassionato di <strong class="highlight-text">Infrastruttura come Codice (IaC)</strong>, ho implementato soluzioni di automazione utilizzando strumenti come Terraform e Ansible volti a migliorare la scalabilità, ridurre le operazioni manuali e aumentare la resilienza dei sistemi.</p>
+                    <p>Ho guidato inoltre iniziative incentrate sulla qualità del codice e sulla governance della piattaforma, supportando ambienti su larga scala contenenti migliaia di progetti in molteplici tecnologie, garantendo elevati standard di manutenibilità ed efficienza ingegneristica.</p>
+                    <p>Più recentemente, sto sfruttando approcci <strong class="highlight-text">guidati dall'IA</strong> per accelerare la generazione di test, migliorare la copertura e aumentare la produttività complessiva dell'ingegneria, aiutando i team a consegnare con maggiore sicurezza e velocità. Inoltre, progetto implementazioni di test sintetici per espandere l'<strong class="highlight-text">osservabilità e il rilevamento proattivo</strong> di anomalie negli ambienti di produzione.</p>
+                    <p>Mi piace collaborare con i team, condividere conoscenze ed esplorare continuamente nuove piattaforme per evolvere le pratiche di ingegneria della qualità. Oltre al lavoro, mi diverto a scoprire nuovi ristoranti con mia moglie, viaggiare in moto e giocare ai videogiochi.</p>
                 </div>
             </div>
 
@@ -406,14 +659,23 @@
             <div class="bento-box span-2">
                 <h2 class="bento-title lang-pt">Experiência Profissional</h2>
                 <h2 class="bento-title lang-en">Professional Experience</h2>
+                <h2 class="bento-title lang-es">Experiencia Profesional</h2>
+                <h2 class="bento-title lang-it">Esperienza Professionale</h2>
                 <ul class="clean-list">
                     <li>
                         <div class="job-title">
                             <span class="lang-pt">Engenheiro de Qualidade</span>
                             <span class="lang-en">Quality Assurance Engineer</span>
-                            <span class="job-date"><span class="lang-pt">Abril/2025 - Momento</span><span class="lang-en">April/2025 - Present</span></span>
+                            <span class="lang-es">Ingeniero de Calidad</span>
+                            <span class="lang-it">Ingegnere della Qualità</span>
+                            <span class="job-date">
+                                <span class="lang-pt">Abril/2025 - Momento</span>
+                                <span class="lang-en">April/2025 - Present</span>
+                                <span class="lang-es">Abril/2025 - Presente</span>
+                                <span class="lang-it">Aprile/2025 - Presente</span>
+                            </span>
                         </div>
-                        <div class="job-company">iConnections</div>
+                        <div class="job-company">🇺🇸 iConnections</div>
                         <div style="font-size: 0.9rem; margin-top: 10px; opacity: 0.8;">
                             <div class="lang-pt">
                                 <p style="margin-top:0;">Liderando iniciativas de arquitetura da qualidade em testes de backend, frontend, mobile e performance, garantindo estratégias de validação escaláveis e confiáveis em toda a plataforma.</p>
@@ -425,26 +687,50 @@
                                 <p>Applying AI-driven approaches to accelerate test creation, improve coverage, and elevate engineering efficiency and product quality.</p>
                                 <p style="margin-bottom:0;">Designing and implementing synthetic testing solutions to strengthen observability and enable proactive detection of production issues.</p>
                             </div>
+                            <div class="lang-es">
+                                <p style="margin-top:0;">Liderando iniciativas de arquitectura de calidad en pruebas de backend, frontend, móviles y de rendimiento, garantizando estrategias de validación escalables y confiables en toda la plataforma.</p>
+                                <p>Aplicando enfoques impulsados por IA para acelerar la creación de pruebas, mejorar la cobertura y elevar la eficiencia de la ingeniería y la calidad del producto.</p>
+                                <p style="margin-bottom:0;">Diseñando e implementando soluciones de pruebas sintéticas para fortalecer la observabilidad y permitir la detección proactiva de problemas de producción.</p>
+                            </div>
+                            <div class="lang-it">
+                                <p style="margin-top:0;">Guidando iniziative di architettura della qualità nei test backend, frontend, mobile e di performance, garantendo strategie di convalida scalabili e affidabili su tutta la piattaforma.</p>
+                                <p>Applicando approcci guidati dall'IA per accelerare la creazione di test, migliorare la copertura ed elevare l'efficienza ingegneristica e la qualità del prodotto.</p>
+                                <p style="margin-bottom:0;">Progettando e implementando soluzioni per test sintetici al fine di rafforzare l'osservabilità e consentire il rilevamento proattivo di problemi in produzione.</p>
+                            </div>
                         </div>
                     </li>
                     <li>
                         <div class="job-title">
                             <span class="lang-pt">Especialista QA</span>
                             <span class="lang-en">Staff QA Engineer</span>
-                            <span class="job-date"><span class="lang-pt">Abril/2020 - Abril/2025</span><span class="lang-en">April/2020 - April/2025</span></span>
+                            <span class="lang-es">Especialista QA</span>
+                            <span class="lang-it">Specialista QA</span>
+                            <span class="job-date">
+                                <span class="lang-pt">Abril/2020 - Abril/2025</span>
+                                <span class="lang-en">April/2020 - April/2025</span>
+                                <span class="lang-es">Abril/2020 - Abril/2025</span>
+                                <span class="lang-it">Aprile/2020 - Aprile/2025</span>
+                            </span>
                         </div>
-                        <div class="job-company">XP Inc</div>
+                        <div class="job-company">🇧🇷 XP Inc</div>
                         <div style="font-size: 0.9rem; margin-top: 10px; opacity: 0.8;">
                             <span class="lang-pt">Liderei a plataforma SonarQube como Tech Lead, sendo responsável pela governança de qualidade de código de mais de 3.000 projetos em diversas stacks (.NET, JavaScript, Golang, Python e Java). Impulsionei estratégias de escalabilidade, confiabilidade e integração contínua (CI/CD), capacitando equipes de engenharia a adotarem altos padrões de qualidade e a melhorarem a manutenibilidade geral do software. Fui o dono da manutenção e evolução dos pipelines de CI/CD construídos no Azure DevOps, com forte foco na implementação de guardrails de teste em toda a esteira. Estabeleci quality gates e processos de validação automatizados para garantir confiabilidade, consistência e altos padrões durante todo o ciclo de vida de entrega de software.</span>
                             <span class="lang-en">Led the SonarQube platform as Tech Lead, owning code quality governance for 3,000+ projects across multiple stacks (.NET, JavaScript, Golang, Python, and Java). Drove scalability, reliability, and CI/CD integration strategies, empowering engineering teams to adopt high-quality standards and improve overall software maintainability. Owned the maintenance and evolution of CI/CD pipelines built on Azure DevOps, with a strong focus on implementing testing guardrails across the entire pipeline. Established quality gates and automated validation processes to ensure reliability, consistency, and high standards throughout the software delivery lifecycle.</span>
+                            <span class="lang-es">Lideré la plataforma SonarQube como Tech Lead, siendo responsable de la gobernanza de la calidad del código de más de 3.000 proyectos en varias tecnologías (.NET, JavaScript, Golang, Python y Java). Impulsé estrategias de escalabilidad, confiabilidad e integración continua (CI/CD), empoderando a los equipos de ingeniería para adoptar altos estándares de calidad y mejorar el mantenimiento general del software. Fui propietario del mantenimiento y evolución de las canalizaciones de CI/CD construidas en Azure DevOps, con un fuerte enfoque en implementar barreras de prueba en toda la canalización. Establecí quality gates y procesos de validación automatizados para garantizar confiabilidad, consistencia y altos estándares durante todo el ciclo de vida de entrega de software.</span>
+                            <span class="lang-it">Ho guidato la piattaforma SonarQube come Tech Lead, assumendo la responsabilità della governance della qualità del codice per oltre 3.000 progetti su svariati stack tecnologici (.NET, JavaScript, Golang, Python e Java). Ho promosso strategie di scalabilità, affidabilità e integrazione continua (CI/CD), mettendo i team di ingegneria in condizione di adottare standard di alta qualità e migliorare la manutenibilità complessiva del software. Ero responsabile della manutenzione e dell'evoluzione delle pipeline CI/CD realizzate su Azure DevOps, con una forte enfasi sull'implementazione di guardrail di test lungo l'intera pipeline. Ho stabilito quality gates e processi di validazione automatizzati per garantire affidabilità, coerenza e standard elevati durante tutto il ciclo di vita della consegna del software.</span>
                         </div>
                     </li>
                     <li>
                         <div class="job-title">
                             SRE / DevOps Engineer
-                            <span class="job-date"><span class="lang-pt">Outubro/2015 - Maio/2020</span><span class="lang-en">October/2015 - March/2020</span></span>
+                            <span class="job-date">
+                                <span class="lang-pt">Outubro/2015 - Março/2020</span>
+                                <span class="lang-en">October/2015 - March/2020</span>
+                                <span class="lang-es">Octubre/2015 - Marzo/2020</span>
+                                <span class="lang-it">Ottobre/2015 - Marzo/2020</span>
+                            </span>
                         </div>
-                        <div class="job-company">Grupo Netshoes</div>
+                        <div class="job-company">🇧🇷 Grupo Netshoes</div>
                         <div style="font-size: 0.9rem; margin-top: 10px; opacity: 0.8;">
                             <div class="lang-pt">
                                 <p style="margin-top:0;">Liderei as iniciativas de engenharia de qualidade como Tech Lead, projetando e implementando um framework escalável de automação de testes (Java, Selenium, REST Assured) e estabelecendo pipelines de CI no Jenkins para garantir a execução consistente e confiável dos testes.</p>
@@ -454,35 +740,55 @@
                                 <p style="margin-top:0;">Led quality engineering initiatives as a Tech Lead, designing and implementing a scalable test automation framework (Java, Selenium, REST Assured) and establishing CI pipelines in Jenkins to ensure consistent and reliable test execution.</p>
                                 <p style="margin-bottom:0;">Transitioned into an SRE / DevOps Engineer role, owning the company’s core high-traffic service (homepage). Drove reliability and scalability improvements by implementing infrastructure automation with Terraform and Ansible, enabling efficient scaling and enhancing overall system resilience.</p>
                             </div>
+                            <div class="lang-es">
+                                <p style="margin-top:0;">Lideré las iniciativas de ingeniería de calidad como Tech Lead, diseñando e implementando un marco escalable de automatización de pruebas (Java, Selenium, REST Assured) y estableciendo pipelines de CI en Jenkins para asegurar la ejecución consistente y confiable de las pruebas.</p>
+                                <p style="margin-bottom:0;">Me transferí al puesto de SRE / DevOps Engineer asumiendo el liderazgo del servicio central de alto tráfico de la empresa (homepage). Impulsé mejoras de confiabilidad y escalabilidad al implementar la automatización de infraestructura con Terraform y Ansible, lo que permitió un escalamiento eficiente y mejoró significativamente la resiliencia general del sistema.</p>
+                            </div>
+                            <div class="lang-it">
+                                <p style="margin-top:0;">Ho guidato le iniziative di ingegneria della qualità come Tech Lead, progettando e implementando un framework di automazione dei test scalabile (Java, Selenium, REST Assured) e stabilendo pipeline CI in Jenkins per garantire un'esecuzione coerente e affidabile dei test.</p>
+                                <p style="margin-bottom:0;">Sono passato al ruolo di SRE / DevOps Engineer assumendo la guida del servizio principale ad alto traffico dell'azienda (homepage). Ho promosso miglioramenti in tema di affidabilità e scalabilità implementando l'automazione dell'infrastruttura con Terraform e Ansible, consentendo una scalabilità efficiente e migliorando significativamente la resilienza complessiva del sistema.</p>
+                            </div>
                         </div>
                     </li>
                     <li>
                         <div class="job-title">
                             Software Developer in Test
-                            <span class="job-date"><span class="lang-pt">Março/2014 - Outubro/2015</span><span class="lang-en">March/2014 - October/2015</span></span>
+                            <span class="job-date">
+                                <span class="lang-pt">Março/2014 - Outubro/2015</span><span class="lang-en">March/2014 - October/2015</span>
+                                <span class="lang-es">Marzo/2014 - Octubre/2015</span><span class="lang-it">Marzo/2014 - Ottobre/2015</span>
+                            </span>
                         </div>
-                        <div class="job-company">Fcamara (LTM, Cnova)</div>
+                        <div class="job-company">🇧🇷 Fcamara (LTM, Cnova)</div>
                     </li>
                     <li>
                         <div class="job-title">
                             QA Analyst
-                            <span class="job-date"><span class="lang-pt">Outubro/2012 - Março/2014</span><span class="lang-en">October/2012 - March/2014</span></span>
+                            <span class="job-date">
+                                <span class="lang-pt">Outubro/2012 - Março/2014</span><span class="lang-en">October/2012 - March/2014</span>
+                                <span class="lang-es">Octubre/2012 - Marzo/2014</span><span class="lang-it">Ottobre/2012 - Marzo/2014</span>
+                            </span>
                         </div>
-                        <div class="job-company">Dotz</div>
+                        <div class="job-company">🇧🇷 Dotz</div>
                     </li>
                     <li>
                         <div class="job-title">
                             QA Analyst
-                            <span class="job-date"><span class="lang-pt">Abril/2011 - Outubro/2012</span><span class="lang-en">April/2011 - October/2012</span></span>
+                            <span class="job-date">
+                                <span class="lang-pt">Abril/2011 - Outubro/2012</span><span class="lang-en">April/2011 - October/2012</span>
+                                <span class="lang-es">Abril/2011 - Octubre/2012</span><span class="lang-it">Aprile/2011 - Ottobre/2012</span>
+                            </span>
                         </div>
-                        <div class="job-company">Spread (Claro)</div>
+                        <div class="job-company">🇧🇷 Spread (Claro)</div>
                     </li>
                     <li>
                         <div class="job-title">
                             QA Analyst
-                            <span class="job-date"><span class="lang-pt">Agosto/2009 - Abril/2011</span><span class="lang-en">August/2009 - April/2011</span></span>
+                            <span class="job-date">
+                                <span class="lang-pt">Agosto/2009 - Abril/2011</span><span class="lang-en">August/2009 - April/2011</span>
+                                <span class="lang-es">Agosto/2009 - Abril/2011</span><span class="lang-it">Agosto/2009 - Aprile/2011</span>
+                            </span>
                         </div>
-                        <div class="job-company">RSI Informática (Caixa)</div>
+                        <div class="job-company">🇧🇷 RSI Informática (Caixa)</div>
                     </li>
                 </ul>
             </div>
@@ -491,108 +797,247 @@
             <div class="bento-box span-4">
                 <h2 class="bento-title lang-pt">Habilidades em Destaque</h2>
                 <h2 class="bento-title lang-en">Skill Highlights</h2>
-                <div class="skills-container">
-                    <!-- Languages -->
-                    <span class="skill-tag">Bash / Shell Script</span>
-                    <span class="skill-tag">TypeScript / JavaScript</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">C#</span>
-                    <span class="skill-tag">Java</span>
-                    <span class="skill-tag">Go</span>
+                <h2 class="bento-title lang-es">Habilidades Destacadas</h2>
+                <h2 class="bento-title lang-it">Competenze in Evidenza</h2>
+                <div class="skills-table">
+                    <!-- IDE -->
+                    <div class="skill-row">
+                        <div class="skill-category">
+                            IDE
+                        </div>
+                        <div class="skill-items">
+                            <span class="skill-tag">Cursor</span>
+                            <span class="skill-tag">Visual Studio Code</span>
+                            <span class="skill-tag">Antigravity</span>
+                        </div>
+                    </div>
+
+                    <!-- Linguagens -->
+                    <div class="skill-row">
+                        <div class="skill-category">
+                            <span class="lang-pt">Linguagens</span>
+                            <span class="lang-en">Languages</span>
+                            <span class="lang-es">Lenguajes</span>
+                            <span class="lang-it">Linguaggi</span>
+                        </div>
+                        <div class="skill-items">
+                            <span class="skill-tag">Bash / Shell Script</span>
+                            <span class="skill-tag">TypeScript / JavaScript</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C#</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">Go</span>
+                        </div>
+                    </div>
+
                     <!-- Frameworks -->
-                    <span class="skill-tag">Playwright</span>
-                    <span class="skill-tag">Cypress</span>
-                    <span class="skill-tag">Appium</span>
-                    <span class="skill-tag">WebdriverIO</span>
-                    <span class="skill-tag">Selenium</span>
-                    <!-- CI/CD & Cloud -->
-                    <span class="skill-tag">DevOps</span>
-                    <span class="skill-tag">Azure DevOps</span>
-                    <span class="skill-tag">Jenkins</span>
-                    <span class="skill-tag">CircleCI</span>
-                    <span class="skill-tag">GitHub Actions</span>
-                    <!-- Infra -->
-                    <span class="skill-tag">Kubernetes</span>
-                    <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">Microsoft Azure</span>
-                    <span class="skill-tag">GCP</span>
-                    <span class="skill-tag">AWS</span>
-                    <span class="skill-tag">Linux (Ubuntu / RHEL)</span>
-                    <!-- Perf -->
-                    <span class="skill-tag">k6</span>
-                    <span class="skill-tag">Tsung</span>
-                    <span class="skill-tag">JMeter</span>
-                    <span class="skill-tag">Locust</span>
-                    <!-- Others -->
-                    <span class="skill-tag">Akamai</span>
-                    <span class="skill-tag">Azion</span>
-                    <span class="skill-tag">Cloudflare</span>
-                    <span class="skill-tag">Grafana</span>
-                    <span class="skill-tag">Datadog</span>
-                    <span class="skill-tag">Ansible</span>
-                    <span class="skill-tag">Terraform</span>
-                    <span class="skill-tag">Redis</span>
+                    <div class="skill-row">
+                        <div class="skill-category">
+                            Frameworks
+                        </div>
+                        <div class="skill-items">
+                            <span class="skill-tag">Playwright</span>
+                            <span class="skill-tag">Cypress</span>
+                            <span class="skill-tag">Appium</span>
+                            <span class="skill-tag">WebdriverIO</span>
+                            <span class="skill-tag">Selenium</span>
+                        </div>
+                    </div>
+
+                    <!-- Performance Test -->
+                    <div class="skill-row">
+                        <div class="skill-category">
+                            <span class="lang-pt">Performance</span>
+                            <span class="lang-en">Performance</span>
+                            <span class="lang-es">Rendimiento</span>
+                            <span class="lang-it">Prestazioni</span>
+                        </div>
+                        <div class="skill-items">
+                            <span class="skill-tag">k6</span>
+                            <span class="skill-tag">Tsung</span>
+                            <span class="skill-tag">JMeter</span>
+                            <span class="skill-tag">Locust</span>
+                        </div>
+                    </div>
+
+                    <!-- Monitoria -->
+                    <div class="skill-row">
+                        <div class="skill-category">
+                            <span class="lang-pt">Monitoria</span>
+                            <span class="lang-en">Monitoring</span>
+                            <span class="lang-es">Monitoreo</span>
+                            <span class="lang-it">Monitoraggio</span>
+                        </div>
+                        <div class="skill-items">
+                            <span class="skill-tag">Grafana</span>
+                            <span class="skill-tag">Datadog</span>
+                            <span class="skill-tag">Dynatrace</span>
+                            <span class="skill-tag">New Relic</span>
+                            <span class="skill-tag">Sensu</span>
+                        </div>
+                    </div>
+
+                    <!-- CI/CD -->
+                    <div class="skill-row">
+                        <div class="skill-category">
+                            CI/CD
+                        </div>
+                        <div class="skill-items">
+                            <span class="skill-tag">Azure DevOps</span>
+                            <span class="skill-tag">Jenkins</span>
+                            <span class="skill-tag">CircleCI</span>
+                            <span class="skill-tag">GitHub Actions</span>
+                        </div>
+                    </div>
+
+                    <!-- Cloud -->
+                    <div class="skill-row">
+                        <div class="skill-category">
+                            Cloud
+                        </div>
+                        <div class="skill-items">
+                            <span class="skill-tag">Microsoft Azure</span>
+                            <span class="skill-tag">GCP</span>
+                            <span class="skill-tag">AWS</span>
+                        </div>
+                    </div>
+
+                    <!-- OS / Containers -->
+                    <div class="skill-row">
+                        <div class="skill-category">
+                            <span class="lang-pt">OS / Containers</span>
+                            <span class="lang-en">OS / Containers</span>
+                            <span class="lang-es">SO / Contenedores</span>
+                            <span class="lang-it">OS / Container</span>
+                        </div>
+                        <div class="skill-items">
+                            <span class="skill-tag">Linux Ubuntu</span>
+                            <span class="skill-tag">Linux Red Hat</span>
+                            <span class="skill-tag">Kubernetes</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Podman</span>
+                        </div>
+                    </div>
+
+                    <!-- Outros -->
+                    <div class="skill-row">
+                        <div class="skill-category">
+                            <span class="lang-pt">Outros</span>
+                            <span class="lang-en">Others</span>
+                            <span class="lang-es">Otros</span>
+                            <span class="lang-it">Altri</span>
+                        </div>
+                        <div class="skill-items">
+                            <span class="skill-tag">DevOps</span>
+                            <span class="skill-tag">Terraform</span>
+                            <span class="skill-tag">Ansible</span>
+                            <span class="skill-tag">Akamai</span>
+                            <span class="skill-tag">Azion</span>
+                            <span class="skill-tag">Cloudflare</span>
+                            <span class="skill-tag">Redis</span>
+                            <span class="skill-tag">Memcached</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- FIAP Projects -->
-            <div class="bento-box span-4">
+            <div class="project-hub bento-box span-4">
                 <h2 class="bento-title">FIAP MBA - AI Business Leadership Projects</h2>
+                <div style="font-size: 0.85rem; margin-top: -15px; margin-bottom: 20px; opacity: 0.8;">
+                    <span class="lang-pt">Projetos acadêmicos desenvolvidos no MBA. Todos os recursos originais estão em Português (BR).</span>
+                    <span class="lang-en">Academic projects developed during the MBA. All original resources are in Portuguese (BR).</span>
+                    <span class="lang-es">Proyectos académicos desarrollados en el MBA. Todos los recursos originales están en Portugués (BR).</span>
+                    <span class="lang-it">Progetti accademici sviluppati durante il MBA. Tutti i materiali originali sono in Portoghese (BR).</span>
+                </div>
                 
-                <div style="margin-bottom: 30px;">
-                    <a href="fiap.tcc/index.html" class="project-link" style="font-size: 1.1rem; padding: 8px 16px;">🎯 TCC: Career AI</a>
+                <div class="project-grid">
+                    <a href="fiap.tcc/index.html" class="project-mini-card tcc-highlight">🎯 TCC: Career AI</a>
                 </div>
 
-                <h3 style="font-size: 1.1rem; margin-top: 0; margin-bottom: 10px; opacity: 0.8; font-weight: 600;">Vibe Coding Executivo</h3>
-                <div style="margin-bottom: 25px;">
-                    <a href="fiap.vibecodeexecutivo/index.html" class="project-link">Vibe Coding (Principal)</a>
-                    <a href="fiap.vibecodeexecutivo/ViagemPro/index.html" class="project-link">Viagem Pro</a>
-                    <a href="fiap.vibecodeexecutivo/Login/index.html" class="project-link">App Login</a>
-                    <a href="fiap.vibecodeexecutivo/Cinema/index.html" class="project-link">Cinema</a>
-                    <a href="fiap.vibecodeexecutivo/ReservaAssento/index.html" class="project-link">Reserva Assentos</a>
-                    <a href="fiap.vibecodeexecutivo/Bingo/index.html" class="project-link">Bingo</a>
-                    <a href="fiap.vibecodeexecutivo/JogoDaVida/index.html" class="project-link">Jogo da Vida</a>
-                    <a href="fiap.vibecodeexecutivo/EnglishSchool/index.html" class="project-link">English School</a>
+                <div class="project-category-header">Vibe Coding Executivo</div>
+                <div class="project-grid">
+                    <a href="fiap.vibecodeexecutivo/index.html" class="project-mini-card">🏠 Principal</a>
+                    <a href="fiap.vibecodeexecutivo/ViagemPro/index.html" class="project-mini-card">✈️ Viagem Pro</a>
+                    <a href="fiap.vibecodeexecutivo/Login/index.html" class="project-mini-card">🔑 Login</a>
+                    <a href="fiap.vibecodeexecutivo/Cinema/index.html" class="project-mini-card">🎬 Cinema</a>
+                    <a href="fiap.vibecodeexecutivo/ReservaAssento/index.html" class="project-mini-card">💺 Assentos</a>
+                    <a href="fiap.vibecodeexecutivo/Bingo/index.html" class="project-mini-card">🔢 Bingo</a>
+                    <a href="fiap.vibecodeexecutivo/JogoDaVida/index.html" class="project-mini-card">🧬 Jogo Vida</a>
+                    <a href="fiap.vibecodeexecutivo/EnglishSchool/index.html" class="project-mini-card">📚 English</a>
                 </div>
 
-                <h3 style="font-size: 1.1rem; margin-top: 0; margin-bottom: 10px; opacity: 0.8; font-weight: 600;">Capacitação Organizacional IA</h3>
-                <div style="margin-bottom: 25px;">
-                    <a href="fiap.capacitacaoorganizacional/index-1.html" class="project-link">Capacitação Org. IA 1</a>
-                    <a href="fiap.capacitacaoorganizacional/index-2.html" class="project-link">Capacitação Org. IA 2</a>
-                    <a href="fiap.capacitacaoorganizacional/index-3.html" class="project-link">Capacitação Org. IA 3</a>
+                <div class="project-category-header">
+                    <span class="lang-pt">Capacitação Organizacional IA</span>
+                    <span class="lang-en">AI Organizational Training</span>
+                    <span class="lang-es">Capacitación Organizacional IA</span>
+                    <span class="lang-it">Formazione Organizzativa IA</span>
+                </div>
+                <div class="project-grid">
+                    <a href="fiap.capacitacaoorganizacional/index-1.html" class="project-mini-card">🧠 Módulo 1</a>
+                    <a href="fiap.capacitacaoorganizacional/index-2.html" class="project-mini-card">🧠 Módulo 2</a>
+                    <a href="fiap.capacitacaoorganizacional/index-3.html" class="project-mini-card">🧠 Módulo 3</a>
                 </div>
 
-                <h3 style="font-size: 1.1rem; margin-top: 0; margin-bottom: 10px; opacity: 0.8; font-weight: 600;">Arquitetura de Agentes</h3>
-                <div style="margin-bottom: 25px;">
-                    <a href="fiap.arquiteturaagentes/index.html" class="project-link">Arquitetura de Agentes 1</a>
-                    <a href="fiap.arquiteturaagentes/index-2.html" class="project-link">Arquitetura de Agentes 2</a>
-                    <a href="fiap.arquiteturaagentes/index-3.html" class="project-link">Arquitetura de Agentes 3</a>
+                <div class="project-category-header">
+                    <span class="lang-pt">Arquitetura de Agentes</span>
+                    <span class="lang-en">Agent Architecture</span>
+                    <span class="lang-es">Arquitectura de Agentes</span>
+                    <span class="lang-it">Architettura degli Agenti</span>
+                </div>
+                <div class="project-grid">
+                    <a href="fiap.arquiteturaagentes/index.html" class="project-mini-card">🤖 Estágio 1</a>
+                    <a href="fiap.arquiteturaagentes/index-2.html" class="project-mini-card">🤖 Estágio 2</a>
+                    <a href="fiap.arquiteturaagentes/index-3.html" class="project-mini-card">🤖 Estágio 3</a>
                 </div>
 
-                <h3 style="font-size: 1.1rem; margin-bottom: 10px; opacity: 0.8; font-weight: 600;">Outros Projetos</h3>
-                <div>
-                    <a href="fiap.GestaoProduto/controleViagem.html" class="project-link">Gestão de Produto</a>
-                    <a href="fiap.monetizacaoego-to-market/index-1.html" class="project-link">Monetização 1</a>
-                    <a href="fiap.monetizacaoego-to-market/index-2.html" class="project-link">Monetização 2</a>
-                    <a href="fiap.advocacyeinfluencia/" class="project-link">Advocacy e Influência</a>
+                <div class="project-category-header">
+                    <span class="lang-pt">Outros Projetos</span>
+                    <span class="lang-en">Other Projects</span>
+                    <span class="lang-es">Otros Proyectos</span>
+                    <span class="lang-it">Altri Progetti</span>
+                </div>
+                <div class="project-grid">
+                    <a href="fiap.GestaoProduto/controleViagem.html" class="project-mini-card">📦 Gestão Prod.</a>
+                    <a href="fiap.monetizacaoego-to-market/index-1.html" class="project-mini-card">💰 Monet. 1</a>
+                    <a href="fiap.monetizacaoego-to-market/index-2.html" class="project-mini-card">💰 Monet. 2</a>
+                    <a href="fiap.advocacyeinfluencia/" class="project-mini-card">📣 Advocacy</a>
                 </div>
             </div>
 
         </div>
+
+        <!-- Footer -->
+        <footer style="text-align: center; margin-top: 20px; padding: 40px 0 20px 0; border-top: 1px solid var(--card-border); opacity: 0.9;">
+            <p style="font-size: 0.95rem; font-weight: 400; margin-bottom: 20px;">&copy; <span id="current-year"></span> Luiz Ihara. Quality Engineer.</p>
+        </footer>
     </div>
+
+    <!-- Floating Back to Top Button -->
+    <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <span class="lang-pt">↑ Voltar ao Topo</span>
+        <span class="lang-en">↑ Back to Top</span>
+        <span class="lang-es">↑ Volver Arriba</span>
+        <span class="lang-it">↑ Torna Sù</span>
+    </button>
 
 
     <!-- Scripts -->
     <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
         // Language Toggle Logic
-        function toggleLanguage() {
-            const html = document.documentElement;
-            if (html.lang === 'pt-BR') {
-                html.lang = 'en';
-            } else {
-                html.lang = 'pt-BR';
-            }
+        function changeLanguage(lang) {
+            document.documentElement.lang = lang;
         }
+
+        // Initialize Language Select Value
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentLang = document.documentElement.lang || 'en';
+            const langSwitcher = document.getElementById('language-switcher');
+            if (langSwitcher) {
+                langSwitcher.value = currentLang;
+            }
+        });
 
         // Theme Toggle Logic
         // Dark theme uses .dark-theme, Light theme uses .light-theme
@@ -619,6 +1064,36 @@
             } else {
                 document.querySelector('.dark-only').style.display = 'none';
             }
+
+            // Phase 1: Scroll Reveal Logic
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -20px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.remove('reveal-hidden');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.bento-box').forEach(box => {
+                box.classList.add('reveal-hidden');
+                observer.observe(box);
+            });
+
+            // Back to Top Scroll Logic
+            const backToTopBtn = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
         });
 
     </script>
