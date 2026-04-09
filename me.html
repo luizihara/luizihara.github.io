@@ -165,27 +165,18 @@
         .highlight-text {
             font-weight: 700;
             color: var(--text-color);
-            position: relative;
-            z-index: 1;
-            white-space: nowrap;
+            background-image: linear-gradient(to right, var(--card-border) 50%, transparent 50%);
+            background-size: 210% 100%;
+            background-position: 100% 0;
+            transition: background-position 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
         }
-        
-        .highlight-text::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 2px;
-            width: 100%;
-            height: 30%;
-            background-color: var(--badge-bg);
-            opacity: 0.3;
-            z-index: -1;
-            transition: height 0.3s ease;
-        }
-        
-        html.dark-theme .highlight-text::after {
-            background-color: var(--badge-bg);
-            opacity: 0.4;
+
+        .highlight-text.highlight-active {
+            background-position: 0 0;
         }
 
         /* Bento Grid Layout */
@@ -626,7 +617,7 @@
                     <p>Especialista em projetar e escalar estratégias de testes, bem como na construção de frameworks de automação utilizando <strong class="highlight-text">Java, JavaScript, Python, Go e Shell Script</strong>. Trabalhei extensivamente com pipelines de <strong class="highlight-text">CI/CD</strong>, implementando quality gates e guardrails de testes para assegurar confiabilidade e consistência por todo o ciclo de entrega de software.</p>
                     <p>Possuo sólida vivência em <strong class="highlight-text">engenharia de infraestrutura</strong> e plataforma, incluindo a gestão de ambientes em nuvem, máquinas virtuais e clusters <strong class="highlight-text">Kubernetes</strong>. Entusiasta de <strong class="highlight-text">Infraestrutura como Código (IaC)</strong>, implementei soluções de automação através de ferramentas como Terraform e Ansible visando melhor escalabilidade, redução de operações manuais e aumento da resiliência dos sistemas.</p>
                     <p>Também liderei iniciativas com foco em qualidade de código e governança de plataforma sustentando ambientes de grande porte contendo milhares de projetos em múltiplas tecnologias, garantindo altos padrões de manutenibilidade e eficiência de engenharia.</p>
-                    <p>Mais recentemente, tenho utilizado abordagens <strong class="highlight-text">orientadas por IA</strong> para acelerar a geração de testes, aprimorar a cobertura e aumentar a produtividade geral da engenharia, ajudando as equipes a entregar com maior segurança e velocidade. Adicionalmente, atuo no desenho e implementação de soluções em testes sintéticos para ampliar a <strong class="highlight-text">observabilidade e a detecção proativa</strong> de anomalias em ambientes produtivos.</p>
+                    <p>Tenho utilizado abordagens <strong class="highlight-text">orientadas por IA</strong> para acelerar a geração de testes, aprimorar a cobertura e aumentar a produtividade geral da engenharia, ajudando as equipes a entregar com maior segurança e velocidade. Adicionalmente, atuo no desenho e implementação de soluções em testes sintéticos para ampliar a <strong class="highlight-text">observabilidade e a detecção proativa</strong> de anomalias em ambientes produtivos.</p>
                     <p>Gosto de colaborar com os times, compartilhar conhecimento e de continuamente explorar novas ferramentas e tecnologias para propagar a evolução nas práticas de engenharia de qualidade. Fora do trabalho, meu passatempo é descobrir novos restaurantes ao lado da minha esposa, pilotar motos na estrada e jogar videogames.</p>
                 </div>
                 <div class="lang-en">
@@ -634,7 +625,7 @@
                     <p>Experienced in designing and scaling test strategies, as well as building automation frameworks using <strong class="highlight-text">Java, JavaScript, Python, Go, and Shell Script</strong>. I have worked extensively with <strong class="highlight-text">CI/CD</strong> pipelines, implementing quality gates and testing guardrails to ensure reliability and consistency throughout the software delivery lifecycle.</p>
                     <p>Strong background in <strong class="highlight-text">infrastructure and platform engineering</strong>, including managing cloud environments, virtual machines, and <strong class="highlight-text">Kubernetes clusters</strong>. Passionate about <strong class="highlight-text">Infrastructure as Code (IaC)</strong>, I have implemented automation solutions using tools such as Terraform and Ansible to improve scalability, reduce manual operations, and enhance system resilience.</p>
                     <p>I have also led initiatives around code quality and platform governance, supporting large-scale environments with thousands of projects across multiple technologies, ensuring high standards of maintainability and engineering efficiency.</p>
-                    <p>More recently, I have been leveraging <strong class="highlight-text">AI-driven approaches</strong> to accelerate test generation, improve coverage, and enhance overall engineering productivity, helping teams deliver with greater confidence and speed. Additionally, I design and implement synthetic testing solutions to improve <strong class="highlight-text">observability and proactively detect issues</strong> in production environments.</p>
+                    <p>I have been leveraging <strong class="highlight-text">AI-driven approaches</strong> to accelerate test generation, improve coverage, and enhance overall engineering productivity, helping teams deliver with greater confidence and speed. Additionally, I design and implement synthetic testing solutions to improve <strong class="highlight-text">observability and proactively detect issues</strong> in production environments.</p>
                     <p>I enjoy collaborating with teams, sharing knowledge, and continuously exploring new tools and technologies to evolve quality engineering practices. Outside of work, I enjoy exploring new restaurants with my wife, riding motorcycles on the road, and playing video games.</p>
                 </div>
                 <div class="lang-es">
@@ -642,7 +633,7 @@
                     <p>Experto en diseñar y escalar estrategias de pruebas, así como en la construcción de frameworks de automatización utilizando <strong class="highlight-text">Java, JavaScript, Python, Go y Shell Script</strong>. He trabajado extensamente con canalizaciones <strong class="highlight-text">CI/CD</strong>, implementando quality gates y barreras de prueba para garantizar confiabilidad y consistencia a lo largo de todo el ciclo de entrega de software.</p>
                     <p>Poseo sólida experiencia en ingeniería de <strong class="highlight-text">infraestructura y plataforma</strong>, incluyendo la gestión de entornos en la nube, máquinas virtuales y <strong class="highlight-text">clústeres Kubernetes</strong>. Entusiasta de la <strong class="highlight-text">Infraestructura como Código (IaC)</strong>, implementé soluciones de automatización a través de herramientas como Terraform y Ansible para mejorar la escalabilidad, reducir operaciones manuales y aumentar la resiliencia de los sistemas.</p>
                     <p>También lideré iniciativas centradas en la calidad del código y la gobernanza de la plataforma que respaldan entornos a gran escala que contienen miles de proyectos en múltiples tecnologías, garantizando altos estándares de mantenibilidad y eficiencia de ingeniería.</p>
-                    <p>Más recientemente, he utilizado enfoques <strong class="highlight-text">impulsados por IA</strong> para acelerar la generación de pruebas, mejorar la cobertura y aumentar la productividad general de la ingeniería, ayudando a los equipos a entregar con mayor confianza y velocidad. Adicionalmente, diseño e implemento soluciones en pruebas sintéticas para ampliar la <strong class="highlight-text">observabilidad y la detección proactiva</strong> de anomalías en entornos de producción.</p>
+                    <p>He utilizado enfoques <strong class="highlight-text">impulsados por IA</strong> para acelerar la generación de pruebas, mejorar la cobertura y aumentar la productividad general de la ingeniería, ayudando a los equipos a entregar con mayor confianza y velocidad. Adicionalmente, diseño e implemento soluciones en pruebas sintéticas para ampliar la <strong class="highlight-text">observabilidad y la detección proactiva</strong> de anomalías en entornos de producción.</p>
                     <p>Disfruto colaborando con los equipos, compartiendo conocimientos y explorando continuamente nuevas tecnologías para evolucionar las prácticas de ingeniería de calidad. Fuera del trabajo, mi pasatiempo es explorar restaurantes junto a mi esposa, andar en motocicleta por carretera y jugar videojuegos.</p>
                 </div>
                 <div class="lang-it">
@@ -650,7 +641,7 @@
                     <p>Esperto nella progettazione e scalabilità di strategie di testing, nonché nella creazione di framework di automazione utilizzando <strong class="highlight-text">Java, JavaScript, Python, Go e Shell Script</strong>. Ho lavorato a lungo con pipeline <strong class="highlight-text">CI/CD</strong>, implementando quality gates e guardrail di test per garantire affidabilità e coerenza in tutto il ciclo di consegna del software.</p>
                     <p>Possiedo un solido background in <strong class="highlight-text">ingegneria delle infrastrutture</strong> e delle piattaforme, inclusa la gestione di ambienti cloud, macchine virtuali e <strong class="highlight-text">cluster Kubernetes</strong>. Appassionato di <strong class="highlight-text">Infrastruttura come Codice (IaC)</strong>, ho implementato soluzioni di automazione utilizzando strumenti come Terraform e Ansible volti a migliorare la scalabilità, ridurre le operazioni manuali e aumentare la resilienza dei sistemi.</p>
                     <p>Ho guidato inoltre iniziative incentrate sulla qualità del codice e sulla governance della piattaforma, supportando ambienti su larga scala contenenti migliaia di progetti in molteplici tecnologie, garantendo elevati standard di manutenibilità ed efficienza ingegneristica.</p>
-                    <p>Più recentemente, sto sfruttando approcci <strong class="highlight-text">guidati dall'IA</strong> per accelerare la generazione di test, migliorare la copertura e aumentare la produttività complessiva dell'ingegneria, aiutando i team a consegnare con maggiore sicurezza e velocità. Inoltre, progetto implementazioni di test sintetici per espandere l'<strong class="highlight-text">osservabilità e il rilevamento proattivo</strong> di anomalie negli ambienti di produzione.</p>
+                    <p>Sto sfruttando approcci <strong class="highlight-text">guidati dall'IA</strong> per accelerare la generazione di test, migliorare la copertura e aumentare la produttività complessiva dell'ingegneria, aiutando i team a consegnare con maggiore sicurezza e velocità. Inoltre, progetto implementazioni di test sintetici per espandere l'<strong class="highlight-text">osservabilità e il rilevamento proattivo</strong> di anomalie negli ambienti di produzione.</p>
                     <p>Mi piace collaborare con i team, condividere conoscenze ed esplorare continuamente nuove piattaforme per evolvere le pratiche di ingegneria della qualità. Oltre al lavoro, mi diverto a scoprire nuovi ristoranti con mia moglie, viaggiare in moto e giocare ai videogiochi.</p>
                 </div>
             </div>
@@ -1083,6 +1074,30 @@
             document.querySelectorAll('.bento-box').forEach(box => {
                 box.classList.add('reveal-hidden');
                 observer.observe(box);
+            });
+
+            // Phase 2: Sequential Highlight Animation
+            let highlightDelay = 600;
+            const highlightObserver = new IntersectionObserver((entries) => {
+                let hasIntersecting = false;
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('highlight-active');
+                        }, highlightDelay);
+                        highlightDelay += 350;
+                        highlightObserver.unobserve(entry.target);
+                        hasIntersecting = true;
+                    }
+                });
+                
+                if (hasIntersecting) {
+                    setTimeout(() => { highlightDelay = 100; }, 100);
+                }
+            }, { threshold: 0.2 });
+
+            document.querySelectorAll('.highlight-text').forEach(el => {
+                highlightObserver.observe(el);
             });
 
             // Back to Top Scroll Logic
