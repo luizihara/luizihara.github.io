@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIAP - Implementação de Agentes de IA</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Mermaid.js for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --surface-color: rgba(22, 27, 34, 0.6);
+            --primary-glow: #58a6ff;
+            --accent-glow: #bd56eb;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --border-glow: rgba(88, 166, 255, 0.2);
+            --card-radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(88, 166, 255, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(189, 86, 235, 0.08), transparent 25%);
+            background-attachment: fixed;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary-glow), var(--accent-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        /* Glass Cards */
+        .card {
+            background: var(--surface-color);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--card-radius);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-glow), var(--accent-glow));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-glow);
+            box-shadow: 0 12px 40px rgba(88, 166, 255, 0.1);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(88, 166, 255, 0.15);
+            color: var(--primary-glow);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Content elements */
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        strong {
+            color: #e6edf3;
+        }
+
+        /* Mac Window Code Block */
+        .mac-window {
+            background: #1e1e1e;
+            border-radius: 8px;
+            border: 1px solid #333;
+            margin: 1.5rem 0;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .mac-header {
+            background: #252526;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            font-family: monospace;
+            color: #e6e6e6;
+            font-size: 0.95rem;
+            font-weight: bold;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.2s;
+        }
+
+        .copy-btn:hover {
+            color: #fff;
+        }
+
+        .mac-content {
+            padding: 1.5rem;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #d4d4d4;
+            white-space: pre;
+            line-height: 1.5;
+        }
+
+        .json-key {
+            color: #e5b567;
+        }
+
+        .json-string {
+            color: #a4c263;
+        }
+
+        .json-boolean {
+            color: #6897bb;
+        }
+
+        /* Placeholders for images */
+        .image-placeholder {
+            width: 100%;
+            height: 350px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px dashed rgba(88, 166, 255, 0.3);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            margin: 1.5rem 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-placeholder:hover {
+            border-color: var(--primary-glow);
+            background: rgba(88, 166, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        .image-placeholder svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        /* Mermaid Wrapper */
+        .mermaid-wrapper {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            overflow-x: auto;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Zoom Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            cursor: zoom-out;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(88, 166, 255, 0.3);
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .zoomable {
+            cursor: zoom-in;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .zoomable:hover {
+            transform: scale(1.02);
+            border-color: var(--primary-glow) !important;
+        }
+
+        /* Reflexoes Box */
+        .reflexoes {
+            background: rgba(189, 86, 235, 0.05);
+            border-left: 4px solid var(--accent-glow);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 1.5rem;
+        }
+
+        .reflexoes h3 {
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        /* Team Members */
+        .team-members {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .team-members span {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 5px 12px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Balãozinho */
+        .floating-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-glow);
+            backdrop-filter: blur(8px);
+            padding: 12px 20px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            font-size: 0.9rem;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .floating-badge a {
+            color: var(--primary-glow);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .close-badge {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hero">
+        <h1>Inteligência Artificial Agents</h1>
+        <p>Fundamentos de Agentes de IA - Implementação de Agentes</p>
+        <p>Prof. Felipe Teodoro</p>
+        <div class="team-members">
+            <span>Luiz Ihara - RM368484</span>
+            <span>Filipe Fragoso - RM368500</span>
+            <span>Daniel Caminha - RM366740</span>
+            <span>Pedro Martins - RM368543</span>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- EXERCISE 1 -->
+        <section class="card" style="animation-delay: 0.1s;">
+            <h2>Exercício 1: Assistente B2B <span class="badge">LangFlow</span></h2>
+            <p>Implementação de uma cadeia de raciocínio (PromptChain) autônoma para orçar RFP's complexas de clientes.
+                O sistema orquestra nativamente a extração estruturada de dados usando <strong>JSON Mode</strong>.</p>
+            <br>
+            <h3>Fluxo de Extração:</h3>
+            <ul>
+                <li><strong>Extrator:</strong> GPT-4o-mini formatando JSON da requisição bruta.</li>
+                <li><strong>Qualificador:</strong> Avaliação técnica de prioridade baseada no Budget e Urgência.</li>
+                <li><strong>Gerador:</strong> GPT-4o operando como consultor de negócios.</li>
+                <li><strong>Validador (+20 Bônus):</strong> Etapa extra validando a resposta corporativa antes da
+                    entrega.</li>
+            </ul>
+
+            <img class="zoomable" src="exercicio1_evidencia.png" alt="Print do Fluxo Exercicio 1"
+                style="width: 100%; border-radius: 12px; border: 1px solid rgba(88, 166, 255, 0.3); margin: 1.5rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+
+            <div class="mac-window">
+                <div class="mac-header">
+                    <span>json</span>
+                    <button class="copy-btn" onclick="copyJSON()" title="Copiar JSON">📋</button>
+                </div>
+                <div class="mac-content" id="jsonOutput"></div>
+            </div>
+
+            <a href="Exercicio1_Fluxo.json" style="color:var(--primary-glow); text-decoration:none;font-weight:600;">📥
+                Baixar Export JSON do Fluxo</a>
+        </section>
+
+        <!-- EXERCISE 2 -->
+        <section class="card" style="animation-delay: 0.3s;">
+            <h2>Exercício 2: Asset Advisor <span class="badge">Agent+Tools</span></h2>
+            <p>Desenvolvimento de um Agente orquestrador que compreende intenções de mercado e aciona ativamente uma
+                ferramenta (Tool) de <strong>Web Scraping</strong> na B3 via <em>Status Invest</em> para obter dados
+                precisos sobre Ações e FIIs.</p>
+            <br>
+
+            <img class="zoomable" src="exercicio2_evidencia.png" alt="Print do Fluxo Exercicio 2"
+                style="width: 100%; border-radius: 12px; border: 1px solid rgba(88, 166, 255, 0.3); margin: 1.5rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+
+            <div class="reflexoes">
+                <h3>Reflexões Exigidas (Documentação Analítica)</h3>
+                <ul>
+                    <li><strong>Limitações do Web Scraping:</strong> Risco alto de bloqueios com Cloudflare (Erros 403)
+                        pela falta de User-Agent e mudanças nas classes DOM HTML.</li>
+                    <li><strong>Ticker Inválido:</strong> O Agente interpreta as respostas nulas 404 da ferramenta e
+                        responde sinteticamente ao usuário que a empresa não existe na bolsa, prevenindo "Error Crashs".
+                    </li>
+                    <li><strong>Dados Históricos:</strong> Como um scraper passivo só tira fotos instantâneas dos cards
+                        (preço no dia), para plotar variação histórica dependemos 100% da criação de uma Tool conectada
+                        via API real (Ex: Yahoo Finance API).</li>
+                    <li><strong>Escalabilidade:</strong> Inviável manter Crawler para alto volume. O roadmap ideal troca
+                        a ferramenta Crawler por conexões JSON e Redis para Cache das cotações.</li>
+                </ul>
+            </div>
+            <br>
+            <a href="Exercicio2_Fluxo.json" style="color:var(--primary-glow); text-decoration:none;font-weight:600;">📥
+                Baixar Export JSON do Agente</a>
+        </section>
+
+        <!-- EXERCISE 3 -->
+        <section class="card" style="animation-delay: 0.5s;">
+            <h2>Trabalho Final: Banco NovaEra <span class="badge">Architecture</span></h2>
+            <p>Documento de apresentação narrativo do "Banco NovaEra", combatendo a queda no NPS com a criação
+                arquitetural de um ecossistema com <strong>3 Agentes Independentes</strong> atuando lado a lado.</p>
+            <br>
+
+            <a href="Exercicio3_TrabalhoFinal.html"
+                style="color:var(--accent-glow); text-decoration:none;font-weight:600; font-size: 1.1rem; border-bottom: 1px dotted;">📄
+                Ler Documento Completo do Storytelling (8 Capítulos)</a>
+
+            <div style="margin-top: 3rem;">
+                <h3>Diagrama Estrutural (Agente Finn)</h3>
+                <p style="color:var(--text-secondary); margin-bottom:1rem;">Renderização dinâmica via código mostrando o
+                    design das memórias.</p>
+                <div class="mermaid-wrapper">
+                    <div class="mermaid">
+                        graph TD
+                        User([Usuário no App]) --> Input[Input de Texto / Imagem]
+                        Input --> AgentFinanceiro{Agente Finn}
+
+                        subgraph Memoria
+                        AgentFinanceiro <-->|10 Tokens| ShortTerm[(Memória Curto Prazo)]
+                            AgentFinanceiro <-->|Vector DB| LongTerm[(Histórico 6 meses)]
+                                end
+
+                                subgraph External_Tools
+                                AgentFinanceiro -->|Upload| OCRTool[Ferramenta Leitora OCR]
+                                AgentFinanceiro -->|Query interna| CoreBank[API Core Bank Saldos]
+                                end
+
+                                OCRTool --> AgentFinanceiro
+                                CoreBank --> AgentFinanceiro
+                                AgentFinanceiro --> Output([Alerta Financeiro Proativo])
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal for Image Zoom -->
+    <div id="imageModal" class="modal" onclick="this.style.display='none'">
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <script>
+        // Image Zoom Logic
+        document.querySelectorAll('.zoomable').forEach(img => {
+            img.onclick = function () {
+                document.getElementById('imageModal').style.display = 'block';
+                document.getElementById('modalImg').src = this.src;
+            }
+        });
+
+        // JSON Data & Syntax Highlighting
+        const rawJSON = {
+            "titulo_proposta": "Proposta de Implementação de Software ERP Personalizado",
+            "introducao": "Prezado(a) [Nome do Cliente], é com grande satisfação que apresentamos nossa proposta para a implementação de um sistema ERP que visa atender às necessidades específicas da sua empresa. Nossa abordagem consultiva busca entender profundamente suas operações e desafios, garantindo que a solução proposta traga resultados efetivos e sustentáveis.",
+            "entendimento_necessidades": "Identificamos que sua empresa enfrenta desafios relacionados à falta de informações sobre o porte e orçamento, além da urgência e identificação dos decisores. Esses fatores são cruciais para uma implementação bem-sucedida e para garantir que a solução atenda às suas expectativas.",
+            "solucao_proposta": "Nossa proposta é a implementação de um sistema ERP modular que se adapta às suas necessidades específicas, proporcionando uma gestão integrada e eficiente. Acreditamos que, ao focar em módulos relevantes, poderemos otimizar seus processos e melhorar a tomada de decisões.",
+            "modulos_recomendados": [
+                {
+                    "nome": "Gestão Financeira",
+                    "beneficio": "Controle aprimorado das finanças, permitindo uma visão clara do fluxo de caixa e das despesas."
+                },
+                {
+                    "nome": "Gestão de Estoque",
+                    "beneficio": "Otimização do controle de estoque, reduzindo custos e melhorando a eficiência operacional."
+                },
+                {
+                    "nome": "Gestão de Vendas",
+                    "beneficio": "Aumento da eficiência nas vendas, com acompanhamento em tempo real e relatórios detalhados."
+                }
+            ],
+            "diferenciais": [
+                "Implementação personalizada com foco nas necessidades específicas da sua empresa.",
+                "Suporte contínuo e treinamento para sua equipe, garantindo uma transição suave.",
+                "Tecnologia de ponta que se adapta ao crescimento da sua empresa."
+            ],
+            "cronograma_sugerido": {
+                "Fase 1": {
+                    "descrição": "Levantamento de requisitos e planejamento",
+                    "duração": "2 semanas"
+                },
+                "Fase 2": {
+                    "descrição": "Implementação dos módulos selecionados",
+                    "duração": "4 semanas"
+                },
+                "Fase 3": {
+                    "descrição": "Treinamento e suporte inicial",
+                    "duração": "2 semanas"
+                }
+            },
+            "proximos_passos": [
+                "Agendar uma reunião para discutir mais sobre o porte da empresa e suas necessidades.",
+                "Identificar os decisores envolvidos no processo de compra.",
+                "Definir um cronograma para o levantamento de informações adicionais."
+            ],
+            "call_to_action": "Estamos à disposição para esclarecer quaisquer dúvidas e dar continuidade a esta parceria promissora."
+        };
+
+        function syntaxHighlight(jsonObj) {
+            let json = JSON.stringify(jsonObj, null, 2);
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                let cls = 'json-string';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'json-key';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'json-boolean';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+
+        // Render JSON on load
+        if (document.getElementById('jsonOutput')) {
+            document.getElementById('jsonOutput').innerHTML = syntaxHighlight(rawJSON);
+        }
+
+        // Copy JSON Function
+        function copyJSON() {
+            const str = JSON.stringify(rawJSON, null, 2);
+            navigator.clipboard.writeText(str).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.innerHTML = '✅';
+                setTimeout(() => { btn.innerHTML = '📋'; }, 2000);
+            });
+        }
+    </script>
+
+    <!-- O Balãozinho -->
+    <div id="visit-badge" class="floating-badge">
+        <span class="badge-icon">🌐</span>
+        <span>
+            Você está visitando o site de
+            <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
+        </span>
+        <button class="close-badge" onclick="document.getElementById('visit-badge').style.display='none'"
+            title="Fechar">×</button>
+    </div>
+</body>
+
+</html>
