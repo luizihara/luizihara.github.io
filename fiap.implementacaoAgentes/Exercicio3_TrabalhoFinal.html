@@ -1,41 +1,51 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trabalho Final - Banco NovaEra</title>
+    <title>Trabalho Final - Banco NovaEra (ESG Edition)</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;500;700;800&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;500;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
+
     <!-- Mermaid.js -->
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true, theme: 'dark', fontFamily: 'Inter', background: 'transparent'});</script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'forest', fontFamily: 'Inter', background: 'transparent' });</script>
 
     <style>
         :root {
-            --bg-color: #030712;
-            --surface-light: rgba(31, 41, 55, 0.4);
-            --surface-heavy: rgba(17, 24, 39, 0.8);
-            --border-color: rgba(255, 255, 255, 0.08);
-            
-            --brand-primary: #3b82f6;
-            --brand-secondary: #8b5cf6;
-            --brand-tertiary: #ec4899;
-            
-            --text-main: #f9fafb;
-            --text-muted: #9ca3af;
+            --bg-color: #f0fdf4;
+            --surface-light: rgba(255, 255, 255, 0.8);
+            --surface-heavy: rgba(255, 255, 255, 0.95);
+            --border-color: rgba(21, 128, 61, 0.2);
+
+            --brand-primary: #15803d;
+            --brand-secondary: #16a34a;
+            --brand-tertiary: #84cc16;
+
+            --text-main: #064e3b;
+            --text-muted: #166534;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(134, 239, 172, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(22, 163, 74, 0.2) 0%, transparent 50%);
             color: var(--text-main);
             line-height: 1.7;
             overflow-x: hidden;
@@ -44,29 +54,65 @@
         /* Animated Background Blobs */
         .bg-blobs {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            overflow: hidden; z-index: -1;
-            background: radial-gradient(circle at 50% 50%, #0a0f1c 0%, var(--bg-color) 100%);
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
         }
-        
+
         .blob {
             position: absolute;
             filter: blur(80px);
-            opacity: 0.4;
+            opacity: 0.6;
             border-radius: 50%;
             animation: float 20s infinite ease-in-out alternate;
         }
 
-        .blob-1 { width: 400px; height: 400px; background: var(--brand-secondary); top: -10%; left: -10%; animation-delay: 0s; }
-        .blob-2 { width: 500px; height: 500px; background: var(--brand-primary); bottom: -20%; right: -10%; animation-delay: -5s; }
-        .blob-3 { width: 300px; height: 300px; background: var(--brand-tertiary); top: 40%; left: 60%; animation-delay: -10s; }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(50px, 50px) scale(1.1); }
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: #86efac;
+            top: -10%;
+            left: -10%;
+            animation-delay: 0s;
         }
 
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: #4ade80;
+            bottom: -20%;
+            right: -10%;
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            width: 300px;
+            height: 300px;
+            background: #bef264;
+            top: 40%;
+            left: 60%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(50px, 50px) scale(1.1);
+            }
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Outfit', sans-serif;
+        }
 
         /* Hero Section */
         .hero {
@@ -81,9 +127,9 @@
         }
 
         .hero-badge {
-            background: rgba(139, 92, 246, 0.1);
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            color: #c4b5fd;
+            background: rgba(22, 163, 74, 0.1);
+            border: 1px solid rgba(22, 163, 74, 0.3);
+            color: #15803d;
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 0.85rem;
@@ -98,7 +144,7 @@
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1rem;
-            background: linear-gradient(to right, #fff, #9ca3af);
+            background: linear-gradient(to right, #14532d, #15803d);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: zoomIn 1s ease;
@@ -129,20 +175,27 @@
             margin-bottom: 3rem;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            opacity: 0; /* for scroll reveal */
+            box-shadow: 0 10px 30px -10px rgba(21, 128, 61, 0.15);
+            opacity: 0;
+            /* for scroll reveal */
             transform: translateY(30px);
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .glass-card.visible { opacity: 1; transform: translateY(0); }
+        .glass-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         .glass-card::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; height: 2px;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
             background: linear-gradient(90deg, transparent, var(--brand-secondary), transparent);
-            opacity: 0.5;
+            opacity: 0.8;
         }
 
         .section-header {
@@ -154,13 +207,37 @@
             border-bottom: 1px solid var(--border-color);
         }
 
-        .section-header i { font-size: 2rem; color: var(--brand-primary); }
-        .section-header h2 { font-size: 2rem; font-weight: 700; color: #fff; }
+        .section-header i {
+            font-size: 2.5rem;
+            color: var(--brand-secondary);
+        }
 
-        p { margin-bottom: 1.2rem; font-size: 1.05rem; }
-        ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; color: var(--text-muted); }
-        li { margin-bottom: 0.8rem; }
-        strong { color: #f3f4f6; font-weight: 600; }
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #064e3b;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+
+        ul,
+        ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+        }
+
+        strong {
+            color: #14532d;
+            font-weight: 700;
+        }
 
         /* Agent 3D Hover Cards */
         .agent-grid {
@@ -171,38 +248,73 @@
         }
 
         .agent-card {
-            background: rgba(0,0,0,0.4);
+            background: rgba(255, 255, 255, 0.6);
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 2rem;
             position: relative;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(22, 163, 74, 0.05);
         }
 
         .agent-card:hover {
             transform: translateY(-8px);
             border-color: var(--brand-secondary);
+            box-shadow: 0 12px 25px rgba(22, 163, 74, 0.15);
         }
 
         .agent-icon {
-            width: 50px; height: 50px;
+            width: 50px;
+            height: 50px;
             border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.8rem;
             margin-bottom: 1.2rem;
         }
-        
-        .icon-blue { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
-        .icon-purple { background: rgba(139, 92, 246, 0.2); color: #a78bfa; }
-        .icon-pink { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
 
-        .agent-card h4 { font-size: 1.3rem; margin-bottom: 0.5rem; }
-        .agent-role { font-size: 0.85rem; color: var(--brand-primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; display: block;}
-        .agent-card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0; line-height: 1.6;}
+        .icon-blue {
+            background: rgba(34, 197, 94, 0.2);
+            color: #16a34a;
+        }
+
+        .icon-purple {
+            background: rgba(21, 128, 61, 0.2);
+            color: #15803d;
+        }
+
+        .icon-pink {
+            background: rgba(132, 204, 22, 0.2);
+            color: #65a30d;
+        }
+
+        .agent-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #064e3b;
+        }
+
+        .agent-role {
+            font-size: 0.85rem;
+            color: var(--brand-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 600;
+        }
+
+        .agent-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
 
         /* Mermaid Wrapper Custom */
         .mermaid-container {
-            background: rgba(0,0,0,0.5);
+            background: rgba(255, 255, 255, 0.7);
             border-radius: 16px;
             padding: 1.5rem;
             border: 1px solid var(--border-color);
@@ -219,6 +331,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 600;
         }
 
         /* Modern Chat Bubbles */
@@ -229,7 +342,15 @@
             margin-bottom: 3rem;
         }
 
-        .chat-scenario { font-size: 1.1rem; font-weight: 600; color: #fff; margin-top: 2rem; margin-bottom: 1rem; border-left: 3px solid var(--brand-tertiary); padding-left: 10px;}
+        .chat-scenario {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #14532d;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--brand-tertiary);
+            padding-left: 10px;
+        }
 
         .msg {
             max-width: 85%;
@@ -242,18 +363,24 @@
             animation: popIn 0.5s forwards;
         }
 
-        @keyframes popIn { to { opacity: 1; transform: translateY(0); } }
+        @keyframes popIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
         .msg-user {
-            background: #1e3a8a;
+            background: #14532d;
             color: #fff;
             align-self: flex-end;
             border-bottom-right-radius: 4px;
         }
 
         .msg-agent {
-            background: #1f2937;
-            border: 1px solid #374151;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #064e3b;
             align-self: flex-start;
             border-bottom-left-radius: 4px;
         }
@@ -264,16 +391,21 @@
             letter-spacing: 1px;
             margin-bottom: 6px;
             font-weight: 700;
-            display: flex; align-items: center; gap: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        
-        .msg-header i { font-size: 1rem; }
+
+        .msg-header i {
+            font-size: 1.2rem;
+        }
 
         .msg-action {
             font-size: 0.85rem;
-            color: #93c5fd;
+            color: #86efac;
             font-style: italic;
-            display: block; margin-bottom: 8px;
+            display: block;
+            margin-bottom: 8px;
         }
 
         /* Bento Grid for Impacts */
@@ -285,46 +417,81 @@
         }
 
         .bento-item {
-            background: rgba(255,255,255,0.03);
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 16px;
             padding: 2rem;
             border: 1px solid var(--border-color);
-            display: flex; flex-direction: column; justify-content: space-between;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(21, 128, 61, 0.05);
         }
 
-        .bento-item.large { grid-column: span 2; background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1)); }
+        .bento-item.large {
+            grid-column: span 2;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(132, 204, 22, 0.1));
+        }
 
-        .bento-number { font-size: 3rem; font-weight: 800; font-family: 'Outfit'; color: #fff; line-height: 1; margin-bottom: 1rem;}
-        .bento-label { font-size: 1.1rem; color: #fff; font-weight: 600; margin-bottom: 0.5rem;}
-        .bento-desc { font-size: 0.9rem; color: var(--text-muted); margin:0;}
+        .bento-number {
+            font-size: 3rem;
+            font-weight: 800;
+            font-family: 'Outfit';
+            color: #15803d;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
 
-        /* Animations */
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes zoomIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .bento-label {
+            font-size: 1.1rem;
+            color: #064e3b;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .bento-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
 
         /* Highlight Quote */
         .quote {
             text-align: center;
             font-size: 1.5rem;
             font-style: italic;
-            color: #fff;
+            color: #064e3b;
             margin-top: 4rem;
             padding: 2rem;
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.02), transparent);
+            background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.05), transparent);
         }
 
         /* Back Button */
         .back-btn {
-            position: absolute; top: 1.5rem; left: 1.5rem; background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border-color); color: var(--text-main);
-            padding: 8px 16px; border-radius: 30px; text-decoration: none;
-            display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 0.9rem;
-            transition: all 0.2s ease; z-index: 10;
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--border-color);
+            color: #064e3b;
+            padding: 8px 16px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            z-index: 10;
         }
-        .back-btn:hover { background: rgba(255,255,255,0.1); transform: translateX(-5px); color: var(--brand-primary); }
+
+        .back-btn:hover {
+            background: rgba(22, 163, 74, 0.1);
+            transform: translateX(-5px);
+            color: var(--brand-primary);
+        }
 
         /* Team Members */
         .team-members {
@@ -337,43 +504,149 @@
             gap: 12px;
             animation: fadeInUp 1s ease 0.4s both;
         }
+
         .team-members span {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(22, 163, 74, 0.1);
             padding: 4px 12px;
             border-radius: 15px;
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(22, 163, 74, 0.2);
+            color: #15803d;
+            font-weight: 500;
         }
 
         /* Balãozinho */
         .floating-badge {
-            position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.8);
-            border: 1px solid var(--border-color); backdrop-filter: blur(8px);
-            padding: 12px 20px; border-radius: 50px; display: flex; align-items: center;
-            gap: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 9999;
-            font-size: 0.9rem; animation: fadeInUp 0.5s ease;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(8px);
+            padding: 12px 20px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(21, 128, 61, 0.15);
+            z-index: 9999;
+            font-size: 0.9rem;
+            animation: fadeInUp 0.5s ease;
+            color: #064e3b;
         }
-        .floating-badge a { color: var(--brand-primary); text-decoration: none; font-weight: bold; }
-        .close-badge { background: transparent; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; margin-left: 10px; }
+
+        .floating-badge a {
+            color: var(--brand-primary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .close-badge {
+            background: transparent;
+            border: none;
+            color: #064e3b;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: bold;
+        }
 
         /* Academic Info */
         .academic-info {
             margin-top: 2.5rem;
             font-size: 0.95rem;
             color: var(--brand-primary);
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.5px;
         }
-        .academic-info span { color: var(--text-muted); font-weight: 400; margin: 0 8px; }
+
+        .academic-info span {
+            color: var(--brand-tertiary);
+            font-weight: 400;
+            margin: 0 8px;
+        }
+
+        /* Table of Contents */
+        .toc {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(21, 128, 61, 0.1);
+            z-index: 100;
+            max-width: 280px;
+        }
+
+        .toc h3 {
+            font-size: 1rem;
+            color: #064e3b;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .toc li {
+            margin-bottom: 0.8rem;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .toc a:hover {
+            color: var(--brand-secondary);
+        }
+
+        .toc a.active {
+            font-weight: 700;
+            color: var(--brand-primary);
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 1250px) {
+            .toc {
+                display: none;
+            }
+        }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .glass-card { padding: 2rem; }
-            .bento-grid { grid-template-columns: 1fr; }
-            .bento-item.large { grid-column: span 1; }
-            .back-btn { top: 1rem; left: 1rem; font-size: 0.8rem; }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .glass-card {
+                padding: 2rem;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bento-item.large {
+                grid-column: span 1;
+            }
+
+            .back-btn {
+                top: 1rem;
+                left: 1rem;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- Background Animation -->
@@ -389,14 +662,15 @@
     </a>
 
     <header class="hero">
-        <div class="hero-badge"><i class="ph-bold ph-sparkle"></i> Trabalho Final FIAP</div>
+        <div class="hero-badge"><i class="ph-bold ph-leaf"></i> Sustentabilidade & IA</div>
         <h1>Banco NovaEra</h1>
-        <p>A reconstrução da arquitetura bancária utilizando um ecossistema de Agentes de IA independentes e Assíncronos.</p>
-        
+        <p>A reconstrução da arquitetura bancária cultivando um ecossistema de Agentes de IA independentes e
+            Assíncronos, germinando um futuro mais verde.</p>
+
         <div class="academic-info">
             Fundamentos de Agentes de IA <span>•</span> Prof. Felipe Teodoro
         </div>
-        
+
         <div class="team-members" style="margin-top: 1rem;">
             <span>Luiz Ihara - RM368484</span>
             <span>Filipe Fragoso - RM368500</span>
@@ -405,158 +679,190 @@
         </div>
     </header>
 
+    <!-- Table of Contents -->
+    <nav class="toc">
+        <h3>Sumário</h3>
+        <ul>
+            <li><a href="#cap1" class="toc-link">A Semente do Problema</a></li>
+            <li><a href="#cap2" class="toc-link">Cultivando Descobertas</a></li>
+            <li><a href="#cap3" class="toc-link">Os Frutos da Solução</a></li>
+            <li><a href="#cap4" class="toc-link">Ecossistema ReAct</a></li>
+            <li><a href="#cap5" class="toc-link">A Trilha do Cliente</a></li>
+            <li><a href="#cap6" class="toc-link">Bioma e Impacto do Negócio</a></li>
+            <li style="margin-top: 1.5rem; padding-top: 0.8rem; border-top: 1px solid var(--border-color);"><a href="#"
+                    class="toc-link">Go to top</a></li>
+        </ul>
+    </nav>
+
     <main class="container">
-        
+
         <!-- Chapter 1 -->
-        <article class="glass-card">
+        <article id="cap1" class="glass-card">
             <div class="section-header">
-                <i class="ph-fill ph-bank"></i>
-                <h2>Capítulo 1 — O Cenário</h2>
+                <i class="ph-fill ph-tree"></i>
+                <h2>Capítulo 1 — A Semente do Problema</h2>
             </div>
-            <p>O <strong>Banco NovaEra</strong> despontou como uma das fintechs mais promissoras da última década, atingindo recentemente a impressionante marca de 5 milhões de clientes. Pautado na promessa de ser 100% digital e sem burocracia, o banco viu um crescimento vertiginoso.</p>
-            <p>No entanto, o rápido crescimento trouxe uma forte consequência: <strong>a infraestrutura humana de suporte não escalou na mesma velocidade.</strong> Nos últimos meses, o banco observou uma queda preocupante de 15 pontos no NPS (Net Promoter Score). O motivo central?</p>
+            <p>O <strong>Banco NovaEra</strong> despontou como uma das fintechs mais promissoras da última década,
+                atingindo recentemente a impressionante marca de 5 milhões de clientes. Pautado na promessa de ser 100%
+                digital e sem burocracia, o banco viu um crescimento vertiginoso.</p>
+            <p>No entanto, o rápido crescimento trouxe uma forte consequência: <strong>a infraestrutura humana de
+                    suporte não escalou na mesma velocidade.</strong> Nos últimos meses, o banco observou uma queda
+                preocupante de 15 pontos no NPS (Net Promoter Score). O motivo central?</p>
             <ul>
                 <li>Clientes perdendo tempo na fila do <em>call center</em> para tirar dúvidas básicas.</li>
                 <li>Investidores inexperientes frustrados com o home-broker sem suporte consultivo.</li>
-                <li>Um aplicativo que apenas "exibia números", sem ajudar de fato na gestão financeira ativa do correntista.</li>
+                <li>Um aplicativo que apenas "exibia números", sem ajudar de fato na gestão financeira ativa do
+                    correntista.</li>
             </ul>
         </article>
 
         <!-- Chapter 2 -->
-        <article class="glass-card">
+        <article id="cap2" class="glass-card">
             <div class="section-header">
-                <i class="ph-fill ph-magnifying-glass"></i>
-                <h2>Capítulo 2 — A Descoberta</h2>
+                <i class="ph-fill ph-leaf"></i>
+                <h2>Capítulo 2 — Cultivando Descobertas</h2>
             </div>
-            <p>Nossa equipe de Customer Experience engajou em sprints de "Design Thinking" com os clientes. Após compilar chamados de ouvidoria, identificamos três frentes prioritárias:</p>
+            <p>Nossa equipe de Customer Experience engajou em sprints de "Design Thinking" com os clientes. Após
+                compilar chamados de ouvidoria, identificamos três frentes prioritárias:</p>
             <ol>
-                <li><strong>A Dor do Salário que Some:</strong> 60% dos clientes afirmavam que perdiam o controle ao longo do mês. Eles precisavam de um parceiro ativo na gestão.</li>
-                <li><strong>A Barreira do Risco:</strong> 45% do montante na poupança poderia ser convertido para ativos de maior margem, mas os clientes tinham medo de investir.</li>
-                <li><strong>O Gargalo Operacional:</strong> Dos mais de 100 mil chamados mensais, 40% se tratavam de dúvidas operacionais simples.</li>
+                <li><strong>A Dor do Salário que Some:</strong> 60% dos clientes afirmavam que perdiam o controle ao
+                    longo do mês. Eles precisavam de um parceiro ativo na gestão.</li>
+                <li><strong>A Barreira do Risco:</strong> 45% do montante na poupança poderia ser convertido para ativos
+                    de maior margem, mas os clientes tinham medo de investir.</li>
+                <li><strong>O Gargalo Operacional:</strong> Dos mais de 100 mil chamados mensais, 40% se tratavam de
+                    dúvidas operacionais simples.</li>
             </ol>
-            <p style="margin-top: 1.5rem; padding: 1rem; background: rgba(59, 130, 246, 0.1); border-left: 3px solid var(--brand-primary); border-radius: 0 8px 8px 0;">
-                💡 <strong>O Veredito:</strong> Criar um super-app focado em módulos inteligentes, alimentado por <strong>Três Especialistas de Inteligência Artificial</strong> operando de maneira hiper-especializada.
+            <p
+                style="margin-top: 1.5rem; padding: 1rem; background: rgba(34, 197, 94, 0.1); border-left: 3px solid var(--brand-primary); border-radius: 0 8px 8px 0;">
+                💡 <strong>A Colheita:</strong> Criar um super-app focado em módulos inteligentes, alimentado por
+                <strong>Três Especialistas de Inteligência Artificial</strong> operando de maneira hiper-especializada
+                como um ecossistema natural.
             </p>
         </article>
 
         <!-- Chapter 3 -->
-        <article class="glass-card">
+        <article id="cap3" class="glass-card">
             <div class="section-header">
-                <i class="ph-fill ph-cpu"></i>
-                <h2>Capítulo 3 — A Solução</h2>
+                <i class="ph-fill ph-plant"></i>
+                <h2>Capítulo 3 — Os Frutos da Solução</h2>
             </div>
-            <p>Para garantir foco, Segurança da Informação (Zero Trust) e evitar alucinações críticas, propusemos o desenvolvimento de três agentes virtuais autônomos.</p>
-            
+            <p>Para garantir foco, Segurança da Informação (Zero Trust) e evitar alucinações críticas, propusemos o
+                desenvolvimento de três agentes virtuais autônomos, como árvores em uma floresta conectada.</p>
+
             <div class="agent-grid">
                 <!-- Agent 1 -->
                 <div class="agent-card">
-                    <div class="agent-icon icon-blue"><i class="ph-fill ph-wallet"></i></div>
+                    <div class="agent-icon icon-blue"><i class="ph-fill ph-flower-tulip"></i></div>
                     <h4>Agente Finn</h4>
-                    <span class="agent-role">Consultor de Varejo</span>
-                    <p>Ajuda na categorização automática e leitura de documentos via OCR. Cruza entradas passadas com boletos presentes para alertar sobre saldo negativo iminente.</p>
+                    <span class="agent-role">Jardineiro de Varejo</span>
+                    <p>Ajuda na categorização automática e leitura de documentos via OCR. Cruza entradas passadas com
+                        boletos presentes para alertar sobre saldo negativo iminente.</p>
                 </div>
                 <!-- Agent 2 -->
                 <div class="agent-card">
-                    <div class="agent-icon icon-purple"><i class="ph-fill ph-trend-up"></i></div>
+                    <div class="agent-icon icon-purple"><i class="ph-fill ph-potted-plant"></i></div>
                     <h4>InvestIA</h4>
-                    <span class="agent-role">Assessor de Capital</span>
-                    <p>Atua sugerindo renda fixa e ações cruzando com o perfil <em>Suitability</em>. Consulta cotações reais na B3 para debates de portfólio em tempo real.</p>
+                    <span class="agent-role">Adubador de Capital</span>
+                    <p>Atua sugerindo renda fixa e ações cruzando com o perfil <em>Suitability</em>. Consulta cotações
+                        reais na B3 para debates de portfólio em tempo real.</p>
                 </div>
                 <!-- Agent 3 -->
                 <div class="agent-card">
-                    <div class="agent-icon icon-pink"><i class="ph-fill ph-headset"></i></div>
+                    <div class="agent-icon icon-pink"><i class="ph-fill ph-bird"></i></div>
                     <h4>GuiaNova</h4>
-                    <span class="agent-role">SAC Omnichannel</span>
-                    <p>Especialista em regras internas. Utiliza <em>Long Term Memory</em> do CRM para deduzir o problema antes do cliente reclamar. Atua ativamente no desbloqueio de senhas.</p>
+                    <span class="agent-role">Pássaro Mensageiro SAC</span>
+                    <p>Especialista em regras internas. Utiliza <em>Long Term Memory</em> do CRM para deduzir o problema
+                        antes do cliente reclamar. Atua ativamente no desbloqueio de senhas.</p>
                 </div>
             </div>
         </article>
 
         <!-- Chapter 4 -->
-        <article class="glass-card">
+        <article id="cap4" class="glass-card">
             <div class="section-header">
-                <i class="ph-fill ph-tree-structure"></i>
-                <h2>Capítulo 4 — Arquitetura ReAct</h2>
+                <i class="ph-fill ph-recycle"></i>
+                <h2>Capítulo 4 — Ecossistema ReAct</h2>
             </div>
-            <p>Mapeamento lógico de Memórias (Curtíssimo prazo vs Vector RAG) e das Ferramentas Externas (Tools) consumidas via padrão ReAct.</p>
+            <p>Mapeamento lógico de Memórias (Curtíssimo prazo vs Vector RAG) e das Ferramentas Externas (Tools)
+                consumidas via padrão ReAct orgânico.</p>
 
             <div class="mermaid-container">
-                <div class="diagram-title"><i class="ph-bold ph-graph"></i> 4.1. Design do "Finn"</div>
+                <div class="diagram-title"><i class="ph-bold ph-tree"></i> 4.1. Raízes do "Finn"</div>
                 <div class="mermaid">
-                graph TD
+                    graph TD
                     User([Usuário no App]) --> Input[Upload Imagem / Texto]
                     Input --> AgentFinanceiro{Agente: Finn}
-                    
+
                     subgraph Sistema de Memória
                     AgentFinanceiro <-->|Janela de Interações| ShortTerm[(Contexto Local)]
-                    AgentFinanceiro <-->|Vectorial RAG| LongTerm[(Histórico Faturas)]
-                    end
-                    
-                    subgraph Tools Acionáveis
-                    AgentFinanceiro -->|Upload| OCRTool[Visão Computacional]
-                    AgentFinanceiro -->|Query interna| CoreBank[API Core Bank]
-                    end
-                    
-                    OCRTool --> AgentFinanceiro
-                    CoreBank --> AgentFinanceiro
-                    AgentFinanceiro --> Output([Alerta Proativo / Resumo])
+                        AgentFinanceiro <-->|Vectorial RAG| LongTerm[(Histórico Faturas)]
+                            end
+
+                            subgraph Tools Acionáveis
+                            AgentFinanceiro -->|Upload| OCRTool[Visão Computacional]
+                            AgentFinanceiro -->|Query interna| CoreBank[API Core Bank]
+                            end
+
+                            OCRTool --> AgentFinanceiro
+                            CoreBank --> AgentFinanceiro
+                            AgentFinanceiro --> Output([Alerta Proativo / Resumo])
                 </div>
             </div>
 
             <div class="mermaid-container">
-                <div class="diagram-title"><i class="ph-bold ph-graph"></i> 4.2. Design da "InvestIA"</div>
+                <div class="diagram-title"><i class="ph-bold ph-tree"></i> 4.2. Raízes da "InvestIA"</div>
                 <div class="mermaid">
-                graph TD
+                    graph TD
                     User2([Investidor Iniciante]) --> Input2[Dúvida sobre papéis]
                     Input2 --> AgentInvest{Agente: InvestIA}
-                    
+
                     subgraph Sistema de Memória
                     AgentInvest <-->|Tese Construída| ShortTerm2[(Discussão Atual)]
-                    AgentInvest <-->|Metadata Filter| LongTerm2[(Perfil Suitability)]
-                    end
-                    
-                    subgraph External Scraping
-                    AgentInvest --> ToolB3[StatusInvest Scraper]
-                    AgentInvest --> ToolNoticias[News API Macroeconomia]
-                    end
-                    
-                    ToolB3 --> AgentInvest
-                    ToolNoticias --> AgentInvest
-                    AgentInvest --> Output2([Recomendação Segura])
+                        AgentInvest <-->|Metadata Filter| LongTerm2[(Perfil Suitability)]
+                            end
+
+                            subgraph External Scraping
+                            AgentInvest --> ToolB3[StatusInvest Scraper]
+                            AgentInvest --> ToolNoticias[News API Macroeconomia]
+                            end
+
+                            ToolB3 --> AgentInvest
+                            ToolNoticias --> AgentInvest
+                            AgentInvest --> Output2([Recomendação Segura])
                 </div>
             </div>
 
             <div class="mermaid-container">
-                <div class="diagram-title"><i class="ph-bold ph-graph"></i> 4.3. Design da "GuiaNova"</div>
+                <div class="diagram-title"><i class="ph-bold ph-tree"></i> 4.3. Raízes da "GuiaNova"</div>
                 <div class="mermaid">
-                graph TD
+                    graph TD
                     User3([Cliente via WhatsApp]) --> Input3[Reclamação ou Dúvida]
                     Input3 --> AgentSac{Agente: GuiaNova}
-                    
+
                     subgraph Sistema de Memória
                     AgentSac <-->|Resolve Ticket Atual| ShortTerm3[(M. Curto Prazo)]
-                    AgentSac <-->|Histórico de Chamados| LongTerm3[(M. Longo Prazo CRM)]
-                    end
-                    
-                    subgraph Tools Resolutivas
-                    AgentSac --> FAQ_Retrieval[RAG Base Conhecimento]
-                    AgentSac --> Autenticator[Token Generator Tool]
-                    end
-                    
-                    FAQ_Retrieval --> AgentSac
-                    Autenticator --> AgentSac
-                    AgentSac --> Output3([Resolução Imediata / Hand-off])
+                        AgentSac <-->|Histórico de Chamados| LongTerm3[(M. Longo Prazo CRM)]
+                            end
+
+                            subgraph Tools Resolutivas
+                            AgentSac --> FAQ_Retrieval[RAG Base Conhecimento]
+                            AgentSac --> Autenticator[Token Generator Tool]
+                            end
+
+                            FAQ_Retrieval --> AgentSac
+                            Autenticator --> AgentSac
+                            AgentSac --> Output3([Resolução Imediata / Hand-off])
                 </div>
             </div>
         </article>
 
         <!-- Chapter 5 -->
-        <article class="glass-card">
+        <article id="cap5" class="glass-card">
             <div class="section-header">
-                <i class="ph-fill ph-chats-teardrop"></i>
-                <h2>Capítulo 5 — A Jornada do Cliente</h2>
+                <i class="ph-fill ph-sun"></i>
+                <h2>Capítulo 5 — A Trilha do Cliente</h2>
             </div>
-            
+
             <div class="chat-simulation">
                 <!-- Chat 1 -->
                 <div class="chat-scenario">Cenário 1: O susto do Boleto</div>
@@ -565,8 +871,11 @@
                     Finn, veio muito alto esse boleto. Tenho saldo pra pagar sem estourar o limite?
                 </div>
                 <div class="msg msg-agent" style="animation-delay: 1.2s;">
-                    <div class="msg-header"><i class="ph-fill ph-robot"></i> Finn • <span style="color:var(--brand-primary); font-weight: 400;">Lendo Imagem OCR...</span></div>
-                    Olá João. Notei que seu boleto veio R$ 950 este mês (R$ 150 a mais que a média que guardei no histórico). Você tem R$ 1.200 na conta atual, mas vai faltar dinheiro para o fechamento do cartão de crédito na semana que vem. Sugiro agendarmos o pagamento para o dia 5!
+                    <div class="msg-header"><i class="ph-fill ph-flower-tulip"></i> Finn • <span
+                            style="color:var(--brand-primary); font-weight: 400;">Lendo Imagem OCR...</span></div>
+                    Olá João. Notei que seu boleto veio R$ 950 este mês (R$ 150 a mais que a média que guardei no
+                    histórico). Você tem R$ 1.200 na conta atual, mas vai faltar dinheiro para o fechamento do cartão de
+                    crédito na semana que vem. Sugiro agendarmos o pagamento para o dia 5!
                 </div>
 
                 <!-- Chat 2 -->
@@ -575,8 +884,13 @@
                     Queria colocar 5 mil num Fundo Imobiliário, mas tô com muito medo do juros que falaram no Jornal.
                 </div>
                 <div class="msg msg-agent" style="animation-delay: 1.2s;">
-                    <div class="msg-header" style="color: #a78bfa;"><i class="ph-fill ph-robot"></i> InvestIA • <span style="color:var(--brand-secondary); font-weight: 400;">Analisando Perfil Conservador...</span></div>
-                    Com a SELIC alta, os fundos de papel realmente podem oscilar. Segundo seu perfil Conservador, essa oscilação vai te causar desconforto. Busquei agora na <em>B3</em> e encontrei CDBs oferecendo 115% do CDI, que trava seu ganho com segurança. Que tal dividirmos: R$ 4 mil no CDB e apenas R$ 1 mil no FII HGLG11 para você ir testando o mercado?
+                    <div class="msg-header" style="color: #15803d;"><i class="ph-fill ph-potted-plant"></i> InvestIA •
+                        <span style="color:var(--brand-secondary); font-weight: 400;">Analisando Perfil
+                            Conservador...</span></div>
+                    Com a SELIC alta, os fundos de papel realmente podem oscilar. Segundo seu perfil Conservador, essa
+                    oscilação vai te causar desconforto. Busquei agora na <em>B3</em> e encontrei CDBs oferecendo 115%
+                    do CDI, que trava seu ganho com segurança. Que tal dividirmos: R$ 4 mil no CDB e apenas R$ 1 mil no
+                    FII HGLG11 para você ir testando o mercado?
                 </div>
 
                 <!-- Chat 3 -->
@@ -585,31 +899,41 @@
                     Socorro meu cartão do NovaEra deu Recusado no restaurante!
                 </div>
                 <div class="msg msg-agent" style="animation-delay: 1.2s;">
-                    <div class="msg-header" style="color: #f472b6;"><i class="ph-fill ph-robot"></i> GuiaNova • <span style="color:var(--brand-tertiary); font-weight: 400;">Consultando Logs do CRM...</span></div>
-                    Oi Maria! Calma, eu vi aqui no sistema que você ativou o "Modo Viagem Internacional" ontem para os Estados Unidos. A maquininha de São Paulo gerou um bloqueio preventivo de segurança por falha de GPS. Acabei de anular o bloqueio por aqui e te mandei um Token SMS. Só digitar e pode passar o cartão novamente!
+                    <div class="msg-header" style="color: #65a30d;"><i class="ph-fill ph-bird"></i> GuiaNova • <span
+                            style="color:var(--brand-tertiary); font-weight: 400;">Consultando Logs do CRM...</span>
+                    </div>
+                    Oi Maria! Calma, eu vi aqui no sistema que você ativou o "Modo Viagem Internacional" ontem para os
+                    Estados Unidos. A maquininha de São Paulo gerou um bloqueio preventivo de segurança por falha de
+                    GPS. Acabei de anular o bloqueio por aqui e te mandei um Token SMS. Só digitar e pode passar o
+                    cartão novamente!
                 </div>
             </div>
         </article>
 
         <!-- Chapter 6, 7, 8 -->
-        <article class="glass-card">
+        <article id="cap6" class="glass-card">
             <div class="section-header">
-                <i class="ph-fill ph-target"></i>
-                <h2>Governança e Impacto do Negócio</h2>
+                <i class="ph-fill ph-globe-hemisphere-west"></i>
+                <h2>Bioma e Impacto do Negócio</h2>
             </div>
-            
-            <p><strong>Avaliação e Controle de Alucinações (Capítulo 6)</strong></p>
+
+            <p><strong>Poda de Alucinações (Capítulo 6)</strong></p>
             <ul>
-                <li><strong>LLM-as-a-Judge:</strong> O Finn sofre auditoria diária não-supervisionada para garantir que nunca sugira calotes ou atrase contas críticas sem emitir alertas expressos de juros.</li>
-                <li><strong>Fidelity RAG:</strong> Se a InvestIA mencionar a "Taxa Selic", um roteador lógico Python intercepta a mensagem final e cruza o valor escrito pelo LLM com a API do Banco Central antes de exibir ao cliente.</li>
+                <li><strong>LLM-as-a-Judge:</strong> O Finn sofre auditoria diária não-supervisionada para garantir que
+                    nunca sugira calotes ou atrase contas críticas sem emitir alertas expressos de juros.</li>
+                <li><strong>Fidelity RAG:</strong> Se a InvestIA mencionar a "Taxa Selic", um roteador lógico Python
+                    intercepta a mensagem final e cruza o valor escrito pelo LLM com a API do Banco Central antes de
+                    exibir ao cliente.</li>
             </ul>
 
             <!-- Bento Grid -->
             <div class="bento-grid">
                 <div class="bento-item large">
-                    <div class="bento-number">+40% <span style="font-size:1.2rem; color:var(--text-muted); font-weight:400;">no AUM</span></div>
+                    <div class="bento-number">+40% <span
+                            style="font-size:1.2rem; color:var(--text-muted); font-weight:400;">no AUM</span></div>
                     <div class="bento-label">Aumento em Assets Under Management</div>
-                    <p class="bento-desc">A personalização cruzada tira o medo do investidor iniciante, democratizando o serviço de Private Banking para as massas.</p>
+                    <p class="bento-desc">A personalização cruzada tira o medo do investidor iniciante, democratizando o
+                        serviço de Private Banking para as massas.</p>
                 </div>
                 <div class="bento-item">
                     <div class="bento-number">45%</div>
@@ -622,13 +946,16 @@
                     <p class="bento-desc">Arquitetura dividida garante segurança intransponível.</p>
                 </div>
                 <div class="bento-item large" style="background: rgba(255,255,255,0.03);">
-                    <div class="bento-label">Visão V2: Orchestrator Mode</div>
-                    <p class="bento-desc">Implantação de um <em>Agente Supervisor</em> que atua invisivelmente na porta de entrada do Banco, roteando a fala do cliente para o Finn, InvestIA ou GuiaNova automaticamente no backend, além da implementação da API Realtime de Voz (Voice Protocol).</p>
+                    <div class="bento-label">Visão V2: Floresta Conectada (Orchestrator Mode)</div>
+                    <p class="bento-desc">Implantação de um <em>Agente Supervisor</em> que atua invisivelmente na porta
+                        de entrada do Banco, roteando a fala do cliente para o Finn, InvestIA ou GuiaNova
+                        automaticamente no backend, além da implementação da API Realtime de Voz (Voice Protocol).</p>
                 </div>
             </div>
-            
+
             <div class="quote">
-                "O verdadeiro banco do futuro não é um aplicativo onde o cliente aperta botões, mas um especialista digital que o cliente convida para tomar um café."
+                "O verdadeiro banco do futuro não é um aplicativo onde o cliente aperta botões, mas um ecossistema
+                digital que respira junto com sua vida financeira."
             </div>
         </article>
 
@@ -648,17 +975,47 @@
             document.querySelectorAll('.glass-card').forEach(card => {
                 observer.observe(card);
             });
+
+            // TOC Observer
+            const tocLinks = document.querySelectorAll('.toc-link');
+            const sections = document.querySelectorAll('article.glass-card');
+
+            const tocObserver = new IntersectionObserver((entries) => {
+                let currentSectionId = null;
+
+                // Encontrar a seção visível mais relevante
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        currentSectionId = entry.target.id;
+                    }
+                });
+
+                if (currentSectionId) {
+                    tocLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + currentSectionId) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            }, { threshold: 0.2, rootMargin: "-10% 0px -50% 0px" });
+
+            sections.forEach(section => {
+                tocObserver.observe(section);
+            });
         });
     </script>
 
     <!-- O Balãozinho -->
     <div id="visit-badge" class="floating-badge">
-        <span class="badge-icon">🌐</span>
+        <span class="badge-icon">🌿</span>
         <span>
             Você está visitando o site de
             <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
         </span>
-        <button class="close-badge" onclick="document.getElementById('visit-badge').style.display='none'" title="Fechar">×</button>
+        <button class="close-badge" onclick="document.getElementById('visit-badge').style.display='none'"
+            title="Fechar">×</button>
     </div>
 </body>
+
 </html>
