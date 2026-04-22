@@ -1,0 +1,76 @@
+# Luiz R R P Ihara
+
+**Quality Engineer [AI-Driven Testing | Automation | Performance]**
+
+* Email: luiz.ihara@gmail.com
+* GitHub: https://github.com/luizihara
+* LinkedIn: https://www.linkedin.com/in/luiz-ihara/
+
+## About Me
+
+Quality Engineer with strong experience in performance, scalability, and reliability across end-to-end backend, frontend, and mobile applications. Over the past few years, I have focused on improving system performance and resilience through stress testing and validation in Linux environments, ensuring systems can handle high-traffic scenarios with confidence.
+
+Experienced in designing and scaling test strategies, as well as building automation frameworks using Java, JavaScript, Python, Go, and Shell Script. I have worked extensively with CI/CD pipelines, implementing quality gates and testing guardrails to ensure reliability and consistency throughout the software delivery lifecycle.
+
+Strong background in infrastructure and platform engineering, including managing cloud environments, virtual machines, and Kubernetes clusters. Passionate about Infrastructure as Code (IaC), I have implemented automation solutions using tools such as Terraform and Ansible to improve scalability, reduce manual operations, and enhance system resilience.
+
+I have also led initiatives around code quality and platform governance, supporting large-scale environments with thousands of projects across multiple technologies, ensuring high standards of maintainability and engineering efficiency.
+
+I have been leveraging AI-driven approaches to accelerate test generation, improve coverage, and enhance overall engineering productivity, helping teams deliver with greater confidence and speed. Additionally, I design and implement synthetic testing solutions to improve observability and proactively detect issues in production environments.
+
+## Professional Experience
+
+### Quality Assurance Engineer @ iConnections
+**April/2025 - Present**
+* Leading quality architecture initiatives across backend, frontend, mobile, and performance testing, ensuring scalable and reliable validation strategies across the platform.
+* Applying AI-driven approaches to accelerate test creation, improve coverage, and elevate engineering efficiency and product quality.
+* Designing and implementing synthetic testing solutions to strengthen observability and enable proactive detection of production issues.
+
+### Staff QA Engineer @ XP Inc
+**April/2020 - April/2025**
+* Led the SonarQube platform as Tech Lead, owning code quality governance for 3,000+ projects across multiple stacks (.NET, JavaScript, Golang, Python, and Java).
+* Drove scalability, reliability, and CI/CD integration strategies, empowering engineering teams to adopt high-quality standards and improve overall software maintainability. 
+* Owned the maintenance and evolution of CI/CD pipelines built on Azure DevOps, with a strong focus on implementing testing guardrails across the entire pipeline.
+* Established quality gates and automated validation processes to ensure reliability, consistency, and high standards throughout the software delivery lifecycle.
+
+### SRE / DevOps Engineer @ Grupo Netshoes
+**October/2015 - March/2020**
+* Led quality engineering initiatives as a Tech Lead, designing and implementing a scalable test automation framework (Java, Selenium, REST Assured) and establishing CI pipelines in Jenkins to ensure consistent and reliable test execution.
+* Transitioned into an SRE / DevOps Engineer role, owning the company’s core high-traffic service (homepage). 
+* Drove reliability and scalability improvements by implementing infrastructure automation with Terraform and Ansible, enabling efficient scaling and enhancing overall system resilience.
+
+### Software Developer in Test @ Fcamara (LTM, Cnova)
+**March/2014 - October/2015**
+
+### QA Analyst @ Dotz
+**October/2012 - March/2014**
+
+### QA Analyst @ Spread (Claro)
+**April/2011 - October/2012**
+
+### QA Analyst @ RSI Informática (Caixa)
+**August/2009 - April/2011**
+
+## Skill Highlights
+
+* **IDE:** Cursor, Visual Studio Code, Antigravity
+* **Languages:** Bash / Shell Script, TypeScript / JavaScript, Python, C#, Java, Go
+* **Frameworks:** Playwright, Cypress, Appium, WebdriverIO, Selenium
+* **Performance:** k6, Tsung, JMeter, Locust
+* **Monitoring:** Grafana, Datadog, Dynatrace, New Relic, Sensu
+* **CI/CD:** Azure DevOps, Jenkins, CircleCI, GitHub Actions
+* **Cloud:** Microsoft Azure, GCP, AWS
+* **OS / Containers:** Linux Ubuntu, Linux Red Hat, Kubernetes, Docker, Podman
+* **Others:** DevOps, Terraform, Ansible, Akamai, Azion, Cloudflare, Redis, Memcached
+
+## FIAP MBA - AI Business Leadership Projects
+Academic projects developed during the MBA.
+
+* TCC: Career AI (fiap.tcc/index.html)
+* Vibe Coding Executivo (fiap.vibecodeexecutivo/)
+* AI Organizational Training (fiap.capacitacaoorganizacional/)
+* Agent Architecture (fiap.arquiteturaagentes/)
+* Agent Implementation (fiap.implementacaoAgentes/entrega.html)
+* Product Management (fiap.GestaoProduto/controleViagem.html)
+* Monetization Go-To-Market (fiap.monetizacaoego-to-market/)
+* Advocacy and Influence (fiap.advocacyeinfluencia/)

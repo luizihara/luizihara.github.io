@@ -1,0 +1,15 @@
+# Luiz Ihara - Portfolio & Resume
+
+> Luiz Ihara is a Quality Engineer specializing in Performance, Scalability, and Reliability across end-to-end backend, frontend, and mobile applications.
+
+## Content Available
+
+* [Full Resume & Portfolio](llms-full.txt) - The complete text of Luiz's resume, including about me, experience, skills, and projects.
+
+## About the site
+This is the personal portfolio and resume of Luiz Ihara. The main page is `index.html`. It is built to be accessible to humans and LLMs.
+
+## Contact
+* Email: luiz.ihara@gmail.com
+* GitHub: [luizihara](https://github.com/luizihara)
+* LinkedIn: [luiz-ihara](https://www.linkedin.com/in/luiz-ihara/)
