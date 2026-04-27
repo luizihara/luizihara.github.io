@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerFlow AI - Entrega Parcial 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0F172A;
+            background-image: radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+                radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #60A5FA, #A78BFA);
+        }
+
+        .bmc-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            grid-template-rows: auto auto auto;
+            gap: 1rem;
+        }
+        
+        .bmc-parcerias { grid-column: span 2; grid-row: span 2; }
+        .bmc-atividades { grid-column: span 2; }
+        .bmc-recursos { grid-column: span 2; }
+        .bmc-proposta { grid-column: span 2; grid-row: span 2; }
+        .bmc-relacionamento { grid-column: span 2; }
+        .bmc-canais { grid-column: span 2; }
+        .bmc-segmentos { grid-column: span 2; grid-row: span 2; }
+        .bmc-custos { grid-column: span 5; }
+        .bmc-receitas { grid-column: span 5; }
+
+        @media (max-width: 1024px) {
+            .bmc-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+            .bmc-grid > div {
+                grid-column: span 1 !important;
+                grid-row: span 1 !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="text-slate-200 min-h-screen pb-16 antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- Navbar / Header -->
+    <nav class="w-full py-4 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center border-b border-white/10 glass-panel sticky top-0 z-50">
+        <div class="flex items-center gap-3 mb-4 md:mb-0">
+            <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-indigo-500/30">
+                C
+            </div>
+            <div>
+                <span class="text-2xl font-bold text-white tracking-tight">CareerFlow<span class="text-indigo-400">.ai</span></span>
+                <p class="text-xs text-slate-400 font-medium">Entrega Parcial 2 - TCC</p>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-6">
+            <div class="hidden md:block text-right">
+                <p class="text-[10px] font-bold uppercase text-indigo-400 tracking-wider mb-1">Squad do Projeto</p>
+                <p class="text-xs text-slate-300">Luiz Ihara (RM368484) • Filipe Fragoso (RM368500)</p>
+                <p class="text-xs text-slate-300">Daniel Caminha (RM366740) • Pedro Martins (RM368543)</p>
+            </div>
+            <div class="flex flex-col items-end">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                    <i class="fas fa-calendar-alt mr-2"></i> Prazo: 15/05/2026
+                </span>
+                <a href="index.html" class="mt-2 text-xs text-slate-400 hover:text-white transition-colors flex items-center">
+                    <i class="fas fa-arrow-left mr-1"></i> Voltar ao Início
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 space-y-16">
+        
+        <!-- Header Section -->
+        <header class="text-center max-w-3xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">Estratégia de Negócios e <span class="gradient-text">Proposta de Valor</span></h1>
+            <p class="text-lg text-slate-400 leading-relaxed">
+                Aprofundamento do problema, modelagem do negócio e análise competitiva para a plataforma CareerFlow AI, focada no combate à erosão da relevância do profissional sênior.
+            </p>
+        </header>
+
+        <!-- 1. Empatia e Problema -->
+        <section>
+            <div class="flex items-center gap-3 mb-8">
+                <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-500/50">
+                    <span class="text-blue-400 font-bold">1</span>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Aprofundamento do Problema e Empatia</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Mapa de Empatia -->
+                <div class="glass-panel p-8 rounded-2xl border border-white/10 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10">
+                        <i class="fas fa-user-circle text-8xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                        <i class="fas fa-map text-blue-400 mr-3"></i> Mapa de Empatia: "Líder em Risco"
+                    </h3>
+                    <p class="text-sm text-slate-300 mb-6 border-l-2 border-blue-500 pl-3">
+                        Tech Senior (35-45 anos), em uma encruzilhada estratégica entre execução técnica e liderança.
+                    </p>
+                    
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="bg-slate-800/50 p-4 rounded-xl border border-white/5 card-hover">
+                            <h4 class="text-blue-400 font-semibold text-sm mb-2"><i class="fas fa-eye mr-2"></i>O que Vê?</h4>
+                            <p class="text-xs text-slate-300">Layoffs de perfis experientes/caros; "IA Staff Engineers"; LMS saturados de conteúdos genéricos.</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded-xl border border-white/5 card-hover">
+                            <h4 class="text-blue-400 font-semibold text-sm mb-2"><i class="fas fa-ear-listen mr-2"></i>O que Ouve?</h4>
+                            <p class="text-xs text-slate-300">Mentorias custam R$1.5k-6k/mês; IA substituirá código puro; ruídos sobre quais tecnologias focar.</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded-xl border border-white/5 card-hover">
+                            <h4 class="text-blue-400 font-semibold text-sm mb-2"><i class="fas fa-brain mr-2"></i>O que Pensa e Sente?</h4>
+                            <p class="text-xs text-slate-300">Medo da obsolescência; ansiedade (fadiga de decisão); isolamento; desejo de um Business Case Pessoal.</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded-xl border border-white/5 card-hover">
+                            <h4 class="text-blue-400 font-semibold text-sm mb-2"><i class="fas fa-comment-dots mr-2"></i>O que Fala e Faz?</h4>
+                            <p class="text-xs text-slate-300">Otimiza LinkedIn intuitivamente; compra cursos e não termina; busca atalhos para gestão; sente "enxugar gelo".</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 grid sm:grid-cols-2 gap-4">
+                        <div class="bg-red-500/10 p-4 rounded-xl border border-red-500/20 card-hover">
+                            <h4 class="text-red-400 font-semibold text-sm mb-2"><i class="fas fa-heart-crack mr-2"></i>Dores</h4>
+                            <p class="text-xs text-slate-300">Custo de oportunidade; risco político sem dados; barreira financeira para consultoria de elite.</p>
+                        </div>
+                        <div class="bg-emerald-500/10 p-4 rounded-xl border border-emerald-500/20 card-hover">
+                            <h4 class="text-emerald-400 font-semibold text-sm mb-2"><i class="fas fa-bullseye mr-2"></i>Ganhos</h4>
+                            <p class="text-xs text-slate-300">Clareza via "Raio-X"; segurança na transição C-Level; mentor no WhatsApp em tempo real.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5W2H -->
+                <div class="glass-panel p-8 rounded-2xl border border-white/10">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                        <i class="fas fa-table-list text-purple-400 mr-3"></i> Declaração do Problema (5W2H)
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="text-xs uppercase bg-slate-800/80 text-slate-300">
+                                <tr>
+                                    <th class="px-4 py-3 rounded-tl-lg">Dimensão</th>
+                                    <th class="px-4 py-3">Descrição</th>
+                                    <th class="px-4 py-3 rounded-tr-lg">Aplicação ao Projeto</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/5">
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 font-semibold text-purple-300">What</td>
+                                    <td class="px-4 py-3 text-slate-300">Plataforma de Gestão Ativa de Carreira com IA.</td>
+                                    <td class="px-4 py-3 text-slate-400 text-xs">Market Intelligence para diagnóstico, mentorias e planos.</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 font-semibold text-purple-300">Why</td>
+                                    <td class="px-4 py-3 text-slate-300">Gap de mercado e barreira de custo humano.</td>
+                                    <td class="px-4 py-3 text-slate-400 text-xs">Mentorias proibitivas; profissionais sofrem Erosão da Relevância.</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 font-semibold text-purple-300">Who</td>
+                                    <td class="px-4 py-3 text-slate-300">Tech Seniors (35-45 anos).</td>
+                                    <td class="px-4 py-3 text-slate-400 text-xs">Transição para liderança ou mobilidade estratégica.</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 font-semibold text-purple-300">Where</td>
+                                    <td class="px-4 py-3 text-slate-300">Web App e WhatsApp.</td>
+                                    <td class="px-4 py-3 text-slate-400 text-xs">Web App responsivo e interface de engajamento diária.</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 font-semibold text-purple-300">When</td>
+                                    <td class="px-4 py-3 text-slate-300">Roadmap até Set/2026.</td>
+                                    <td class="px-4 py-3 text-slate-400 text-xs">Validação (Mai), Protótipo (Jul), MVP (Set).</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 font-semibold text-purple-300">How</td>
+                                    <td class="px-4 py-3 text-slate-300">Mixture of Experts (MoE) e Automação de Agentes.</td>
+                                    <td class="px-4 py-3 text-slate-400 text-xs">Extração LinkedIn -> Deep Research -> Assessment.</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 font-semibold text-purple-300">How Much</td>
+                                    <td class="px-4 py-3 text-slate-300">Modelo Híbrido Escalável.</td>
+                                    <td class="px-4 py-3 text-slate-400 text-xs">Baixo CAPEX; Assinatura Pro, Tokens e Pay-per-use.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Canvas de Proposta de Valor -->
+        <section>
+            <div class="flex items-center gap-3 mb-8">
+                <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/50">
+                    <span class="text-emerald-400 font-bold">2</span>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Canvas de Proposta de Valor (VPC)</h2>
+            </div>
+
+            <div class="glass-panel p-8 rounded-2xl border border-emerald-500/20 relative overflow-hidden">
+                <div class="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
+                
+                <p class="text-lg text-slate-300 mb-8 italic text-center max-w-4xl mx-auto">
+                    "O CareerFlow AI não é um repositório de cursos, mas um motor de decisão que transforma o conhecimento técnico silencioso em uma narrativa estratégica de alto impacto."
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-12">
+                    
+                    <!-- Perfil do Cliente -->
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-center w-16 h-16 bg-slate-800 rounded-full mb-4 mx-auto border-4 border-slate-700">
+                            <i class="fas fa-user text-2xl text-slate-300"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center text-white border-b border-white/10 pb-4">Perfil do Cliente</h3>
+                        
+                        <div>
+                            <h4 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-3"><i class="fas fa-tasks mr-2"></i>Tarefas (Jobs to be Done)</h4>
+                            <ul class="space-y-2 text-sm text-slate-300">
+                                <li><strong class="text-white">Funcionais:</strong> Construir Business Case para promoção; otimizar LinkedIn para ATS; navegação política interna.</li>
+                                <li><strong class="text-white">Sociais:</strong> Manter status de "especialista antenado"; projetar imagem de líder perante diretoria.</li>
+                                <li><strong class="text-white">Emocionais:</strong> Reduzir ansiedade da obsolescência; sentir controle da trajetória frente à IA.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-red-500/5 p-4 rounded-xl border border-red-500/10">
+                                <h4 class="text-sm font-bold text-red-400 mb-2"><i class="fas fa-frown mr-2"></i>Dores Críticas</h4>
+                                <ul class="text-xs text-slate-400 space-y-1 list-disc pl-4">
+                                    <li>Fadiga de Decisão (saturação).</li>
+                                    <li>Cegueira de Valor (skills invisíveis).</li>
+                                    <li>Alto Custo de Oportunidade.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-emerald-500/5 p-4 rounded-xl border border-emerald-500/10">
+                                <h4 class="text-sm font-bold text-emerald-400 mb-2"><i class="fas fa-smile mr-2"></i>Ganhos Esperados</h4>
+                                <ul class="text-xs text-slate-400 space-y-1 list-disc pl-4">
+                                    <li>Clareza via "Raio-X" realista.</li>
+                                    <li>Prontidão (Mentor no WhatsApp 2min antes da reunião).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mapa de Valor -->
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-center w-16 h-16 bg-indigo-600 rounded-full mb-4 mx-auto border-4 border-indigo-900 shadow-lg shadow-indigo-500/30">
+                            <i class="fas fa-gift text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center text-white border-b border-white/10 pb-4">Mapa de Valor</h3>
+                        
+                        <div>
+                            <h4 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-3"><i class="fas fa-box-open mr-2"></i>Produtos e Serviços</h4>
+                            <ul class="space-y-2 text-sm text-slate-300">
+                                <li><strong class="text-white">Plataforma de Diagnóstico:</strong> Cruzamento de rastro digital com mercado.</li>
+                                <li><strong class="text-white">Skill Analogy Engine™:</strong> Correspondência semântica intersetorial de habilidades.</li>
+                                <li><strong class="text-white">Mentor Virtual 24/7:</strong> Acompanhamento WhatsApp com memória.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-emerald-500/10 p-4 rounded-xl border border-emerald-500/20">
+                                <h4 class="text-sm font-bold text-emerald-400 mb-2"><i class="fas fa-capsules mr-2"></i>Analgésicos</h4>
+                                <ul class="text-xs text-slate-400 space-y-1 list-disc pl-4">
+                                    <li>Disponibilidade imediata (sem R$ 5k).</li>
+                                    <li>Filtro de ruído ("Trilha Delta").</li>
+                                </ul>
+                            </div>
+                            <div class="bg-blue-500/10 p-4 rounded-xl border border-blue-500/20">
+                                <h4 class="text-sm font-bold text-blue-400 mb-2"><i class="fas fa-rocket mr-2"></i>Criadores de Ganho</h4>
+                                <ul class="text-xs text-slate-400 space-y-1 list-disc pl-4">
+                                    <li>Diário Conversacional ativo.</li>
+                                    <li>Simulador de Roleplay para negociações com feedback.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="mt-8 bg-gradient-to-r from-indigo-500/20 to-blue-500/20 p-5 rounded-xl border border-indigo-500/30 text-center">
+                    <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-1">FIT PRODUTO-MERCADO</span>
+                    <p class="text-sm text-white">O CareerFlow AI resolve a estagnação ao substituir a mentoria cara por inteligência de mercado que identifica o valor "invisível", reduzindo a fadiga de decisão.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. BMC -->
+        <section>
+            <div class="flex items-center gap-3 mb-8">
+                <div class="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center border border-amber-500/50">
+                    <span class="text-amber-400 font-bold">3</span>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Business Model Canvas (BMC)</h2>
+            </div>
+
+            <div class="bmc-grid bg-slate-900/80 p-6 rounded-2xl border border-white/10 shadow-2xl">
+                <!-- Parcerias -->
+                <div class="bmc-parcerias glass-panel p-5 rounded-xl border border-white/5 hover:border-amber-500/50 transition-colors">
+                    <h3 class="text-amber-400 font-bold text-sm mb-3 flex items-center"><i class="fas fa-handshake mr-2"></i>Parcerias-Chave</h3>
+                    <ul class="text-xs text-slate-300 space-y-2 list-disc pl-4">
+                        <li>LinkedIn (dados API/Scraping).</li>
+                        <li>Plataformas Educação (Afiliados).</li>
+                        <li>Redes de Executive Search (validação).</li>
+                    </ul>
+                </div>
+
+                <!-- Atividades -->
+                <div class="bmc-atividades glass-panel p-5 rounded-xl border border-white/5 hover:border-amber-500/50 transition-colors">
+                    <h3 class="text-amber-400 font-bold text-sm mb-3 flex items-center"><i class="fas fa-cogs mr-2"></i>Atividades-Chave</h3>
+                    <ul class="text-xs text-slate-300 space-y-2 list-disc pl-4">
+                        <li>Curadoria/normalização de dados.</li>
+                        <li>Treinamento de IA (MoE).</li>
+                        <li>Desenvolvimento de roleplay.</li>
+                    </ul>
+                </div>
+
+                <!-- Proposta de Valor -->
+                <div class="bmc-proposta bg-gradient-to-br from-indigo-900/50 to-blue-900/50 p-5 rounded-xl border border-indigo-500/30 hover:border-indigo-400 transition-colors shadow-inner">
+                    <h3 class="text-indigo-400 font-bold text-sm mb-3 flex items-center text-center justify-center"><i class="fas fa-gem mr-2"></i>Proposta de Valor</h3>
+                    <p class="text-sm font-semibold text-white text-center mb-4">Gestão Ativa de Carreira com IA</p>
+                    <ul class="text-xs text-slate-300 space-y-3">
+                        <li class="flex items-start"><i class="fas fa-check text-indigo-400 mt-0.5 mr-2"></i> Skill Analogy Engine (arbitragem).</li>
+                        <li class="flex items-start"><i class="fas fa-check text-indigo-400 mt-0.5 mr-2"></i> Mentor Virtual 24/7 com memória.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-indigo-400 mt-0.5 mr-2"></i> Diagnóstico profundo vs cursos genéricos.</li>
+                    </ul>
+                </div>
+
+                <!-- Relacionamento -->
+                <div class="bmc-relacionamento glass-panel p-5 rounded-xl border border-white/5 hover:border-amber-500/50 transition-colors">
+                    <h3 class="text-amber-400 font-bold text-sm mb-3 flex items-center"><i class="fas fa-heart mr-2"></i>Relacionamento</h3>
+                    <ul class="text-xs text-slate-300 space-y-2 list-disc pl-4">
+                        <li>Self-service automatizado.</li>
+                        <li>Suporte via IA conversacional.</li>
+                        <li>Comunidade "Pro" (Networking).</li>
+                    </ul>
+                </div>
+
+                <!-- Segmentos -->
+                <div class="bmc-segmentos glass-panel p-5 rounded-xl border border-white/5 hover:border-amber-500/50 transition-colors">
+                    <h3 class="text-amber-400 font-bold text-sm mb-3 flex items-center"><i class="fas fa-users mr-2"></i>Segmentos</h3>
+                    <ul class="text-xs text-slate-300 space-y-2 list-disc pl-4">
+                        <li>Tech Seniors (35-45 anos).</li>
+                        <li>Gestores em transição.</li>
+                        <li>Busca de mobilidade intersetorial.</li>
+                        <li>B2B (Retenção corporativa).</li>
+                    </ul>
+                </div>
+
+                <!-- Recursos -->
+                <div class="bmc-recursos glass-panel p-5 rounded-xl border border-white/5 hover:border-amber-500/50 transition-colors">
+                    <h3 class="text-amber-400 font-bold text-sm mb-3 flex items-center"><i class="fas fa-cube mr-2"></i>Recursos-Chave</h3>
+                    <ul class="text-xs text-slate-300 space-y-2 list-disc pl-4">
+                        <li>Algoritmos proprietários (MoE).</li>
+                        <li>Infraestrutura AWS/Cloud.</li>
+                        <li>Engenharia de Prompts.</li>
+                    </ul>
+                </div>
+
+                <!-- Canais -->
+                <div class="bmc-canais glass-panel p-5 rounded-xl border border-white/5 hover:border-amber-500/50 transition-colors">
+                    <h3 class="text-amber-400 font-bold text-sm mb-3 flex items-center"><i class="fas fa-truck mr-2"></i>Canais</h3>
+                    <ul class="text-xs text-slate-300 space-y-2 list-disc pl-4">
+                        <li>Web App.</li>
+                        <li>API WhatsApp.</li>
+                        <li>LinkedIn / Indicações (Viral).</li>
+                    </ul>
+                </div>
+
+                <!-- Estrutura de Custos -->
+                <div class="bmc-custos glass-panel p-5 rounded-xl border border-red-500/10 hover:border-red-400/50 transition-colors">
+                    <h3 class="text-red-400 font-bold text-sm mb-3 flex items-center"><i class="fas fa-file-invoice-dollar mr-2"></i>Estrutura de Custos</h3>
+                    <div class="flex gap-4 text-xs text-slate-300">
+                        <span class="bg-red-500/10 px-3 py-1 rounded-full"><i class="fas fa-coins mr-1"></i>Tokens IA</span>
+                        <span class="bg-red-500/10 px-3 py-1 rounded-full"><i class="fas fa-code mr-1"></i>Dev Low-code</span>
+                        <span class="bg-red-500/10 px-3 py-1 rounded-full"><i class="fas fa-bullhorn mr-1"></i>CAC / Ads</span>
+                    </div>
+                </div>
+
+                <!-- Fontes de Receita -->
+                <div class="bmc-receitas glass-panel p-5 rounded-xl border border-emerald-500/10 hover:border-emerald-400/50 transition-colors">
+                    <h3 class="text-emerald-400 font-bold text-sm mb-3 flex items-center"><i class="fas fa-sack-dollar mr-2"></i>Fontes de Receita</h3>
+                    <div class="flex gap-4 text-xs text-slate-300">
+                        <span class="bg-emerald-500/10 px-3 py-1 rounded-full"><i class="fas fa-unlock mr-1"></i>Freemium</span>
+                        <span class="bg-emerald-500/10 px-3 py-1 rounded-full"><i class="fas fa-star mr-1"></i>Assinatura Pro</span>
+                        <span class="bg-emerald-500/10 px-3 py-1 rounded-full"><i class="fas fa-file-pdf mr-1"></i>Pay-per-use (Relatórios)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Concorrência e ERRC -->
+        <section>
+            <div class="flex items-center gap-3 mb-8">
+                <div class="w-8 h-8 rounded-full bg-cyan-500/20 flex items-center justify-center border border-cyan-500/50">
+                    <span class="text-cyan-400 font-bold">4</span>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Análise de Concorrência e Posicionamento</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Matriz Comparativa -->
+                <div class="glass-panel p-8 rounded-2xl border border-white/10">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                        <i class="fas fa-chart-bar text-cyan-400 mr-3"></i> Matriz Comparativa
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="text-xs uppercase bg-slate-800/80 text-slate-300">
+                                <tr>
+                                    <th class="px-4 py-3 rounded-tl-lg">Critério</th>
+                                    <th class="px-4 py-3">Headhunters</th>
+                                    <th class="px-4 py-3">LMS (Alura)</th>
+                                    <th class="px-4 py-3 bg-indigo-900/50 text-white rounded-tr-lg border-b border-indigo-500">CareerFlow AI</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/5">
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 font-semibold text-slate-300">Preço</td>
+                                    <td class="px-4 py-3 text-red-400">Elevado (R$ 5k+)</td>
+                                    <td class="px-4 py-3 text-yellow-400">Baixo/Médio</td>
+                                    <td class="px-4 py-3 text-emerald-400 font-bold bg-indigo-900/20">Médio (Assinatura)</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 font-semibold text-slate-300">Disponibilidade</td>
+                                    <td class="px-4 py-3 text-red-400">Baixa (Agenda)</td>
+                                    <td class="px-4 py-3 text-emerald-400">Alta (Gravado)</td>
+                                    <td class="px-4 py-3 text-emerald-400 font-bold bg-indigo-900/20">Total (24/7 API)</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 font-semibold text-slate-300">Personalização</td>
+                                    <td class="px-4 py-3 text-emerald-400">Alta (Humana)</td>
+                                    <td class="px-4 py-3 text-red-400">Nula (Genérica)</td>
+                                    <td class="px-4 py-3 text-indigo-400 font-bold bg-indigo-900/20">Altíssima (MoE)</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 font-semibold text-slate-300">Diagnóstico</td>
+                                    <td class="px-4 py-3 text-yellow-400">Analógico</td>
+                                    <td class="px-4 py-3 text-red-400">Inexistente</td>
+                                    <td class="px-4 py-3 text-indigo-400 font-bold bg-indigo-900/20">Profundo (Data)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Framework ERRC -->
+                <div class="glass-panel p-8 rounded-2xl border border-white/10">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                        <i class="fas fa-chess-knight text-cyan-400 mr-3"></i> Estratégia de Diferenciação (ERRC)
+                    </h3>
+                    <p class="text-sm text-slate-400 mb-6">Criando um novo padrão de Career Intelligence no mercado.</p>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-red-500/10 p-4 rounded-xl border border-red-500/20 card-hover">
+                            <h4 class="text-red-400 font-bold text-sm mb-2"><i class="fas fa-times-circle mr-2"></i>Eliminar</h4>
+                            <ul class="text-xs text-slate-300 space-y-1 list-disc pl-4">
+                                <li>Agendamento humano.</li>
+                                <li>Sessões episódicas caras.</li>
+                                <li>Dependência de "nomes licenciados".</li>
+                            </ul>
+                        </div>
+                        <div class="bg-yellow-500/10 p-4 rounded-xl border border-yellow-500/20 card-hover">
+                            <h4 class="text-yellow-400 font-bold text-sm mb-2"><i class="fas fa-arrow-down mr-2"></i>Reduzir</h4>
+                            <ul class="text-xs text-slate-300 space-y-1 list-disc pl-4">
+                                <li>Custo de conselhos executivos.</li>
+                                <li>Tempo em cursos irrelevantes.</li>
+                                <li>Fricção no diagnóstico.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-blue-500/10 p-4 rounded-xl border border-blue-500/20 card-hover">
+                            <h4 class="text-blue-400 font-bold text-sm mb-2"><i class="fas fa-arrow-up mr-2"></i>Elevar</h4>
+                            <ul class="text-xs text-slate-300 space-y-1 list-disc pl-4">
+                                <li>Precisão via rastro digital.</li>
+                                <li>Velocidade ante crises (layoff).</li>
+                                <li>Clareza em mobilidade lateral.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-emerald-500/10 p-4 rounded-xl border border-emerald-500/20 card-hover">
+                            <h4 class="text-emerald-400 font-bold text-sm mb-2"><i class="fas fa-plus-circle mr-2"></i>Criar</h4>
+                            <ul class="text-xs text-slate-300 space-y-1 list-disc pl-4">
+                                <li>Skill Analogy Engine™.</li>
+                                <li>Diário Conversacional.</li>
+                                <li>Simulador Roleplay Executivo.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-20 border-t border-white/10 bg-slate-900/50 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="inline-flex items-center gap-2 px-5 py-2 bg-slate-800 rounded-full border border-slate-700 mb-4 shadow-lg shadow-black/20">
+                <i class="fas fa-check-circle text-emerald-400"></i>
+                <span class="text-xs font-bold text-slate-300 uppercase tracking-widest">Documentação Oficial • MVP Validation</span>
+            </div>
+            <p class="text-slate-500 text-sm">© 2026 CareerFlow AI Project. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
