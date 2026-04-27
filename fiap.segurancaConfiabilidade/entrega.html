@@ -400,6 +400,79 @@
             border: 1px solid rgba(244, 196, 48, 0.3);
             font-size: 1.1rem;
         }
+
+        /* Balãozinho LCARS Style */
+        .floating-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--panel-bg);
+            border: 2px solid var(--trek-blue);
+            border-top: 5px solid var(--lcars-orange);
+            border-bottom-right-radius: 20px;
+            border-top-left-radius: 10px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            color: var(--lcars-peach);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .floating-badge .badge-icon {
+            font-size: 1.5rem;
+            color: var(--trek-gold);
+        }
+
+        .floating-badge a {
+            color: var(--trek-blue);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-left: 5px;
+        }
+
+        .floating-badge a:hover {
+            color: var(--trek-gold);
+            text-decoration: underline;
+        }
+
+        .close-badge {
+            background: var(--trek-red);
+            border: none;
+            color: #fff;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            margin-left: 10px;
+            transition: background 0.3s;
+        }
+
+        .close-badge:hover {
+            background: #ff3333;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -691,6 +764,16 @@
             });
         });
     </script>
+    <!-- O Balãozinho -->
+    <div id="visit-badge" class="floating-badge">
+        <span class="badge-icon">🖖</span>
+        <span>
+            Você está visitando o site de
+            <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
+        </span>
+        <button class="close-badge" onclick="document.getElementById('visit-badge').style.display='none'"
+            title="Fechar">×</button>
+    </div>
 </body>
 
 </html>
