@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador - Triagem Inteligente de RH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#0ea5e9',
+                        brandHover: '#0284c7',
+                        dark: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #0ea5e9;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Navbar do Produto -->
+    <header class="bg-dark text-white shadow-md z-10">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-layer-group text-brand text-xl"></i>
+                <h1 class="text-xl font-bold tracking-wide">RecruitAI <span
+                        class="text-xs font-normal text-slate-400 ml-2">MVP Test Mode</span></h1>
+            </div>
+            <div class="flex items-center gap-4 text-sm">
+                <span class="text-slate-300"><i class="fa-solid fa-user-circle"></i> Analista de RH</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 py-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Informações do Trabalho -->
+        <div class="lg:col-span-12 bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
+            <div class="flex-1">
+                <h2 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-3"><i class="fa-solid fa-users text-brand mr-2"></i> Equipe</h2>
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-lg shadow-sm flex items-center"><i class="fa-solid fa-user-graduate text-slate-400 mr-2"></i> Luiz Ihara <span class="text-xs font-mono text-slate-400 ml-2 border-l border-slate-300 pl-2">RM368484</span></span>
+                    <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-lg shadow-sm flex items-center"><i class="fa-solid fa-user-graduate text-slate-400 mr-2"></i> Filipe Fragoso <span class="text-xs font-mono text-slate-400 ml-2 border-l border-slate-300 pl-2">RM368500</span></span>
+                    <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-lg shadow-sm flex items-center"><i class="fa-solid fa-user-graduate text-slate-400 mr-2"></i> Daniel Caminha <span class="text-xs font-mono text-slate-400 ml-2 border-l border-slate-300 pl-2">RM366740</span></span>
+                    <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-lg shadow-sm flex items-center"><i class="fa-solid fa-user-graduate text-slate-400 mr-2"></i> Pedro Martins <span class="text-xs font-mono text-slate-400 ml-2 border-l border-slate-300 pl-2">RM368543</span></span>
+                </div>
+            </div>
+            <div class="md:border-l md:border-slate-200 md:pl-6 flex flex-col justify-center min-w-max w-full md:w-auto pt-4 md:pt-0 border-t border-slate-100 md:border-t-0">
+                <h2 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2"><i class="fa-solid fa-chalkboard-user text-brand mr-2"></i> Professor</h2>
+                <div class="text-sm font-medium text-slate-700 flex items-center gap-3 bg-slate-50 p-2 pr-4 rounded-lg border border-slate-200 shadow-sm w-fit">
+                    <div class="w-8 h-8 rounded-md bg-brand text-white flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    Willian Luis Domingues
+                </div>
+            </div>
+        </div>
+
+        <!-- Coluna Esquerda: Inputs do Usuário -->
+        <div class="lg:col-span-5 space-y-4">
+            
+            <!-- Aviso de Mock -->
+            <div class="bg-amber-50 border border-amber-200 text-amber-800 p-4 rounded-xl flex items-start gap-3 shadow-sm">
+                <i class="fa-solid fa-triangle-exclamation mt-0.5 text-amber-500"></i>
+                <div class="text-sm">
+                    <strong class="font-semibold block mb-1">Aviso: Simulador com Dados Mockados</strong>
+                    Este ambiente é uma demonstração de frontend (MVP). A inteligência artificial aqui não faz consultas reais a um backend; os resultados são simulados (mockados) para demonstrar a jornada do usuário e a proposta de valor.
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-lg font-semibold mb-4 border-b pb-2"><i
+                        class="fa-solid fa-pen-to-square text-brand"></i> Dados da Vaga e Candidatos</h2>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Descrição da Vaga</label>
+                    <textarea id="input-vaga" rows="3"
+                        class="w-full p-3 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-brand focus:outline-none"
+                        placeholder="Ex: Desenvolvedor Front-end Pleno. Requisitos: React, Tailwind, 3 anos de experiência..."></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Currículos (Texto Bruto)</label>
+                    <textarea id="input-curriculos" rows="8"
+                        class="w-full p-3 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-brand focus:outline-none"
+                        placeholder="Cole aqui o texto dos currículos para análise..."></textarea>
+                </div>
+
+                <div class="flex gap-3 mb-6">
+                    <button onclick="limparCampos()"
+                        class="flex-1 py-2 bg-white border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition text-sm font-medium flex justify-center items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-eraser"></i> Limpar Campos
+                    </button>
+                    <button onclick="preencherExemplo()"
+                        class="flex-1 py-2 bg-slate-100 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-200 transition text-sm font-medium flex justify-center items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-file-lines"></i> Preencher Dados
+                    </button>
+                </div>
+
+                <button id="btn-triar" onclick="executarTriagem()"
+                    class="w-full py-3 bg-brand text-white font-medium rounded-lg hover:bg-brandHover transition-colors flex justify-center items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-microchip"></i> Executar Triagem Inteligente
+                </button>
+            </div>
+        </div>
+
+        <!-- Coluna Direita: Área da IA e Decisão -->
+        <div class="lg:col-span-7 flex flex-col gap-4">
+
+            <!-- Painel de Resultados -->
+            <div class="bg-white flex-grow rounded-xl shadow-sm border border-slate-200 flex flex-col overflow-hidden">
+                <div class="bg-slate-100 px-5 py-3 border-b border-slate-200 flex justify-between items-center">
+                    <h2 class="text-sm font-semibold text-slate-700 uppercase tracking-wider"><i
+                            class="fa-solid fa-list-ol text-slate-500"></i> Sugestão de Ranking</h2>
+                    <span id="status-badge"
+                        class="px-2 py-1 bg-slate-200 text-slate-600 text-xs rounded-full font-medium">Aguardando
+                        dados</span>
+                </div>
+
+                <div id="area-resultados" class="p-5 flex-grow overflow-y-auto bg-slate-50 relative">
+                    <!-- Estado Inicial -->
+                    <div id="estado-vazio" class="h-full flex flex-col items-center justify-center text-slate-400">
+                        <i class="fa-solid fa-file-contract text-4xl mb-3 opacity-50"></i>
+                        <p class="text-sm text-center">Insira a vaga e os currículos ao lado<br>para gerar o ranking
+                            comentado.</p>
+                    </div>
+
+                    <!-- Loader -->
+                    <div id="estado-carregando"
+                        class="hidden h-full flex flex-col items-center justify-center text-brand">
+                        <div class="loader mb-3"></div>
+                        <p class="text-sm font-medium animate-pulse">A IA está cruzando os perfis...</p>
+                    </div>
+
+                    <!-- Resultados Simulados -->
+                    <div id="estado-pronto" class="hidden space-y-4">
+                        <p class="text-sm text-slate-600 mb-4 bg-blue-50 p-3 rounded border border-blue-100"><i
+                                class="fa-solid fa-circle-info text-blue-500"></i> <strong>Nota da IA:</strong> Aqui
+                            está a organização dos perfis com base na aderência à descrição fornecida. A decisión final
+                            de contacto é súa.</p>
+
+                        <!-- Candidato 1 -->
+                        <div
+                            class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm border-l-4 border-l-green-500">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-bold text-slate-800">1º - Mariana Costa</h3>
+                            </div>
+                            <p class="text-sm text-slate-700 leading-relaxed">
+                                <strong>Aderência:</strong> Possui 4 anos de experiência com React e Tailwind CSS,
+                                correspondendo perfeitamente ao nível Pleno exigido. Conhecimento sólido em consumo de
+                                APIs REST.<br>
+                                <strong>Atenção:</strong> O currículo não detalha experiência prévia com metodologias
+                                ágeis (Scrum), que foi mencionado como diferencial na vaga.
+                            </p>
+                        </div>
+
+                        <!-- Candidato 2 -->
+                        <div
+                            class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm border-l-4 border-l-yellow-500">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-bold text-slate-800">2º - Roberto Alves</h3>
+                            </div>
+                            <p class="text-sm text-slate-700 leading-relaxed">
+                                <strong>Aderência:</strong> Forte background em desenvolvimento Front-end (5 anos),
+                                domina metodologias ágeis e liderança técnica em projetos passados.<br>
+                                <strong>Atenção:</strong> Sua experiência principal é com Angular. Menciona React apenas
+                                como projeto de estudo, o que pode aumentar o tempo de onboarding.
+                            </p>
+                        </div>
+
+                        <!-- Candidato 3 -->
+                        <div
+                            class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm border-l-4 border-l-red-500">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-bold text-slate-800">3º - João Mendes</h3>
+                            </div>
+                            <p class="text-sm text-slate-700 leading-relaxed">
+                                <strong>Aderência:</strong> Conhecimento básico de HTML, CSS e JavaScript puro. Perfil
+                                motivado e em transição de carreira.<br>
+                                <strong>Atenção:</strong> Não possui os 3 anos de experiência exigidos nem domínio dos
+                                frameworks solicitados (React/Tailwind). Perfil mais alinhado para vagas Júnior/Estágio.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ações do RH (Simula o Override do teste) -->
+                <div id="area-acoes"
+                    class="bg-white border-t border-slate-200 p-4 flex gap-3 opacity-50 pointer-events-none transition-opacity">
+                    <button onclick="registrarAcao('Aceitar Ranking', 'ACEITOU_SUGESTAO_IA', 'NAO')"
+                        class="flex-1 bg-green-50 text-green-700 border border-green-200 py-2 rounded-lg text-sm font-medium hover:bg-green-100 transition">
+                        <i class="fa-solid fa-check"></i> Aceitar e Seguir
+                    </button>
+                    <button onclick="solicitarAjuste()"
+                        class="flex-1 bg-amber-50 text-amber-700 border border-amber-200 py-2 rounded-lg text-sm font-medium hover:bg-amber-100 transition">
+                        <i class="fa-solid fa-sliders"></i> Pedir Ajuste na IA
+                    </button>
+                    <button
+                        onclick="registrarAcao('Decisão Própria (Override)', 'IGNOROU_IA_FEZ_SELECAO_MANUAL', 'SIM')"
+                        class="flex-1 bg-slate-100 text-slate-700 border border-slate-300 py-2 rounded-lg text-sm font-medium hover:bg-slate-200 transition">
+                        <i class="fa-solid fa-user-xmark"></i> Ignorar Ranking (Override)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal de Ajuste (Escondido) -->
+            <div id="modal-ajuste" class="hidden bg-white p-4 rounded-xl border border-amber-300 shadow-md">
+                <label class="block text-sm font-medium text-amber-800 mb-2">Instrução adicional para a IA:</label>
+                <input type="text" id="input-ajuste"
+                    class="w-full p-2 border border-amber-200 rounded text-sm mb-3 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                    placeholder="Ex: Dê mais peso para quem tem Scrum...">
+                <div class="flex gap-2">
+                    <button onclick="enviarAjuste()"
+                        class="bg-amber-500 text-white px-4 py-1.5 rounded text-sm hover:bg-amber-600">Re-processar</button>
+                    <button onclick="fecharAjuste()"
+                        class="bg-slate-100 text-slate-600 px-4 py-1.5 rounded text-sm hover:bg-slate-200">Cancelar</button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Painel Inferior: Console de Log (Obrigatório para o Testador preencher a ficha) -->
+    <div class="max-w-7xl mx-auto px-4 pb-8 w-full">
+        <div class="bg-slate-900 rounded-xl overflow-hidden shadow-lg border border-slate-800">
+            <div class="bg-slate-800 px-4 py-2 flex justify-between items-center border-b border-slate-700">
+                <span class="text-xs font-mono text-emerald-400"><i class="fa-solid fa-terminal"></i> CONSOLE DE TESTES
+                    (LOGS DA RODADA 4)</span>
+                <button onclick="limparLogs()" class="text-xs text-slate-400 hover:text-white"><i
+                        class="fa-solid fa-trash"></i> Limpar</button>
+            </div>
+            <div id="console-logs" class="p-4 h-40 overflow-y-auto font-mono text-xs text-slate-300 space-y-2">
+                <div class="text-slate-500">// O registro de interações aparecerá aqui para ser copiado para a ficha de
+                    entregável.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função que preenche os dados iniciais
+        function preencherExemplo() {
+            document.getElementById('input-vaga').value = "Desenvolvedor Front-end Pleno. Requisitos Obrigatórios: 3+ anos de experiência, React, Tailwind CSS. Diferencial: Experiência com metodologias ágeis (Scrum).";
+            document.getElementById('input-curriculos').value = "CANDIDATO 1: João Mendes\nExperiência: 1 ano como estagiário. Conhecimentos: HTML, CSS, JS. Estudando React.\n\nCANDIDATO 2: Mariana Costa\nExperiência: 4 anos dev front-end. Tecnologias: React, Tailwind, Next.js, API REST.\n\nCANDIDATO 3: Roberto Alves\nExperiência: 5 anos de engenharia de software. Líder técnico, domina Angular e Scrum. Fez um bootcamp rápido de React.";
+            addLog("SISTEMA", "CARREGOU_DADOS_DE_EXEMPLO", "NAO");
+        }
+
+        // Função para limpar os campos
+        function limparCampos() {
+            document.getElementById('input-vaga').value = "";
+            document.getElementById('input-curriculos').value = "";
+            addLog("SISTEMA", "LIMPOU_TODOS_OS_CAMPOS", "NAO");
+        }
+
+        // Preenche automaticamente ao carregar a página
+        window.onload = function () {
+            preencherExemplo();
+        };
+
+        function executarTriagem() {
+            const vaga = document.getElementById('input-vaga').value;
+            const currs = document.getElementById('input-curriculos').value;
+
+            if (!vaga || !currs) {
+                alert("Preencha a vaga e os currículos primeiro.");
+                return;
+            }
+
+            const btn = document.getElementById('btn-triar');
+            btn.disabled = true;
+            btn.classList.add('opacity-75');
+
+            // Log de entrada
+            addLog("ACAO_USUARIO", "ENVIOU_VAGA_E_CURRICULOS", "NAO");
+
+            // UI State - Carregando
+            document.getElementById('estado-vazio').classList.add('hidden');
+            document.getElementById('estado-pronto').classList.add('hidden');
+            document.getElementById('estado-carregando').classList.remove('hidden');
+            document.getElementById('status-badge').innerText = "Processando...";
+            document.getElementById('status-badge').classList.replace('bg-slate-200', 'bg-blue-200');
+            document.getElementById('status-badge').classList.replace('text-slate-600', 'text-blue-700');
+            document.getElementById('area-acoes').classList.add('opacity-50', 'pointer-events-none');
+
+            // Simula tempo da IA (1.5 segundos)
+            setTimeout(() => {
+                document.getElementById('estado-carregando').classList.add('hidden');
+                document.getElementById('estado-pronto').classList.remove('hidden');
+                document.getElementById('status-badge').innerText = "Ranking Gerado";
+                document.getElementById('status-badge').classList.replace('bg-blue-200', 'bg-green-200');
+                document.getElementById('status-badge').classList.replace('text-blue-700', 'text-green-700');
+
+                // Habilita as ações de feedback (Override)
+                document.getElementById('area-acoes').classList.remove('opacity-50', 'pointer-events-none');
+                btn.disabled = false;
+                btn.classList.remove('opacity-75');
+
+                addLog("REACAO_IA", "DEVOLVEU_RANKING_COMENTADO", "NAO");
+            }, 1500);
+        }
+
+        function solicitarAjuste() {
+            document.getElementById('modal-ajuste').classList.remove('hidden');
+            document.getElementById('input-ajuste').focus();
+        }
+
+        function fecharAjuste() {
+            document.getElementById('modal-ajuste').classList.add('hidden');
+            document.getElementById('input-ajuste').value = '';
+        }
+
+        function enviarAjuste() {
+            const ajuste = document.getElementById('input-ajuste').value;
+            if (!ajuste) return;
+
+            fecharAjuste();
+            addLog("ACAO_USUARIO", `SOLICITOU_RERANKING ("${ajuste}")`, "NAO");
+            addLog("REACAO_IA", "REPROCESSOU_COM_NOVO_CRITERIO", "NAO");
+
+            // Simula piscar a tela de resultados para parecer que recarregou
+            document.getElementById('estado-pronto').classList.add('opacity-50');
+            setTimeout(() => {
+                document.getElementById('estado-pronto').classList.remove('opacity-50');
+            }, 500);
+        }
+
+        function registrarAcao(label, acao, override) {
+            addLog("ACAO_USUARIO", acao, override);
+            addLog("REACAO_IA", "NENHUMA (PROCESSO_CONCLUIDO)", "NAO");
+
+            // Feedback visual rápido
+            alert(`Ação "${label}" registrada no console! Verifique os logs abaixo para copiar para a ficha.`);
+        }
+
+        function addLog(tipo, mensagem, override) {
+            const consoleEl = document.getElementById('console-logs');
+            const logLine = document.createElement('div');
+
+            let corTipo = "text-blue-400";
+            if (tipo === "REACAO_IA") corTipo = "text-purple-400";
+            if (tipo === "SISTEMA") corTipo = "text-slate-500";
+
+            let txtOverride = override === "SIM" ? `<span class="bg-red-900 text-red-200 px-1 rounded ml-2">OVERRIDE: SIM</span>` : `<span class="text-slate-600 ml-2">OVERRIDE: NAO</span>`;
+            if (tipo === "REACAO_IA" || tipo === "SISTEMA") txtOverride = "";
+
+            logLine.innerHTML = `<span class="${corTipo} font-bold">${tipo}:</span> ${mensagem} ${txtOverride}`;
+            consoleEl.appendChild(logLine);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+
+        function limparLogs() {
+            document.getElementById('console-logs').innerHTML = '';
+        }
+    </script>
+    <!-- O Balãozinho -->
+    <div id="visit-badge" class="fixed bottom-6 right-6 bg-white border border-slate-200 shadow-xl rounded-2xl p-4 flex items-center gap-4 z-50" style="animation: fadeIn 0.5s ease;">
+        <div class="bg-brand/10 text-brand w-10 h-10 rounded-full flex items-center justify-center">
+            <i class="fa-solid fa-layer-group text-lg"></i>
+        </div>
+        <span class="text-sm text-slate-600 font-medium leading-tight">
+            Você está visitando o site de<br>
+            <a href="https://luizihara.github.io/" target="_blank" class="text-brand font-bold hover:text-brandHover hover:underline transition-colors">luizihara.github.io</a>
+        </span>
+        <button onclick="document.getElementById('visit-badge').style.display='none'"
+            class="ml-2 text-slate-400 hover:text-red-500 hover:bg-red-50 w-8 h-8 rounded-lg transition-colors flex items-center justify-center" title="Fechar">
+            <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+    </div>
+</body>
+
+</html>
