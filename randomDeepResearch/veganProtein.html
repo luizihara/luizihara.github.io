@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Whey Vegano Custo x Benefício</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js para o Canvas -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#4ade80', // green-400
+                            DEFAULT: '#22c55e', // green-500
+                            dark: '#166534', // green-800
+                        },
+                        darkbase: '#0a0a0a'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #f5f5f5;
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(34, 197, 94, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+            overflow-x: hidden;
+        }
+
+        /* Efeito Glassmorphism UI */
+        .glass-panel {
+            background: rgba(25, 25, 25, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #4ade80, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Efeito de Tilt nos Cards */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tilt-card:hover {
+            border-color: rgba(74, 222, 128, 0.4);
+            box-shadow: 0 10px 40px -10px rgba(74, 222, 128, 0.2);
+        }
+
+        .tilt-content {
+            transform: translateZ(30px);
+        }
+
+        /* Scrollbar customizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #22c55e;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen p-4 md:p-8 lg:p-12">
+
+    <!-- Header -->
+    <header class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+        <div class="flex items-center gap-3">
+            <div class="p-3 bg-brand-dark/30 rounded-xl border border-brand/20">
+                <i data-lucide="leaf" class="text-brand-light w-8 h-8"></i>
+            </div>
+            <div>
+                <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">Plant<span
+                        class="text-gradient">Power</span></h1>
+                <p class="text-gray-400 text-sm font-medium">Análise de Mercado UI/UX 2026</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 text-sm bg-white/5 px-4 py-2 rounded-full border border-white/10">
+            <i data-lucide="activity" class="w-4 h-4 text-brand-light"></i>
+            <span>Criado no dia 24/04/2026</span>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto space-y-8">
+
+        <!-- Top Section: Vencedor & Gráfico Canvas -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Vencedor Custo Benefício -->
+            <div class="glass-panel rounded-3xl p-8 relative overflow-hidden flex flex-col justify-between tilt-card"
+                id="winner-card">
+                <div
+                    class="absolute top-0 right-0 w-32 h-32 bg-brand/20 blur-[50px] rounded-full translate-x-1/2 -translate-y-1/2">
+                </div>
+
+                <div class="tilt-content">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 bg-brand/20 text-brand-light rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-brand/30">
+                        <i data-lucide="award" class="w-4 h-4"></i>
+                        Melhor Custo-Benefício
+                    </div>
+
+                    <h2 class="text-4xl font-black mb-2 text-white">Growth Blend</h2>
+                    <p class="text-gray-400 mb-6 font-medium">A combinação imbatível de ervilha e arroz com o menor
+                        custo por dose do mercado brasileiro.</p>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-black/30 p-4 rounded-2xl border border-white/5">
+                            <span class="block text-gray-500 text-xs uppercase mb-1">Preço/Kg</span>
+                            <span class="text-2xl font-bold text-white">R$ 145<span
+                                    class="text-sm text-gray-500">,34</span></span>
+                        </div>
+                        <div class="bg-brand/10 p-4 rounded-2xl border border-brand/20">
+                            <span class="block text-brand-light text-xs uppercase mb-1">Custo/Dose</span>
+                            <span class="text-2xl font-bold text-brand-light">R$ 4<span
+                                    class="text-sm">,36</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Area do Canvas (Gráfico Chart.js) -->
+            <div class="glass-panel rounded-3xl p-8 lg:col-span-2 relative tilt-card">
+                <div class="tilt-content h-full flex flex-col">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-bold flex items-center gap-2">
+                            <i data-lucide="bar-chart-2" class="text-blue-400"></i>
+                            Análise Comparativa: Custo por Dose (R$)
+                        </h3>
+                    </div>
+                    <!-- Elemento Canvas -->
+                    <div class="relative w-full h-[250px] md:h-[300px] flex-1">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Tabela/Cards Interativos -->
+        <div>
+            <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                <i data-lucide="layers" class="text-brand-light"></i>
+                Análise Detalhada (Top 6 Marcas)
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="cards-container">
+                <!-- Os cards serão injetados aqui via JavaScript -->
+            </div>
+        </div>
+
+    </main>
+
+    <footer
+        class="max-w-7xl mx-auto mt-16 mb-8 text-center text-gray-500 text-sm font-medium flex justify-center items-center gap-2">
+        <span>Criado com</span>
+        <i data-lucide="heart" class="w-4 h-4 text-red-500 fill-red-500"></i>
+        <span>para dados precisos e design surpreendente.</span>
+    </footer>
+
+    <script>
+        // Inicializar os ícones do Lucide
+        lucide.createIcons();
+
+        // Base de dados das proteínas (extraída da pesquisa web 2026)
+        const proteinsData = [
+            { id: 'growth', name: 'Blend Vegan', brand: 'Growth Supplements', price: 145.34, weight: 1000, dose: 30, protein: 24, score: 9.8, highlights: ['Ervilha & Arroz', 'Líder em Preço'] },
+            { id: 'wise', name: 'Vegan Protein', brand: 'WiseHealth', price: 129.00, weight: 837, dose: 30, protein: 25, score: 9.2, highlights: ['Alta Proteína', 'Ótimo Sabor'] },
+            { id: 'true', name: 'True Vegan', brand: 'True Source', price: 189.90, weight: 837, dose: 34, protein: 23, score: 8.5, highlights: ['Textura Premium', 'Enriquecido B12'] },
+            { id: 'nutrify', name: 'Vegan Tasty', brand: 'Nutrify', price: 116.90, weight: 420, dose: 35, protein: 20, score: 8.0, highlights: ['Sabor Sobremesa', 'Clean Label'] },
+            { id: 'atlhetica', name: 'Best Vegan', brand: 'Atlhetica', price: 159.00, weight: 500, dose: 35, protein: 20, score: 7.8, highlights: ['Embalagem Sustentável', 'Fibras'] },
+            { id: 'essential', name: 'Veggie Protein', brand: 'Essential Nutrition', price: 294.00, weight: 405, dose: 36, protein: 22, score: 7.0, highlights: ['Qualidade Luxo', 'Ervilha & Amêndoa'] },
+        ];
+
+        // Calcular custo por dose dinamicamente
+        proteinsData.forEach(p => {
+            p.costPerDose = ((p.price / p.weight) * p.dose).toFixed(2);
+            p.dosesPerPkg = Math.floor(p.weight / p.dose);
+        });
+
+        // Ordenar do melhor custo-benefício (menor preço/dose) para o maior
+        proteinsData.sort((a, b) => a.costPerDose - b.costPerDose);
+
+        // Renderizar Cards Interativos
+        const cardsContainer = document.getElementById('cards-container');
+
+        proteinsData.forEach((p, index) => {
+            const isWinner = index === 0;
+            const badgeColor = isWinner ? 'bg-brand text-black' : 'bg-white/10 text-gray-300';
+
+            const cardHTML = `
+                <div class="glass-panel rounded-2xl p-6 tilt-card group relative overflow-hidden">
+                    ${isWinner ? '<div class="absolute top-0 right-0 w-24 h-24 bg-brand/20 blur-[30px] rounded-full translate-x-1/2 -translate-y-1/2"></div>' : ''}
+                    <div class="tilt-content">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h4 class="text-xl font-bold text-white mb-1">${p.brand}</h4>
+                                <p class="text-gray-400 text-sm font-medium">${p.name}</p>
+                            </div>
+                            <span class="px-2 py-1 text-xs font-bold rounded-lg ${badgeColor} shadow-lg">
+                                #${index + 1}
+                            </span>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            ${p.highlights.map(h => `<span class="text-xs px-2 py-1 bg-white/5 border border-white/10 rounded-md text-gray-300">${h}</span>`).join('')}
+                        </div>
+
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between items-center pb-2 border-b border-white/5">
+                                <span class="text-sm text-gray-400">Preço do Pote (${p.weight}g)</span>
+                                <span class="font-bold text-white">R$ ${p.price.toFixed(2).replace('.', ',')}</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-2 border-b border-white/5">
+                                <span class="text-sm text-gray-400">Proteína / Dose</span>
+                                <span class="font-bold text-brand-light">${p.protein}g</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-400">Rendimento</span>
+                                <span class="font-bold text-white">${p.dosesPerPkg} doses</span>
+                            </div>
+                        </div>
+
+                        <div class="w-full bg-black/40 rounded-xl p-3 flex justify-between items-center border border-white/5 transition-colors group-hover:border-brand/30">
+                            <span class="text-sm font-medium text-gray-400">Custo por Dose</span>
+                            <span class="text-xl font-black ${isWinner ? 'text-brand-light' : 'text-white'}">
+                                R$ ${p.costPerDose.replace('.', ',')}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            cardsContainer.innerHTML += cardHTML;
+        });
+
+        // Configuração e Renderização do Canvas (Chart.js)
+        const ctx = document.getElementById('costChart').getContext('2d');
+
+        // Criar gradiente para as barras
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, '#4ade80'); // Verde neon
+        gradient.addColorStop(1, '#3b82f6'); // Azul neon
+
+        const chartData = {
+            labels: proteinsData.map(p => p.brand),
+            datasets: [{
+                label: 'Custo por Dose (R$)',
+                data: proteinsData.map(p => p.costPerDose),
+                backgroundColor: proteinsData.map((_, i) => i === 0 ? gradient : 'rgba(255, 255, 255, 0.1)'),
+                borderColor: proteinsData.map((_, i) => i === 0 ? '#4ade80' : 'rgba(255, 255, 255, 0.2)'),
+                borderWidth: 1,
+                borderRadius: 6,
+                barPercentage: 0.6
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data: chartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(10, 10, 10, 0.9)',
+                        titleColor: '#fff',
+                        bodyColor: '#4ade80',
+                        titleFont: { size: 14, family: 'Outfit' },
+                        bodyFont: { size: 16, weight: 'bold', family: 'Outfit' },
+                        padding: 12,
+                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        borderWidth: 1,
+                        displayColors: false,
+                        callbacks: {
+                            label: function (context) {
+                                return `Custo: R$ ${context.raw.replace('.', ',')} / dose`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)',
+                            drawBorder: false,
+                        },
+                        ticks: {
+                            color: '#a3a3a3',
+                            font: { family: 'Outfit' },
+                            callback: function (value) {
+                                return 'R$ ' + value;
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false,
+                        },
+                        ticks: {
+                            color: '#e5e5e5',
+                            font: { family: 'Outfit', weight: '500' }
+                        }
+                    }
+                },
+                animation: {
+                    y: {
+                        duration: 2000,
+                        easing: 'easeOutElastic'
+                    }
+                }
+            }
+        };
+
+        new Chart(ctx, config);
+
+        // Lógica para o efeito 3D Tilt (Mouse tracking)
+        const tiltCards = document.querySelectorAll('.tilt-card');
+
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                // Reduzir um pouco o multiplicador para não ficar tão exagerado
+                const rotateX = ((y - centerY) / centerY) * -8;
+                const rotateY = ((x - centerX) / centerX) * 8;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+
+    </script>
+</body>
+
+</html>
