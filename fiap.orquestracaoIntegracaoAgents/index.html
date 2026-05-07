@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto NuBridge - Design de Sistema Multiagentes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --nu-purple: #8A05BE;
+            --nu-purple-dark: #610488;
+            --nu-purple-light: #A728DF;
+            --bg-dark: #0F0F13;
+            --bg-card: #1C1C24;
+            --text-main: #FFFFFF;
+            --text-muted: #A1A1AA;
+            --accent-green: #10B981;
+            --accent-red: #EF4444;
+            --accent-blue: #3B82F6;
+            --glass-bg: rgba(28, 28, 36, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.2;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .text-purple { color: var(--nu-purple-light); }
+        .text-muted { color: var(--text-muted); }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-8 { margin-bottom: 2rem; }
+
+        /* Typography */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #FFF, var(--nu-purple-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(138, 5, 190, 0.15);
+            border-color: rgba(138, 5, 190, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: radial-gradient(circle at center, #2e0042 0%, var(--bg-dark) 70%);
+            overflow: hidden;
+        }
+
+        /* Neural network background pattern */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                radial-gradient(rgba(138, 5, 190, 0.2) 1px, transparent 1px),
+                radial-gradient(rgba(138, 5, 190, 0.2) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            animation: fadeInUP 1s ease-out forwards;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(138, 5, 190, 0.2);
+            color: var(--nu-purple-light);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(138, 5, 190, 0.5);
+            box-shadow: 0 0 15px rgba(138, 5, 190, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #FFF, var(--nu-purple-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        /* Problem vs Solution */
+        .split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .split-grid { grid-template-columns: 1fr; }
+        }
+
+        .problem-list, .solution-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+        .problem-list li, .solution-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .problem-list li:hover, .solution-list li:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        .problem-list li i { color: var(--accent-red); margin-top: 4px; }
+        .solution-list li i { color: var(--accent-green); margin-top: 4px; }
+
+        /* Agents Grid */
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .agent-card {
+            padding-top: 3.5rem;
+            overflow: hidden;
+            border-top: 3px solid transparent;
+        }
+
+        .agent-card.triador { border-top-color: var(--accent-red); }
+        .agent-card.arqueologo { border-top-color: var(--text-muted); }
+        .agent-card.bibliotecario { border-top-color: #F59E0B; }
+        .agent-card.investigador { border-top-color: var(--nu-purple-light); }
+        .agent-card.solucionador { border-top-color: var(--accent-green); }
+        .agent-card.cronista { border-top-color: var(--accent-blue); }
+
+        .agent-icon {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            opacity: 0.1;
+            transform: scale(2.5);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .agent-card:hover .agent-icon {
+            transform: scale(3) rotate(-10deg);
+            opacity: 0.2;
+        }
+        .triador:hover .agent-icon { color: var(--accent-red); }
+        .arqueologo:hover .agent-icon { color: #FFF; }
+        .bibliotecario:hover .agent-icon { color: #F59E0B; }
+        .investigador:hover .agent-icon { color: var(--nu-purple-light); }
+        .solucionador:hover .agent-icon { color: var(--accent-green); }
+        .cronista:hover .agent-icon { color: var(--accent-blue); }
+
+        .agent-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        /* Architecture */
+        .architecture-container {
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            padding: 2.5rem;
+            border: 1px dashed var(--glass-border);
+            text-align: center;
+            overflow-x: auto;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
+        }
+        
+        .human-loop-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent-green);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            font-weight: 600;
+        }
+
+        /* KPIs */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        @media (max-width: 900px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { .kpi-grid { grid-template-columns: 1fr; } }
+        
+        .kpi-card {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            background: linear-gradient(145deg, var(--bg-card), rgba(0,0,0,0.2));
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--nu-purple-light), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .kpi-card:hover::before { opacity: 1; }
+        
+        .kpi-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--nu-purple-light);
+            font-family: 'Outfit', sans-serif;
+            margin: 1rem 0 0.5rem;
+            line-height: 1;
+        }
+
+        /* Knight Capital */
+        .knight-capital {
+            background: linear-gradient(145deg, rgba(239, 68, 68, 0.05), transparent);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 16px;
+            padding: 3rem;
+            position: relative;
+        }
+        .knight-capital::after {
+            content: '';
+            position: absolute;
+            bottom: 0; right: 0; width: 150px; height: 150px;
+            background: radial-gradient(circle, rgba(239,68,68,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .risk-box {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        .risk-icon {
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-red);
+            box-shadow: 0 0 20px rgba(239,68,68,0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeInUP {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Flow Glows */
+        .glow-circle {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--nu-purple);
+            filter: blur(150px);
+            border-radius: 50%;
+            opacity: 0.15;
+            z-index: -1;
+        }
+        .glow-1 { top: -10%; left: -10%; }
+        .glow-2 { bottom: 20%; right: -5%; background: var(--accent-blue); }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="tag"><i data-lucide="network" width="14" style="display:inline; vertical-align:middle; margin-right:4px;"></i> Architect-Lab Project</div>
+            <h1>Projeto NuBridge</h1>
+            <p>A ponte neural entre a falha crítica e a recuperação sistêmica. Um esquadrão multiagentes que transforma a adrenalina e o caos de uma <em>War Room</em> em memória institucional automatizada.</p>
+            <a href="#problema" style="display:inline-flex; align-items: center; gap: 8px; padding: 1rem 2.5rem; background: var(--nu-purple); color: white; text-decoration: none; border-radius: 30px; font-weight: 600; font-size: 1.1rem; transition: 0.3s; box-shadow: 0 4px 15px rgba(138,5,190,0.4);">
+                Descobrir a Solução <i data-lucide="arrow-right" width="20"></i>
+            </a>
+        </div>
+    </header>
+
+    <div class="glow-circle glow-1"></div>
+
+    <!-- Contexto do Problema -->
+    <section class="container reveal" style="padding-bottom: 2rem;">
+        <div class="glass-card" style="border-left: 4px solid var(--nu-purple-light); padding: 2.5rem; text-align: center; max-width: 900px; margin: 0 auto;">
+            <i data-lucide="quote" style="color: var(--nu-purple-dark); transform: scale(2); margin-bottom: 1.5rem; opacity: 0.5;"></i>
+            <p style="font-size: 1.3rem; font-style: italic; color: var(--text-main); font-weight: 300;">
+                "Ao receber um bug crítico em produção, o time precisa correr contra o relógio para descobrir <strong>com quem está acontecendo</strong>, <strong>onde exatamente o erro estourou</strong>, <strong>quais serviços estão caindo em cascata</strong>, <strong>quem está sendo afetado</strong> e <strong>quais times (squads) precisarão ser envolvidos na War Room</strong>."
+            </p>
+            <p class="text-purple mt-4" style="font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">A Realidade das Trincheiras de Engenharia</p>
+        </div>
+    </section>
+
+    <!-- 1 & 2: Problema e Solução -->
+    <section id="problema" class="container reveal">
+        <div class="split-grid">
+            <div class="glass-card">
+                <div class="mb-4 text-purple"><i data-lucide="flame" width="40" height="40"></i></div>
+                <h2 class="section-title" style="font-size: 2rem;">1. O Problema</h2>
+                <p class="text-muted">A caçada noturna em logs destrói o sono, o foco e a retenção de conhecimento da equipe.</p>
+                <ul class="problem-list">
+                    <li><i data-lucide="x-circle"></i> <div><strong>A Síndrome da Tela Cega:</strong> Durante um incidente, a equipe entra em "achismos", cruzando métricas soltas em dezenas de dashboards na tentativa de adivinhar o erro.</div></li>
+                    <li><i data-lucide="x-circle"></i> <div><strong>Gargalo de Escavação:</strong> Encontrar qual Feature Flag ou PR recente quebrou a integração de forma oculta exige trabalho manual de detetive.</div></li>
+                    <li><i data-lucide="x-circle"></i> <div><strong>Ametropia Institucional ("Deja Vu"):</strong> O bug é resolvido na adrenalina. Ninguém escreve o Post-Mortem. 6 meses depois, o mesmo bug volta e a equipe gasta as mesmas 4 horas investigando.</div></li>
+                </ul>
+            </div>
+            
+            <div class="glass-card" style="border-color: rgba(16,185,129,0.3);">
+                <div class="mb-4" style="color: var(--accent-green)"><i data-lucide="milestone" width="40" height="40"></i></div>
+                <h2 class="section-title" style="font-size: 2rem; background: linear-gradient(to right, #FFF, var(--accent-green)); -webkit-background-clip: text;">2. A NuBridge</h2>
+                <p class="text-muted">O Swarm é a ponte conectando o diagnóstico instantâneo à memória corporativa permanente via RAG (Retrieval-Augmented Generation).</p>
+                <ul class="solution-list">
+                    <li><i data-lucide="check-circle"></i> <div><strong>Diagnóstico Vetorial:</strong> Os agentes não apenas olham os logs, mas perguntam ao banco de dados interno se a empresa já lidou com um incidente idêntico no passado.</div></li>
+                    <li><i data-lucide="check-circle"></i> <div><strong>Fixes Prontos:</strong> A equipe recebe no Slack o Pull Request de correção preparado, bastando apenas revisar o código e aprovar.</div></li>
+                    <li><i data-lucide="check-circle"></i> <div><strong>Post-Mortem Autônomo:</strong> O sistema redige e publica sozinho o relatório no Confluence/Notion e alimenta seu próprio cérebro (Vector DB) garantindo evolução contínua.</div></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3: Mapa de Agentes -->
+    <section id="agentes" class="container reveal">
+        <div class="text-center mb-8" style="text-align: center;">
+            <h2 class="section-title">3. O Enxame (Mapa de Agentes)</h2>
+            <p class="text-muted">Cinco agentes especializados formando uma ponte desde a triagem tática até a cristalização do conhecimento.</p>
+        </div>
+
+        <div class="agents-grid">
+            <!-- Agent 1 -->
+            <div class="glass-card agent-card triador">
+                <i data-lucide="stethoscope" class="agent-icon"></i>
+                <div class="agent-badge" style="background: rgba(239,68,68,0.15); color: var(--accent-red)"><i data-lucide="siren" width="14"></i> 1. Linha de Frente</div>
+                <h3>Agente Triador</h3>
+                <p class="text-muted mb-4 mt-2">Acorda com o PagerDuty. Lê os logs no Datadog/Splunk, extrai o stack trace e identifica quais microsserviços estão sofrendo degradação.</p>
+                <div style="font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                    <strong class="text-purple">Limites:</strong> Apenas leitura de telemetria.<br>
+                    <strong class="text-purple mt-2 d-block">Dados:</strong> Datadog, PagerDuty, Prometheus.
+                </div>
+            </div>
+
+            <!-- Agent 2 -->
+            <div class="glass-card agent-card arqueologo">
+                <i data-lucide="git-commit" class="agent-icon"></i>
+                <div class="agent-badge" style="background: rgba(255,255,255,0.1); color: #FFF"><i data-lucide="history" width="14"></i> 2. Contexto Recente</div>
+                <h3>Agente Arqueólogo</h3>
+                <p class="text-muted mb-4 mt-2">Mapeia as mudanças táticas. Busca quais PRs, dependências ou Feature Flags foram ativadas na última hora no ambiente de produção afetado.</p>
+                <div style="font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                    <strong class="text-purple">Limites:</strong> Leitura restrita ao repositório git e painéis de Flags.<br>
+                    <strong class="text-purple mt-2 d-block">Dados:</strong> GitHub, LaunchDarkly.
+                </div>
+            </div>
+
+            <!-- Agent 3 (NEW) -->
+            <div class="glass-card agent-card bibliotecario">
+                <i data-lucide="library-big" class="agent-icon" style="color: #F59E0B"></i>
+                <div class="agent-badge" style="background: rgba(245,158,11,0.15); color: #F59E0B"><i data-lucide="database-zap" width="14"></i> 3. Busca Histórica</div>
+                <h3>Agente Bibliotecário</h3>
+                <p class="text-muted mb-4 mt-2">Consulta a Base de Conhecimento Vetorial (RAG) em busca de incidentes idênticos no passado, extraindo o Post-Mortem de como o problema foi resolvido.</p>
+                <div style="font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                    <strong class="text-purple">Limites:</strong> Apenas realiza buscas no banco vetorial de Post-Mortems.<br>
+                    <strong class="text-purple mt-2 d-block">Dados:</strong> Pinecone / Weaviate.
+                </div>
+            </div>
+
+            <!-- Agent 4 -->
+            <div class="glass-card agent-card investigador">
+                <i data-lucide="brain-circuit" class="agent-icon"></i>
+                <div class="agent-badge" style="background: rgba(167,40,223,0.15); color: var(--nu-purple-light)"><i data-lucide="cpu" width="14"></i> 4. Cérebro Lógico</div>
+                <h3>Agente Investigador</h3>
+                <p class="text-muted mb-4 mt-2">Cruza a telemetria com as mudanças do Arqueólogo <strong>e o histórico do Bibliotecário</strong>. Crava a causa raiz da falha técnica identificando o culpado exato.</p>
+                <div style="font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                    <strong class="text-purple">Limites:</strong> Depende dos dados agregados para tirar conclusões.<br>
+                    <strong class="text-purple mt-2 d-block">Dados:</strong> Relatórios dos Agentes 1, 2 e 3.
+                </div>
+            </div>
+
+            <!-- Agent 5 -->
+            <div class="glass-card agent-card solucionador">
+                <i data-lucide="wrench" class="agent-icon"></i>
+                <div class="agent-badge" style="background: rgba(16,185,129,0.15); color: var(--accent-green)"><i data-lucide="code" width="14"></i> 5. Ação Prática</div>
+                <h3>Agente Solucionador</h3>
+                <p class="text-muted mb-4 mt-2">Escreve o patch para o bug identificado. Cria uma branch de hotfix, abre o PR e chama a equipe humana no Slack para revisão da correção proposta.</p>
+                <div style="font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                    <strong class="text-purple">Limites:</strong> Proibido de aprovar PR ou rodar deploy sozinho.<br>
+                    <strong class="text-purple mt-2 d-block">Dados:</strong> Repositório (Write Branch), API Slack.
+                </div>
+            </div>
+
+            <!-- Agent 6 -->
+            <div class="glass-card agent-card cronista">
+                <i data-lucide="library" class="agent-icon"></i>
+                <div class="agent-badge" style="background: rgba(59,130,246,0.15); color: var(--accent-blue)"><i data-lucide="book-marked" width="14"></i> 6. Memória Institucional</div>
+                <h3>Agente Cronista</h3>
+                <p class="text-muted mb-4 mt-2">Assim que o incidente é resolvido, lê a thread do Slack, redige um <em>Post-Mortem</em> no Confluence e vetoriza o aprendizado no Pinecone.</p>
+                <div style="font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                    <strong class="text-purple">Limites:</strong> Apenas documenta de forma assíncrona. Não interage com produção.<br>
+                    <strong class="text-purple mt-2 d-block">Dados:</strong> Slack Threads, Confluence API, Vector DB.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-circle glow-2"></div>
+
+    <!-- 4: Orquestração -->
+    <section id="orquestracao" class="container reveal">
+        <h2 class="section-title">4. Orquestração (O Loop RAG)</h2>
+        <p class="text-muted mb-8">Padrão: <strong>Collaborative Swarm Híbrido com Feedback Loop (RAG)</strong>. Os agentes investigam, humanos decidem, e a rede arquiva o aprendizado criando um ciclo contínuo de imunidade.</p>
+        
+        <div class="architecture-container">
+            <div class="mermaid">
+                graph TD
+                    Alert((Alerta de Incidente)) --> Triador[Agente Triador]
+                    Triador -->|Métricas/Logs| Investigador[Agente Investigador]
+                    Arqueologo[Agente Arqueólogo] -->|Commits/Contexto| Investigador
+                    
+                    VectorDB[(Base Vetorial)] -.->|Busca Similaridade| Bibliotecario[Agente Bibliotecário]
+                    Bibliotecario -->|Fornece Soluções Passadas| Investigador
+                    
+                    Investigador -->|Diagnóstico e Causa| Solucionador[Agente Solucionador]
+                    Solucionador -->|Gera PR e Explica| Slack[Slack Thread]
+                    
+                    Slack --> Dev[Equipe / Persona]
+                    Dev -->|Human-in-the-loop: Aprova Fix| Deploy((Deploy Correção))
+                    
+                    Deploy --> Cronista[Agente Cronista / Post-Mortem]
+                    Cronista -->|Escreve Relatório Oficial| Confluence((Notion / Confluence))
+                    Cronista -.->|Vetoriza Aprendizado 'Loop'| VectorDB
+                    
+                    classDef default fill:#1C1C24,stroke:#8A05BE,stroke-width:2px,color:#fff;
+                    classDef human fill:#A728DF,stroke:#fff,stroke-width:2px,color:#fff;
+                    classDef postmortem fill:#3B82F6,stroke:#fff,stroke-width:2px,color:#fff;
+                    classDef trigger fill:#10B981,stroke:#fff,stroke-width:2px,color:#fff;
+                    classDef search fill:#F59E0B,stroke:#fff,stroke-width:2px,color:#fff;
+                    classDef db fill:#2A2A35,stroke:#3B82F6,stroke-width:2px,stroke-dasharray: 5 5;
+                    
+                    class Dev,Slack human;
+                    class Alert trigger;
+                    class Cronista,Confluence postmortem;
+                    class Bibliotecario search;
+                    class VectorDB db;
+            </div>
+            
+            <div class="human-loop-banner">
+                <i data-lucide="check-circle-2"></i>
+                Diferencial Criativo: Auto-Healing Cognitivo. Ao invés de apenas corrigir, o sistema "aprende" e documenta. A equipe atua apenas no ponto de máxima inteligência: decidindo se aprova ou rejeita o PR.
+            </div>
+        </div>
+    </section>
+
+    <!-- 5: Viabilidade -->
+    <section id="viabilidade" class="container reveal">
+        <h2 class="section-title">5. Viabilidade & Business Case</h2>
+        <p class="text-muted mb-8">Por que a engenharia e a diretoria vão abraçar este projeto de braços abertos?</p>
+
+        <div class="kpi-grid mb-8">
+            <div class="kpi-card">
+                <i data-lucide="file-check-2" class="text-purple" width="32" height="32"></i>
+                <div class="kpi-value">100%</div>
+                <p class="text-muted">Incidentes críticos documentados via Post-Mortem</p>
+            </div>
+            <div class="kpi-card">
+                <i data-lucide="shield-check" class="text-purple" width="32" height="32"></i>
+                <div class="kpi-value">70%</div>
+                <p class="text-muted">Redução na reincidência de "Bugs Deja-vu"</p>
+            </div>
+            <div class="kpi-card">
+                <i data-lucide="clock-4" class="text-purple" width="32" height="32"></i>
+                <div class="kpi-value">-80%</div>
+                <p class="text-muted">Do tempo gasto redigindo relatórios burocráticos</p>
+            </div>
+            <div class="kpi-card">
+                <i data-lucide="trending-down" class="text-purple" width="32" height="32"></i>
+                <div class="kpi-value">85%</div>
+                <p class="text-muted">Redução no Tempo Médio de Resolução (MTTR)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6: Knight Capital -->
+    <section id="knight-capital" class="container reveal">
+        <h2 class="section-title">6. O Caso "Knight Capital" (Contenção)</h2>
+        <p class="text-muted mb-8">Piores cenários e arquitetura de contenção para evitar desastres sistêmicos.</p>
+
+        <div class="split-grid">
+            <div class="knight-capital" style="padding: 2rem;">
+                <div class="risk-box mb-4">
+                    <div class="risk-icon" style="width: 50px; height: 50px;"><i data-lucide="filter-x" width="24"></i></div>
+                    <h3 style="font-size: 1.25rem; color: var(--accent-red);">Risco 1: O Vazamento Ingênuo</h3>
+                </div>
+                <p class="text-muted mb-4" style="font-size: 0.9rem;">O Agente Investigador puxa logs com PIIs não mascarados (CPFs/Cartões) e gera um resumo expondo dados num Pull Request ou Slack, violando a LGPD.</p>
+                <div style="background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent-green);">
+                    <strong class="text-purple" style="font-size: 0.85rem;">Contenção (DLP Gateway)</strong>
+                    <p style="font-size: 0.85rem; color: #ccc;">Todos os logs ingeridos passam por um Data Loss Prevention para sanitizar regexes de documentos antes de bater no modelo, rodando em rede privada VPC.</p>
+                </div>
+            </div>
+
+            <div class="knight-capital" style="padding: 2rem;">
+                <div class="risk-box mb-4">
+                    <div class="risk-icon" style="width: 50px; height: 50px;"><i data-lucide="biohazard" width="24"></i></div>
+                    <h3 style="font-size: 1.25rem; color: var(--accent-red);">Risco 2: A Memória Envenenada</h3>
+                </div>
+                <p class="text-muted mb-4" style="font-size: 0.9rem;">A equipe faz um "workaround" sujo (gambiarra) para resolver a crise. O Agente Cronista vetoriza essa gambiarra como "solução oficial" e sugere reproduzi-la sempre no futuro.</p>
+                <div style="background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent-green);">
+                    <strong class="text-purple" style="font-size: 0.85rem;">Contenção (Golden PRs)</strong>
+                    <p style="font-size: 0.85rem; color: #ccc;">O Agente Cronista só envia para o Vector DB soluções de PRs que receberem uma Label específica da liderança técnica (ex: <code>safe-to-learn</code>), separando paliativos de curas definitivas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 4rem 2rem; background: rgba(0,0,0,0.5); border-top: 1px solid var(--glass-border); margin-top: 4rem;">
+        <div class="container">
+            <h2 class="text-purple mb-2" style="font-size: 1.5rem;"><i data-lucide="network" width="20" style="display:inline; vertical-align:middle;"></i> Projeto NuBridge</h2>
+            <p class="text-muted mb-4">Entrega de Case - Orquestração e Integração de Agentes (Architect Lab)</p>
+            <p style="font-size: 0.85rem; color: #666;">Foco total em resolução de incidentes, auto-healing e inteligência institucional.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Initialize Mermaid
+        mermaid.initialize({
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#8A05BE',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#A728DF',
+                lineColor: '#A1A1AA',
+                secondaryColor: '#10B981',
+                tertiaryColor: '#1C1C24'
+            }
+        });
+
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        setTimeout(reveal, 100);
+    </script>
+</body>
+</html>
