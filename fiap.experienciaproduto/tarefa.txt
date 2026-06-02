@@ -1,0 +1,14 @@
+Desafio: 
+Realizar o mapeamento da jornada do cliente e sugestão de melhorias de produto a partir da persona selecionada
+
+Tarefas:
+- Reunir informações que descrevem a persona atendida pela empresa escolhida pelo grupo.
+- Mapear a Jornada AS IS (cenário inicial referente ao que podemos observar na experiência vivida pela persona hoje) - VISÃO ATUAL DO SERVIÇO ENTREGUE PELA EMPRESA
+- Baseando-se no mapeamento da jornada, registrar insights que poderiam ser aplicados para melhoria da experiência da persona escolhida no template para JORNADA TO BE. *Obs.: para quem está usando o projeto do startup one, os insights podem corresponder às principais funcionalidades da solução que estão criando, respeitando os desafios identificados na jornada. 
+- A jornada será apresentada no nosso último encontro da disciplina.
+- Enviar uma apresentação em PDF ao sistema, até o prazo limite, para que a nota da disciplina seja registrada (a apresentação deve trazer um resumo sobre a empresa estudada, com os principais achados do trabalho, bem como os insights gerados a partir do mapeamento)
+
+Obs.: o link do Miro é uma sugestão de ferramentas para auxiliar na construção do trabalho. Caso opte por usar outras ferramentas, atente-se às tarefas solicitadas, para que todas estejam presentes no trabalho. 
+
+Sucesso no trabalho!
+Prof. Igor Souza

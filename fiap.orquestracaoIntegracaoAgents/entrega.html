@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto NuBridge - Entrega Final Orquestração</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --fiap-red: #ED145B;
+            --fiap-red-light: #FF4D79;
+            --bg-light: #FFFFFF;
+            --bg-alt: #F8F9FA;
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+            --border-color: #E5E7EB;
+            --accent-green: #10B981;
+            --accent-blue: #3B82F6;
+            --accent-orange: #F59E0B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-alt);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.2;
+            color: #111827;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .text-red { color: var(--fiap-red); }
+        .text-muted { color: var(--text-muted); }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mt-4 { margin-top: 1rem; }
+        .d-block { display: block; }
+
+        /* Typography */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--fiap-red);
+            display: inline-block;
+        }
+
+        /* Header / Hero */
+        .academic-header {
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF0F4 100%);
+            border-bottom: 4px solid var(--fiap-red);
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .university-badge {
+            display: inline-block;
+            background: var(--fiap-red);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(237, 20, 91, 0.3);
+        }
+
+        .academic-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        .info-block h3 {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-block p, .info-block ul {
+            font-size: 1.1rem;
+            font-weight: 600;
+            list-style: none;
+        }
+        
+        .info-block ul li {
+            margin-bottom: 0.25rem;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 0.25rem;
+        }
+        .info-block ul li:last-child {
+            border-bottom: none;
+        }
+        .info-block ul li span {
+            font-weight: 400;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+            position: relative;
+        }
+        
+        section:nth-child(even) {
+            background-color: var(--bg-light);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Cards */
+        .white-card {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        .white-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(237, 20, 91, 0.1);
+            border-color: rgba(237, 20, 91, 0.3);
+        }
+
+        /* Problem vs Solution */
+        .split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        @media (max-width: 768px) {
+            .split-grid { grid-template-columns: 1fr; }
+        }
+
+        .problem-list, .solution-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+        .problem-list li, .solution-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            background: var(--bg-alt);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s;
+        }
+        .problem-list li:hover, .solution-list li:hover {
+            background: #FFFFFF;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .problem-list li i { color: var(--fiap-red); margin-top: 4px; }
+        .solution-list li i { color: var(--accent-green); margin-top: 4px; }
+
+        /* Agents Grid */
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .agent-card {
+            padding-top: 3.5rem;
+            overflow: hidden;
+            border-top: 4px solid transparent;
+        }
+
+        .agent-card.triador { border-top-color: var(--fiap-red); }
+        .agent-card.arqueologo { border-top-color: var(--text-muted); }
+        .agent-card.bibliotecario { border-top-color: var(--accent-orange); }
+        .agent-card.investigador { border-top-color: #8A05BE; }
+        .agent-card.solucionador { border-top-color: var(--accent-green); }
+        .agent-card.cronista { border-top-color: var(--accent-blue); }
+
+        .agent-icon {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            opacity: 0.05;
+            transform: scale(2.5);
+            transition: all 0.5s ease;
+            color: var(--text-main);
+        }
+
+        .agent-card:hover .agent-icon {
+            transform: scale(3) rotate(-10deg);
+            opacity: 0.1;
+        }
+
+        .agent-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.5rem;
+        }
+
+        .agent-data {
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+            margin-top: 1.5rem;
+            background: var(--bg-alt);
+            margin: 1.5rem -2.5rem -2.5rem;
+            padding: 1.5rem 2.5rem;
+        }
+
+        /* Architecture */
+        .architecture-container {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 3rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            overflow-x: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+        }
+        
+        .human-loop-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background: #ECFDF5;
+            border: 1px solid #A7F3D0;
+            color: #047857;
+            padding: 1.25rem;
+            border-radius: 12px;
+            margin-top: 3rem;
+            font-weight: 600;
+        }
+
+        /* KPIs */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        @media (max-width: 900px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { .kpi-grid { grid-template-columns: 1fr; } }
+        
+        .kpi-card {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            background: #FFFFFF;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: all 0.3s;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(237, 20, 91, 0.1);
+            border-color: var(--fiap-red-light);
+        }
+        
+        .kpi-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--fiap-red);
+            font-family: 'Outfit', sans-serif;
+            margin: 1rem 0 0.5rem;
+            line-height: 1;
+        }
+
+        /* Knight Capital */
+        .knight-capital {
+            background: #FFF0F4;
+            border: 1px solid rgba(237, 20, 91, 0.2);
+            border-radius: 16px;
+            padding: 2.5rem;
+            position: relative;
+        }
+        .risk-box {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        .risk-icon {
+            flex-shrink: 0;
+            width: 70px;
+            height: 70px;
+            background: #FFFFFF;
+            border: 2px solid var(--fiap-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--fiap-red);
+            box-shadow: 0 10px 20px rgba(237, 20, 91, 0.15);
+        }
+        .containment-box {
+            background: #FFFFFF;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-green);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        /* Prototype & Video Sections */
+        .media-placeholder {
+            background: var(--bg-alt);
+            border: 2px dashed #CBD5E1;
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .media-placeholder:hover {
+            border-color: var(--fiap-red);
+            background: #FFF0F4;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.85rem 2rem;
+            background: var(--fiap-red);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(237, 20, 91, 0.3);
+        }
+        .btn:hover {
+            background: #C40B47;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(237, 20, 91, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeInUP {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Number Badges */
+        .section-badge {
+            display: inline-block;
+            background: #FFF0F4;
+            color: var(--fiap-red);
+            font-weight: 800;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            vertical-align: middle;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho Acadêmico -->
+    <header class="academic-header">
+        <div class="university-badge">Trabalho Final - FIAP</div>
+        <h1>Projeto NuBridge</h1>
+        <p style="font-size: 1.25rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 3rem;">
+            A ponte neural entre a falha crítica e a recuperação sistêmica. Um canvas de design multiagente para automação em incidentes, conectando arquitetura, governança e valor.
+        </p>
+
+        <div class="info-grid">
+            <div class="info-block">
+                <h3><i data-lucide="book-open"></i> Disciplina</h3>
+                <p>Orquestração e Integração de Agentes</p>
+                <div style="margin-top: 1.5rem;">
+                    <h3><i data-lucide="users"></i> Turma</h3>
+                    <p>2ABL</p>
+                </div>
+            </div>
+            
+            <div class="info-block" style="border-left: 1px solid var(--border-color); padding-left: 2rem;">
+                <h3><i data-lucide="user"></i> Professor</h3>
+                <p>Thiago Nascimento Nogueira</p>
+                <div style="margin-top: 1.5rem;">
+                    <h3><i data-lucide="graduation-cap"></i> Integrantes</h3>
+                    <ul>
+                        <li>Luiz Ihara <span>RM368484</span></li>
+                        <li>Filipe Fragoso <span>RM368500</span></li>
+                        <li>Daniel Caminha <span>RM366740</span></li>
+                        <li>Pedro Martins <span>RM368543</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Componente 1: Canvas de Design Multiagente -->
+    
+    <!-- 1. O Problema -->
+    <section id="problema" class="container reveal">
+        <div class="text-center mb-8">
+            <span class="university-badge" style="background: var(--text-main);">Componente 1: Canvas</span>
+        </div>
+        <div class="split-grid">
+            <div class="white-card">
+                <div class="mb-4 text-red"><i data-lucide="flame" width="40" height="40"></i></div>
+                <h2 class="section-title"><span class="section-badge">1</span>O Problema</h2>
+                <p class="text-muted">A caçada noturna em logs destrói o sono, o foco e a retenção de conhecimento da equipe durante War Rooms críticas.</p>
+                <ul class="problem-list">
+                    <li><i data-lucide="x-circle"></i> <div><strong>A Síndrome da Tela Cega:</strong> Durante um incidente, a equipe entra em "achismos", cruzando métricas soltas em dezenas de dashboards na tentativa de adivinhar o erro.</div></li>
+                    <li><i data-lucide="x-circle"></i> <div><strong>Gargalo de Escavação:</strong> Encontrar qual Feature Flag ou PR recente quebrou a integração de forma oculta exige trabalho manual de detetive.</div></li>
+                    <li><i data-lucide="x-circle"></i> <div><strong>Ametropia Institucional:</strong> O bug é resolvido na adrenalina. Ninguém escreve o Post-Mortem. 6 meses depois, o mesmo bug volta e a equipe gasta as mesmas 4 horas.</div></li>
+                </ul>
+            </div>
+            
+            <div class="white-card" style="border-color: var(--accent-green);">
+                <div class="mb-4" style="color: var(--accent-green)"><i data-lucide="milestone" width="40" height="40"></i></div>
+                <h2 class="section-title" style="color: var(--accent-green);"><span class="section-badge" style="background: #ECFDF5; color: var(--accent-green);">2</span>A Solução</h2>
+                <p class="text-muted">O projeto NuBridge (Swarm) conecta o diagnóstico instantâneo à memória corporativa permanente via RAG (Retrieval-Augmented Generation).</p>
+                <ul class="solution-list">
+                    <li><i data-lucide="check-circle"></i> <div><strong>Diagnóstico Vetorial:</strong> Os agentes não apenas olham os logs, mas perguntam ao banco de dados interno se a empresa já lidou com um incidente idêntico no passado.</div></li>
+                    <li><i data-lucide="check-circle"></i> <div><strong>Fixes Prontos:</strong> A equipe recebe no Slack o Pull Request de correção preparado, bastando apenas revisar o código e aprovar.</div></li>
+                    <li><i data-lucide="check-circle"></i> <div><strong>Post-Mortem Autônomo:</strong> O sistema redige e publica sozinho o relatório no Confluence/Notion e alimenta seu próprio cérebro (Vector DB) garantindo evolução.</div></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Mapa de Agentes -->
+    <section id="agentes" class="container reveal">
+        <div class="text-center mb-8" style="text-align: center;">
+            <h2 class="section-title"><span class="section-badge">3</span>Mapa de Agentes</h2>
+            <p class="text-muted">Cinco agentes especializados formando uma ponte desde a triagem tática até a cristalização do conhecimento.</p>
+        </div>
+
+        <div class="agents-grid">
+            <!-- Agent 1 -->
+            <div class="white-card agent-card triador">
+                <i data-lucide="stethoscope" class="agent-icon"></i>
+                <div class="agent-badge" style="background: #FFF0F4; color: var(--fiap-red)"><i data-lucide="siren" width="14"></i> 1. Linha de Frente</div>
+                <h3>Agente Triador</h3>
+                <p class="text-muted mt-2">Acorda com o PagerDuty. Lê os logs no Datadog/Splunk, extrai o stack trace e identifica quais microsserviços estão sofrendo degradação.</p>
+                <div class="agent-data">
+                    <strong class="text-red">Limites:</strong> Apenas leitura de telemetria.<br>
+                    <strong class="text-red mt-2 d-block">Dados:</strong> Datadog, PagerDuty, Prometheus.
+                </div>
+            </div>
+
+            <!-- Agent 2 -->
+            <div class="white-card agent-card arqueologo">
+                <i data-lucide="git-commit" class="agent-icon"></i>
+                <div class="agent-badge" style="background: #F3F4F6; color: var(--text-main)"><i data-lucide="history" width="14"></i> 2. Contexto Recente</div>
+                <h3>Agente Arqueólogo</h3>
+                <p class="text-muted mt-2">Mapeia as mudanças táticas. Busca quais PRs, dependências ou Feature Flags foram ativadas na última hora no ambiente afetado.</p>
+                <div class="agent-data">
+                    <strong style="color: var(--text-main);">Limites:</strong> Leitura restrita ao git e painéis.<br>
+                    <strong style="color: var(--text-main);" class="mt-2 d-block">Dados:</strong> GitHub, LaunchDarkly.
+                </div>
+            </div>
+
+            <!-- Agent 3 -->
+            <div class="white-card agent-card bibliotecario">
+                <i data-lucide="library-big" class="agent-icon"></i>
+                <div class="agent-badge" style="background: #FEF3C7; color: #D97706"><i data-lucide="database-zap" width="14"></i> 3. Busca Histórica</div>
+                <h3>Agente Bibliotecário</h3>
+                <p class="text-muted mt-2">Consulta a Base Vetorial (RAG) em busca de incidentes idênticos no passado, extraindo o Post-Mortem de como o problema foi resolvido.</p>
+                <div class="agent-data">
+                    <strong style="color: #D97706;">Limites:</strong> Buscas no banco vetorial.<br>
+                    <strong style="color: #D97706;" class="mt-2 d-block">Dados:</strong> Pinecone / Weaviate.
+                </div>
+            </div>
+
+            <!-- Agent 4 -->
+            <div class="white-card agent-card investigador">
+                <i data-lucide="brain-circuit" class="agent-icon"></i>
+                <div class="agent-badge" style="background: #F3E8FF; color: #7E22CE"><i data-lucide="cpu" width="14"></i> 4. Cérebro Lógico</div>
+                <h3>Agente Investigador</h3>
+                <p class="text-muted mt-2">Cruza a telemetria com as mudanças do Arqueólogo e histórico do Bibliotecário. Crava a causa raiz da falha técnica identificando o culpado.</p>
+                <div class="agent-data">
+                    <strong style="color: #7E22CE;">Limites:</strong> Depende dos dados agregados.<br>
+                    <strong style="color: #7E22CE;" class="mt-2 d-block">Dados:</strong> Relatórios dos Agentes 1, 2 e 3.
+                </div>
+            </div>
+
+            <!-- Agent 5 -->
+            <div class="white-card agent-card solucionador">
+                <i data-lucide="wrench" class="agent-icon"></i>
+                <div class="agent-badge" style="background: #ECFDF5; color: #047857"><i data-lucide="code" width="14"></i> 5. Ação Prática</div>
+                <h3>Agente Solucionador</h3>
+                <p class="text-muted mt-2">Escreve o patch para o bug. Cria uma branch de hotfix, abre o PR e chama a equipe humana no Slack para revisão da correção proposta.</p>
+                <div class="agent-data">
+                    <strong style="color: #047857;">Limites:</strong> Proibido de aprovar PR sozinho.<br>
+                    <strong style="color: #047857;" class="mt-2 d-block">Dados:</strong> Repositório (Write Branch), API Slack.
+                </div>
+            </div>
+
+            <!-- Agent 6 -->
+            <div class="white-card agent-card cronista">
+                <i data-lucide="library" class="agent-icon"></i>
+                <div class="agent-badge" style="background: #EFF6FF; color: #1D4ED8"><i data-lucide="book-marked" width="14"></i> 6. Memória Institucional</div>
+                <h3>Agente Cronista</h3>
+                <p class="text-muted mt-2">Após a resolução, lê a thread do Slack, redige um <em>Post-Mortem</em> no Confluence e vetoriza o aprendizado na Base Vetorial.</p>
+                <div class="agent-data">
+                    <strong style="color: #1D4ED8;">Limites:</strong> Documentação assíncrona.<br>
+                    <strong style="color: #1D4ED8;" class="mt-2 d-block">Dados:</strong> Slack, Confluence API, Vector DB.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Orquestração -->
+    <section id="orquestracao" class="container reveal">
+        <div style="text-align: center;">
+            <h2 class="section-title"><span class="section-badge">4</span>Orquestração</h2>
+            <p class="text-muted mb-8" style="max-width: 800px; margin: 0 auto 2rem;">Padrão: <strong>Collaborative Swarm Híbrido com Feedback Loop (RAG)</strong>. Os agentes investigam, humanos decidem, e a rede arquiva o aprendizado criando um ciclo contínuo de imunidade.</p>
+        </div>
+        
+        <div class="architecture-container">
+            <div class="mermaid">
+                graph TD
+                    Alert((Alerta de Incidente)) --> Triador[Agente Triador]
+                    Triador -->|Métricas/Logs| Investigador[Agente Investigador]
+                    Arqueologo[Agente Arqueólogo] -->|Commits/Contexto| Investigador
+                    
+                    VectorDB[(Base Vetorial)] -.->|Busca Similaridade| Bibliotecario[Agente Bibliotecário]
+                    Bibliotecario -->|Fornece Soluções Passadas| Investigador
+                    
+                    Investigador -->|Diagnóstico e Causa| Solucionador[Agente Solucionador]
+                    Solucionador -->|Gera PR e Explica| Slack[Slack Thread]
+                    
+                    Slack --> Dev[Equipe / Persona]
+                    Dev -->|Human-in-the-loop: Aprova Fix| Deploy((Deploy Correção))
+                    
+                    Deploy --> Cronista[Agente Cronista / Post-Mortem]
+                    Cronista -->|Escreve Relatório Oficial| Confluence((Notion / Confluence))
+                    Cronista -.->|Vetoriza Aprendizado 'Loop'| VectorDB
+                    
+                    classDef default fill:#FFFFFF,stroke:#ED145B,stroke-width:2px,color:#1F2937;
+                    classDef human fill:#FFF0F4,stroke:#ED145B,stroke-width:2px,color:#1F2937;
+                    classDef postmortem fill:#EFF6FF,stroke:#3B82F6,stroke-width:2px,color:#1F2937;
+                    classDef trigger fill:#ECFDF5,stroke:#10B981,stroke-width:2px,color:#1F2937;
+                    classDef search fill:#FEF3C7,stroke:#F59E0B,stroke-width:2px,color:#1F2937;
+                    classDef db fill:#F8F9FA,stroke:#6B7280,stroke-width:2px,stroke-dasharray: 5 5,color:#1F2937;
+                    
+                    class Dev,Slack human;
+                    class Alert trigger;
+                    class Cronista,Confluence postmortem;
+                    class Bibliotecario search;
+                    class VectorDB db;
+            </div>
+            
+            <div class="human-loop-banner">
+                <i data-lucide="check-circle-2"></i>
+                <div style="text-align: left;">
+                    <strong>Diferencial Criativo: Auto-Healing Cognitivo.</strong> Ao invés de apenas corrigir, o sistema "aprende" e documenta. A equipe atua apenas no ponto de máxima inteligência (Human-in-the-loop): decidindo se aprova ou rejeita o Pull Request.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Viabilidade -->
+    <section id="viabilidade" class="container reveal">
+        <div style="text-align: center;">
+            <h2 class="section-title"><span class="section-badge">5</span>Viabilidade & Business Case</h2>
+            <p class="text-muted mb-8">O impacto operacional e financeiro da adoção deste Canvas na empresa.</p>
+        </div>
+
+        <div class="kpi-grid mb-8">
+            <div class="kpi-card">
+                <i data-lucide="file-check-2" class="text-red" width="40" height="40"></i>
+                <div class="kpi-value">100%</div>
+                <p class="text-muted">Incidentes críticos documentados via Post-Mortem automático</p>
+            </div>
+            <div class="kpi-card">
+                <i data-lucide="shield-check" class="text-red" width="40" height="40"></i>
+                <div class="kpi-value">70%</div>
+                <p class="text-muted">Redução na reincidência de "Bugs Deja-vu" através do RAG</p>
+            </div>
+            <div class="kpi-card">
+                <i data-lucide="clock-4" class="text-red" width="40" height="40"></i>
+                <div class="kpi-value">-80%</div>
+                <p class="text-muted">Do tempo de equipe gasto redigindo relatórios burocráticos</p>
+            </div>
+            <div class="kpi-card">
+                <i data-lucide="trending-down" class="text-red" width="40" height="40"></i>
+                <div class="kpi-value">85%</div>
+                <p class="text-muted">Redução no Tempo Médio de Resolução de Falhas (MTTR)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Knight Capital -->
+    <section id="knight-capital" class="container reveal">
+        <div style="text-align: center;">
+            <h2 class="section-title"><span class="section-badge">6</span>"Knight Capital" do Caso</h2>
+            <p class="text-muted mb-8">Mapeamento dos piores cenários e arquitetura de contenção de falhas.</p>
+        </div>
+
+        <div class="split-grid">
+            <div class="knight-capital">
+                <div class="risk-box mb-4">
+                    <div class="risk-icon"><i data-lucide="filter-x" width="32"></i></div>
+                    <h3 style="font-size: 1.4rem; color: var(--fiap-red);">Risco 1: O Vazamento Ingênuo</h3>
+                </div>
+                <p class="text-muted mb-6" style="font-size: 1rem;">O Agente Investigador puxa logs com PIIs não mascarados (CPFs/Cartões) e gera um resumo expondo dados num Pull Request ou Slack, violando a LGPD/GDPR gravemente.</p>
+                <div class="containment-box">
+                    <strong class="text-red" style="font-size: 0.9rem; text-transform: uppercase;">Contenção (DLP Gateway)</strong>
+                    <p style="font-size: 0.95rem; color: var(--text-main); margin-top: 0.5rem;">Todos os logs ingeridos passam por um Data Loss Prevention para sanitizar regexes de documentos antes de bater no LLM, rodando em rede privada VPC (Mecanismo explícito de controle).</p>
+                </div>
+            </div>
+
+            <div class="knight-capital">
+                <div class="risk-box mb-4">
+                    <div class="risk-icon"><i data-lucide="biohazard" width="32"></i></div>
+                    <h3 style="font-size: 1.4rem; color: var(--fiap-red);">Risco 2: A Memória Envenenada</h3>
+                </div>
+                <p class="text-muted mb-6" style="font-size: 1rem;">A equipe faz um "workaround" sujo (gambiarra) para resolver a crise. O Agente Cronista vetoriza essa gambiarra como "solução oficial" e sugere reproduzi-la cegamente no futuro.</p>
+                <div class="containment-box">
+                    <strong class="text-red" style="font-size: 0.9rem; text-transform: uppercase;">Contenção (Golden PRs)</strong>
+                    <p style="font-size: 0.95rem; color: var(--text-main); margin-top: 0.5rem;">O Agente Cronista só envia para o Vector DB soluções de PRs que receberem uma Label explícita da liderança técnica (ex: <code>safe-to-learn</code>), separando paliativos de curas definitivas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Componente 2 e 3 -->
+    <section class="container reveal" style="padding-top: 2rem;">
+        <div class="text-center mb-8">
+            <span class="university-badge" style="background: var(--text-main);">Componentes 2 e 3: Prática</span>
+        </div>
+        
+        <div class="split-grid">
+            <!-- 7. Protótipo -->
+            <div class="white-card">
+                <h2 class="section-title" style="font-size: 2rem; color: var(--accent-blue);"><i data-lucide="code-2" style="display:inline; vertical-align:middle; margin-right:8px;"></i>Protótipo Funcional</h2>
+                <p class="text-muted mb-6">Acesse o código-fonte implementando o fluxo principal, demonstrando a colaboração entre os agentes mapeados.</p>
+                
+                <div class="media-placeholder" style="border-color: rgba(59, 130, 246, 0.3); background: #EFF6FF;">
+                    <i data-lucide="github" width="48" height="48" style="color: var(--accent-blue); margin-bottom: 1rem;"></i>
+                    <h3 style="margin-bottom: 0.5rem;">Repositório do Protótipo</h3>
+                    <p class="text-muted mb-6" style="font-size: 0.9rem;">Contém o código organizado e README com instruções de execução.</p>
+                    <a href="#" class="btn" style="background: var(--accent-blue); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);">
+                        <i data-lucide="external-link" width="18"></i> Acessar Github
+                    </a>
+                </div>
+            </div>
+
+            <!-- 8. Video -->
+            <div class="white-card">
+                <h2 class="section-title" style="font-size: 2rem; color: var(--accent-orange);"><i data-lucide="play-circle" style="display:inline; vertical-align:middle; margin-right:8px;"></i>Vídeo Demonstração</h2>
+                <p class="text-muted mb-6">Apresentação do contexto do caso, funcionamento da arquitetura e escolhas de design (3 a 5 min).</p>
+                
+                <div class="media-placeholder" style="border-color: rgba(245, 158, 11, 0.3); background: #FEF3C7; padding: 0; overflow: hidden; position: relative;">
+                    <!-- Simulando o player do youtube -->
+                    <div style="padding: 56.25% 0 0 0; position: relative;">
+                        <div style="position: absolute; top:0; left:0; width:100%; height:100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <i data-lucide="youtube" width="64" height="64" style="color: var(--accent-orange); margin-bottom: 1rem;"></i>
+                            <h3 style="color: #92400E;">Assistir no YouTube</h3>
+                        </div>
+                    </div>
+                    <!-- Caso vá colocar o iframe do youtube, basta substituir essa div media-placeholder pelo <iframe> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 4rem 2rem; background: var(--bg-light); border-top: 1px solid var(--border-color); margin-top: 2rem;">
+        <div class="container">
+            <h2 class="text-red mb-2" style="font-size: 1.5rem;"><i data-lucide="network" width="20" style="display:inline; vertical-align:middle;"></i> Trabalho Final - FIAP</h2>
+            <p class="text-muted mb-4">Orquestração e Integração de Agentes - Turma 2ABL</p>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Desenvolvido por Luiz Ihara, Filipe Fragoso, Daniel Caminha e Pedro Martins.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Initialize Mermaid (Light Theme)
+        mermaid.initialize({
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#FFFFFF',
+                primaryTextColor: '#1F2937',
+                primaryBorderColor: '#ED145B',
+                lineColor: '#6B7280',
+                secondaryColor: '#10B981',
+                tertiaryColor: '#F8F9FA',
+                fontFamily: 'Inter, sans-serif'
+            }
+        });
+
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        setTimeout(reveal, 100);
+    </script>
+</body>
+</html>

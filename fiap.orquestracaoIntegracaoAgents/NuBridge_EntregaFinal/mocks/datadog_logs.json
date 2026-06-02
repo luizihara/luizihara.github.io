@@ -1,0 +1,8 @@
+{
+  "timestamp": "2026-06-01T14:32:00Z",
+  "level": "CRITICAL",
+  "service": "checkout-service",
+  "message": "NullPointerException in payment_gateway_integration.py",
+  "stack_trace": "Traceback (most recent call last):\n  File 'payment_gateway_integration.py', line 45, in process_payment\n    if config['enable_new_gateway']:\nTypeError: 'NoneType' object is not subscriptable",
+  "environment": "production"
+}

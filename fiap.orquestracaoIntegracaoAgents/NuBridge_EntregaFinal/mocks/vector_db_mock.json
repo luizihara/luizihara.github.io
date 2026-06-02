@@ -1,0 +1,7 @@
+{
+  "incident_id": "INC-2022-849",
+  "similarity_score": 0.94,
+  "title": "Checkout NullPointerException during Config Cleanup",
+  "post_mortem_summary": "Em novembro de 2022, ocorreu um TypeError ('NoneType' object is not subscriptable) no serviço de carrinho quando o cache de configurações do Redis foi limpo prematuramente. O código não verificava se o dicionário `config` retornava `None` antes de acessar suas chaves.",
+  "resolution": "Adicionado um fallback defensivo no código para garantir que `config` assuma um valor padrão `{}` se o Redis retornar nulo. Exemplo: `config = redis.get('gateway_config') or {}`."
+}

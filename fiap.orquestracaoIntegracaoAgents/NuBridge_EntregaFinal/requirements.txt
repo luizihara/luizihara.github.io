@@ -1,0 +1,8 @@
+colorama==0.4.6
+python-dotenv==1.0.0
+streamlit==1.36.0
+langchain==0.2.6
+langchain-community==0.2.6
+chromadb==0.5.3
+pydantic==2.8.2
+fpdf2==2.7.9

@@ -1,2 +1,26 @@
 .DS_Store
 
+# Ambientes Virtuais (Python)
+venv/
+env/
+.venv/
+
+# Variáveis de Ambiente e Segredos
+.env
+.env.local
+
+# Cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Banco de Dados Vetorial (ChromaDB / Langchain Local Storage)
+chroma_db/
+*.sqlite3
+
+# Logs
+*.log
+
+# Streamlit
+.streamlit/
