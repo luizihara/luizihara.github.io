@@ -366,6 +366,67 @@
         .glow-1 { top: -10%; left: -10%; }
         .glow-2 { bottom: 20%; right: -5%; background: var(--accent-blue); }
         
+        /* Balãozinho */
+        .floating-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(8px);
+            padding: 12px 20px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            font-size: 0.9rem;
+            animation: fadeInUP 0.5s ease;
+            color: #fff;
+        }
+
+        .floating-badge a {
+            color: var(--nu-purple-light);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .close-badge {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        /* Print Optimization */
+        @media print {
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+            .floating-badge {
+                display: none !important;
+            }
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            body {
+                background-color: var(--bg-dark) !important;
+                color: var(--text-main) !important;
+            }
+            .hero {
+                min-height: auto !important;
+                padding: 4rem 2rem !important;
+            }
+            .glass-card, .knight-capital, .agent-card, .kpi-card {
+                break-inside: avoid;
+            }
+        }
     </style>
 </head>
 <body>
@@ -655,5 +716,15 @@
         // Trigger once on load
         setTimeout(reveal, 100);
     </script>
+    <!-- O Balãozinho -->
+    <div id="visit-badge" class="floating-badge">
+        <span class="badge-icon">🌐</span>
+        <span>
+            Você está visitando o site de
+            <a href="https://luizihara.github.io/" target="_blank">luizihara.github.io</a>
+        </span>
+        <button class="close-badge" onclick="document.getElementById('visit-badge').style.display='none'"
+            title="Fechar">×</button>
+    </div>
 </body>
 </html>
