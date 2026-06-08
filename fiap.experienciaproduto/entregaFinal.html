@@ -202,168 +202,179 @@
                     <i class="fas fa-search"></i> Fase: Pré-Uso
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 md:grid-rows-[repeat(12,auto)] xl:grid-rows-[repeat(6,auto)]">
                     <!-- Etapa 1: Conscientização -->
                     <article
-                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden">
-                        <div class="bg-fiap-pink text-white p-4">
+                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden md:grid md:grid-rows-subgrid md:row-span-6 xl:grid xl:grid-rows-subgrid xl:row-span-6 gap-y-0">
+                        <div class="bg-fiap-pink text-white p-4 flex flex-col justify-center">
                             <span
-                                class="text-xs font-bold bg-white/20 px-2 py-1 rounded uppercase tracking-wider mb-2 inline-block">Etapa
-                                1</span>
+                                class="text-xs font-bold bg-white/20 px-2 py-1 rounded uppercase tracking-wider mb-2 self-start">Etapa 1</span>
                             <h3 class="text-xl font-bold">Conscientização</h3>
                         </div>
-                        <div class="p-5 flex flex-col gap-4 text-sm text-base-dark h-full">
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-book-open text-fiap-light"></i> História</h4>
-                                <p>Sente-se ameaçado pela velocidade da IA ou está estagnado. É o "Líder em Risco".</p>
+                        <div class="p-5 pb-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-book-open text-fiap-light"></i> História</h4>
+                            <p>Sente-se ameaçado pela velocidade da IA ou está estagnado. É o "Líder em Risco".</p>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-running text-fiap-light"></i> Ações</h4>
+                            <ul class="list-disc pl-4 space-y-1 text-gray-600">
+                                <li>Lê notícias sobre layoffs tech.</li>
+                                <li>Recebe feedbacks no 1:1; PDI estagnado.</li>
+                                <li>Observa jovens dominando IA generativa.</li>
+                            </ul>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark">
+                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex items-center gap-3">
+                                <img src="images/emocao_ansiedade.png" alt="Emoção Ansiedade" class="w-12 h-12 object-contain flex-shrink-0">
+                                <div>
+                                    <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-0.5"><i
+                                            class="fas fa-heartbeat"></i> Emoções</h4>
+                                    <p class="font-medium text-xs leading-snug">Ansiedade com o futuro, frustração por estagnação e medo de obsolescência rápida.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-running text-fiap-light"></i> Ações</h4>
-                                <ul class="list-disc pl-4 space-y-1 text-gray-600">
-                                    <li>Lê notícias sobre layoffs tech.</li>
-                                    <li>Recebe feedbacks protocolares no 1:1; PDI corporativo estagnado.</li>
-                                    <li>Observa jovens dominando IA generativa.</li>
-                                </ul>
-                            </div>
-                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 mt-auto">
-                                <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-1"><i
-                                        class="fas fa-heartbeat"></i> Emoções</h4>
-                                <p class="font-medium">Ansiedade com o futuro, frustração por estagnação e medo de
-                                    obsolescência rápida.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-exclamation-triangle text-orange-500"></i> Dores & Gargalos</h4>
-                                <p class="text-gray-600"><strong>Esforço Invisível:</strong> trabalha muito, mas o valor
-                                    de mercado cai. Falta de tempo para se atualizar devido à alta carga operacional.
-                                </p>
-                            </div>
-                            <div class="pt-4 border-t border-gray-100 mt-2">
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-lightbulb text-yellow-500"></i> Oportunidade / Growth</h4>
-                                <p class="text-gray-600">Capturar a atenção no momento exato de perda de segurança no
-                                    LinkedIn (Squad Growth).</p>
-                            </div>
+                        </div>
+                        <div class="px-5 pt-2 pb-5 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-exclamation-triangle text-orange-500"></i> Dores & Gargalos</h4>
+                            <p class="text-gray-600"><strong>Esforço Invisível:</strong> trabalha muito, mas o valor de mercado cai. Falta de tempo para se atualizar.</p>
+                        </div>
+                        <div class="p-5 bg-green-50 border-t border-green-100 rounded-b-xl text-sm text-base-dark flex flex-col gap-1 -mx-[1px] -mb-[1px] h-full justify-center">
+                            <h4 class="font-bold flex items-center gap-2 text-green-700"><i
+                                    class="fas fa-flask"></i> Inovação / IA</h4>
+                            <p class="text-green-800 text-xs">Capturar a atenção no momento exato de perda de segurança no LinkedIn; propor autodiagnóstico de carreira por IA.</p>
                         </div>
                     </article>
 
                     <!-- Etapa 2: Pesquisa -->
                     <article
-                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden">
-                        <div class="bg-fiap-pink text-white p-4">
+                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden md:grid md:grid-rows-subgrid md:row-span-6 xl:grid xl:grid-rows-subgrid xl:row-span-6 gap-y-0">
+                        <div class="bg-fiap-pink text-white p-4 flex flex-col justify-center">
                             <span
-                                class="text-xs font-bold bg-white/20 px-2 py-1 rounded uppercase tracking-wider mb-2 inline-block">Etapa
-                                2</span>
+                                class="text-xs font-bold bg-white/20 px-2 py-1 rounded uppercase tracking-wider mb-2 self-start">Etapa 2</span>
                             <h3 class="text-xl font-bold">Pesquisa</h3>
                         </div>
-                        <div class="p-5 flex flex-col gap-4 text-sm text-base-dark h-full">
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-book-open text-fiap-light"></i> História</h4>
-                                <p>Busca saídas no mercado. Filtra vagas frias, procura MBAs caros e consome conteúdo
-                                    fragmentado na web.</p>
+                        <div class="p-5 pb-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-book-open text-fiap-light"></i> História</h4>
+                            <p>Busca saídas no mercado. Filtra vagas frias, procura MBAs caros e consome conteúdo fragmentado na web.</p>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-running text-fiap-light"></i> Ações</h4>
+                            <ul class="list-disc pl-4 space-y-1 text-gray-600">
+                                <li>Procura MBAs e cursos de liderança.</li>
+                                <li>Tenta atualizar LinkedIn/CV sozinho.</li>
+                                <li>Busca headhunters e consultorias no Google.</li>
+                            </ul>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark">
+                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex items-center gap-3">
+                                <img src="images/emocao_confusao.png" alt="Emoção Confusão" class="w-12 h-12 object-contain flex-shrink-0">
+                                <div>
+                                    <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-0.5"><i
+                                            class="fas fa-heartbeat"></i> Emoções</h4>
+                                    <p class="font-medium text-xs leading-snug">Confusão diante do excesso de caminhos e fadiga de decisão.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-running text-fiap-light"></i> Ações</h4>
-                                <ul class="list-disc pl-4 space-y-1 text-gray-600">
-                                    <li>Procura MBAs e cursos de liderança.</li>
-                                    <li>Tenta atualizar LinkedIn/CV sozinho.</li>
-                                    <li>Busca headhunters e consultorias no Google.</li>
-                                </ul>
-                            </div>
-                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 mt-auto">
-                                <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-1"><i
-                                        class="fas fa-heartbeat"></i> Emoções</h4>
-                                <p class="font-medium">Confusão diante do excesso de caminhos e fadiga de decisão.</p>
-                            </div>
-                            <div class="pt-2">
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-exclamation-triangle text-orange-500"></i> Dores & Gargalos</h4>
-                                <p class="text-gray-600">Preços proibitivos (R$ 1.5k a R$ 6k) e fadiga de informação
-                                    (cursos genéricos).</p>
-                            </div>
+                        </div>
+                        <div class="px-5 pt-2 pb-5 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-exclamation-triangle text-orange-500"></i> Dores & Gargalos</h4>
+                            <p class="text-gray-600">Preços proibitivos (R$ 1.5k a R$ 6k) e fadiga de informação decorrente de cursos genéricos.</p>
+                        </div>
+                        <div class="p-5 bg-green-50 border-t border-green-100 rounded-b-xl text-sm text-base-dark flex flex-col gap-1 -mx-[1px] -mb-[1px] h-full justify-center">
+                            <h4 class="font-bold flex items-center gap-2 text-green-700"><i
+                                    class="fas fa-flask"></i> Inovação / IA</h4>
+                            <p class="text-green-800 text-xs">Oferecer um analisador inteligente de currículo/perfil indicando gaps de forma automatizada para atrair o usuário.</p>
                         </div>
                     </article>
 
                     <!-- Etapa 3: Decisão -->
                     <article
-                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden">
-                        <div class="bg-fiap-pink text-white p-4">
+                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden md:grid md:grid-rows-subgrid md:row-span-6 xl:grid xl:grid-rows-subgrid xl:row-span-6 gap-y-0">
+                        <div class="bg-fiap-pink text-white p-4 flex flex-col justify-center">
                             <span
-                                class="text-xs font-bold bg-white/20 px-2 py-1 rounded uppercase tracking-wider mb-2 inline-block">Etapa
-                                3</span>
+                                class="text-xs font-bold bg-white/20 px-2 py-1 rounded uppercase tracking-wider mb-2 self-start">Etapa 3</span>
                             <h3 class="text-xl font-bold">Decisão</h3>
                         </div>
-                        <div class="p-5 flex flex-col gap-4 text-sm text-base-dark h-full">
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-book-open text-fiap-light"></i> História</h4>
-                                <p>Chega ao ponto de decisão: investir alto em mentorias humanas ou assinar cursos
-                                    gravados genéricos.</p>
+                        <div class="p-5 pb-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-book-open text-fiap-light"></i> História</h4>
+                            <p>Chega ao ponto de decisão: investir alto em mentorias humanas ou assinar cursos gravados genéricos.</p>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-running text-fiap-light"></i> Ações</h4>
+                            <ul class="list-disc pl-4 space-y-1 text-gray-600">
+                                <li>Procura cases de sucesso.</li>
+                                <li>Compara planos de assinatura.</li>
+                                <li>Avalia privacidade (medo de exposição).</li>
+                            </ul>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark">
+                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex items-center gap-3">
+                                <img src="images/emocao_cautela.png" alt="Emoção Cautela" class="w-12 h-12 object-contain flex-shrink-0">
+                                <div>
+                                    <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-0.5"><i
+                                            class="fas fa-heartbeat"></i> Emoções</h4>
+                                    <p class="font-medium text-xs leading-snug">Cautela, receio de investir tempo/dinheiro em soluções milagrosas.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-running text-fiap-light"></i> Ações</h4>
-                                <ul class="list-disc pl-4 space-y-1 text-gray-600">
-                                    <li>Procura cases de sucesso.</li>
-                                    <li>Compara planos de assinatura.</li>
-                                    <li>Avalia privacidade (medo de exposição).</li>
-                                </ul>
-                            </div>
-                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 mt-auto">
-                                <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-1"><i
-                                        class="fas fa-heartbeat"></i> Emoções</h4>
-                                <p class="font-medium">Cautela, receio de investir tempo/dinheiro em soluções
-                                    milagrosas.</p>
-                            </div>
-                            <div class="pt-2">
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-exclamation-triangle text-orange-500"></i> Dores & Gargalos</h4>
-                                <p class="text-gray-600">Barreira de compromisso, receio de expor vulnerabilidades e
-                                    receber apenas mais um PDF.</p>
-                            </div>
+                        </div>
+                        <div class="px-5 pt-2 pb-5 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-exclamation-triangle text-orange-500"></i> Dores & Gargalos</h4>
+                            <p class="text-gray-600">Barreira de compromisso, receio de expor vulnerabilidades e de receber apenas mais um PDF estático.</p>
+                        </div>
+                        <div class="p-5 bg-green-50 border-t border-green-100 rounded-b-xl text-sm text-base-dark flex flex-col gap-1 -mx-[1px] -mb-[1px] h-full justify-center">
+                            <h4 class="font-bold flex items-center gap-2 text-green-700"><i
+                                    class="fas fa-flask"></i> Inovação / IA</h4>
+                            <p class="text-green-800 text-xs">Demonstrar assistente interativo para simular ROI do plano de mentoria e garantir a privacidade dos dados.</p>
                         </div>
                     </article>
 
                     <!-- Etapa 4: Compra/Aquisição -->
                     <article
-                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden">
-                        <div class="bg-fiap-pink text-white p-4">
+                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden md:grid md:grid-rows-subgrid md:row-span-6 xl:grid xl:grid-rows-subgrid xl:row-span-6 gap-y-0">
+                        <div class="bg-fiap-pink text-white p-4 flex flex-col justify-center">
                             <span
-                                class="text-xs font-bold bg-white/20 px-2 py-1 rounded uppercase tracking-wider mb-2 inline-block">Etapa
-                                4</span>
+                                class="text-xs font-bold bg-white/20 px-2 py-1 rounded uppercase tracking-wider mb-2 self-start">Etapa 4</span>
                             <h3 class="text-xl font-bold">Compra / Aquisição</h3>
                         </div>
-                        <div class="p-5 flex flex-col gap-4 text-sm text-base-dark h-full">
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-book-open text-fiap-light"></i> História</h4>
-                                <p>Desapontado com ferramentas gratuitas, contrata consultoria tradicional ou mentoria
-                                    avulsa com Guru.</p>
+                        <div class="p-5 pb-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-book-open text-fiap-light"></i> História</h4>
+                            <p>Desapontado com ferramentas gratuitas, contrata consultoria tradicional ou mentoria avulsa com Guru.</p>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-running text-fiap-light"></i> Ações</h4>
+                            <ul class="list-disc pl-4 space-y-1 text-gray-600">
+                                <li>Realiza cadastro e pagamento.</li>
+                                <li>Agenda sessão que só vai acontecer dali a 2 semanas.</li>
+                            </ul>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark">
+                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex items-center gap-3">
+                                <img src="images/emocao_preocupado.png" alt="Emoção Preocupado" class="w-12 h-12 object-contain flex-shrink-0">
+                                <div>
+                                    <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-0.5"><i
+                                            class="fas fa-heartbeat"></i> Emoções</h4>
+                                    <p class="font-medium text-xs leading-snug">Preocupado com retorno. Receio de aprofundar fadiga de decisão investindo em conselhos limitados.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-running text-fiap-light"></i> Ações</h4>
-                                <ul class="list-disc pl-4 space-y-1 text-gray-600">
-                                    <li>Cadastro e pagamento.</li>
-                                    <li>Agendar sessão que só vai acontecer dali a 2 semanas.</li>
-                                </ul>
-                            </div>
-                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 mt-auto">
-                                <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-1"><i
-                                        class="fas fa-heartbeat"></i> Emoções</h4>
-                                <p class="font-medium">Preocupado com retorno. Receio de aprofundar fadiga de decisão
-                                    investindo em conselhos limitados.</p>
-                            </div>
-                            <div class="pt-2 border-t border-gray-100">
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-lightbulb text-yellow-500"></i> Oportunidade</h4>
-                                <p class="text-gray-600">Reduzir a barreira de entrada convertendo o usuário no exato
-                                    momento da escolha da Saída Estratégica.</p>
-                            </div>
+                        </div>
+                        <div class="px-5 pt-2 pb-5 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-exclamation-triangle text-orange-500"></i> Dores & Gargalos</h4>
+                            <p class="text-gray-600">Atrito no fluxo de checkout e medo de o produto final ser apenas mais um curso passivo gravado em vídeo.</p>
+                        </div>
+                        <div class="p-5 bg-green-50 border-t border-green-100 rounded-b-xl text-sm text-base-dark flex flex-col gap-1 -mx-[1px] -mb-[1px] h-full justify-center">
+                            <h4 class="font-bold flex items-center gap-2 text-green-700"><i
+                                    class="fas fa-flask"></i> Inovação / IA</h4>
+                            <p class="text-green-800 text-xs">Reduzir a barreira de entrada convertendo o usuário no exato momento da escolha da Saída Estratégica.</p>
                         </div>
                     </article>
                 </div>
@@ -378,114 +389,133 @@
                     <i class="fas fa-desktop"></i> Fase: Durante o Uso
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:grid-rows-[repeat(6,auto)]">
                     <!-- Etapa 5: Delivery -->
                     <article
-                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden">
-                        <div class="bg-base-dark text-white p-4">
+                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden md:grid md:grid-rows-subgrid md:row-span-6 gap-y-0">
+                        <div class="bg-base-dark text-white p-4 flex flex-col justify-center">
                             <span
-                                class="text-xs font-bold bg-white/20 px-2 py-1 rounded uppercase tracking-wider mb-2 text-fiap-light inline-block">Etapa
-                                5</span>
+                                class="text-xs font-bold bg-white/20 px-2 py-1 rounded uppercase tracking-wider mb-2 text-fiap-light self-start">Etapa 5</span>
                             <h3 class="text-xl font-bold">Delivery / Espera</h3>
                         </div>
-                        <div class="p-5 flex flex-col gap-4 text-sm text-base-dark h-full">
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-book-open text-fiap-light"></i> História</h4>
-                                <p>Fica num limbo aguardando a 1ª sessão ou tenta arrumar tempo na rotina caótica para
-                                    os cursos.</p>
+                        <div class="p-5 pb-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-book-open text-fiap-light"></i> História</h4>
+                            <p>Fica num limbo aguardando a 1ª sessão ou tenta arrumar tempo na rotina caótica para os cursos.</p>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-running text-fiap-light"></i> Ações</h4>
+                            <ul class="list-disc pl-4 text-gray-600">
+                                <li>Cobra o consultor por WhatsApp.</li>
+                                <li>Aguarda dias por retorno da plataforma.</li>
+                            </ul>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark">
+                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex items-center gap-3">
+                                <img src="images/emocao_desmotivado.png" alt="Emoção Desmotivado" class="w-12 h-12 object-contain flex-shrink-0">
+                                <div>
+                                    <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-0.5"><i
+                                            class="fas fa-heartbeat"></i> Emoções</h4>
+                                    <p class="font-medium text-xs leading-snug">Desmotivado e impaciente. O ritmo lento tradicional quebra a urgência de se atualizar.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-running text-fiap-light"></i> Ações</h4>
-                                <ul class="list-disc pl-4 text-gray-600">
-                                    <li>Cobra o consultor por WhatsApp.</li>
-                                    <li>Aguarda dias por retorno.</li>
-                                </ul>
-                            </div>
-                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 mt-auto">
-                                <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-1"><i
-                                        class="fas fa-heartbeat"></i> Emoções</h4>
-                                <p class="font-medium">Desmotivado e impaciente. O ritmo lento tradicional quebra a
-                                    urgência de se atualizar.</p>
-                            </div>
+                        </div>
+                        <div class="px-5 pt-2 pb-5 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-exclamation-triangle text-orange-500"></i> Dores & Gargalos</h4>
+                            <p class="text-gray-600">Ansiedade e desengajamento devido ao tempo de espera para a primeira mentoria humana de fato começar.</p>
+                        </div>
+                        <div class="p-5 bg-green-50 border-t border-green-100 rounded-b-xl text-sm text-base-dark flex flex-col gap-1 -mx-[1px] -mb-[1px] h-full justify-center">
+                            <h4 class="font-bold flex items-center gap-2 text-green-700"><i
+                                    class="fas fa-flask"></i> Inovação / IA</h4>
+                            <p class="text-green-800 text-xs">Liberar acesso imediato ao Mentor Virtual de IA para engajar o usuário no aquecimento e diagnóstico preliminar.</p>
                         </div>
                     </article>
 
                     <!-- Etapa 6: Primeiro Acesso -->
                     <article
-                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden">
-                        <div class="bg-base-dark text-white p-4">
+                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden md:grid md:grid-rows-subgrid md:row-span-6 gap-y-0">
+                        <div class="bg-base-dark text-white p-4 flex flex-col justify-center">
                             <span
-                                class="text-xs font-bold bg-white/20 px-2 py-1 rounded uppercase tracking-wider mb-2 text-fiap-light inline-block">Etapa
-                                6</span>
+                                class="text-xs font-bold bg-white/20 px-2 py-1 rounded uppercase tracking-wider mb-2 text-fiap-light self-start">Etapa 6</span>
                             <h3 class="text-xl font-bold">Primeiro Acesso / Uso</h3>
                         </div>
-                        <div class="p-5 flex flex-col gap-4 text-sm text-base-dark h-full">
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-book-open text-fiap-light"></i> História</h4>
-                                <p>Realiza a mentoria humana ou recebe um Plano de Desenvolvimento Individual (PDI) em
-                                    PDF estático.</p>
+                        <div class="p-5 pb-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-book-open text-fiap-light"></i> História</h4>
+                            <p>Realiza a mentoria humana ou recebe um Plano de Desenvolvimento Individual (PDI) em PDF estático.</p>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-running text-fiap-light"></i> Ações</h4>
+                            <ul class="list-disc pl-4 text-gray-600">
+                                <li>Lê o PDF enviado pelo consultor.</li>
+                                <li>Participa de uma conversa pontual de 1h.</li>
+                            </ul>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark">
+                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex items-center gap-3">
+                                <img src="images/emocao_sobrecarregado.png" alt="Emoção Sobrecarregado" class="w-12 h-12 object-contain flex-shrink-0">
+                                <div>
+                                    <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-0.5"><i
+                                            class="fas fa-heartbeat"></i> Emoções</h4>
+                                    <p class="font-medium text-xs leading-snug">Indiferente / Sobrecarregado. Diagnóstico genérico que parece um teste de personalidade chato.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-running text-fiap-light"></i> Ações</h4>
-                                <ul class="list-disc pl-4 text-gray-600">
-                                    <li>Lê o PDF enviado pelo consultor.</li>
-                                    <li>Participa de uma conversa pontual de 1h.</li>
-                                </ul>
-                            </div>
-                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 mt-auto">
-                                <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-1"><i
-                                        class="fas fa-heartbeat"></i> Emoções</h4>
-                                <p class="font-medium">Indiferente / Sobrecarregado. Diagnóstico genérico que parece um
-                                    teste de personalidade chato.</p>
-                            </div>
-                            <div class="pt-2">
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-exclamation-triangle text-orange-500"></i> Gargalo</h4>
-                                <p class="text-gray-600">Ineficiência do aprendizado passivo. Quebra de momentum.</p>
-                            </div>
+                        </div>
+                        <div class="px-5 pt-2 pb-5 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-exclamation-triangle text-orange-500"></i> Dores & Gargalos</h4>
+                            <p class="text-gray-600">Ineficiência do aprendizado passivo. Quebra imediata do momentum de evolução do profissional.</p>
+                        </div>
+                        <div class="p-5 bg-green-50 border-t border-green-100 rounded-b-xl text-sm text-base-dark flex flex-col gap-1 -mx-[1px] -mb-[1px] h-full justify-center">
+                            <h4 class="font-bold flex items-center gap-2 text-green-700"><i
+                                    class="fas fa-flask"></i> Inovação / IA</h4>
+                            <p class="text-green-800 text-xs">Substituir o PDF estático de PDI por um painel gamificado e dinâmico com chat de apoio do Mentor Virtual.</p>
                         </div>
                     </article>
 
                     <!-- Etapa 7: Uso Continuado -->
                     <article
-                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden">
-                        <div class="bg-base-dark text-white p-4">
+                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden md:grid md:grid-rows-subgrid md:row-span-6 gap-y-0">
+                        <div class="bg-base-dark text-white p-4 flex flex-col justify-center">
                             <span
-                                class="text-xs font-bold bg-white/20 px-2 py-1 rounded uppercase tracking-wider mb-2 text-fiap-light inline-block">Etapa
-                                7</span>
+                                class="text-xs font-bold bg-white/20 px-2 py-1 rounded uppercase tracking-wider mb-2 text-fiap-light self-start">Etapa 7</span>
                             <h3 class="text-xl font-bold">Uso Continuado</h3>
                         </div>
-                        <div class="p-5 flex flex-col gap-4 text-sm text-base-dark h-full">
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-book-open text-fiap-light"></i> História</h4>
-                                <p>Sem acompanhamento, engaveta o PDI estático. Volta a ficar isolado enfrentando
-                                    desafios corporativos na raça.</p>
+                        <div class="p-5 pb-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-book-open text-fiap-light"></i> História</h4>
+                            <p>Sem acompanhamento, engaveta o PDI estático. Volta a ficar isolado enfrentando desafios corporativos na raça.</p>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-running text-fiap-light"></i> Ações</h4>
+                            <ul class="list-disc pl-4 space-y-1 text-gray-600">
+                                <li>Tenta aplicar o PDI analógico isoladamente.</li>
+                                <li>Retorna ao ChatGPT genérico para dúvidas.</li>
+                            </ul>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark">
+                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex items-center gap-3">
+                                <img src="images/emocao_solitario.png" alt="Emoção Solitário" class="w-12 h-12 object-contain flex-shrink-0">
+                                <div>
+                                    <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-0.5"><i
+                                            class="fas fa-heartbeat"></i> Emoções</h4>
+                                    <p class="font-medium text-xs leading-snug">Solitário e Estagnado. Sente a solidão do tomador de decisão, sem parceiro para guiar mini-estresses.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-running text-fiap-light"></i> Ações</h4>
-                                <ul class="list-disc pl-4 space-y-1 text-gray-600">
-                                    <li>Tenta aplicar o PDI analógico isoladamente.</li>
-                                    <li>Retorna ao ChatGPT genérico para dúvidas.</li>
-                                </ul>
-                            </div>
-                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 mt-auto">
-                                <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-1"><i
-                                        class="fas fa-heartbeat"></i> Emoções</h4>
-                                <p class="font-medium">Solitário e Estagnado. Sente a solidão do tomador de decisão, sem
-                                    parceiro para guiar mini-estresses.</p>
-                            </div>
-                            <div class="mt-4 pt-4 border-t border-gray-100 bg-green-50 -mx-5 -mb-5 p-5">
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-green-700"><i
-                                        class="fas fa-flask"></i> Solução / IA</h4>
-                                <p class="text-green-800 text-xs">Transformar PDI estático num roadmap interativo. Criar
-                                    Mentor Virtual 24/7 integrado via N8N.</p>
-                            </div>
+                        </div>
+                        <div class="px-5 pt-2 pb-5 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-exclamation-triangle text-orange-500"></i> Dores & Gargalos</h4>
+                            <p class="text-gray-600">O usuário se sente desamparado e sem acompanhamento ao enfrentar problemas práticos cotidianos pós-sessão.</p>
+                        </div>
+                        <div class="p-5 bg-green-50 border-t border-green-100 rounded-b-xl text-sm text-base-dark flex flex-col gap-1 -mx-[1px] -mb-[1px] h-full justify-center">
+                            <h4 class="font-bold flex items-center gap-2 text-green-700"><i
+                                    class="fas fa-flask"></i> Inovação / IA</h4>
+                            <p class="text-green-800 text-xs">Transformar PDI estático num roadmap interativo. Criar Mentor Virtual 24/7 integrado via N8N e WhatsApp.</p>
                         </div>
                     </article>
                 </div>
@@ -500,116 +530,134 @@
                     <i class="fas fa-flag-checkered"></i> Fase: Pós-Uso
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:grid-rows-[repeat(6,auto)]">
                     <!-- Etapa 8: Lembranças -->
                     <article
-                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden">
-                        <div class="bg-gray-400 text-white p-4">
+                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden md:grid md:grid-rows-subgrid md:row-span-6 gap-y-0">
+                        <div class="bg-gray-400 text-white p-4 flex flex-col justify-center">
                             <span
-                                class="text-xs font-bold bg-white/30 text-base-dark px-2 py-1 rounded uppercase tracking-wider mb-2 inline-block">Etapa
-                                8</span>
+                                class="text-xs font-bold bg-white/30 text-base-dark px-2 py-1 rounded uppercase tracking-wider mb-2 self-start">Etapa 8</span>
                             <h3 class="text-xl font-bold text-base-dark">Percepção de Valor</h3>
                         </div>
-                        <div class="p-5 flex flex-col gap-4 text-sm text-base-dark h-full">
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-book-open text-fiap-light"></i> História</h4>
-                                <p>Passadas as sessões, o plano em PDF é engavetado e o valor percebido desaba pois
-                                    novas crises surgem em tempo real.</p>
+                        <div class="p-5 pb-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-book-open text-fiap-light"></i> História</h4>
+                            <p>Passadas as sessões, o plano em PDF é engavetado e o valor percebido desaba pois novas crises surgem em tempo real.</p>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-running text-fiap-light"></i> Ações</h4>
+                            <ul class="list-disc pl-4 space-y-1 text-gray-600">
+                                <li>Consulta anotações antigas durante crises de trabalho.</li>
+                                <li>Tenta decifrar sozinho competências antigas.</li>
+                            </ul>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark">
+                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex items-center gap-3">
+                                <img src="images/emocao_frustrado.png" alt="Emoção Frustrado" class="w-12 h-12 object-contain flex-shrink-0">
+                                <div>
+                                    <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-0.5"><i
+                                            class="fas fa-heartbeat"></i> Emoções</h4>
+                                    <p class="font-medium text-xs leading-snug">Frustrado. Sente que investiu alto (R$ 1.5k a 6k) por um conselho que já desatualizou.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-running text-fiap-light"></i> Ações</h4>
-                                <ul class="list-disc pl-4 space-y-1 text-gray-600">
-                                    <li>Consulta anotações antigas durante crises.</li>
-                                    <li>Tenta decifrar sozinho competências antigas.</li>
-                                </ul>
-                            </div>
-                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 mt-auto">
-                                <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-1"><i
-                                        class="fas fa-heartbeat"></i> Emoções</h4>
-                                <p class="font-medium">Frustrado. Sente que investiu alto (R$ 1.5k a 6k) por um conselho
-                                    que já desatualizou.</p>
-                            </div>
+                        </div>
+                        <div class="px-5 pt-2 pb-5 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-exclamation-triangle text-orange-500"></i> Dores & Gargalos</h4>
+                            <p class="text-gray-600">Perda rápida da percepção de valor à medida que o mercado de TI muda e novos problemas surgem.</p>
+                        </div>
+                        <div class="p-5 bg-green-50 border-t border-green-100 rounded-b-xl text-sm text-base-dark flex flex-col gap-1 -mx-[1px] -mb-[1px] h-full justify-center">
+                            <h4 class="font-bold flex items-center gap-2 text-green-700"><i
+                                    class="fas fa-flask"></i> Inovação / IA</h4>
+                            <p class="text-green-800 text-xs">Atualização automática do PDI por agentes de IA com base nos feedbacks e novas tendências do mercado.</p>
                         </div>
                     </article>
 
                     <!-- Etapa 9: Feedbacks -->
                     <article
-                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden">
-                        <div class="bg-gray-400 text-white p-4">
+                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden md:grid md:grid-rows-subgrid md:row-span-6 gap-y-0">
+                        <div class="bg-gray-400 text-white p-4 flex flex-col justify-center">
                             <span
-                                class="text-xs font-bold bg-white/30 text-base-dark px-2 py-1 rounded uppercase tracking-wider mb-2 inline-block">Etapa
-                                9</span>
+                                class="text-xs font-bold bg-white/30 text-base-dark px-2 py-1 rounded uppercase tracking-wider mb-2 self-start">Etapa 9</span>
                             <h3 class="text-xl font-bold text-base-dark">Feedbacks / Avaliação</h3>
                         </div>
-                        <div class="p-5 flex flex-col gap-4 text-sm text-base-dark h-full">
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-book-open text-fiap-light"></i> História</h4>
-                                <p>Recebe NPS genéricos por e-mail. Atarefado, ele ignora a maioria ou responde de forma
-                                    protocolar.</p>
+                        <div class="p-5 pb-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-book-open text-fiap-light"></i> História</h4>
+                            <p>Recebe NPS genéricos por e-mail. Atarefado, ele ignora a maioria ou responde de forma protocolar.</p>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-running text-fiap-light"></i> Ações</h4>
+                            <ul class="list-disc pl-4 space-y-1 text-gray-600">
+                                <li>Ignora ou responde correndo os forms de NPS.</li>
+                                <li>Evita críticas profundas para não causar incômodo.</li>
+                            </ul>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark">
+                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex items-center gap-3">
+                                <img src="images/emocao_fadigado.png" alt="Emoção Fadigado" class="w-12 h-12 object-contain flex-shrink-0">
+                                <div>
+                                    <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-0.5"><i
+                                            class="fas fa-heartbeat"></i> Emoções</h4>
+                                    <p class="font-medium text-xs leading-snug">Fadigado. Acha que preencher pesquisas longas é perda de tempo corporativo.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-running text-fiap-light"></i> Ações</h4>
-                                <ul class="list-disc pl-4 space-y-1 text-gray-600">
-                                    <li>Ignora ou responde correndo os forms de NPS.</li>
-                                    <li>Evita críticas profundas para não causar incômodo.</li>
-                                </ul>
-                            </div>
-                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 mt-auto">
-                                <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-1"><i
-                                        class="fas fa-heartbeat"></i> Emoções</h4>
-                                <p class="font-medium">Fadigado. Acha que preencher pesquisas longas é perda de tempo
-                                    corporativo.</p>
-                            </div>
-                            <div class="mt-4 pt-4 border-t border-gray-100 bg-green-50 -mx-5 -mb-5 p-5">
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-green-700"><i
-                                        class="fas fa-lightbulb"></i> Insight / Inovação</h4>
-                                <p class="text-green-800 text-xs">Analisar desabafos no chat com MoE (Mixture of
-                                    Experts) em vez de aplicar NPS chato e invasivo.</p>
-                            </div>
+                        </div>
+                        <div class="px-5 pt-2 pb-5 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-exclamation-triangle text-orange-500"></i> Dores & Gargalos</h4>
+                            <p class="text-gray-600">Fadiga de responder formulários longos de NPS sem retorno direto de valor para o seu dia a dia.</p>
+                        </div>
+                        <div class="p-5 bg-green-50 border-t border-green-100 rounded-b-xl text-sm text-base-dark flex flex-col gap-1 -mx-[1px] -mb-[1px] h-full justify-center">
+                            <h4 class="font-bold flex items-center gap-2 text-green-700"><i
+                                    class="fas fa-flask"></i> Inovação / IA</h4>
+                            <p class="text-green-800 text-xs">Analisar desabafos no chat com MoE (Mixture of Experts) em vez de aplicar NPS chato e invasivo.</p>
                         </div>
                     </article>
 
                     <!-- Etapa 10: Compartilhamento -->
                     <article
-                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden">
-                        <div class="bg-gray-400 text-white p-4">
+                        class="bg-white rounded-xl card-shadow border border-gray-100 flex flex-col h-full overflow-hidden md:grid md:grid-rows-subgrid md:row-span-6 gap-y-0">
+                        <div class="bg-gray-400 text-white p-4 flex flex-col justify-center">
                             <span
-                                class="text-xs font-bold bg-white/30 text-base-dark px-2 py-1 rounded uppercase tracking-wider mb-2 inline-block">Etapa
-                                10</span>
+                                class="text-xs font-bold bg-white/30 text-base-dark px-2 py-1 rounded uppercase tracking-wider mb-2 self-start">Etapa 10</span>
                             <h3 class="text-xl font-bold text-base-dark">Compartilhamento</h3>
                         </div>
-                        <div class="p-5 flex flex-col gap-4 text-sm text-base-dark h-full">
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-book-open text-fiap-light"></i> História</h4>
-                                <p>Protege sua reputação. Esconde a transição ou que fez mentoria. Compartilha apenas
-                                    certificados frios no LinkedIn.</p>
+                        <div class="p-5 pb-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-book-open text-fiap-light"></i> História</h4>
+                            <p>Protege sua reputação. Esconde a transição ou que fez mentoria. Compartilha apenas certificados frios no LinkedIn.</p>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-running text-fiap-light"></i> Ações</h4>
+                            <ul class="list-disc pl-4 space-y-1 text-gray-600">
+                                <li>Publica certificados genéricos.</li>
+                                <li>Oculta buscas ativas na empresa atual.</li>
+                                <li>Compartilha boca a boca apenas com pessoas íntimas.</li>
+                            </ul>
+                        </div>
+                        <div class="px-5 py-2 text-sm text-base-dark">
+                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex items-center gap-3">
+                                <img src="images/emocao_reservado.png" alt="Emoção Reservado" class="w-12 h-12 object-contain flex-shrink-0">
+                                <div>
+                                    <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-0.5"><i
+                                            class="fas fa-heartbeat"></i> Emoções</h4>
+                                    <p class="font-medium text-xs leading-snug">Reservado. Mantém uma narrativa de controle, escondendo o medo da obsolescência.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-running text-fiap-light"></i> Ações</h4>
-                                <ul class="list-disc pl-4 space-y-1 text-gray-600">
-                                    <li>Publica certificados genéricos.</li>
-                                    <li>Oculta buscas ativas na empresa.</li>
-                                    <li>Boca a boca só para íntimos.</li>
-                                </ul>
-                            </div>
-                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 mt-auto">
-                                <h4 class="font-bold flex items-center gap-2 text-fiap-pink mb-1"><i
-                                        class="fas fa-heartbeat"></i> Emoções</h4>
-                                <p class="font-medium">Reservado. Mantém uma narrativa de controle, escondendo o medo da
-                                    obsolescência.</p>
-                            </div>
-                            <div class="pt-2 border-t border-gray-100">
-                                <h4 class="font-bold flex items-center gap-2 mb-1 text-gray-700"><i
-                                        class="fas fa-lightbulb text-yellow-500"></i> Oportunidade</h4>
-                                <p class="text-gray-600">Criar canal seguro (Skill Narratives) para exportar conquistas
-                                    silenciosas para redes executivas sem expor dores.</p>
-                            </div>
+                        </div>
+                        <div class="px-5 pt-2 pb-5 text-sm text-base-dark flex flex-col gap-1">
+                            <h4 class="font-bold flex items-center gap-2 text-gray-700"><i
+                                    class="fas fa-exclamation-triangle text-orange-500"></i> Dores & Gargalos</h4>
+                            <p class="text-gray-600">Receio de expor vulnerabilidades ou busca ativa de vagas ao compartilhar certificados publicamente.</p>
+                        </div>
+                        <div class="p-5 bg-green-50 border-t border-green-100 rounded-b-xl text-sm text-base-dark flex flex-col gap-1 -mx-[1px] -mb-[1px] h-full justify-center">
+                            <h4 class="font-bold flex items-center gap-2 text-green-700"><i
+                                    class="fas fa-flask"></i> Inovação / IA</h4>
+                            <p class="text-green-800 text-xs">Criar canal seguro (Skill Narratives) para exportar conquistas silenciosas formatadas por IA sem expor dores.</p>
                         </div>
                     </article>
                 </div>
