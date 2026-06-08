@@ -1,6 +1,6 @@
 # Luiz Ihara - Portfolio & Resume
 
-> Luiz Ihara is a Quality Engineer specializing in Performance, Scalability, and Reliability across end-to-end backend, frontend, and mobile applications.
+> Luiz Ihara is a Platform Engineer | DevOps specializing in Cloud, CI/CD, Quality Engineering, and Reliability across end-to-end applications.
 
 ## Content Available
 

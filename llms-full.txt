@@ -1,6 +1,6 @@
 # Luiz R R P Ihara
 
-**Quality Engineer [AI-Driven Testing | Automation | Performance]**
+**Platform Engineer | DevOps | Quality Engineering | CI/CD | Cloud & Reliability**
 
 * Email: luiz.ihara@gmail.com
 * GitHub: https://github.com/luizihara
@@ -8,19 +8,21 @@
 
 ## About Me
 
-Quality Engineer with strong experience in performance, scalability, and reliability across end-to-end backend, frontend, and mobile applications. Over the past few years, I have focused on improving system performance and resilience through stress testing and validation in Linux environments, ensuring systems can handle high-traffic scenarios with confidence.
+I am a technology professional with strong experience in Quality Engineering, Platform Engineering, DevOps, automation, and reliability of end-to-end systems across backend, frontend, and mobile applications. In recent years, my focus has been on improving the performance, scalability, and resilience of systems through validation strategies, stress testing, automation, and engineering practices applied to Linux environments, cloud, and high-traffic platforms.
 
-Experienced in designing and scaling test strategies, as well as building automation frameworks using Java, JavaScript, Python, Go, and Shell Script. I have worked extensively with CI/CD pipelines, implementing quality gates and testing guardrails to ensure reliability and consistency throughout the software delivery lifecycle.
+I have experience in designing and scaling test strategies, as well as building automation frameworks using JavaScript, TypeScript, Python, Shell Script, .NET, Go, and Java. I have also worked extensively with CI/CD pipelines, implementing quality gates, testing guardrails, and automated validations to ensure reliability, consistency, and high standards throughout the software delivery lifecycle.
 
-Strong background in infrastructure and platform engineering, including managing cloud environments, virtual machines, and Kubernetes clusters. Passionate about Infrastructure as Code (IaC), I have implemented automation solutions using tools such as Terraform and Ansible to improve scalability, reduce manual operations, and enhance system resilience.
+I have a solid background in infrastructure and platform engineering, including managing cloud environments, virtual machines, and Kubernetes clusters. Passionate about Infrastructure as Code, I implemented automation solutions with Terraform and Ansible to improve scalability, reduce manual operations, and enhance system resilience.
 
-I have also led initiatives around code quality and platform governance, supporting large-scale environments with thousands of projects across multiple technologies, ensuring high standards of maintainability and engineering efficiency.
+I have also led initiatives focused on code quality and platform governance, supporting large-scale environments with thousands of projects across multiple technologies. My role involved defining standards, processes, quality gates, and engineering practices aimed at maintainability, efficiency, and continuous evolution of platforms.
 
-I have been leveraging AI-driven approaches to accelerate test generation, improve coverage, and enhance overall engineering productivity, helping teams deliver with greater confidence and speed. Additionally, I design and implement synthetic testing solutions to improve observability and proactively detect issues in production environments.
+I have been leveraging AI-driven approaches to accelerate test generation, improve coverage, and enhance overall engineering productivity, helping teams deliver with greater safety and speed. Additionally, I design and implement synthetic testing solutions to expand observability and proactive anomaly detection in production environments.
+
+I enjoy working hands-on, collaborating with multidisciplinary teams, sharing knowledge, and continuously exploring new tools and technologies. My current interest lies at the intersection of Quality Engineering, Platform Engineering, DevOps, AI, and reliability, contributing to helping teams build, validate, and deliver software in a more secure, scalable, and efficient way.
 
 ## Professional Experience
 
-### Quality Assurance Engineer @ iConnections
+### Software Quality Architect @ iConnections
 **April/2025 - Present**
 * Leading quality architecture initiatives across backend, frontend, mobile, and performance testing, ensuring scalable and reliable validation strategies across the platform.
 * Applying AI-driven approaches to accelerate test creation, improve coverage, and elevate engineering efficiency and product quality.
@@ -53,15 +55,16 @@ I have been leveraging AI-driven approaches to accelerate test generation, impro
 
 ## Skill Highlights
 
-* **IDE:** Cursor, Visual Studio Code, Antigravity
-* **Languages:** Bash / Shell Script, TypeScript / JavaScript, Python, C#, Java, Go
-* **Frameworks:** Playwright, Cypress, Appium, WebdriverIO, Selenium
-* **Performance:** k6, Tsung, JMeter, Locust
-* **Monitoring:** Grafana, Datadog, Dynatrace, New Relic, Sensu
 * **CI/CD:** Azure DevOps, Jenkins, CircleCI, GitHub Actions
 * **Cloud:** Microsoft Azure, GCP, AWS
 * **OS / Containers:** Linux Ubuntu, Linux Red Hat, Kubernetes, Docker, Podman
+* **Languages:** Bash / Shell Script, TypeScript / JavaScript, Python, C#, Java, Go
+* **Performance:** k6, Tsung, JMeter, Locust
+* **Monitoring:** Grafana, Datadog, Dynatrace, New Relic, Sensu
+* **Frameworks:** Playwright, Cypress, Appium, WebdriverIO, Selenium
+* **API Testing:** Postman, Bruno, Insomnia, Swagger, Terminal (cURL)
 * **Others:** DevOps, Terraform, Ansible, Akamai, Azion, Cloudflare, Redis, Memcached
+* **IDE:** Cursor, Visual Studio Code, Antigravity
 
 ## FIAP MBA - AI Business Leadership Projects
 Academic projects developed during the MBA.
