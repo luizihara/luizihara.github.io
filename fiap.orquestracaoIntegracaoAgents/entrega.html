@@ -769,16 +769,13 @@
             <div class="white-card">
                 <h2 class="section-title" style="font-size: 2rem; color: var(--accent-orange);"><i data-lucide="play-circle" style="display:inline; vertical-align:middle; margin-right:8px;"></i>Vídeo Demonstração</h2>
                 <p class="text-muted mb-6">Apresentação do contexto do caso, funcionamento da arquitetura e escolhas de design (3 a 5 min).</p>
-                
-                <div class="media-placeholder" style="border-color: rgba(245, 158, 11, 0.3); background: #FEF3C7; padding: 0; overflow: hidden; position: relative;">
-                    <!-- Simulando o player do youtube -->
-                    <div style="padding: 56.25% 0 0 0; position: relative;">
-                        <div style="position: absolute; top:0; left:0; width:100%; height:100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                            <i data-lucide="youtube" width="64" height="64" style="color: var(--accent-orange); margin-bottom: 1rem;"></i>
-                            <h3 style="color: #92400E;">Assistir no YouTube</h3>
-                        </div>
-                    </div>
-                    <!-- Caso vá colocar o iframe do youtube, basta substituir essa div media-placeholder pelo <iframe> -->
+                <div class="media-placeholder" style="border-color: rgba(245, 158, 11, 0.3); background: #FEF3C7; padding: 0; overflow: hidden; position: relative; padding-bottom: 56.25%; height: 0;">
+                    <iframe src="https://www.youtube.com/embed/jSIWI7qib7U" 
+                            title="Vídeo Demonstração NuBridge" 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                    </iframe>
                 </div>
             </div>
         </div>
