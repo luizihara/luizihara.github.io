@@ -77,3 +77,6 @@ Academic projects developed during the MBA.
 * Product Management (fiap.GestaoProduto/controleViagem.html)
 * Monetization Go-To-Market (fiap.monetizacaoego-to-market/)
 * Advocacy and Influence (fiap.advocacyeinfluencia/)
+* Agent Orchestration & Integration (fiap.orquestracaoIntegracaoAgents/index.html)
+* Product Experiences (fiap.experienciaproduto/entregaFinal.html)
+* Agents in Business Operations (fiap.agentes-em-operacoes-empresariais/index.html)

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapeamento de Oportunidades - IA no Bradesco | FIAP MBA+</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        fiapPink: '#ED145B',
+                        fiapBlack: '#111111',
+                        fiapDarkGray: '#222222',
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .glass-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(237, 20, 91, 0.15);
+        }
+    </style>
+</head>
+
+<body class="text-gray-800 antialiased font-sans flex flex-col min-h-screen">
+
+    <!-- Header FIAP Style -->
+    <header class="bg-fiapBlack text-white border-b-4 border-fiapPink pt-8 pb-6 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
+                <!-- Fake FIAP Logo using text -->
+                <div class="flex items-center gap-2">
+                    <span class="text-4xl font-black tracking-tighter text-fiapPink">FIAP</span>
+                    <span class="text-xl font-light text-gray-400 mt-1">MBA+</span>
+                </div>
+
+                <div class="text-right text-sm md:text-base">
+                    <p class="font-bold text-fiapPink mb-1">Disciplina: Agentes em Operações Empresariais</p>
+                    <p class="text-gray-300">Professor: <span class="font-semibold text-white">Galo Carlos Lopez
+                            Noriega</span></p>
+                </div>
+            </div>
+
+            <!-- Equipe -->
+            <div class="bg-fiapDarkGray p-5 rounded-lg border border-gray-800">
+                <h3 class="text-xs uppercase tracking-widest text-gray-500 mb-3 font-bold">Equipe de Desenvolvimento
+                </h3>
+                <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-sm">
+                    <li class="flex flex-col"><span class="font-bold">Luiz Ihara</span> <span
+                            class="text-fiapPink text-xs">RM: 368484</span></li>
+                    <li class="flex flex-col"><span class="font-bold">Daniel Caminha</span> <span
+                            class="text-fiapPink text-xs">RM: 366740</span></li>
+                    <li class="flex flex-col"><span class="font-bold">Stefano Martins</span> <span
+                            class="text-fiapPink text-xs">RM: 368534</span></li>
+                    <li class="flex flex-col"><span class="font-bold">Kisy Trevisan</span> <span
+                            class="text-fiapPink text-xs">RM: 367443</span></li>
+                    <li class="flex flex-col"><span class="font-bold">Yasmin Gaudard</span> <span
+                            class="text-fiapPink text-xs">RM: 368568</span></li>
+                    <li class="flex flex-col"><span class="font-bold">Gustavo David</span> <span
+                            class="text-fiapPink text-xs">RM: 368324</span></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto w-full px-6 lg:px-12 py-10">
+
+        <!-- Contextualização -->
+        <div class="mb-12">
+            <h1 class="text-4xl font-black text-fiapBlack mb-2 tracking-tight">Dinâmica: Mapeamento Colaborativo</h1>
+            <h2 class="text-2xl font-light text-gray-600 mb-6">Organização Analisada: <span
+                    class="font-bold text-fiapPink">Banco Bradesco</span></h2>
+
+            <div class="bg-white p-8 rounded-xl shadow-sm border-l-4 border-fiapPink">
+                <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-fiapPink" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                        </path>
+                    </svg>
+                    Desafio Operacional e Proposta
+                </h3>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    <strong>Problema Atual:</strong> O aumento exponencial de fraudes financeiras, golpes do Pix e
+                    roubos de celulares desbloqueados. Criminosos têm conseguido burlar as proteções padrão (senhas e
+                    até biometria facial/digital com uso de fotos ou coerção), resultando em perdas financeiras
+                    milionárias, invasão de contas (<em>Account Takeover</em>) e graves danos à confiança do cliente no
+                    aplicativo do Bradesco.
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    <strong>Oportunidade para Agente de IA:</strong> Implementação de um <strong>Agente de Visão
+                        Computacional para Reconhecimento de Íris no App Bradesco</strong> para autorização de
+                    transações sensíveis. A íris possui padrões únicos muito mais complexos que a face ou a digital,
+                    oferecendo uma validação de prova de vida (<em>liveness</em>) quase impossível de ser falsificada ou
+                    forçada passivamente, elevando a segurança transacional ao nível máximo.
+                </p>
+            </div>
+        </div>
+
+        <!-- Matriz de Respostas (4 Quadrantes) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Impacto -->
+            <div class="glass-card p-8 border-t-4 border-fiapPink">
+                <h4 class="text-2xl font-bold text-fiapBlack mb-4 flex items-center gap-2">
+                    <span
+                        class="bg-fiapPink text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">1</span>
+                    Impacto
+                </h4>
+                <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">Qual métrica melhora? Em
+                    quanto tempo? É reversível?</p>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong class="text-fiapBlack">Métricas:</strong> Queda drástica (meta de redução de 90%+) nos
+                        índices de fraudes por roubo de aparelho e invasão de conta. Redução imediata nos custos de
+                        ressarcimento de clientes (chargebacks) e litígios judiciais.</li>
+                    <li><strong class="text-fiapBlack">Tempo de Retorno:</strong> Médio prazo (6 a 18 meses), dependendo
+                        da curva de adoção da funcionalidade pelos usuários do aplicativo.</li>
+                    <li><strong class="text-fiapBlack">Natureza:</strong> Impacto <strong>permanente</strong>. Cria-se
+                        uma nova barreira arquitetônica definitiva contra engenharia social e roubo físico.</li>
+                </ul>
+            </div>
+
+            <!-- Risco -->
+            <div class="glass-card p-8 border-t-4 border-fiapBlack">
+                <h4 class="text-2xl font-bold text-fiapBlack mb-4 flex items-center gap-2">
+                    <span
+                        class="bg-fiapBlack text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">2</span>
+                    Risco
+                </h4>
+                <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">O que falha se o agente
+                    errar? Há exposição regulatória?</p>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong class="text-fiapBlack">Falha do Agente:</strong> <em>Falsos Negativos</em> impediriam
+                        transações legítimas urgentes, gerando extrema frustração e potenciais reclamações no
+                        BACEN/Reclame Aqui.</li>
+                    <li><strong class="text-fiapBlack">Risco Tecnológico e Exclusão:</strong> Dispositivos mais antigos
+                        possuem câmeras de baixa qualidade que podem não conseguir ler a íris corretamente, gerando
+                        risco de exclusão digital de clientes de baixa renda.</li>
+                    <li><strong class="text-fiapBlack">Exposição Regulatória (LGPD):</strong> Altíssima. O processamento
+                        e armazenamento de um dado biométrico tão sensível em nuvem ou no edge (celular) exige
+                        criptografia militar para evitar vazamentos catastróficos.</li>
+                </ul>
+            </div>
+
+            <!-- Dependências -->
+            <div class="glass-card p-8 border-t-4 border-fiapBlack">
+                <h4 class="text-2xl font-bold text-fiapBlack mb-4 flex items-center gap-2">
+                    <span
+                        class="bg-fiapBlack text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">3</span>
+                    Dependências
+                </h4>
+                <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">Sistemas, dados e
+                    competências necessárias.</p>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong class="text-fiapBlack">Hardware dos Clientes:</strong> Depende intrinsecamente da
+                        qualidade das câmeras frontais dos smartphones da base de clientes (resolução e sensores
+                        infravermelhos em alguns casos).</li>
+                    <li><strong class="text-fiapBlack">Sistemas e Dados:</strong> Atualização massiva do App Bradesco.
+                        Integração com APIs e SDKs de empresas especializadas em IA biométrica e <em>liveness
+                            detection</em>.</li>
+                    <li><strong class="text-fiapBlack">Competências:</strong> Engenheiros de segurança mobile,
+                        especialistas em IA/Machine Learning e forte apoio do time de UX/UI para desenhar a jornada de
+                        captura da íris sem fricção.</li>
+                </ul>
+            </div>
+
+            <!-- Prontidão -->
+            <div class="glass-card p-8 border-t-4 border-fiapPink">
+                <h4 class="text-2xl font-bold text-fiapBlack mb-4 flex items-center gap-2">
+                    <span
+                        class="bg-fiapPink text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">4</span>
+                    Prontidão
+                </h4>
+                <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">A organização está madura
+                    (dados, processos, cultura)?</p>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong class="text-fiapBlack">Tecnologia:</strong> O Bradesco possui alta maturidade digital,
+                        com infraestrutura robusta de app e nuvem pronta para suportar a integração dessa nova camada de
+                        segurança.</li>
+                    <li><strong class="text-fiapBlack">Processos:</strong> Os fluxos de contestação de fraudes
+                        precisarão ser redesenhados, pois uma transação validada por íris tem praticamente repúdio zero
+                        (o cliente não pode negar que foi ele).</li>
+                    <li><strong class="text-fiapBlack">Cultura do Usuário:</strong> Grande barreira inicial. Será
+                        necessário educar o cliente a posicionar o celular corretamente para a leitura dos olhos,
+                        mudando o hábito atual de apenas olhar para a tela de qualquer jeito ou usar a digital.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- ... existing code ... -->
+
+
+
+
+        <!-- STREAMING_CHUNK: Adicionando a divisória e a segunda ideia (RH/Offboarding)... -->
+
+        <!-- Divisor -->
+        <div class="my-16 border-t-2 border-gray-200 border-dashed"></div>
+
+        <!-- IDEIA 2: People Analytics / Offboarding -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-light text-gray-600 mb-6">Ideia 02: <span class="font-bold text-fiapPink">People
+                    Analytics (Retenção e Desligamento)</span></h2>
+
+            <div class="bg-white p-8 rounded-xl shadow-sm border-l-4 border-fiapBlack">
+                <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-fiapBlack" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                        </path>
+                    </svg>
+                    Desafio de RH e Proposta
+                </h3>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    <strong>Problema Atual:</strong> Entrevistas de desligamento (Offboarding) geram dados qualitativos
+                    riquíssimos, mas que muitas vezes se perdem em anotações não padronizadas ou tabulações rasas. O
+                    Bradesco perde talentos para concorrentes ou fintechs e, muitas vezes, não consegue mapear com
+                    precisão
+                    cirúrgica os motivos reais (ex: pacotes de benefícios defasados, problemas de liderança em setores
+                    específicos, modelo de trabalho).
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    <strong>Oportunidade para Agente de IA:</strong> Implementação de um <strong>Agente de Processamento
+                        de
+                        Linguagem Natural (NLP) para Análise de Offboarding</strong>. Mediante consentimento, as
+                    entrevistas
+                    de saída (áudio/vídeo) seriam gravadas e o agente transcreveria, analisaria o sentimento e
+                    categorizaria
+                    os motivos de saída. Isso geraria painéis preditivos para o RH identificar "áreas tóxicas" ou
+                    tendências
+                    de mercado (ex: "50% dos devs que saíram citaram o benefício de saúde da empresa X"), permitindo
+                    melhorias contínuas na organização.
+                </p>
+            </div>
+        </div>
+
+        <!-- Matriz de Respostas (4 Quadrantes) - Ideia 2 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Impacto -->
+            <div class="glass-card p-8 border-t-4 border-fiapBlack">
+                <h4 class="text-2xl font-bold text-fiapBlack mb-4 flex items-center gap-2">
+                    <span
+                        class="bg-fiapBlack text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">1</span>
+                    Impacto
+                </h4>
+                <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">Qual métrica melhora? Em
+                    quanto
+                    tempo? É reversível?</p>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong class="text-fiapBlack">Métricas:</strong> Redução da taxa de <em>Turnover</em>
+                        voluntário.
+                        Diminuição drástica do Custo de Aquisição de Talentos (economia com novos recrutamentos e curva
+                        de
+                        aprendizado). Aumento do e-NPS (Employee Net Promoter Score).</li>
+                    <li><strong class="text-fiapBlack">Tempo de Retorno:</strong> Médio a longo prazo (necessita de
+                        volume
+                        de dados estatísticos para o algoritmo apontar tendências sólidas e justificar mudanças em
+                        pacotes
+                        de RH).</li>
+                    <li><strong class="text-fiapBlack">Natureza:</strong> Reversível. A IA atua como um sistema de
+                        suporte à
+                        decisão, mas as melhorias aplicadas na cultura e nos benefícios geram impactos
+                        <strong>permanentes</strong> na empresa.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Risco -->
+            <div class="glass-card p-8 border-t-4 border-fiapPink">
+                <h4 class="text-2xl font-bold text-fiapBlack mb-4 flex items-center gap-2">
+                    <span
+                        class="bg-fiapPink text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">2</span>
+                    Risco
+                </h4>
+                <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">O que falha se o agente
+                    errar?
+                    Há exposição regulatória?</p>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong class="text-fiapBlack">Falha do Agente:</strong> A IA pode interpretar ironias ou
+                        contextos
+                        de forma equivocada (falso positivo de toxicidade), induzindo o RH a penalizar líderes
+                        injustamente
+                        ou criar políticas baseadas em dados enviesados.</li>
+                    <li><strong class="text-fiapBlack">Exposição Regulatória:</strong> Altíssima. Requer consentimento
+                        explícito para gravação e transcrição (LGPD trabalhista).</li>
+                    <li><strong class="text-fiapBlack">Risco Reputacional Interno:</strong> Quebra de anonimato. Se o
+                        sistema vazar que o funcionário X criticou o diretor Y, isso pode gerar passivos trabalhistas
+                        graves
+                        (dano moral/retaliação).</li>
+                </ul>
+            </div>
+
+            <!-- Dependências -->
+            <div class="glass-card p-8 border-t-4 border-fiapPink">
+                <h4 class="text-2xl font-bold text-fiapBlack mb-4 flex items-center gap-2">
+                    <span
+                        class="bg-fiapPink text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">3</span>
+                    Dependências
+                </h4>
+                <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">Sistemas, dados e
+                    competências
+                    necessárias.</p>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong class="text-fiapBlack">Sistemas:</strong> Plataforma de videoconferência corporativa
+                        (Teams/Zoom) integrada via API a modelos de Speech-to-Text e LLMs (Large Language Models) em
+                        ambiente seguro/privado (sem treinar IA pública com dados do banco).</li>
+                    <li><strong class="text-fiapBlack">Dados:</strong> Histórico de desligamentos, avaliações de
+                        desempenho
+                        anteriores e metadados estruturados (cargo, tempo de casa, departamento).</li>
+                    <li><strong class="text-fiapBlack">Competências:</strong> Analistas de <em>People Analytics</em>,
+                        Psicólogos Organizacionais para parametrizar e revisar as categorias da IA, e forte apoio do
+                        Jurídico.</li>
+                </ul>
+            </div>
+
+            <!-- Prontidão -->
+            <div class="glass-card p-8 border-t-4 border-fiapBlack">
+                <h4 class="text-2xl font-bold text-fiapBlack mb-4 flex items-center gap-2">
+                    <span
+                        class="bg-fiapBlack text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">4</span>
+                    Prontidão
+                </h4>
+                <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">A organização está madura
+                    (dados, processos, cultura)?</p>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong class="text-fiapBlack">Tecnologia:</strong> O Bradesco possui totais condições técnicas
+                        para
+                        implementar soluções de processamento de linguagem natural internamente.</li>
+                    <li><strong class="text-fiapBlack">Processos:</strong> O RH precisará padronizar os roteiros das
+                        entrevistas de saída e criar fluxos sistêmicos blindados para garantir a desidentificação
+                        (anonimização) dos dados antes de irem para o painel de diretoria.</li>
+                    <li><strong class="text-fiapBlack">Cultura:</strong> Ponto mais sensível. É necessário garantir
+                        <em>"segurança psicológica"</em> total, para que o colaborador que está sendo desligado seja
+                        100%
+                        transparente sem medo de retaliações futuras ou de "fechar portas".
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="bg-fiapDarkGray text-center py-8 mt-12 border-t border-gray-800">
+        <div class="max-w-4xl mx-auto px-6">
+            <p class="text-gray-400 text-sm mb-4">
+                <strong>Critérios de Entrega Atendidos:</strong><br>
+                Enviar para o e-mail <a href="mailto:GALOLOPEZ@HOTMAIL.COM"
+                    class="text-fiapPink hover:underline">GALOLOPEZ@HOTMAIL.COM</a><br>
+                Assunto sugerido: Oportunidades – Luiz – Daniel – Stefano – Kisy – Yasmin – Gustavo.
+            </p>
+            <p class="text-gray-600 text-xs">
+                Desenvolvido para fins acadêmicos - FIAP &copy; 2026.
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
