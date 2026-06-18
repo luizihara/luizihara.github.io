@@ -86,12 +86,14 @@
     <!-- Main Content -->
     <main class="flex-grow max-w-7xl mx-auto w-full px-6 lg:px-12 py-10">
 
-        <!-- Contextualização -->
-        <div class="mb-12">
-            <h1 class="text-4xl font-black text-fiapBlack mb-2 tracking-tight">Dinâmica: Mapeamento Colaborativo</h1>
-            <h2 class="text-2xl font-light text-gray-600 mb-6">Organização Analisada: <span
-                    class="font-bold text-fiapPink">Banco Bradesco</span></h2>
+        <h1 class="text-4xl font-black text-fiapBlack mb-2 tracking-tight">Dinâmica: Mapeamento Colaborativo</h1>
+        <h2 class="text-2xl font-light text-gray-600 mb-12">Organização Analisada: <span
+                class="font-bold text-fiapPink">Banco Bradesco</span></h2>
 
+        <!-- IDEIA 1: Segurança -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-light text-gray-600 mb-6">Ideia 01: <span class="font-bold text-fiapPink">IA de
+                    Segurança e Prova de Vida (Íris)</span></h2>
             <div class="bg-white p-8 rounded-xl shadow-sm border-l-4 border-fiapPink">
                 <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
                     <svg class="w-6 h-6 text-fiapPink" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -106,20 +108,208 @@
                     <strong>Problema Atual:</strong> O aumento exponencial de fraudes financeiras, golpes do Pix e
                     roubos de celulares desbloqueados. Criminosos têm conseguido burlar as proteções padrão (senhas e
                     até biometria facial/digital com uso de fotos ou coerção), resultando em perdas financeiras
-                    milionárias, invasão de contas (<em>Account Takeover</em>) e graves danos à confiança do cliente no
-                    aplicativo do Bradesco.
+                    milionárias e invasão de contas (<em>Account Takeover</em>).
                 </p>
                 <p class="text-gray-700 leading-relaxed">
-                    <strong>Oportunidade para Agente de IA:</strong> Implementação de um <strong>Agente de Visão
-                        Computacional para Reconhecimento de Íris no App Bradesco</strong> para autorização de
-                    transações sensíveis. A íris possui padrões únicos muito mais complexos que a face ou a digital,
-                    oferecendo uma validação de prova de vida (<em>liveness</em>) quase impossível de ser falsificada ou
-                    forçada passivamente, elevando a segurança transacional ao nível máximo.
+                    <strong>Oportunidade:</strong> Implementação de um <strong>Agente de Visão Computacional para
+                        Reconhecimento de Íris no App Bradesco</strong> para autorização de transações sensíveis. A íris
+                    possui padrões únicos, oferecendo uma validação de prova de vida (<em>liveness</em>) quase
+                    impossível de ser falsificada ou forçada passivamente.
                 </p>
             </div>
         </div>
 
-        <!-- Matriz de Respostas (4 Quadrantes) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Impacto -->
+            <div class="glass-card p-8 border-t-4 border-fiapPink">
+                <h4 class="text-2xl font-bold text-fiapBlack mb-4 flex items-center gap-2">
+                    <span
+                        class="bg-fiapPink text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">1</span>
+                    Impacto
+                </h4>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong class="text-fiapBlack">Métricas:</strong> Queda drástica nos índices de fraudes por
+                        roubo de aparelho. Redução imediata nos custos de ressarcimento de clientes (chargebacks) e
+                        litígios judiciais.</li>
+                    <li><strong class="text-fiapBlack">Tempo de Retorno:</strong> Médio prazo (6 a 18 meses), dependendo
+                        da curva de adoção.</li>
+                    <li><strong class="text-fiapBlack">Natureza:</strong> Impacto <strong>permanente</strong> na
+                        barreira de segurança.</li>
+                </ul>
+            </div>
+            <!-- Risco -->
+            <div class="glass-card p-8 border-t-4 border-fiapBlack">
+                <h4 class="text-2xl font-bold text-fiapBlack mb-4 flex items-center gap-2">
+                    <span
+                        class="bg-fiapBlack text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">2</span>
+                    Risco
+                </h4>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong class="text-fiapBlack">Risco Tecnológico:</strong> Dispositivos antigos podem ter
+                        câmeras que não leem a íris corretamente (exclusão digital).</li>
+                    <li><strong class="text-fiapBlack">Regulatório (LGPD):</strong> Altíssimo. Processamento de dado
+                        biométrico sensível requer criptografia extrema.</li>
+                </ul>
+            </div>
+            <!-- Dependências -->
+            <div class="glass-card p-8 border-t-4 border-fiapBlack">
+                <h4 class="text-2xl font-bold text-fiapBlack mb-4 flex items-center gap-2">
+                    <span
+                        class="bg-fiapBlack text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">3</span>
+                    Dependências
+                </h4>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong class="text-fiapBlack">Sistemas:</strong> Atualização massiva do App, integração com
+                        APIs/SDKs de <em>liveness detection</em>.</li>
+                    <li><strong class="text-fiapBlack">Competências:</strong> Engenheiros de segurança mobile e
+                        especialistas em IA biométrica.</li>
+                </ul>
+            </div>
+            <!-- Prontidão -->
+            <div class="glass-card p-8 border-t-4 border-fiapPink">
+                <h4 class="text-2xl font-bold text-fiapBlack mb-4 flex items-center gap-2">
+                    <span
+                        class="bg-fiapPink text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">4</span>
+                    Prontidão
+                </h4>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong class="text-fiapBlack">Tecnologia/Dados:</strong> Bradesco possui alta maturidade
+                        digital.</li>
+                    <li><strong class="text-fiapBlack">Cultura:</strong> Barreira inicial. Será necessário reeducar o
+                        cliente a posicionar o celular corretamente para a leitura ocular.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Divisor -->
+        <div class="my-16 border-t-2 border-gray-200 border-dashed"></div>
+
+        <!-- IDEIA 2: People Analytics / Offboarding -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-light text-gray-600 mb-6">Ideia 02: <span class="font-bold text-fiapPink">People
+                    Analytics (Retenção e Desligamentos)</span></h2>
+            <div class="bg-white p-8 rounded-xl shadow-sm border-l-4 border-fiapBlack">
+                <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-fiapBlack" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                        </path>
+                    </svg>
+                    Desafio de RH e Proposta
+                </h3>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    <strong>Problema Atual:</strong> Entrevistas de desligamento (Offboarding) geram dados qualitativos
+                    riquíssimos que se perdem em anotações não padronizadas. A empresa perde talentos e não mapeia
+                    cirurgicamente os reais motivos (benefícios de concorrentes, lideranças tóxicas, modelo de
+                    trabalho).
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    <strong>Oportunidade:</strong> Implementação de um <strong>Agente de Processamento de Linguagem
+                        Natural (NLP) para Offboarding</strong>. Mediante consentimento, as entrevistas de saída são
+                    gravadas, e a IA transcreve, analisa sentimento e categoriza os motivos, gerando painéis preditivos
+                    para o RH aplicar melhorias contínuas.
+                </p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Impacto -->
+            <div class="glass-card p-8 border-t-4 border-fiapBlack">
+                <h4 class="text-2xl font-bold text-fiapBlack mb-4 flex items-center gap-2">
+                    <span
+                        class="bg-fiapBlack text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">1</span>
+                    Impacto
+                </h4>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong class="text-fiapBlack">Métricas:</strong> Redução da taxa de <em>Turnover</em>
+                        voluntário. Economia no Custo de Aquisição de Talentos e aumento do e-NPS.</li>
+                    <li><strong class="text-fiapBlack">Tempo de Retorno:</strong> Médio prazo (necessita acúmulo de
+                        dados).</li>
+                    <li><strong class="text-fiapBlack">Natureza:</strong> Mudanças culturais geram impacto
+                        <strong>permanente</strong> e estrutural.</li>
+                </ul>
+            </div>
+            <!-- Risco -->
+            <div class="glass-card p-8 border-t-4 border-fiapPink">
+                <h4 class="text-2xl font-bold text-fiapBlack mb-4 flex items-center gap-2">
+                    <span
+                        class="bg-fiapPink text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">2</span>
+                    Risco
+                </h4>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong class="text-fiapBlack">Falha da IA:</strong> Interpretar ironias equivocadamente (viés),
+                        induzindo decisões erradas do RH.</li>
+                    <li><strong class="text-fiapBlack">Risco Reputacional/Jurídico:</strong> Quebra de anonimato e
+                        vazamento de críticas a gestores, gerando passivos trabalhistas.</li>
+                </ul>
+            </div>
+            <!-- Dependências -->
+            <div class="glass-card p-8 border-t-4 border-fiapPink">
+                <h4 class="text-2xl font-bold text-fiapBlack mb-4 flex items-center gap-2">
+                    <span
+                        class="bg-fiapPink text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">3</span>
+                    Dependências
+                </h4>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong class="text-fiapBlack">Sistemas:</strong> LLMs em nuvem privada (para não treinar IA
+                        pública com dados internos). Integração com Teams/Zoom.</li>
+                    <li><strong class="text-fiapBlack">Competências:</strong> Psicólogos Organizacionais para
+                        parametrizar o modelo.</li>
+                </ul>
+            </div>
+            <!-- Prontidão -->
+            <div class="glass-card p-8 border-t-4 border-fiapBlack">
+                <h4 class="text-2xl font-bold text-fiapBlack mb-4 flex items-center gap-2">
+                    <span
+                        class="bg-fiapBlack text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">4</span>
+                    Prontidão
+                </h4>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong class="text-fiapBlack">Processos:</strong> Padronização do roteiro de desligamento e
+                        anonimização de dados sistêmica.</li>
+                    <li><strong class="text-fiapBlack">Cultura:</strong> Exige "segurança psicológica" para o
+                        colaborador ser transparente sem medo de retaliação.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Divisor -->
+        <div class="my-16 border-t-2 border-gray-200 border-dashed"></div>
+
+        <!-- IDEIA 3: Agente de Câmbio / Transacional -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-light text-gray-600 mb-6">Ideia 03: <span class="font-bold text-fiapPink">Agente
+                    Autônomo de Câmbio e Diversificação</span></h2>
+
+            <div class="bg-white p-8 rounded-xl shadow-sm border-l-4 border-fiapPink">
+                <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-fiapPink" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                        </path>
+                    </svg>
+                    Desafio de Negócios e Proposta
+                </h3>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    <strong>Problema Atual:</strong> Clientes perdem boas oportunidades de compra de moedas estrangeiras
+                    (Dólar, Euro, Libra) por não acompanharem as flutuações diárias do mercado. Funcionalidades simples
+                    de "alerta de preço" não resolvem, pois o cliente ainda precisa acessar o app e operar manualmente.
+                    Além disso, a tecnologia atual não considera o <em>contexto</em> da compra (ex: viagem marcada,
+                    intercâmbio, diversificação de carteira).
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    <strong>Oportunidade para Agente de IA:</strong> Implementação de um <strong>Agente Financeiro
+                        Autônomo e Conversacional</strong>. A IA conversa com o cliente para entender a necessidade
+                    ("Vou para a Disney em 6 meses, preciso de 3 mil dólares") e recebe o mandato para operar. O Agente
+                    monitora o mercado e realiza compras automáticas (fracionadas ou em lote) sempre que a moeda atingir
+                    um "Valor X" estipulado ou sofrer uma "Queda de Y%". Isso melhora o preço médio do cliente
+                    (estratégia de <em>Dollar Cost Averaging</em>) e automatiza a inteligência de mercado.
+                </p>
+            </div>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
             <!-- Impacto -->
@@ -132,13 +322,13 @@
                 <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">Qual métrica melhora? Em
                     quanto tempo? É reversível?</p>
                 <ul class="space-y-3 text-gray-700">
-                    <li><strong class="text-fiapBlack">Métricas:</strong> Queda drástica (meta de redução de 90%+) nos
-                        índices de fraudes por roubo de aparelho e invasão de conta. Redução imediata nos custos de
-                        ressarcimento de clientes (chargebacks) e litígios judiciais.</li>
-                    <li><strong class="text-fiapBlack">Tempo de Retorno:</strong> Médio prazo (6 a 18 meses), dependendo
-                        da curva de adoção da funcionalidade pelos usuários do aplicativo.</li>
-                    <li><strong class="text-fiapBlack">Natureza:</strong> Impacto <strong>permanente</strong>. Cria-se
-                        uma nova barreira arquitetônica definitiva contra engenharia social e roubo físico.</li>
+                    <li><strong class="text-fiapBlack">Métricas:</strong> Aumento significativo do TPV (Volume Total de
+                        Pagamentos) em câmbio e remessas internacionais. Aumento da receita do banco através do
+                        <em>spread cambial</em>. Aumento de engajamento no aplicativo.</li>
+                    <li><strong class="text-fiapBlack">Tempo de Retorno:</strong> Retorno em curto/médio prazo. Features
+                        de monetização direta geram caixa assim que são implementadas.</li>
+                    <li><strong class="text-fiapBlack">Natureza:</strong> Totalmente <strong>reversível</strong>. O
+                        cliente pode cancelar os "gatilhos" da IA a qualquer momento.</li>
                 </ul>
             </div>
 
@@ -152,15 +342,15 @@
                 <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">O que falha se o agente
                     errar? Há exposição regulatória?</p>
                 <ul class="space-y-3 text-gray-700">
-                    <li><strong class="text-fiapBlack">Falha do Agente:</strong> <em>Falsos Negativos</em> impediriam
-                        transações legítimas urgentes, gerando extrema frustração e potenciais reclamações no
-                        BACEN/Reclame Aqui.</li>
-                    <li><strong class="text-fiapBlack">Risco Tecnológico e Exclusão:</strong> Dispositivos mais antigos
-                        possuem câmeras de baixa qualidade que podem não conseguir ler a íris corretamente, gerando
-                        risco de exclusão digital de clientes de baixa renda.</li>
-                    <li><strong class="text-fiapBlack">Exposição Regulatória (LGPD):</strong> Altíssima. O processamento
-                        e armazenamento de um dado biométrico tão sensível em nuvem ou no edge (celular) exige
-                        criptografia militar para evitar vazamentos catastróficos.</li>
+                    <li><strong class="text-fiapBlack">Risco Financeiro:</strong> O mercado é volátil. A IA pode
+                        executar uma compra por interpretar um gatilho e a moeda continuar caindo nos dias seguintes,
+                        gerando frustração.</li>
+                    <li><strong class="text-fiapBlack">Falha Sistêmica:</strong> Bugs de execução ("comprar em loop" ou
+                        comprar no valor errado) podem zerar o saldo em reais da conta corrente do cliente, causando
+                        danos gravíssimos.</li>
+                    <li><strong class="text-fiapBlack">Regulatório (CVM/BACEN):</strong> O Agente não pode "recomendar"
+                        ou atuar como analista financeiro sem perfil (suitability). Ele deve agir estritamente baseado
+                        no mandato paramétrico do cliente.</li>
                 </ul>
             </div>
 
@@ -174,15 +364,13 @@
                 <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">Sistemas, dados e
                     competências necessárias.</p>
                 <ul class="space-y-3 text-gray-700">
-                    <li><strong class="text-fiapBlack">Hardware dos Clientes:</strong> Depende intrinsecamente da
-                        qualidade das câmeras frontais dos smartphones da base de clientes (resolução e sensores
-                        infravermelhos em alguns casos).</li>
-                    <li><strong class="text-fiapBlack">Sistemas e Dados:</strong> Atualização massiva do App Bradesco.
-                        Integração com APIs e SDKs de empresas especializadas em IA biométrica e <em>liveness
-                            detection</em>.</li>
-                    <li><strong class="text-fiapBlack">Competências:</strong> Engenheiros de segurança mobile,
-                        especialistas em IA/Machine Learning e forte apoio do time de UX/UI para desenhar a jornada de
-                        captura da íris sem fricção.</li>
+                    <li><strong class="text-fiapBlack">Sistemas:</strong> Integração pesada (latência próxima a zero)
+                        com APIs de cotação global (Bloomberg/Reuters) e com o motor transacional de câmbio do
+                        Bradesco/BIA.</li>
+                    <li><strong class="text-fiapBlack">Dados:</strong> Acesso seguro ao saldo em conta corrente do
+                        cliente para garantir que a ordem só será executada se houver saldo em Reais disponível.</li>
+                    <li><strong class="text-fiapBlack">Competências:</strong> Especialistas em UX conversacional,
+                        engenheiros financeiros de Trading e equipe forte de Compliance/Jurídico.</li>
                 </ul>
             </div>
 
@@ -196,69 +384,52 @@
                 <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">A organização está madura
                     (dados, processos, cultura)?</p>
                 <ul class="space-y-3 text-gray-700">
-                    <li><strong class="text-fiapBlack">Tecnologia:</strong> O Bradesco possui alta maturidade digital,
-                        com infraestrutura robusta de app e nuvem pronta para suportar a integração dessa nova camada de
-                        segurança.</li>
-                    <li><strong class="text-fiapBlack">Processos:</strong> Os fluxos de contestação de fraudes
-                        precisarão ser redesenhados, pois uma transação validada por íris tem praticamente repúdio zero
-                        (o cliente não pode negar que foi ele).</li>
-                    <li><strong class="text-fiapBlack">Cultura do Usuário:</strong> Grande barreira inicial. Será
-                        necessário educar o cliente a posicionar o celular corretamente para a leitura dos olhos,
-                        mudando o hábito atual de apenas olhar para a tela de qualquer jeito ou usar a digital.</li>
+                    <li><strong class="text-fiapBlack">Tecnologia:</strong> O Bradesco é altamente maduro em sistemas
+                        transacionais, já suportando grandes volumes de robôs de investimento e home broker.</li>
+                    <li><strong class="text-fiapBlack">Processos:</strong> Precisam de Termos de Uso blindados. O fluxo
+                        precisa garantir que o cliente aprove o limite máximo que a IA pode gastar.</li>
+                    <li><strong class="text-fiapBlack">Cultura:</strong> Ponto de atenção (Trade-off de autonomia).
+                        Existe uma curva de confiança até o cliente se sentir confortável em dar um "cheque em branco
+                        condicional" para um Agente de IA operar seu dinheiro.</li>
                 </ul>
             </div>
 
         </div>
 
-        <!-- ... existing code ... -->
-
-
-
-
-        <!-- STREAMING_CHUNK: Adicionando a divisória e a segunda ideia (RH/Offboarding)... -->
 
         <!-- Divisor -->
         <div class="my-16 border-t-2 border-gray-200 border-dashed"></div>
 
-        <!-- IDEIA 2: People Analytics / Offboarding -->
+        <!-- IDEIA 4: World ID / Identidade Sintética -->
         <div class="mb-12">
-            <h2 class="text-2xl font-light text-gray-600 mb-6">Ideia 02: <span class="font-bold text-fiapPink">People
-                    Analytics (Retenção e Desligamento)</span></h2>
+            <h2 class="text-2xl font-light text-gray-600 mb-6">Ideia 04: <span class="font-bold text-fiapPink">Agente de
+                    IA para Prevenção de Fraudes de Identidade (Integração World ID)</span></h2>
 
             <div class="bg-white p-8 rounded-xl shadow-sm border-l-4 border-fiapBlack">
                 <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
                     <svg class="w-6 h-6 text-fiapBlack" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
                         </path>
                     </svg>
-                    Desafio de RH e Proposta
+                    Desafio Estratégico e Proposta
                 </h3>
                 <p class="text-gray-700 leading-relaxed mb-4">
-                    <strong>Problema Atual:</strong> Entrevistas de desligamento (Offboarding) geram dados qualitativos
-                    riquíssimos, mas que muitas vezes se perdem em anotações não padronizadas ou tabulações rasas. O
-                    Bradesco perde talentos para concorrentes ou fintechs e, muitas vezes, não consegue mapear com
-                    precisão
-                    cirúrgica os motivos reais (ex: pacotes de benefícios defasados, problemas de liderança em setores
-                    específicos, modelo de trabalho).
+                    <strong>Problema Atual:</strong> A proliferação de identidades sintéticas (criação de perfis falsos
+                    misturando dados reais e falsos) e o avanço dos <em>deepfakes</em> têm tornado os processos
+                    tradicionais de KYC (Conheça seu Cliente) obsoletos, gerando perdas sistêmicas e aumentando o tempo
+                    e o custo de validação de novos clientes.
                 </p>
                 <p class="text-gray-700 leading-relaxed">
-                    <strong>Oportunidade para Agente de IA:</strong> Implementação de um <strong>Agente de Processamento
-                        de
-                        Linguagem Natural (NLP) para Análise de Offboarding</strong>. Mediante consentimento, as
-                    entrevistas
-                    de saída (áudio/vídeo) seriam gravadas e o agente transcreveria, analisaria o sentimento e
-                    categorizaria
-                    os motivos de saída. Isso geraria painéis preditivos para o RH identificar "áreas tóxicas" ou
-                    tendências
-                    de mercado (ex: "50% dos devs que saíram citaram o benefício de saúde da empresa X"), permitindo
-                    melhorias contínuas na organização.
+                    <strong>Oportunidade para Agente de IA:</strong> Implementar um agente de IA integrado ao protocolo
+                    da <strong>World ID</strong> para fortalecer a prevenção a fraudes de identidade. A proposta visa
+                    utilizar essa infraestrutura para validações críticas (onboarding e transações de altíssimo risco),
+                    garantindo a "prova de humanidade" de forma descentralizada.
                 </p>
             </div>
         </div>
 
-        <!-- Matriz de Respostas (4 Quadrantes) - Ideia 2 -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
             <!-- Impacto -->
@@ -268,25 +439,15 @@
                         class="bg-fiapBlack text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">1</span>
                     Impacto
                 </h4>
-                <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">Qual métrica melhora? Em
-                    quanto
-                    tempo? É reversível?</p>
                 <ul class="space-y-3 text-gray-700">
-                    <li><strong class="text-fiapBlack">Métricas:</strong> Redução da taxa de <em>Turnover</em>
-                        voluntário.
-                        Diminuição drástica do Custo de Aquisição de Talentos (economia com novos recrutamentos e curva
-                        de
-                        aprendizado). Aumento do e-NPS (Employee Net Promoter Score).</li>
-                    <li><strong class="text-fiapBlack">Tempo de Retorno:</strong> Médio a longo prazo (necessita de
-                        volume
-                        de dados estatísticos para o algoritmo apontar tendências sólidas e justificar mudanças em
-                        pacotes
-                        de RH).</li>
-                    <li><strong class="text-fiapBlack">Natureza:</strong> Reversível. A IA atua como um sistema de
-                        suporte à
-                        decisão, mas as melhorias aplicadas na cultura e nos benefícios geram impactos
-                        <strong>permanentes</strong> na empresa.
+                    <li><strong class="text-fiapBlack">Métricas:</strong> Redução de até 90% nas perdas financeiras
+                        associadas a fraudes de identidade sintética e deepfakes. Redução do tempo de análise de KYC de
+                        minutos para segundos.</li>
+                    <li><strong class="text-fiapBlack">Tempo de Retorno:</strong> Os primeiros resultados e a queda no
+                        provisionamento para fraudes podem ocorrer em até 6 meses nas praças piloto (grandes capitais).
                     </li>
+                    <li><strong class="text-fiapBlack">Natureza:</strong> Impacto <strong>permanente</strong>. Cria uma
+                        barreira estrutural de segurança digital e fortalece a confiança (<em>Brand Equity</em>).</li>
                 </ul>
             </div>
 
@@ -297,21 +458,14 @@
                         class="bg-fiapPink text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">2</span>
                     Risco
                 </h4>
-                <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">O que falha se o agente
-                    errar?
-                    Há exposição regulatória?</p>
                 <ul class="space-y-3 text-gray-700">
-                    <li><strong class="text-fiapBlack">Falha do Agente:</strong> A IA pode interpretar ironias ou
-                        contextos
-                        de forma equivocada (falso positivo de toxicidade), induzindo o RH a penalizar líderes
-                        injustamente
-                        ou criar políticas baseadas em dados enviesados.</li>
-                    <li><strong class="text-fiapBlack">Exposição Regulatória:</strong> Altíssima. Requer consentimento
-                        explícito para gravação e transcrição (LGPD trabalhista).</li>
-                    <li><strong class="text-fiapBlack">Risco Reputacional Interno:</strong> Quebra de anonimato. Se o
-                        sistema vazar que o funcionário X criticou o diretor Y, isso pode gerar passivos trabalhistas
-                        graves
-                        (dano moral/retaliação).</li>
+                    <li><strong class="text-fiapBlack">Risco Reputacional/Regulatório:</strong> Alto risco na LGPD
+                        (ANPD). Possível reação negativa de clientes por medo de "vigilância em massa" e uso indevido de
+                        biometria sensível.</li>
+                    <li><strong class="text-fiapBlack">Falha Operacional:</strong> Falsos negativos podem impedir
+                        clientes legítimos de transacionar, gerando grande atrito na jornada.</li>
+                    <li><strong class="text-fiapBlack">Risco Estratégico:</strong> Risco de <em>lock-in</em>
+                        (dependência tecnológica de um único fornecedor internacional — Tools for Humanity/World).</li>
                 </ul>
             </div>
 
@@ -322,19 +476,13 @@
                         class="bg-fiapPink text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">3</span>
                     Dependências
                 </h4>
-                <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">Sistemas, dados e
-                    competências
-                    necessárias.</p>
                 <ul class="space-y-3 text-gray-700">
-                    <li><strong class="text-fiapBlack">Sistemas:</strong> Plataforma de videoconferência corporativa
-                        (Teams/Zoom) integrada via API a modelos de Speech-to-Text e LLMs (Large Language Models) em
-                        ambiente seguro/privado (sem treinar IA pública com dados do banco).</li>
-                    <li><strong class="text-fiapBlack">Dados:</strong> Histórico de desligamentos, avaliações de
-                        desempenho
-                        anteriores e metadados estruturados (cargo, tempo de casa, departamento).</li>
-                    <li><strong class="text-fiapBlack">Competências:</strong> Analistas de <em>People Analytics</em>,
-                        Psicólogos Organizacionais para parametrizar e revisar as categorias da IA, e forte apoio do
-                        Jurídico.</li>
+                    <li><strong class="text-fiapBlack">Sistemas e Dados:</strong> Integração via API/SDK do protocolo
+                        descentralizado no app do Bradesco. Depende do cruzamento de chaves criptográficas (hashes),
+                        <em>sem armazenamento</em> de dados biométricos brutos nos servidores do banco.</li>
+                    <li><strong class="text-fiapBlack">Competências Internas:</strong> Necessidade de formar ou
+                        contratar profissionais com domínio em criptografia Web3, arquitetura de Identidade
+                        Autossoberana (SSI) e direito regulatório digital.</li>
                 </ul>
             </div>
 
@@ -345,27 +493,34 @@
                         class="bg-fiapBlack text-white w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-lg">4</span>
                     Prontidão
                 </h4>
-                <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">A organização está madura
-                    (dados, processos, cultura)?</p>
                 <ul class="space-y-3 text-gray-700">
-                    <li><strong class="text-fiapBlack">Tecnologia:</strong> O Bradesco possui totais condições técnicas
-                        para
-                        implementar soluções de processamento de linguagem natural internamente.</li>
-                    <li><strong class="text-fiapBlack">Processos:</strong> O RH precisará padronizar os roteiros das
-                        entrevistas de saída e criar fluxos sistêmicos blindados para garantir a desidentificação
-                        (anonimização) dos dados antes de irem para o painel de diretoria.</li>
-                    <li><strong class="text-fiapBlack">Cultura:</strong> Ponto mais sensível. É necessário garantir
-                        <em>"segurança psicológica"</em> total, para que o colaborador que está sendo desligado seja
-                        100%
-                        transparente sem medo de retaliações futuras ou de "fechar portas".
-                    </li>
+                    <li><strong class="text-fiapBlack">Dados:</strong> Alta. O banco já possui estrutura robusta para
+                        análise de risco em tempo real.</li>
+                    <li><strong class="text-fiapBlack">Processos:</strong> Média. A adaptação de um modelo centralizado
+                        para uma validação descentralizada exigirá remodelagem de compliance.</li>
+                    <li><strong class="text-fiapBlack">Cultura:</strong> A prontidão de engenharia é alta, mas exigirá
+                        <em>aculturamento da diretoria executiva</em> para gerenciar desafios geopolíticos e
+                        regulatórios atrelados à empresa World.</li>
                 </ul>
             </div>
 
         </div>
 
-    </main>
+        <!-- Síntese Executiva -->
+        <div class="mt-8 bg-fiapDarkGray text-white p-6 rounded-xl shadow-md border-l-4 border-fiapPink">
+            <h4 class="text-lg font-bold mb-2 uppercase tracking-wider text-fiapPink">Síntese Executiva</h4>
+            <p class="text-gray-300 text-sm leading-relaxed">
+                A proposta apresenta alto potencial de impacto na redução de fraudes de identidade sintética e
+                deepfakes, com ganhos operacionais relevantes para <em>onboarding</em>, KYC e transações de alto risco.
+                Ao mesmo tempo, sua implementação exige atenção rigorosa a riscos regulatórios, reputacionais e
+                estratégicos. A principal tensão da proposta está no equilíbrio entre segurança digital avançada,
+                experiência do usuário, privacidade e dependência de infraestrutura externa. A recomendação do grupo é
+                que a solução seja testada em praças piloto, com governança regulatória robusta e comunicação
+                transparente aos clientes do Bradesco sobre a privacidade dos dados.
+            </p>
+        </div>
 
+    </main>
 
     <!-- Footer -->
     <footer class="bg-fiapDarkGray text-center py-8 mt-12 border-t border-gray-800">
