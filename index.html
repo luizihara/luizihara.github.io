@@ -444,6 +444,37 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
+        .project-feature-card {
+            grid-column: 1 / -1;
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            text-align: left;
+            gap: 8px;
+        }
+
+        .project-feature-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .project-feature-copy {
+            font-size: 0.82rem;
+            line-height: 1.55;
+            opacity: 0.88;
+            font-weight: 500;
+        }
+
+        .project-feature-meta {
+            font-size: 0.74rem;
+            opacity: 0.72;
+            letter-spacing: 0.02em;
+            font-weight: 600;
+        }
+
         .tcc-highlight {
             grid-column: 1 / -1;
             padding: 14px;
@@ -1254,6 +1285,41 @@
                 </div>
             </div>
 
+            <!-- Independent Projects -->
+            <div class="project-hub bento-box span-4">
+                <h2 class="bento-title">
+                    <span class="lang-pt">Projetos Autorais & Ferramentas</span>
+                    <span class="lang-en">Independent Projects & Tools</span>
+                    <span class="lang-es">Proyectos Independientes y Herramientas</span>
+                    <span class="lang-it">Progetti Indipendenti e Strumenti</span>
+                </h2>
+                <div style="font-size: 0.85rem; margin-top: -15px; margin-bottom: 20px; opacity: 0.8;">
+                    <span class="lang-pt">Trabalhos autorais e utilitários práticos criados fora do MBA. Aqui entram experimentos, builders e artefatos reutilizáveis pensados para uso real em clientes e times.</span>
+                    <span class="lang-en">Independent work and practical utilities created outside the MBA. This is where experiments, builders, and reusable artifacts designed for real client and team usage live.</span>
+                    <span class="lang-es">Trabajos independientes y utilidades prácticas creadas fuera del MBA. Aquí viven experimentos, builders y artefactos reutilizables pensados para uso real con clientes y equipos.</span>
+                    <span class="lang-it">Lavori indipendenti e utilità pratiche create al di fuori del MBA. Qui vivono esperimenti, builder e artefatti riutilizzabili pensati per un uso reale con clienti e team.</span>
+                </div>
+
+                <div class="project-grid">
+                    <a href="design-system-questionario/index.html" class="project-mini-card project-feature-card tcc-highlight">
+                        <span class="project-feature-title lang-pt">🧩 Design System Blueprint Builder</span>
+                        <span class="project-feature-title lang-en">🧩 Design System Blueprint Builder</span>
+                        <span class="project-feature-title lang-es">🧩 Constructor de Blueprint para Design System</span>
+                        <span class="project-feature-title lang-it">🧩 Builder di Blueprint per Design System</span>
+
+                        <span class="project-feature-copy lang-pt">Questionário interativo em HTML cru, inspirado na linguagem visual da home, com dark/light mode, PT/EN e exportação de markdown para briefing visual, sistema de design e handoff de build.</span>
+                        <span class="project-feature-copy lang-en">Interactive raw HTML questionnaire inspired by the visual language of the home page, with dark/light mode, PT/EN, and markdown export for visual briefing, design system definition, and build handoff.</span>
+                        <span class="project-feature-copy lang-es">Cuestionario interactivo en HTML puro, inspirado en el lenguaje visual de la home, con modo dark/light, PT/EN y exportación en markdown para briefing visual, definición del design system y handoff de build.</span>
+                        <span class="project-feature-copy lang-it">Questionario interattivo in HTML puro, ispirato al linguaggio visivo della home, con modalità dark/light, PT/EN ed esportazione in markdown per briefing visivo, definizione del design system e handoff di build.</span>
+
+                        <span class="project-feature-meta lang-pt">HTML cru • Dark/Light • PT/EN • Exportação Markdown</span>
+                        <span class="project-feature-meta lang-en">Raw HTML • Dark/Light • PT/EN • Markdown Export</span>
+                        <span class="project-feature-meta lang-es">HTML puro • Dark/Light • PT/EN • Exportación Markdown</span>
+                        <span class="project-feature-meta lang-it">HTML puro • Dark/Light • PT/EN • Esportazione Markdown</span>
+                    </a>
+                </div>
+            </div>
+
             <!-- FIAP Projects -->
             <div class="project-hub bento-box span-4 print-page-break">
                 <h2 class="bento-title">FIAP MBA - AI Business Leadership Projects</h2>
@@ -1459,15 +1525,24 @@
 
     <!-- Scripts -->
     <script>
+        const SHARED_LANGUAGE_KEY = 'site-language';
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
         // Language Toggle Logic
         function changeLanguage(lang) {
             document.documentElement.lang = lang;
+            localStorage.setItem(SHARED_LANGUAGE_KEY, lang);
         }
 
         // Initialize Language Select Value
         document.addEventListener('DOMContentLoaded', () => {
-            const currentLang = document.documentElement.lang || 'en';
+            const supportedLanguages = ['pt-BR', 'en', 'es', 'it'];
+            const savedLang = localStorage.getItem(SHARED_LANGUAGE_KEY);
+            const currentLang = supportedLanguages.includes(savedLang)
+                ? savedLang
+                : (document.documentElement.lang || 'en');
+
+            document.documentElement.lang = currentLang;
             const langSwitcher = document.getElementById('language-switcher');
             if (langSwitcher) {
                 langSwitcher.value = currentLang;
