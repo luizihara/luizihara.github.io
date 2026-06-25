@@ -623,6 +623,86 @@
             background: var(--status-error);
         }
 
+        .summary-card {
+            margin-top: 20px;
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 18px;
+            background: var(--preview-bg);
+        }
+
+        .summary-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .summary-head h3 {
+            margin: 0 0 6px;
+            font-size: 1.08rem;
+        }
+
+        .summary-head p {
+            margin: 0;
+            opacity: 0.82;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .summary-meta {
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            opacity: 0.72;
+            white-space: nowrap;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .summary-group {
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 14px;
+            background: color-mix(in srgb, var(--preview-bg) 82%, transparent);
+        }
+
+        .summary-group strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.76rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .summary-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .summary-pill {
+            display: inline-flex;
+            align-items: center;
+            min-height: 32px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--card-border);
+            background: var(--card-bg);
+            font-size: 0.82rem;
+            line-height: 1.2;
+        }
+
+        .summary-pill.is-muted {
+            opacity: 0.62;
+            font-style: italic;
+        }
+
         .preview-shell {
             margin-top: 20px;
             border: 1px solid var(--card-border);
@@ -700,6 +780,51 @@
             text-transform: uppercase;
             letter-spacing: 0.12em;
             margin-bottom: 8px;
+        }
+
+        .modal-backdrop[hidden] {
+            display: none;
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(9, 11, 18, 0.58);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-card {
+            width: min(100%, 520px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 24px;
+            background: var(--card-bg);
+            box-shadow: 0 22px 60px rgba(0, 0, 0, 0.24);
+        }
+
+        .modal-card h2 {
+            margin: 8px 0 10px;
+            font-size: 1.6rem;
+            line-height: 1.05;
+        }
+
+        .modal-card p {
+            margin: 0;
+            opacity: 0.84;
+            line-height: 1.6;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 22px;
+            flex-wrap: wrap;
         }
 
         .helper-list {
@@ -919,12 +1044,14 @@
             }
 
             .panel-grid,
+            .summary-grid,
             .preview-notes,
             .quick-presets,
             .options-grid {
                 grid-template-columns: 1fr;
             }
 
+            .summary-head,
             .question-top,
             .section-card {
                 flex-direction: column;
@@ -1082,11 +1209,23 @@
 
                 <div class="preview-actions" style="margin-top: 20px;">
                     <button class="action-btn primary" data-copy-markdown type="button" disabled>Copiar markdown</button>
-                    <button class="action-btn" id="downloadButton" type="button" disabled>Baixar design-system.md</button>
+                    <button class="action-btn" data-copy-build-prompt type="button" disabled>Copiar prompt de build</button>
+                    <button class="action-btn" id="downloadButton" type="button" disabled>Baixar arquivo .md</button>
                 </div>
 
                 <div class="status-box" id="statusBox" role="status" aria-live="polite">
                     Pronto para configurar. Responda as perguntas e clique em <strong>Gerar markdown</strong>.
+                </div>
+
+                <div class="summary-card" id="outputSummaryCard">
+                    <div class="summary-head">
+                        <div>
+                            <h3 id="summaryTitle">Direcao escolhida</h3>
+                            <p id="summaryDescription">Um retrato rapido das decisoes ja tomadas antes do preview final.</p>
+                        </div>
+                        <span class="summary-meta" id="summaryMeta">Autosave ativo neste navegador</span>
+                    </div>
+                    <div class="summary-grid" id="summaryGrid"></div>
                 </div>
 
                 <div class="preview-notes">
@@ -1106,7 +1245,7 @@
 
                 <div class="preview-shell">
                     <div class="preview-header">
-                        <span class="preview-header-title">design-system.md</span>
+                        <span class="preview-header-title" id="previewFileName">design-system.md</span>
                         <div class="preview-header-actions">
                             <span id="previewMeta">Aguardando geracao</span>
                             <button class="action-btn" data-copy-markdown type="button" disabled>Copiar markdown</button>
@@ -1181,6 +1320,18 @@ Responda o questionario para gerar o documento final.</pre>
     </div>
 
     <button id="back-to-top" type="button">Topo</button>
+
+    <div class="modal-backdrop" id="resetConfirmModal" hidden>
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="resetConfirmTitle">
+            <div class="eyebrow" id="resetConfirmEyebrow">Confirmacao</div>
+            <h2 id="resetConfirmTitle">Limpar respostas?</h2>
+            <p id="resetConfirmCopy">Isso apaga as escolhas atuais e remove o rascunho salvo neste navegador.</p>
+            <div class="modal-actions">
+                <button class="action-btn" id="cancelResetButton" type="button">Cancelar</button>
+                <button class="action-btn primary" id="confirmResetButton" type="button">Sim, limpar</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         const sectionMeta = {
@@ -2907,7 +3058,22 @@ Responda o questionario para gerar o documento final.</pre>
                     description: "O bloco abaixo consolida a direcao escolhida e gera um documento que pode virar referencia para briefing visual, PRD, prompt de build, documentacao ou backlog de implementacao.",
                     buttons: {
                         copy: "Copiar markdown",
-                        download: "Baixar design-system.md"
+                        copyPrompt: "Copiar prompt de build",
+                        download: "Baixar arquivo .md"
+                    },
+                    summary: {
+                        title: "Direcao escolhida",
+                        description: "Um retrato rapido das decisoes ja tomadas antes do preview final.",
+                        meta: "Autosave ativo neste navegador",
+                        pending: "Pendente",
+                        more: (count) => `+${count} a mais`,
+                        groups: {
+                            brand: "Brand core",
+                            visual: "Visual system",
+                            behavior: "Product behavior",
+                            trust: "Trust e UX",
+                            delivery: "Entrega e guardrails"
+                        }
                     },
                     notes: [
                         {
@@ -2925,6 +3091,13 @@ Responda o questionario para gerar o documento final.</pre>
                     ],
                     waiting: "Aguardando geracao",
                     placeholder: `# Design System Blueprint\n\nResponda o questionario para gerar o documento final.`
+                },
+                resetModal: {
+                    eyebrow: "Confirmacao",
+                    title: "Limpar respostas?",
+                    copy: "Isso apaga as escolhas atuais e remove o rascunho salvo neste navegador.",
+                    cancel: "Cancelar",
+                    confirm: "Sim, limpar"
                 },
                 nav: {
                     ariaLabel: "Mapa da pagina",
@@ -2992,7 +3165,22 @@ Responda o questionario para gerar o documento final.</pre>
                     description: "The block below consolidates the chosen direction and generates a document that can become a reference for visual briefing, PRD, build prompt, documentation, or implementation backlog.",
                     buttons: {
                         copy: "Copy markdown",
-                        download: "Download design-system.md"
+                        copyPrompt: "Copy build prompt",
+                        download: "Download .md file"
+                    },
+                    summary: {
+                        title: "Chosen direction",
+                        description: "A quick snapshot of the decisions already made before the final preview.",
+                        meta: "Autosave is on in this browser",
+                        pending: "Pending",
+                        more: (count) => `+${count} more`,
+                        groups: {
+                            brand: "Brand core",
+                            visual: "Visual system",
+                            behavior: "Product behavior",
+                            trust: "Trust and UX",
+                            delivery: "Delivery and guardrails"
+                        }
                     },
                     notes: [
                         {
@@ -3010,6 +3198,13 @@ Responda o questionario para gerar o documento final.</pre>
                     ],
                     waiting: "Awaiting generation",
                     placeholder: `# Design System Blueprint\n\nAnswer the questionnaire to generate the final document.`
+                },
+                resetModal: {
+                    eyebrow: "Confirmation",
+                    title: "Clear answers?",
+                    copy: "This clears the current choices and removes the saved draft from this browser.",
+                    cancel: "Cancel",
+                    confirm: "Yes, clear"
                 },
                 nav: {
                     ariaLabel: "Page map",
@@ -3121,10 +3316,16 @@ Responda o questionario para gerar o documento final.</pre>
         };
 
         const SHARED_LANGUAGE_KEY = "site-language";
+        const DRAFT_STORAGE_KEY = "design-system-blueprint-draft";
+        const THEME_STORAGE_KEY = "design-system-theme";
 
-        const state = Object.fromEntries(
-            questions.map((question) => [question.id, question.type === "multi" ? [] : null])
-        );
+        function createEmptyState() {
+            return Object.fromEntries(
+                questions.map((question) => [question.id, question.type === "multi" ? [] : null])
+            );
+        }
+
+        const state = createEmptyState();
 
         const languageSwitcher = document.getElementById("language-switcher");
         const questionsRoot = document.getElementById("questionsRoot");
@@ -3141,9 +3342,15 @@ Responda o questionario para gerar o documento final.</pre>
         const progressBars = document.querySelectorAll("[data-progress-bar]");
         const progressTexts = document.querySelectorAll("[data-progress-text]");
         const statusBox = document.getElementById("statusBox");
+        const summaryTitle = document.getElementById("summaryTitle");
+        const summaryDescription = document.getElementById("summaryDescription");
+        const summaryMeta = document.getElementById("summaryMeta");
+        const summaryGrid = document.getElementById("summaryGrid");
         const markdownPreview = document.getElementById("markdownPreview");
+        const previewFileName = document.getElementById("previewFileName");
         const previewMeta = document.getElementById("previewMeta");
         const copyButtons = Array.from(document.querySelectorAll("[data-copy-markdown]"));
+        const copyPromptButtons = Array.from(document.querySelectorAll("[data-copy-build-prompt]"));
         const downloadButton = document.getElementById("downloadButton");
         const generateButtons = document.querySelectorAll("[data-generate-markdown]");
         const resetButtons = document.querySelectorAll("[data-reset-state]");
@@ -3152,11 +3359,104 @@ Responda o questionario para gerar o documento final.</pre>
         const navProgressBar = document.querySelector("[data-nav-progress-bar]");
         const navLinks = Array.from(document.querySelectorAll("[data-scroll-link]"));
         const backToTopBtn = document.getElementById("back-to-top");
+        const resetConfirmModal = document.getElementById("resetConfirmModal");
+        const resetConfirmEyebrow = document.getElementById("resetConfirmEyebrow");
+        const resetConfirmTitle = document.getElementById("resetConfirmTitle");
+        const resetConfirmCopy = document.getElementById("resetConfirmCopy");
+        const cancelResetButton = document.getElementById("cancelResetButton");
+        const confirmResetButton = document.getElementById("confirmResetButton");
 
         let generatedMarkdown = "";
         let hasRenderedQuestions = false;
         let hasBoundSectionTracker = false;
         let statusState = { key: "ready", tone: "", params: {} };
+        let resetModalReturnFocus = null;
+
+        function resetAnswerState() {
+            for (const question of questions) {
+                state[question.id] = question.type === "multi" ? [] : null;
+            }
+        }
+
+        function getTodayStamp() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, "0");
+            const day = String(now.getDate()).padStart(2, "0");
+            return `${year}-${month}-${day}`;
+        }
+
+        function getExportFileName() {
+            return `design-system-${getTodayStamp()}.md`;
+        }
+
+        function normalizeStoredAnswers(rawAnswers = {}) {
+            const normalizedAnswers = {};
+
+            questions.forEach((question) => {
+                const validOptionIds = new Set(question.options.map((option) => option.id));
+                const rawValue = rawAnswers[question.id];
+
+                if (question.type === "multi") {
+                    normalizedAnswers[question.id] = Array.isArray(rawValue)
+                        ? rawValue.filter((value, index, array) => validOptionIds.has(value) && array.indexOf(value) === index)
+                        : [];
+                } else {
+                    normalizedAnswers[question.id] = typeof rawValue === "string" && validOptionIds.has(rawValue)
+                        ? rawValue
+                        : null;
+                }
+            });
+
+            return normalizedAnswers;
+        }
+
+        function hasAnySavedAnswer(answers) {
+            return questions.some((question) => {
+                const value = answers[question.id];
+                return Array.isArray(value) ? value.length > 0 : Boolean(value);
+            });
+        }
+
+        function restoreDraftFromStorage() {
+            try {
+                const rawDraft = localStorage.getItem(DRAFT_STORAGE_KEY);
+                if (!rawDraft) {
+                    return { restored: false, generated: false };
+                }
+
+                const parsedDraft = JSON.parse(rawDraft);
+                if (!parsedDraft || typeof parsedDraft !== "object") {
+                    localStorage.removeItem(DRAFT_STORAGE_KEY);
+                    return { restored: false, generated: false };
+                }
+
+                const normalizedAnswers = normalizeStoredAnswers(parsedDraft.answers || {});
+                questions.forEach((question) => {
+                    state[question.id] = normalizedAnswers[question.id];
+                });
+
+                return {
+                    restored: hasAnySavedAnswer(normalizedAnswers),
+                    generated: parsedDraft.hasGenerated === true
+                };
+            } catch (error) {
+                localStorage.removeItem(DRAFT_STORAGE_KEY);
+                return { restored: false, generated: false };
+            }
+        }
+
+        function persistDraft() {
+            const payload = {
+                answers: normalizeStoredAnswers(state),
+                hasGenerated: Boolean(generatedMarkdown)
+            };
+            localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(payload));
+        }
+
+        function clearDraft() {
+            localStorage.removeItem(DRAFT_STORAGE_KEY);
+        }
 
         function normalizeDesignSystemLanguage(lang) {
             return lang === "en" ? "en" : "pt-BR";
@@ -3271,6 +3571,8 @@ Responda o questionario para gerar o documento final.</pre>
                 switch (key) {
                     case "presetApplied":
                         return `<strong>Preset applied.</strong> The <strong>${label}</strong> direction was loaded. Adjust anything you want and generate the markdown.`;
+                    case "draftRestored":
+                        return "<strong>Draft restored.</strong> Your saved choices were loaded automatically in this browser.";
                     case "reset":
                         return "Questionnaire cleared. Choose a new direction to build another blueprint.";
                     case "missing":
@@ -3279,10 +3581,14 @@ Responda o questionario para gerar o documento final.</pre>
                         return "<strong>Markdown generated.</strong> You can now copy or download the final blueprint.";
                     case "copied":
                         return "<strong>Markdown copied.</strong> The blueprint is already in your clipboard.";
+                    case "promptCopied":
+                        return "<strong>Build prompt copied.</strong> The handoff prompt is already in your clipboard.";
                     case "copyFailed":
                         return "<strong>Automatic copy failed.</strong> The markdown was selected on screen. Use <code>Ctrl/Cmd + C</code> or download the file.";
+                    case "promptCopyFailed":
+                        return "<strong>Automatic prompt copy failed.</strong> Try again or download the .md file.";
                     case "downloaded":
-                        return "<strong>File downloaded.</strong> The markdown was exported as <code>design-system.md</code>.";
+                        return `<strong>File downloaded.</strong> The markdown was exported as <code>${label}</code>.`;
                     case "ready":
                     default:
                         return 'Ready to configure. Answer the questions and click <strong>Generate markdown</strong>.';
@@ -3292,6 +3598,8 @@ Responda o questionario para gerar o documento final.</pre>
             switch (key) {
                 case "presetApplied":
                     return `<strong>Preset aplicado.</strong> A direcao <strong>${label}</strong> foi carregada. Ajuste o que quiser e gere o markdown.`;
+                case "draftRestored":
+                    return "<strong>Rascunho restaurado.</strong> Suas escolhas salvas foram carregadas automaticamente neste navegador.";
                 case "reset":
                     return "Questionario limpo. Escolha uma nova direcao para montar outro blueprint.";
                 case "missing":
@@ -3300,10 +3608,14 @@ Responda o questionario para gerar o documento final.</pre>
                     return "<strong>Markdown gerado.</strong> Agora voce pode copiar ou baixar o blueprint final.";
                 case "copied":
                     return "<strong>Markdown copiado.</strong> O blueprint ja esta na area de transferencia.";
+                case "promptCopied":
+                    return "<strong>Prompt de build copiado.</strong> O handoff para build ja esta na area de transferencia.";
                 case "copyFailed":
                     return "<strong>Falha ao copiar automaticamente.</strong> O markdown foi selecionado na tela. Use <code>Ctrl/Cmd + C</code> ou baixe o arquivo.";
+                case "promptCopyFailed":
+                    return "<strong>Falha ao copiar o prompt automaticamente.</strong> Tente de novo ou baixe o arquivo .md.";
                 case "downloaded":
-                    return "<strong>Arquivo baixado.</strong> O markdown foi exportado como <code>design-system.md</code>.";
+                    return `<strong>Arquivo baixado.</strong> O markdown foi exportado como <code>${label}</code>.`;
                 case "ready":
                 default:
                     return 'Pronto para configurar. Responda as perguntas e clique em <strong>Gerar markdown</strong>.';
@@ -3321,16 +3633,91 @@ Responda o questionario para gerar o documento final.</pre>
             });
         }
 
+        function setCopyPromptButtonsDisabled(disabled) {
+            copyPromptButtons.forEach((button) => {
+                button.disabled = disabled;
+            });
+        }
+
+        function renderSummaryPills(options) {
+            const copy = getStaticCopy();
+            const visibleOptions = options.filter(Boolean).slice(0, 4);
+            const extraCount = options.filter(Boolean).length - visibleOptions.length;
+
+            if (!visibleOptions.length) {
+                return `<span class="summary-pill is-muted">${copy.output.summary.pending}</span>`;
+            }
+
+            return [
+                ...visibleOptions.map((option) => `<span class="summary-pill">${option.title}</span>`),
+                ...(extraCount > 0 ? [`<span class="summary-pill">${copy.output.summary.more(extraCount)}</span>`] : [])
+            ].join("");
+        }
+
+        function renderDirectionSummary() {
+            if (!summaryGrid) {
+                return;
+            }
+
+            const copy = getStaticCopy();
+            const selections = getSelections();
+            const groups = [
+                {
+                    label: copy.output.summary.groups.brand,
+                    options: [selections.productPosture, selections.emotionalTone, selections.logoBehavior]
+                },
+                {
+                    label: copy.output.summary.groups.visual,
+                    options: [selections.palette, selections.typography, selections.shapes, selections.imagery]
+                },
+                {
+                    label: copy.output.summary.groups.behavior,
+                    options: [selections.navigation, selections.density, selections.dataLanguage, selections.ctaTone, selections.motion]
+                },
+                {
+                    label: copy.output.summary.groups.trust,
+                    options: [
+                        ...selections.trustSignals,
+                        ...selections.componentPriority,
+                        ...selections.priorities
+                    ]
+                },
+                {
+                    label: copy.output.summary.groups.delivery,
+                    options: [selections.themeStrategy, selections.accessibility, selections.emptyState, ...selections.antiPatterns]
+                }
+            ];
+
+            summaryGrid.innerHTML = groups.map((group) => `
+                <article class="summary-group">
+                    <strong>${group.label}</strong>
+                    <div class="summary-pills">${renderSummaryPills(group.options)}</div>
+                </article>
+            `).join("");
+        }
+
         function refreshPreviewLanguage() {
             const copy = getStaticCopy();
+            const canRenderPreview = generatedMarkdown && getMissingQuestions().length === 0;
 
-            if (generatedMarkdown) {
+            if (previewFileName) {
+                previewFileName.textContent = getExportFileName();
+            }
+
+            if (canRenderPreview) {
                 generatedMarkdown = buildMarkdown();
                 markdownPreview.textContent = generatedMarkdown;
                 previewMeta.textContent = getPreviewMetaText(generatedMarkdown.split("\n").length);
+                setCopyButtonsDisabled(false);
+                setCopyPromptButtonsDisabled(false);
+                downloadButton.disabled = false;
             } else {
+                generatedMarkdown = "";
                 markdownPreview.textContent = copy.output.placeholder;
                 previewMeta.textContent = copy.output.waiting;
+                setCopyButtonsDisabled(true);
+                setCopyPromptButtonsDisabled(true);
+                downloadButton.disabled = true;
             }
         }
 
@@ -3402,6 +3789,9 @@ Responda o questionario para gerar o documento final.</pre>
                 outputCard.querySelector(".eyebrow").textContent = copy.output.eyebrow;
                 outputCard.querySelector("h2").textContent = copy.output.title;
                 if (outputParagraph) outputParagraph.textContent = copy.output.description;
+                if (summaryTitle) summaryTitle.textContent = copy.output.summary.title;
+                if (summaryDescription) summaryDescription.textContent = copy.output.summary.description;
+                if (summaryMeta) summaryMeta.textContent = copy.output.summary.meta;
                 previewNotes.forEach((note, index) => {
                     note.innerHTML = `<strong>${copy.output.notes[index].title}</strong>${copy.output.notes[index].body}`;
                 });
@@ -3410,7 +3800,16 @@ Responda o questionario para gerar o documento final.</pre>
             copyButtons.forEach((button) => {
                 button.textContent = copy.output.buttons.copy;
             });
+            copyPromptButtons.forEach((button) => {
+                button.textContent = copy.output.buttons.copyPrompt;
+            });
             downloadButton.textContent = copy.output.buttons.download;
+
+            if (resetConfirmEyebrow) resetConfirmEyebrow.textContent = copy.resetModal.eyebrow;
+            if (resetConfirmTitle) resetConfirmTitle.textContent = copy.resetModal.title;
+            if (resetConfirmCopy) resetConfirmCopy.textContent = copy.resetModal.copy;
+            if (cancelResetButton) cancelResetButton.textContent = copy.resetModal.cancel;
+            if (confirmResetButton) confirmResetButton.textContent = copy.resetModal.confirm;
 
             if (floatingNav) {
                 const floatingEyebrow = floatingNav.querySelector(".eyebrow");
@@ -3435,20 +3834,27 @@ Responda o questionario para gerar o documento final.</pre>
                 backToTopBtn.textContent = copy.backToTop;
             }
 
+            renderDirectionSummary();
             refreshPreviewLanguage();
             setStatus(statusState.key, statusState.tone, statusState.params);
             activateHighlightAnimation();
         }
 
-        function changeLanguage(lang) {
+        function applyDesignSystemLanguage(lang, persist = true) {
             const normalizedLanguage = normalizeDesignSystemLanguage(lang);
             document.documentElement.lang = normalizedLanguage;
-            localStorage.setItem(SHARED_LANGUAGE_KEY, normalizedLanguage);
+            if (persist) {
+                localStorage.setItem(SHARED_LANGUAGE_KEY, normalizedLanguage);
+            }
             applyStaticTranslations();
             renderQuestions();
             refreshProgress();
             refreshMissingState(statusState.key === "missing" ? getMissingQuestions().map((question) => question.id) : []);
             updateActiveNavFromScroll();
+        }
+
+        function changeLanguage(lang) {
+            applyDesignSystemLanguage(lang, true);
         }
 
         function changeStatus(message, tone) {
@@ -3473,6 +3879,30 @@ Responda o questionario para gerar o documento final.</pre>
                 return selected.map((optionId) => getOption(question, optionId)).filter(Boolean);
             }
             return selected ? [getOption(question, selected)].filter(Boolean) : [];
+        }
+
+        function getSelections() {
+            return {
+                productPosture: getSelectedOptions(getQuestionById("productPosture"))[0],
+                emotionalTone: getSelectedOptions(getQuestionById("emotionalTone"))[0],
+                logoBehavior: getSelectedOptions(getQuestionById("logoBehavior"))[0],
+                palette: getSelectedOptions(getQuestionById("palette"))[0],
+                typography: getSelectedOptions(getQuestionById("typography"))[0],
+                shapes: getSelectedOptions(getQuestionById("shapes"))[0],
+                imagery: getSelectedOptions(getQuestionById("imagery"))[0],
+                navigation: getSelectedOptions(getQuestionById("navigation"))[0],
+                density: getSelectedOptions(getQuestionById("density"))[0],
+                trustSignals: getSelectedOptions(getQuestionById("trustSignals")),
+                componentPriority: getSelectedOptions(getQuestionById("componentPriority")),
+                dataLanguage: getSelectedOptions(getQuestionById("dataLanguage"))[0],
+                ctaTone: getSelectedOptions(getQuestionById("ctaTone"))[0],
+                emptyState: getSelectedOptions(getQuestionById("emptyState"))[0],
+                motion: getSelectedOptions(getQuestionById("motion"))[0],
+                themeStrategy: getSelectedOptions(getQuestionById("themeStrategy"))[0],
+                accessibility: getSelectedOptions(getQuestionById("accessibility"))[0],
+                priorities: getSelectedOptions(getQuestionById("priorities")),
+                antiPatterns: getSelectedOptions(getQuestionById("antiPatterns"))
+            };
         }
 
         function hasAnswer(question) {
@@ -3650,6 +4080,8 @@ Responda o questionario para gerar o documento final.</pre>
             if (navSummary) {
                 navSummary.textContent = getNavSummaryText(answered, total, missing);
             }
+
+            renderDirectionSummary();
         }
 
         function refreshMissingState(missingIds) {
@@ -3677,6 +4109,8 @@ Responda o questionario para gerar o documento final.</pre>
             renderQuestions();
             refreshProgress();
             refreshMissingState([]);
+            refreshPreviewLanguage();
+            persistDraft();
         }
 
         function applyPreset(name) {
@@ -3695,21 +4129,19 @@ Responda o questionario para gerar o documento final.</pre>
             renderQuestions();
             refreshProgress();
             refreshMissingState([]);
+            refreshPreviewLanguage();
+            persistDraft();
             setStatus("presetApplied", "success", { label: getPresetLabel(name) });
         }
 
         function resetState() {
-            for (const question of questions) {
-                state[question.id] = question.type === "multi" ? [] : null;
-            }
-
+            resetAnswerState();
             generatedMarkdown = "";
             renderQuestions();
             refreshProgress();
             refreshMissingState([]);
-            setCopyButtonsDisabled(true);
-            downloadButton.disabled = true;
             refreshPreviewLanguage();
+            clearDraft();
             setStatus("reset", "");
         }
 
@@ -3756,29 +4188,8 @@ Responda o questionario para gerar o documento final.</pre>
         }
 
         function buildMarkdown() {
-            const selections = {
-                productPosture: getSelectedOptions(getQuestionById("productPosture"))[0],
-                emotionalTone: getSelectedOptions(getQuestionById("emotionalTone"))[0],
-                logoBehavior: getSelectedOptions(getQuestionById("logoBehavior"))[0],
-                palette: getSelectedOptions(getQuestionById("palette"))[0],
-                typography: getSelectedOptions(getQuestionById("typography"))[0],
-                shapes: getSelectedOptions(getQuestionById("shapes"))[0],
-                imagery: getSelectedOptions(getQuestionById("imagery"))[0],
-                navigation: getSelectedOptions(getQuestionById("navigation"))[0],
-                density: getSelectedOptions(getQuestionById("density"))[0],
-                trustSignals: getSelectedOptions(getQuestionById("trustSignals")),
-                componentPriority: getSelectedOptions(getQuestionById("componentPriority")),
-                dataLanguage: getSelectedOptions(getQuestionById("dataLanguage"))[0],
-                ctaTone: getSelectedOptions(getQuestionById("ctaTone"))[0],
-                emptyState: getSelectedOptions(getQuestionById("emptyState"))[0],
-                motion: getSelectedOptions(getQuestionById("motion"))[0],
-                themeStrategy: getSelectedOptions(getQuestionById("themeStrategy"))[0],
-                accessibility: getSelectedOptions(getQuestionById("accessibility"))[0],
-                priorities: getSelectedOptions(getQuestionById("priorities")),
-                antiPatterns: getSelectedOptions(getQuestionById("antiPatterns"))
-            };
-
-            const today = new Date().toISOString().slice(0, 10);
+            const selections = getSelections();
+            const today = getTodayStamp();
             const directionParagraph = buildDirectionParagraph(selections);
             const aiHandoff = buildAIHandoff(selections);
 
@@ -3933,10 +4344,8 @@ ${aiHandoff}
 
             refreshMissingState([]);
             generatedMarkdown = buildMarkdown();
-            markdownPreview.textContent = generatedMarkdown;
-            previewMeta.textContent = getPreviewMetaText(generatedMarkdown.split("\n").length);
-            setCopyButtonsDisabled(false);
-            downloadButton.disabled = false;
+            refreshPreviewLanguage();
+            persistDraft();
             setStatus("generated", "success");
 
             if (outputCard) {
@@ -3969,25 +4378,42 @@ ${aiHandoff}
             selection.addRange(range);
         }
 
+        async function writeTextToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+                return;
+            }
+
+            const copied = fallbackCopyText(text);
+            if (!copied) {
+                throw new Error("fallback copy failed");
+            }
+        }
+
         async function copyMarkdown() {
             if (!generatedMarkdown) {
                 return;
             }
 
             try {
-                if (navigator.clipboard && window.isSecureContext) {
-                    await navigator.clipboard.writeText(generatedMarkdown);
-                } else {
-                    const copied = fallbackCopyText(generatedMarkdown);
-                    if (!copied) {
-                        throw new Error("fallback copy failed");
-                    }
-                }
-
+                await writeTextToClipboard(generatedMarkdown);
                 setStatus("copied", "success");
             } catch (error) {
                 selectPreviewText();
                 setStatus("copyFailed", "error");
+            }
+        }
+
+        async function copyBuildPrompt() {
+            if (!generatedMarkdown) {
+                return;
+            }
+
+            try {
+                await writeTextToClipboard(buildAIHandoff(getSelections()));
+                setStatus("promptCopied", "success");
+            } catch (error) {
+                setStatus("promptCopyFailed", "error");
             }
         }
 
@@ -3996,17 +4422,53 @@ ${aiHandoff}
                 return;
             }
 
+            const exportFileName = getExportFileName();
             const blob = new Blob([generatedMarkdown], { type: "text/markdown;charset=utf-8" });
             const url = URL.createObjectURL(blob);
             const link = document.createElement("a");
             link.href = url;
-            link.download = "design-system.md";
+            link.download = exportFileName;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
 
-            setStatus("downloaded", "success");
+            setStatus("downloaded", "success", { label: exportFileName });
+        }
+
+        function openResetConfirmation(triggerButton) {
+            const copy = getStaticCopy();
+            if (!resetConfirmModal || !cancelResetButton || !confirmResetButton) {
+                const shouldReset = window.confirm(copy.resetModal.title);
+                if (shouldReset) {
+                    resetState();
+                }
+                return;
+            }
+
+            resetModalReturnFocus = triggerButton || document.activeElement;
+            resetConfirmModal.hidden = false;
+            document.body.style.overflow = "hidden";
+            window.setTimeout(() => {
+                cancelResetButton.focus({ preventScroll: true });
+            }, 0);
+        }
+
+        function closeResetConfirmation() {
+            if (!resetConfirmModal) {
+                return;
+            }
+
+            resetConfirmModal.hidden = true;
+            document.body.style.overflow = "";
+            if (resetModalReturnFocus && typeof resetModalReturnFocus.focus === "function") {
+                resetModalReturnFocus.focus({ preventScroll: true });
+            }
+        }
+
+        function confirmResetState() {
+            resetState();
+            closeResetConfirmation();
         }
 
         function toggleTheme() {
@@ -4014,11 +4476,11 @@ ${aiHandoff}
             if (html.classList.contains("dark-theme")) {
                 html.classList.remove("dark-theme");
                 html.classList.add("light-theme");
-                localStorage.setItem("design-system-theme", "light");
+                localStorage.setItem(THEME_STORAGE_KEY, "light");
             } else {
                 html.classList.remove("light-theme");
                 html.classList.add("dark-theme");
-                localStorage.setItem("design-system-theme", "dark");
+                localStorage.setItem(THEME_STORAGE_KEY, "dark");
             }
 
             syncThemeToggle();
@@ -4104,9 +4566,10 @@ ${aiHandoff}
 
         document.addEventListener("DOMContentLoaded", () => {
             const savedLanguage = localStorage.getItem(SHARED_LANGUAGE_KEY);
+            const restoredDraft = restoreDraftFromStorage();
             document.documentElement.lang = normalizeDesignSystemLanguage(savedLanguage || document.documentElement.lang);
 
-            const savedTheme = localStorage.getItem("design-system-theme");
+            const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
             if (savedTheme === "light") {
                 document.documentElement.classList.remove("dark-theme");
                 document.documentElement.classList.add("light-theme");
@@ -4116,9 +4579,17 @@ ${aiHandoff}
             }
 
             syncThemeToggle();
-            applyStaticTranslations();
-            renderQuestions();
-            refreshProgress();
+            applyDesignSystemLanguage(document.documentElement.lang, false);
+
+            if (restoredDraft.generated && getMissingQuestions().length === 0) {
+                generatedMarkdown = buildMarkdown();
+                refreshPreviewLanguage();
+            }
+
+            if (restoredDraft.restored) {
+                setStatus("draftRestored", "success");
+            }
+
             observeReveals();
             activateHighlightAnimation();
             initBackToTop();
@@ -4143,12 +4614,44 @@ ${aiHandoff}
                 button.addEventListener("click", generateMarkdown);
             });
             resetButtons.forEach((button) => {
-                button.addEventListener("click", resetState);
+                button.addEventListener("click", () => openResetConfirmation(button));
             });
             copyButtons.forEach((button) => {
                 button.addEventListener("click", copyMarkdown);
             });
+            copyPromptButtons.forEach((button) => {
+                button.addEventListener("click", copyBuildPrompt);
+            });
             downloadButton.addEventListener("click", downloadMarkdown);
+
+            if (cancelResetButton) {
+                cancelResetButton.addEventListener("click", closeResetConfirmation);
+            }
+            if (confirmResetButton) {
+                confirmResetButton.addEventListener("click", confirmResetState);
+            }
+            if (resetConfirmModal) {
+                resetConfirmModal.addEventListener("click", (event) => {
+                    if (event.target === resetConfirmModal) {
+                        closeResetConfirmation();
+                    }
+                });
+            }
+
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape" && resetConfirmModal && !resetConfirmModal.hidden) {
+                    closeResetConfirmation();
+                }
+            });
+
+            window.addEventListener("storage", (event) => {
+                if (event.key === SHARED_LANGUAGE_KEY && event.newValue) {
+                    const nextLanguage = normalizeDesignSystemLanguage(event.newValue);
+                    if (nextLanguage !== getCurrentLanguage()) {
+                        applyDesignSystemLanguage(nextLanguage, false);
+                    }
+                }
+            });
         });
     </script>
 </body>

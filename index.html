@@ -1526,27 +1526,45 @@
     <!-- Scripts -->
     <script>
         const SHARED_LANGUAGE_KEY = 'site-language';
+        const SUPPORTED_HOME_LANGUAGES = ['pt-BR', 'en', 'es', 'it'];
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
         // Language Toggle Logic
+        function applyHomeLanguage(lang, persist = true) {
+            const normalizedLanguage = SUPPORTED_HOME_LANGUAGES.includes(lang)
+                ? lang
+                : (document.documentElement.lang || 'en');
+
+            document.documentElement.lang = normalizedLanguage;
+
+            const langSwitcher = document.getElementById('language-switcher');
+            if (langSwitcher) {
+                langSwitcher.value = normalizedLanguage;
+            }
+
+            if (persist) {
+                localStorage.setItem(SHARED_LANGUAGE_KEY, normalizedLanguage);
+            }
+        }
+
         function changeLanguage(lang) {
-            document.documentElement.lang = lang;
-            localStorage.setItem(SHARED_LANGUAGE_KEY, lang);
+            applyHomeLanguage(lang, true);
         }
 
         // Initialize Language Select Value
         document.addEventListener('DOMContentLoaded', () => {
-            const supportedLanguages = ['pt-BR', 'en', 'es', 'it'];
             const savedLang = localStorage.getItem(SHARED_LANGUAGE_KEY);
-            const currentLang = supportedLanguages.includes(savedLang)
+            const currentLang = SUPPORTED_HOME_LANGUAGES.includes(savedLang)
                 ? savedLang
                 : (document.documentElement.lang || 'en');
 
-            document.documentElement.lang = currentLang;
-            const langSwitcher = document.getElementById('language-switcher');
-            if (langSwitcher) {
-                langSwitcher.value = currentLang;
-            }
+            applyHomeLanguage(currentLang, false);
+
+            window.addEventListener('storage', (event) => {
+                if (event.key === SHARED_LANGUAGE_KEY && event.newValue && SUPPORTED_HOME_LANGUAGES.includes(event.newValue)) {
+                    applyHomeLanguage(event.newValue, false);
+                }
+            });
         });
 
         // Theme Toggle Logic
