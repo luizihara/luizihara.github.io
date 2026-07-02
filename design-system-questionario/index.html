@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Design System Blueprint Builder</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+    <link rel="stylesheet" href="../assets/flag-icons/css/flag-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -126,6 +127,80 @@
             background-color: var(--hover-highlight);
             color: var(--hover-text);
             transform: translateY(-2px);
+        }
+
+        .language-switcher {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .language-select-trigger {
+            min-width: 176px;
+            justify-content: space-between;
+        }
+
+        .language-current {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .language-switcher .fi {
+            border-radius: 2px;
+            box-shadow: 0 0 0 1px var(--card-border);
+            flex: 0 0 auto;
+        }
+
+        .language-chevron {
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 5px solid currentColor;
+            opacity: 0.75;
+        }
+
+        .language-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            z-index: 80;
+            min-width: 190px;
+            display: none;
+            padding: 6px;
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            background-color: var(--bg-color);
+            box-shadow: 0 16px 40px var(--soft-shadow);
+        }
+
+        .language-switcher.is-open .language-menu {
+            display: grid;
+            gap: 4px;
+        }
+
+        .language-option {
+            width: 100%;
+            min-height: 38px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            background: transparent;
+            color: var(--text-color);
+            cursor: pointer;
+            font: inherit;
+            font-weight: 600;
+            padding: 8px 10px;
+            text-align: left;
+        }
+
+        .language-option:hover,
+        .language-option.is-active {
+            background-color: var(--hover-highlight);
+            color: var(--hover-text);
         }
 
         .hero {
@@ -819,6 +894,64 @@
             line-height: 1.6;
         }
 
+        .modal-card.is-export-review {
+            width: min(100%, 640px);
+        }
+
+        .export-review-stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin: 18px 0;
+        }
+
+        .export-review-stat,
+        .export-review-item {
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            background: var(--preview-bg);
+        }
+
+        .export-review-stat {
+            padding: 12px;
+        }
+
+        .export-review-stat strong,
+        .export-review-item strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            opacity: 0.72;
+        }
+
+        .export-review-stat span {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1rem;
+        }
+
+        .export-review-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .export-review-item {
+            padding: 12px;
+            min-width: 0;
+        }
+
+        .export-review-item span {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            opacity: 0.86;
+        }
+
         .modal-actions {
             display: flex;
             justify-content: flex-end;
@@ -1045,6 +1178,8 @@
 
             .panel-grid,
             .summary-grid,
+            .export-review-stats,
+            .export-review-list,
             .preview-notes,
             .quick-presets,
             .options-grid {
@@ -1069,10 +1204,25 @@
         <header>
             <a class="control-btn" href="../index.html">Voltar para Home</a>
             <div class="header-actions">
-                <select class="control-btn" id="language-switcher" onchange="changeLanguage(this.value)" style="cursor: pointer; padding-right: 10px;">
-                    <option value="pt-BR">🇧🇷 Português</option>
-                    <option value="en">🇺🇸 English</option>
-                </select>
+                <div class="language-switcher" id="language-switcher">
+                    <button class="control-btn language-select-trigger" type="button" id="language-trigger" aria-haspopup="listbox" aria-expanded="false" onclick="toggleLanguageMenu()">
+                        <span class="language-current">
+                            <span class="fi fi-br" id="language-current-flag" aria-hidden="true"></span>
+                            <span id="language-current-label">Português</span>
+                        </span>
+                        <span class="language-chevron" aria-hidden="true"></span>
+                    </button>
+                    <div class="language-menu" role="listbox" aria-label="Idioma">
+                        <button class="language-option" type="button" data-lang="pt-BR" role="option" aria-selected="false" onclick="changeLanguage('pt-BR')">
+                            <span class="fi fi-br" aria-hidden="true"></span>
+                            <span>Português</span>
+                        </button>
+                        <button class="language-option" type="button" data-lang="en" role="option" aria-selected="false" onclick="changeLanguage('en')">
+                            <span class="fi fi-us" aria-hidden="true"></span>
+                            <span>English</span>
+                        </button>
+                    </div>
+                </div>
                 <button class="control-btn" id="theme-toggle" type="button" onclick="toggleTheme()">
                     <span class="dark-only">☀️ Light Mode</span>
                     <span class="light-only">🌙 Dark Mode</span>
@@ -1329,6 +1479,20 @@ Responda o questionario para gerar o documento final.</pre>
             <div class="modal-actions">
                 <button class="action-btn" id="cancelResetButton" type="button">Cancelar</button>
                 <button class="action-btn primary" id="confirmResetButton" type="button">Sim, limpar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="exportConfirmModal" hidden>
+        <div class="modal-card is-export-review" role="dialog" aria-modal="true" aria-labelledby="exportConfirmTitle">
+            <div class="eyebrow" id="exportConfirmEyebrow">Revisao final</div>
+            <h2 id="exportConfirmTitle">Conferir antes de baixar</h2>
+            <p id="exportConfirmCopy">Antes de gerar o arquivo, da uma ultima olhada no que vai sair no markdown.</p>
+            <div class="export-review-stats" id="exportReviewStats"></div>
+            <div class="export-review-list" id="exportReviewList"></div>
+            <div class="modal-actions">
+                <button class="action-btn" id="cancelExportButton" type="button">Voltar para revisar</button>
+                <button class="action-btn primary" id="confirmExportButton" type="button">Baixar .md</button>
             </div>
         </div>
     </div>
@@ -3099,6 +3263,29 @@ Responda o questionario para gerar o documento final.</pre>
                     cancel: "Cancelar",
                     confirm: "Sim, limpar"
                 },
+                exportModal: {
+                    eyebrow: "Revisao final",
+                    title: "Conferir antes de baixar",
+                    copy: "Antes de gerar o arquivo, da uma ultima olhada no que vai sair no markdown.",
+                    stats: {
+                        answeredLabel: "Respondidas",
+                        missingLabel: "Em aberto",
+                        linesLabel: "Linhas",
+                        answered: (answered, total) => `${answered}/${total} respondidas`,
+                        missing: (count) => `${count} em aberto`,
+                        lines: (count) => `${count} linhas`
+                    },
+                    items: {
+                        direction: "Direcao",
+                        colors: "Cores",
+                        type: "Tipografia",
+                        components: "Componentes",
+                        guardrails: "Guardrails"
+                    },
+                    fallback: "A definir",
+                    cancel: "Voltar para revisar",
+                    confirm: "Baixar .md"
+                },
                 nav: {
                     ariaLabel: "Mapa da pagina",
                     eyebrow: "Navigator",
@@ -3205,6 +3392,29 @@ Responda o questionario para gerar o documento final.</pre>
                     copy: "This clears the current choices and removes the saved draft from this browser.",
                     cancel: "Cancel",
                     confirm: "Yes, clear"
+                },
+                exportModal: {
+                    eyebrow: "Final review",
+                    title: "Review before downloading",
+                    copy: "Before generating the file, take one last look at what will go into the markdown.",
+                    stats: {
+                        answeredLabel: "Answered",
+                        missingLabel: "Open",
+                        linesLabel: "Lines",
+                        answered: (answered, total) => `${answered}/${total} answered`,
+                        missing: (count) => `${count} open`,
+                        lines: (count) => `${count} lines`
+                    },
+                    items: {
+                        direction: "Direction",
+                        colors: "Colors",
+                        type: "Typography",
+                        components: "Components",
+                        guardrails: "Guardrails"
+                    },
+                    fallback: "To define",
+                    cancel: "Back to review",
+                    confirm: "Download .md"
                 },
                 nav: {
                     ariaLabel: "Page map",
@@ -3318,6 +3528,23 @@ Responda o questionario para gerar o documento final.</pre>
         const SHARED_LANGUAGE_KEY = "site-language";
         const DRAFT_STORAGE_KEY = "design-system-blueprint-draft";
         const THEME_STORAGE_KEY = "design-system-theme";
+        const LANGUAGE_META = {
+            "pt-BR": { label: "Português", flag: "fi-br" },
+            en: { label: "English", flag: "fi-us" }
+        };
+
+        function setLanguageMenuOpen(isOpen) {
+            const switcher = document.getElementById("language-switcher");
+            const trigger = document.getElementById("language-trigger");
+            if (!switcher || !trigger) return;
+            switcher.classList.toggle("is-open", isOpen);
+            trigger.setAttribute("aria-expanded", String(isOpen));
+        }
+
+        function toggleLanguageMenu() {
+            const switcher = document.getElementById("language-switcher");
+            setLanguageMenuOpen(!switcher?.classList.contains("is-open"));
+        }
 
         function createEmptyState() {
             return Object.fromEntries(
@@ -3365,12 +3592,21 @@ Responda o questionario para gerar o documento final.</pre>
         const resetConfirmCopy = document.getElementById("resetConfirmCopy");
         const cancelResetButton = document.getElementById("cancelResetButton");
         const confirmResetButton = document.getElementById("confirmResetButton");
+        const exportConfirmModal = document.getElementById("exportConfirmModal");
+        const exportConfirmEyebrow = document.getElementById("exportConfirmEyebrow");
+        const exportConfirmTitle = document.getElementById("exportConfirmTitle");
+        const exportConfirmCopy = document.getElementById("exportConfirmCopy");
+        const exportReviewStats = document.getElementById("exportReviewStats");
+        const exportReviewList = document.getElementById("exportReviewList");
+        const cancelExportButton = document.getElementById("cancelExportButton");
+        const confirmExportButton = document.getElementById("confirmExportButton");
 
         let generatedMarkdown = "";
         let hasRenderedQuestions = false;
         let hasBoundSectionTracker = false;
         let statusState = { key: "ready", tone: "", params: {} };
         let resetModalReturnFocus = null;
+        let exportModalReturnFocus = null;
 
         function resetAnswerState() {
             for (const question of questions) {
@@ -3639,6 +3875,14 @@ Responda o questionario para gerar o documento final.</pre>
             });
         }
 
+        function escapeHtml(value) {
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
+        }
+
         function renderSummaryPills(options) {
             const copy = getStaticCopy();
             const visibleOptions = options.filter(Boolean).slice(0, 4);
@@ -3728,7 +3972,22 @@ Responda o questionario para gerar o documento final.</pre>
             document.documentElement.lang = getCurrentLanguage();
 
             if (languageSwitcher) {
-                languageSwitcher.value = getCurrentLanguage();
+                const currentLanguage = getCurrentLanguage();
+                const languageMeta = LANGUAGE_META[currentLanguage];
+                const currentFlag = document.getElementById("language-current-flag");
+                const currentLabel = document.getElementById("language-current-label");
+                languageSwitcher.dataset.currentLanguage = currentLanguage;
+                if (currentFlag && languageMeta) {
+                    currentFlag.className = `fi ${languageMeta.flag}`;
+                }
+                if (currentLabel && languageMeta) {
+                    currentLabel.textContent = languageMeta.label;
+                }
+                languageSwitcher.querySelectorAll("[data-lang]").forEach((button) => {
+                    const isActive = button.dataset.lang === currentLanguage;
+                    button.classList.toggle("is-active", isActive);
+                    button.setAttribute("aria-selected", String(isActive));
+                });
             }
 
             if (headerBackLink) {
@@ -3810,6 +4069,14 @@ Responda o questionario para gerar o documento final.</pre>
             if (resetConfirmCopy) resetConfirmCopy.textContent = copy.resetModal.copy;
             if (cancelResetButton) cancelResetButton.textContent = copy.resetModal.cancel;
             if (confirmResetButton) confirmResetButton.textContent = copy.resetModal.confirm;
+            if (exportConfirmEyebrow) exportConfirmEyebrow.textContent = copy.exportModal.eyebrow;
+            if (exportConfirmTitle) exportConfirmTitle.textContent = copy.exportModal.title;
+            if (exportConfirmCopy) exportConfirmCopy.textContent = copy.exportModal.copy;
+            if (cancelExportButton) cancelExportButton.textContent = copy.exportModal.cancel;
+            if (confirmExportButton) confirmExportButton.textContent = copy.exportModal.confirm;
+            if (exportConfirmModal && !exportConfirmModal.hidden && generatedMarkdown) {
+                renderExportReview();
+            }
 
             if (floatingNav) {
                 const floatingEyebrow = floatingNav.querySelector(".eyebrow");
@@ -3855,6 +4122,7 @@ Responda o questionario para gerar o documento final.</pre>
 
         function changeLanguage(lang) {
             applyDesignSystemLanguage(lang, true);
+            setLanguageMenuOpen(false);
         }
 
         function changeStatus(message, tone) {
@@ -4417,11 +4685,65 @@ ${aiHandoff}
             }
         }
 
-        function downloadMarkdown() {
+        function renderExportReview() {
             if (!generatedMarkdown) {
                 return;
             }
 
+            const copy = getStaticCopy();
+            const total = questions.length;
+            const answered = answeredCount();
+            const missing = total - answered;
+            const lineCount = generatedMarkdown.trim().split(/\r?\n/).length;
+            const selections = getSelections();
+            const fallback = copy.exportModal.fallback;
+            const reviewItems = [
+                {
+                    label: copy.exportModal.items.direction,
+                    value: [selections.productPosture?.title, selections.emotionalTone?.title].filter(Boolean).join(" / ") || fallback
+                },
+                {
+                    label: copy.exportModal.items.colors,
+                    value: selections.palette?.title || fallback
+                },
+                {
+                    label: copy.exportModal.items.type,
+                    value: selections.typography?.title || fallback
+                },
+                {
+                    label: copy.exportModal.items.components,
+                    value: listText(selections.componentPriority, fallback)
+                },
+                {
+                    label: copy.exportModal.items.guardrails,
+                    value: listText([...selections.priorities, ...selections.antiPatterns], fallback)
+                }
+            ];
+
+            if (exportReviewStats) {
+                exportReviewStats.innerHTML = [
+                    { label: copy.exportModal.stats.answeredLabel, value: copy.exportModal.stats.answered(answered, total) },
+                    { label: copy.exportModal.stats.missingLabel, value: copy.exportModal.stats.missing(missing) },
+                    { label: copy.exportModal.stats.linesLabel, value: copy.exportModal.stats.lines(lineCount) }
+                ].map((item) => `
+                    <div class="export-review-stat">
+                        <strong>${escapeHtml(item.label)}</strong>
+                        <span>${escapeHtml(item.value)}</span>
+                    </div>
+                `).join("");
+            }
+
+            if (exportReviewList) {
+                exportReviewList.innerHTML = reviewItems.map((item) => `
+                    <div class="export-review-item">
+                        <strong>${escapeHtml(item.label)}</strong>
+                        <span title="${escapeHtml(item.value)}">${escapeHtml(item.value)}</span>
+                    </div>
+                `).join("");
+            }
+        }
+
+        function performMarkdownDownload() {
             const exportFileName = getExportFileName();
             const blob = new Blob([generatedMarkdown], { type: "text/markdown;charset=utf-8" });
             const url = URL.createObjectURL(blob);
@@ -4434,6 +4756,46 @@ ${aiHandoff}
             URL.revokeObjectURL(url);
 
             setStatus("downloaded", "success", { label: exportFileName });
+        }
+
+        function openExportConfirmation(triggerButton) {
+            if (!generatedMarkdown) {
+                return;
+            }
+
+            if (!exportConfirmModal || !cancelExportButton || !confirmExportButton) {
+                performMarkdownDownload();
+                return;
+            }
+
+            renderExportReview();
+            exportModalReturnFocus = triggerButton || document.activeElement;
+            exportConfirmModal.hidden = false;
+            document.body.style.overflow = "hidden";
+            window.setTimeout(() => {
+                confirmExportButton.focus({ preventScroll: true });
+            }, 0);
+        }
+
+        function closeExportConfirmation() {
+            if (!exportConfirmModal) {
+                return;
+            }
+
+            exportConfirmModal.hidden = true;
+            document.body.style.overflow = "";
+            if (exportModalReturnFocus && typeof exportModalReturnFocus.focus === "function") {
+                exportModalReturnFocus.focus({ preventScroll: true });
+            }
+        }
+
+        function confirmExportDownload() {
+            performMarkdownDownload();
+            closeExportConfirmation();
+        }
+
+        function downloadMarkdown() {
+            openExportConfirmation(downloadButton);
         }
 
         function openResetConfirmation(triggerButton) {
@@ -4623,6 +4985,12 @@ ${aiHandoff}
                 button.addEventListener("click", copyBuildPrompt);
             });
             downloadButton.addEventListener("click", downloadMarkdown);
+            if (cancelExportButton) {
+                cancelExportButton.addEventListener("click", closeExportConfirmation);
+            }
+            if (confirmExportButton) {
+                confirmExportButton.addEventListener("click", confirmExportDownload);
+            }
 
             if (cancelResetButton) {
                 cancelResetButton.addEventListener("click", closeResetConfirmation);
@@ -4637,10 +5005,29 @@ ${aiHandoff}
                     }
                 });
             }
+            if (exportConfirmModal) {
+                exportConfirmModal.addEventListener("click", (event) => {
+                    if (event.target === exportConfirmModal) {
+                        closeExportConfirmation();
+                    }
+                });
+            }
+
+            document.addEventListener("click", (event) => {
+                if (!event.target.closest("#language-switcher")) {
+                    setLanguageMenuOpen(false);
+                }
+            });
 
             document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape") {
+                    setLanguageMenuOpen(false);
+                }
                 if (event.key === "Escape" && resetConfirmModal && !resetConfirmModal.hidden) {
                     closeResetConfirmation();
+                }
+                if (event.key === "Escape" && exportConfirmModal && !exportConfirmModal.hidden) {
+                    closeExportConfirmation();
                 }
             });
 

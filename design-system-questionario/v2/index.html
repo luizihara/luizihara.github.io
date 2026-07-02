@@ -1,0 +1,3867 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System Blueprint Builder V2</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
+    <link rel="stylesheet" href="../../assets/flag-icons/css/flag-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow:wght@400;600;700&family=DM+Sans:wght@400;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lora:wght@400;600;700&family=Manrope:wght@400;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700&family=Public+Sans:wght@400;600;700&family=Sora:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --app-bg: #f7f8f5;
+            --app-ink: #171817;
+            --app-muted: #626760;
+            --app-panel: #ffffff;
+            --app-panel-soft: #eef2ed;
+            --app-line: #d5dcd2;
+            --app-line-strong: #aeb9ae;
+            --app-accent: #e75f43;
+            --app-accent-2: #1f7a63;
+            --app-accent-3: #4a63d9;
+            --app-shadow: 0 18px 44px rgba(34, 30, 22, 0.12);
+            --focus: #1b67ff;
+            --preview-primary: #000000;
+            --preview-secondary: #eae0c8;
+            --preview-accent: #8b7e66;
+            --preview-surface: #f5eedc;
+            --preview-surface-dark: #121212;
+            --preview-text: #111111;
+            --preview-text-dark: #eae0c8;
+            --preview-display: "Outfit", sans-serif;
+            --preview-body: "Outfit", sans-serif;
+            --preview-mono: "IBM Plex Mono", monospace;
+            --preview-radius: 8px;
+            --preview-control-radius: 8px;
+            --preview-gap: 14px;
+        }
+
+        html.dark {
+            --app-bg: #10110f;
+            --app-ink: #f4f1ea;
+            --app-muted: #b8b1a5;
+            --app-panel: #191b17;
+            --app-panel-soft: #22241f;
+            --app-line: #30352e;
+            --app-line-strong: #555d50;
+            --app-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background:
+                linear-gradient(90deg, rgba(231, 95, 67, 0.07), transparent 28%, rgba(31, 122, 99, 0.07) 68%, transparent),
+                var(--app-bg);
+            color: var(--app-ink);
+            font-family: "Outfit", system-ui, sans-serif;
+            line-height: 1.4;
+            letter-spacing: 0;
+        }
+
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            letter-spacing: 0;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 18px;
+            border-bottom: 1px solid var(--app-line);
+            background: color-mix(in srgb, var(--app-bg) 86%, transparent);
+            backdrop-filter: blur(18px);
+        }
+
+        .topbar-left,
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .topbar-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-width: 0;
+            color: var(--app-muted);
+            font-size: 0.9rem;
+        }
+
+        .topbar-title strong {
+            color: var(--app-ink);
+            font-size: 0.96rem;
+        }
+
+        .save-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--app-accent-2);
+            box-shadow: 0 0 0 4px color-mix(in srgb, var(--app-accent-2) 18%, transparent);
+        }
+
+        .icon-btn,
+        .icon-text,
+        .seg-btn,
+        .choice,
+        .tool-btn,
+        .help {
+            border: 1px solid var(--app-line);
+            border-radius: 8px;
+            background: color-mix(in srgb, var(--app-panel) 92%, transparent);
+            color: var(--app-ink);
+            cursor: pointer;
+            transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .icon-btn,
+        .tool-btn {
+            width: 40px;
+            height: 40px;
+            display: inline-grid;
+            place-items: center;
+            flex: 0 0 auto;
+        }
+
+        .icon-text {
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 0 12px;
+            font-weight: 700;
+        }
+
+        .icon-btn svg,
+        .icon-text svg,
+        .tool-btn svg,
+        .seg-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke-width: 2;
+        }
+
+        .icon-btn:hover,
+        .icon-text:hover,
+        .tool-btn:hover,
+        .seg-btn:hover,
+        .choice:hover {
+            transform: translateY(-1px);
+            border-color: var(--app-line-strong);
+            box-shadow: var(--app-shadow);
+        }
+
+        .icon-btn:focus-visible,
+        .icon-text:focus-visible,
+        .tool-btn:focus-visible,
+        .seg-btn:focus-visible,
+        .choice:focus-visible,
+        .help:focus-visible,
+        textarea:focus-visible {
+            outline: 3px solid color-mix(in srgb, var(--focus) 34%, transparent);
+            outline-offset: 2px;
+        }
+
+        .segmented {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px;
+            border: 1px solid var(--app-line);
+            border-radius: 8px;
+            background: var(--app-panel-soft);
+        }
+
+        .seg-label {
+            display: inline-flex;
+            align-items: center;
+            min-height: 32px;
+            padding: 0 8px;
+            color: var(--app-muted);
+            font-size: 0.74rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .seg-btn {
+            min-height: 32px;
+            padding: 0 10px;
+            border-color: transparent;
+            background: transparent;
+            color: var(--app-muted);
+            font-size: 0.84rem;
+            font-weight: 700;
+        }
+
+        .seg-btn.is-active {
+            background: var(--app-panel);
+            color: var(--app-ink);
+            box-shadow: 0 7px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .language-flag,
+        .language-code {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .language-switcher .fi {
+            border-radius: 2px;
+            box-shadow: 0 0 0 1px var(--app-line);
+            flex: 0 0 auto;
+        }
+
+        .workspace {
+            display: grid;
+            grid-template-columns: minmax(320px, 520px) minmax(0, 1fr);
+            gap: 20px;
+            width: min(1800px, 100%);
+            margin: 0 auto;
+            padding: 18px;
+        }
+
+        .decision-panel,
+        .preview-panel {
+            min-width: 0;
+        }
+
+        .decision-panel {
+            display: grid;
+            gap: 14px;
+            align-content: start;
+        }
+
+        .intro-block,
+        .progress-block,
+        .question-block,
+        .export-panel {
+            border: 1px solid var(--app-line);
+            border-radius: 8px;
+            background: color-mix(in srgb, var(--app-panel) 92%, transparent);
+            box-shadow: 0 12px 32px rgba(34, 30, 22, 0.05);
+        }
+
+        .intro-block {
+            display: grid;
+            grid-template-columns: 72px minmax(0, 1fr);
+            gap: 16px;
+            padding: 18px;
+        }
+
+        .brand-mark {
+            width: 72px;
+            height: 72px;
+            display: grid;
+            place-items: center;
+            border-radius: 8px;
+            color: var(--preview-text-dark);
+            background:
+                linear-gradient(135deg, var(--preview-primary), var(--preview-accent)),
+                var(--app-ink);
+            font-family: "IBM Plex Mono", monospace;
+            font-weight: 700;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--app-muted);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0;
+        }
+
+        h1 {
+            margin-bottom: 6px;
+            font-size: 4.2rem;
+            line-height: 0.95;
+            letter-spacing: 0;
+        }
+
+        .intro-block p {
+            max-width: 35rem;
+            margin-bottom: 0;
+            color: var(--app-muted);
+            font-size: 0.98rem;
+        }
+
+        .progress-block {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1px;
+            overflow: hidden;
+            background: var(--app-line);
+        }
+
+        .metric {
+            padding: 14px;
+            background: var(--app-panel);
+        }
+
+        .metric strong {
+            display: block;
+            margin-bottom: 4px;
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 1.35rem;
+        }
+
+        .metric span {
+            color: var(--app-muted);
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .questions {
+            display: grid;
+            gap: 14px;
+        }
+
+        .question-block {
+            padding: 14px;
+        }
+
+        .question-head {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .q-index {
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--app-line);
+            border-radius: 8px;
+            color: var(--app-muted);
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 0.76rem;
+            font-weight: 700;
+        }
+
+        .question-head h2 {
+            margin: 0;
+            font-size: 1.05rem;
+            line-height: 1.1;
+        }
+
+        .help {
+            position: relative;
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            color: var(--app-muted);
+            font-weight: 800;
+        }
+
+        .help::after,
+        .choice::after,
+        .tooltip-source::after {
+            position: absolute;
+            z-index: 60;
+            width: min(270px, 78vw);
+            padding: 10px 11px;
+            border: 1px solid var(--app-line);
+            border-radius: 8px;
+            background: var(--app-ink);
+            color: var(--app-bg);
+            box-shadow: var(--app-shadow);
+            content: attr(data-tip);
+            font-size: 0.82rem;
+            font-weight: 600;
+            line-height: 1.35;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(8px);
+            transition: opacity 0.16s ease, transform 0.16s ease;
+        }
+
+        .help::after {
+            right: 0;
+            top: calc(100% + 8px);
+        }
+
+        .help:hover::after,
+        .help:focus-visible::after,
+        .help.is-tip-open::after,
+        .choice:has(.choice-info:hover)::after,
+        .choice:focus-visible::after,
+        .choice.is-tip-open::after,
+        .tooltip-source:hover::after,
+        .tooltip-source.is-tip-open::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .choice-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .question-block[data-wide="true"] .choice-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .choice {
+            position: relative;
+            min-height: 74px;
+            padding: 10px;
+            text-align: left;
+            background: var(--app-panel-soft);
+            overflow: visible;
+        }
+
+        .choice:hover,
+        .choice:has(.choice-info:hover),
+        .choice.is-tip-open,
+        .choice:focus-visible {
+            z-index: 8;
+        }
+
+        .choice::after {
+            right: 10px;
+            left: 10px;
+            top: auto;
+            bottom: calc(100% + 10px);
+            width: auto;
+            text-align: left;
+            white-space: normal;
+        }
+
+        .choice.is-selected {
+            border-color: color-mix(in srgb, var(--preview-primary) 82%, var(--app-line));
+            background:
+                linear-gradient(135deg, color-mix(in srgb, var(--preview-secondary) 62%, var(--app-panel)), var(--app-panel));
+            color: var(--preview-primary);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--preview-primary) 30%, transparent);
+        }
+
+        html.dark .choice.is-selected {
+            color: var(--app-ink);
+        }
+
+        .choice-main {
+            display: block;
+            padding-right: 22px;
+            font-size: 0.96rem;
+            font-weight: 800;
+            line-height: 1.12;
+        }
+
+        .choice-tag {
+            display: block;
+            margin-top: 7px;
+            color: var(--app-muted);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .choice.is-selected .choice-tag {
+            color: color-mix(in srgb, currentColor 72%, transparent);
+        }
+
+        .choice-info {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            display: grid;
+            place-items: center;
+            border: 1px solid color-mix(in srgb, currentColor 32%, transparent);
+            border-radius: 50%;
+            color: color-mix(in srgb, currentColor 76%, transparent);
+            cursor: help;
+            font-size: 0.72rem;
+            font-weight: 900;
+            touch-action: manipulation;
+        }
+
+        .help,
+        .choice-info,
+        .tooltip-source {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .palette-mini {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3px;
+            margin-top: 10px;
+        }
+
+        .palette-mini span {
+            height: 12px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .preview-panel {
+            position: sticky;
+            top: 77px;
+            align-self: start;
+            height: calc(100vh - 95px);
+            display: grid;
+            grid-template-rows: auto minmax(0, 1fr) auto;
+            gap: 14px;
+        }
+
+        .preview-tools {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 14px;
+            min-width: 0;
+        }
+
+        .preview-tools h2 {
+            margin: 4px 0 0;
+            font-size: 2.15rem;
+            line-height: 1;
+        }
+
+        .tool-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .studio-shell {
+            min-height: 0;
+            display: grid;
+            grid-template-rows: auto minmax(0, 1fr);
+            gap: 12px;
+        }
+
+        .swatch-row {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .swatch-card {
+            min-width: 0;
+            border: 1px solid var(--app-line);
+            border-radius: 8px;
+            background: var(--app-panel);
+            overflow: hidden;
+        }
+
+        .swatch-color {
+            height: 34px;
+            border-bottom: 1px solid var(--app-line);
+        }
+
+        .swatch-copy {
+            display: grid;
+            gap: 1px;
+            padding: 8px;
+        }
+
+        .swatch-copy strong,
+        .swatch-copy code {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .swatch-copy strong {
+            font-size: 0.72rem;
+        }
+
+        .swatch-copy code {
+            color: var(--app-muted);
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 0.7rem;
+        }
+
+        .artboard {
+            min-height: 0;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 280px;
+            gap: 12px;
+            overflow: auto;
+            padding: 14px;
+            border: 1px solid var(--app-line);
+            border-radius: 8px;
+            background:
+                linear-gradient(135deg, color-mix(in srgb, var(--preview-secondary) 26%, transparent), transparent 38%),
+                color-mix(in srgb, var(--app-panel-soft) 80%, var(--preview-secondary));
+        }
+
+        .studio-shell.is-mobile .artboard {
+            grid-template-columns: minmax(320px, 390px) minmax(240px, 280px);
+            align-items: start;
+            justify-content: center;
+        }
+
+        .studio-shell.is-mobile .mock-browser {
+            width: min(390px, 100%);
+            justify-self: center;
+        }
+
+        .mock-browser,
+        .snapshot-panel,
+        .export-panel {
+            border: 1px solid color-mix(in srgb, var(--preview-primary) 24%, var(--app-line));
+            border-radius: var(--preview-radius);
+            background: var(--preview-surface);
+            color: var(--preview-text);
+            overflow: hidden;
+        }
+
+        .mock-browser {
+            min-width: 0;
+            display: grid;
+            grid-template-rows: auto minmax(0, 1fr);
+            box-shadow: 0 22px 50px color-mix(in srgb, var(--preview-primary) 18%, transparent);
+            container-type: inline-size;
+        }
+
+        .mock-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 14px;
+            border-bottom: 1px solid color-mix(in srgb, var(--preview-primary) 16%, transparent);
+            background: color-mix(in srgb, var(--preview-surface) 82%, white);
+            font-family: var(--preview-body);
+        }
+
+        .mock-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+            font-weight: 800;
+        }
+
+        .mock-logo {
+            width: 30px;
+            height: 30px;
+            display: grid;
+            place-items: center;
+            border-radius: var(--preview-control-radius);
+            background: var(--preview-primary);
+            color: var(--preview-text-dark);
+            font-family: var(--preview-mono);
+            font-size: 0.78rem;
+        }
+
+        .mock-nav {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .mock-nav span {
+            min-width: 52px;
+            height: 8px;
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--preview-primary) 18%, transparent);
+        }
+
+        .mock-body {
+            display: grid;
+            grid-template-columns: 130px minmax(0, 1fr);
+            gap: var(--preview-gap);
+            padding: var(--preview-gap);
+            font-family: var(--preview-body);
+        }
+
+        .artboard[data-layout="bento"] .mock-body,
+        .artboard[data-layout="story"] .mock-body {
+            grid-template-columns: 1fr;
+        }
+
+        .studio-shell.is-mobile .mock-body {
+            grid-template-columns: 1fr;
+        }
+
+        .mock-sidebar {
+            display: grid;
+            align-content: start;
+            gap: 8px;
+            padding: 10px;
+            border: 1px solid color-mix(in srgb, var(--preview-primary) 14%, transparent);
+            border-radius: var(--preview-radius);
+            background: color-mix(in srgb, var(--preview-secondary) 32%, var(--preview-surface));
+        }
+
+        .artboard[data-layout="bento"] .mock-sidebar,
+        .artboard[data-layout="story"] .mock-sidebar {
+            display: none;
+        }
+
+        .mock-sidebar span {
+            height: 24px;
+            border-radius: var(--preview-control-radius);
+            background: color-mix(in srgb, var(--preview-primary) 12%, transparent);
+        }
+
+        .mock-content {
+            display: grid;
+            gap: var(--preview-gap);
+            min-width: 0;
+        }
+
+        .mock-hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(170px, 0.9fr);
+            gap: var(--preview-gap);
+            align-items: stretch;
+        }
+
+        .studio-shell.is-mobile .mock-hero {
+            grid-template-columns: 1fr;
+        }
+
+        .hero-copy,
+        .visual-poster,
+        .mock-card,
+        .mock-table,
+        .empty-state,
+        .mini-card {
+            border: 1px solid color-mix(in srgb, var(--preview-primary) 14%, transparent);
+            border-radius: var(--preview-radius);
+            background: color-mix(in srgb, var(--preview-surface) 88%, white);
+        }
+
+        .hero-copy {
+            min-height: 208px;
+            display: grid;
+            align-content: space-between;
+            gap: 16px;
+            padding: 28px;
+        }
+
+        .hero-kicker {
+            display: inline-flex;
+            width: max-content;
+            padding: 6px 9px;
+            border: 1px solid color-mix(in srgb, var(--preview-primary) 18%, transparent);
+            border-radius: var(--preview-control-radius);
+            color: color-mix(in srgb, var(--preview-primary) 72%, var(--preview-text));
+            font-family: var(--preview-mono);
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .hero-copy h3 {
+            max-width: 12ch;
+            margin-bottom: 0;
+            font-family: var(--preview-display);
+            font-size: 3.2rem;
+            line-height: 0.98;
+            letter-spacing: 0;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .mock-cta,
+        .mock-secondary {
+            min-height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 12px;
+            border-radius: var(--preview-control-radius);
+            font-weight: 800;
+        }
+
+        .mock-cta {
+            background: var(--preview-primary);
+            color: var(--preview-text-dark);
+        }
+
+        .mock-secondary {
+            border: 1px solid color-mix(in srgb, var(--preview-primary) 18%, transparent);
+        }
+
+        .visual-poster {
+            min-height: 208px;
+            display: grid;
+            grid-template-rows: 1fr auto;
+            gap: 12px;
+            padding: 12px;
+            overflow: hidden;
+            background:
+                linear-gradient(135deg, var(--preview-primary), color-mix(in srgb, var(--preview-accent) 84%, var(--preview-secondary)));
+            color: var(--preview-text-dark);
+        }
+
+        .poster-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.7fr 0.5fr;
+            grid-template-rows: repeat(3, 1fr);
+            gap: 8px;
+            min-height: 134px;
+        }
+
+        .poster-grid span {
+            border: 1px solid rgba(255, 255, 255, 0.26);
+            border-radius: var(--preview-radius);
+            background: rgba(255, 255, 255, 0.16);
+            backdrop-filter: blur(6px);
+        }
+
+        .poster-grid span:nth-child(1) {
+            grid-row: span 2;
+            background: var(--preview-secondary);
+        }
+
+        .poster-grid span:nth-child(3) {
+            grid-row: span 3;
+            background: color-mix(in srgb, var(--preview-accent) 72%, white);
+        }
+
+        .poster-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            font-family: var(--preview-mono);
+            font-size: 0.74rem;
+            font-weight: 700;
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: var(--preview-gap);
+        }
+
+        .artboard[data-density="spacious"] {
+            --preview-gap: 18px;
+        }
+
+        .artboard[data-density="balanced"] {
+            --preview-gap: 14px;
+        }
+
+        .artboard[data-density="dense"] {
+            --preview-gap: 8px;
+        }
+
+        .artboard[data-density="dramatic"] {
+            --preview-gap: 18px;
+        }
+
+        .artboard[data-density="dense"] .hero-copy {
+            min-height: 170px;
+            padding: 18px;
+        }
+
+        .artboard[data-density="dense"] .hero-copy h3 {
+            font-size: 2.45rem;
+        }
+
+        @container (max-width: 560px) {
+            .mock-body,
+            .mock-hero,
+            .component-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mock-sidebar {
+                display: none;
+            }
+
+            .hero-copy {
+                min-height: 168px;
+                padding: 20px;
+            }
+
+            .hero-copy h3,
+            .artboard[data-density="dense"] .hero-copy h3 {
+                font-size: 2.45rem;
+            }
+
+            .visual-poster {
+                min-height: 158px;
+            }
+        }
+
+        .artboard[data-density="dramatic"] .mock-hero {
+            grid-template-columns: 1.35fr 0.65fr;
+        }
+
+        .component-grid[data-columns="2"] {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .studio-shell.is-mobile .component-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .mock-card,
+        .mock-table,
+        .empty-state,
+        .mini-card {
+            min-width: 0;
+            padding: 12px;
+        }
+
+        .mock-card {
+            display: grid;
+            gap: 12px;
+        }
+
+        .mock-card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .mock-card-title {
+            height: 12px;
+            width: 72px;
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--preview-primary) 22%, transparent);
+        }
+
+        .mock-badge {
+            min-width: 48px;
+            height: 22px;
+            border-radius: var(--preview-control-radius);
+            background: var(--preview-accent);
+        }
+
+        .bars {
+            display: grid;
+            align-items: end;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            height: 86px;
+        }
+
+        .bars span {
+            border-radius: var(--preview-radius) var(--preview-radius) 3px 3px;
+            background: linear-gradient(180deg, var(--preview-primary), var(--preview-accent));
+        }
+
+        .bars span:nth-child(1) { height: 42%; }
+        .bars span:nth-child(2) { height: 78%; }
+        .bars span:nth-child(3) { height: 56%; }
+        .bars span:nth-child(4) { height: 92%; }
+        .bars span:nth-child(5) { height: 65%; }
+
+        .mock-table {
+            display: grid;
+            gap: 8px;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 1.1fr 0.7fr 0.5fr;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .table-row span {
+            height: 10px;
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--preview-primary) 16%, transparent);
+        }
+
+        .table-row:first-child span {
+            height: 18px;
+            background: color-mix(in srgb, var(--preview-primary) 28%, transparent);
+        }
+
+        .empty-state {
+            min-height: 142px;
+            display: grid;
+            align-content: center;
+            justify-items: center;
+            gap: 10px;
+            text-align: center;
+        }
+
+        .empty-icon {
+            width: 54px;
+            height: 54px;
+            display: grid;
+            place-items: center;
+            border-radius: var(--preview-control-radius);
+            background: color-mix(in srgb, var(--preview-accent) 22%, var(--preview-secondary));
+            color: var(--preview-primary);
+        }
+
+        .empty-state strong {
+            font-family: var(--preview-display);
+            font-size: 1.05rem;
+        }
+
+        .empty-state span {
+            max-width: 20ch;
+            color: color-mix(in srgb, var(--preview-text) 68%, transparent);
+            font-size: 0.82rem;
+        }
+
+        .snapshot-panel {
+            display: grid;
+            align-content: start;
+            gap: 12px;
+            padding: 12px;
+            background: var(--preview-surface-dark);
+            color: var(--preview-text-dark);
+            font-family: var(--preview-body);
+        }
+
+        .snapshot-panel h3 {
+            margin-bottom: 0;
+            font-family: var(--preview-display);
+            font-size: 1.35rem;
+            line-height: 1.05;
+        }
+
+        .snapshot-list {
+            display: grid;
+            gap: 8px;
+        }
+
+        .snapshot-item {
+            display: grid;
+            grid-template-columns: 28px minmax(0, 1fr);
+            gap: 8px;
+            align-items: center;
+            min-height: 40px;
+            padding: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--preview-radius);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .snapshot-item svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .snapshot-item strong {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 0.82rem;
+        }
+
+        .snapshot-item span {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: color-mix(in srgb, var(--preview-text-dark) 68%, transparent);
+            font-size: 0.72rem;
+        }
+
+        .mood-bars {
+            display: grid;
+            gap: 8px;
+        }
+
+        .mood-row {
+            display: grid;
+            grid-template-columns: 70px minmax(0, 1fr) 28px;
+            gap: 8px;
+            align-items: center;
+            font-family: var(--preview-mono);
+            font-size: 0.7rem;
+        }
+
+        .mood-track {
+            height: 8px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+            overflow: hidden;
+        }
+
+        .mood-track span {
+            display: block;
+            height: 100%;
+            border-radius: inherit;
+            background: var(--preview-accent);
+        }
+
+        .export-panel {
+            display: none;
+            padding: 12px;
+            background: var(--app-panel);
+            color: var(--app-ink);
+        }
+
+        .export-panel.is-open {
+            display: grid;
+            gap: 10px;
+        }
+
+        .export-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .export-head h3 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .export-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .export-actions .icon-text {
+            min-height: 36px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 320px;
+            max-height: 54vh;
+            resize: vertical;
+            border: 1px solid var(--app-line);
+            border-radius: 8px;
+            padding: 12px;
+            background: var(--app-panel-soft);
+            color: var(--app-ink);
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 0.78rem;
+            line-height: 1.55;
+        }
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 18px;
+            z-index: 70;
+            min-width: min(360px, calc(100vw - 32px));
+            padding: 12px 14px;
+            border: 1px solid var(--app-line);
+            border-radius: 8px;
+            background: var(--app-ink);
+            color: var(--app-bg);
+            box-shadow: var(--app-shadow);
+            text-align: center;
+            transform: translate(-50%, 20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.18s ease, transform 0.18s ease;
+        }
+
+        .toast.is-visible {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        .modal-backdrop[hidden] {
+            display: none;
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 90;
+            display: grid;
+            place-items: center;
+            padding: 18px;
+            background: rgba(12, 13, 12, 0.58);
+            backdrop-filter: blur(14px);
+        }
+
+        .modal-card {
+            width: min(640px, 100%);
+            max-height: min(720px, calc(100vh - 36px));
+            overflow: auto;
+            border: 1px solid var(--app-line);
+            border-radius: 8px;
+            background: var(--app-panel);
+            color: var(--app-ink);
+            box-shadow: var(--app-shadow);
+            padding: 18px;
+        }
+
+        .modal-card h2 {
+            margin: 6px 0 8px;
+            font-size: 1.6rem;
+            line-height: 1.05;
+        }
+
+        .modal-card p {
+            margin: 0;
+            color: var(--app-muted);
+        }
+
+        .export-review-stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .export-review-stat,
+        .export-review-item {
+            border: 1px solid var(--app-line);
+            border-radius: 8px;
+            background: var(--app-panel-soft);
+        }
+
+        .export-review-stat {
+            padding: 12px;
+        }
+
+        .export-review-stat strong,
+        .export-review-item strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--app-muted);
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .export-review-stat span {
+            display: block;
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .export-review-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .export-review-item {
+            min-width: 0;
+            padding: 12px;
+        }
+
+        .export-review-item span {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .modal-primary {
+            border-color: var(--app-ink);
+            background: var(--app-ink);
+            color: var(--app-bg);
+        }
+
+        .tooltip-source {
+            position: relative;
+        }
+
+        .tooltip-source::after {
+            right: 0;
+            top: calc(100% + 8px);
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        @media (max-width: 1240px) {
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+
+            .preview-panel {
+                position: static;
+                height: auto;
+                order: -1;
+            }
+
+            .studio-shell {
+                min-height: 0;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .topbar {
+                grid-template-columns: minmax(0, 1fr) auto;
+                grid-template-areas:
+                    "back status"
+                    "actions actions";
+                gap: 10px;
+                padding: 10px 12px;
+            }
+
+            .topbar-title {
+                grid-area: status;
+                justify-content: flex-end;
+                white-space: nowrap;
+            }
+
+            #autosaveState {
+                max-width: 96px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .topbar-title strong {
+                display: none;
+            }
+
+            .topbar-left {
+                grid-area: back;
+                width: auto;
+                min-width: 0;
+            }
+
+            .topbar-left .icon-text {
+                max-width: 100%;
+                justify-content: flex-start;
+            }
+
+            .topbar-actions {
+                grid-area: actions;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto auto;
+                width: 100%;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .topbar-actions > .segmented:first-child {
+                grid-column: 1 / -1;
+                width: 100%;
+                overflow-x: auto;
+                justify-content: flex-start;
+                scrollbar-width: none;
+            }
+
+            .topbar-actions > .segmented:first-child::-webkit-scrollbar {
+                display: none;
+            }
+
+            .topbar-actions > .segmented:first-child .seg-label,
+            .topbar-actions > .segmented:first-child .seg-btn {
+                flex: 0 0 auto;
+            }
+
+            .language-switcher {
+                justify-self: start;
+            }
+
+            .language-switcher .seg-btn {
+                min-width: 38px;
+                padding: 0 8px;
+            }
+
+            .language-code,
+            #surpriseBtn span {
+                display: none;
+            }
+
+            #surpriseBtn {
+                width: 40px;
+                min-height: 40px;
+                padding: 0;
+            }
+
+            .workspace {
+                padding: 12px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .preview-tools h2 {
+                font-size: 1.55rem;
+            }
+
+            .hero-copy {
+                padding: 18px;
+            }
+
+            .hero-copy h3,
+            .artboard[data-density="dense"] .hero-copy h3 {
+                font-size: 2.35rem;
+            }
+
+            .intro-block,
+            .artboard,
+            .mock-hero,
+            .mock-body {
+                grid-template-columns: 1fr;
+            }
+
+            .studio-shell.is-mobile .artboard {
+                grid-template-columns: minmax(320px, 390px) 280px;
+            }
+
+            .question-block[data-wide="true"] .choice-grid,
+            .choice-grid,
+            .progress-block,
+            .component-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .swatch-row {
+                grid-template-columns: repeat(5, minmax(104px, 1fr));
+                overflow-x: auto;
+                padding-bottom: 4px;
+            }
+
+            .mock-sidebar {
+                display: none;
+            }
+
+            .preview-tools {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .export-review-stats,
+            .export-review-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-left">
+            <a class="icon-text" href="../../index.html" aria-label="Voltar para home">
+                <i data-lucide="home"></i>
+                <span data-i18n="backHome">Voltar para home</span>
+            </a>
+        </div>
+
+        <div class="topbar-title" aria-live="polite">
+            <span class="save-dot" aria-hidden="true"></span>
+            <strong>DS Blueprint v2</strong>
+            <span id="autosaveState" data-i18n="autosaveActive">autosave ativo</span>
+        </div>
+
+        <div class="topbar-actions">
+            <div class="segmented" aria-label="Exemplos de presets">
+                <span class="seg-label" data-i18n="examples">Exemplos</span>
+                <button class="seg-btn" type="button" data-preset="home">Home</button>
+                <button class="seg-btn" type="button" data-preset="ops">Ops</button>
+                <button class="seg-btn" type="button" data-preset="premium">Premium</button>
+                <button class="seg-btn" type="button" data-preset="human">Humano</button>
+            </div>
+            <div class="segmented language-switcher" aria-label="Idioma">
+                <button class="seg-btn" type="button" data-lang="pt-BR" aria-label="Português">
+                    <span class="language-flag fi fi-br" aria-hidden="true"></span>
+                    <span class="language-code">PT</span>
+                </button>
+                <button class="seg-btn" type="button" data-lang="en" aria-label="English">
+                    <span class="language-flag fi fi-us" aria-hidden="true"></span>
+                    <span class="language-code">EN</span>
+                </button>
+            </div>
+            <button class="icon-text" type="button" id="surpriseBtn">
+                <i data-lucide="sparkles"></i>
+                <span data-i18n="surprise">Surpreenda</span>
+            </button>
+            <button class="icon-btn tooltip-source" type="button" id="themeBtn" aria-label="Alternar tema" data-tip="Alternar tema">
+                <i data-lucide="moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="workspace">
+        <section class="decision-panel" aria-label="Decisoes do design system">
+            <div class="intro-block">
+                <div class="brand-mark">DS2</div>
+                <div>
+                    <span class="eyebrow" data-i18n="introEyebrow">Questionario visual</span>
+                    <h1 data-i18n="introTitle">Escolha. Veja. Exporte.</h1>
+                    <p data-i18n="introCopy">Menos explicacao na tela. Mais decisao, sinal visual e preview vivo.</p>
+                </div>
+            </div>
+
+            <div class="progress-block" aria-live="polite">
+                <div class="metric">
+                    <strong id="answeredMetric">0</strong>
+                    <span data-i18n="metricDecisions">decisoes</span>
+                </div>
+                <div class="metric">
+                    <strong id="styleMetric">0</strong>
+                    <span data-i18n="metricStyles">estilos</span>
+                </div>
+                <div class="metric">
+                    <strong id="guardrailMetric">0</strong>
+                    <span data-i18n="metricGuardrails">guardrails</span>
+                </div>
+            </div>
+
+            <div class="questions" id="questionRoot"></div>
+        </section>
+
+        <section class="preview-panel" aria-label="Preview do design system">
+            <div class="preview-tools">
+                <div>
+                    <span class="eyebrow" data-i18n="livePreview">Preview vivo</span>
+                    <h2 id="previewTitle">Sistema editorial</h2>
+                </div>
+                <div class="tool-row">
+                    <div class="segmented" aria-label="Tamanho do preview">
+                        <button class="seg-btn is-active" type="button" data-view="desktop" aria-label="Desktop">
+                            <i data-lucide="monitor"></i>
+                        </button>
+                        <button class="seg-btn" type="button" data-view="mobile" aria-label="Mobile">
+                            <i data-lucide="smartphone"></i>
+                        </button>
+                    </div>
+                    <button class="icon-text" type="button" id="exportToggle">
+                        <i data-lucide="file-down"></i>
+                        <span data-i18n="export">Exportar</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="studio-shell" id="studioShell">
+                <div class="swatch-row" id="swatchRow"></div>
+
+                <div class="artboard" id="artboard" data-layout="bento" data-density="balanced">
+                    <article class="mock-browser" aria-label="Preview de interface">
+                        <div class="mock-topbar">
+                            <div class="mock-brand">
+                                <span class="mock-logo">DS</span>
+                                <span id="mockBrandName">Blueprint Studio</span>
+                            </div>
+                            <div class="mock-nav" aria-hidden="true">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+
+                        <div class="mock-body">
+                            <aside class="mock-sidebar" aria-hidden="true">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </aside>
+
+                            <div class="mock-content">
+                                <section class="mock-hero">
+                                    <div class="hero-copy">
+                                        <div>
+                                            <span class="hero-kicker" id="heroKicker">EDITORIAL / SYSTEM</span>
+                                            <h3 id="heroTitle">Uma interface com ponto de vista.</h3>
+                                        </div>
+                                        <div class="hero-actions">
+                                            <span class="mock-cta" id="ctaLabel">Ver direcao</span>
+                                            <span class="mock-secondary" id="secondaryLabel">Detalhes</span>
+                                        </div>
+                                    </div>
+                                    <div class="visual-poster" aria-hidden="true">
+                                        <div class="poster-grid">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                        <div class="poster-label">
+                                            <span id="posterLeft">palette</span>
+                                            <span id="posterRight">tokens</span>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section class="component-grid" id="componentGrid" data-columns="3" aria-label="Componentes priorizados">
+                                    <div class="mock-card" id="chartCard">
+                                        <div class="mock-card-head">
+                                            <span class="mock-card-title"></span>
+                                            <span class="mock-badge"></span>
+                                        </div>
+                                        <div class="bars" aria-hidden="true">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="mock-table" id="tableCard" aria-hidden="true">
+                                        <div class="table-row"><span></span><span></span><span></span></div>
+                                        <div class="table-row"><span></span><span></span><span></span></div>
+                                        <div class="table-row"><span></span><span></span><span></span></div>
+                                        <div class="table-row"><span></span><span></span><span></span></div>
+                                        <div class="table-row"><span></span><span></span><span></span></div>
+                                    </div>
+
+                                    <div class="empty-state" id="emptyState">
+                                        <span class="empty-icon"><i data-lucide="message-square-text"></i></span>
+                                        <strong id="emptyTitle">Estado com criterio</strong>
+                                        <span id="emptyCopy">Poucas palavras, proximo passo claro.</span>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </article>
+
+                    <aside class="snapshot-panel" aria-label="Resumo visual">
+                        <span class="eyebrow">DNA</span>
+                        <h3 id="snapshotTitle">Editorial, contido e memoravel.</h3>
+                        <div class="snapshot-list" id="snapshotList"></div>
+                        <div class="mood-bars" id="moodBars"></div>
+                    </aside>
+                </div>
+            </div>
+
+            <div class="export-panel" id="exportPanel">
+                <div class="export-head">
+                    <h3>Markdown</h3>
+                    <div class="export-actions">
+                        <button class="icon-text" type="button" id="copyButton">
+                            <i data-lucide="copy"></i>
+                            <span data-i18n="copy">Copiar</span>
+                        </button>
+                        <button class="icon-text" type="button" id="downloadButton">
+                            <i data-lucide="download"></i>
+                            <span data-i18n="download">Baixar</span>
+                        </button>
+                    </div>
+                </div>
+                <textarea id="markdownOutput" readonly spellcheck="false"></textarea>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <div class="modal-backdrop" id="exportReviewModal" hidden>
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="exportReviewTitle">
+            <span class="eyebrow" data-i18n="exportReviewEyebrow">Revisao final</span>
+            <h2 id="exportReviewTitle" data-i18n="exportReviewTitle">Conferir antes de baixar</h2>
+            <p data-i18n="exportReviewCopy">Uma ultima leitura rapida do blueprint antes de gerar o arquivo.</p>
+            <div class="export-review-stats" id="exportReviewStats"></div>
+            <div class="export-review-list" id="exportReviewList"></div>
+            <div class="modal-actions">
+                <button class="icon-text" type="button" id="cancelExportReview" data-i18n="exportReviewCancel">Voltar</button>
+                <button class="icon-text modal-primary" type="button" id="confirmExportReview">
+                    <i data-lucide="download"></i>
+                    <span data-i18n="exportReviewConfirm">Baixar .md</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const STORAGE_KEY = "design-system-blueprint-v2";
+
+        const palettes = {
+            "ink-beige": {
+                label: "Ink / Beige",
+                tag: "editorial",
+                detail: "Contraste alto, calor contido e assinatura proxima da home atual.",
+                tokens: {
+                    primary: "#000000",
+                    secondary: "#EAE0C8",
+                    accent: "#8B7E66",
+                    surface: "#F5EEDC",
+                    surfaceDark: "#121212",
+                    text: "#111111",
+                    textDark: "#EAE0C8"
+                }
+            },
+            "night-ice": {
+                label: "Night / Ice",
+                tag: "B2B calmo",
+                detail: "Azul profundo, gelo e uma leitura mais institucional.",
+                tokens: {
+                    primary: "#13233F",
+                    secondary: "#EDF3FF",
+                    accent: "#5D7BD8",
+                    surface: "#F7FAFF",
+                    surfaceDark: "#10182A",
+                    text: "#13233F",
+                    textDark: "#EDF3FF"
+                }
+            },
+            "forest-clay": {
+                label: "Forest / Clay",
+                tag: "humano premium",
+                detail: "Verde profundo, argila e apoio quente para servicos com tato humano.",
+                tokens: {
+                    primary: "#1D6B52",
+                    secondary: "#F0E4CA",
+                    accent: "#B96F35",
+                    surface: "#F7F0DF",
+                    surfaceDark: "#14241D",
+                    text: "#18261F",
+                    textDark: "#F0E6D2"
+                }
+            },
+            "coral-ink": {
+                label: "Coral / Ink",
+                tag: "energia",
+                detail: "Coral vivo com base escura para presenca forte sem perder nitidez.",
+                tokens: {
+                    primary: "#ED6642",
+                    secondary: "#FFF3EA",
+                    accent: "#241611",
+                    surface: "#FFF7F0",
+                    surfaceDark: "#0F0F0B",
+                    text: "#1E130F",
+                    textDark: "#FFF0E5"
+                }
+            },
+            "volt-milk": {
+                label: "Volt / Milk",
+                tag: "experimental",
+                detail: "Lima eletrico, leite e grafite para uma marca mais inventiva.",
+                tokens: {
+                    primary: "#19211B",
+                    secondary: "#F8F8EA",
+                    accent: "#B7F24A",
+                    surface: "#FBFAF0",
+                    surfaceDark: "#121A13",
+                    text: "#182018",
+                    textDark: "#F3F8DD"
+                }
+            },
+            "ocean-mint": {
+                label: "Ocean / Mint",
+                tag: "fresh tech",
+                detail: "Azul petroleo, menta clara e acento aquatico para produto moderno e leve.",
+                tokens: {
+                    primary: "#075E6A",
+                    secondary: "#E8FFF7",
+                    accent: "#4ED3B5",
+                    surface: "#F3FFFB",
+                    surfaceDark: "#08292F",
+                    text: "#08373D",
+                    textDark: "#E8FFF7"
+                }
+            },
+            "ruby-blush": {
+                label: "Ruby / Blush",
+                tag: "presenca",
+                detail: "Rubi profundo com blush suave para marcas expressivas, humanas e sofisticadas.",
+                tokens: {
+                    primary: "#A91D3A",
+                    secondary: "#FFF1F4",
+                    accent: "#F2A0B5",
+                    surface: "#FFF7F8",
+                    surfaceDark: "#2A0710",
+                    text: "#321016",
+                    textDark: "#FFE8EE"
+                }
+            },
+            "gold-graphite": {
+                label: "Gold / Graphite",
+                tag: "premium",
+                detail: "Grafite, dourado e luz quente para uma sensacao mais criteriosa e editorial.",
+                tokens: {
+                    primary: "#24211C",
+                    secondary: "#FFF6D8",
+                    accent: "#D49A2A",
+                    surface: "#FFF9E8",
+                    surfaceDark: "#171512",
+                    text: "#251F17",
+                    textDark: "#FFF1C2"
+                }
+            },
+            "cyan-graphite": {
+                label: "Cyan / Graphite",
+                tag: "sistema",
+                detail: "Grafite tecnico com ciano vivo para interfaces de dados, IA e operacao.",
+                tokens: {
+                    primary: "#1D2733",
+                    secondary: "#E9FBFF",
+                    accent: "#23B6D8",
+                    surface: "#F4FDFF",
+                    surfaceDark: "#101820",
+                    text: "#152230",
+                    textDark: "#E8FAFF"
+                }
+            },
+            "olive-sky": {
+                label: "Olive / Sky",
+                tag: "calma viva",
+                detail: "Oliva, ceu e fundo claro para produtos confiaveis sem ficarem frios.",
+                tokens: {
+                    primary: "#4F6F34",
+                    secondary: "#F3F8E8",
+                    accent: "#6BA6D9",
+                    surface: "#FAFCF3",
+                    surfaceDark: "#1A2314",
+                    text: "#233018",
+                    textDark: "#F4FAE8"
+                }
+            },
+            "plum-apricot": {
+                label: "Plum / Apricot",
+                tag: "autoral",
+                detail: "Ameixa escura e damasco para uma direcao mais autoral, quente e memoravel.",
+                tokens: {
+                    primary: "#5B315E",
+                    secondary: "#FFF4E6",
+                    accent: "#D56D4D",
+                    surface: "#FFF8EE",
+                    surfaceDark: "#211024",
+                    text: "#2C1930",
+                    textDark: "#FFF0E3"
+                }
+            },
+            "cobalt-lime": {
+                label: "Cobalt / Lime",
+                tag: "energia limpa",
+                detail: "Cobalto com lima para produtos digitais com mais contraste e frescor.",
+                tokens: {
+                    primary: "#2442A8",
+                    secondary: "#F5FFE9",
+                    accent: "#98D23D",
+                    surface: "#F9FFF1",
+                    surfaceDark: "#111B46",
+                    text: "#17245C",
+                    textDark: "#F3FFE4"
+                }
+            },
+            "terra-mint": {
+                label: "Terra / Mint",
+                tag: "organico",
+                detail: "Terra queimada com menta para uma marca quente, tangivel e ainda limpa.",
+                tokens: {
+                    primary: "#8F3D2F",
+                    secondary: "#F0F8EF",
+                    accent: "#64BFA3",
+                    surface: "#FFF8F1",
+                    surfaceDark: "#2A130E",
+                    text: "#2F1711",
+                    textDark: "#F4FFF4"
+                }
+            },
+            "indigo-lavender": {
+                label: "Indigo / Lavender",
+                tag: "digital premium",
+                detail: "Indigo profundo com lavanda clara para um produto digital sofisticado e memoravel.",
+                tokens: {
+                    primary: "#3F3D99",
+                    secondary: "#F2F0FF",
+                    accent: "#B69CFF",
+                    surface: "#F9F7FF",
+                    surfaceDark: "#171642",
+                    text: "#24235E",
+                    textDark: "#F0EDFF"
+                }
+            },
+            "navy-peach": {
+                label: "Navy / Peach",
+                tag: "acolhedor B2B",
+                detail: "Azul marinho com pessego para combinar confianca institucional e calor humano.",
+                tokens: {
+                    primary: "#172A46",
+                    secondary: "#FFF1E8",
+                    accent: "#FF9C73",
+                    surface: "#FFF8F4",
+                    surfaceDark: "#0D1828",
+                    text: "#16263B",
+                    textDark: "#FFF0E6"
+                }
+            },
+            "moss-copper": {
+                label: "Moss / Copper",
+                tag: "craft",
+                detail: "Musgo e cobre para marcas com materialidade, craft e sensacao estrategica.",
+                tokens: {
+                    primary: "#465A2A",
+                    secondary: "#FFF8E6",
+                    accent: "#C7773D",
+                    surface: "#FFFBEF",
+                    surfaceDark: "#1B2112",
+                    text: "#2B351B",
+                    textDark: "#FFF3D2"
+                }
+            },
+            "charcoal-rose": {
+                label: "Charcoal / Rose",
+                tag: "expressivo",
+                detail: "Carvao com rosa vivo para uma interface forte, editorial e ainda humana.",
+                tokens: {
+                    primary: "#24262B",
+                    secondary: "#FFF0F3",
+                    accent: "#E85C83",
+                    surface: "#FFF7F9",
+                    surfaceDark: "#111215",
+                    text: "#272027",
+                    textDark: "#FFE8EF"
+                }
+            },
+            "arctic-orange": {
+                label: "Arctic / Orange",
+                tag: "contraste quente",
+                detail: "Azul gelado com laranja para energia, tecnologia e leitura muito clara.",
+                tokens: {
+                    primary: "#0E4F5C",
+                    secondary: "#F1FBFF",
+                    accent: "#FF8A3D",
+                    surface: "#F8FDFF",
+                    surfaceDark: "#08262D",
+                    text: "#103840",
+                    textDark: "#ECFBFF"
+                }
+            },
+            "violet-citron": {
+                label: "Violet / Citron",
+                tag: "ousado",
+                detail: "Violeta e citrico para produtos criativos, AI-native ou experiencias de descoberta.",
+                tokens: {
+                    primary: "#4A2574",
+                    secondary: "#F8FFE7",
+                    accent: "#D7F75B",
+                    surface: "#FCFFF2",
+                    surfaceDark: "#1E0F30",
+                    text: "#31184E",
+                    textDark: "#FAFFE8"
+                }
+            },
+            "brick-denim": {
+                label: "Brick / Denim",
+                tag: "confiante",
+                detail: "Tijolo e denim para uma marca solida, acessivel e com personalidade terrestre.",
+                tokens: {
+                    primary: "#9B3D2E",
+                    secondary: "#EDF5FF",
+                    accent: "#4779B8",
+                    surface: "#F8FBFF",
+                    surfaceDark: "#2B100C",
+                    text: "#351B16",
+                    textDark: "#EEF6FF"
+                }
+            },
+            "mono-signal": {
+                label: "Mono / Signal",
+                tag: "utilitario",
+                detail: "Base neutra com azul sinal para ferramentas, docs, dashboards e sistemas internos.",
+                tokens: {
+                    primary: "#111827",
+                    secondary: "#F8FAFC",
+                    accent: "#2563EB",
+                    surface: "#FFFFFF",
+                    surfaceDark: "#0B1020",
+                    text: "#111827",
+                    textDark: "#F8FAFC"
+                }
+            },
+            "pine-coral": {
+                label: "Pine / Coral",
+                tag: "humano forte",
+                detail: "Pinheiro escuro com coral para uma direcao acolhedora sem perder autoridade.",
+                tokens: {
+                    primary: "#123C33",
+                    secondary: "#FFF3EC",
+                    accent: "#F16F59",
+                    surface: "#FFF8F4",
+                    surfaceDark: "#071F1A",
+                    text: "#132A25",
+                    textDark: "#FFF1E8"
+                }
+            },
+            "ultramarine-sand": {
+                label: "Ultramarine / Sand",
+                tag: "institucional vivo",
+                detail: "Azul ultramarino com areia para B2B com mais presenca, sem ficar frio.",
+                tokens: {
+                    primary: "#193AA8",
+                    secondary: "#F5EDD9",
+                    accent: "#E0B25C",
+                    surface: "#FAF5E8",
+                    surfaceDark: "#0E1E55",
+                    text: "#162758",
+                    textDark: "#F7EEDB"
+                }
+            }
+        };
+
+        const typeSystems = {
+            "clean-sans": {
+                label: "Sans limpa",
+                tag: "direta",
+                detail: "Uma familia moderna para produto, marketing e documento.",
+                fonts: {
+                    display: "\"Outfit\", sans-serif",
+                    body: "\"Outfit\", sans-serif",
+                    mono: "\"IBM Plex Mono\", monospace"
+                }
+            },
+            "editorial-serif": {
+                label: "Serif editorial",
+                tag: "assinatura",
+                detail: "Titulos com voz editorial e corpo simples para leitura.",
+                fonts: {
+                    display: "\"Newsreader\", serif",
+                    body: "\"Outfit\", sans-serif",
+                    mono: "\"IBM Plex Mono\", monospace"
+                }
+            },
+            "technical": {
+                label: "Tecnica",
+                tag: "precisao",
+                detail: "Sans tecnica com mono mais visivel para estados, dados e operacao.",
+                fonts: {
+                    display: "\"IBM Plex Sans\", sans-serif",
+                    body: "\"IBM Plex Sans\", sans-serif",
+                    mono: "\"IBM Plex Mono\", monospace"
+                }
+            },
+            "humanist": {
+                label: "Humanista",
+                tag: "proxima",
+                detail: "Base aberta e calorosa, com display mais presente.",
+                fonts: {
+                    display: "\"Space Grotesk\", sans-serif",
+                    body: "\"Source Sans 3\", sans-serif",
+                    mono: "\"IBM Plex Mono\", monospace"
+                }
+            },
+            "inter-product": {
+                label: "Inter produto",
+                tag: "SaaS limpo",
+                detail: "Sistema neutro, preciso e muito seguro para interfaces digitais e produtos de uso diario.",
+                fonts: {
+                    display: "\"Inter\", sans-serif",
+                    body: "\"Inter\", sans-serif",
+                    mono: "\"JetBrains Mono\", monospace"
+                }
+            },
+            "manrope-executive": {
+                label: "Manrope executivo",
+                tag: "premium claro",
+                detail: "Sans sofisticada, geometrica e amigavel para dashboards, landing pages e marcas B2B.",
+                fonts: {
+                    display: "\"Manrope\", sans-serif",
+                    body: "\"Manrope\", sans-serif",
+                    mono: "\"IBM Plex Mono\", monospace"
+                }
+            },
+            "jakarta-soft": {
+                label: "Jakarta soft",
+                tag: "moderno",
+                detail: "Uma sans contemporanea com calor suficiente para produtos proximos e ainda profissionais.",
+                fonts: {
+                    display: "\"Plus Jakarta Sans\", sans-serif",
+                    body: "\"Plus Jakarta Sans\", sans-serif",
+                    mono: "\"JetBrains Mono\", monospace"
+                }
+            },
+            "sora-tech": {
+                label: "Sora tech",
+                tag: "AI / tech",
+                detail: "Mais tecnologica e expressiva, boa para interfaces AI-native, labs e produtos inovadores.",
+                fonts: {
+                    display: "\"Sora\", sans-serif",
+                    body: "\"Inter\", sans-serif",
+                    mono: "\"JetBrains Mono\", monospace"
+                }
+            },
+            "public-system": {
+                label: "Public system",
+                tag: "institucional",
+                detail: "Tipografia direta, civica e muito legivel para servicos, plataformas e ambientes serios.",
+                fonts: {
+                    display: "\"Public Sans\", sans-serif",
+                    body: "\"Public Sans\", sans-serif",
+                    mono: "\"IBM Plex Mono\", monospace"
+                }
+            },
+            "barlow-data": {
+                label: "Barlow data",
+                tag: "operacional",
+                detail: "Leitura compacta e tecnica, boa para interfaces com listas, tabelas e alta densidade.",
+                fonts: {
+                    display: "\"Barlow\", sans-serif",
+                    body: "\"Barlow\", sans-serif",
+                    mono: "\"JetBrains Mono\", monospace"
+                }
+            },
+            "atkinson-accessible": {
+                label: "Atkinson legivel",
+                tag: "acessivel",
+                detail: "Familia desenhada para alta legibilidade, otima para leitura longa e produtos inclusivos.",
+                fonts: {
+                    display: "\"Atkinson Hyperlegible\", sans-serif",
+                    body: "\"Atkinson Hyperlegible\", sans-serif",
+                    mono: "\"IBM Plex Mono\", monospace"
+                }
+            },
+            "lora-editorial": {
+                label: "Lora editorial",
+                tag: "conteudo",
+                detail: "Serif gratuita com personalidade, boa para conteudo, relatorios, artigos e storytelling.",
+                fonts: {
+                    display: "\"Lora\", serif",
+                    body: "\"Inter\", sans-serif",
+                    mono: "\"JetBrains Mono\", monospace"
+                }
+            },
+            "fraunces-brand": {
+                label: "Fraunces brand",
+                tag: "expressiva",
+                detail: "Display serif marcante para marcas autorais, premium ou com mais memorabilidade.",
+                fonts: {
+                    display: "\"Fraunces\", serif",
+                    body: "\"DM Sans\", sans-serif",
+                    mono: "\"IBM Plex Mono\", monospace"
+                }
+            }
+        };
+
+        const shapeSystems = {
+            "hard-frame": {
+                label: "Frame seco",
+                tag: "8px",
+                detail: "Estrutura nitida, borda firme e pouco ornamento.",
+                radius: "8px",
+                controlRadius: "8px"
+            },
+            "soft-industrial": {
+                label: "Industrial suave",
+                tag: "12px",
+                detail: "Utilitario com um pouco de maciez.",
+                radius: "12px",
+                controlRadius: "10px"
+            },
+            "circle-echo": {
+                label: "Eco circular",
+                tag: "ritmo",
+                detail: "Curvas repetidas em logos, chips, avatares e blocos.",
+                radius: "22px",
+                controlRadius: "999px"
+            },
+            "sharp-editorial": {
+                label: "Editorial sharp",
+                tag: "2px",
+                detail: "Mais revista, mais contraste, quase sem curva.",
+                radius: "2px",
+                controlRadius: "2px"
+            }
+        };
+
+        const questions = [
+            {
+                id: "posture",
+                title: "Postura",
+                tip: "A sensacao central que a interface deve passar nos primeiros segundos.",
+                type: "single",
+                options: [
+                    { id: "operator", label: "Operador", tag: "controle", detail: "Mesa de comando, estados claros, decisao rapida." },
+                    { id: "guide", label: "Guia", tag: "seguranca", detail: "Especialista calmo que orienta sem invadir." },
+                    { id: "premium", label: "Premium", tag: "criterio", detail: "Poucas decisoes por vez, acabamento seletivo e valor percebido." },
+                    { id: "editorial", label: "Editorial", tag: "ponto de vista", detail: "Hierarquia forte, ritmo de publicacao e identidade memoravel." }
+                ]
+            },
+            {
+                id: "energy",
+                title: "Energia",
+                tip: "A temperatura emocional que segura a experiencia inteira.",
+                type: "single",
+                options: [
+                    { id: "quiet", label: "Silenciosa", tag: "maturidade", detail: "Nada grita; tudo parece intencional." },
+                    { id: "bold", label: "Enfatica", tag: "autoridade", detail: "A interface assume lideranca visual e verbal." },
+                    { id: "warm", label: "Humana", tag: "cuidado", detail: "Proximidade e rigor no mesmo lugar." },
+                    { id: "curious", label: "Curiosa", tag: "descoberta", detail: "Inventiva, viva e ainda facil de entender." }
+                ]
+            },
+            {
+                id: "palette",
+                title: "Cores",
+                tip: "A base cromatica ja aparece no preview, nos tokens e nos componentes.",
+                type: "single",
+                options: Object.entries(palettes).map(([id, item]) => ({ id, label: item.label, tag: item.tag, detail: item.detail, tokens: item.tokens }))
+            },
+            {
+                id: "type",
+                title: "Tipo",
+                tip: "A voz tipografica muda titulos, corpo e detalhes do preview. Todas as opcoes usam fontes gratuitas.",
+                type: "single",
+                options: Object.entries(typeSystems).map(([id, item]) => ({ id, label: item.label, tag: item.tag, detail: item.detail }))
+            },
+            {
+                id: "shape",
+                title: "Forma",
+                tip: "Raio de card, controles e ritmo das superficies.",
+                type: "single",
+                options: Object.entries(shapeSystems).map(([id, item]) => ({ id, label: item.label, tag: item.tag, detail: item.detail }))
+            },
+            {
+                id: "layout",
+                title: "Layout",
+                tip: "O modelo dominante de navegacao e composicao.",
+                type: "single",
+                options: [
+                    { id: "bento", label: "Bento", tag: "overview", detail: "Blocos de decisao, bons para comparacao rapida." },
+                    { id: "sidebar", label: "Sidebar", tag: "workspace", detail: "Produto de rotina, modulos e profundidade." },
+                    { id: "flow", label: "Fluxo", tag: "guiado", detail: "Etapas sequenciais, menos escolha simultanea." },
+                    { id: "story", label: "Narrativa", tag: "scroll", detail: "Sequencia vertical com cadencia e clima." }
+                ]
+            },
+            {
+                id: "density",
+                title: "Densidade",
+                tip: "Quantidade de informacao por tela e sensacao de velocidade.",
+                type: "single",
+                options: [
+                    { id: "spacious", label: "Espacosa", tag: "respiro", detail: "Mais pausa, mais foco em cada bloco." },
+                    { id: "balanced", label: "Balanceada", tag: "adaptavel", detail: "Boa para sistemas reutilizaveis." },
+                    { id: "dense", label: "Densa", tag: "operacao", detail: "Mais informacao por tela, menos ornamentacao." },
+                    { id: "dramatic", label: "Dramatica", tag: "ritmo", detail: "Alterna escala, pausa e impacto." }
+                ]
+            },
+            {
+                id: "trust",
+                title: "Prova",
+                tip: "Sinais de confianca que devem aparecer com frequencia.",
+                type: "multi",
+                wide: true,
+                options: [
+                    { id: "numbers", label: "Numeros", tag: "evidencia", detail: "KPIs, scorecards e comparacoes." },
+                    { id: "people", label: "Pessoas", tag: "autoria", detail: "Especialistas, autores ou operadores nomeados." },
+                    { id: "process", label: "Metodo", tag: "criterio", detail: "Passos, regras, estados e racional." },
+                    { id: "status", label: "Status", tag: "sistema", detail: "Progresso, fila, sincronizacao e aprovacoes." },
+                    { id: "proof", label: "Cases", tag: "resultado", detail: "Outcomes, depoimentos e prova social." },
+                    { id: "compliance", label: "Compliance", tag: "risco", detail: "Seguranca, logs, politicas e auditoria." }
+                ]
+            },
+            {
+                id: "components",
+                title: "Componentes",
+                tip: "Blocos que precisam carregar mais identidade visual.",
+                type: "multi",
+                wide: true,
+                options: [
+                    { id: "hero", label: "Hero", tag: "entrada", detail: "Primeira dobra ou abertura muito bem resolvida." },
+                    { id: "cards", label: "Cards", tag: "estrutura", detail: "Paineis de resumo, agrupamento e decisao." },
+                    { id: "forms", label: "Forms", tag: "input", detail: "Inputs, validacao, wizard e captura." },
+                    { id: "tables", label: "Tabelas", tag: "scan", detail: "Comparacao, ordenacao e leitura densa." },
+                    { id: "dashboards", label: "Dashboards", tag: "insight", detail: "Indicadores, graficos e estado resumido." },
+                    { id: "workflow", label: "Workflow", tag: "feedback", detail: "Conversas, empty states e processamento." }
+                ]
+            },
+            {
+                id: "avoid",
+                title: "Evitar",
+                tip: "Erros que empobrecem a identidade ou atrapalham uso real.",
+                type: "multi",
+                wide: true,
+                options: [
+                    { id: "verbose", label: "Texto prolixo", tag: "ritmo", detail: "Explicacao longa para decisao simples." },
+                    { id: "stock", label: "Stock fake", tag: "imagem", detail: "Sorriso generico sem prova nem contexto." },
+                    { id: "crowded", label: "Dashboard lotado", tag: "hierarquia", detail: "Tudo importante ao mesmo tempo." },
+                    { id: "lowContrast", label: "Baixo contraste", tag: "leitura", detail: "Bonito de longe, ruim de usar." },
+                    { id: "noisyMotion", label: "Movimento demais", tag: "cansaco", detail: "Animacao que compete com a tarefa." },
+                    { id: "genericGradient", label: "Gradiente SaaS", tag: "generico", detail: "Visual intercambiavel e sem assinatura." }
+                ]
+            }
+        ];
+
+        const presets = {
+            home: {
+                posture: "editorial",
+                energy: "quiet",
+                palette: "ink-beige",
+                type: "clean-sans",
+                shape: "hard-frame",
+                layout: "bento",
+                density: "balanced",
+                trust: ["numbers", "process", "proof"],
+                components: ["hero", "cards", "dashboards"],
+                avoid: ["verbose", "genericGradient", "lowContrast"]
+            },
+            ops: {
+                posture: "operator",
+                energy: "quiet",
+                palette: "night-ice",
+                type: "technical",
+                shape: "soft-industrial",
+                layout: "sidebar",
+                density: "dense",
+                trust: ["numbers", "process", "status", "compliance"],
+                components: ["tables", "dashboards", "workflow"],
+                avoid: ["crowded", "lowContrast", "noisyMotion"]
+            },
+            premium: {
+                posture: "premium",
+                energy: "quiet",
+                palette: "forest-clay",
+                type: "editorial-serif",
+                shape: "sharp-editorial",
+                layout: "story",
+                density: "spacious",
+                trust: ["people", "proof", "process"],
+                components: ["hero", "cards", "forms"],
+                avoid: ["stock", "verbose", "genericGradient"]
+            },
+            human: {
+                posture: "guide",
+                energy: "warm",
+                palette: "coral-ink",
+                type: "humanist",
+                shape: "circle-echo",
+                layout: "flow",
+                density: "balanced",
+                trust: ["people", "process", "status"],
+                components: ["forms", "workflow", "cards"],
+                avoid: ["stock", "lowContrast", "noisyMotion"]
+            }
+        };
+
+        const surprisePresets = [
+            {
+                name: "Atlas",
+                answers: {
+                    posture: "operator",
+                    energy: "bold",
+                    palette: "volt-milk",
+                    type: "technical",
+                    shape: "hard-frame",
+                    layout: "sidebar",
+                    density: "dense",
+                    trust: ["numbers", "status", "compliance"],
+                    components: ["dashboards", "tables", "workflow"],
+                    avoid: ["crowded", "lowContrast", "genericGradient"]
+                }
+            },
+            {
+                name: "Museu",
+                answers: {
+                    posture: "editorial",
+                    energy: "curious",
+                    palette: "forest-clay",
+                    type: "editorial-serif",
+                    shape: "sharp-editorial",
+                    layout: "story",
+                    density: "dramatic",
+                    trust: ["people", "proof", "process"],
+                    components: ["hero", "cards", "workflow"],
+                    avoid: ["stock", "verbose", "lowContrast"]
+                }
+            },
+            {
+                name: "Pulse",
+                answers: {
+                    posture: "guide",
+                    energy: "warm",
+                    palette: "coral-ink",
+                    type: "humanist",
+                    shape: "circle-echo",
+                    layout: "flow",
+                    density: "spacious",
+                    trust: ["people", "status", "proof"],
+                    components: ["forms", "workflow", "hero"],
+                    avoid: ["noisyMotion", "stock", "verbose"]
+                }
+            }
+        ];
+
+        const labels = Object.fromEntries(
+            questions.map((question) => [
+                question.id,
+                Object.fromEntries(question.options.map((option) => [option.id, option]))
+            ])
+        );
+
+        const LANGUAGE_KEY = "design-system-blueprint-v2-language";
+
+        const i18n = {
+            "pt-BR": {
+                ui: {
+                    documentTitle: "Design System Blueprint Builder V2",
+                    backHome: "Voltar para home",
+                    autosaveActive: "autosave ativo",
+                    savedNow: "salvo agora",
+                    examples: "Exemplos",
+                    surprise: "Surpreenda",
+                    introEyebrow: "Questionario visual",
+                    introTitle: "Escolha. Veja. Exporte.",
+                    introCopy: "Menos explicacao na tela. Mais decisao, sinal visual e preview vivo.",
+                    metricDecisions: "decisoes",
+                    metricStyles: "estilos",
+                    metricGuardrails: "guardrails",
+                    livePreview: "Preview vivo",
+                    export: "Exportar",
+                    copy: "Copiar",
+                    download: "Baixar",
+                    themeTip: "Alternar tema",
+                    presetAria: "Exemplos de presets",
+                    languageAria: "Idioma",
+                    decisionPanel: "Decisoes do design system",
+                    previewPanel: "Preview do design system",
+                    previewSize: "Tamanho do preview",
+                    snapshotAria: "Resumo visual",
+                    interfacePreview: "Preview de interface",
+                    prioritizedComponents: "Componentes priorizados",
+                    helpAbout: "Ajuda sobre",
+                    presetApplied: "Preset {name} aplicado.",
+                    surpriseApplied: "Direcao {name} aplicada.",
+                    markdownCopied: "Markdown copiado.",
+                    markdownDownloaded: "Arquivo markdown gerado.",
+                    languageChanged: "Idioma alterado.",
+                    markdownTitle: "Markdown",
+                    exportReviewEyebrow: "Revisao final",
+                    exportReviewTitle: "Conferir antes de baixar",
+                    exportReviewCopy: "Uma ultima leitura rapida do blueprint antes de gerar o arquivo.",
+                    exportReviewCancel: "Voltar",
+                    exportReviewConfirm: "Baixar .md",
+                    exportReviewAnswered: "decisoes",
+                    exportReviewLines: "linhas",
+                    exportReviewSections: "secoes",
+                    exportReviewDirection: "Direcao",
+                    exportReviewColors: "Cores",
+                    exportReviewType: "Tipografia",
+                    exportReviewComponents: "Componentes",
+                    exportReviewGuardrails: "Guardrails",
+                    and: "e",
+                    primary: "Primary",
+                    secondary: "Secondary",
+                    accent: "Accent",
+                    surface: "Surface",
+                    dark: "Dark",
+                    proof: "Prova",
+                    components: "Componentes",
+                    avoid: "Evitar",
+                    type: "Tipo",
+                    layout: "Layout",
+                    clarity: "clareza",
+                    warmth: "calor",
+                    impact: "impacto",
+                    rigor: "rigor"
+                },
+                presets: {
+                    home: "Home",
+                    ops: "Ops",
+                    premium: "Premium",
+                    human: "Humano"
+                }
+            },
+            en: {
+                ui: {
+                    documentTitle: "Design System Blueprint Builder V2",
+                    backHome: "Back to home",
+                    autosaveActive: "autosave on",
+                    savedNow: "saved now",
+                    examples: "Examples",
+                    surprise: "Surprise me",
+                    introEyebrow: "Visual questionnaire",
+                    introTitle: "Choose. Preview. Export.",
+                    introCopy: "Less explanation on screen. More decision, visual signal, and live preview.",
+                    metricDecisions: "decisions",
+                    metricStyles: "styles",
+                    metricGuardrails: "guardrails",
+                    livePreview: "Live preview",
+                    export: "Export",
+                    copy: "Copy",
+                    download: "Download",
+                    themeTip: "Toggle theme",
+                    presetAria: "Example presets",
+                    languageAria: "Language",
+                    decisionPanel: "Design system decisions",
+                    previewPanel: "Design system preview",
+                    previewSize: "Preview size",
+                    snapshotAria: "Visual summary",
+                    interfacePreview: "Interface preview",
+                    prioritizedComponents: "Prioritized components",
+                    helpAbout: "Help about",
+                    presetApplied: "{name} preset applied.",
+                    surpriseApplied: "{name} direction applied.",
+                    markdownCopied: "Markdown copied.",
+                    markdownDownloaded: "Markdown file generated.",
+                    languageChanged: "Language changed.",
+                    markdownTitle: "Markdown",
+                    exportReviewEyebrow: "Final review",
+                    exportReviewTitle: "Review before downloading",
+                    exportReviewCopy: "One last quick read of the blueprint before generating the file.",
+                    exportReviewCancel: "Back",
+                    exportReviewConfirm: "Download .md",
+                    exportReviewAnswered: "decisions",
+                    exportReviewLines: "lines",
+                    exportReviewSections: "sections",
+                    exportReviewDirection: "Direction",
+                    exportReviewColors: "Colors",
+                    exportReviewType: "Typography",
+                    exportReviewComponents: "Components",
+                    exportReviewGuardrails: "Guardrails",
+                    and: "and",
+                    primary: "Primary",
+                    secondary: "Secondary",
+                    accent: "Accent",
+                    surface: "Surface",
+                    dark: "Dark",
+                    proof: "Proof",
+                    components: "Components",
+                    avoid: "Avoid",
+                    type: "Type",
+                    layout: "Layout",
+                    clarity: "clarity",
+                    warmth: "warmth",
+                    impact: "impact",
+                    rigor: "rigor"
+                },
+                presets: {
+                    home: "Home",
+                    ops: "Ops",
+                    premium: "Premium",
+                    human: "Human"
+                },
+                questions: {
+                    posture: {
+                        title: "Posture",
+                        tip: "The core feeling the interface should create in the first few seconds.",
+                        options: {
+                            operator: { label: "Operator", tag: "control", detail: "Command desk, clear states, fast decisions." },
+                            guide: { label: "Guide", tag: "safety", detail: "A calm expert that guides without invading." },
+                            premium: { label: "Premium", tag: "judgment", detail: "Fewer decisions at once, selective finish, and high perceived value." },
+                            editorial: { label: "Editorial", tag: "point of view", detail: "Strong hierarchy, publication rhythm, and memorable identity." }
+                        }
+                    },
+                    energy: {
+                        title: "Energy",
+                        tip: "The emotional temperature that holds the whole experience together.",
+                        options: {
+                            quiet: { label: "Quiet", tag: "maturity", detail: "Nothing screams; everything feels intentional." },
+                            bold: { label: "Bold", tag: "authority", detail: "The interface takes visual and verbal leadership." },
+                            warm: { label: "Human", tag: "care", detail: "Closeness and rigor in the same place." },
+                            curious: { label: "Curious", tag: "discovery", detail: "Inventive, alive, and still easy to understand." }
+                        }
+                    },
+                    palette: {
+                        title: "Colors",
+                        tip: "The chromatic base appears in the preview, tokens, and components."
+                    },
+                    type: {
+                        title: "Type",
+                        tip: "The typographic voice changes titles, body copy, and preview details. All options use free fonts."
+                    },
+                    shape: {
+                        title: "Shape",
+                        tip: "Card radius, controls, and surface rhythm."
+                    },
+                    layout: {
+                        title: "Layout",
+                        tip: "The dominant navigation and composition model.",
+                        options: {
+                            bento: { label: "Bento", tag: "overview", detail: "Decision blocks, useful for fast comparison." },
+                            sidebar: { label: "Sidebar", tag: "workspace", detail: "Routine product, modules, and depth." },
+                            flow: { label: "Flow", tag: "guided", detail: "Sequential steps, less simultaneous choice." },
+                            story: { label: "Narrative", tag: "scroll", detail: "Vertical sequence with cadence and atmosphere." }
+                        }
+                    },
+                    density: {
+                        title: "Density",
+                        tip: "Amount of information per screen and sense of speed.",
+                        options: {
+                            spacious: { label: "Spacious", tag: "breathing room", detail: "More pause and more focus on each block." },
+                            balanced: { label: "Balanced", tag: "adaptable", detail: "Good for reusable systems." },
+                            dense: { label: "Dense", tag: "operation", detail: "More information per screen, less ornament." },
+                            dramatic: { label: "Dramatic", tag: "rhythm", detail: "Alternates scale, pause, and impact." }
+                        }
+                    },
+                    trust: {
+                        title: "Proof",
+                        tip: "Trust signals that should appear frequently.",
+                        options: {
+                            numbers: { label: "Numbers", tag: "evidence", detail: "KPIs, scorecards, and comparisons." },
+                            people: { label: "People", tag: "authorship", detail: "Named experts, authors, or operators." },
+                            process: { label: "Method", tag: "criteria", detail: "Steps, rules, states, and rationale." },
+                            status: { label: "Status", tag: "system", detail: "Progress, queue, sync, and approvals." },
+                            proof: { label: "Cases", tag: "outcome", detail: "Outcomes, testimonials, and social proof." },
+                            compliance: { label: "Compliance", tag: "risk", detail: "Security, logs, policies, and auditability." }
+                        }
+                    },
+                    components: {
+                        title: "Components",
+                        tip: "Blocks that need to carry more visual identity.",
+                        options: {
+                            hero: { label: "Hero", tag: "entry", detail: "A first fold or opening that feels resolved." },
+                            cards: { label: "Cards", tag: "structure", detail: "Panels for summaries, grouping, and decisions." },
+                            forms: { label: "Forms", tag: "input", detail: "Inputs, validation, wizard, and capture." },
+                            tables: { label: "Tables", tag: "scan", detail: "Comparison, sorting, and dense reading." },
+                            dashboards: { label: "Dashboards", tag: "insight", detail: "Indicators, charts, and summarized state." },
+                            workflow: { label: "Workflow", tag: "feedback", detail: "Conversation, empty states, and processing." }
+                        }
+                    },
+                    avoid: {
+                        title: "Avoid",
+                        tip: "Mistakes that weaken identity or hurt real use.",
+                        options: {
+                            verbose: { label: "Verbose copy", tag: "rhythm", detail: "Long explanation for a simple decision." },
+                            stock: { label: "Fake stock", tag: "image", detail: "Generic smiles without proof or context." },
+                            crowded: { label: "Crowded dashboard", tag: "hierarchy", detail: "Everything important at the same time." },
+                            lowContrast: { label: "Low contrast", tag: "reading", detail: "Beautiful from afar, bad to use." },
+                            noisyMotion: { label: "Too much motion", tag: "fatigue", detail: "Animation that competes with the task." },
+                            genericGradient: { label: "Generic SaaS gradient", tag: "generic", detail: "Interchangeable visual with no signature." }
+                        }
+                    }
+                },
+                palettes: {
+                    "ink-beige": { tag: "editorial", detail: "High contrast, contained warmth, and a signature close to the current home." },
+                    "night-ice": { tag: "calm B2B", detail: "Deep blue, ice, and a more institutional reading." },
+                    "forest-clay": { tag: "human premium", detail: "Deep green, clay, and warm support for services with human tact." },
+                    "coral-ink": { tag: "energy", detail: "Living coral with a dark base for strong presence without losing sharpness." },
+                    "volt-milk": { tag: "experimental", detail: "Electric lime, milk, and graphite for a more inventive brand." },
+                    "ocean-mint": { tag: "fresh tech", detail: "Petroleum blue, light mint, and aquatic accent for a modern, light product." },
+                    "ruby-blush": { tag: "presence", detail: "Deep ruby with soft blush for expressive, human, sophisticated brands." },
+                    "gold-graphite": { tag: "premium", detail: "Graphite, gold, and warm light for a more curated editorial feeling." },
+                    "cyan-graphite": { tag: "system", detail: "Technical graphite with vivid cyan for data, AI, and operation interfaces." },
+                    "olive-sky": { tag: "living calm", detail: "Olive, sky, and light background for trustworthy products that do not feel cold." },
+                    "plum-apricot": { tag: "authorial", detail: "Dark plum and apricot for a warmer, memorable, more authored direction." },
+                    "cobalt-lime": { tag: "clean energy", detail: "Cobalt with lime for digital products with more contrast and freshness." },
+                    "terra-mint": { tag: "organic", detail: "Burnt earth with mint for a warm, tangible, and still clean brand." },
+                    "indigo-lavender": { tag: "digital premium", detail: "Deep indigo with light lavender for a sophisticated and memorable digital product." },
+                    "navy-peach": { tag: "warm B2B", detail: "Navy with peach to combine institutional trust and human warmth." },
+                    "moss-copper": { tag: "craft", detail: "Moss and copper for brands with materiality, craft, and strategic feel." },
+                    "charcoal-rose": { tag: "expressive", detail: "Charcoal with vivid rose for a strong, editorial, and still human interface." },
+                    "arctic-orange": { tag: "warm contrast", detail: "Icy blue with orange for energy, technology, and very clear reading." },
+                    "violet-citron": { tag: "bold", detail: "Violet and citrus for creative products, AI-native experiences, and discovery flows." },
+                    "brick-denim": { tag: "confident", detail: "Brick and denim for a solid, accessible brand with earthy personality." },
+                    "mono-signal": { tag: "utility", detail: "Neutral base with signal blue for tools, docs, dashboards, and internal systems." },
+                    "pine-coral": { tag: "strong human", detail: "Dark pine with coral for a welcoming direction that keeps authority." },
+                    "ultramarine-sand": { tag: "living institutional", detail: "Ultramarine with sand for B2B with more presence, without feeling cold." }
+                },
+                typeSystems: {
+                    "clean-sans": { label: "Clean sans", tag: "direct", detail: "A modern family for product, marketing, and documentation." },
+                    "editorial-serif": { label: "Editorial serif", tag: "signature", detail: "Titles with editorial voice and simple body text for reading." },
+                    technical: { label: "Technical", tag: "precision", detail: "Technical sans with visible mono for states, data, and operations." },
+                    humanist: { label: "Humanist", tag: "close", detail: "Open, warm base with more present display voice." },
+                    "inter-product": { label: "Inter product", tag: "clean SaaS", detail: "Neutral, precise, and safe for digital products and daily-use interfaces." },
+                    "manrope-executive": { label: "Manrope executive", tag: "clear premium", detail: "Sophisticated, geometric, friendly sans for dashboards, landing pages, and B2B brands." },
+                    "jakarta-soft": { label: "Jakarta soft", tag: "modern", detail: "Contemporary sans with enough warmth for close but professional products." },
+                    "sora-tech": { label: "Sora tech", tag: "AI / tech", detail: "More technological and expressive, good for AI-native interfaces, labs, and innovative products." },
+                    "public-system": { label: "Public system", tag: "institutional", detail: "Direct, civic, and very legible typography for services, platforms, and serious environments." },
+                    "barlow-data": { label: "Barlow data", tag: "operational", detail: "Compact, technical reading for lists, tables, and high-density interfaces." },
+                    "atkinson-accessible": { label: "Atkinson legible", tag: "accessible", detail: "A family designed for high legibility, great for long reading and inclusive products." },
+                    "lora-editorial": { label: "Lora editorial", tag: "content", detail: "Free serif with personality, good for content, reports, articles, and storytelling." },
+                    "fraunces-brand": { label: "Fraunces brand", tag: "expressive", detail: "Distinctive display serif for authorial, premium, or more memorable brands." }
+                },
+                shapeSystems: {
+                    "hard-frame": { label: "Hard frame", tag: "8px", detail: "Sharp structure, firm border, and little ornament." },
+                    "soft-industrial": { label: "Soft industrial", tag: "12px", detail: "Utilitarian with a little softness." },
+                    "circle-echo": { label: "Circle echo", tag: "rhythm", detail: "Repeated curves in logos, chips, avatars, and blocks." },
+                    "sharp-editorial": { label: "Editorial sharp", tag: "2px", detail: "More magazine-like, more contrast, almost no curve." }
+                }
+            }
+        };
+
+        let answers = loadState();
+        let activePreset = detectPreset(answers);
+        let viewMode = "desktop";
+        let currentLanguage = loadLanguage();
+
+        const questionRoot = document.getElementById("questionRoot");
+        const artboard = document.getElementById("artboard");
+        const studioShell = document.getElementById("studioShell");
+        const swatchRow = document.getElementById("swatchRow");
+        const markdownOutput = document.getElementById("markdownOutput");
+        const exportPanel = document.getElementById("exportPanel");
+        const exportReviewModal = document.getElementById("exportReviewModal");
+        const exportReviewStats = document.getElementById("exportReviewStats");
+        const exportReviewList = document.getElementById("exportReviewList");
+        const cancelExportReview = document.getElementById("cancelExportReview");
+        const confirmExportReview = document.getElementById("confirmExportReview");
+        const toast = document.getElementById("toast");
+        let exportReviewReturnFocus = null;
+
+        function loadLanguage() {
+            return localStorage.getItem(LANGUAGE_KEY) === "en" ? "en" : "pt-BR";
+        }
+
+        function languagePack() {
+            return i18n[currentLanguage] || i18n["pt-BR"];
+        }
+
+        function ui(key) {
+            return languagePack().ui?.[key] || i18n["pt-BR"].ui[key] || key;
+        }
+
+        function presetName(id) {
+            return languagePack().presets?.[id] || i18n["pt-BR"].presets[id] || id;
+        }
+
+        function translatedQuestion(question) {
+            return {
+                ...question,
+                ...(languagePack().questions?.[question.id] || {})
+            };
+        }
+
+        function translatedOption(questionId, optionId) {
+            const base = labels[questionId]?.[optionId] || palettes[optionId] || typeSystems[optionId] || shapeSystems[optionId] || {};
+            const translated = languagePack().questions?.[questionId]?.options?.[optionId]
+                || (questionId === "palette" ? languagePack().palettes?.[optionId] : null)
+                || (questionId === "type" ? languagePack().typeSystems?.[optionId] : null)
+                || (questionId === "shape" ? languagePack().shapeSystems?.[optionId] : null)
+                || {};
+            return { ...base, ...translated };
+        }
+
+        function paletteCopy(id = answers.palette) {
+            return {
+                ...palettes[id],
+                ...(languagePack().palettes?.[id] || {}),
+                tokens: palettes[id].tokens
+            };
+        }
+
+        function typeCopy(id = answers.type) {
+            return {
+                ...typeSystems[id],
+                ...(languagePack().typeSystems?.[id] || {}),
+                fonts: typeSystems[id].fonts
+            };
+        }
+
+        function shapeCopy(id = answers.shape) {
+            return {
+                ...shapeSystems[id],
+                ...(languagePack().shapeSystems?.[id] || {}),
+                radius: shapeSystems[id].radius,
+                controlRadius: shapeSystems[id].controlRadius
+            };
+        }
+
+        function renderStaticCopy() {
+            document.documentElement.lang = currentLanguage === "en" ? "en" : "pt-BR";
+            document.title = ui("documentTitle");
+            document.querySelectorAll("[data-i18n]").forEach((item) => {
+                item.textContent = ui(item.dataset.i18n);
+            });
+            document.querySelector(".topbar-left .icon-text")?.setAttribute("aria-label", ui("backHome"));
+            document.querySelector(".topbar-actions > .segmented")?.setAttribute("aria-label", ui("presetAria"));
+            document.querySelector(".language-switcher")?.setAttribute("aria-label", ui("languageAria"));
+            document.querySelector(".decision-panel")?.setAttribute("aria-label", ui("decisionPanel"));
+            document.querySelector(".preview-panel")?.setAttribute("aria-label", ui("previewPanel"));
+            document.querySelector(".preview-tools .segmented")?.setAttribute("aria-label", ui("previewSize"));
+            document.querySelector(".mock-browser")?.setAttribute("aria-label", ui("interfacePreview"));
+            document.querySelector(".component-grid")?.setAttribute("aria-label", ui("prioritizedComponents"));
+            document.querySelector(".snapshot-panel")?.setAttribute("aria-label", ui("snapshotAria"));
+            document.querySelector(".export-head h3").textContent = ui("markdownTitle");
+            const themeButton = document.getElementById("themeBtn");
+            themeButton.setAttribute("aria-label", ui("themeTip"));
+            themeButton.dataset.tip = ui("themeTip");
+            document.querySelectorAll("[data-lang]").forEach((button) => {
+                button.classList.toggle("is-active", button.dataset.lang === currentLanguage);
+            });
+            if (exportReviewModal && !exportReviewModal.hidden) {
+                renderExportReview();
+            }
+        }
+
+        function loadState() {
+            try {
+                const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+                if (saved && typeof saved === "object") {
+                    return normalizeAnswers(saved);
+                }
+            } catch (error) {
+                localStorage.removeItem(STORAGE_KEY);
+            }
+            return normalizeAnswers(presets.home);
+        }
+
+        function normalizeAnswers(source) {
+            const fallback = presets.home;
+            const normalized = {};
+            questions.forEach((question) => {
+                if (question.type === "multi") {
+                    const value = Array.isArray(source[question.id]) ? source[question.id] : fallback[question.id];
+                    normalized[question.id] = value.filter((item) => labels[question.id][item]);
+                } else {
+                    const value = source[question.id];
+                    normalized[question.id] = labels[question.id][value] ? value : fallback[question.id];
+                }
+            });
+            return normalized;
+        }
+
+        function detectPreset(current) {
+            const found = Object.entries(presets).find(([, preset]) => JSON.stringify(normalizeAnswers(preset)) === JSON.stringify(normalizeAnswers(current)));
+            return found ? found[0] : "";
+        }
+
+        function renderQuestions() {
+            questionRoot.innerHTML = questions.map((question, index) => {
+                const questionCopy = translatedQuestion(question);
+                const choices = question.options.map((option) => {
+                    const optionCopy = translatedOption(question.id, option.id);
+                    const selected = question.type === "multi"
+                        ? answers[question.id].includes(option.id)
+                        : answers[question.id] === option.id;
+                    const swatches = optionCopy.tokens ? `
+                        <span class="palette-mini" aria-hidden="true">
+                            <span style="background:${optionCopy.tokens.primary}"></span>
+                            <span style="background:${optionCopy.tokens.secondary}"></span>
+                            <span style="background:${optionCopy.tokens.accent}"></span>
+                            <span style="background:${optionCopy.tokens.surface}"></span>
+                        </span>
+                    ` : "";
+                    return `
+                        <button
+                            class="choice ${selected ? "is-selected" : ""}"
+                            type="button"
+                            data-question="${question.id}"
+                            data-value="${option.id}"
+                            data-tip="${escapeHtml(optionCopy.detail)}"
+                            aria-pressed="${selected}"
+                            aria-expanded="false"
+                            title="${escapeHtml(optionCopy.detail)}"
+                        >
+                            <span class="choice-main">${escapeHtml(optionCopy.label)}</span>
+                            <span class="choice-tag">${escapeHtml(optionCopy.tag)}</span>
+                            ${swatches}
+                            <span class="choice-info" data-tip="${escapeHtml(optionCopy.detail)}" aria-hidden="true">?</span>
+                        </button>
+                    `;
+                }).join("");
+
+                return `
+                    <section class="question-block" data-wide="${question.wide ? "true" : "false"}">
+                        <div class="question-head">
+                            <span class="q-index">${String(index + 1).padStart(2, "0")}</span>
+                            <h2>${escapeHtml(questionCopy.title)}</h2>
+                            <button class="help" type="button" data-tip="${escapeHtml(questionCopy.tip)}" aria-label="${escapeHtml(ui("helpAbout"))} ${escapeHtml(questionCopy.title)}" aria-expanded="false">?</button>
+                        </div>
+                        <div class="choice-grid">${choices}</div>
+                    </section>
+                `;
+            }).join("");
+        }
+
+        function selectChoice(questionId, value) {
+            const question = questions.find((item) => item.id === questionId);
+            if (!question) return;
+            if (question.type === "multi") {
+                const current = new Set(answers[questionId]);
+                if (current.has(value)) {
+                    current.delete(value);
+                } else {
+                    current.add(value);
+                }
+                if (current.size === 0) {
+                    current.add(value);
+                }
+                answers[questionId] = [...current];
+            } else {
+                answers[questionId] = value;
+            }
+            activePreset = detectPreset(answers);
+            updateUI();
+            persist();
+        }
+
+        function persist() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
+            document.getElementById("autosaveState").textContent = ui("savedNow");
+            window.clearTimeout(persist.timer);
+            persist.timer = window.setTimeout(() => {
+                document.getElementById("autosaveState").textContent = ui("autosaveActive");
+            }, 1400);
+        }
+
+        function updateUI() {
+            renderStaticCopy();
+            renderQuestions();
+            renderPresetState();
+            renderPreview();
+            renderMetrics();
+            markdownOutput.value = buildMarkdown();
+            refreshIcons();
+        }
+
+        function renderPresetState() {
+            document.querySelectorAll("[data-preset]").forEach((button) => {
+                button.textContent = presetName(button.dataset.preset);
+                button.classList.toggle("is-active", button.dataset.preset === activePreset);
+            });
+        }
+
+        function renderMetrics() {
+            const multiCount = answers.trust.length + answers.components.length + answers.avoid.length;
+            document.getElementById("answeredMetric").textContent = String(questions.length);
+            document.getElementById("styleMetric").textContent = String(new Set([answers.posture, answers.energy, answers.palette, answers.type, answers.shape, answers.layout, answers.density]).size);
+            document.getElementById("guardrailMetric").textContent = String(multiCount);
+        }
+
+        function renderPreview() {
+            const palette = paletteCopy();
+            const type = typeCopy();
+            const shape = shapeCopy();
+            const posture = translatedOption("posture", answers.posture);
+            const energy = translatedOption("energy", answers.energy);
+            const layout = translatedOption("layout", answers.layout);
+            const density = translatedOption("density", answers.density);
+
+            Object.entries({
+                "--preview-primary": palette.tokens.primary,
+                "--preview-secondary": palette.tokens.secondary,
+                "--preview-accent": palette.tokens.accent,
+                "--preview-surface": palette.tokens.surface,
+                "--preview-surface-dark": palette.tokens.surfaceDark,
+                "--preview-text": palette.tokens.text,
+                "--preview-text-dark": palette.tokens.textDark,
+                "--preview-display": type.fonts.display,
+                "--preview-body": type.fonts.body,
+                "--preview-mono": type.fonts.mono,
+                "--preview-radius": shape.radius,
+                "--preview-control-radius": shape.controlRadius
+            }).forEach(([name, value]) => artboard.style.setProperty(name, value));
+
+            artboard.dataset.layout = answers.layout;
+            artboard.dataset.density = answers.density;
+            studioShell.classList.toggle("is-mobile", viewMode === "mobile");
+
+            document.getElementById("previewTitle").textContent = `${posture.label} / ${palette.label}`;
+            document.getElementById("mockBrandName").textContent = brandNameFor();
+            document.getElementById("heroKicker").textContent = `${posture.tag} / ${energy.tag}`;
+            document.getElementById("heroTitle").textContent = heroTitleFor();
+            document.getElementById("ctaLabel").textContent = ctaFor();
+            document.getElementById("secondaryLabel").textContent = layout.label;
+            document.getElementById("posterLeft").textContent = palette.label;
+            document.getElementById("posterRight").textContent = shape.label;
+            document.getElementById("emptyTitle").textContent = emptyTitleFor();
+            document.getElementById("emptyCopy").textContent = emptyCopyFor();
+            document.getElementById("snapshotTitle").textContent = `${posture.label}, ${energy.label.toLowerCase()} ${ui("and")} ${density.label.toLowerCase()}.`;
+
+            renderSwatches(palette.tokens);
+            renderSnapshot();
+            renderMoodBars();
+            renderComponentEmphasis();
+        }
+
+        function renderSwatches(tokens) {
+            const items = [
+                [ui("primary"), tokens.primary],
+                [ui("secondary"), tokens.secondary],
+                [ui("accent"), tokens.accent],
+                [ui("surface"), tokens.surface],
+                [ui("dark"), tokens.surfaceDark]
+            ];
+            swatchRow.innerHTML = items.map(([label, color]) => `
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background:${color}"></div>
+                    <div class="swatch-copy">
+                        <strong>${label}</strong>
+                        <code>${color}</code>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        function renderSnapshot() {
+            const trust = answers.trust.map((id) => translatedOption("trust", id).label).slice(0, 3).join(", ");
+            const components = answers.components.map((id) => translatedOption("components", id).label).slice(0, 3).join(", ");
+            const avoid = answers.avoid.map((id) => translatedOption("avoid", id).label).slice(0, 3).join(", ");
+            const items = [
+                ["shield-check", ui("proof"), trust],
+                ["blocks", ui("components"), components],
+                ["ban", ui("avoid"), avoid],
+                ["type", ui("type"), typeCopy().label],
+                ["layout-dashboard", ui("layout"), translatedOption("layout", answers.layout).label]
+            ];
+            document.getElementById("snapshotList").innerHTML = items.map(([icon, title, text]) => `
+                <div class="snapshot-item">
+                    <i data-lucide="${icon}"></i>
+                    <span>
+                        <strong>${escapeHtml(title)}</strong>
+                        <span>${escapeHtml(text)}</span>
+                    </span>
+                </div>
+            `).join("");
+        }
+
+        function renderMoodBars() {
+            const scores = moodScores();
+            const labelsByMetric = {
+                clareza: ui("clarity"),
+                calor: ui("warmth"),
+                impacto: ui("impact"),
+                rigor: ui("rigor")
+            };
+            document.getElementById("moodBars").innerHTML = Object.entries(scores).map(([label, value]) => `
+                <div class="mood-row">
+                    <span>${labelsByMetric[label]}</span>
+                    <span class="mood-track"><span style="width:${value}%"></span></span>
+                    <span>${value}</span>
+                </div>
+            `).join("");
+        }
+
+        function renderComponentEmphasis() {
+            const selected = new Set(answers.components);
+            document.getElementById("chartCard").style.display = selected.has("dashboards") || selected.has("cards") ? "grid" : "none";
+            document.getElementById("tableCard").style.display = selected.has("tables") || answers.density === "dense" ? "grid" : "none";
+            document.getElementById("emptyState").style.display = selected.has("workflow") || selected.has("forms") ? "grid" : "none";
+            const visible = ["chartCard", "tableCard", "emptyState"].filter((id) => document.getElementById(id).style.display !== "none").length;
+            document.getElementById("componentGrid").dataset.columns = visible <= 2 ? "2" : "3";
+        }
+
+        function moodScores() {
+            const clarity = 50
+                + (answers.posture === "operator" ? 18 : 0)
+                + (answers.density === "dense" ? 14 : 0)
+                + (answers.trust.includes("process") ? 10 : 0)
+                + (answers.avoid.includes("lowContrast") ? 8 : 0);
+            const warmth = 44
+                + (answers.energy === "warm" ? 26 : 0)
+                + (answers.posture === "guide" ? 16 : 0)
+                + (["forest-clay", "coral-ink", "ruby-blush", "gold-graphite", "plum-apricot", "terra-mint", "navy-peach", "moss-copper", "charcoal-rose", "arctic-orange", "brick-denim", "pine-coral", "ultramarine-sand"].includes(answers.palette) ? 10 : 0)
+                + (answers.trust.includes("people") ? 8 : 0);
+            const impact = 48
+                + (answers.energy === "bold" ? 24 : 0)
+                + (answers.density === "dramatic" ? 20 : 0)
+                + (["volt-milk", "coral-ink", "ruby-blush", "cyan-graphite", "cobalt-lime", "plum-apricot", "indigo-lavender", "charcoal-rose", "arctic-orange", "violet-citron", "brick-denim", "mono-signal", "pine-coral"].includes(answers.palette) ? 10 : 0)
+                + (answers.layout === "story" ? 8 : 0);
+            const rigor = 50
+                + (answers.type === "technical" ? 18 : 0)
+                + (answers.shape === "hard-frame" || answers.shape === "sharp-editorial" ? 12 : 0)
+                + (answers.trust.includes("compliance") ? 12 : 0)
+                + (answers.avoid.includes("crowded") ? 6 : 0);
+            return {
+                clareza: clampScore(clarity),
+                calor: clampScore(warmth),
+                impacto: clampScore(impact),
+                rigor: clampScore(rigor)
+            };
+        }
+
+        function clampScore(value) {
+            return Math.max(24, Math.min(96, value));
+        }
+
+        function brandNameFor() {
+            const map = {
+                operator: "Command Desk",
+                guide: "Path Studio",
+                premium: "Atelier OS",
+                editorial: "Blueprint Studio"
+            };
+            return map[answers.posture];
+        }
+
+        function heroTitleFor() {
+            const map = {
+                "pt-BR": {
+                    operator: "Controle rapido para decisoes reais.",
+                    guide: "Um fluxo claro para seguir com confianca.",
+                    premium: "Curadoria precisa, sem excesso.",
+                    editorial: "Uma interface com ponto de vista."
+                },
+                en: {
+                    operator: "Fast control for real decisions.",
+                    guide: "A clear flow to move with confidence.",
+                    premium: "Precise curation, no excess.",
+                    editorial: "An interface with a point of view."
+                }
+            };
+            return map[currentLanguage][answers.posture];
+        }
+
+        function ctaFor() {
+            const map = {
+                "pt-BR": {
+                    operator: "Resolver agora",
+                    guide: "Continuar seguro",
+                    premium: "Solicitar curadoria",
+                    editorial: "Ver direcao"
+                },
+                en: {
+                    operator: "Resolve now",
+                    guide: "Continue safely",
+                    premium: "Request curation",
+                    editorial: "See direction"
+                }
+            };
+            return map[currentLanguage][answers.posture];
+        }
+
+        function emptyTitleFor() {
+            const map = {
+                "pt-BR": {
+                    operator: "Sem pendencias",
+                    guide: "Proximo passo claro",
+                    premium: "Selecao em preparo",
+                    editorial: "Nova pauta pronta"
+                },
+                en: {
+                    operator: "No pending items",
+                    guide: "Clear next step",
+                    premium: "Selection in progress",
+                    editorial: "New brief ready"
+                }
+            };
+            return map[currentLanguage][answers.posture];
+        }
+
+        function emptyCopyFor() {
+            const map = {
+                "pt-BR": {
+                    quiet: "Estado calmo, objetivo e previsivel.",
+                    bold: "Direcao firme para destravar a acao.",
+                    warm: "Orientacao curta com tato humano.",
+                    curious: "Um convite pequeno para explorar."
+                },
+                en: {
+                    quiet: "Calm, objective, predictable state.",
+                    bold: "Firm direction to unlock the action.",
+                    warm: "Short guidance with a human touch.",
+                    curious: "A small invitation to explore."
+                }
+            };
+            return map[currentLanguage][answers.energy];
+        }
+
+        function buildMarkdown() {
+            if (currentLanguage === "en") {
+                return buildMarkdownEn();
+            }
+
+            const palette = palettes[answers.palette];
+            const type = typeSystems[answers.type];
+            const shape = shapeSystems[answers.shape];
+            const selected = (id) => labels[id][answers[id]];
+            const singleLine = (id) => selected(id).label;
+            const detailLine = (id) => selected(id).detail;
+            const listLine = (id) => answers[id].map((value) => labels[id][value].label).join(", ");
+            const detailList = (id) => answers[id]
+                .map((value) => `- ${labels[id][value].label}: ${labels[id][value].detail}`)
+                .join("\n");
+            const mood = moodScores();
+            const tokenLines = Object.entries(palette.tokens)
+                .map(([name, value]) => `- ${name}: ${value}`)
+                .join("\n");
+            const tokenTable = Object.entries(palette.tokens)
+                .map(([name, value]) => `| ${name} | ${value} |`)
+                .join("\n");
+
+            const layoutGuidance = {
+                bento: "Organizar a primeira leitura em blocos independentes, com cada card resolvendo uma pergunta clara. Evitar longos paragrafos antes de entregar sinal visual.",
+                sidebar: "Usar navegacao lateral persistente, agrupando modulos por rotina de uso. Estados ativos, badges e progresso precisam ser muito legiveis.",
+                flow: "Quebrar decisoes em passos pequenos. Cada tela deve ter uma acao principal, contexto minimo e feedback imediato.",
+                story: "Construir uma sequencia vertical com ritmo: abertura forte, provas, detalhes, contraste e fechamento. A hierarquia deve conduzir a leitura."
+            };
+
+            const densityGuidance = {
+                spacious: "Priorizar respiro, blocos grandes e menos informacao simultanea. Ideal para decisao consultiva, premium ou educativa.",
+                balanced: "Manter boa leitura sem perder produtividade. Usar espacamento consistente e variar densidade apenas quando houver motivo claro.",
+                dense: "Reduzir ornamento, aumentar escaneabilidade e deixar estados muito visiveis. A densidade deve ajudar throughput, nao virar ruido.",
+                dramatic: "Alternar blocos silenciosos com momentos de escala. Funciona bem quando a marca precisa de memoria e cadencia editorial."
+            };
+
+            const componentGuidance = {
+                hero: "Deve comunicar promessa, tom e primeira acao em poucos segundos. Incluir um gesto visual claro da paleta escolhida.",
+                cards: "Devem ter hierarquia interna consistente: titulo curto, sinal visual, estado e acao quando necessario.",
+                forms: "Devem reduzir ansiedade: labels claros, validacao visivel, estados de erro legiveis e proximo passo obvio.",
+                tables: "Devem priorizar comparacao: cabecalhos fortes, alinhamento numerico, densidade controlada e filtros previsiveis.",
+                dashboards: "Devem transformar dado em decisao: KPIs com contexto, graficos simples, tendencia e estado atual.",
+                workflow: "Deve deixar o sistema vivo: mensagens de processamento, empty states, confirmacoes e feedbacks de erro precisam ter voz propria."
+            };
+
+            const avoidGuidance = {
+                verbose: "Toda explicacao precisa justificar sua presenca. Preferir titulo curto, suporte visual e detalhe sob demanda.",
+                stock: "Usar imagem apenas quando houver contexto real, autoria, produto, materialidade ou prova concreta.",
+                crowded: "Se tudo compete por atencao, nada guia decisao. Agrupar, priorizar e reduzir sinais simultaneos.",
+                lowContrast: "Contraste e tamanho de texto sao criterio de qualidade, nao acabamento final.",
+                noisyMotion: "Movimento deve confirmar estado ou orientar foco. Animacao sem funcao deve sair.",
+                genericGradient: "Evitar efeitos intercambiaveis. A cor precisa nascer dos tokens e da personalidade da marca."
+            };
+
+            const implementationChecklist = [
+                "Definir tokens CSS para cores, fontes, raios, espacamento, bordas e estados.",
+                "Criar versoes responsivas antes de decorar: desktop, tablet e mobile precisam nascer juntos.",
+                "Documentar estados de hover, foco, ativo, carregando, vazio, erro e sucesso.",
+                "Testar contraste de texto e foco navegavel por teclado nos componentes principais.",
+                "Usar a paleta com disciplina: primary para estrutura/acao, secondary para fundos, accent para destaque e feedback.",
+                "Evitar texto longo na interface principal; mover explicacoes para tooltip, progressive disclosure ou documento de apoio.",
+                "Criar exemplos reais dos componentes prioritarios, nao apenas formas abstratas."
+            ].map((item) => `- [ ] ${item}`).join("\n");
+
+            const componentLines = answers.components
+                .map((value) => `- ${labels.components[value].label}: ${labels.components[value].detail} ${componentGuidance[value]}`)
+                .join("\n");
+            const avoidLines = answers.avoid
+                .map((value) => `- ${labels.avoid[value].label}: ${labels.avoid[value].detail} ${avoidGuidance[value]}`)
+                .join("\n");
+            const generatedAt = new Date().toLocaleString("pt-BR");
+
+            return `# Design System Blueprint v2
+
+Gerado em: ${generatedAt}
+
+## 1. Resumo executivo
+
+Este blueprint define uma interface com postura ${singleLine("posture").toLowerCase()}, energia ${singleLine("energy").toLowerCase()}, layout ${singleLine("layout").toLowerCase()} e densidade ${singleLine("density").toLowerCase()}.
+
+A direcao escolhida pede uma experiencia que pareca ${selected("posture").tag}, com tom de ${selected("energy").tag}. Na pratica, o produto deve abrir rapido, explicar pouco na superficie, mostrar sinais visuais fortes e guardar detalhes para momentos de apoio.
+
+## 2. Tese de experiencia
+
+- Postura: ${singleLine("posture")} - ${detailLine("posture")}
+- Energia: ${singleLine("energy")} - ${detailLine("energy")}
+- Layout dominante: ${singleLine("layout")} - ${detailLine("layout")}
+- Densidade: ${singleLine("density")} - ${detailLine("density")}
+- CTA de referencia: "${ctaFor()}"
+- Empty state de referencia: "${emptyTitleFor()}" / ${emptyCopyFor()}
+
+## 3. Decisoes de sistema
+
+| Eixo | Decisao | Intencao |
+| --- | --- | --- |
+| Postura | ${singleLine("posture")} | ${detailLine("posture")} |
+| Energia | ${singleLine("energy")} | ${detailLine("energy")} |
+| Cores | ${palette.label} | ${palette.detail} |
+| Tipografia | ${type.label} | ${type.detail} |
+| Forma | ${shape.label} | ${shape.detail} |
+| Layout | ${singleLine("layout")} | ${detailLine("layout")} |
+| Densidade | ${singleLine("density")} | ${detailLine("density")} |
+
+## 4. Sistema visual
+
+### Paleta
+
+${palette.detail}
+
+| Token | Valor |
+| --- | --- |
+${tokenTable}
+
+Uso recomendado:
+- Primary: botoes principais, logo, elementos estruturais e maior contraste.
+- Secondary: fundos, areas calmas, blocos de apoio e respiro visual.
+- Accent: indicadores, estados, graficos, badges e momentos de destaque.
+- Surface: base de telas claras e containers.
+- Surface dark: preview escuro, modo escuro, banners ou secoes de contraste.
+- Text / Text dark: texto principal em fundos claros e escuros.
+
+Tokens em lista:
+${tokenLines}
+
+### Tipografia
+
+Todas as fontes deste blueprint sao gratuitas/open-source via Google Fonts.
+
+- Display: ${type.fonts.display}
+- Body: ${type.fonts.body}
+- Mono: ${type.fonts.mono}
+
+Diretriz: ${type.detail} Titulos devem carregar personalidade, corpo deve preservar leitura e a mono deve aparecer apenas em estados, indices, tokens, codigos, metricas ou linguagem de sistema.
+
+### Forma e superficie
+
+- Card radius: ${shape.radius}
+- Control radius: ${shape.controlRadius}
+- Diretriz: ${shape.detail}
+
+As formas precisam ser consistentes entre cards, botoes, inputs, chips, modais e preview de dados. Variar raio sem regra enfraquece o sistema.
+
+## 5. Layout e comportamento
+
+${layoutGuidance[answers.layout]}
+
+${densityGuidance[answers.density]}
+
+Regras praticas:
+- A primeira tela deve responder: onde estou, o que importa agora e qual e o proximo passo.
+- A hierarquia deve separar informacao primaria, contexto e detalhe.
+- O preview visual deve aparecer cedo quando a decisao for subjetiva.
+- Informacoes auxiliares devem entrar em tooltip, resumo expandido, modal leve ou documento exportado.
+
+## 6. Componentes prioritarios
+
+${componentLines}
+
+Esses componentes devem ser desenhados como exemplos reais, com conteudo plausivel, estados e responsividade. Nao basta criar uma variacao estetica vazia.
+
+## 7. Sinais de confianca
+
+${detailList("trust")}
+
+Aplicacao:
+- Inserir prova perto de decisoes importantes, nao apenas em secoes institucionais.
+- Combinar sinal visual com texto curto: numero + legenda, status + proximo passo, metodo + criterio.
+- Evitar prometer confianca apenas por estetica; a interface precisa mostrar evidencia.
+
+## 8. Conteudo e microcopy
+
+Voz recomendada:
+- Curta na interface principal.
+- Especifica em estados de erro, vazio, carregamento e confirmacao.
+- Mais explicativa apenas no export, onboarding, documentacao ou tooltip.
+
+Exemplos de tom:
+- CTA principal: "${ctaFor()}"
+- CTA secundario: "${singleLine("layout")}"
+- Empty state: "${emptyTitleFor()}"
+- Apoio de empty state: "${emptyCopyFor()}"
+
+## 9. Guardrails e antipadroes
+
+${avoidLines}
+
+Principio geral: se um elemento nao aumenta clareza, confianca, velocidade ou valor percebido, ele precisa ser removido, simplificado ou escondido em detalhe sob demanda.
+
+## 10. DNA visual estimado
+
+- Clareza: ${mood.clareza}/100
+- Calor: ${mood.calor}/100
+- Impacto: ${mood.impacto}/100
+- Rigor: ${mood.rigor}/100
+
+Esses numeros nao sao metricas cientificas. Eles servem como leitura rapida da direcao escolhida e ajudam a perceber se a combinacao esta mais operacional, humana, expressiva ou rigorosa.
+
+## 11. Checklist de implementacao
+
+${implementationChecklist}
+
+## Prompt de build
+
+Crie uma interface ${singleLine("posture").toLowerCase()} com energia ${singleLine("energy").toLowerCase()}, usando a paleta ${palette.label}, tipografia ${type.label}, forma ${shape.label}, layout ${singleLine("layout").toLowerCase()} e densidade ${singleLine("density").toLowerCase()}.
+
+A interface deve priorizar ${listLine("components").toLowerCase()} e trazer sinais de confianca como ${listLine("trust").toLowerCase()}. Use a paleta com tokens claros, preserve contraste, crie estados de hover/focus/active/loading/empty/error/success e garanta responsividade real.
+
+Evite ${listLine("avoid").toLowerCase()}. O resultado deve parecer um produto com sistema visual proprio, nao um template generico. Mostre exemplos concretos de componentes com conteudo plausivel, hierarquia clara e microcopy curta.`;
+        }
+
+        function buildMarkdownEn() {
+            const palette = paletteCopy();
+            const type = typeCopy();
+            const shape = shapeCopy();
+            const selected = (id) => translatedOption(id, answers[id]);
+            const singleLine = (id) => selected(id).label;
+            const detailLine = (id) => selected(id).detail;
+            const listLine = (id) => answers[id].map((value) => translatedOption(id, value).label).join(", ");
+            const detailList = (id) => answers[id]
+                .map((value) => {
+                    const item = translatedOption(id, value);
+                    return `- ${item.label}: ${item.detail}`;
+                })
+                .join("\n");
+            const mood = moodScores();
+            const tokenLines = Object.entries(palette.tokens)
+                .map(([name, value]) => `- ${name}: ${value}`)
+                .join("\n");
+            const tokenTable = Object.entries(palette.tokens)
+                .map(([name, value]) => `| ${name} | ${value} |`)
+                .join("\n");
+
+            const layoutGuidance = {
+                bento: "Organize the first read into independent blocks, with each card answering one clear question. Avoid long paragraphs before giving a visual signal.",
+                sidebar: "Use persistent side navigation and group modules by routine. Active states, badges, and progress indicators need to be very legible.",
+                flow: "Break decisions into small steps. Each screen should have one primary action, minimal context, and immediate feedback.",
+                story: "Build a vertical sequence with rhythm: strong opening, proof, detail, contrast, and close. Hierarchy should guide the reading."
+            };
+
+            const densityGuidance = {
+                spacious: "Prioritize breathing room, larger blocks, and less simultaneous information. Ideal for consultative, premium, or educational decisions.",
+                balanced: "Keep readability high without losing productivity. Use consistent spacing and vary density only when there is a clear reason.",
+                dense: "Reduce ornament, increase scanability, and make states highly visible. Density should help throughput, not create noise.",
+                dramatic: "Alternate quiet blocks with moments of scale. Works well when the brand needs memory and editorial cadence."
+            };
+
+            const componentGuidance = {
+                hero: "It should communicate promise, tone, and first action in a few seconds. Include a clear visual gesture from the chosen palette.",
+                cards: "They need consistent internal hierarchy: short title, visual signal, state, and action when needed.",
+                forms: "They should reduce anxiety: clear labels, visible validation, legible error states, and an obvious next step.",
+                tables: "They should prioritize comparison: strong headers, numeric alignment, controlled density, and predictable filters.",
+                dashboards: "They should turn data into decisions: KPIs with context, simple charts, trend, and current state.",
+                workflow: "It should make the system feel alive: processing messages, empty states, confirmations, and errors need their own voice."
+            };
+
+            const avoidGuidance = {
+                verbose: "Every explanation needs to earn its place. Prefer short titles, visual support, and detail on demand.",
+                stock: "Use imagery only when there is real context, authorship, product materiality, or concrete proof.",
+                crowded: "If everything competes for attention, nothing guides the decision. Group, prioritize, and reduce simultaneous signals.",
+                lowContrast: "Contrast and text size are quality criteria, not final polish.",
+                noisyMotion: "Motion should confirm state or guide focus. Animation without function should go.",
+                genericGradient: "Avoid interchangeable effects. Color should come from tokens and brand personality."
+            };
+
+            const implementationChecklist = [
+                "Define CSS tokens for colors, fonts, radii, spacing, borders, and states.",
+                "Create responsive versions before decoration: desktop, tablet, and mobile should be designed together.",
+                "Document hover, focus, active, loading, empty, error, and success states.",
+                "Test text contrast and keyboard focus on the main components.",
+                "Use the palette with discipline: primary for structure/action, secondary for backgrounds, accent for emphasis and feedback.",
+                "Avoid long text in the main interface; move explanations to tooltips, progressive disclosure, or supporting docs.",
+                "Create real examples of the priority components, not only abstract shapes."
+            ].map((item) => `- [ ] ${item}`).join("\n");
+
+            const componentLines = answers.components
+                .map((value) => {
+                    const item = translatedOption("components", value);
+                    return `- ${item.label}: ${item.detail} ${componentGuidance[value]}`;
+                })
+                .join("\n");
+            const avoidLines = answers.avoid
+                .map((value) => {
+                    const item = translatedOption("avoid", value);
+                    return `- ${item.label}: ${item.detail} ${avoidGuidance[value]}`;
+                })
+                .join("\n");
+            const generatedAt = new Date().toLocaleString("en-US");
+
+            return `# Design System Blueprint v2
+
+Generated at: ${generatedAt}
+
+## 1. Executive summary
+
+This blueprint defines an interface with ${singleLine("posture").toLowerCase()} posture, ${singleLine("energy").toLowerCase()} energy, ${singleLine("layout").toLowerCase()} layout, and ${singleLine("density").toLowerCase()} density.
+
+The chosen direction should feel ${selected("posture").tag}, with a tone of ${selected("energy").tag}. In practice, the product should open fast, explain little on the surface, show strong visual signals, and keep deeper detail for support moments.
+
+## 2. Experience thesis
+
+- Posture: ${singleLine("posture")} - ${detailLine("posture")}
+- Energy: ${singleLine("energy")} - ${detailLine("energy")}
+- Dominant layout: ${singleLine("layout")} - ${detailLine("layout")}
+- Density: ${singleLine("density")} - ${detailLine("density")}
+- Reference CTA: "${ctaFor()}"
+- Reference empty state: "${emptyTitleFor()}" / ${emptyCopyFor()}
+
+## 3. System decisions
+
+| Axis | Decision | Intent |
+| --- | --- | --- |
+| Posture | ${singleLine("posture")} | ${detailLine("posture")} |
+| Energy | ${singleLine("energy")} | ${detailLine("energy")} |
+| Colors | ${palette.label} | ${palette.detail} |
+| Typography | ${type.label} | ${type.detail} |
+| Shape | ${shape.label} | ${shape.detail} |
+| Layout | ${singleLine("layout")} | ${detailLine("layout")} |
+| Density | ${singleLine("density")} | ${detailLine("density")} |
+
+## 4. Visual system
+
+### Palette
+
+${palette.detail}
+
+| Token | Value |
+| --- | --- |
+${tokenTable}
+
+Recommended use:
+- Primary: main buttons, logo, structural elements, and strongest contrast.
+- Secondary: backgrounds, calm areas, support blocks, and visual breathing room.
+- Accent: indicators, states, charts, badges, and emphasis moments.
+- Surface: base for light screens and containers.
+- Surface dark: dark preview, dark mode, banners, or contrast sections.
+- Text / Text dark: primary text on light and dark backgrounds.
+
+Token list:
+${tokenLines}
+
+### Typography
+
+All fonts in this blueprint are free/open-source through Google Fonts.
+
+- Display: ${type.fonts.display}
+- Body: ${type.fonts.body}
+- Mono: ${type.fonts.mono}
+
+Guideline: ${type.detail} Titles should carry personality, body copy should preserve reading, and mono should appear only in states, indexes, tokens, code, metrics, or system language.
+
+### Shape and surface
+
+- Card radius: ${shape.radius}
+- Control radius: ${shape.controlRadius}
+- Guideline: ${shape.detail}
+
+Shapes need to stay consistent across cards, buttons, inputs, chips, modals, and data previews. Varying radius without a rule weakens the system.
+
+## 5. Layout and behavior
+
+${layoutGuidance[answers.layout]}
+
+${densityGuidance[answers.density]}
+
+Practical rules:
+- The first screen should answer: where am I, what matters now, and what is the next step.
+- Hierarchy should separate primary information, context, and detail.
+- The visual preview should appear early when the decision is subjective.
+- Supporting information should move into tooltip, expanded summary, light modal, or exported document.
+
+## 6. Priority components
+
+${componentLines}
+
+These components should be designed as real examples with plausible content, states, and responsiveness. A purely aesthetic variation is not enough.
+
+## 7. Trust signals
+
+${detailList("trust")}
+
+Application:
+- Place proof near important decisions, not only in institutional sections.
+- Combine visual signal with short text: number + caption, status + next step, method + criteria.
+- Do not promise trust through aesthetics alone; the interface needs to show evidence.
+
+## 8. Content and microcopy
+
+Recommended voice:
+- Short in the primary interface.
+- Specific in error, empty, loading, and confirmation states.
+- More explanatory only in export, onboarding, documentation, or tooltip.
+
+Tone examples:
+- Primary CTA: "${ctaFor()}"
+- Secondary CTA: "${singleLine("layout")}"
+- Empty state: "${emptyTitleFor()}"
+- Empty state support: "${emptyCopyFor()}"
+
+## 9. Guardrails and anti-patterns
+
+${avoidLines}
+
+General principle: if an element does not increase clarity, trust, speed, or perceived value, it should be removed, simplified, or hidden in detail on demand.
+
+## 10. Estimated visual DNA
+
+- Clarity: ${mood.clareza}/100
+- Warmth: ${mood.calor}/100
+- Impact: ${mood.impacto}/100
+- Rigor: ${mood.rigor}/100
+
+These numbers are not scientific metrics. They are a quick read of the chosen direction and help reveal whether the combination feels more operational, human, expressive, or rigorous.
+
+## 11. Implementation checklist
+
+${implementationChecklist}
+
+## Build prompt
+
+Create an interface with ${singleLine("posture").toLowerCase()} posture and ${singleLine("energy").toLowerCase()} energy, using the ${palette.label} palette, ${type.label} typography, ${shape.label} shape system, ${singleLine("layout").toLowerCase()} layout, and ${singleLine("density").toLowerCase()} density.
+
+The interface should prioritize ${listLine("components").toLowerCase()} and bring trust signals such as ${listLine("trust").toLowerCase()}. Use clear color tokens, preserve contrast, create hover/focus/active/loading/empty/error/success states, and guarantee real responsiveness.
+
+Avoid ${listLine("avoid").toLowerCase()}. The result should feel like a product with its own visual system, not a generic template. Show concrete component examples with plausible content, clear hierarchy, and short microcopy.`;
+        }
+
+        function copyMarkdown() {
+            const text = markdownOutput.value;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => showToast(ui("markdownCopied")));
+                return;
+            }
+            markdownOutput.select();
+            document.execCommand("copy");
+            showToast(ui("markdownCopied"));
+        }
+
+        function optionLabel(questionId, value) {
+            return translatedOption(questionId, value).label;
+        }
+
+        function multiLabels(questionId) {
+            const values = answers[questionId].map((value) => optionLabel(questionId, value));
+            return values.length ? values.join(", ") : "-";
+        }
+
+        function renderExportReview() {
+            const text = buildMarkdown();
+            markdownOutput.value = text;
+            const lineCount = text.trim().split(/\r?\n/).length;
+            const sectionCount = (text.match(/^## /gm) || []).length;
+            const decisionCount = questions.length + answers.trust.length + answers.components.length + answers.avoid.length;
+            const reviewItems = [
+                {
+                    label: ui("exportReviewDirection"),
+                    value: `${optionLabel("posture", answers.posture)} / ${optionLabel("energy", answers.energy)}`
+                },
+                {
+                    label: ui("exportReviewColors"),
+                    value: paletteCopy().label
+                },
+                {
+                    label: ui("exportReviewType"),
+                    value: typeCopy().label
+                },
+                {
+                    label: ui("exportReviewComponents"),
+                    value: multiLabels("components")
+                },
+                {
+                    label: ui("exportReviewGuardrails"),
+                    value: multiLabels("avoid")
+                }
+            ];
+
+            exportReviewStats.innerHTML = [
+                { label: ui("exportReviewAnswered"), value: String(decisionCount) },
+                { label: ui("exportReviewSections"), value: String(sectionCount) },
+                { label: ui("exportReviewLines"), value: String(lineCount) }
+            ].map((item) => `
+                <div class="export-review-stat">
+                    <strong>${escapeHtml(item.label)}</strong>
+                    <span>${escapeHtml(item.value)}</span>
+                </div>
+            `).join("");
+
+            exportReviewList.innerHTML = reviewItems.map((item) => `
+                <div class="export-review-item">
+                    <strong>${escapeHtml(item.label)}</strong>
+                    <span title="${escapeHtml(item.value)}">${escapeHtml(item.value)}</span>
+                </div>
+            `).join("");
+        }
+
+        function performMarkdownDownload() {
+            const blob = new Blob([markdownOutput.value], { type: "text/markdown;charset=utf-8" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "design-system-blueprint-v2.md";
+            link.click();
+            URL.revokeObjectURL(link.href);
+            showToast(ui("markdownDownloaded"));
+        }
+
+        function openExportReview(triggerButton) {
+            if (!exportReviewModal || !cancelExportReview || !confirmExportReview) {
+                performMarkdownDownload();
+                return;
+            }
+
+            renderExportReview();
+            exportReviewReturnFocus = triggerButton || document.activeElement;
+            exportReviewModal.hidden = false;
+            document.body.style.overflow = "hidden";
+            window.setTimeout(() => {
+                confirmExportReview.focus({ preventScroll: true });
+            }, 0);
+        }
+
+        function closeExportReview() {
+            if (!exportReviewModal) return;
+            exportReviewModal.hidden = true;
+            document.body.style.overflow = "";
+            if (exportReviewReturnFocus && typeof exportReviewReturnFocus.focus === "function") {
+                exportReviewReturnFocus.focus({ preventScroll: true });
+            }
+        }
+
+        function confirmExportDownload() {
+            performMarkdownDownload();
+            closeExportReview();
+        }
+
+        function downloadMarkdown() {
+            openExportReview(document.getElementById("downloadButton"));
+        }
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add("is-visible");
+            window.clearTimeout(showToast.timer);
+            showToast.timer = window.setTimeout(() => toast.classList.remove("is-visible"), 2200);
+        }
+
+        function escapeHtml(value) {
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
+        }
+
+        function refreshIcons() {
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        }
+
+        function closeTips(except = null) {
+            document.querySelectorAll(".is-tip-open").forEach((item) => {
+                if (item !== except) {
+                    item.classList.remove("is-tip-open");
+                    if (item.matches(".help, .choice")) {
+                        item.setAttribute("aria-expanded", "false");
+                    }
+                }
+            });
+        }
+
+        function toggleTip(target) {
+            const willOpen = !target.classList.contains("is-tip-open");
+            closeTips(target);
+            target.classList.toggle("is-tip-open", willOpen);
+            if (target.matches(".help, .choice")) {
+                target.setAttribute("aria-expanded", String(willOpen));
+            }
+        }
+
+        questionRoot.addEventListener("click", (event) => {
+            const tipTrigger = event.target.closest(".choice-info, .help");
+            if (tipTrigger) {
+                event.preventDefault();
+                event.stopPropagation();
+                toggleTip(tipTrigger.classList.contains("choice-info") ? tipTrigger.closest(".choice") : tipTrigger);
+                return;
+            }
+
+            const choice = event.target.closest(".choice");
+            if (!choice) return;
+            closeTips();
+            selectChoice(choice.dataset.question, choice.dataset.value);
+        });
+
+        questionRoot.addEventListener("keydown", (event) => {
+            if (event.key !== "Enter" && event.key !== " ") return;
+            const help = event.target.closest(".help");
+            if (!help) return;
+            event.preventDefault();
+            toggleTip(help);
+        });
+
+        document.addEventListener("click", (event) => {
+            if (event.target.closest(".choice-info, .help, .tooltip-source")) return;
+            closeTips();
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeTips();
+                if (exportReviewModal && !exportReviewModal.hidden) {
+                    closeExportReview();
+                }
+            }
+        });
+
+        document.querySelectorAll("[data-preset]").forEach((button) => {
+            button.addEventListener("click", () => {
+                closeTips();
+                answers = normalizeAnswers(presets[button.dataset.preset]);
+                activePreset = button.dataset.preset;
+                updateUI();
+                persist();
+                showToast(ui("presetApplied").replace("{name}", presetName(button.dataset.preset)));
+            });
+        });
+
+        document.getElementById("surpriseBtn").addEventListener("click", () => {
+            const next = surprisePresets[Math.floor(Math.random() * surprisePresets.length)];
+            answers = normalizeAnswers(next.answers);
+            activePreset = "";
+            updateUI();
+            persist();
+            showToast(ui("surpriseApplied").replace("{name}", next.name));
+        });
+
+        document.querySelectorAll("[data-lang]").forEach((button) => {
+            button.addEventListener("click", () => {
+                currentLanguage = button.dataset.lang === "en" ? "en" : "pt-BR";
+                localStorage.setItem(LANGUAGE_KEY, currentLanguage);
+                updateUI();
+                showToast(ui("languageChanged"));
+            });
+        });
+
+        document.querySelectorAll("[data-view]").forEach((button) => {
+            button.addEventListener("click", () => {
+                viewMode = button.dataset.view;
+                document.querySelectorAll("[data-view]").forEach((item) => item.classList.toggle("is-active", item === button));
+                renderPreview();
+                refreshIcons();
+            });
+        });
+
+        document.getElementById("themeBtn").addEventListener("click", () => {
+            closeTips();
+            document.documentElement.classList.toggle("dark");
+            refreshIcons();
+        });
+
+        document.getElementById("exportToggle").addEventListener("click", () => {
+            exportPanel.classList.toggle("is-open");
+        });
+
+        document.getElementById("copyButton").addEventListener("click", copyMarkdown);
+        document.getElementById("downloadButton").addEventListener("click", downloadMarkdown);
+        cancelExportReview.addEventListener("click", closeExportReview);
+        confirmExportReview.addEventListener("click", confirmExportDownload);
+        exportReviewModal.addEventListener("click", (event) => {
+            if (event.target === exportReviewModal) {
+                closeExportReview();
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateUI();
+            refreshIcons();
+        });
+    </script>
+</body>
+</html>

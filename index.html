@@ -119,6 +119,7 @@
             align-items: center;
             padding: 20px 0;
             gap: 20px;
+            flex-wrap: wrap;
         }
 
         /* Switchers de Tema e Idioma */
@@ -140,6 +141,80 @@
         }
 
         .control-btn:hover {
+            background-color: var(--hover-highlight);
+            color: var(--hover-text);
+        }
+
+        .language-switcher {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .language-select-trigger {
+            min-width: 176px;
+            justify-content: space-between;
+        }
+
+        .language-current {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .language-switcher .fi {
+            border-radius: 2px;
+            box-shadow: 0 0 0 1px var(--card-border);
+            flex: 0 0 auto;
+        }
+
+        .language-chevron {
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 5px solid currentColor;
+            opacity: 0.75;
+        }
+
+        .language-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            z-index: 20;
+            min-width: 190px;
+            display: none;
+            padding: 6px;
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            background-color: var(--bg-color);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+        }
+
+        .language-switcher.is-open .language-menu {
+            display: grid;
+            gap: 4px;
+        }
+
+        .language-option {
+            width: 100%;
+            min-height: 38px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            background: transparent;
+            color: var(--text-color);
+            cursor: pointer;
+            font: inherit;
+            font-weight: 600;
+            padding: 8px 10px;
+            text-align: left;
+        }
+
+        .language-option:hover,
+        .language-option.is-active {
             background-color: var(--hover-highlight);
             color: var(--hover-text);
         }
@@ -475,6 +550,29 @@
             font-weight: 600;
         }
 
+        .project-feature-badge {
+            display: inline-flex;
+            width: fit-content;
+            align-items: center;
+            border: 1px solid currentColor;
+            border-radius: 999px;
+            padding: 3px 8px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .project-tools-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .project-tools-grid .project-feature-card,
+        .project-tools-grid .tcc-highlight {
+            grid-column: auto;
+        }
+
         .tcc-highlight {
             grid-column: 1 / -1;
             padding: 14px;
@@ -694,6 +792,11 @@
                 content: ", ";
             }
 
+            .project-feature-badge {
+                border: none !important;
+                padding: 0 !important;
+            }
+
             .project-grid {
                 display: block !important;
             }
@@ -770,6 +873,10 @@
             .skill-items {
                 padding: 15px 20px;
             }
+
+            .project-tools-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -779,13 +886,33 @@
     <div class="container">
         <!-- Controls -->
         <header>
-            <select class="control-btn" id="language-switcher" onchange="changeLanguage(this.value)"
-                style="cursor: pointer; padding-right: 10px;">
-                <option value="pt-BR">🇧🇷 Português</option>
-                <option value="en">🇺🇸 English</option>
-                <option value="es">🇪🇸 Español</option>
-                <option value="it">🇮🇹 Italiano</option>
-            </select>
+            <div class="language-switcher" id="language-switcher">
+                <button class="control-btn language-select-trigger" type="button" id="language-trigger" aria-haspopup="listbox" aria-expanded="false" onclick="toggleLanguageMenu()">
+                    <span class="language-current">
+                        <span class="fi fi-us" id="language-current-flag" aria-hidden="true"></span>
+                        <span id="language-current-label">English</span>
+                    </span>
+                    <span class="language-chevron" aria-hidden="true"></span>
+                </button>
+                <div class="language-menu" role="listbox" aria-label="Language selector">
+                    <button class="language-option" type="button" data-lang="pt-BR" role="option" aria-selected="false" onclick="changeLanguage('pt-BR')">
+                        <span class="fi fi-br" aria-hidden="true"></span>
+                        <span>Português</span>
+                    </button>
+                    <button class="language-option" type="button" data-lang="en" role="option" aria-selected="false" onclick="changeLanguage('en')">
+                        <span class="fi fi-us" aria-hidden="true"></span>
+                        <span>English</span>
+                    </button>
+                    <button class="language-option" type="button" data-lang="es" role="option" aria-selected="false" onclick="changeLanguage('es')">
+                        <span class="fi fi-es" aria-hidden="true"></span>
+                        <span>Español</span>
+                    </button>
+                    <button class="language-option" type="button" data-lang="it" role="option" aria-selected="false" onclick="changeLanguage('it')">
+                        <span class="fi fi-it" aria-hidden="true"></span>
+                        <span>Italiano</span>
+                    </button>
+                </div>
+            </div>
             <button class="control-btn" onclick="toggleTheme()">
                 <span class="dark-only">☀️ Light Mode</span>
                 <span class="light-only">🌙 Dark Mode</span>
@@ -1300,12 +1427,39 @@
                     <span class="lang-it">Lavori indipendenti e utilità pratiche create al di fuori del MBA. Qui vivono esperimenti, builder e artefatti riutilizzabili pensati per un uso reale con clienti e team.</span>
                 </div>
 
-                <div class="project-grid">
+                <div class="project-grid project-tools-grid">
+                    <a href="design-system-questionario/v2/index.html" class="project-mini-card project-feature-card tcc-highlight">
+                        <span class="project-feature-title lang-pt">🧩 Design System Blueprint Builder V2</span>
+                        <span class="project-feature-title lang-en">🧩 Design System Blueprint Builder V2</span>
+                        <span class="project-feature-title lang-es">🧩 Constructor de Blueprint para Design System V2</span>
+                        <span class="project-feature-title lang-it">🧩 Builder di Blueprint per Design System V2</span>
+
+                        <span class="project-feature-badge lang-pt">Recomendado • novo e melhor</span>
+                        <span class="project-feature-badge lang-en">Recommended • new and improved</span>
+                        <span class="project-feature-badge lang-es">Recomendado • nuevo y mejor</span>
+                        <span class="project-feature-badge lang-it">Consigliato • nuovo e migliore</span>
+
+                        <span class="project-feature-copy lang-pt">Versão mais visual e enxuta do builder, com preview vivo, mais cores, mais fontes gratuitas, troca PT/EN na página inteira e exportação de markdown mais detalhada.</span>
+                        <span class="project-feature-copy lang-en">A more visual and streamlined version of the builder, with live preview, more colors, more free fonts, full-page PT/EN switching, and a richer markdown export.</span>
+                        <span class="project-feature-copy lang-es">Versión más visual y directa del builder, con preview vivo, más colores, más fuentes gratuitas, cambio PT/EN en toda la página y exportación markdown más detallada.</span>
+                        <span class="project-feature-copy lang-it">Versione più visuale e snella del builder, con preview live, più colori, più font gratuiti, cambio PT/EN su tutta la pagina ed esportazione markdown più dettagliata.</span>
+
+                        <span class="project-feature-meta lang-pt">V2 • Preview vivo • Mais cores/fontes • PT/EN • Exportação rica</span>
+                        <span class="project-feature-meta lang-en">V2 • Live preview • More colors/fonts • PT/EN • Rich export</span>
+                        <span class="project-feature-meta lang-es">V2 • Preview vivo • Más colores/fuentes • PT/EN • Exportación rica</span>
+                        <span class="project-feature-meta lang-it">V2 • Preview live • Più colori/font • PT/EN • Export ricco</span>
+                    </a>
+
                     <a href="design-system-questionario/index.html" class="project-mini-card project-feature-card tcc-highlight">
                         <span class="project-feature-title lang-pt">🧩 Design System Blueprint Builder</span>
                         <span class="project-feature-title lang-en">🧩 Design System Blueprint Builder</span>
                         <span class="project-feature-title lang-es">🧩 Constructor de Blueprint para Design System</span>
                         <span class="project-feature-title lang-it">🧩 Builder di Blueprint per Design System</span>
+
+                        <span class="project-feature-badge lang-pt">Versão clássica</span>
+                        <span class="project-feature-badge lang-en">Classic version</span>
+                        <span class="project-feature-badge lang-es">Versión clásica</span>
+                        <span class="project-feature-badge lang-it">Versione classica</span>
 
                         <span class="project-feature-copy lang-pt">Questionário interativo em HTML cru, inspirado na linguagem visual da home, com dark/light mode, PT/EN e exportação de markdown para briefing visual, sistema de design e handoff de build.</span>
                         <span class="project-feature-copy lang-en">Interactive raw HTML questionnaire inspired by the visual language of the home page, with dark/light mode, PT/EN, and markdown export for visual briefing, design system definition, and build handoff.</span>
@@ -1527,7 +1681,26 @@
     <script>
         const SHARED_LANGUAGE_KEY = 'site-language';
         const SUPPORTED_HOME_LANGUAGES = ['pt-BR', 'en', 'es', 'it'];
+        const HOME_LANGUAGE_META = {
+            'pt-BR': { label: 'Português', flag: 'fi-br' },
+            en: { label: 'English', flag: 'fi-us' },
+            es: { label: 'Español', flag: 'fi-es' },
+            it: { label: 'Italiano', flag: 'fi-it' }
+        };
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        function setLanguageMenuOpen(isOpen) {
+            const langSwitcher = document.getElementById('language-switcher');
+            const trigger = document.getElementById('language-trigger');
+            if (!langSwitcher || !trigger) return;
+            langSwitcher.classList.toggle('is-open', isOpen);
+            trigger.setAttribute('aria-expanded', String(isOpen));
+        }
+
+        function toggleLanguageMenu() {
+            const langSwitcher = document.getElementById('language-switcher');
+            setLanguageMenuOpen(!langSwitcher?.classList.contains('is-open'));
+        }
 
         // Language Toggle Logic
         function applyHomeLanguage(lang, persist = true) {
@@ -1539,7 +1712,21 @@
 
             const langSwitcher = document.getElementById('language-switcher');
             if (langSwitcher) {
-                langSwitcher.value = normalizedLanguage;
+                langSwitcher.dataset.currentLanguage = normalizedLanguage;
+                const languageMeta = HOME_LANGUAGE_META[normalizedLanguage];
+                const currentFlag = document.getElementById('language-current-flag');
+                const currentLabel = document.getElementById('language-current-label');
+                if (currentFlag && languageMeta) {
+                    currentFlag.className = `fi ${languageMeta.flag}`;
+                }
+                if (currentLabel && languageMeta) {
+                    currentLabel.textContent = languageMeta.label;
+                }
+                langSwitcher.querySelectorAll('[data-lang]').forEach(button => {
+                    const isActive = button.dataset.lang === normalizedLanguage;
+                    button.classList.toggle('is-active', isActive);
+                    button.setAttribute('aria-selected', String(isActive));
+                });
             }
 
             if (persist) {
@@ -1549,6 +1736,7 @@
 
         function changeLanguage(lang) {
             applyHomeLanguage(lang, true);
+            setLanguageMenuOpen(false);
         }
 
         // Initialize Language Select Value
@@ -1563,6 +1751,18 @@
             window.addEventListener('storage', (event) => {
                 if (event.key === SHARED_LANGUAGE_KEY && event.newValue && SUPPORTED_HOME_LANGUAGES.includes(event.newValue)) {
                     applyHomeLanguage(event.newValue, false);
+                }
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('#language-switcher')) {
+                    setLanguageMenuOpen(false);
+                }
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    setLanguageMenuOpen(false);
                 }
             });
         });
