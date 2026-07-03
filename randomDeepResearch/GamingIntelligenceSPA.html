@@ -71,7 +71,10 @@
     <!-- Navegação -->
     <nav class="sticky top-0 z-50 glass-card border-b bg-white/80 px-4 py-3">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <h1 class="text-xl font-bold gradient-text">GAME INTELLIGENCE 25/26</h1>
+            <div class="flex flex-col md:items-start items-center">
+                <h1 class="text-xl font-bold gradient-text">GAME INTELLIGENCE 25/26</h1>
+                <span class="text-[11px] text-slate-400 font-medium tracking-wide">CRIADO EM: 02/07/2026</span>
+            </div>
             <div class="flex space-x-6 text-sm font-semibold text-slate-600">
                 <a href="#overview" class="hover:text-sage-600 transition">MERCADO</a>
                 <a href="#top20" class="hover:text-sage-600 transition">TOP 20</a>
@@ -130,13 +133,17 @@
                     <input type="text" id="gameSearch" placeholder="Buscar por jogo ou gênero..."
                         class="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-sage-600 outline-none">
                 </div>
-                <div class="flex gap-2">
+                <div class="flex flex-wrap gap-2">
                     <button onclick="filterTable('All')"
                         class="px-3 py-1 rounded bg-slate-200 text-xs font-bold hover:bg-slate-300">TODOS</button>
                     <button onclick="filterTable('Mobile')"
                         class="px-3 py-1 rounded bg-slate-200 text-xs font-bold hover:bg-slate-300">MOBILE</button>
                     <button onclick="filterTable('Cross-platform')"
                         class="px-3 py-1 rounded bg-slate-200 text-xs font-bold hover:bg-slate-300">CROSS-PLATFORM</button>
+                    <button onclick="filterTable('PC')"
+                        class="px-3 py-1 rounded bg-slate-200 text-xs font-bold hover:bg-slate-300">PC</button>
+                    <button onclick="filterTable('Console')"
+                        class="px-3 py-1 rounded bg-slate-200 text-xs font-bold hover:bg-slate-300">CONSOLE</button>
                 </div>
             </div>
 
@@ -308,7 +315,7 @@
         }
 
         function filterTable(type) {
-            const filtered = type === 'All' ? gameData : gameData.filter(g => g.type === type);
+            const filtered = type === 'All' ? gameData : gameData.filter(g => g.type === type || g.platform.includes(type));
             populateTable(filtered);
         }
 
