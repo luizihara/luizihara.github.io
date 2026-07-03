@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Estratégico: Mercado de Games 2025-2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        :root {
+            --bg-creme: #FAF9F6;
+            --slate-800: #1e293b;
+            --sage-600: #4d7c0f;
+            --sage-100: #f1f5f9;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-creme);
+            color: var(--slate-800);
+            scroll-behavior: smooth;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #1e293b 0%, #4d7c0f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        .tab-active {
+            border-bottom: 3px solid var(--sage-600);
+            color: var(--sage-600);
+        }
+    </style>
+</head>
+
+<body class="antialiased overflow-x-hidden">
+
+    <!-- Navegação -->
+    <nav class="sticky top-0 z-50 glass-card border-b bg-white/80 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <h1 class="text-xl font-bold gradient-text">GAME INTELLIGENCE 25/26</h1>
+            <div class="flex space-x-6 text-sm font-semibold text-slate-600">
+                <a href="#overview" class="hover:text-sage-600 transition">MERCADO</a>
+                <a href="#top20" class="hover:text-sage-600 transition">TOP 20</a>
+                <a href="#visual" class="hover:text-sage-600 transition">VISUAL & TECH</a>
+                <a href="#strategy" class="hover:text-sage-600 transition">ESTRATÉGIA</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-16">
+
+        <!-- Seção 1: Overview -->
+        <section id="overview" class="space-y-8 animate-fade-in">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="text-sage-600 font-bold tracking-widest text-xs uppercase">Inteligência de Mercado</span>
+                <h2 class="text-4xl font-extrabold mt-2 mb-4">O Ponto de Inflexão da Indústria</h2>
+                <p class="text-slate-600 leading-relaxed">
+                    A indústria global de videojogos atingiu um ponto crítico no biénio 2025-2026. Com 3,6 mil milhões
+                    de jogadores e receitas ultrapassando US$ 200 bi, o mercado transita para uma era de "monetização em
+                    primeiro lugar" e retenção profunda de audiência.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-2xl shadow-sm text-center transform hover:scale-105 transition">
+                    <div class="text-4xl mb-2">🌎</div>
+                    <div class="text-3xl font-bold">3.6B</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Jogadores Ativos</div>
+                </div>
+                <div
+                    class="glass-card p-6 rounded-2xl shadow-sm text-center transform hover:scale-105 transition border-l-4 border-sage-600">
+                    <div class="text-4xl mb-2">💰</div>
+                    <div class="text-3xl font-bold">200B+</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Receita Global (USD)
+                    </div>
+                </div>
+                <div class="glass-card p-6 rounded-2xl shadow-sm text-center transform hover:scale-105 transition">
+                    <div class="text-4xl mb-2">📊</div>
+                    <div class="text-3xl font-bold">61.5%</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold">População Online Global
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 2: Top 20 Interativo -->
+        <section id="top20" class="space-y-6">
+            <div class="border-l-4 border-slate-800 pl-4">
+                <h3 class="text-2xl font-bold">Ranking de Engajamento Global</h3>
+                <p class="text-slate-500 text-sm">Análise baseada em MAU (Monthly Active Users) e DAU (Daily Active
+                    Users) consolidando PC, Mobile e Console.</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-4 mb-6 items-center justify-between">
+                <div class="relative w-full md:w-96">
+                    <input type="text" id="gameSearch" placeholder="Buscar por jogo ou gênero..."
+                        class="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-sage-600 outline-none">
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="filterTable('All')"
+                        class="px-3 py-1 rounded bg-slate-200 text-xs font-bold hover:bg-slate-300">TODOS</button>
+                    <button onclick="filterTable('Mobile')"
+                        class="px-3 py-1 rounded bg-slate-200 text-xs font-bold hover:bg-slate-300">MOBILE</button>
+                    <button onclick="filterTable('Cross-platform')"
+                        class="px-3 py-1 rounded bg-slate-200 text-xs font-bold hover:bg-slate-300">CROSS-PLATFORM</button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto rounded-xl border bg-white">
+                <table class="w-full text-left text-sm border-collapse" id="rankTable">
+                    <thead class="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider border-b">
+                        <tr>
+                            <th class="px-6 py-4">#</th>
+                            <th class="px-6 py-4">Jogo</th>
+                            <th class="px-6 py-4">Gênero Principal</th>
+                            <th class="px-6 py-4">Plataforma</th>
+                            <th class="px-6 py-4 text-right">Volume (MAU)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y text-slate-700 font-medium" id="tableBody">
+                        <!-- Gerado por JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Seção 3: Análise Técnica e Visual -->
+        <section id="visual" class="space-y-12">
+            <div class="bg-slate-900 text-white p-8 rounded-3xl space-y-8">
+                <div class="max-w-2xl">
+                    <h3 class="text-3xl font-bold">Engenharia Reversa Visual</h3>
+                    <p class="text-slate-400 mt-2">A análise dos 20 títulos mais jogados revela que o fotorrealismo não
+                        é o motor da retenção massiva. A acessibilidade técnica é o segredo do alcance global.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-semibold text-sage-600">Distribuição de Motores Gráficos (Engines)</h4>
+                        <div class="chart-container bg-white/5 p-4 rounded-2xl">
+                            <canvas id="engineChart"></canvas>
+                        </div>
+                        <p class="text-xs text-slate-400 italic">O Unity domina o setor móvel e independente, enquanto
+                            motores proprietários em C++ são usados pelos gigantes (Supercell, Riot) para otimização
+                            extrema.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-semibold text-sage-600">Paradigma Estético</h4>
+                        <div class="chart-container bg-white/5 p-4 rounded-2xl">
+                            <canvas id="styleChart"></canvas>
+                        </div>
+                        <p class="text-xs text-slate-400 italic">Apenas 25% dos títulos no Top 20 buscam o fotorrealismo
+                            militar ou cinematográfico. A estilização garante "elasticidade" tecnológica e temporal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 4: Insights e Benchmarking -->
+        <section id="strategy" class="space-y-10">
+            <div class="text-center">
+                <h3 class="text-3xl font-bold">Matriz Estratégica de Desenvolvimento</h3>
+                <p class="text-slate-600 mt-2">Onde investir e onde recuar em 2026.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Oceanos Vermelhos -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2 text-red-600 font-bold">
+                        <span>🔴</span>
+                        <h4>OCEANOS VERMELHOS (Saturação)</h4>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="glass-card p-5 rounded-xl border-l-4 border-red-500">
+                            <h5 class="font-bold">Battle Royales Fotorrealistas</h5>
+                            <p class="text-sm text-slate-600 mt-1">Domínio absoluto de CoD e Fortnite. Barreiras de
+                                capital e "custo irrecuperável" de cosméticos bloqueiam novos entrantes.</p>
+                        </div>
+                        <div class="glass-card p-5 rounded-xl border-l-4 border-red-500">
+                            <h5 class="font-bold">MOBAs Puros (Mercado Asiático)</h5>
+                            <p class="text-sm text-slate-600 mt-1">Cinturão MOBA asiático blindado por ecossistemas
+                                eSports locais. Saturação geográfica extrema.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Oceanos Azuis -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2 text-sage-600 font-bold">
+                        <span>🔵</span>
+                        <h4>OCEANOS AZUIS (Oportunidade)</h4>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="glass-card p-5 rounded-xl border-l-4 border-sage-600 hover:shadow-md transition">
+                            <h5 class="font-bold">Horror Social & "Friendslop"</h5>
+                            <p class="text-sm text-slate-600 mt-1">Foco em físicas instáveis e chat de proximidade.
+                                Sucesso de R.E.P.O prova que o falhanço hilariante retém mais que a competição tóxica.
+                            </p>
+                        </div>
+                        <div class="glass-card p-5 rounded-xl border-l-4 border-sage-600 hover:shadow-md transition">
+                            <h5 class="font-bold">Puzzles "Zen" Sinceros</h5>
+                            <p class="text-sm text-slate-600 mt-1">Remover mecânicas punitivas e monetização agressiva
+                                (ex: Block Blast). Foco no relaxamento puro atrai demografias maduras.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-sage-100 p-8 rounded-3xl border border-sage-200">
+                <h4 class="text-xl font-bold mb-4">A Arquitetura da Eficiência Visual</h4>
+                <p class="text-slate-700 leading-relaxed">
+                    Para novos estúdios, o investimento em <strong>"Game Feel" (VFX/SFX)</strong> deve sobrepor-se à
+                    complexidade de polígonos. Estilos como <em>Flat Shading</em> e <em>Low-Poly Retro</em> reduzem o
+                    pipeline de arte em 50%, permitindo focar no que realmente importa: mecânicas sistémicas e
+                    interações sociais orgânicas.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 py-12 px-4 mt-20 text-center">
+        <div class="max-w-4xl mx-auto space-y-4">
+            <p class="text-sm">Relatório Estratégico de Inteligência de Mercado | Game Dev Intel 2026</p>
+            <div class="flex justify-center space-x-4 text-xs font-mono">
+                <span>UNITY: DOMINANTE</span>
+                <span>•</span>
+                <span>RETENÇÃO: PRIORIDADE</span>
+                <span>•</span>
+                <span>ESTILIZAÇÃO: ESCALA</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const gameData = [
+            { id: 1, name: "Roblox", genre: "Sandbox / UGC", platform: "Cross-platform", mau: "380M", type: "Cross-platform" },
+            { id: 2, name: "Block Blast", genre: "Puzzle Casual", platform: "Mobile", mau: "300M", type: "Mobile" },
+            { id: 3, name: "Candy Crush Saga", genre: "Match-3", platform: "Mobile", mau: "273M", type: "Mobile" },
+            { id: 4, name: "Minecraft", genre: "Survival / Sandbox", platform: "Cross-platform", mau: "212M", type: "Cross-platform" },
+            { id: 5, name: "PUBG Mobile", genre: "Battle Royale", platform: "Mobile", mau: "150M", type: "Mobile" },
+            { id: 6, name: "Free Fire", genre: "Battle Royale", platform: "Mobile", mau: "130M", type: "Mobile" },
+            { id: 7, name: "League of Legends", genre: "MOBA", platform: "PC", mau: "117M", type: "PC" },
+            { id: 8, name: "Fortnite", genre: "Battle Royale / Metaverso", platform: "Cross-platform", mau: "110M", type: "Cross-platform" },
+            { id: 9, name: "Mobile Legends: Bang Bang", genre: "MOBA", platform: "Mobile", mau: "110M", type: "Mobile" },
+            { id: 10, name: "Honor of Kings", genre: "MOBA", platform: "Mobile", mau: "100M+", type: "Mobile" },
+            { id: 11, name: "Genshin Impact", genre: "Action RPG", platform: "Cross-platform", mau: "95M", type: "Cross-platform" },
+            { id: 12, name: "EA Sports FC 25/26", genre: "Simulação Desportiva", platform: "Cross-platform", mau: "85M", type: "Cross-platform" },
+            { id: 13, name: "Valorant", genre: "Tactical Shooter", platform: "PC/Console", mau: "75M", type: "Cross-platform" },
+            { id: 14, name: "Royal Match", genre: "Match-3 / Puzzle", platform: "Mobile", mau: "55M", type: "Mobile" },
+            { id: 15, name: "Palworld", genre: "Survival / Monster Taming", platform: "PC/Console", mau: "55M", type: "Cross-platform" },
+            { id: 16, name: "Brawl Stars", genre: "Hero Shooter / MOBA Lite", platform: "Mobile", mau: "52M", type: "Mobile" },
+            { id: 17, name: "Counter-Strike 2", genre: "Tactical Shooter", platform: "PC", mau: "40M", type: "PC" },
+            { id: 18, name: "CoD HQ (Warzone)", genre: "Shooter / BR", platform: "PC/Console", mau: "50M", type: "Cross-platform" },
+            { id: 19, name: "GTA V / Online", genre: "Action / Open World", platform: "PC/Console", mau: "30M", type: "Cross-platform" },
+            { id: 20, name: "R.E.P.O.", genre: "Social Horror / Co-op", platform: "PC (Early Access)", mau: "16.5M", type: "PC" }
+        ];
+
+        function populateTable(data) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            data.forEach(game => {
+                const row = `<tr class="hover:bg-slate-50 transition border-b">
+                    <td class="px-6 py-4 text-slate-400">#${game.id}</td>
+                    <td class="px-6 py-4 font-bold text-slate-800">${game.name}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 rounded-full bg-sage-100 text-sage-600 text-xs">${game.genre}</span>
+                    </td>
+                    <td class="px-6 py-4 text-slate-500">${game.platform}</td>
+                    <td class="px-6 py-4 text-right font-mono font-bold text-slate-800">${game.mau}</td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function filterTable(type) {
+            const filtered = type === 'All' ? gameData : gameData.filter(g => g.type === type);
+            populateTable(filtered);
+        }
+
+        document.getElementById('gameSearch').addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            const filtered = gameData.filter(g =>
+                g.name.toLowerCase().includes(val) ||
+                g.genre.toLowerCase().includes(val)
+            );
+            populateTable(filtered);
+        });
+
+        // Gráficos
+        const ctxEngine = document.getElementById('engineChart').getContext('2d');
+        const ctxStyle = document.getElementById('styleChart').getContext('2d');
+
+        new Chart(ctxEngine, {
+            type: 'doughnut',
+            data: {
+                labels: ['Unity', 'Unreal Engine', 'Proprietário C++', 'Cocos/Outros'],
+                datasets: [{
+                    data: [7, 4, 6, 3],
+                    backgroundColor: ['#4d7c0f', '#1e293b', '#64748b', '#94a3b8'],
+                    borderColor: 'transparent'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#fff', padding: 20 } }
+                }
+            }
+        });
+
+        new Chart(ctxStyle, {
+            type: 'bar',
+            data: {
+                labels: ['Estilizado/Cartoon', 'Fotorrealista', 'Retro/Low-poly', '2D Polido'],
+                datasets: [{
+                    label: 'Quantidade de Jogos',
+                    data: [9, 5, 3, 3],
+                    backgroundColor: '#4d7c0f'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#fff' }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#fff',
+                            callback: function (value) {
+                                let label = this.getLabelForValue(value);
+                                return label.length > 16 ? label.substr(0, 13) + '...' : label;
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // Inicialização
+        populateTable(gameData);
+    </script>
+</body>
+
+</html>
