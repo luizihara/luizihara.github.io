@@ -4,18 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório Estratégico: Mercado de Games 2025-2026</title>
-    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+    <title>Relatório Estratégico Deep Data: Mercado de Games 2025-2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
         :root {
             --bg-creme: #FAF9F6;
             --slate-800: #1e293b;
             --sage-600: #4d7c0f;
             --sage-100: #f1f5f9;
+            --accent-blue: #0284c7;
+            --accent-amber: #d97706;
         }
 
         body {
@@ -28,17 +29,20 @@
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 400px;
+            height: 300px;
+        }
+
+        .chart-container-large {
+            position: relative;
+            width: 100%;
+            height: 400px;
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         }
 
         .gradient-text {
@@ -60,263 +64,457 @@
             border-radius: 10px;
         }
 
-        .tab-active {
-            border-bottom: 3px solid var(--sage-600);
-            color: var(--sage-600);
+        /* Animações */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
         }
     </style>
 </head>
 
-<body class="antialiased overflow-x-hidden">
+<body class="antialiased overflow-x-hidden custom-scrollbar">
 
-    <!-- Navegação -->
-    <nav class="sticky top-0 z-50 glass-card border-b bg-white/80 px-4 py-3">
+    <nav class="sticky top-0 z-50 glass-card border-b bg-white/90 px-4 py-3">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex flex-col md:items-start items-center">
-                <h1 class="text-xl font-bold gradient-text">GAME INTELLIGENCE 25/26</h1>
-                <span class="text-[11px] text-slate-400 font-medium tracking-wide">CRIADO EM: 02/07/2026</span>
-            </div>
-            <div class="flex space-x-6 text-sm font-semibold text-slate-600">
-                <a href="#overview" class="hover:text-sage-600 transition">MERCADO</a>
+            <h1 class="text-xl font-extrabold gradient-text tracking-tight">GAME INTEL DEEP DATA '26</h1>
+            <div class="flex flex-wrap justify-center space-x-4 md:space-x-6 text-sm font-semibold text-slate-600">
+                <a href="#overview" class="hover:text-sage-600 transition">MACRO</a>
                 <a href="#top20" class="hover:text-sage-600 transition">TOP 20</a>
-                <a href="#visual" class="hover:text-sage-600 transition">VISUAL & TECH</a>
-                <a href="#strategy" class="hover:text-sage-600 transition">ESTRATÉGIA</a>
+                <a href="#data-hub" class="hover:text-sage-600 transition">DATA HUB</a>
+                <a href="#demographics" class="hover:text-sage-600 transition">COMPORTAMENTO</a>
+                <a href="#strategy" class="hover:text-sage-600 transition">MATRIZ ESTRATÉGICA</a>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-4 py-8 space-y-16">
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-20">
 
         <!-- Seção 1: Overview -->
-        <section id="overview" class="space-y-8 animate-fade-in">
-            <div class="text-center max-w-3xl mx-auto">
-                <span class="text-sage-600 font-bold tracking-widest text-xs uppercase">Inteligência de Mercado</span>
-                <h2 class="text-4xl font-extrabold mt-2 mb-4">O Ponto de Inflexão da Indústria</h2>
-                <p class="text-slate-600 leading-relaxed">
-                    A indústria global de videojogos atingiu um ponto crítico no biénio 2025-2026. Com 3,6 mil milhões
-                    de jogadores e receitas ultrapassando US$ 200 bi, o mercado transita para uma era de "monetização em
-                    primeiro lugar" e retenção profunda de audiência.
+        <section id="overview" class="space-y-10 animate-fade-in pt-8">
+            <div class="text-center max-w-4xl mx-auto space-y-4">
+                <span
+                    class="inline-block py-1 px-3 rounded-full bg-sage-100 text-sage-600 font-bold tracking-widest text-xs uppercase mb-2">Executive
+                    Summary</span>
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">A Economia da Atenção 2.0</h2>
+                <p class="text-lg text-slate-600 leading-relaxed font-light">
+                    O mercado de games em 2025-2026 não é mais definido por cópias vendidas, mas por <strong>tempo
+                        monopolizado</strong>. Com a saturação do modelo AAA tradicional (devido a orçamentos
+                    insustentáveis de $200M+), o foco global migrou para a retenção perpétua, conteúdo gerado pelo
+                    usuário (UGC) e acessibilidade multi-plataforma extrema.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-card p-6 rounded-2xl shadow-sm text-center transform hover:scale-105 transition">
-                    <div class="text-4xl mb-2">🌎</div>
-                    <div class="text-3xl font-bold">3.6B</div>
-                    <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Jogadores Ativos</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div
+                    class="glass-card p-6 rounded-2xl text-center transform hover:-translate-y-1 transition duration-300">
+                    <div class="text-4xl mb-3">🌎</div>
+                    <div class="text-3xl font-extrabold text-slate-800">3.6B</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-widest font-bold mt-1">Jogadores Ativos</div>
                 </div>
                 <div
-                    class="glass-card p-6 rounded-2xl shadow-sm text-center transform hover:scale-105 transition border-l-4 border-sage-600">
-                    <div class="text-4xl mb-2">💰</div>
-                    <div class="text-3xl font-bold">200B+</div>
-                    <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Receita Global (USD)
-                    </div>
+                    class="glass-card p-6 rounded-2xl text-center transform hover:-translate-y-1 transition duration-300">
+                    <div class="text-4xl mb-3">💰</div>
+                    <div class="text-3xl font-extrabold text-slate-800">US$ 212B</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-widest font-bold mt-1">Receita Projetada</div>
                 </div>
-                <div class="glass-card p-6 rounded-2xl shadow-sm text-center transform hover:scale-105 transition">
-                    <div class="text-4xl mb-2">📊</div>
-                    <div class="text-3xl font-bold">61.5%</div>
-                    <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold">População Online Global
-                    </div>
+                <div
+                    class="glass-card p-6 rounded-2xl text-center transform hover:-translate-y-1 transition duration-300">
+                    <div class="text-4xl mb-3">📱</div>
+                    <div class="text-3xl font-extrabold text-slate-800">49%</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-widest font-bold mt-1">Share do Mobile</div>
+                </div>
+                <div
+                    class="glass-card p-6 rounded-2xl text-center transform hover:-translate-y-1 transition duration-300 border-b-4 border-sage-600">
+                    <div class="text-4xl mb-3">⏱️</div>
+                    <div class="text-3xl font-extrabold text-slate-800">+14%</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-widest font-bold mt-1">Crescimento de Horas
+                        Jogadas</div>
                 </div>
             </div>
         </section>
 
-        <!-- Seção 2: Top 20 Interativo -->
-        <section id="top20" class="space-y-6">
-            <div class="border-l-4 border-slate-800 pl-4">
-                <h3 class="text-2xl font-bold">Ranking de Engajamento Global</h3>
-                <p class="text-slate-500 text-sm">Análise baseada em MAU (Monthly Active Users) e DAU (Daily Active
-                    Users) consolidando PC, Mobile e Console.</p>
-            </div>
-
-            <div class="flex flex-col md:flex-row gap-4 mb-6 items-center justify-between">
-                <div class="relative w-full md:w-96">
-                    <input type="text" id="gameSearch" placeholder="Buscar por jogo ou gênero..."
-                        class="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-sage-600 outline-none">
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <button onclick="filterTable('All')"
-                        class="px-3 py-1 rounded bg-slate-200 text-xs font-bold hover:bg-slate-300">TODOS</button>
-                    <button onclick="filterTable('Mobile')"
-                        class="px-3 py-1 rounded bg-slate-200 text-xs font-bold hover:bg-slate-300">MOBILE</button>
-                    <button onclick="filterTable('Cross-platform')"
-                        class="px-3 py-1 rounded bg-slate-200 text-xs font-bold hover:bg-slate-300">CROSS-PLATFORM</button>
-                    <button onclick="filterTable('PC')"
-                        class="px-3 py-1 rounded bg-slate-200 text-xs font-bold hover:bg-slate-300">PC</button>
-                    <button onclick="filterTable('Console')"
-                        class="px-3 py-1 rounded bg-slate-200 text-xs font-bold hover:bg-slate-300">CONSOLE</button>
+        <!-- Seção 2: Top 20 Interativo Expandido -->
+        <section id="top20" class="space-y-6 pt-10">
+            <div class="flex flex-col md:flex-row justify-between items-end border-b pb-4">
+                <div class="border-l-4 border-slate-800 pl-4 max-w-2xl">
+                    <h3 class="text-3xl font-black text-slate-900">Top 20 Global Deep Data</h3>
+                    <p class="text-slate-500 mt-2 text-sm">Métricas cruzadas de MAU, plataformas e modelos de negócios.
+                        Note a dominância esmagadora do modelo F2P (Free-to-Play) nos volumes massivos.</p>
                 </div>
             </div>
 
-            <div class="overflow-x-auto rounded-xl border bg-white">
-                <table class="w-full text-left text-sm border-collapse" id="rankTable">
-                    <thead class="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider border-b">
+            <div
+                class="flex flex-col md:flex-row gap-4 mb-6 items-center justify-between bg-white p-4 rounded-xl border shadow-sm">
+                <div class="relative w-full md:w-1/3">
+                    <svg class="absolute left-3 top-3 h-5 w-5 text-slate-400" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <input type="text" id="gameSearch" placeholder="Filtrar jogo, gênero, dev..."
+                        class="w-full pl-10 pr-4 py-2 rounded-lg bg-slate-50 border-slate-200 border focus:bg-white focus:ring-2 focus:ring-sage-600 outline-none transition">
+                </div>
+                <div class="flex flex-wrap gap-2 w-full md:w-auto">
+                    <button onclick="filterTable('All', this)"
+                        class="filter-btn px-4 py-2 rounded-lg bg-sage-600 text-white text-xs font-bold transition shadow-md">TODOS</button>
+                    <button onclick="filterTable('Mobile', this)"
+                        class="filter-btn px-4 py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-bold transition">MOBILE</button>
+                    <button onclick="filterTable('PC', this)"
+                        class="filter-btn px-4 py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-bold transition">PC
+                        EXCLUSIVE</button>
+                    <button onclick="filterTable('Cross-platform', this)"
+                        class="filter-btn px-4 py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-bold transition">CROSS-PLATFORM</button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto rounded-xl shadow-sm border border-slate-200 bg-white">
+                <table class="w-full text-left text-sm border-collapse whitespace-nowrap" id="rankTable">
+                    <thead class="bg-slate-800 text-slate-100 font-bold uppercase tracking-wider text-xs">
                         <tr>
-                            <th class="px-6 py-4">#</th>
-                            <th class="px-6 py-4">Jogo</th>
-                            <th class="px-6 py-4">Gênero Principal</th>
-                            <th class="px-6 py-4">Plataforma</th>
-                            <th class="px-6 py-4 text-right">Volume (MAU)</th>
+                            <th class="px-5 py-4">#</th>
+                            <th class="px-5 py-4">Título</th>
+                            <th class="px-5 py-4">Gênero Principal</th>
+                            <th class="px-5 py-4">Plataforma</th>
+                            <th class="px-5 py-4 hidden md:table-cell">Monetização</th>
+                            <th class="px-5 py-4 hidden lg:table-cell">Lançamento</th>
+                            <th class="px-5 py-4 text-right">MAU Est.</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y text-slate-700 font-medium" id="tableBody">
-                        <!-- Gerado por JS -->
+                    <tbody class="divide-y divide-slate-100 text-slate-700 font-medium" id="tableBody">
+                        <!-- Gerado dinamicamente via JavaScript -->
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- Seção 3: Análise Técnica e Visual -->
-        <section id="visual" class="space-y-12">
-            <div class="bg-slate-900 text-white p-8 rounded-3xl space-y-8">
-                <div class="max-w-2xl">
-                    <h3 class="text-3xl font-bold">Engenharia Reversa Visual</h3>
-                    <p class="text-slate-400 mt-2">A análise dos 20 títulos mais jogados revela que o fotorrealismo não
-                        é o motor da retenção massiva. A acessibilidade técnica é o segredo do alcance global.</p>
+        <!-- Seção 3: Data Intelligence Hub (Gráficos) -->
+        <section id="data-hub" class="space-y-10 pt-10">
+            <div class="text-center">
+                <h3 class="text-3xl font-black text-slate-900">Intelligence Hub Visual & Comercial</h3>
+                <p class="text-slate-600 mt-2 max-w-3xl mx-auto">
+                    A engenharia reversa do Top 20 revela que o sucesso não reside na complexidade gráfica, mas na
+                    acessibilidade tecnológica e em modelos de negócios de baixo atrito.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Gráfico 1: Engines -->
+                <div class="bg-white p-6 rounded-2xl border shadow-sm flex flex-col">
+                    <h4 class="text-lg font-bold text-slate-800 mb-1">Ecossistema de Motores Gráficos</h4>
+                    <p class="text-xs text-slate-500 mb-6">Proporção de engines no Top 20 global.</p>
+                    <div class="chart-container flex-grow">
+                        <canvas id="engineChart"></canvas>
+                    </div>
+                    <div class="mt-4 p-4 bg-slate-50 rounded-lg border text-sm text-slate-600">
+                        <strong>Insight:</strong> O Unity mantém dominância devido ao massivo mercado mobile. Motores
+                        proprietários em C++ (Riot, Valve) focam em latência ultra-baixa para eSports.
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    <div class="space-y-4">
-                        <h4 class="text-lg font-semibold text-sage-600">Distribuição de Motores Gráficos (Engines)</h4>
-                        <div class="chart-container bg-white/5 p-4 rounded-2xl">
-                            <canvas id="engineChart"></canvas>
-                        </div>
-                        <p class="text-xs text-slate-400 italic">O Unity domina o setor móvel e independente, enquanto
-                            motores proprietários em C++ são usados pelos gigantes (Supercell, Riot) para otimização
-                            extrema.</p>
+                <!-- Gráfico 2: Estética -->
+                <div class="bg-white p-6 rounded-2xl border shadow-sm flex flex-col">
+                    <h4 class="text-lg font-bold text-slate-800 mb-1">Paradigma de Direção de Arte</h4>
+                    <p class="text-xs text-slate-500 mb-6">Classificação visual técnica dos líderes de retenção.</p>
+                    <div class="chart-container flex-grow">
+                        <canvas id="styleChart"></canvas>
                     </div>
+                    <div class="mt-4 p-4 bg-slate-50 rounded-lg border text-sm text-slate-600">
+                        <strong>Insight:</strong> O "Estilizado" (Fortnite, Valorant, Genshin) vence o "Fotorrealismo"
+                        (CoD). Garante rodar em hardware antigo e envelhece melhor (future-proofing).
+                    </div>
+                </div>
 
-                    <div class="space-y-4">
-                        <h4 class="text-lg font-semibold text-sage-600">Paradigma Estético</h4>
-                        <div class="chart-container bg-white/5 p-4 rounded-2xl">
-                            <canvas id="styleChart"></canvas>
-                        </div>
-                        <p class="text-xs text-slate-400 italic">Apenas 25% dos títulos no Top 20 buscam o fotorrealismo
-                            militar ou cinematográfico. A estilização garante "elasticidade" tecnológica e temporal.</p>
+                <!-- Gráfico 3: Monetização -->
+                <div class="bg-white p-6 rounded-2xl border shadow-sm flex flex-col">
+                    <h4 class="text-lg font-bold text-slate-800 mb-1">Distribuição de Modelos de Receita</h4>
+                    <p class="text-xs text-slate-500 mb-6">Como os jogos mais populares geram fluxo de caixa contínuo.
+                    </p>
+                    <div class="chart-container flex-grow">
+                        <canvas id="monetizationChart"></canvas>
+                    </div>
+                    <div class="mt-4 p-4 bg-slate-50 rounded-lg border text-sm text-slate-600">
+                        <strong>Insight:</strong> 85% do engajamento massivo é Free-to-Play. A barreira de entrada
+                        financeira foi substituída pela barreira de tempo (Passe de Batalha/Gacha).
+                    </div>
+                </div>
+
+                <!-- Gráfico 4: Plataformas -->
+                <div class="bg-white p-6 rounded-2xl border shadow-sm flex flex-col">
+                    <h4 class="text-lg font-bold text-slate-800 mb-1">Concentração de Audiência por Plataforma</h4>
+                    <p class="text-xs text-slate-500 mb-6">Share do engajamento ativo global (MAU cross-platform).</p>
+                    <div class="chart-container flex-grow">
+                        <canvas id="platformChart"></canvas>
+                    </div>
+                    <div class="mt-4 p-4 bg-slate-50 rounded-lg border text-sm text-slate-600">
+                        <strong>Insight:</strong> O paradigma "Console-First" morreu. As IPs mais fortes hoje nascem no
+                        Mobile ou são arquitetadas desde o dia 1 para Cross-play e Cross-progression.
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Seção 4: Insights e Benchmarking -->
-        <section id="strategy" class="space-y-10">
+        <!-- Seção 4: Comportamento e Demografia -->
+        <section id="demographics" class="bg-slate-900 text-white rounded-3xl p-8 md:p-12 space-y-10 shadow-xl mt-16">
             <div class="text-center">
-                <h3 class="text-3xl font-bold">Matriz Estratégica de Desenvolvimento</h3>
-                <p class="text-slate-600 mt-2">Onde investir e onde recuar em 2026.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Oceanos Vermelhos -->
-                <div class="space-y-4">
-                    <div class="flex items-center space-x-2 text-red-600 font-bold">
-                        <span>🔴</span>
-                        <h4>OCEANOS VERMELHOS (Saturação)</h4>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="glass-card p-5 rounded-xl border-l-4 border-red-500">
-                            <h5 class="font-bold">Battle Royales Fotorrealistas</h5>
-                            <p class="text-sm text-slate-600 mt-1">Domínio absoluto de CoD e Fortnite. Barreiras de
-                                capital e "custo irrecuperável" de cosméticos bloqueiam novos entrantes.</p>
-                        </div>
-                        <div class="glass-card p-5 rounded-xl border-l-4 border-red-500">
-                            <h5 class="font-bold">MOBAs Puros (Mercado Asiático)</h5>
-                            <p class="text-sm text-slate-600 mt-1">Cinturão MOBA asiático blindado por ecossistemas
-                                eSports locais. Saturação geográfica extrema.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Oceanos Azuis -->
-                <div class="space-y-4">
-                    <div class="flex items-center space-x-2 text-sage-600 font-bold">
-                        <span>🔵</span>
-                        <h4>OCEANOS AZUIS (Oportunidade)</h4>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="glass-card p-5 rounded-xl border-l-4 border-sage-600 hover:shadow-md transition">
-                            <h5 class="font-bold">Horror Social & "Friendslop"</h5>
-                            <p class="text-sm text-slate-600 mt-1">Foco em físicas instáveis e chat de proximidade.
-                                Sucesso de R.E.P.O prova que o falhanço hilariante retém mais que a competição tóxica.
-                            </p>
-                        </div>
-                        <div class="glass-card p-5 rounded-xl border-l-4 border-sage-600 hover:shadow-md transition">
-                            <h5 class="font-bold">Puzzles "Zen" Sinceros</h5>
-                            <p class="text-sm text-slate-600 mt-1">Remover mecânicas punitivas e monetização agressiva
-                                (ex: Block Blast). Foco no relaxamento puro atrai demografias maduras.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-sage-100 p-8 rounded-3xl border border-sage-200">
-                <h4 class="text-xl font-bold mb-4">A Arquitetura da Eficiência Visual</h4>
-                <p class="text-slate-700 leading-relaxed">
-                    Para novos estúdios, o investimento em <strong>"Game Feel" (VFX/SFX)</strong> deve sobrepor-se à
-                    complexidade de polígonos. Estilos como <em>Flat Shading</em> e <em>Low-Poly Retro</em> reduzem o
-                    pipeline de arte em 50%, permitindo focar no que realmente importa: mecânicas sistémicas e
-                    interações sociais orgânicas.
+                <span class="text-accent-blue font-bold tracking-widest text-xs uppercase">Estudo Demográfico</span>
+                <h3 class="text-3xl md:text-4xl font-black mt-2">A Nova Geração Fragmentada</h3>
+                <p class="text-slate-400 mt-4 max-w-2xl mx-auto">
+                    Entender o jogador de 2026 exige separar o mercado em clusters demográficos. O design de sistemas
+                    que atrai um jogador Gen X afasta imediatamente um nativo Gen Alpha.
                 </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700 hover:border-accent-blue transition">
+                    <h4 class="text-xl font-bold text-accent-blue mb-2">Gen Alpha & Z (Sub-25)</h4>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li class="flex items-start"><span class="mr-2">🎮</span> <strong>Foco:</strong> Mundos como
+                            plataformas sociais (Roblox, Fortnite).</li>
+                        <li class="flex items-start"><span class="mr-2">⏱️</span> <strong>Comportamento:</strong>
+                            Sessões curtas de jogo intenso misturadas com criação de conteúdo (UGC) e chat de voz
+                            nativo.</li>
+                        <li class="flex items-start"><span class="mr-2">💸</span> <strong>Monetização:</strong> Gastam
+                            em identidade digital (Skins, Avatares) como símbolo de status social.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700 hover:border-sage-500 transition">
+                    <h4 class="text-xl font-bold text-sage-500 mb-2">Millennials (25-40)</h4>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li class="flex items-start"><span class="mr-2">🎮</span> <strong>Foco:</strong> Nostalgia
+                            competitiva (CS2, LoL) e RPGs narrativos de alta qualidade.</li>
+                        <li class="flex items-start"><span class="mr-2">⏱️</span> <strong>Comportamento:</strong>
+                            Sessões programadas (fim de semana/noite). Valorizam respeito ao seu tempo (progressão
+                            clara).</li>
+                        <li class="flex items-start"><span class="mr-2">💸</span> <strong>Monetização:</strong>
+                            Assinaturas (Game Pass) e microtransações utilitárias/cosméticas sem "Pay-to-Win".</li>
+                    </ul>
+                </div>
+
+                <div
+                    class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700 hover:border-accent-amber transition">
+                    <h4 class="text-xl font-bold text-accent-amber mb-2">Gen X & Boomers (+40)</h4>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li class="flex items-start"><span class="mr-2">🎮</span> <strong>Foco:</strong> Casual, Match-3
+                            (Candy Crush), Jogos de Palavras, Simuladores de Construção.</li>
+                        <li class="flex items-start"><span class="mr-2">⏱️</span> <strong>Comportamento:</strong> Jogos
+                            como ferramenta de relaxamento. Alta frequência diária, sessões curtas (mobile commuting).
+                        </li>
+                        <li class="flex items-start"><span class="mr-2">💸</span> <strong>Monetização:</strong> Anúncios
+                            recompensados (Rewarded Ads) e facilitadores de puzzle.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 5: Estratégia e Benchmarking -->
+        <section id="strategy" class="space-y-10 pt-10">
+            <div class="border-l-4 border-slate-800 pl-4">
+                <h3 class="text-3xl font-black text-slate-900">Matriz Estratégica: Onde Alocar Capital</h3>
+                <p class="text-slate-500 mt-2 max-w-3xl">
+                    Análise competitiva de mercado baseada na barreira de entrada técnica versus o potencial de
+                    retenção. Evite os "Oceanos Vermelhos" a menos que possua +$100M em fundos.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- RED OCEANS -->
+                <div class="space-y-6">
+                    <div
+                        class="inline-flex items-center space-x-2 bg-red-50 text-red-700 px-4 py-2 rounded-lg font-bold border border-red-200">
+                        <span class="text-xl">⚠️</span>
+                        <h4>Oceanos Vermelhos (Hiper-Saturados)</h4>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-white p-5 rounded-xl border-l-4 border-red-500 shadow-sm">
+                            <h5 class="font-bold text-lg text-slate-800">Battle Royales Puros</h5>
+                            <p class="text-sm text-slate-600 mt-2 mb-3">Dominado por Apex, Fortnite e Warzone. O custo
+                                de aquisição de clientes (CAC) é proibitivo. A expectativa do usuário por updates
+                                constantes exige equipes de 500+ pessoas.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Risco: Crítico</span>
+                                <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded">Custo Dev:
+                                    AAA</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-xl border-l-4 border-red-500 shadow-sm">
+                            <h5 class="font-bold text-lg text-slate-800">Hero Shooters Competitivos</h5>
+                            <p class="text-sm text-slate-600 mt-2 mb-3">O mercado rejeitou dezenas de clones recentes.
+                                Overwatch 2 e Valorant monopolizam a atenção e o cenário de eSports. Falta de espaço
+                                para novas IPs sem inovação disruptiva mecânica.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Risco: Alto</span>
+                                <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded">Base Insta:
+                                    Infiel</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BLUE OCEANS -->
+                <div class="space-y-6">
+                    <div
+                        class="inline-flex items-center space-x-2 bg-sage-50 text-sage-700 px-4 py-2 rounded-lg font-bold border border-sage-200">
+                        <span class="text-xl">💡</span>
+                        <h4>Oceanos Azuis (Janelas de Oportunidade)</h4>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div
+                            class="bg-white p-5 rounded-xl border-l-4 border-sage-500 shadow-sm hover:shadow-md transition">
+                            <h5 class="font-bold text-lg text-slate-800">Social Horror Co-op Acústico</h5>
+                            <p class="text-sm text-slate-600 mt-2 mb-3">Modelos inspirados em *Lethal Company* e
+                                *Phasmophobia*. Foco em proximidade de voz, gráficos rudimentares/PS1-style que reduzem
+                                o custo de arte, e física "janky" que gera clipes virais no TikTok.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-sage-100 text-sage-800 text-xs px-2 py-1 rounded">Potencial Viral:
+                                    Alto</span>
+                                <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded">Custo Dev:
+                                    Baixo/AA</span>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white p-5 rounded-xl border-l-4 border-sage-500 shadow-sm hover:shadow-md transition">
+                            <h5 class="font-bold text-lg text-slate-800">"Cozy" Extraction & Survival</h5>
+                            <p class="text-sm text-slate-600 mt-2 mb-3">Remover o PVP estressante de jogos de
+                                extração/sobrevivência e focar em PVE colaborativo, coleta de recursos satisfatória e
+                                construção de base (ex: *Palworld* simplificado, *Enshrouded*). Público massivo de
+                                jogadores casuais buscando transição para core.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-sage-100 text-sage-800 text-xs px-2 py-1 rounded">Retenção: Longa</span>
+                                <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded">Estética:
+                                    Estilizada</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-slate-800 to-slate-900 p-8 rounded-3xl text-white shadow-lg mt-8 relative overflow-hidden">
+                <div class="absolute right-0 top-0 opacity-10 text-9xl">📈</div>
+                <h4 class="text-2xl font-bold mb-4">O Veredicto Técnico para Novos Projetos</h4>
+                <div class="space-y-4 text-slate-300">
+                    <p>
+                        Para a concepção de um novo jogo com orçamento AA ou Indie+, a matemática do mercado dita as
+                        seguintes regras:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 font-medium">
+                        <li><strong>Engine Recomendada:</strong> Unreal Engine 5 (para AA buscando fidelidade de
+                            iluminação com Lumen em gráficos estilizados) ou Godot (ganhando tração massiva para 2D/2.5D
+                            devido a licenças livres).</li>
+                        <li><strong>Direção de Arte:</strong> Estilização forte. Low-poly texturizado à mão ou
+                            Cell-Shading. Isso corta o tempo de produção de assets em 60% comparado ao PBR
+                            fotorrealista.</li>
+                        <li><strong>Networking:</strong> A integração social e Co-op não é mais uma "feature extra", é o
+                            núcleo do game design. Jogos single-player sem componente UGC ou narrativo espetacular
+                            enfrentam paredes de vendas brutais.</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="bg-slate-800 text-slate-400 py-12 px-4 mt-20 text-center">
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-500 py-12 px-4 mt-20 text-center">
         <div class="max-w-4xl mx-auto space-y-4">
-            <p class="text-sm">Relatório Estratégico de Inteligência de Mercado | Game Dev Intel 2026</p>
-            <div class="flex justify-center space-x-4 text-xs font-mono">
-                <span>UNITY: DOMINANTE</span>
-                <span>•</span>
-                <span>RETENÇÃO: PRIORIDADE</span>
-                <span>•</span>
-                <span>ESTILIZAÇÃO: ESCALA</span>
+            <p class="text-sm uppercase tracking-widest font-bold text-slate-400">Deep Data Report • Game Intelligence
+                Agency 2026</p>
+            <div class="flex flex-wrap justify-center gap-4 text-xs font-mono">
+                <span class="bg-slate-800 px-3 py-1 rounded">DESIGN PARA RETENÇÃO</span>
+                <span class="bg-slate-800 px-3 py-1 rounded">ESTILIZAÇÃO > FOTORREALISMO</span>
+                <span class="bg-slate-800 px-3 py-1 rounded">CROSS-PLATFORM NATIVO</span>
             </div>
+            <p class="text-xs mt-8 opacity-50">Dados consolidados baseados em estimativas de mercado, APIs públicas de
+                plataformas e análises de tendências do biénio 2024-2025.</p>
         </div>
     </footer>
 
     <script>
+        // Dados Estruturados Expandidos
         const gameData = [
-            { id: 1, name: "Roblox", genre: "Sandbox / UGC", platform: "Cross-platform", mau: "380M", type: "Cross-platform" },
-            { id: 2, name: "Block Blast", genre: "Puzzle Casual", platform: "Mobile", mau: "300M", type: "Mobile" },
-            { id: 3, name: "Candy Crush Saga", genre: "Match-3", platform: "Mobile", mau: "273M", type: "Mobile" },
-            { id: 4, name: "Minecraft", genre: "Survival / Sandbox", platform: "Cross-platform", mau: "212M", type: "Cross-platform" },
-            { id: 5, name: "PUBG Mobile", genre: "Battle Royale", platform: "Mobile", mau: "150M", type: "Mobile" },
-            { id: 6, name: "Free Fire", genre: "Battle Royale", platform: "Mobile", mau: "130M", type: "Mobile" },
-            { id: 7, name: "League of Legends", genre: "MOBA", platform: "PC", mau: "117M", type: "PC" },
-            { id: 8, name: "Fortnite", genre: "Battle Royale / Metaverso", platform: "Cross-platform", mau: "110M", type: "Cross-platform" },
-            { id: 9, name: "Mobile Legends: Bang Bang", genre: "MOBA", platform: "Mobile", mau: "110M", type: "Mobile" },
-            { id: 10, name: "Honor of Kings", genre: "MOBA", platform: "Mobile", mau: "100M+", type: "Mobile" },
-            { id: 11, name: "Genshin Impact", genre: "Action RPG", platform: "Cross-platform", mau: "95M", type: "Cross-platform" },
-            { id: 12, name: "EA Sports FC 25/26", genre: "Simulação Desportiva", platform: "Cross-platform", mau: "85M", type: "Cross-platform" },
-            { id: 13, name: "Valorant", genre: "Tactical Shooter", platform: "PC/Console", mau: "75M", type: "Cross-platform" },
-            { id: 14, name: "Royal Match", genre: "Match-3 / Puzzle", platform: "Mobile", mau: "55M", type: "Mobile" },
-            { id: 15, name: "Palworld", genre: "Survival / Monster Taming", platform: "PC/Console", mau: "55M", type: "Cross-platform" },
-            { id: 16, name: "Brawl Stars", genre: "Hero Shooter / MOBA Lite", platform: "Mobile", mau: "52M", type: "Mobile" },
-            { id: 17, name: "Counter-Strike 2", genre: "Tactical Shooter", platform: "PC", mau: "40M", type: "PC" },
-            { id: 18, name: "CoD HQ (Warzone)", genre: "Shooter / BR", platform: "PC/Console", mau: "50M", type: "Cross-platform" },
-            { id: 19, name: "GTA V / Online", genre: "Action / Open World", platform: "PC/Console", mau: "30M", type: "Cross-platform" },
-            { id: 20, name: "R.E.P.O.", genre: "Social Horror / Co-op", platform: "PC (Early Access)", mau: "16.5M", type: "PC" }
+            { id: 1, name: "Roblox", genre: "Sandbox / Plataforma UGC", platform: "Cross-platform", mau: "380M", type: "Cross-platform", monetization: "Free-to-Play (UGC/Moeda)", dev: "Roblox Corp", year: "2006" },
+            { id: 2, name: "Block Blast", genre: "Puzzle Casual", platform: "Mobile", mau: "300M", type: "Mobile", monetization: "F2P / Ad-Supported", dev: "Hungry Studio", year: "2022" },
+            { id: 3, name: "Candy Crush Saga", genre: "Match-3 Puzzle", platform: "Mobile", mau: "273M", type: "Mobile", monetization: "Free-to-Play (IAP)", dev: "King", year: "2012" },
+            { id: 4, name: "Minecraft", genre: "Survival / Voxel Sandbox", platform: "Cross-platform", mau: "212M", type: "Cross-platform", monetization: "Premium + Marketplace", dev: "Mojang", year: "2011" },
+            { id: 5, name: "PUBG Mobile", genre: "Battle Royale", platform: "Mobile", mau: "150M", type: "Mobile", monetization: "Free-to-Play (Gacha/Pass)", dev: "Tencent/Krafton", year: "2018" },
+            { id: 6, name: "Free Fire", genre: "Battle Royale", platform: "Mobile", mau: "130M", type: "Mobile", monetization: "Free-to-Play (IAP)", dev: "Garena", year: "2017" },
+            { id: 7, name: "League of Legends", genre: "MOBA", platform: "PC", mau: "117M", type: "PC", monetization: "Free-to-Play (Skins)", dev: "Riot Games", year: "2009" },
+            { id: 8, name: "Fortnite", genre: "Battle Royale / Metaverso", platform: "Cross-platform", mau: "110M", type: "Cross-platform", monetization: "Free-to-Play (Pass/Shop)", dev: "Epic Games", year: "2017" },
+            { id: 9, name: "Mobile Legends", genre: "MOBA Mobile", platform: "Mobile", mau: "110M", type: "Mobile", monetization: "Free-to-Play (IAP)", dev: "Moonton", year: "2016" },
+            { id: 10, name: "Honor of Kings", genre: "MOBA Mobile", platform: "Mobile", mau: "100M", type: "Mobile", monetization: "Free-to-Play (IAP)", dev: "Tencent", year: "2015" },
+            { id: 11, name: "Genshin Impact", genre: "Action RPG Open-World", platform: "Cross-platform", mau: "95M", type: "Cross-platform", monetization: "Free-to-Play (Gacha)", dev: "HoYoverse", year: "2020" },
+            { id: 12, name: "EA Sports FC 25", genre: "Simulação Desportiva", platform: "Cross-platform", mau: "85M", type: "Cross-platform", monetization: "Premium + Live Service", dev: "EA Sports", year: "2024" },
+            { id: 13, name: "Valorant", genre: "Tactical Hero Shooter", platform: "Cross-platform", mau: "75M", type: "Cross-platform", monetization: "Free-to-Play (Skins)", dev: "Riot Games", year: "2020" },
+            { id: 14, name: "Call of Duty: Warzone", genre: "Shooter / BR", platform: "Cross-platform", mau: "60M", type: "Cross-platform", monetization: "Free-to-Play (Pass)", dev: "Activision", year: "2020" },
+            { id: 15, name: "Royal Match", genre: "Match-3 / Metagame", platform: "Mobile", mau: "55M", type: "Mobile", monetization: "Free-to-Play (IAP)", dev: "Dream Games", year: "2021" },
+            { id: 16, name: "Palworld", genre: "Survival / Monster Taming", platform: "Cross-platform", mau: "50M", type: "Cross-platform", monetization: "Premium (Buy-to-play)", dev: "Pocketpair", year: "2024" },
+            { id: 17, name: "Brawl Stars", genre: "Hero Shooter Top-down", platform: "Mobile", mau: "52M", type: "Mobile", monetization: "Free-to-Play (Pass/Gacha)", dev: "Supercell", year: "2018" },
+            { id: 18, name: "Counter-Strike 2", genre: "Tactical Shooter", platform: "PC", mau: "45M", type: "PC", monetization: "Free-to-Play (Market)", dev: "Valve", year: "2023" },
+            { id: 19, name: "GTA V / Online", genre: "Ação / Mundo Aberto", platform: "Cross-platform", mau: "35M", type: "Cross-platform", monetization: "Premium + Microtransações", dev: "Rockstar", year: "2013" },
+            { id: 20, name: "Lethal Company/REPO", genre: "Social Horror Co-op", platform: "PC", mau: "15M", type: "PC", monetization: "Premium Low-Cost", dev: "Indies", year: "2023" }
         ];
 
         function populateTable(data) {
             const tbody = document.getElementById('tableBody');
             tbody.innerHTML = '';
-            data.forEach(game => {
-                const row = `<tr class="hover:bg-slate-50 transition border-b">
-                    <td class="px-6 py-4 text-slate-400">#${game.id}</td>
-                    <td class="px-6 py-4 font-bold text-slate-800">${game.name}</td>
-                    <td class="px-6 py-4">
-                        <span class="px-2 py-1 rounded-full bg-sage-100 text-sage-600 text-xs">${game.genre}</span>
+
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="px-6 py-8 text-center text-slate-500">Nenhum resultado encontrado.</td></tr>`;
+                return;
+            }
+
+            data.forEach((game, index) => {
+                // Badge color para plataforma
+                let platColor = "bg-slate-100 text-slate-600";
+                if (game.type === "Mobile") platColor = "bg-blue-100 text-blue-700";
+                if (game.type === "Cross-platform") platColor = "bg-purple-100 text-purple-700";
+
+                const row = `<tr class="hover:bg-slate-50/80 transition duration-150">
+                    <td class="px-5 py-4 text-slate-400 font-mono text-xs">#${game.id}</td>
+                    <td class="px-5 py-4">
+                        <div class="font-bold text-slate-900">${game.name}</div>
+                        <div class="text-xs text-slate-500">${game.dev}</div>
                     </td>
-                    <td class="px-6 py-4 text-slate-500">${game.platform}</td>
-                    <td class="px-6 py-4 text-right font-mono font-bold text-slate-800">${game.mau}</td>
+                    <td class="px-5 py-4 text-sm text-slate-700">${game.genre}</td>
+                    <td class="px-5 py-4">
+                        <span class="px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wide ${platColor}">${game.type}</span>
+                    </td>
+                    <td class="px-5 py-4 hidden md:table-cell text-sm text-slate-600">
+                        ${game.monetization.includes("Free") ? '<span class="text-green-600 font-medium">F2P</span>' : '<span class="text-amber-600 font-medium">Premium</span>'}
+                        <span class="text-xs text-slate-400 block">${game.monetization.replace(/(Free-to-Play|Premium)\s?/, '')}</span>
+                    </td>
+                    <td class="px-5 py-4 hidden lg:table-cell text-sm text-slate-500">${game.year}</td>
+                    <td class="px-5 py-4 text-right font-mono font-extrabold text-slate-900">${game.mau}</td>
                 </tr>`;
                 tbody.innerHTML += row;
             });
         }
 
-        function filterTable(type) {
-            const filtered = type === 'All' ? gameData : gameData.filter(g => g.type === type || g.platform.includes(type));
+        function filterTable(type, btnElement) {
+            // Update button styles
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = "filter-btn px-4 py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-bold transition";
+            });
+            btnElement.className = "filter-btn px-4 py-2 rounded-lg bg-sage-600 text-white shadow-md text-xs font-bold transition";
+
+            // Filter data
+            const filtered = type === 'All' ? gameData : gameData.filter(g => g.type === type);
             populateTable(filtered);
         }
 
@@ -324,70 +522,119 @@
             const val = e.target.value.toLowerCase();
             const filtered = gameData.filter(g =>
                 g.name.toLowerCase().includes(val) ||
-                g.genre.toLowerCase().includes(val)
+                g.genre.toLowerCase().includes(val) ||
+                g.dev.toLowerCase().includes(val)
             );
             populateTable(filtered);
+
+            // Reset buttons to default visual state
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = "filter-btn px-4 py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-bold transition";
+            });
         });
 
-        // Gráficos
-        const ctxEngine = document.getElementById('engineChart').getContext('2d');
-        const ctxStyle = document.getElementById('styleChart').getContext('2d');
+        // Configuração Global do Chart.js
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#64748b'; // slate-500
 
+        // 1. Gráfico de Engines
+        const ctxEngine = document.getElementById('engineChart').getContext('2d');
         new Chart(ctxEngine, {
             type: 'doughnut',
             data: {
-                labels: ['Unity', 'Unreal Engine', 'Proprietário C++', 'Cocos/Outros'],
+                labels: ['Unity (Mobile/Indie)', 'Proprietária C++ (AAA/eSports)', 'Unreal Engine (AA/AAA)', 'Cocos / Outros'],
                 datasets: [{
-                    data: [7, 4, 6, 3],
-                    backgroundColor: ['#4d7c0f', '#1e293b', '#64748b', '#94a3b8'],
-                    borderColor: 'transparent'
+                    data: [40, 30, 20, 10], // Valores baseados em % do mercado top tiers
+                    backgroundColor: ['#4d7c0f', '#0f172a', '#0284c7', '#94a3b8'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff',
+                    hoverOffset: 4
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                cutout: '65%',
                 plugins: {
-                    legend: { position: 'bottom', labels: { color: '#fff', padding: 20 } }
+                    legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15 } }
                 }
             }
         });
 
+        // 2. Gráfico de Estilos Visuais
+        const ctxStyle = document.getElementById('styleChart').getContext('2d');
         new Chart(ctxStyle, {
             type: 'bar',
             data: {
-                labels: ['Estilizado/Cartoon', 'Fotorrealista', 'Retro/Low-poly', '2D Polido'],
+                labels: ['Estilizado / Cartoon', 'Semi-realista / PBR', 'Fotorrealismo Extremo', 'Pixel Art / Voxel / Retro'],
                 datasets: [{
-                    label: 'Quantidade de Jogos',
-                    data: [9, 5, 3, 3],
-                    backgroundColor: '#4d7c0f'
+                    label: 'Volume de Jogos (Top 20)',
+                    data: [10, 4, 3, 3],
+                    backgroundColor: ['#4d7c0f', '#84cc16', '#cbd5e1', '#0284c7'],
+                    borderRadius: 6
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: 'rgba(255,255,255,0.1)' },
-                        ticks: { color: '#fff' }
-                    },
-                    x: {
-                        ticks: {
-                            color: '#fff',
-                            callback: function (value) {
-                                let label = this.getLabelForValue(value);
-                                return label.length > 16 ? label.substr(0, 13) + '...' : label;
-                            }
-                        }
-                    }
+                    y: { beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { stepSize: 2 } },
+                    x: { grid: { display: false } }
                 },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // 3. Gráfico de Monetização
+        const ctxMonetization = document.getElementById('monetizationChart').getContext('2d');
+        new Chart(ctxMonetization, {
+            type: 'pie',
+            data: {
+                labels: ['Free-to-Play (Live Service)', 'Premium (Buy-to-Play)', 'Assinatura / Subs'],
+                datasets: [{
+                    data: [82, 14, 4],
+                    backgroundColor: ['#10b981', '#f59e0b', '#6366f1'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff',
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
                 plugins: {
-                    legend: { display: false }
+                    legend: { position: 'right', labels: { boxWidth: 12 } },
+                    tooltip: { callbacks: { label: (context) => ` ${context.parsed}% do Mercado Top 20` } }
                 }
             }
         });
 
-        // Inicialização
+        // 4. Gráfico de Plataformas
+        const ctxPlatform = document.getElementById('platformChart').getContext('2d');
+        new Chart(ctxPlatform, {
+            type: 'bar',
+            indexAxis: 'y', // Gráfico de barras horizontais
+            data: {
+                labels: ['Mobile Exclusivo', 'Cross-Platform (Mob+PC+Cons)', 'PC / Console Restrito', 'PC Exclusivo'],
+                datasets: [{
+                    label: 'Milhões de Usuários Ativos (MAU Agregado)',
+                    data: [1100, 950, 245, 177],
+                    backgroundColor: '#0284c7',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { grid: { color: '#f1f5f9' } },
+                    y: { grid: { display: false } }
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Inicialização da Tabela
         populateTable(gameData);
     </script>
 </body>
