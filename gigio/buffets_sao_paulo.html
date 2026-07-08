@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aniversário 2 Anos - Toy Story</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Open+Sans:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #87CEEB; /* Céu azul */
+            background-image: radial-gradient(white 15%, transparent 16%), radial-gradient(white 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Nuvens estilo quarto do Andy */
+        .clouds {
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Cloud_icon.svg/512px-Cloud_icon.svg.png') repeat-x;
+            height: 150px;
+            background-size: contain;
+            opacity: 0.8;
+            animation: moveClouds 35s linear infinite;
+        }
+
+        .bg-character {
+            position: fixed;
+            z-index: 1;
+            mix-blend-mode: multiply;
+            width: 180px;
+            height: auto;
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .bg-character {
+                width: 110px;
+            }
+        }
+
+        @keyframes moveClouds {
+            from { background-position: 0 0; }
+            to { background-position: 1000px 0; }
+        }
+
+        .container {
+            max-width: 1350px;
+            margin: -50px auto 50px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 40px;
+            position: relative;
+            z-index: 10;
+            border: 5px solid #FCD116; /* Amarelo Woody */
+        }
+
+        .header-banner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .header-banner img {
+            width: 120px;
+            height: 120px;
+            mix-blend-mode: multiply; /* Faz o fundo branco sumir perfeitamente */
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            text-align: center;
+            color: #E32636; /* Vermelho */
+            font-size: 3em;
+            text-shadow: 2px 2px 0px #FCD116, 4px 4px 0px #2E58A6;
+            margin: 0;
+        }
+
+        h2 {
+            font-family: 'Fredoka One', cursive;
+            color: #2E58A6; /* Azul Escuro */
+            border-bottom: 3px dashed #FCD116;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+
+        p.subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: #f9f9f9;
+            border-radius: 15px;
+            padding: 20px;
+            border: 3px solid #7CBA00; /* Verde Buzz */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+        }
+
+        .card::before {
+            content: '★';
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            font-size: 80px;
+            color: rgba(252, 209, 22, 0.2);
+        }
+
+        .card h3 {
+            font-family: 'Fredoka One', cursive;
+            color: #E32636;
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-size: 1.2em;
+        }
+        
+        .card p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        /* Estilos dos Filtros */
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-btn {
+            background-color: #f2f2f2;
+            border: 2px solid #ccc;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.9em;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background-color: #eaf1f8;
+            border-color: #2E58A6;
+            color: #2E58A6;
+        }
+
+        .filter-btn.active {
+            background-color: #2E58A6;
+            border-color: #2E58A6;
+            color: white;
+            box-shadow: 0 4px 8px rgba(46, 88, 166, 0.3);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            max-height: 70vh;
+            overflow-y: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px 10px;
+            text-align: left;
+            font-size: 0.85em;
+        }
+
+        th {
+            background-color: #2E58A6;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            font-family: 'Fredoka One', cursive;
+            font-weight: normal;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        tr.buffet-row:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr.buffet-row:hover {
+            background-color: #eaf1f8;
+        }
+
+        /* Ocultar linhas filtradas */
+        .hidden {
+            display: none !important;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85em;
+            transition: all 0.3s;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+            transform: scale(1.05);
+        }
+
+        .btn-maps {
+            background-color: #EA4335;
+            color: white;
+        }
+
+        .btn-maps:hover {
+            background-color: #C5221F;
+            transform: scale(1.05);
+        }
+
+        .btn-site {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .btn-site:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .btn-instagram {
+            background-color: #E1306C;
+            color: white;
+        }
+
+        .btn-instagram:hover {
+            background-color: #C13584;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9em;
+            color: #777;
+        }
+        
+        .bairro-tag {
+            background: #FCD116;
+            color: #333;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        
+        .regiao-tag {
+            background: #7CBA00;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+
+        .footer-characters {
+            position: relative;
+            height: 100px;
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .footer-char {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 90px;
+            width: auto;
+            mix-blend-mode: multiply;
+        }
+
+        .char-1 { animation: walkRightLeft 20s linear infinite; }
+        .char-2 { animation: walkRightLeft 25s linear infinite -5s; }
+        .char-3 { animation: walkRightLeft 18s linear infinite -10s; }
+        .char-4 { animation: walkRightLeft 30s linear infinite -15s; }
+        
+        .char-5 { animation: walkLeftRight 22s linear infinite -2s; }
+        .char-6 { animation: walkLeftRight 28s linear infinite -8s; }
+        .char-7 { animation: walkLeftRight 16s linear infinite -12s; }
+        .char-8 { animation: walkLeftRight 26s linear infinite -18s; }
+
+        @keyframes walkRightLeft {
+            0% { transform: translateX(0) scaleX(1); }
+            49% { transform: translateX(calc(100vw - 90px)) scaleX(1); }
+            50% { transform: translateX(calc(100vw - 90px)) scaleX(-1); }
+            99% { transform: translateX(0) scaleX(-1); }
+            100% { transform: translateX(0) scaleX(1); }
+        }
+
+        @keyframes walkLeftRight {
+            0% { transform: translateX(calc(100vw - 90px)) scaleX(-1); }
+            49% { transform: translateX(0) scaleX(-1); }
+            50% { transform: translateX(0) scaleX(1); }
+            99% { transform: translateX(calc(100vw - 90px)) scaleX(1); }
+            100% { transform: translateX(calc(100vw - 90px)) scaleX(-1); }
+        }
+
+        /* Tooltip Balãozinho Amarelo */
+        .yellow-tooltip {
+            position: absolute;
+            background-color: #FFFACD;
+            color: #333;
+            padding: 10px 15px;
+            border: 2px solid #FCD116;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            font-size: 0.9em;
+            pointer-events: none;
+            z-index: 1000;
+            max-width: 250px;
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="clouds"></div>
+
+    <div class="container">
+        <div class="header-banner">
+            <img src="images/buzz.jpg" alt="Astronauta Toy Story estilo rabisco colorido">
+            <h1>Ao infinito e além!</h1>
+            <img src="images/jessie.jpg" alt="Cowgirl Toy Story estilo rabisco colorido">
+        </div>
+        <p class="subtitle">Seleção de Buffets Infantis na região de São Paulo para a comemoração de 2 aninhos.</p>
+
+        <h2 style="display: none;">Opções em Destaque</h2>
+        
+        <div class="cards" style="display: none;">
+            <div class="card">
+                <h3>Buffet Lá no Quintal</h3>
+                <p><strong>Bairro:</strong> Vila Madalena</p>
+                <p>Um espaço super charmoso e aconchegante, no estilo festa de quintal.</p>
+            </div>
+            <div class="card">
+                <h3>Espaço Buticabeira</h3>
+                <p><strong>Bairro:</strong> Pinheiros</p>
+                <p>Focado em brincadeiras ao ar livre, arvorismo e contato direto com a natureza.</p>
+            </div>
+            <div class="card">
+                <h3>Planeta Kids (Pompéia)</h3>
+                <p><strong>Bairro:</strong> Perdizes</p>
+                <p>Estrutura moderna, diversos brinquedos eletrônicos e excelência em serviços.</p>
+            </div>
+            <div class="card">
+                <h3>Planeta Kids (Santana)</h3>
+                <p><strong>Bairro:</strong> Santana</p>
+                <p>Padrão de qualidade da rede, com ótima gastronomia e recreação na Zona Norte.</p>
+            </div>
+            <div class="card">
+                <h3>Planeta Kids (Ipiranga)</h3>
+                <p><strong>Bairro:</strong> Ipiranga</p>
+                <p>Unidade espaçosa, ideal para festas inesquecíveis e muitos brinquedos interativos.</p>
+            </div>
+            <div class="card">
+                <h3>Planeta Kids (Butantã)</h3>
+                <p><strong>Bairro:</strong> Butantã</p>
+                <p>Perfeito para quem busca o alto nível da franquia na região da Zona Oeste.</p>
+            </div>
+            <div class="card">
+                <h3>Espaço Formigueiro</h3>
+                <p><strong>Bairro:</strong> Vila Olímpia</p>
+                <p>Com conceito diferenciado de quintal e brincadeiras lúdicas que fogem do comum.</p>
+            </div>
+            <div class="card">
+                <h3>Miniland Pinheiros</h3>
+                <p><strong>Bairro:</strong> Pinheiros</p>
+                <p>Cenários lúdicos e interativos incríveis que estimulam a imaginação das crianças.</p>
+            </div>
+            <div class="card">
+                <h3>Buffet Billy Willy</h3>
+                <p><strong>Bairro:</strong> Moema</p>
+                <p>Um espaço clássico, acolhedor e muito renomado pelas ótimas festas.</p>
+            </div>
+            <div class="card">
+                <h3>Buffet Spasso Splash</h3>
+                <p><strong>Bairro:</strong> Moema</p>
+                <p>Oferece uma enorme gama de atrações e muito conforto para os convidados.</p>
+            </div>
+            <div class="card">
+                <h3>Espaço Pindorama</h3>
+                <p><strong>Bairro:</strong> Vila Nova Conceição</p>
+                <p>Amplo espaço focado em brincadeiras integrativas, oficinas e atividades manuais.</p>
+            </div>
+            <div class="card">
+                <h3>Buffet No Galpão</h3>
+                <p><strong>Bairro:</strong> Pinheiros</p>
+                <p>Estilo rústico, pé direito alto, com tirolesa, arvorismo e muita diversão ativa.</p>
+            </div>
+            <div class="card">
+                <h3>Buffet Kids Point</h3>
+                <p><strong>Bairro:</strong> Vila Mariana</p>
+                <p>Ótima estrutura com simuladores, brinquedão e atividades para todas as idades.</p>
+            </div>
+            <div class="card">
+                <h3>Espaço Boo!</h3>
+                <p><strong>Bairro:</strong> Lapa</p>
+                <p>Focado na liberdade de brincar, com circuitos, ofurô de bolinhas e muita diversão lúdica.</p>
+            </div>
+            <div class="card">
+                <h3>Buffet Megauê</h3>
+                <p><strong>Bairro:</strong> Mooca</p>
+                <p>Espaço muito amplo com brinquedos modernos e atrações para pais e filhos se divertirem juntos.</p>
+            </div>
+            <div class="card">
+                <h3>Buffet Espaço Auê</h3>
+                <p><strong>Bairro:</strong> Santana</p>
+                <p>Estrutura fantástica com foco em brinquedos radicais e espaços integrados para toda a família.</p>
+            </div>
+            <div class="card">
+                <h3>Buffet Zupaloo</h3>
+                <p><strong>Bairro:</strong> Tatuapé</p>
+                <p>Muito conforto, excelente gastronomia e diversas atrações interativas para as crianças.</p>
+            </div>
+            <div class="card">
+                <h3>Bambolê Espaço Kids</h3>
+                <p><strong>Bairro:</strong> Jardim Anália Franco</p>
+                <p>Diversão garantida com brinquedos modernos e uma estrutura impecável para festas inesquecíveis.</p>
+            </div>
+            <div class="card">
+                <h3>Comics Buffet</h3>
+                <p><strong>Bairro:</strong> Morumbi</p>
+                <p>Mais de 1.000m² de pura diversão, com montanha-russa, super atrações e espaço temático.</p>
+            </div>
+            <div class="card">
+                <h3>Casa Jabuti</h3>
+                <p><strong>Bairro:</strong> Guarulhos</p>
+                <p>Novo conceito de Buffet que chega a Guarulhos para elevar o padrão das festas e surpreender em cada detalhe.</p>
+            </div>
+            <div class="card">
+                <h3>Toca do Leão</h3>
+                <p><strong>Bairro:</strong> Santo André</p>
+                <p>Espaço amplo com diversas atrações emocionantes e excelente infraestrutura para a família no ABC.</p>
+            </div>
+            <div class="card">
+                <h3>Rede Cata-Vento (Santo André)</h3>
+                <p><strong>Bairro:</strong> Santo André</p>
+                <p>A maior rede de buffets infantis do Brasil, repleta de opções incríveis e muita diversão garantida.</p>
+            </div>
+        </div>
+
+        <h2>Tabela de Contatos e Informações</h2>
+
+        <div class="name-input-container" style="text-align: center; margin-bottom: 20px; background-color: #fff; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; gap: 15px;">
+            <div>
+                <label for="childName" style="font-size: 1.1em; font-weight: bold; color: #2E58A6;">🎉 Qual é o nome do aniversariante?</label><br>
+                <input type="text" id="childName" value="Gigio" placeholder="Ex: Gigio" style="padding: 10px; font-size: 1em; border-radius: 5px; border: 2px solid #FCD116; outline: none; text-align: center; margin-top: 5px; width: 100%; max-width: 300px;">
+            </div>
+            <div>
+                <label for="partyDate" style="font-size: 1.1em; font-weight: bold; color: #2E58A6;">📅 Qual é a data da festa?</label><br>
+                <input type="date" id="partyDate" value="2026-10-18" style="padding: 10px; font-size: 1em; border-radius: 5px; border: 2px solid #FCD116; outline: none; text-align: center; margin-top: 5px; width: 100%; max-width: 300px;">
+            </div>
+            <div>
+                <label for="childAge" style="font-size: 1.1em; font-weight: bold; color: #2E58A6;">🎂 Quantos anos vai fazer?</label><br>
+                <input type="number" id="childAge" value="2" min="1" style="padding: 10px; font-size: 1em; border-radius: 5px; border: 2px solid #FCD116; outline: none; text-align: center; margin-top: 5px; width: 100%; max-width: 300px;">
+            </div>
+            <div>
+                <label for="guestCount" style="font-size: 1.1em; font-weight: bold; color: #2E58A6;">👥 Quantas pessoas?</label><br>
+                <input type="number" id="guestCount" value="150" min="10" step="10" style="padding: 10px; font-size: 1em; border-radius: 5px; border: 2px solid #FCD116; outline: none; text-align: center; margin-top: 5px; width: 100%; max-width: 300px;">
+            </div>
+        </div>
+        
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="todos">Todos</button>
+            <button class="filter-btn" data-filter="Zona Sul">Zona Sul</button>
+            <button class="filter-btn" data-filter="Zona Oeste">Zona Oeste</button>
+            <button class="filter-btn" data-filter="Zona Norte">Zona Norte</button>
+            <button class="filter-btn" data-filter="Zona Leste">Zona Leste</button>
+            <button class="filter-btn" data-filter="Interior">Interior</button>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="text-align: center; width: 40px;">✔</th>
+                        <th>Nome do Buffet</th>
+                        <th>Região</th>
+                        <th>Bairro</th>
+                        <th>Telefone / WhatsApp</th>
+                        <th>Site Oficial</th>
+                        <th>Google Maps</th>
+                        <th>WhatsApp</th>
+                    </tr>
+                </thead>
+                <tbody id="buffet-table-body">
+                    <tr class="buffet-row" data-regiao="Zona Oeste">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Buffet Lá no Quintal</td>
+                        <td><span class="regiao-tag">Zona Oeste</span></td>
+                        <td><span class="bairro-tag">Vila Madalena</span></td>
+                        <td>(11) 99996-1666 3021-4119</td>
+                        <td><a href="https://www.instagram.com/la_no_quintal/" target="_blank" class="btn btn-instagram">Ver Instagram</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Buffet+Lá+no+Quintal+Rua+Caminha+de+Amorim+335" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511999961666?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Oeste">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Espaço Buticabeira</td>
+                        <td><span class="regiao-tag">Zona Oeste</span></td>
+                        <td><span class="bairro-tag">Pinheiros</span></td>
+                        <td>(11) 3062-2874 / 99110-2673</td>
+                        <td><a href="https://www.instagram.com/espacobuticabeira" target="_blank" class="btn btn-instagram">Ver Instagram</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Espaço+Buticabeira+Rua+Francisco+Leitão+383" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511991102673?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Oeste">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Planeta Kids (Pompéia)</td>
+                        <td><span class="regiao-tag">Zona Oeste</span></td>
+                        <td><span class="bairro-tag">Perdizes</span></td>
+                        <td>(11) 2283-1997 / 93281-7513</td>
+                        <td><a href="https://planetakids.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Planeta+Kids+Avenida+Pompéia+1603" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511932817513?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Norte">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Planeta Kids (Santana)</td>
+                        <td><span class="regiao-tag">Zona Norte</span></td>
+                        <td><span class="bairro-tag">Santana</span></td>
+                        <td>(11) 2283-1997 / 93281-7513</td>
+                        <td><a href="https://planetakids.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Planeta+Kids+Santana+Avenida+General+Ataliba+Leonel" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511932817513?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Sul">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Planeta Kids (Ipiranga)</td>
+                        <td><span class="regiao-tag">Zona Sul</span></td>
+                        <td><span class="bairro-tag">Ipiranga</span></td>
+                        <td>(11) 2283-1997 / 93281-7513</td>
+                        <td><a href="https://planetakids.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Planeta+Kids+Ipiranga" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511932817513?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Oeste">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Planeta Kids (Butantã)</td>
+                        <td><span class="regiao-tag">Zona Oeste</span></td>
+                        <td><span class="bairro-tag">Butantã</span></td>
+                        <td>(11) 2283-1997 / 93281-7513</td>
+                        <td><a href="https://planetakids.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Planeta+Kids+Butanta" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511932817513?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Sul">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Espaço Formigueiro</td>
+                        <td><span class="regiao-tag">Zona Sul</span></td>
+                        <td><span class="bairro-tag">Vila Olímpia</span></td>
+                        <td>(11) 99106-7493</td>
+                        <td><a href="https://espacoformigueiro.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Espaço+Formigueiro+Rua+Prof.+Vahia+de+Abreu+592" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511991067493?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Oeste">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Miniland Pinheiros</td>
+                        <td><span class="regiao-tag">Zona Oeste</span></td>
+                        <td><span class="bairro-tag">Pinheiros</span></td>
+                        <td>(11) 3729-5003 3729-5003</td>
+                        <td><a href="http://www.miniland.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Miniland+Pinheiros+Rua+Padre+Carvalho+525" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="tel:+551137295003" class="btn btn-telefone">Telefone</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Sul">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Buffet Billy Willy</td>
+                        <td><span class="regiao-tag">Zona Sul</span></td>
+                        <td><span class="bairro-tag">Moema</span></td>
+                        <td>(11) 5052-7766</td>
+                        <td><a href="https://billywilly.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Buffet+Billy+Willy+Avenida+Chibarás+322" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="tel:+551150527766" class="btn btn-telefone">Telefone</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Sul">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Buffet Spasso Splash</td>
+                        <td><span class="regiao-tag">Zona Sul</span></td>
+                        <td><span class="bairro-tag">Moema</span></td>
+                        <td>(11) 97398-1356 5095-0991 / 97398-1356</td>
+                        <td><a href="https://spassosplash.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Buffet+Spasso+Splash+Rua+Canário+1270" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511973981356?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Sul">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Espaço Pindorama</td>
+                        <td><span class="regiao-tag">Zona Sul</span></td>
+                        <td><span class="bairro-tag">V. N. Conceição</span></td>
+                        <td>(11) 3045-5190 3045-5190</td>
+                        <td><a href="http://espacopindorama.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Espaço+Pindorama+Rua+Comendador+Miguel+Calfat+540" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="tel:+551130455190" class="btn btn-telefone">Telefone</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Oeste">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Buffet No Galpão</td>
+                        <td><span class="regiao-tag">Zona Oeste</span></td>
+                        <td><span class="bairro-tag">Pinheiros</span></td>
+                        <td>(11) 3097-8848 / 99823-1290</td>
+                        <td><a href="http://nogalpao.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Buffet+No+Galpão+Rua+Fernão+Dias+161" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511998231290?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Sul">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Buffet Kids Point</td>
+                        <td><span class="regiao-tag">Zona Sul</span></td>
+                        <td><span class="bairro-tag">Vila Mariana</span></td>
+                        <td>(11) 93712-3020</td>
+                        <td><a href="http://buffetkidspoint.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Buffet+Kids+Point+Rua+Padre+Machado+1161" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511937123020?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Oeste">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Espaço Boo!</td>
+                        <td><span class="regiao-tag">Zona Oeste</span></td>
+                        <td><span class="bairro-tag">Lapa</span></td>
+                        <td>(11) 97236-6511</td>
+                        <td><a href="https://www.espacoboo.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Espaço+Boo!+Rua+Nossa+Senhora+da+Lapa+747" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511972366511?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Leste">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Buffet Megauê</td>
+                        <td><span class="regiao-tag">Zona Leste</span></td>
+                        <td><span class="bairro-tag">Mooca</span></td>
+                        <td>(11) 93800-6874</td>
+                        <td><a href="https://www.buffetmegaue.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Buffet+Megauê+Rua+Madre+de+Deus+883" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511938006874?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Norte">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Buffet Espaço Auê</td>
+                        <td><span class="regiao-tag">Zona Norte</span></td>
+                        <td><span class="bairro-tag">Santana</span></td>
+                        <td>(11) 94028-6952 94028-6952</td>
+                        <td><a href="http://www.buffetespacoaue.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Buffet+Espaço+Auê+Alameda+Afonso+Schmidt+410" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511940286952?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Leste">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Buffet Zupaloo</td>
+                        <td><span class="regiao-tag">Zona Leste</span></td>
+                        <td><span class="bairro-tag">Tatuapé</span></td>
+                        <td>(11) 94588-7006</td>
+                        <td><a href="https://www.buffetzupaloo.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Buffet+Zupaloo+Rua+Cantagalo+1553" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511945887006?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Leste">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Bambolê Espaço Kids</td>
+                        <td><span class="regiao-tag">Zona Leste</span></td>
+                        <td><span class="bairro-tag">Jd Anália Franco</span></td>
+                        <td>(11) 98144-2271</td>
+                        <td><a href="https://www.instagram.com/bamboleespacokids" target="_blank" class="btn btn-instagram">Ver Instagram</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Bambolê+Espaço+Kids+Av.+Ver.+Abel+Ferreira+325" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511981442271?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Zona Sul">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Comics Buffet</td>
+                        <td><span class="regiao-tag">Zona Sul</span></td>
+                        <td><span class="bairro-tag">Morumbi</span></td>
+                        <td>(11) 99617-4954 3224-8179</td>
+                        <td><a href="https://buffetcomics.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Comics+Buffet+Rua+Aurelio+Mirelles+51" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511996174954?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Interior">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Casa Jabuti</td>
+                        <td><span class="regiao-tag">Interior</span></td>
+                        <td><span class="bairro-tag">Guarulhos</span></td>
+                        <td>(11) 91629-8626</td>
+                        <td><a href="https://www.casajabuti.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Casa+Jabuti+Buffet+Infantil+Alameda+Yaya+534" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511916298626?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Interior">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Toca do Leão</td>
+                        <td><span class="regiao-tag">Interior</span></td>
+                        <td><span class="bairro-tag">Santo André</span></td>
+                        <td>(11) 94701-7350</td>
+                        <td><a href="https://tocadoleaobuffet.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Toca+do+Leao+Buffet+Rua+das+Caneleiras+540" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/5511947017350?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                    <tr class="buffet-row" data-regiao="Interior">
+                        <td style="text-align: center;"><input type="checkbox" class="buffet-check" style="transform: scale(1.5); cursor: pointer; accent-color: #7CBA00;"></td>
+                        <td>Rede Cata-Vento (Santo André)</td>
+                        <td><span class="regiao-tag">Interior</span></td>
+                        <td><span class="bairro-tag">Santo André</span></td>
+                        <td>(11) 4436-9480</td>
+                        <td><a href="https://www.catavento.com.br" target="_blank" class="btn btn-site">Acessar Site</a></td>
+                        <td><a href="https://www.google.com/maps/search/?api=1&query=Buffet+Cata-Vento+Santo+Andre+Artur+de+Queiros+348" target="_blank" class="btn btn-maps">Maps</a></td>
+                        <td><a href="https://wa.me/551144369480?text=Ola%2C%20estou%20querendo%20fazer%20o%20aniversario%20do%20meu%20filho%20que%20completara%202%20anos%20de%20idade%20no%20dia%2018%20de%20outubro%20de%202026.%20Sera%20para%20100%20pessoas%20e%20temos%20preferencia%20pelo%20tema%20do%20toy%20story" target="_blank" class="btn btn-whatsapp">WhatsApp</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-characters">
+                <img src="images/woody.jpg" class="footer-char char-1" alt="Woody">
+                <img src="images/forky.jpg" class="footer-char char-2" alt="Forky">
+                <img src="images/hamm.jpg" class="footer-char char-3" alt="Hamm">
+                <img src="images/slinky.jpg" class="footer-char char-4" alt="Slinky">
+                <img src="images/rex.jpg" class="footer-char char-5" alt="Rex">
+                <img src="images/bullseye.jpg" class="footer-char char-6" alt="Bullseye">
+                <img src="images/bopeep.jpg" class="footer-char char-7" alt="Bo Peep">
+                <img src="images/alien.jpg" class="footer-char char-8" alt="Alien">
+            </div>
+            <p>Criado com muito carinho para ajudar a organizar a festa de 2 anos com o tema Toy Story! Você pode utilizar os filtros acima da tabela para visualizar opções por região.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const tableRows = document.querySelectorAll('.buffet-row');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Atualiza botão ativo
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    // Filtra linhas da tabela
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    tableRows.forEach(row => {
+                        if (filterValue === 'todos') {
+                            row.classList.remove('hidden');
+                        } else {
+                            if (row.getAttribute('data-regiao') === filterValue) {
+                                row.classList.remove('hidden');
+                            } else {
+                                row.classList.add('hidden');
+                            }
+                        }
+                    });
+                });
+            });
+
+            // Atualiza mensagens do WhatsApp dinamicamente
+            const nameInput = document.getElementById('childName');
+            const dateInput = document.getElementById('partyDate');
+            const ageInput = document.getElementById('childAge');
+            const guestInput = document.getElementById('guestCount');
+            const whatsappBtns = document.querySelectorAll('.btn-whatsapp');
+            
+            // Salva as URLs base do WhatsApp (sem o ?text=)
+            const whatsappBaseUrls = Array.from(whatsappBtns).map(btn => {
+                return btn.getAttribute('href').split('?text=')[0];
+            });
+
+            function updateWhatsAppLinks() {
+                const name = nameInput.value.trim() || 'meu filho';
+                const age = ageInput.value.trim() || '2';
+                const guests = guestInput.value.trim() || '150';
+                
+                // Formata a data de YYYY-MM-DD para DD/MM/YYYY
+                let formattedDate = '18 de outubro de 2026';
+                if (dateInput.value) {
+                    const [year, month, day] = dateInput.value.split('-');
+                    formattedDate = `${day}/${month}/${year}`;
+                }
+
+                const message = `Olá, estou querendo fazer o aniversário do ${name} que completará ${age} anos de idade no dia ${formattedDate}. Será para ${guests} pessoas e temos preferência pelo tema do toy story. Poderia me mandar orçamento, por favor?`;
+                const encodedMessage = encodeURIComponent(message);
+                
+                whatsappBtns.forEach((btn, index) => {
+                    btn.setAttribute('href', `${whatsappBaseUrls[index]}?text=${encodedMessage}`);
+                });
+            }
+
+            nameInput.addEventListener('input', updateWhatsAppLinks);
+            dateInput.addEventListener('change', updateWhatsAppLinks);
+            ageInput.addEventListener('input', updateWhatsAppLinks);
+            guestInput.addEventListener('input', updateWhatsAppLinks);
+            
+            // Inicializa os links do WhatsApp com os valores já preenchidos
+            updateWhatsAppLinks();
+
+            // Tooltip Balãozinho Amarelo
+            const tooltip = document.createElement('div');
+            tooltip.className = 'yellow-tooltip';
+            document.body.appendChild(tooltip);
+
+            const descriptions = {};
+            document.querySelectorAll('.card').forEach(card => {
+                const name = card.querySelector('h3').textContent.trim();
+                const desc = card.querySelectorAll('p')[1].textContent.trim();
+                descriptions[name] = desc;
+            });
+
+            document.querySelectorAll('.buffet-row td:first-child').forEach(cell => {
+                const name = cell.textContent.trim();
+                if (descriptions[name]) {
+                    cell.style.cursor = 'help';
+                    cell.style.textDecoration = 'underline dotted #FCD116';
+                    
+                    cell.addEventListener('mouseenter', () => {
+                        tooltip.textContent = descriptions[name];
+                        tooltip.style.opacity = '1';
+                    });
+                    
+                    cell.addEventListener('mousemove', (e) => {
+                        tooltip.style.left = (e.pageX + 15) + 'px';
+                        tooltip.style.top = (e.pageY + 15) + 'px';
+                    });
+                    
+                    cell.addEventListener('mouseleave', () => {
+                        tooltip.style.opacity = '0';
+                    });
+                }
+            });
+
+            // Lógica do Checklist (Salvar no localStorage)
+            const checkboxes = document.querySelectorAll('.buffet-check');
+            checkboxes.forEach(cb => {
+                const buffetName = cb.parentElement.nextElementSibling.textContent.trim();
+                const storageKey = 'gigio_buffet_' + buffetName;
+                
+                // Carregar estado salvo
+                if (localStorage.getItem(storageKey) === 'true') {
+                    cb.checked = true;
+                    cb.closest('tr').style.opacity = '0.6';
+                    cb.closest('tr').style.backgroundColor = '#f0f8ff'; // leve destaque
+                }
+
+                // Salvar ao clicar
+                cb.addEventListener('change', (e) => {
+                    localStorage.setItem(storageKey, e.target.checked);
+                    if (e.target.checked) {
+                        e.target.closest('tr').style.opacity = '0.6';
+                        e.target.closest('tr').style.backgroundColor = '#f0f8ff';
+                    } else {
+                        e.target.closest('tr').style.opacity = '1';
+                        e.target.closest('tr').style.backgroundColor = 'transparent';
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
