@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Ergonomia: Motos até 40k para 1,90m</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chosen Palette: Serenidade Asfáltica (Fundo Creme #FDFBF7, Texto Ardósia #2D3748, Destaque Terracota Suave #D68C78) -->
+    <!-- Application Structure Plan: 
+        1. Introdução Antropométrica: Explicação da biomecânica para 1,90m e por que certas categorias falham.
+        2. Dashboard Comparativo: Gráficos dinâmicos para comparar Altura do Assento vs Preço FIPE.
+        3. Explorador de Modelos: Interface de cards interativos com detalhes de cada moto recomendada.
+        4. Calculadora de Customização: Seção focada no 'Kit Lombar' com impacto no orçamento de 40k.
+        5. Veredito de TCO: Análise de custo total de propriedade para evitar armadilhas de marcas premium.
+        Escolhi esta estrutura pois o usuário com dor lombar precisa primeiro entender o 'porquê' (ciência) antes de escolher o 'quê' (modelo).
+    -->
+    <!-- Visualization & Content Choices:
+        - Gráfico de Barras (Chart.js): Comparação de Altura de Assento (mm) - Essencial para o usuário de 1,90m visualizar o espaço para pernas.
+        - Gráfico de Radar (Chart.js): Equilíbrio entre Conforto, Potência, Custo e Tecnologia para cada modelo.
+        - Cards Dinâmicos: Detalhamento de prós/contras com filtros.
+        - Tabela de Custos: Comparativo de Tabela FIPE 2026.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+    <style>
+        body {
+            background-color: #FDFBF7;
+            color: #2D3748;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        .card-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .tab-active {
+            border-bottom: 3px solid #D68C78;
+            color: #D68C78;
+        }
+
+        .accent-bg {
+            background-color: #D68C78;
+        }
+
+        .accent-text {
+            color: #D68C78;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-100 py-8 px-4 text-center">
+        <h1 class="text-3xl md:text-4xl font-bold mb-2">Engenharia do Conforto: Motos para 1,90m</h1>
+        <p class="text-gray-600 max-w-2xl mx-auto">Análise técnica para preservação lombar e otimização de orçamento até
+            R$ 40.000 no mercado brasileiro.</p>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+
+        <!-- Section: Biomecânica -->
+        <section id="biomecanica" class="mb-16">
+            <div class="bg-white p-6 rounded-xl card-shadow border-l-4 border-[#D68C78]">
+                <h2 class="text-2xl font-semibold mb-4">A Ciência por trás da Dor</h2>
+                <p class="mb-4 text-lg">Para um piloto de 1,90m, o "Triângulo do Piloto" (relação entre mãos, quadril e
+                    pés) é frequentemente comprimido. O relatório aponta que a geometria
+                    <strong>Trail/Crossover</strong> é a única que mantém as curvas fisiológicas da coluna, permitindo o
+                    uso das pernas como amortecedores naturais.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div class="p-4 bg-red-50 rounded-lg">
+                        <span class="font-bold text-red-700">Custom/Scooters:</span> Retroversão pélvica. A coluna vira
+                        um "C", esmagando discos lombares em cada buraco.
+                    </div>
+                    <div class="p-4 bg-red-50 rounded-lg">
+                        <span class="font-bold text-red-700">Esportivas:</span> Hiperestensão cervical e peso excessivo
+                        nos punhos. Inviável para 1,90m.
+                    </div>
+                    <div class="p-4 bg-green-50 rounded-lg">
+                        <span class="font-bold text-green-700">Trail/Crossover:</span> Postura neutra, suspensão de
+                        longo curso e alinhamento axial perfeito.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation Tabs -->
+        <div class="flex flex-wrap justify-center space-x-4 mb-8 border-b border-gray-200">
+            <button onclick="switchTab('explorer')" id="tab-explorer"
+                class="pb-2 px-4 tab-active font-medium transition-all">Explorador de Modelos</button>
+            <button onclick="switchTab('analytics')" id="tab-analytics"
+                class="pb-2 px-4 font-medium transition-all">Análise Comparativa</button>
+            <button onclick="switchTab('custom')" id="tab-custom" class="pb-2 px-4 font-medium transition-all">Kit
+                Lombar & Custos</button>
+        </div>
+
+        <!-- View: Model Explorer -->
+        <div id="view-explorer" class="space-y-8">
+            <div class="flex justify-between items-center mb-4">
+                <p class="text-sm text-gray-500 italic italic">Clique nos cards para ver detalhes técnicos.</p>
+                <select id="filter-cyl" onchange="renderModels()"
+                    class="bg-white border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-[#D68C78]">
+                    <option value="all">Todas Cilindradas</option>
+                    <option value="low">Baixa/Média (300-500cc)</option>
+                    <option value="high">Média/Alta (650cc+)</option>
+                </select>
+            </div>
+            <div id="models-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Cards injected via JS -->
+            </div>
+        </div>
+
+        <!-- View: Analytics -->
+        <div id="view-analytics" class="hidden space-y-12">
+            <div class="bg-white p-6 rounded-xl card-shadow">
+                <h3 class="text-xl font-semibold mb-6 text-center">Espaço para Pernas: Altura do Assento (mm)</h3>
+                <div class="chart-container">
+                    <canvas id="seatHeightChart"></canvas>
+                </div>
+                <p class="mt-4 text-sm text-gray-600 text-center">Quanto maior a altura, menos flexionados ficam os
+                    joelhos de um piloto de 1,90m, reduzindo a fadiga femoropatelar.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl card-shadow">
+                    <h3 class="text-xl font-semibold mb-6 text-center">Relação Preço vs Benefício (2026)</h3>
+                    <div class="chart-container">
+                        <canvas id="priceChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl card-shadow">
+                    <h3 class="text-xl font-semibold mb-6 text-center">Equilíbrio de Atributos</h3>
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                    <div class="mt-4 flex justify-center space-x-2 flex-wrap" id="radar-legend"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- View: Customization -->
+        <div id="view-custom" class="hidden">
+            <div class="max-w-4xl mx-auto space-y-8">
+                <div class="bg-white p-6 rounded-xl card-shadow border-t-4 border-[#D68C78]">
+                    <h3 class="text-2xl font-bold mb-4">A "Trindade Lombar" Aftermarket</h3>
+                    <p class="mb-6">O relatório enfatiza que nenhuma moto original é perfeita para 1,90m. Você deve
+                        reservar parte dos R$ 40k para estas modificações:</p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="accent-bg text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">
+                                1</div>
+                            <div>
+                                <h4 class="font-bold text-lg">Banco Comfort (Gel + Encosto Sacral)</h4>
+                                <p class="text-gray-600">Elimina a "postura de corcunda" e absorve microvibrações que o
+                                    chassi transfere à pelve. <span class="font-semibold italic">(Custo: R$ 1.000 -
+                                        1.600)</span></p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="accent-bg text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">
+                                2</div>
+                            <div>
+                                <h4 class="font-bold text-lg">Risers Articulados</h4>
+                                <p class="text-gray-600">Aproxima o guidão do tronco, permitindo que os braços fiquem
+                                    relaxados e a coluna 100% vertical. <span class="font-semibold italic">(Custo: R$
+                                        150 - 400)</span></p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="accent-bg text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">
+                                3</div>
+                            <div>
+                                <h4 class="font-bold text-lg">Defletores de Bolha e Ajuste de Sag</h4>
+                                <p class="text-gray-600">Reduz a pressão do vento no tórax (que causa tensão isométrica
+                                    lombar) e calibra a suspensão para o seu peso real. <span
+                                        class="font-semibold italic">(Custo: R$ 200 - 500)</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 text-white p-6 rounded-xl shadow-xl">
+                    <h3 class="text-xl font-bold mb-4">Simulador de Investimento</h3>
+                    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                        <div class="text-center md:text-left">
+                            <span class="text-gray-400 block uppercase text-xs tracking-widest">Orçamento Total</span>
+                            <span class="text-3xl font-bold text-[#D68C78]">R$ 40.000</span>
+                        </div>
+                        <div class="text-2xl text-gray-500 font-light hidden md:block">-</div>
+                        <div class="text-center md:text-left">
+                            <span class="text-gray-400 block uppercase text-xs tracking-widest">Média do Veículo</span>
+                            <span class="text-2xl font-bold">R$ 36.500</span>
+                        </div>
+                        <div class="text-2xl text-gray-500 font-light hidden md:block">-</div>
+                        <div class="text-center md:text-left">
+                            <span class="text-gray-400 block uppercase text-xs tracking-widest">Kit Lombar + Docs</span>
+                            <span class="text-2xl font-bold">R$ 3.500</span>
+                        </div>
+                    </div>
+                    <p class="mt-6 text-sm text-gray-300 italic text-center border-t border-slate-700 pt-4">"A
+                        recomendação técnica é nunca gastar os 40k apenas na moto. A saúde lombar depende dos ajustes
+                        periféricos."</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-gray-100 py-12 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-500 text-sm">Baseado no Relatório Técnico de Ergonomia Motociclística 2026.</p>
+            <p class="text-gray-400 text-xs mt-2 italic">Aviso: Consulte sempre um mecânico e um ortopedista.</p>
+        </div>
+    </footer>
+
+    <script>
+        const models = [
+            { id: 0, name: "Suzuki V-Strom 650 XT", year: "2015-2017", price: 37500, seat: 835, engine: "V-Twin 645cc", power: "71 cv", category: "high", comfort: 95, tech: 70, cost: 80, notes: "O pináculo do conforto. Motor V-Twin elimina vibrações que cansam a lombar.", pros: ["Suavidade", "Banco Padrão-Ouro"], cons: ["Peso estático"] },
+            { id: 1, name: "Honda CB 500X", year: "2018-2020", price: 38500, seat: 830, engine: "Twin 471cc", power: "50 cv", category: "low", comfort: 85, tech: 75, cost: 85, notes: "A escolha racional. Manutenção barata e posição de ataque neutra.", pros: ["Revenda fácil", "Econômica"], cons: ["Básica em tecnologia"] },
+            { id: 2, name: "RE Himalayan 450", year: "0km 2025", price: 31500, seat: 845, engine: "Sherpa 452cc", power: "40 cv", category: "low", comfort: 90, tech: 90, cost: 95, notes: "Zero km com suspensão Showa de 200mm. Excelente para absorver crateras.", pros: ["Zero km", "Suspensão superior"], cons: ["Rede de concessionárias"] },
+            { id: 3, name: "Honda Sahara 300 Adv", year: "0km 2024", price: 35500, seat: 859, engine: "Monoc. 293cc", power: "25 cv", category: "low", comfort: 88, tech: 80, cost: 85, notes: "Assento mais alto da categoria. Ideal para não dobrar os joelhos.", pros: ["Altura do assento", "Agilidade"], cons: ["Ágio nas lojas"] },
+            { id: 4, name: "Kawasaki Versys-X 300", year: "2022-2024", price: 33000, seat: 815, engine: "Twin 296cc", power: "40 cv", category: "low", comfort: 75, tech: 70, cost: 90, notes: "Motor elástico. Ótima postura, mas exige banco comfort imediato.", pros: ["Vento desviado", "Motor Ninja"], cons: ["Banco duro original"] },
+            { id: 5, name: "Honda NC 750X", year: "2015-2016", price: 38800, seat: 830, engine: "Twin 745cc", power: "54 cv", category: "high", comfort: 85, tech: 65, cost: 75, notes: "Conforto por baixo giro. Exige 'dog bones' para subir a traseira para seu tamanho.", pros: ["Porta-capacete", "Torque"], cons: ["Km alta no orçamento"] }
+        ];
+
+        let seatChart, priceChart, radarChart;
+
+        function switchTab(tab) {
+            document.getElementById('view-explorer').classList.add('hidden');
+            document.getElementById('view-analytics').classList.add('hidden');
+            document.getElementById('view-custom').classList.add('hidden');
+            document.getElementById('tab-explorer').classList.remove('tab-active');
+            document.getElementById('tab-analytics').classList.remove('tab-active');
+            document.getElementById('tab-custom').classList.remove('tab-active');
+
+            document.getElementById('view-' + tab).classList.remove('hidden');
+            document.getElementById('tab-' + tab).classList.add('tab-active');
+
+            if (tab === 'analytics') initCharts();
+        }
+
+        function renderModels() {
+            const filter = document.getElementById('filter-cyl').value;
+            const container = document.getElementById('models-grid');
+            container.innerHTML = '';
+
+            const filtered = filter === 'all' ? models : models.filter(m => m.category === filter);
+
+            filtered.forEach(m => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-6 rounded-xl card-shadow border border-gray-100 hover:border-[#D68C78] transition-all cursor-pointer group";
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-xl font-bold group-hover:accent-text">${m.name}</h4>
+                        <span class="text-xs font-bold px-2 py-1 bg-gray-100 rounded">${m.year}</span>
+                    </div>
+                    <div class="space-y-2 mb-4 text-sm">
+                        <div class="flex justify-between"><span>Assento:</span><span class="font-semibold">${m.seat} mm</span></div>
+                        <div class="flex justify-between"><span>Preço Médio:</span><span class="font-semibold">R$ ${m.price.toLocaleString()}</span></div>
+                        <div class="flex justify-between"><span>Motor:</span><span class="font-semibold italic text-gray-500">${m.engine}</span></div>
+                    </div>
+                    <div class="pt-4 border-t border-gray-50 space-y-2">
+                        <p class="text-xs text-gray-600 line-clamp-2">${m.notes}</p>
+                        <div class="flex gap-2 flex-wrap">
+                            ${m.pros.map(p => `<span class="text-[10px] bg-green-50 text-green-700 px-2 py-0.5 rounded-full font-medium">+ ${p}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+                card.onclick = () => {
+                    // Quick alert simulation for interaction
+                    alert(`${m.name}\n\nDica Ergonômica: ${m.notes}\n\nO que cuidar: ${m.cons.join(', ')}`);
+                };
+                container.appendChild(card);
+            });
+        }
+
+        function initCharts() {
+            if (seatChart) return; // Prevent double init
+
+            const ctx1 = document.getElementById('seatHeightChart').getContext('2d');
+            seatChart = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: models.map(m => m.name),
+                    datasets: [{
+                        label: 'Altura do Assento (mm)',
+                        data: models.map(m => m.seat),
+                        backgroundColor: '#D68C78',
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: { legend: { display: false } },
+                    scales: { x: { min: 800, max: 870 } }
+                }
+            });
+
+            const ctx2 = document.getElementById('priceChart').getContext('2d');
+            priceChart = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: models.map(m => m.name),
+                    datasets: [{
+                        label: 'Preço Estimado (R$)',
+                        data: models.map(m => m.price),
+                        backgroundColor: '#2D3748',
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { min: 25000, max: 45000 } }
+                }
+            });
+
+            const ctx3 = document.getElementById('radarChart').getContext('2d');
+            const datasets = models.slice(0, 3).map((m, i) => ({
+                label: m.name,
+                data: [m.comfort, m.tech, m.cost, 80, m.power === '71 cv' ? 90 : 60], // simple mapping
+                borderColor: ['#D68C78', '#2D3748', '#8E9AAF'][i],
+                borderWidth: 2,
+                pointBackgroundColor: ['#D68C78', '#2D3748', '#8E9AAF'][i]
+            }));
+
+            radarChart = new Chart(ctx3, {
+                type: 'radar',
+                data: {
+                    labels: ['Conforto', 'Tech/Segurança', 'Custo-Ben.', 'Suspensão', 'Motor'],
+                    datasets: datasets
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    elements: { line: { tension: 0.1 } },
+                    scales: { r: { angleLines: { display: true }, suggestMin: 50, suggestMax: 100, ticks: { display: false } } }
+                }
+            });
+
+            // Dynamic legend for radar
+            const legendDiv = document.getElementById('radar-legend');
+            datasets.forEach(ds => {
+                legendDiv.innerHTML += `<span class="text-[10px] border px-2 py-1 rounded" style="color:${ds.borderColor}">${ds.label}</span>`;
+            });
+        }
+
+        // Initialize
+        renderModels();
+    </script>
+</body>
+
+</html>
