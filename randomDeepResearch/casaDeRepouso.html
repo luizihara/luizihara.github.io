@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panorama Residencial Sênior SP 2026</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👴</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfaf7;
+            color: #3d3d3d;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        .tab-active { border-bottom-color: #f97316; color: #ea580c; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .card-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Header Navigation -->
+    <header class="bg-white border-b sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                <span class="text-2xl font-bold text-blue-900 tracking-tight">CUIDADO SÊNIOR SP</span>
+                <span
+                    class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded uppercase">2026</span>
+            </div>
+            <nav class="flex space-x-4 text-sm">
+                <button onclick="showSection('mercado')" class="nav-link tab-active py-2" id="nav-mercado">Mercado &
+                    Preços</button>
+                <button onclick="showSection('analise')" class="nav-link py-2" id="nav-analise">Análise de
+                    Custos</button>
+                <button onclick="showSection('qualidade')" class="nav-link py-2" id="nav-qualidade">Qualidade &
+                    Regras</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+
+        <!-- SECTION 1: MERCADO & PREÇOS -->
+        <section id="section-mercado" class="space-y-8">
+            <div class="bg-white p-6 rounded-2xl border border-orange-100 card-shadow">
+                <h1 class="text-3xl font-bold text-gray-800 mb-4">Panorama do Setor de Residenciais para Idosos</h1>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    A Região Metropolitana de São Paulo e cidades vizinhas (como ABC e Alphaville) vivem uma profunda metamorfose em sua infraestrutura geriátrica. O modelo de "asilos" cedeu espaço a residenciais sênior focados em bem-estar.
+                    Este módulo apresenta a estratificação geográfica dos preços e um explorador interativo com <strong>32 instituições</strong>, permitindo que você encontre a melhor opção por zona e faixa de investimento.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="chart-container">
+                        <canvas id="chartRegiao"></canvas>
+                    </div>
+                    <div class="bg-orange-50 p-6 rounded-xl">
+                        <h3 class="font-bold text-orange-900 mb-2">Resumo Geográfico Atualizado</h3>
+                        <ul class="text-sm space-y-2 text-orange-800">
+                            <li>• <strong>Z. Norte, Leste e ABC:</strong> Foco em custo-benefício e lares familiares (R$ 1.500 a R$ 9.000).</li>
+                            <li>• <strong>Zona Sul:</strong> Alta dualidade, mesclando bairros simples e eixos nobres hospitalares (R$ 4.000 a R$ 19.000).</li>
+                            <li>• <strong>Z. Oeste e Alphaville:</strong> Epicentro do ultraluxo, hotelaria boutique e <em>all-inclusive</em> (até R$ 39.000).
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interativo: Lista de Instituições -->
+            <div class="space-y-6 relative">
+                <div id="filterBar" class="sticky z-40 bg-white p-4 rounded-xl shadow-lg border-b-4 border-orange-500 flex flex-col lg:flex-row lg:items-center justify-between gap-4 w-full transition-all">
+                    <div class="flex flex-col">
+                        <h2 class="text-2xl font-bold text-gray-800">Explorador de Instituições</h2>
+                        <p id="resultsCounter" class="text-sm text-gray-500 mt-1">Exibindo opções...</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 items-center">
+                        <div class="relative w-full sm:w-auto">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-gray-400">🔍</span>
+                            <input type="text" id="filterSearch" oninput="filterData()" placeholder="Buscar nome ou local..." class="p-2 pl-8 rounded border bg-white text-sm w-full sm:w-48 outline-none focus:border-orange-400">
+                        </div>
+                        <select id="filterRegiao" onchange="filterData()" class="p-2 rounded border bg-white text-sm outline-none focus:border-orange-400">
+                            <option value="todos">Todas as Zonas</option>
+                            <option value="Norte">Zona Norte</option>
+                            <option value="Sul">Zona Sul</option>
+                            <option value="Leste">Zona Leste</option>
+                            <option value="Oeste">Zona Oeste</option>
+                            <option value="Centro">Centro</option>
+                            <option value="Interior">Interior / Grande SP</option>
+                        </select>
+                        <select id="filterPreco" onchange="filterData()" class="p-2 rounded border bg-white text-sm outline-none focus:border-orange-400">
+                            <option value="todos">Todos os Preços</option>
+                            <option value="economico">Até R$ 4.000</option>
+                            <option value="intermediario">R$ 4.000 - R$ 8.000</option>
+                            <option value="premium">Acima de R$ 8.000</option>
+                        </select>
+                        <select id="sortPreco" onchange="filterData()" class="p-2 rounded border bg-white text-sm outline-none focus:border-orange-400">
+                            <option value="padrao">Ordem Padrão</option>
+                            <option value="menor">Menor Preço</option>
+                            <option value="maior">Maior Preço</option>
+                        </select>
+                        <button id="btnFavFilter" onclick="toggleFavFilter()" class="p-2 rounded border bg-white text-sm flex items-center gap-1 hover:bg-gray-50 transition-colors w-full sm:w-auto outline-none focus:border-orange-400">
+                            <span class="text-gray-400" id="favFilterIcon">☐</span> Apenas Marcados
+                        </button>
+                    </div>
+                </div>
+
+                <div id="instituicoesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Gerado via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: ANÁLISE DE CUSTOS -->
+        <section id="section-analise" class="hidden space-y-12">
+            <div class="bg-white p-8 rounded-2xl border border-blue-50 card-shadow text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">O Dilema Financeiro: ILPI vs Home Care</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto mb-8">
+                    Analisamos os custos reais envolvidos na assistência 24h. Enquanto o Home Care exige a gestão de uma
+                    "microempresa médica" doméstica com altos encargos, a Instituição de Longa Permanência (ILPI)
+                    utiliza a economia de escala para reduzir custos e aumentar a socialização.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                    <div class="space-y-6">
+                        <div class="chart-container">
+                            <canvas id="chartHomeCare"></canvas>
+                        </div>
+                        <p class="text-xs text-gray-400 italic">Custo estimado baseado em escalas de 4 cuidadores CLT
+                            para cobertura 24h/dia.</p>
+                    </div>
+                    <div class="text-left space-y-6">
+                        <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-500">
+                            <h4 class="font-bold text-blue-900 mb-2">Por que a variação de preço?</h4>
+                            <p class="text-sm text-blue-800">O preço final não é arbitrário. Ele é moldado por:</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="chartFatores"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-6 bg-white rounded-xl border border-gray-100 card-shadow">
+                    <h4 class="font-bold mb-2 text-blue-700">1. Dependência</h4>
+                    <p class="text-sm text-gray-600">Graus elevados (G3) exigem cuidadores 1 para 6 idosos, aumentando a
+                        folha técnica em até 40%.</p>
+                </div>
+                <div class="p-6 bg-white rounded-xl border border-gray-100 card-shadow">
+                    <h4 class="font-bold mb-2 text-blue-700">2. Acomodação</h4>
+                    <p class="text-sm text-gray-600">Quartos individuais em áreas nobres refletem o custo do m² e
+                        garantem privacidade extrema.</p>
+                </div>
+                <div class="p-6 bg-white rounded-xl border border-gray-100 card-shadow">
+                    <h4 class="font-bold mb-2 text-blue-700">3. Equipe Clínica</h4>
+                    <p class="text-sm text-gray-600">Diferença crucial entre apenas cuidadores e uma equipe
+                        multidisciplinar (médico, fisio, fono).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: QUALIDADE & REGRAS -->
+        <section id="section-qualidade" class="hidden space-y-8">
+            <div class="bg-white p-8 rounded-2xl border border-green-50 card-shadow">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">Checklist de Segurança e Regulação</h2>
+                <p class="text-gray-600 text-center max-w-2xl mx-auto mb-10">
+                    Baseado na RDC 283/2005 da Anvisa, estes são os pontos inegociáveis para garantir a integridade
+                    física e o bem-estar psicológico do idoso.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <div class="flex items-start p-4 bg-green-50 rounded-lg">
+                            <div class="text-2xl mr-4">🏢</div>
+                            <div>
+                                <h4 class="font-bold text-green-900">Infraestrutura Adaptada</h4>
+                                <p class="text-sm text-green-800">Pisos antiderrapantes, ausência de tapetes, banheiros
+                                    com barras de apoio e campainhas de emergência acessíveis.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start p-4 bg-green-50 rounded-lg">
+                            <div class="text-2xl mr-4">🍎</div>
+                            <div>
+                                <h4 class="font-bold text-green-900">Gestão Nutricional</h4>
+                                <p class="text-sm text-green-800">Oferta obrigatória de 6 refeições diárias
+                                    supervisionadas por nutricionista clínico.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start p-4 bg-green-50 rounded-lg">
+                            <div class="text-2xl mr-4">🛡️</div>
+                            <div>
+                                <h4 class="font-bold text-green-900">Responsabilidade Técnica</h4>
+                                <p class="text-sm text-green-800">Presença de um RT de nível superior e licenciamento
+                                    ativo na Covisa São Paulo.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start p-4 bg-green-50 rounded-lg">
+                            <div class="text-2xl mr-4">❤️</div>
+                            <div>
+                                <h4 class="font-bold text-green-900">Psicologia do Acolhimento</h4>
+                                <p class="text-sm text-green-800">Liberdade de personalização do quarto com objetos
+                                    afetivos e horários de visita irrestritos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 p-6 bg-yellow-50 rounded-xl border-2 border-yellow-200">
+                    <h3 class="font-bold text-yellow-800 mb-2 text-center">⚠️ Alerta de Transparência</h3>
+                    <p class="text-sm text-yellow-700 text-center">
+                        Qualquer restrição aos horários de visita ou ausência de licença sanitária visível deve ser
+                        interpretada como um sinal de alerta severo (Red Flag).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-8 right-8 bg-orange-500 text-white p-3 rounded-full shadow-lg hover:bg-orange-600 hover:-translate-y-1 transition-all opacity-0 translate-y-10 invisible z-50 focus:outline-none" title="Voltar ao Topo">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+
+    <footer class="bg-gray-900 text-gray-400 py-12 mt-20">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">© 2026 - Guia de Assistência Sênior SP. Dados baseados em Projeções de Mercado e Tabelas
+                de Referência.</p>
+            <p class="text-xs mt-2">NÃO SUBSTITUI AVALIAÇÃO MÉDICA E PRESENCIAL NAS INSTITUIÇÕES.</p>
+        </div>
+    </footer>
+
+    <script>
+        // EVENT LISTENERS
+        function updateStickyTop() {
+            const header = document.querySelector('header');
+            const filterBar = document.getElementById('filterBar');
+            if (header && filterBar) {
+                // Adiciona um pequeno respiro de -1px para evitar falhas visuais na renderização do browser
+                filterBar.style.top = (header.offsetHeight - 1) + 'px';
+            }
+        }
+        
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('backToTop');
+            if (window.scrollY > 400) {
+                btn.classList.remove('opacity-0', 'translate-y-10', 'invisible');
+                btn.classList.add('opacity-100', 'translate-y-0', 'visible');
+            } else {
+                btn.classList.add('opacity-0', 'translate-y-10', 'invisible');
+                btn.classList.remove('opacity-100', 'translate-y-0', 'visible');
+            }
+        });
+
+        window.addEventListener('resize', updateStickyTop);
+        document.addEventListener('DOMContentLoaded', updateStickyTop);
+        // Garante que rodará imediatamente se o script executar após o DOM
+        updateStickyTop();
+
+        const instituicoes = [
+            { nome: "Casa de Repouso Sorriso da Velhice", regiao: "Centro", precoMin: 1500, precoMax: 2200, tel: "N/A", site: "N/A", instagram: "N/A", end: "Centro de SP", tag: "Econômico" },
+            { nome: "Levimed", regiao: "Geral", precoMin: 2300, precoMax: 2300, tel: "(11) 3806-0606", site: "bellaclinic.com.br", instagram: "N/A", end: "São Paulo (Várias)", tag: "Econômico" },
+            { nome: "Casa das Oliveiras 2", regiao: "Norte", precoMin: 4000, precoMax: 4000, tel: "(11) 93335-5193", site: "N/A", instagram: "N/A", end: "ZN, CEP 02345-000", tag: "Intermediário" },
+            { nome: "Primavera Lar Para Idosos", regiao: "Sul", precoMin: 3000, precoMax: 5500, tel: "(11) 4930-3286", site: "residenciaprimaveras.com.br", instagram: "@residenciaprimaveras", end: "R. Cerqueira César, 425", tag: "Intermediário" },
+            { nome: "Casa de Repouso Vó Elizabeth", regiao: "Norte", precoMin: 3000, precoMax: 6000, tel: "(11) 3297-0885", site: "N/A", instagram: "N/A", end: "R. Casa Forte, 773", tag: "Intermediário" },
+            { nome: "Casa de Repouso Sant'Anna", regiao: "Norte", precoMin: 3300, precoMax: 7000, tel: "N/A", site: "casaderepousosantana.com.br", instagram: "N/A", end: "Rua Padre Donizetti T. de Lima, 212", tag: "Intermediário" },
+            { nome: "Residencial Premium Senior", regiao: "Sul", precoMin: 3500, precoMax: 5000, tel: "(11) 2338-5365", site: "residencialpremiumsenior.com", instagram: "N/A", end: "R. dos Cafezais, 174", tag: "Intermediário" },
+            { nome: "Cora Residencial Senior", regiao: "Leste/Sul", precoMin: 4880, precoMax: 11000, tel: "(11) 2500-0800", site: "coraresidencial.com.br", instagram: "@coraresidencial", end: "Ipiranga / Tatuapé", tag: "Premium" },
+            { nome: "Terça da Serra", regiao: "Norte/Oeste", precoMin: 7000, precoMax: 13000, tel: "(19) 3325-8969", site: "tercadaserra.com.br", instagram: "@tercadaserra", end: "Pinheiros / Santana", tag: "Premium" },
+            { nome: "Villa Fiori", regiao: "Oeste", precoMin: 6500, precoMax: 8500, tel: "(11) 98272-9946", site: "familiamodesto.com.br", instagram: "@residencialfamiliamodesto", end: "Alto de Pinheiros", tag: "Premium" },
+            { nome: "Residencial Santa Cruz", regiao: "Sul", precoMin: 7800, precoMax: 15600, tel: "(11) 4564-2050", site: "rsantacruz.com.br", instagram: "@residencialsantacruz", end: "R. Antonio Furlan Júnior, 15", tag: "Luxo" },
+            { nome: "Clara Sênior", regiao: "Oeste", precoMin: 13000, precoMax: 19600, tel: "N/A", site: "clarasenior.com.br", instagram: "@clarasenior", end: "Consulta via Site", tag: "All-Inclusive" },
+            { nome: "Residencial Club Leger", regiao: "Oeste", precoMin: 12500, precoMax: 35000, tel: "(11) 92244-4300", site: "residencialclubleger.com.br", instagram: "@residencialleger", end: "R. Antônio Cardoso Nogueira, 859", tag: "Luxo" },
+            { nome: "Einstein Residencial", regiao: "Sul/Oeste", precoMin: 7800, precoMax: 19292, tel: "(11) 2151-7114", site: "einstein.br", instagram: "@instaeinstein", end: "Morumbi / Vila Mariana", tag: "Excelência" },
+            { nome: "Cora Premium", regiao: "Geral", precoMin: 19900, precoMax: 39000, tel: "(11) 2500-0800", site: "coraresidencial.com.br", instagram: "@coraresidencial", end: "Rua dos Jacarandás, 1111", tag: "Luxo Total" },
+            { nome: "Amor Residencial Sênior", regiao: "Oeste", precoMin: 4500, precoMax: 6500, tel: "(11) 2365-4306", site: "amorresidencialsenior.com.br", instagram: "N/A", end: "Rua Noberto Mayer, 399", tag: "Intermediário" },
+            { nome: "Casa de Repouso De Paula", regiao: "Leste", precoMin: 2500, precoMax: 4500, tel: "(11) 2338-0686", site: "casaderepousodepaula.com.br", instagram: "N/A", end: "Vila Matilde", tag: "Econômico" },
+            { nome: "Residencial Brilho do Sol", regiao: "Oeste", precoMin: 4000, precoMax: 7000, tel: "N/A", site: "casaderepousobrilhodosol.com.br", instagram: "N/A", end: "Alto da Lapa / Pinheiros", tag: "Intermediário" },
+            { nome: "Residencial Viver Bem", regiao: "Oeste", precoMin: 4500, precoMax: 7500, tel: "N/A", site: "residencialviverbem.com.br", instagram: "N/A", end: "São Paulo (Várias)", tag: "Intermediário" },
+            { nome: "Casa de Repouso Elite SP", regiao: "Centro", precoMin: 7000, precoMax: 12000, tel: "N/A", site: "casaderepousoelite.com.br", instagram: "N/A", end: "Perdizes / Higienópolis", tag: "Premium" },
+            { nome: "Solar Ville Garaude", regiao: "Interior", precoMin: 8000, precoMax: 15000, tel: "N/A", site: "solarville.com.br", instagram: "N/A", end: "Alphaville, Barueri", tag: "Premium" },
+            { nome: "Vivenda Quinta das Flores", regiao: "Interior", precoMin: 6000, precoMax: 10000, tel: "(11) 98908-4908", site: "vivendaquintadasflores.com.br", instagram: "N/A", end: "Santana de Parnaíba", tag: "Premium" },
+            { nome: "Lar Felicità", regiao: "Interior", precoMin: 5000, precoMax: 9000, tel: "N/A", site: "larfelicita.com.br", instagram: "N/A", end: "Santo André", tag: "Intermediário" },
+            { nome: "Residencial Belo Lar", regiao: "Interior", precoMin: 4000, precoMax: 7000, tel: "(11) 4451-2381", site: "residencialbelolarsenior.com.br", instagram: "N/A", end: "Vila Pires, Santo André", tag: "Intermediário" },
+            { nome: "Clínica Martinelli", regiao: "Interior", precoMin: 4500, precoMax: 8000, tel: "(11) 96857-2744", site: "casaderepousomartinelli.com.br", instagram: "@clinicamartinelli", end: "Centro, Jundiaí", tag: "Intermediário" },
+            { nome: "Ágape Residencial", regiao: "Interior", precoMin: 5000, precoMax: 9000, tel: "(11) 4321-3707", site: "agaperesidencial.com.br", instagram: "N/A", end: "Granja Viana, Cotia", tag: "Premium" },
+            { nome: "Vila Vida Residencial Sênior", regiao: "Interior", precoMin: 6000, precoMax: 11000, tel: "(11) 2424-7720", site: "vilavida.com.br", instagram: "N/A", end: "Granja Viana, Cotia", tag: "Premium" },
+            { nome: "Vitória Spa Granja Viana", regiao: "Interior", precoMin: 7000, precoMax: 13000, tel: "(17) 99136-5819", site: "vitoriaspa.com.br", instagram: "N/A", end: "Granja Viana, Cotia", tag: "Premium" },
+            { nome: "Lar Madre Regina", regiao: "Interior", precoMin: 2500, precoMax: 4000, tel: "N/A", site: "redesantacatarina.org.br", instagram: "@larmadreregina", end: "Guarulhos", tag: "Econômico" },
+            { nome: "Residencial Vila Harmonia", regiao: "Leste", precoMin: 4000, precoMax: 7000, tel: "(11) 3804-2374", site: "casaderepousovh.com.br", instagram: "N/A", end: "Mooca / Anália Franco", tag: "Intermediário" },
+            { nome: "Tatuapé Residencial Sênior", regiao: "Leste", precoMin: 4500, precoMax: 8000, tel: "N/A", site: "tatuaperesidencialsenior.com.br", instagram: "N/A", end: "Tatuapé", tag: "Intermediário" },
+            { nome: "Villaggio Bella Prosa", regiao: "Leste", precoMin: 4000, precoMax: 6500, tel: "(11) 2359-1231", site: "villaggiobellaprosa.com.br", instagram: "N/A", end: "Vila Formosa", tag: "Intermediário" }
+        ];
+
+        let showFavsOnly = false;
+
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+            document.getElementById('section-' + id).classList.remove('hidden');
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('tab-active'));
+            document.getElementById('nav-' + id).classList.add('tab-active');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleFavFilter() {
+            showFavsOnly = !showFavsOnly;
+            const btn = document.getElementById('btnFavFilter');
+            const icon = document.getElementById('favFilterIcon');
+            if(showFavsOnly) {
+                btn.classList.add('bg-blue-50', 'border-blue-300', 'text-blue-800');
+                icon.innerHTML = '<span class="text-green-600">☑</span>';
+            } else {
+                btn.classList.remove('bg-blue-50', 'border-blue-300', 'text-blue-800');
+                icon.innerHTML = '<span class="text-gray-400">☐</span>';
+            }
+            filterData();
+        }
+
+        function filterData() {
+            const r = document.getElementById('filterRegiao').value;
+            const p = document.getElementById('filterPreco').value;
+            const s = document.getElementById('filterSearch').value.toLowerCase();
+            const sort = document.getElementById('sortPreco').value;
+            const favs = JSON.parse(localStorage.getItem('fav_instituicoes') || '[]');
+
+            let filtered = instituicoes.filter(i => {
+                let matchRegiao = (r === 'todos' || i.regiao.includes(r));
+                
+                let matchPreco = true;
+                if (p === 'economico') matchPreco = i.precoMin <= 4000;
+                if (p === 'intermediario') matchPreco = (i.precoMin > 4000 && i.precoMin <= 8000) || (i.precoMax > 4000 && i.precoMax <= 8000);
+                if (p === 'premium') matchPreco = i.precoMax > 8000;
+
+                let matchSearch = true;
+                if (s !== '') {
+                    matchSearch = i.nome.toLowerCase().includes(s) || i.end.toLowerCase().includes(s) || i.regiao.toLowerCase().includes(s);
+                }
+
+                let matchFav = true;
+                if (showFavsOnly) {
+                    matchFav = favs.includes(i.nome);
+                }
+
+                return matchRegiao && matchPreco && matchSearch && matchFav;
+            });
+
+            if (sort === 'menor') {
+                filtered.sort((a, b) => a.precoMin - b.precoMin);
+            } else if (sort === 'maior') {
+                filtered.sort((a, b) => b.precoMin - a.precoMin);
+            }
+
+            renderInstituicoes(filtered);
+        }
+
+        function toggleFavorite(nome) {
+            let favs = JSON.parse(localStorage.getItem('fav_instituicoes') || '[]');
+            if (favs.includes(nome)) {
+                favs = favs.filter(n => n !== nome);
+            } else {
+                favs.push(nome);
+            }
+            localStorage.setItem('fav_instituicoes', JSON.stringify(favs));
+            filterData(); // re-render para mostrar atualização
+        }
+
+        function renderInstituicoes(data) {
+            const grid = document.getElementById('instituicoesGrid');
+            const counter = document.getElementById('resultsCounter');
+            
+            counter.innerText = `Exibindo ${data.length} de ${instituicoes.length} opções disponíveis.`;
+            
+            if (data.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center bg-gray-50 rounded-xl border border-dashed border-gray-300">
+                        <div class="text-4xl mb-3 opacity-50">🧐</div>
+                        <h3 class="text-lg font-bold text-gray-600">Nenhum resultado encontrado</h3>
+                        <p class="text-gray-500 text-sm">Tente ajustar seus filtros ou termos de busca.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = '';
+            const favs = JSON.parse(localStorage.getItem('fav_instituicoes') || '[]');
+
+            data.forEach((i, index) => {
+                const isFav = favs.includes(i.nome);
+                const safeNome = i.nome.replace(/'/g, "\\'");
+                const card = document.createElement('div');
+                card.style.animationDelay = `${index * 0.05}s`;
+                card.className = "bg-white p-5 rounded-xl border border-gray-100 card-shadow transition-all hover:-translate-y-1 hover:border-blue-200 opacity-0 animate-fade-in";
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-xs font-bold px-2 py-1 bg-blue-50 text-blue-700 rounded uppercase">${i.tag}</span>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-gray-400 font-semibold uppercase">${i.regiao}</span>
+                            <button onclick="toggleFavorite('${safeNome}')" class="focus:outline-none text-2xl" title="Marcar">
+                                ${isFav ? '<span class="text-green-600">☑</span>' : '<span class="text-gray-400 hover:text-gray-600 transition-colors">☐</span>'}
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-2 leading-tight h-10 overflow-hidden pr-4">${i.nome}</h3>
+                    <div class="text-blue-900 font-bold text-lg mb-4">
+                        R$ ${i.precoMin.toLocaleString()} - ${i.precoMax.toLocaleString()}<span class="text-xs font-normal text-gray-400">/mês</span>
+                    </div>
+                    <div class="text-xs space-y-2 text-gray-600 border-t pt-4">
+                        <p>📍 <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(i.nome + ' ' + i.end)}" target="_blank" class="text-gray-600 hover:text-blue-600 hover:underline" title="Ver no mapa">${i.end}</a></p>
+                        <p>📞 ${i.tel}</p>
+                        <p>🌐 ${i.site !== 'N/A' ? `<a href="https://${i.site}" target="_blank" class="text-blue-600 hover:underline">${i.site}</a>` : 'N/A'}</p>
+                        <p>📸 ${i.instagram !== 'N/A' ? `<a href="https://instagram.com/${i.instagram.replace('@', '')}" target="_blank" class="text-blue-600 hover:underline">${i.instagram}</a>` : 'N/A'}</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // CHARTS INITIALIZATION
+        function initCharts() {
+            // Chart Regiões
+            new Chart(document.getElementById('chartRegiao'), {
+                type: 'bar',
+                data: {
+                    labels: ['Z. Norte', 'Z. Leste', 'Centro', 'Z. Sul', 'Z. Oeste'],
+                    datasets: [{
+                        label: 'Preço Médio Estimado (R$)',
+                        data: [4250, 3400, 5750, 9000, 15000],
+                        backgroundColor: '#1e40af',
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: { legend: { display: false } },
+                    scales: { x: { grid: { display: false } } }
+                }
+            });
+
+            // Chart Home Care vs ILPI
+            new Chart(document.getElementById('chartHomeCare'), {
+                type: 'bar',
+                data: {
+                    labels: ['Casa de Repouso (Média)', 'Home Care 24h (Real)'],
+                    datasets: [{
+                        label: 'Investimento Mensal (R$)',
+                        data: [6500, 19600],
+                        backgroundColor: ['#3b82f6', '#ef4444'],
+                        borderRadius: 10
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: { display: true, text: 'Custos Assistenciais 2026' },
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // Chart Fatores
+            new Chart(document.getElementById('chartFatores'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Grau Dependência', 'Acomodação', 'Equipe Técnica', 'Outros'],
+                    datasets: [{
+                        data: [40, 25, 25, 10],
+                        backgroundColor: ['#1e3a8a', '#2563eb', '#60a5fa', '#d1d5db'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+
+        window.onload = () => {
+            renderInstituicoes(instituicoes);
+            initCharts();
+        };
+    </script>
+</body>
+
+</html>
