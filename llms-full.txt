@@ -22,8 +22,14 @@ I enjoy working hands-on, collaborating with multidisciplinary teams, sharing kn
 
 ## Professional Experience
 
+### Platform Engineering - DevOps | QA | SRE @ nstech
+**July/2026 - Present**
+
+### Founding Engineer @ Nômade Code
+**April/2026 - Present**
+
 ### Software Quality Architect @ iConnections
-**April/2025 - Present**
+**April/2025 - April/2026**
 * Leading quality architecture initiatives across backend, frontend, mobile, and performance testing, ensuring scalable and reliable validation strategies across the platform.
 * Applying AI-driven approaches to accelerate test creation, improve coverage, and elevate engineering efficiency and product quality.
 * Designing and implementing synthetic testing solutions to strengthen observability and enable proactive detection of production issues.

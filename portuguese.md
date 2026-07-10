@@ -72,9 +72,17 @@ Com experiência em Qualidade de Software, meus últimos anos foram focados em m
 ```
 
 ## Experiência Profissional
+- nstech
+    - Platform Engineering - DevOps | QA | SRE
+    - _Julho/2026 - ate o momento_
+
+- Nômade Code
+    - Founding Engineer
+    - _Abril/2026 - ate o momento_
+
 - iConnections
     - Engenheiro de Qualidade
-    - _Abril/2025 - ate o momento_
+    - _Abril/2025 - Abril/2026_
 
 - XP Inc
     - Especialista em Engenharia de Qualidade de Software
