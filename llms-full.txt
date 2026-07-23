@@ -86,3 +86,4 @@ Academic projects developed during the MBA.
 * Agent Orchestration & Integration (fiap.orquestracaoIntegracaoAgents/index.html)
 * Product Experiences (fiap.experienciaproduto/entregaFinal.html)
 * Agents in Business Operations (fiap.agentes-em-operacoes-empresariais/index.html)
+* Software Reengineering (fiap.reengenharia-de-software/index.html)

@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reengenharia de Processos com Agentes — Desafio BPA</title>
+<style>
+  :root{
+    --fiap:#ed145b;
+    --fiap-2:#ff3b78;
+    --ink:#f7f7fb;
+    --muted:#aeb2c0;
+    --bg:#08090d;
+    --panel:#11131a;
+    --panel-2:#171a22;
+    --line:#2a2e3b;
+    --good:#2ee6a6;
+    --warn:#ffcc66;
+    --bad:#ff647c;
+    --blue:#66b8ff;
+    --shadow:0 24px 80px rgba(0,0,0,.38);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 85% 10%, rgba(237,20,91,.16), transparent 34rem),
+      radial-gradient(circle at 10% 80%, rgba(102,184,255,.08), transparent 28rem),
+      var(--bg);
+    font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    overflow-x:hidden;
+  }
+  body:before{
+    content:"";
+    position:fixed; inset:0; pointer-events:none; z-index:-1;
+    background-image:linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                     linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size:48px 48px;
+    mask-image:linear-gradient(to bottom, #000, transparent 90%);
+  }
+  .brand{
+    position:fixed; z-index:30; top:18px; left:22px;
+    display:flex; align-items:center; gap:10px;
+    font-weight:900; letter-spacing:.12em; font-size:13px;
+  }
+  .brand-mark{
+    width:34px;height:34px;border:2px solid var(--fiap);display:grid;place-items:center;
+    color:var(--fiap);font-weight:1000;transform:skew(-9deg);
+  }
+  .progress{position:fixed;z-index:31;left:0;top:0;height:3px;background:var(--fiap);width:0}
+  .hud{
+    position:fixed; z-index:30; right:22px; top:18px; display:flex; gap:8px;
+  }
+  button{
+    border:1px solid var(--line);background:rgba(17,19,26,.8);color:var(--ink);
+    padding:9px 12px;border-radius:10px;cursor:pointer;font-weight:700;
+    backdrop-filter:blur(10px);
+  }
+  button:hover{border-color:var(--fiap);color:#fff}
+  main{scroll-snap-type:y mandatory}
+  .slide{
+    min-height:100vh; scroll-snap-align:start; position:relative;
+    display:flex; align-items:center; justify-content:center;
+    padding:72px 6vw 54px;
+  }
+  .frame{
+    width:min(1180px, 100%); min-height:min(700px, calc(100vh - 120px));
+    background:linear-gradient(145deg, rgba(23,26,34,.96), rgba(13,15,21,.98));
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:28px; box-shadow:var(--shadow); padding:54px 58px;
+    position:relative; overflow:hidden;
+  }
+  .frame:after{
+    content:"";position:absolute;right:-130px;top:-130px;width:360px;height:360px;
+    background:radial-gradient(circle, rgba(237,20,91,.24), transparent 66%);
+  }
+  .kicker{color:var(--fiap);text-transform:uppercase;letter-spacing:.18em;font-size:12px;font-weight:900}
+  h1,h2,h3,p{margin-top:0}
+  h1{font-size:clamp(48px,7vw,92px);line-height:.94;letter-spacing:-.055em;max-width:980px;margin-bottom:26px}
+  h2{font-size:clamp(36px,4.5vw,64px);line-height:1.02;letter-spacing:-.04em;margin-bottom:24px}
+  h3{font-size:22px;line-height:1.15}
+  p{color:#d9dbe4;line-height:1.62}
+  .lead{font-size:clamp(18px,2vw,27px);max-width:840px;color:#f3f4f8}
+  .muted{color:var(--muted)}
+  .accent{color:var(--fiap)}
+  .good{color:var(--good)}
+  .warn{color:var(--warn)}
+  .bad{color:var(--bad)}
+  .grid{display:grid;gap:20px}
+  .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .card{
+    background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
+    border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:22px;
+  }
+  .card strong.metric{display:block;font-size:42px;letter-spacing:-.05em;margin:5px 0}
+  .metric-label{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:800}
+  .tag{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border-radius:999px;background:rgba(237,20,91,.11);border:1px solid rgba(237,20,91,.35);font-size:12px;font-weight:800;color:#ffd5e3}
+  .tag:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--fiap)}
+  .hero-line{height:5px;width:115px;background:var(--fiap);border-radius:999px;margin:28px 0}
+  .cover-meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:38px;color:var(--muted);font-size:14px}
+  .cover-number{position:absolute;right:38px;bottom:10px;font-size:210px;font-weight:1000;color:rgba(255,255,255,.022);letter-spacing:-.09em}
+  .big-result{font-size:clamp(66px,11vw,146px);font-weight:1000;line-height:.82;letter-spacing:-.075em}
+  .arrow{font-size:40px;color:var(--fiap);align-self:center}
+  .bar-row{display:grid;grid-template-columns:190px 1fr 76px;align-items:center;gap:12px;margin:12px 0}
+  .bar{height:13px;background:#252936;border-radius:999px;overflow:hidden}
+  .bar>i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--fiap),var(--fiap-2))}
+  .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:16px}
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  th,td{padding:14px 15px;border-bottom:1px solid var(--line);text-align:left}
+  th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:#151820}
+  td{color:#d7d9e2}
+  tr:last-child td{border-bottom:0}
+  .timeline{position:relative;margin-top:24px}
+  .timeline:before{content:"";position:absolute;left:18px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--fiap),rgba(237,20,91,.15))}
+  .step{position:relative;padding-left:54px;margin:22px 0}
+  .step:before{content:attr(data-n);position:absolute;left:0;top:-1px;width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:var(--fiap);font-weight:1000}
+  .step b{display:block;margin-bottom:4px}
+  .callout{border-left:4px solid var(--fiap);padding:18px 22px;background:rgba(237,20,91,.08);border-radius:0 16px 16px 0}
+  .note{font-size:12px;color:var(--muted);margin-top:14px}
+  .process{
+    width:100%;height:auto;background:#fbfbfd;border-radius:18px;padding:10px;
+    border:1px solid #d7d9e0;
+  }
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--muted)}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+  .service{display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:start}
+  .service-icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:rgba(237,20,91,.12);border:1px solid rgba(237,20,91,.28);font-size:21px}
+  .service p{font-size:14px;margin:6px 0 0}
+  .formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#0d0f15;border:1px solid var(--line);padding:14px;border-radius:12px;color:#f8dce6}
+  .result-pill{display:inline-flex;gap:10px;align-items:center;padding:11px 15px;border-radius:999px;background:rgba(46,230,166,.1);border:1px solid rgba(46,230,166,.35);color:#caffed;font-weight:900}
+  .sim-board{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
+  .sim-screen{background:#090b10;border:1px solid var(--line);border-radius:18px;padding:20px;min-height:300px;position:relative;overflow:hidden}
+  .pulse-line{height:6px;background:#1c202b;border-radius:99px;overflow:hidden;margin:18px 0}
+  .pulse-line span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--fiap),var(--good));transition:width 1.8s cubic-bezier(.2,.8,.2,1)}
+  .sim-screen.running .pulse-line span{width:100%}
+  .cases{display:grid;grid-template-columns:repeat(10,1fr);gap:7px;margin-top:20px}
+  .case{aspect-ratio:1;border-radius:5px;background:#2b2f3c;transition:.4s}
+  .sim-screen.running .case{background:var(--good);box-shadow:0 0 15px rgba(46,230,166,.24)}
+  .cost-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:stretch}
+  .price{font-size:50px;font-weight:1000;letter-spacing:-.06em}
+  .stamp{
+    position:absolute;right:50px;bottom:40px;border:3px solid var(--good);color:var(--good);
+    padding:10px 18px;border-radius:10px;font-weight:1000;letter-spacing:.12em;
+    transform:rotate(-5deg);opacity:.9
+  }
+  .footer-num{position:absolute;right:26px;bottom:20px;color:#777d8d;font-size:12px}
+  .nav-dots{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:30;display:grid;gap:9px}
+  .nav-dots a{width:8px;height:8px;border-radius:50%;background:#555b69;display:block}
+  .nav-dots a.active{background:var(--fiap);transform:scale(1.5)}
+  .mini{font-size:12px}
+  @media(max-width:900px){
+    .frame{padding:42px 28px;border-radius:20px}
+    .grid-2,.grid-3,.grid-4,.sim-board,.cost-compare{grid-template-columns:1fr}
+    .arrow{transform:rotate(90deg);justify-self:center}
+    .bar-row{grid-template-columns:110px 1fr 55px;font-size:12px}
+    .nav-dots{display:none}
+    .brand span{display:none}
+  }
+  @media print{
+    body{background:#fff;color:#111}
+    .brand,.hud,.nav-dots,.progress{display:none}
+    .slide{min-height:auto;height:190mm;padding:0;page-break-after:always}
+    .frame{width:100%;height:100%;min-height:0;border-radius:0;box-shadow:none;border:0;background:#0c0e13;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="brand"><div class="brand-mark">F</div><span>FIAP · BPA</span></div>
+<div class="hud">
+  <button onclick="window.print()">Imprimir / PDF</button>
+  <button onclick="go(-1)" aria-label="Anterior">←</button>
+  <button onclick="go(1)" aria-label="Próximo">→</button>
+</div>
+<nav class="nav-dots" id="dots"></nav>
+
+<main id="deck">
+<section class="slide" id="s1">
+  <div class="frame">
+    <span class="kicker">Reengenharia de Processos com Agentes</span>
+    <div class="hero-line"></div>
+    <h1>Desafio de<br><span class="accent">Performance BPA</span></h1>
+    <p class="lead">Simulação, automação e análise econômica de um processo clínico em BPMS.</p>
+    <div class="cover-meta">
+      <span>Luiz Ihara · RM368484</span>
+      <span>FIAP · MBA AI Business Leadership</span>
+      <span>Professor Rogério Kobayashi</span>
+    </div>
+    <div class="cover-number">50</div>
+    <div class="footer-num">01 / 11</div>
+  </div>
+</section>
+
+<section class="slide" id="s2">
+  <div class="frame">
+    <span class="kicker">Resumo executivo</span>
+    <h2>O problema não é desenhar o processo.<br>É fazê-lo <span class="accent">performar</span>.</h2>
+    <div class="grid grid-4">
+      <div class="card"><span class="metric-label">Demanda</span><strong class="metric">50</strong><span class="muted">consultas em 1 dia útil</span></div>
+      <div class="card"><span class="metric-label">Cenário atual</span><strong class="metric bad">5</strong><span class="muted">conclusões em 8 horas</span></div>
+      <div class="card"><span class="metric-label">Cenário proposto</span><strong class="metric good">50</strong><span class="muted">conclusões esperadas</span></div>
+      <div class="card"><span class="metric-label">Término estimado</span><strong class="metric">7h50</strong><span class="muted">margem de 10 minutos</span></div>
+    </div>
+    <div class="callout" style="margin-top:28px">
+      <b>Estratégia:</b> reduzir tempos de processamento por automação, preservar os tempos de espera originais e ampliar somente os recursos que formam os gargalos.
+    </div>
+    <div class="footer-num">02 / 11</div>
+  </div>
+</section>
+
+<section class="slide" id="s3">
+  <div class="frame">
+    <span class="kicker">Processo AS-IS</span>
+    <h2>Fluxo de atendimento clínico</h2>
+    <svg class="process" viewBox="0 0 1100 610" role="img" aria-label="Processo clínico com recepcionista, enfermeiro, médico e laboratório">
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L9,3 z" fill="#20232b"/>
+        </marker>
+      </defs>
+      <rect x="0" y="0" width="1100" height="610" fill="#fff"/>
+      <g stroke="#8c909b" stroke-width="1.4">
+        <line x1="100" y1="0" x2="100" y2="610"/>
+        <line x1="100" y1="150" x2="1100" y2="150"/>
+        <line x1="100" y1="300" x2="1100" y2="300"/>
+        <line x1="100" y1="455" x2="1100" y2="455"/>
+      </g>
+      <g fill="#14161b" font-family="Arial" font-size="16" font-weight="700">
+        <text x="42" y="90" transform="rotate(-90 42 90)">Recepcionista</text>
+        <text x="42" y="250" transform="rotate(-90 42 250)">Enfermeiro</text>
+        <text x="42" y="393" transform="rotate(-90 42 393)">Médico</text>
+        <text x="42" y="563" transform="rotate(-90 42 563)">Laboratório</text>
+      </g>
+      <circle cx="155" cy="78" r="22" fill="#c8ff8f" stroke="#7caa31" stroke-width="3"/>
+      <g fill="#f6f7fb" stroke="#1683be" stroke-width="3">
+        <rect x="230" y="42" width="130" height="72" rx="13"/>
+        <rect x="230" y="190" width="130" height="72" rx="13"/>
+        <rect x="690" y="340" width="140" height="72" rx="13"/>
+        <rect x="680" y="42" width="150" height="72" rx="13"/>
+        <rect x="430" y="500" width="140" height="72" rx="13"/>
+      </g>
+      <g fill="#1e2633" font-family="Arial" font-size="16" text-anchor="middle">
+        <text x="295" y="72"><tspan x="295">Recepcionar</tspan><tspan x="295" dy="21">Cliente</tspan></text>
+        <text x="295" y="232">Medir Pressão</text>
+        <text x="760" y="382">Efetuar Consulta</text>
+        <text x="755" y="72"><tspan x="755">Efetuar</tspan><tspan x="755" dy="21">Cobrança</tspan></text>
+        <text x="500" y="542">Efetuar Exames</text>
+      </g>
+      <polygon points="490,192 535,237 490,282 445,237" fill="#fffbd4" stroke="#c5b824" stroke-width="3"/>
+      <text x="490" y="306" text-anchor="middle" font-family="Arial" fill="#30333a" font-size="15">Requer exames?</text>
+      <g stroke="#20232b" stroke-width="2.2" fill="none" marker-end="url(#arrow)">
+        <path d="M177 78 H230"/>
+        <path d="M295 114 V190"/>
+        <path d="M360 226 H445"/>
+        <path d="M535 237 H610 V376 H690"/>
+        <path d="M490 282 V500"/>
+        <path d="M570 536 H760 V412"/>
+        <path d="M760 340 V114"/>
+        <path d="M830 78 H900"/>
+      </g>
+      <circle cx="925" cy="78" r="22" fill="#ff9ea4" stroke="#a80000" stroke-width="3"/>
+      <text x="625" y="225" font-family="Arial" font-size="14" fill="#333">Exames não requeridos · 30%</text>
+      <text x="365" y="455" font-family="Arial" font-size="14" fill="#333">Exames requeridos · 70%</text>
+    </svg>
+    <div class="legend">
+      <span><i class="dot" style="background:#1683be"></i>Atividades</span>
+      <span><i class="dot" style="background:#c5b824"></i>Decisão</span>
+      <span><i class="dot" style="background:#ed145b"></i>Foco da reengenharia: gargalos e capacidade</span>
+    </div>
+    <div class="footer-num">03 / 11</div>
+  </div>
+</section>
+
+<section class="slide" id="s4">
+  <div class="frame">
+    <span class="kicker">Baseline fornecido</span>
+    <h2>Parâmetros do cenário original</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Atividade</th><th>Processamento</th><th>Espera</th><th>Recurso</th><th>Qtd.</th></tr></thead>
+        <tbody>
+          <tr><td>Recepcionar Cliente</td><td>15 min</td><td>5 min</td><td>Recepcionista</td><td>1</td></tr>
+          <tr><td>Medir Pressão</td><td>5 min</td><td>10 min</td><td>Enfermeiro</td><td>1</td></tr>
+          <tr><td>Efetuar Exames</td><td>1h30</td><td>30 min</td><td>Laboratório</td><td>1</td></tr>
+          <tr><td>Efetuar Consulta</td><td>25 min</td><td>10 min</td><td>Médico</td><td>1</td></tr>
+          <tr><td>Efetuar Cobrança</td><td>10 min</td><td>15 min</td><td>Recepcionista</td><td>1</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid grid-3" style="margin-top:22px">
+      <div class="card"><span class="metric-label">Chegadas</span><strong class="metric">50</strong><span class="muted">instâncias</span></div>
+      <div class="card"><span class="metric-label">Gateway</span><strong class="metric">70%</strong><span class="muted">requer exames</span></div>
+      <div class="card"><span class="metric-label">Janela</span><strong class="metric">8h</strong><span class="muted">08:00 às 16:00</span></div>
+    </div>
+    <p class="note">No enunciado, o cenário de 30 dias conclui todas as instâncias. Ao restringir a duração para 8 horas, apenas 9 são iniciadas e 5 chegam ao fim.</p>
+    <div class="footer-num">04 / 11</div>
+  </div>
+</section>
+
+<section class="slide" id="s5">
+  <div class="frame">
+    <span class="kicker">Diagnóstico</span>
+    <h2>Onde está o gargalo?</h2>
+    <div class="grid grid-2">
+      <div>
+        <div class="bar-row"><b>Laboratório</b><div class="bar"><i style="width:100%"></i></div><strong>52,5h</strong></div>
+        <div class="bar-row"><b>Médico</b><div class="bar"><i style="width:40%"></i></div><strong>20,8h</strong></div>
+        <div class="bar-row"><b>Recepção</b><div class="bar"><i style="width:40%"></i></div><strong>20,8h</strong></div>
+        <div class="bar-row"><b>Enfermagem</b><div class="bar"><i style="width:8%"></i></div><strong>4,2h</strong></div>
+        <p class="note">Carga teórica de processamento para 50 consultas; 35 delas passam pelo laboratório.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Restrição dominante</span>
+        <h3 style="margin-top:18px">O laboratório sozinho exigiria mais de seis jornadas de trabalho.</h3>
+        <p>Mesmo antes de considerar filas e esperas, um técnico não possui capacidade para processar 35 exames de 90 minutos em uma janela de 8 horas.</p>
+        <div class="formula">35 exames × 90 min = 3.150 min = 52,5 horas</div>
+      </div>
+    </div>
+    <div class="footer-num">05 / 11</div>
+  </div>
+</section>
+
+<section class="slide" id="s6">
+  <div class="frame">
+    <span class="kicker">Reengenharia TO-BE</span>
+    <h2>Automação aplicada ao processo</h2>
+    <div class="grid grid-2">
+      <div class="card service"><div class="service-icon">⌁</div><div><h3>Pré-atendimento digital</h3><p>Portal com OCR e RPA para cadastro, validação de dados e preparação da cobrança.</p><span class="good">15 → 4 min</span></div></div>
+      <div class="card service"><div class="service-icon">◉</div><div><h3>Sinais vitais integrados</h3><p>Esfigmomanômetro digital conectado ao prontuário; o enfermeiro apenas valida a medição.</p><span class="good">5 → 3 min</span></div></div>
+      <div class="card service"><div class="service-icon">⌬</div><div><h3>LIS + automação laboratorial</h3><p>Roteamento automático, point-of-care tests e integração dos resultados ao prontuário.</p><span class="good">90 → 20 min</span></div></div>
+      <div class="card service"><div class="service-icon">AI</div><div><h3>Copiloto clínico</h3><p>Resumo pré-consulta, documentação ambiente e apoio à decisão, mantendo validação médica.</p><span class="good">25 → 12 min</span></div></div>
+      <div class="card service"><div class="service-icon">R$</div><div><h3>Cobrança automatizada</h3><p>RPA, conciliação automática e link de pagamento integrado ao atendimento.</p><span class="good">10 → 3 min</span></div></div>
+      <div class="card service"><div class="service-icon">⇄</div><div><h3>Orquestração BPMS</h3><p>Filas, SLA, escalonamento e rastreabilidade ponta a ponta no motor de processos.</p><span class="warn">Tempos de espera preservados</span></div></div>
+    </div>
+    <div class="footer-num">06 / 11</div>
+  </div>
+</section>
+
+<section class="slide" id="s7">
+  <div class="frame">
+    <span class="kicker">Configuração proposta no Bizagi</span>
+    <h2>Cenário otimizado</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Variável</th><th>Configuração</th><th>Racional</th></tr></thead>
+        <tbody>
+          <tr><td>Duração</td><td>1 dia · 8 horas · início 08:00</td><td>Mesma restrição do desafio</td></tr>
+          <tr><td>Chegadas</td><td>50 · intervalo constante de 6 min</td><td>Instanciar a demanda dentro da janela</td></tr>
+          <tr><td>Gateway</td><td>70% exames / 30% sem exames</td><td>Preservar o enunciado</td></tr>
+          <tr><td>Recepcionista</td><td>1 recurso</td><td>Processamento total abaixo de 8h</td></tr>
+          <tr><td>Enfermeiro</td><td>1 recurso</td><td>Capacidade suficiente após integração</td></tr>
+          <tr><td>Laboratório</td><td>2 recursos</td><td>Gargalo mitigado com automação</td></tr>
+          <tr><td>Médico</td><td>2 recursos</td><td>Capacidade para 50 consultas</td></tr>
+          <tr><td>Tempos de espera</td><td>5 / 10 / 30 / 10 / 15 min</td><td>Sem redução artificial de fila</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:22px">
+      <b>Ponto de controle:</b> a redução ocorre somente nos tempos de processamento e está vinculada a serviços de automação claramente identificados.
+    </div>
+    <div class="footer-num">07 / 11</div>
+  </div>
+</section>
+
+<section class="slide" id="s8">
+  <div class="frame">
+    <span class="kicker">Resultado esperado</span>
+    <h2>Simulação determinística de apoio</h2>
+    <div class="sim-board">
+      <div class="sim-screen" id="sim">
+        <span class="metric-label">Execução · 08:00 → 15:50</span>
+        <div class="pulse-line"><span></span></div>
+        <div class="cases" id="cases"></div>
+        <p class="note">50 instâncias · 35 com exames · cenário conservador com demanda concentrada.</p>
+      </div>
+      <div class="grid">
+        <div class="card"><span class="metric-label">Concluídas</span><strong class="metric good" id="done">0 / 50</strong></div>
+        <div class="card"><span class="metric-label">Última conclusão</span><strong class="metric" id="finish">—</strong></div>
+        <div class="card"><span class="metric-label">Margem operacional</span><strong class="metric" id="margin">—</strong></div>
+        <button onclick="runSimulation()" style="background:var(--fiap);border-color:var(--fiap);padding:15px">Rodar cenário</button>
+      </div>
+    </div>
+    <p class="note">Este cálculo é uma validação independente. O resultado oficial deve ser obtido pela execução no Bizagi e exportado em Excel.</p>
+    <div class="footer-num">08 / 11</div>
+  </div>
+</section>
+
+<section class="slide" id="s9">
+  <div class="frame">
+    <span class="kicker">Análise econômica</span>
+    <h2>Premissas de custeio</h2>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Base de cálculo</h3>
+        <div class="formula">22 dias úteis × 8h = 176h/mês</div>
+        <p>Salários e benefícios são convertidos em custo por hora. Os valores mensais de infraestrutura são rateados por dia útil.</p>
+        <p class="note">Premissa acadêmica explícita para tornar o cálculo auditável. Caso a turma adote 220h/mês, basta substituir o divisor.</p>
+      </div>
+      <div class="card">
+        <h3>Valores do enunciado</h3>
+        <p>Recepcionista: R$ 5.500 · Enfermeiro: R$ 8.900 · Médico: R$ 22.000 · Técnico de laboratório: R$ 6.800.</p>
+        <p>Infraestrutura por profissional: mesa/cadeira + computador + conectividade + software = <b>R$ 815/mês</b>.</p>
+        <p>Laboratório: <b>R$ 250.000/mês</b>; materiais adicionais: R$ 135/mês.</p>
+      </div>
+    </div>
+    <div class="grid grid-4" style="margin-top:20px">
+      <div class="card"><span class="metric-label">Recepção</span><strong class="metric">R$ 31,25/h</strong></div>
+      <div class="card"><span class="metric-label">Enfermagem</span><strong class="metric">R$ 50,57/h</strong></div>
+      <div class="card"><span class="metric-label">Médico</span><strong class="metric">R$ 125,00/h</strong></div>
+      <div class="card"><span class="metric-label">Laboratório</span><strong class="metric">R$ 38,64/h</strong></div>
+    </div>
+    <div class="footer-num">09 / 11</div>
+  </div>
+</section>
+
+<section class="slide" id="s10">
+  <div class="frame">
+    <span class="kicker">Business case</span>
+    <h2>Mais capacidade com melhor custo por conclusão</h2>
+    <div class="cost-compare">
+      <div class="card">
+        <span class="metric-label">Cenário atual · 1 recurso por papel</span>
+        <div class="price bad">R$ 2.696</div>
+        <p>por consulta efetivamente concluída na janela de 8h</p>
+        <p class="muted mini">Custo mensal estimado: R$ 296.595<br>Custo diário: R$ 13.481,59<br>Conclusões: 5</p>
+      </div>
+      <div class="arrow">→</div>
+      <div class="card">
+        <span class="metric-label">Cenário otimizado · 2 médicos e 2 técnicos</span>
+        <div class="price good">R$ 297</div>
+        <p>por consulta concluída na janela de 8h</p>
+        <p class="muted mini">Custo mensal estimado: R$ 327.025<br>Custo diário: R$ 14.864,77<br>Conclusões: 50</p>
+      </div>
+    </div>
+    <div class="grid grid-3" style="margin-top:22px">
+      <div class="card"><span class="metric-label">Aumento mensal</span><strong class="metric">R$ 30,4 mil</strong></div>
+      <div class="card"><span class="metric-label">Ganho de throughput</span><strong class="metric good">10×</strong></div>
+      <div class="card"><span class="metric-label">Custo por conclusão</span><strong class="metric good">−89%</strong></div>
+    </div>
+    <p class="note">O comparativo usa a mesma estrutura mensal do enunciado e divide o custo diário pelo número de processos concluídos em 8 horas.</p>
+    <div class="footer-num">10 / 11</div>
+  </div>
+</section>
+
+<section class="slide" id="s11">
+  <div class="frame">
+    <span class="kicker">Entrega no portal FIAP</span>
+    <h2>O que precisa ser enviado</h2>
+    <div class="grid grid-2">
+      <div class="timeline">
+        <div class="step" data-n="1"><b>Modelar o processo</b><span class="muted">Reproduzir o BPMN com as quatro raias e o gateway de exames.</span></div>
+        <div class="step" data-n="2"><b>Executar o baseline</b><span class="muted">Validar o cenário original de 30 dias e o problema de 8 horas.</span></div>
+        <div class="step" data-n="3"><b>Aplicar o cenário TO-BE</b><span class="muted">Configurar recursos, chegadas e novos tempos de processamento.</span></div>
+        <div class="step" data-n="4"><b>Gerar a evidência oficial</b><span class="muted">Executar a simulação final e exportar o relatório do Bizagi em Excel.</span></div>
+        <div class="step" data-n="5"><b>Subir no portal</b><span class="muted">Enviar o Excel no post criado pelo professor; grupo de até quatro ou cinco integrantes.</span></div>
+      </div>
+      <div>
+        <div class="card">
+          <span class="tag">Checklist final</span>
+          <h3 style="margin-top:18px">O pacote de entrega</h3>
+          <p>✓ Excel exportado pelo Bizagi<br>
+             ✓ Resultado do cenário final<br>
+             ✓ Serviços de automação adotados<br>
+             ✓ Racional para recursos e custos<br>
+             ✓ Integrantes identificados</p>
+        </div>
+        <div class="callout" style="margin-top:18px">
+          <b>Importante:</b> este HTML funciona como apresentação e memorial da solução. A evidência acadêmica solicitada pelo professor continua sendo o Excel gerado pela ferramenta.
+        </div>
+      </div>
+    </div>
+    <div class="stamp">PRONTO PARA SIMULAR</div>
+    <div class="footer-num">11 / 11</div>
+  </div>
+</section>
+</main>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const dots=document.getElementById('dots');
+slides.forEach((s,i)=>{
+  const a=document.createElement('a'); a.href='#'+s.id; a.title='Slide '+(i+1);
+  dots.appendChild(a);
+});
+const dotEls=[...dots.children];
+
+function update(){
+  const middle=window.scrollY+innerHeight/2;
+  let idx=0;
+  slides.forEach((s,i)=>{if(s.offsetTop<=middle) idx=i});
+  dotEls.forEach((d,i)=>d.classList.toggle('active',i===idx));
+  document.getElementById('progress').style.width=((idx+1)/slides.length*100)+'%';
+}
+function go(delta){
+  const middle=window.scrollY+innerHeight/2;
+  let idx=0; slides.forEach((s,i)=>{if(s.offsetTop<=middle) idx=i});
+  idx=Math.max(0,Math.min(slides.length-1,idx+delta));
+  slides[idx].scrollIntoView({behavior:'smooth'});
+}
+window.addEventListener('scroll',update,{passive:true});
+window.addEventListener('resize',update);
+window.addEventListener('keydown',e=>{
+  if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(1)}
+  if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(-1)}
+});
+const cases=document.getElementById('cases');
+for(let i=0;i<50;i++){const c=document.createElement('div');c.className='case';cases.appendChild(c)}
+let simRan=false;
+function runSimulation(){
+  const sim=document.getElementById('sim');
+  sim.classList.remove('running');
+  document.getElementById('done').textContent='0 / 50';
+  document.getElementById('finish').textContent='—';
+  document.getElementById('margin').textContent='—';
+  void sim.offsetWidth;
+  sim.classList.add('running');
+  setTimeout(()=>document.getElementById('done').textContent='50 / 50',700);
+  setTimeout(()=>document.getElementById('finish').textContent='15:50',1200);
+  setTimeout(()=>document.getElementById('margin').textContent='10 min',1700);
+  simRan=true;
+}
+update();
+</script>
+</body>
+</html>
