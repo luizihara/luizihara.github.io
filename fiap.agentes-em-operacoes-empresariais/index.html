@@ -39,6 +39,54 @@
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(237, 20, 91, 0.15);
         }
+
+        .site-badge {
+            position: fixed;
+            right: 1.25rem;
+            bottom: 1.25rem;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            max-width: calc(100vw - 2.5rem);
+            padding: 0.875rem 1.125rem;
+            background: #ffffff;
+            border-radius: 12px;
+            border-left: 4px solid #ED145B;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            animation: site-badge-in .6s cubic-bezier(.2, .8, .2, 1) .8s both;
+        }
+
+        .site-badge:hover {
+            box-shadow: 0 15px 35px rgba(237, 20, 91, 0.2);
+        }
+
+        .site-badge-icon {
+            flex: 0 0 auto;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ED145B;
+            color: #fff;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(237, 20, 91, .35);
+        }
+
+        @keyframes site-badge-in {
+            from { opacity: 0; transform: translateY(14px) }
+            to   { opacity: 1; transform: none }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .site-badge { animation-duration: .01s }
+        }
+
+        @media print {
+            .site-badge { display: none }
+        }
     </style>
 </head>
 
@@ -536,6 +584,18 @@
             </p>
         </div>
     </footer>
+
+    <!-- Selo de visita -->
+    <aside class="site-badge" role="note">
+        <span class="site-badge-icon" aria-hidden="true">👋</span>
+        <div class="leading-tight">
+            <p class="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-0.5">Obrigado pela visita</p>
+            <p class="text-sm text-gray-800">Você está visitando o site de
+                <a href="https://luizihara.github.io" target="_blank" rel="noopener"
+                    class="font-bold text-fiapPink hover:underline">luizihara.github.io</a>
+            </p>
+        </div>
+    </aside>
 
 </body>
 

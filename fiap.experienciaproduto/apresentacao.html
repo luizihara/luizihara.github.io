@@ -161,6 +161,81 @@
         .reveal-viewport {
             background-color: var(--r-background-color) !important;
         }
+
+        .visit-toast {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 60;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            max-width: min(360px, calc(100vw - 48px));
+            padding: 16px 20px;
+            font-family: var(--r-main-font);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(237, 20, 91, 0.4);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+            text-align: left;
+            opacity: 0;
+            transform: translateY(16px);
+            pointer-events: none;
+            transition: opacity .5s ease, transform .5s ease-out;
+        }
+
+        .visit-toast.is-visible {
+            opacity: 1;
+            transform: none;
+            pointer-events: auto;
+        }
+
+        .visit-toast i {
+            flex: 0 0 auto;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--fiap-pink);
+            color: #fff;
+            font-size: 1rem;
+            box-shadow: 0 0 20px rgba(237, 20, 91, 0.4);
+        }
+
+        .visit-toast .visit-toast-label {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #9CA3AF;
+            margin-bottom: 4px;
+        }
+
+        .visit-toast p {
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #E5E7EB;
+        }
+
+        .visit-toast a {
+            color: var(--fiap-pink);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .visit-toast a:hover {
+            color: var(--fiap-light);
+            text-decoration: underline;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .visit-toast { transition: opacity .01s linear }
+        }
     </style>
 </head>
 <body>
@@ -523,6 +598,16 @@
         </div>
     </div>
 
+    <aside class="visit-toast" id="visitToast" role="status" aria-live="polite">
+        <i class="fas fa-hand-sparkles" aria-hidden="true"></i>
+        <div>
+            <span class="visit-toast-label">Obrigado pela visita</span>
+            <p>Você está visitando o site de
+                <a href="https://luizihara.github.io" target="_blank" rel="noopener">luizihara.github.io</a>
+            </p>
+        </div>
+    </aside>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
     <script>
         Reveal.initialize({
@@ -533,6 +618,26 @@
             autoAnimateDuration: 0.8,
             autoAnimateUnmatched: false
         });
+
+        // Selo de visita: aparece somente no último slide
+        (function () {
+            var toast = document.getElementById('visitToast');
+            var timer = null;
+
+            function syncToast() {
+                if (Reveal.isLastSlide()) {
+                    timer = setTimeout(function () {
+                        toast.classList.add('is-visible');
+                    }, 600);
+                } else {
+                    clearTimeout(timer);
+                    toast.classList.remove('is-visible');
+                }
+            }
+
+            Reveal.on('ready', syncToast);
+            Reveal.on('slidechanged', syncToast);
+        })();
     </script>
 </body>
 </html>
