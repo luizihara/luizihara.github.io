@@ -1,0 +1,3 @@
+Nota da entrega parcial: 10,00
+
+Feedback do(a) professor(a): Pessoal, Excelente construção de material. Certamente manter o link do github é mais simples e de fácil manutenção e está tudo bem entregar por lá, mas somente para as entregas parciais. A entrega final deverá seguir o modelo e solicitação da FIAP, com envio de ppts, pdfs etc, ok? De qualquer maneira, o trabalho está muito bem estruturado. Peço agora que apliquem todos os pontos que trouxeram na continuidade do projeto e atentem-se sempre aos potenciais direcionamentos necessários para a execução e entrega da proposta de valor ao mercado. Contem comigo no que precisarem de ajuda. Obrigado, Prof. Ricardo Esposto

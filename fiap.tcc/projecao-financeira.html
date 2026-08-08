@@ -1,0 +1,2128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerFlow AI | Projeção Financeira 3 Anos</title>
+    <meta name="description"
+        content="Projeção financeira de 3 anos do CareerFlow AI — modelo FIAP de viabilidade para MVP/Seed.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #060814;
+            --ink: #e7ecff;
+            --muted: #8b96b8;
+            --dim: #5a6488;
+            --indigo: #6366f1;
+            --violet: #a855f7;
+            --cyan: #22d3ee;
+            --emerald: #34d399;
+            --amber: #fbbf24;
+            --rose: #fb7185;
+            --line: rgba(255, 255, 255, .10);
+            --card: rgba(255, 255, 255, .035);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Inter', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* fundo: canvas three.js + vinheta */
+        #gl {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            display: block;
+        }
+
+        .vignette {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 90% 70% at 50% 45%, transparent 20%, rgba(6, 8, 20, .75) 78%),
+                linear-gradient(180deg, rgba(6, 8, 20, .55) 0%, transparent 22%, transparent 74%, rgba(6, 8, 20, .85) 100%);
+        }
+
+        /* ---------------------------------------------------------- deck */
+        .deck {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            width: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            /* flex-start + margin auto no .wrap: centraliza quando cabe,
+               mas continua rolável quando o conteúdo é mais alto que a tela */
+            justify-content: flex-start;
+            padding: clamp(56px, 7vh, 84px) clamp(24px, 6vw, 104px) clamp(76px, 9vh, 104px);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(28px);
+            transition: opacity .5s ease, transform .6s cubic-bezier(.22, 1, .36, 1), visibility .5s;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, .18) transparent;
+        }
+
+        .slide::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .slide::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, .18);
+            border-radius: 3px;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: none;
+        }
+
+        .slide.leaving {
+            transform: translateY(-24px);
+        }
+
+        .wrap {
+            width: 100%;
+            max-width: 1180px;
+            margin: auto;
+        }
+
+        /* entrada escalonada dos elementos */
+        .slide .rise {
+            opacity: 0;
+            transform: translateY(18px);
+        }
+
+        .slide.active .rise {
+            animation: rise .7s cubic-bezier(.22, 1, .36, 1) forwards;
+        }
+
+        /* Rede de segurança: o JS marca .shown depois que a animação deveria ter
+           terminado. Se ela não rodar (aba em segundo plano, animação bloqueada),
+           o conteúdo aparece mesmo assim — nunca um slide em branco. */
+        .slide.shown .rise {
+            opacity: 1;
+            transform: none;
+        }
+
+        @keyframes rise {
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .slide.active .rise:nth-child(1) { animation-delay: .06s }
+        .slide.active .rise:nth-child(2) { animation-delay: .13s }
+        .slide.active .rise:nth-child(3) { animation-delay: .20s }
+        .slide.active .rise:nth-child(4) { animation-delay: .27s }
+        .slide.active .rise:nth-child(5) { animation-delay: .34s }
+        .slide.active .rise:nth-child(6) { animation-delay: .41s }
+
+        /* ------------------------------------------------------ tipografia */
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: #a5b0ff;
+            background: rgba(99, 102, 241, .12);
+            border: 1px solid rgba(99, 102, 241, .3);
+            padding: 6px 14px;
+            border-radius: 999px;
+            margin-bottom: 22px;
+        }
+
+        h1 {
+            font-size: clamp(34px, 6.4vw, 76px);
+            font-weight: 800;
+            letter-spacing: -.035em;
+            line-height: 1.02;
+        }
+
+        h2 {
+            font-size: clamp(26px, 3.9vw, 46px);
+            font-weight: 700;
+            letter-spacing: -.03em;
+            line-height: 1.08;
+            margin-bottom: 10px;
+        }
+
+        .sub {
+            color: var(--muted);
+            font-size: clamp(14px, 1.5vw, 17px);
+            line-height: 1.6;
+            max-width: 66ch;
+        }
+
+        .grad {
+            background: linear-gradient(100deg, #818cf8 0%, #22d3ee 55%, #34d399 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+        }
+
+        /* ---------------------------------------------------------- cards */
+        .grid {
+            display: grid;
+            gap: 14px;
+            margin-top: 26px;
+        }
+
+        .g2 { grid-template-columns: repeat(2, 1fr) }
+        .g3 { grid-template-columns: repeat(3, 1fr) }
+        .g4 { grid-template-columns: repeat(4, 1fr) }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 20px 22px;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            transition: border-color .3s, transform .3s, background .3s;
+        }
+
+        .card:hover {
+            border-color: rgba(99, 102, 241, .45);
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, .06);
+        }
+
+        .card .k {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--dim);
+            margin-bottom: 9px;
+        }
+
+        .card .v {
+            font-size: clamp(22px, 2.9vw, 36px);
+            font-weight: 700;
+            letter-spacing: -.03em;
+            line-height: 1;
+        }
+
+        .card .n {
+            font-size: 12.5px;
+            color: var(--muted);
+            margin-top: 9px;
+            line-height: 1.5;
+        }
+
+        .c-ind { color: #a5b4fc }
+        .c-cya { color: #67e8f9 }
+        .c-eme { color: #6ee7b7 }
+        .c-amb { color: #fcd34d }
+        .c-ros { color: #fda4af }
+        .c-vio { color: #d8b4fe }
+
+        /* --------------------------------------------------------- tabela */
+        .tbl {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 22px;
+            font-size: clamp(12px, 1.28vw, 15px);
+        }
+
+        .tbl th,
+        .tbl td {
+            padding: 10px 12px;
+            text-align: right;
+            border-bottom: 1px solid rgba(255, 255, 255, .07);
+            white-space: nowrap;
+        }
+
+        .tbl th:first-child,
+        .tbl td:first-child {
+            text-align: left;
+            white-space: normal;
+        }
+
+        /* .dense: tabelas longas (dashboard de KPIs) que precisam caber na tela */
+        .tbl.dense th,
+        .tbl.dense td { padding: 6px 10px }
+        .tbl.dense { font-size: clamp(11px, 1.12vw, 13.5px) }
+        .tbl.dense .pill { padding: 2px 8px; font-size: 10.5px }
+
+        .tbl thead th {
+            font-size: 10.5px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--dim);
+            font-weight: 700;
+            border-bottom-color: rgba(255, 255, 255, .16);
+        }
+
+        .tbl tbody tr {
+            transition: background .2s;
+        }
+
+        .tbl tbody tr:hover {
+            background: rgba(255, 255, 255, .035);
+        }
+
+        .tbl .tot td {
+            font-weight: 700;
+            color: #fff;
+            border-top: 1px solid rgba(99, 102, 241, .45);
+            border-bottom: none;
+            background: rgba(99, 102, 241, .07);
+        }
+
+        .tbl .neg { color: #fda4af }
+        .tbl .pos { color: #6ee7b7 }
+        .tbl td.num { font-family: 'JetBrains Mono', monospace; font-size: .94em }
+
+        .pill {
+            display: inline-block;
+            padding: 3px 9px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .p-ok { background: rgba(52, 211, 153, .14); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, .3) }
+        .p-mid { background: rgba(251, 191, 36, .13); color: #fcd34d; border: 1px solid rgba(251, 191, 36, .3) }
+        .p-bad { background: rgba(251, 113, 133, .13); color: #fda4af; border: 1px solid rgba(251, 113, 133, .3) }
+
+        /* --------------------------------------------------------- charts */
+        .chart {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        /* max-height evita que o gráfico cresça demais em telas largas e
+           empurre o conteúdo para baixo do HUD; o viewBox reescala sozinho */
+        .chart svg { width: 100%; height: auto; max-height: 42vh; display: block; overflow: visible }
+        /* .sm para slides em que o gráfico divide espaço com uma tabela;
+           .xs para o slide de caixa, que tem gráfico + tabela + nota */
+        .chart.sm svg { max-height: 29vh }
+        .chart.xs svg { max-height: 22vh }
+        .ax { stroke: rgba(255, 255, 255, .10); stroke-width: 1 }
+        .axl { fill: var(--dim); font-size: 11px; font-family: 'Inter', sans-serif }
+        .vlbl { fill: #e7ecff; font-size: 12px; font-weight: 600; font-family: 'JetBrains Mono', monospace }
+
+        .bar {
+            transform-origin: center bottom;
+            transform: scaleY(0);
+            transition: transform .85s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        .slide.active .bar { transform: scaleY(1) }
+
+        /* barra horizontal (gráfico de composição) */
+        .barx {
+            transform: scaleX(0);
+            transition: transform .9s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        .slide.active .barx { transform: scaleX(1) }
+
+        .ln {
+            stroke-dasharray: var(--len);
+            stroke-dashoffset: var(--len);
+            transition: stroke-dashoffset 1.5s cubic-bezier(.4, 0, .2, 1) .25s;
+        }
+
+        .slide.active .ln { stroke-dashoffset: 0 }
+
+        .dot {
+            opacity: 0;
+            transform: scale(0);
+            transform-box: fill-box;
+            transform-origin: center;
+            transition: opacity .4s, transform .5s cubic-bezier(.34, 1.56, .64, 1);
+        }
+
+        .slide.active .dot { opacity: 1; transform: scale(1) }
+
+        .fadein { opacity: 0; transition: opacity .6s ease .7s }
+        .slide.active .fadein { opacity: 1 }
+
+        /* barra horizontal comparativa */
+        .hbar {
+            height: 9px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .07);
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .hbar > i {
+            display: block;
+            height: 100%;
+            border-radius: 999px;
+            width: 0;
+            transition: width 1.1s cubic-bezier(.22, 1, .36, 1) .3s;
+        }
+
+        .slide.active .hbar > i { width: var(--w) }
+
+        /* --------------------------------------------------------- navegação */
+        .hud {
+            position: fixed;
+            z-index: 5;
+            color: var(--dim);
+            font-size: 11.5px;
+            letter-spacing: .06em;
+        }
+
+        .hud-tl { top: 22px; left: clamp(24px, 6vw, 104px); display: flex; align-items: center; gap: 10px }
+        .brand { font-weight: 800; letter-spacing: -.02em; color: #fff; font-size: 14px }
+        .brand span { color: var(--indigo) }
+
+        .hud-tr { top: 22px; right: clamp(24px, 6vw, 104px); display: flex; gap: 8px; align-items: center }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 14px;
+            border-radius: 9px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, .05);
+            color: var(--ink);
+            font-size: 12px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all .22s;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn:hover { background: rgba(99, 102, 241, .2); border-color: rgba(99, 102, 241, .55) }
+
+        .btn-cta {
+            background: linear-gradient(100deg, var(--indigo), #4f46e5);
+            border-color: transparent;
+            box-shadow: 0 8px 26px -8px rgba(99, 102, 241, .8);
+        }
+
+        .btn-cta:hover { background: linear-gradient(100deg, #7c7ff5, #5b52ea); transform: translateY(-2px) }
+
+        .btn-lg { padding: 15px 26px; font-size: 15px; border-radius: 12px }
+
+        .hud-bar {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, .07);
+        }
+
+        .hud-bar > i {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--indigo), var(--cyan));
+            transition: width .55s cubic-bezier(.22, 1, .36, 1);
+            box-shadow: 0 0 14px rgba(34, 211, 238, .7);
+        }
+
+        .hud-bl { bottom: 22px; left: clamp(24px, 6vw, 104px); display: flex; align-items: center; gap: 14px }
+        .hud-br { bottom: 22px; right: clamp(24px, 6vw, 104px); display: flex; align-items: center; gap: 10px }
+
+        .count { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted) }
+        .count b { color: #fff; font-weight: 600 }
+
+        .dots { display: flex; gap: 6px; flex-wrap: wrap; max-width: 46vw }
+
+        .dots button {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            border: 0;
+            padding: 0;
+            background: rgba(255, 255, 255, .2);
+            cursor: pointer;
+            transition: all .3s;
+        }
+
+        .dots button:hover { background: rgba(255, 255, 255, .5); transform: scale(1.35) }
+        .dots button[aria-current="true"] { background: var(--cyan); width: 22px; border-radius: 4px; box-shadow: 0 0 10px rgba(34, 211, 238, .8) }
+
+        .nav-arrow {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, .05);
+            color: var(--ink);
+            cursor: pointer;
+            transition: all .22s;
+            font-size: 15px;
+            line-height: 1;
+        }
+
+        .nav-arrow:hover:not(:disabled) { background: rgba(99, 102, 241, .25); border-color: rgba(99, 102, 241, .6) }
+        .nav-arrow:disabled { opacity: .28; cursor: default }
+
+        /* dica de teclado */
+        .hint {
+            position: fixed;
+            z-index: 6;
+            bottom: 68px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11.5px;
+            color: var(--dim);
+            background: rgba(6, 8, 20, .85);
+            border: 1px solid var(--line);
+            padding: 7px 15px;
+            border-radius: 999px;
+            backdrop-filter: blur(10px);
+            transition: opacity .6s;
+        }
+
+        .hint kbd {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 1px 6px;
+            margin: 0 2px;
+            font-size: 10.5px;
+        }
+
+        .hint.gone { opacity: 0; pointer-events: none }
+
+        /* ------------------------------------------------------ específicos */
+        .hero-meta {
+            display: flex;
+            gap: 26px;
+            flex-wrap: wrap;
+            margin-top: 34px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .hero-meta div b { color: #fff; display: block; font-size: 15px; font-weight: 600; margin-bottom: 3px }
+
+        .team { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 30px }
+        .team figure { display: flex; align-items: center; gap: 10px }
+        .team img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(99, 102, 241, .5) }
+        .team figcaption { font-size: 12.5px; line-height: 1.35 }
+        .team figcaption b { display: block; color: #fff; font-weight: 600 }
+        .team figcaption span { color: var(--dim); font-family: 'JetBrains Mono', monospace; font-size: 10.5px }
+
+        .note {
+            margin-top: 22px;
+            padding: 14px 18px;
+            border-left: 2px solid var(--indigo);
+            background: rgba(99, 102, 241, .07);
+            border-radius: 0 10px 10px 0;
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        .note b { color: var(--ink) }
+
+        .fix {
+            display: grid;
+            grid-template-columns: 26px 1fr;
+            gap: 12px;
+            padding: 13px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .07);
+            font-size: 13.5px;
+            line-height: 1.55;
+        }
+
+        .fix .ico { color: var(--amber); font-size: 15px; line-height: 1.3 }
+        .fix b { color: #fff }
+        .fix code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11.5px;
+            background: rgba(255, 255, 255, .07);
+            padding: 1.5px 6px;
+            border-radius: 4px;
+            color: #a5b4fc;
+            white-space: nowrap;
+        }
+
+        .fix .was { color: #fda4af }
+        .fix .now { color: #6ee7b7 }
+
+        .final-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; align-items: center }
+
+        /* Telas baixas (1366×768 e afins): o conteúdo fixo não encolhe com vh,
+           então adensa-se a régua vertical inteira para o slide continuar cabendo
+           sem rolagem. Vem antes das regras de largura para o mobile prevalecer. */
+        @media (max-height: 820px) {
+            .slide { padding: 46px clamp(24px, 6vw, 104px) 64px }
+            .eyebrow { margin-bottom: 14px; padding: 5px 12px; font-size: 10px }
+            h2 { font-size: clamp(22px, 3.1vw, 34px) }
+            .sub { font-size: 13.5px; line-height: 1.5 }
+            .grid { margin-top: 16px; gap: 11px }
+            .card { padding: 14px 16px; border-radius: 13px }
+            .card .k { margin-bottom: 6px; font-size: 10px }
+            .card .v { font-size: clamp(19px, 2.3vw, 28px) }
+            .card .n { font-size: 11.5px; margin-top: 7px }
+            .note { margin-top: 14px; padding: 10px 14px; font-size: 12px }
+            .chart { margin-top: 12px }
+            .chart svg { max-height: 34vh }
+            .chart.sm svg { max-height: 26vh }
+            .chart.xs svg { max-height: 21vh }
+            .tbl { margin-top: 14px }
+            .tbl th, .tbl td { padding: 7px 10px }
+            .tbl.dense th, .tbl.dense td { padding: 4px 9px }
+            .fix { padding: 9px 0; font-size: 12.5px }
+            .hero-meta { margin-top: 24px }
+            .team { margin-top: 20px }
+        }
+
+        @media (max-width: 900px) {
+            .g4 { grid-template-columns: repeat(2, 1fr) }
+            .g3 { grid-template-columns: repeat(2, 1fr) }
+        }
+
+        @media (max-width: 620px) {
+            .g4, .g3, .g2 { grid-template-columns: 1fr }
+            .dots { display: none }
+            .hint { display: none }
+            .slide { padding: 68px 20px 92px }
+            .tbl { font-size: 11.5px }
+            .tbl th, .tbl td { padding: 8px 6px }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: .01ms !important; transition-duration: .01ms !important }
+            .slide .rise { opacity: 1; transform: none }
+            .bar { transform: scaleY(1) }
+            .ln { stroke-dashoffset: 0 }
+            .dot { opacity: 1; transform: none }
+        }
+
+        @media print {
+            html, body { overflow: visible; height: auto }
+            #gl, .vignette, .hud, .hint { display: none }
+            .slide { position: static; opacity: 1; visibility: visible; transform: none; page-break-after: always; min-height: 100vh }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <main class="deck" id="deck">
+
+        <!-- ============================================ 1. CAPA -->
+        <section class="slide" data-form="sphere">
+            <div class="wrap">
+                <span class="eyebrow rise">FIAP · MBA · Empreendedorismo · 2026</span>
+                <h1 class="rise">Projeção Financeira<br><span class="grad">CareerFlow AI</span></h1>
+                <p class="sub rise" style="margin-top:20px">
+                    Modelo de viabilidade de 3 anos para o MVP de uma plataforma de gestão ativa de carreira com IA.
+                    Da premissa de aquisição ao EBITDA, do runway aos indicadores que um investidor de fato analisa.
+                </p>
+                <div class="hero-meta rise">
+                    <div><b>3 anos</b>Horizonte projetado</div>
+                    <div><b>R$ 2,77 M</b>Receita no Ano 3</div>
+                    <div><b>Break-even</b>Operacional no Ano 3</div>
+                    <div><b>R$ 2,4 M</b>Captação total prevista</div>
+                </div>
+                <div class="team rise">
+                    <figure><img src="team/LuizIhara.jpeg" alt="">
+                        <figcaption><b>Luiz Ihara</b><span>RM368484</span></figcaption>
+                    </figure>
+                    <figure><img src="team/FilipeFragoso.jpeg" alt="">
+                        <figcaption><b>Filipe Fragoso</b><span>RM368500</span></figcaption>
+                    </figure>
+                    <figure><img src="team/DanielCaminha.jpeg" alt="">
+                        <figcaption><b>Daniel Caminha</b><span>RM366740</span></figcaption>
+                    </figure>
+                    <figure><img src="team/PedroMartins.jpeg" alt="">
+                        <figcaption><b>Pedro Martins</b><span>RM368543</span></figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ 2. SUMÁRIO EXECUTIVO -->
+        <section class="slide" data-form="grid">
+            <div class="wrap">
+                <div class="rise">
+                    <span class="eyebrow">Sumário executivo</span>
+                    <h2>Onde chegamos no <span class="grad">Ano 3</span></h2>
+                    <p class="sub">Os quatro números que resumem a tese. Todo o resto desta apresentação existe para
+                        sustentá-los.</p>
+                </div>
+                <div class="grid g4 rise">
+                    <div class="card">
+                        <div class="k">ARR — Receita anual</div>
+                        <div class="v c-ind" data-count="2766960" data-fmt="money0">R$ 0</div>
+                        <div class="n">Meta do modelo FIAP: &gt; R$ 1 M &nbsp;<span class="pill p-ok">2,8× a meta</span></div>
+                    </div>
+                    <div class="card">
+                        <div class="k">Clientes ativos</div>
+                        <div class="v c-cya" data-count="1020" data-fmt="int">0</div>
+                        <div class="n">Meta: &gt; 300 &nbsp;<span class="pill p-ok">3,4× a meta</span></div>
+                    </div>
+                    <div class="card">
+                        <div class="k">Margem bruta</div>
+                        <div class="v c-eme" data-count="76" data-fmt="pct0">0%</div>
+                        <div class="n">Benchmark SaaS: 60–80% &nbsp;<span class="pill p-ok">Saudável</span></div>
+                    </div>
+                    <div class="card">
+                        <div class="k">LTV / CAC</div>
+                        <div class="v c-vio" data-count="9.98" data-fmt="x2">0×</div>
+                        <div class="n">Benchmark: &gt; 3× aceitável &nbsp;<span class="pill p-ok">Excelente</span></div>
+                    </div>
+                </div>
+                <div class="note rise">
+                    <b>A leitura honesta:</b> o Ano 3 fecha com EBITDA de <b>R$ 50,2 mil</b> — margem de 1,8%. Não é um
+                    negócio lucrativo ainda: é um negócio que <b>atinge o break-even operacional</b> crescendo 207% ao
+                    ano. Para um MVP em estágio seed, esse é exatamente o formato esperado.
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ 3. MODELO DE RECEITA -->
+        <section class="slide" data-form="helix">
+            <div class="wrap">
+                <div class="rise">
+                    <span class="eyebrow">Bloco 5 do BMC · Fontes de receita</span>
+                    <h2>Duas linhas, <span class="grad">um motor recorrente</span></h2>
+                    <p class="sub">A tese é SaaS: a assinatura carrega o crescimento e a previsibilidade. O pay-per-use
+                        entra como alavanca de caixa e porta de entrada para o B2B.</p>
+                </div>
+                <div class="grid g2 rise">
+                    <div class="card">
+                        <div class="k">Linha 1 · 84% da receita do Ano 3</div>
+                        <div class="v c-ind" style="font-size:clamp(19px,2.1vw,26px)">Assinatura CareerFlow Pro</div>
+                        <div class="n">Mentor virtual 24/7 no WhatsApp, diário conversacional com memória e diagnóstico
+                            contínuo. Ticket de <b class="c-ind">R$ 97 → R$ 139 → R$ 189</b>/mês conforme o produto
+                            amadurece.</div>
+                        <div class="n" style="color:var(--dim)">Ancoragem: mentoria humana custa R$ 1.500–6.000/mês. No
+                            Ano 3 cobramos <b>1/8 do piso</b> desse mercado.</div>
+                    </div>
+                    <div class="card">
+                        <div class="k">Linha 2 · 16% da receita do Ano 3</div>
+                        <div class="v c-cya" style="font-size:clamp(19px,2.1vw,26px)">Deep Research + B2B</div>
+                        <div class="n">Relatórios de Deep Research avulsos e licenças white-label para empresas que usam
+                            a ferramenta como retenção de lideranças. Ticket médio de <b class="c-cya">R$ 249 → R$
+                                420</b>.</div>
+                        <div class="n" style="color:var(--dim)">De 15 para 90 transações/mês em 3 anos — o embrião do
+                            canal B2B previsto no ecossistema.</div>
+                    </div>
+                </div>
+                <div class="chart rise" id="ch-mix"></div>
+            </div>
+        </section>
+
+        <!-- ============================================ 4. PREMISSAS DE AQUISIÇÃO -->
+        <section class="slide" data-form="torus">
+            <div class="wrap">
+                <div class="rise">
+                    <span class="eyebrow">Aba Premissas · Inputs do modelo</span>
+                    <h2>As <span class="grad">7 premissas</span> que movem tudo</h2>
+                    <p class="sub">Sete entradas comandam receita, margem e impostos — os blocos de custo e de capital
+                        vêm nos próximos slides. Nenhum número desta apresentação foi digitado à mão: mude uma premissa
+                        na planilha e o modelo inteiro se recalcula.</p>
+                </div>
+                <div class="rise" style="overflow-x:auto">
+                    <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th>Premissa</th>
+                                <th>Ano 1</th>
+                                <th>Ano 2</th>
+                                <th>Ano 3</th>
+                                <th style="text-align:left">Racional</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ticket médio da assinatura</td>
+                                <td class="num">R$ 97</td>
+                                <td class="num">R$ 139</td>
+                                <td class="num">R$ 189</td>
+                                <td style="text-align:left;color:var(--muted)">Preço sobe com o Skill Analogy Engine e o
+                                    simulador de roleplay</td>
+                            </tr>
+                            <tr>
+                                <td>Novos clientes por mês</td>
+                                <td class="num">18</td>
+                                <td class="num">40</td>
+                                <td class="num">70</td>
+                                <td style="text-align:left;color:var(--muted)">Ano 1 orgânico via LinkedIn; depois mídia
+                                    paga + viral loop</td>
+                            </tr>
+                            <tr>
+                                <td>Churn mensal</td>
+                                <td class="num c-ros">6,0%</td>
+                                <td class="num c-amb">4,0%</td>
+                                <td class="num c-eme">2,5%</td>
+                                <td style="text-align:left;color:var(--muted)">Cai à medida que a memória de longo prazo
+                                    cria lock-in</td>
+                            </tr>
+                            <tr>
+                                <td>Ticket do Deep Research / B2B</td>
+                                <td class="num">R$ 249</td>
+                                <td class="num">R$ 320</td>
+                                <td class="num">R$ 420</td>
+                                <td style="text-align:left;color:var(--muted)">Blend de relatório avulso e pacote
+                                    corporativo</td>
+                            </tr>
+                            <tr>
+                                <td>Transações Deep Research / mês</td>
+                                <td class="num">15</td>
+                                <td class="num">45</td>
+                                <td class="num">90</td>
+                                <td style="text-align:left;color:var(--muted)">Cross-sell sobre a própria base de
+                                    assinantes</td>
+                            </tr>
+                            <tr>
+                                <td>COGS sobre receita</td>
+                                <td class="num">38%</td>
+                                <td class="num">30%</td>
+                                <td class="num">24%</td>
+                                <td style="text-align:left;color:var(--muted)">Custo de tokens cai com cache de prompts e
+                                    modelos menores</td>
+                            </tr>
+                            <tr>
+                                <td>Imposto sobre receita</td>
+                                <td class="num">6%</td>
+                                <td class="num">8%</td>
+                                <td class="num">10%</td>
+                                <td style="text-align:left;color:var(--muted)">Simples Nacional progressivo conforme o
+                                    faturamento sobe</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="note rise">
+                    <b>Por que o churn é a premissa mais sensível:</b> o LTV é calculado como ticket ÷ churn. Cair de
+                    6% para 2,5% ao mês sozinho multiplica o valor de cada cliente por <b>2,4×</b>; o aumento de ticket
+                    contribui com <b>1,95×</b>. Juntos dão os 4,7× de crescimento do LTV — com a retenção pesando mais
+                    que o preço. É por isso que retenção, e não aquisição, é o KPI que o time persegue.
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ 5. BASE DE CLIENTES -->
+        <section class="slide" data-form="curve">
+            <div class="wrap">
+                <div class="rise">
+                    <span class="eyebrow">Tração</span>
+                    <h2>De 138 a <span class="grad">1.020 clientes</span> pagantes</h2>
+                    <p class="sub">A base é líquida: entram os novos clientes do ano e saem os cancelamentos acumulados
+                        pelo churn. É o número que prova product-market fit antes de qualquer projeção de receita.</p>
+                </div>
+                <div class="chart rise" id="ch-clientes"></div>
+                <div class="grid g3 rise">
+                    <div class="card">
+                        <div class="k">Ano 1 — validação</div>
+                        <div class="v c-ind" data-count="138" data-fmt="int">0</div>
+                        <div class="n">216 clientes conquistados, 78 perdidos para o churn de 6%. Benchmark FIAP para o
+                            Ano 1: &gt; 100.</div>
+                    </div>
+                    <div class="card">
+                        <div class="k">Ano 2 — escala</div>
+                        <div class="v c-cya" data-count="437" data-fmt="int">0</div>
+                        <div class="n">Primeiro ano com mídia paga estruturada. A base triplica com churn já em 4%.</div>
+                    </div>
+                    <div class="card">
+                        <div class="k">Ano 3 — consolidação</div>
+                        <div class="v c-eme" data-count="1020" data-fmt="int">0</div>
+                        <div class="n">840 novas assinaturas no ano contra apenas 257 cancelamentos. A retenção passa a
+                            trabalhar a favor.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ 6. RECEITA -->
+        <section class="slide" data-form="bars">
+            <div class="wrap">
+                <div class="rise">
+                    <span class="eyebrow">Receita</span>
+                    <h2>R$ 205 mil → <span class="grad">R$ 2,77 milhões</span></h2>
+                    <p class="sub">Crescimento de 13,5× em três anos, com a assinatura ganhando participação sobre o
+                        pay-per-use — exatamente o movimento que um investidor de SaaS quer ver.</p>
+                </div>
+                <div class="chart rise" id="ch-receita"></div>
+                <div class="grid g3 rise">
+                    <div class="card">
+                        <div class="k">Crescimento Ano 1 → 2</div>
+                        <div class="v c-ind" data-count="339" data-fmt="pct0">0%</div>
+                        <div class="n">Benchmark VC para seed: 100–300%</div>
+                    </div>
+                    <div class="card">
+                        <div class="k">Crescimento Ano 2 → 3</div>
+                        <div class="v c-cya" data-count="207" data-fmt="pct0">0%</div>
+                        <div class="n">Benchmark Série A: 80–150% &nbsp;<span class="pill p-ok">Alta velocidade</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="k">MRR no Ano 3</div>
+                        <div class="v c-eme" data-count="230580" data-fmt="money0">R$ 0</div>
+                        <div class="n">Benchmark: &gt; R$ 80 mil &nbsp;<span class="pill p-ok">2,9× a meta</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ 7. MARGEM BRUTA -->
+        <section class="slide" data-form="ring">
+            <div class="wrap">
+                <div class="rise">
+                    <span class="eyebrow">Escalabilidade</span>
+                    <h2>A margem que <span class="grad">se paga sozinha</span></h2>
+                    <p class="sub">O COGS de uma plataforma de IA é real — tokens, inferência, Deep Research. A tese de
+                        escala está em fazer esse custo cair enquanto a receita sobe.</p>
+                </div>
+                <div class="grid g3 rise">
+                    <div class="card">
+                        <div class="k">Ano 1 · COGS 38%</div>
+                        <div class="v c-ros" data-count="62" data-fmt="pct0">0%</div>
+                        <div class="n">Margem bruta. Prompts longos, sem cache, modelos grandes para tudo.</div>
+                        <div class="hbar"><i style="--w:62%;background:linear-gradient(90deg,#fb7185,#f472b6)"></i></div>
+                    </div>
+                    <div class="card">
+                        <div class="k">Ano 2 · COGS 30%</div>
+                        <div class="v c-amb" data-count="70" data-fmt="pct0">0%</div>
+                        <div class="n">Cache de prompts e roteamento MoE: tarefas simples migram para modelos baratos.
+                        </div>
+                        <div class="hbar"><i style="--w:70%;background:linear-gradient(90deg,#fbbf24,#fcd34d)"></i></div>
+                    </div>
+                    <div class="card">
+                        <div class="k">Ano 3 · COGS 24%</div>
+                        <div class="v c-eme" data-count="76" data-fmt="pct0">0%</div>
+                        <div class="n">Volume, contratos de inferência e reuso de diagnósticos entre usuários.</div>
+                        <div class="hbar"><i style="--w:76%;background:linear-gradient(90deg,#34d399,#22d3ee)"></i></div>
+                    </div>
+                </div>
+                <div class="note rise">
+                    <b>Por que isso importa mais do que parece:</b> cada ponto de margem bruta é caixa que financia
+                    aquisição sem diluição. Sair de 62% para 76% significa que, no Ano 3, cada R$ 1 de receita nova
+                    devolve <b>R$ 0,76</b> para o negócio em vez de R$ 0,62.
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ 8. ESTRUTURA DE CUSTOS -->
+        <section class="slide" data-form="stack">
+            <div class="wrap">
+                <div class="rise">
+                    <span class="eyebrow">Bloco 9 do BMC · Estrutura de custos</span>
+                    <h2>Time enxuto, <span class="grad">alavancado por IA</span></h2>
+                    <p class="sub">A operação sobe de R$ 35 mil para R$ 148 mil por mês. Pessoal é quase metade — mas
+                        cresce 4× enquanto a receita cresce 13,5×.</p>
+                </div>
+                <div class="chart sm rise" id="ch-custos"></div>
+                <div class="rise" style="overflow-x:auto">
+                    <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th>Categoria (R$ / mês)</th>
+                                <th>Ano 1</th>
+                                <th>Ano 2</th>
+                                <th>Ano 3</th>
+                                <th>% da receita Ano 3</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>👥 Pessoal e encargos</td><td class="num">18.000</td><td class="num">46.000</td><td class="num">72.000</td><td class="num">31,2%</td></tr>
+                            <tr><td>📣 Marketing e aquisição</td><td class="num">7.500</td><td class="num">22.000</td><td class="num">40.000</td><td class="num">17,3%</td></tr>
+                            <tr><td>🤝 Vendas e comissões</td><td class="num">2.000</td><td class="num">7.000</td><td class="num">13.000</td><td class="num">5,6%</td></tr>
+                            <tr><td>🖥️ Tecnologia e infraestrutura</td><td class="num">4.500</td><td class="num">8.500</td><td class="num">14.000</td><td class="num">6,1%</td></tr>
+                            <tr><td>🏢 Administrativo / G&amp;A</td><td class="num">3.000</td><td class="num">5.500</td><td class="num">9.000</td><td class="num">3,9%</td></tr>
+                            <tr class="tot"><td>Total operacional / mês</td><td class="num">35.000</td><td class="num">89.000</td><td class="num">148.000</td><td class="num">64,2%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ 9. DRE / WATERFALL -->
+        <section class="slide" data-form="waterfall">
+            <div class="wrap">
+                <div class="rise">
+                    <span class="eyebrow">DRE do Ano 3</span>
+                    <h2>Da receita ao <span class="grad">EBITDA</span></h2>
+                    <p class="sub">O caminho completo de R$ 2,77 milhões de receita até R$ 50 mil de resultado
+                        operacional. Cada degrau é uma linha da aba Projeção 3 Anos.</p>
+                </div>
+                <div class="chart rise" id="ch-waterfall"></div>
+                <div class="note rise">
+                    <b>Leitura:</b> a margem bruta de 76% gera R$ 2,10 M. A estrutura consome R$ 1,78 M e os impostos
+                    R$ 277 mil, sobrando <b class="c-eme">R$ 50,2 mil</b>. O negócio vira o ano no azul operacional —
+                    com folga de apenas 1,8%, o que torna a disciplina de custos o principal risco de execução.
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ 10. EBITDA 3 ANOS -->
+        <section class="slide" data-form="jcurve">
+            <div class="wrap">
+                <div class="rise">
+                    <span class="eyebrow">Resultado operacional</span>
+                    <h2>A <span class="grad">curva J</span> do investimento</h2>
+                    <p class="sub">Dois anos de queima planejada para construir base e produto, e a virada no Ano 3.
+                        Exatamente o padrão que o benchmark do modelo FIAP espera: "positivo a partir do Ano 2 ou 3".</p>
+                </div>
+                <div class="chart rise" id="ch-ebitda"></div>
+                <div class="grid g3 rise">
+                    <div class="card">
+                        <div class="k">Ano 1 · queima</div>
+                        <div class="v c-ros">−R$ 305 mil</div>
+                        <div class="n">Margem EBITDA de −148%. Ano de construção do MVP e primeiros 138 clientes.</div>
+                    </div>
+                    <div class="card">
+                        <div class="k">Ano 2 · pico de queima</div>
+                        <div class="v c-amb">−R$ 509 mil</div>
+                        <div class="n">Margem de −56%. Investimento pesado em time e aquisição, financiado pela rodada
+                            seed.</div>
+                    </div>
+                    <div class="card">
+                        <div class="k">Ano 3 · virada</div>
+                        <div class="v c-eme">+R$ 50 mil</div>
+                        <div class="n">Margem de +1,8%. <span class="pill p-mid">🟡 Break-even</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ 11. FLUXO DE CAIXA -->
+        <section class="slide" data-form="cash">
+            <div class="wrap">
+                <div class="rise">
+                    <span class="eyebrow">Fluxo de caixa e sobrevivência</span>
+                    <h2>Runway: de <span class="grad">13 para 39 meses</span></h2>
+                    <p class="sub">Quanto tempo o caixa sustenta a operação. Abaixo de 12 meses é zona de perigo — o
+                        modelo nunca entra nela, e no Ano 3 a questão deixa de existir porque o EBITDA vira positivo.</p>
+                </div>
+                <div class="chart xs rise" id="ch-caixa"></div>
+                <div class="rise" style="overflow-x:auto">
+                    <table class="tbl">
+                        <thead>
+                            <tr><th>Fluxo de caixa (R$)</th><th>Ano 1</th><th>Ano 2</th><th>Ano 3</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Caixa no início do ano</td><td class="num">150.000</td><td class="num">345.053</td><td class="num">1.636.117</td></tr>
+                            <tr><td>(+) Captação externa</td><td class="num pos">600.000</td><td class="num pos">1.800.000</td><td class="num">0</td></tr>
+                            <tr><td>(−) Investimento / Capex</td><td class="num neg">−100.000</td><td class="num">0</td><td class="num">0</td></tr>
+                            <tr><td>(+/−) EBITDA do ano</td><td class="num neg">−304.947</td><td class="num neg">−508.936</td><td class="num pos">+50.194</td></tr>
+                            <tr class="tot"><td>Caixa final do ano</td><td class="num">345.053</td><td class="num">1.636.117</td><td class="num">1.686.311</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="note rise">
+                    <b>Risco declarado:</b> o Ano 1 fecha com 13,6 meses de runway — acima do limite de 12, abaixo dos
+                    18 recomendados. É o que torna a rodada seed do Ano 2 <b>não opcional</b>. No Ano 3, com EBITDA
+                    positivo, não há queima a financiar (a planilha marca <b>999</b>).
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ 12. UNIT ECONOMICS -->
+        <section class="slide" data-form="twin">
+            <div class="wrap">
+                <div class="rise">
+                    <span class="eyebrow">Unit economics</span>
+                    <h2>Cada cliente devolve <span class="grad">10× o que custou</span></h2>
+                    <p class="sub">O CAC sobe pouco porque a aquisição é ancorada em marketing de autoridade no
+                        LinkedIn. O LTV explode porque o churn cai. A tesoura entre os dois é a tese do negócio.</p>
+                </div>
+                <div class="chart rise" id="ch-unit"></div>
+                <div class="grid g4 rise">
+                    <div class="card">
+                        <div class="k">CAC · Ano 3</div>
+                        <div class="v c-amb" data-count="757" data-fmt="money0">R$ 0</div>
+                        <div class="n">Custo de adquirir 1 cliente. Sobe só 44% em 3 anos.</div>
+                    </div>
+                    <div class="card">
+                        <div class="k">LTV · Ano 3</div>
+                        <div class="v c-ind" data-count="7560" data-fmt="money0">R$ 0</div>
+                        <div class="n">Valor vitalício. Cresce 4,7× — puxado pela retenção.</div>
+                    </div>
+                    <div class="card">
+                        <div class="k">LTV / CAC · Ano 3</div>
+                        <div class="v c-eme" data-count="9.98" data-fmt="x2">0×</div>
+                        <div class="n">&gt; 5× é considerado excelente <span class="pill p-ok">✅</span></div>
+                    </div>
+                    <div class="card">
+                        <div class="k">Payback · Ano 3</div>
+                        <div class="v c-cya" data-count="4.0" data-fmt="m1">0</div>
+                        <div class="n">Meses para recuperar o CAC. Ideal: &lt; 6 <span class="pill p-ok">✅</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ 13. DASHBOARD -->
+        <section class="slide" data-form="grid">
+            <div class="wrap">
+                <div class="rise">
+                    <span class="eyebrow">Aba Dashboard Investidor</span>
+                    <h2>O <span class="grad">placar</span> contra os benchmarks</h2>
+                    <p class="sub">Treze linhas de KPI, onze delas avaliadas automaticamente pela planilha contra os
+                        benchmarks do mercado SaaS/Tech brasileiro: nove verdes, dois amarelos, nenhum vermelho.</p>
+                </div>
+                <div class="rise" style="overflow-x:auto">
+                    <table class="tbl dense">
+                        <thead>
+                            <tr><th>KPI</th><th>Ano 1</th><th>Ano 2</th><th>Ano 3</th><th style="text-align:left">Benchmark</th><th style="text-align:left">Status</th></tr>
+                        </thead>
+                        <tbody id="kpi-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ 14. ASK / RISCOS -->
+        <section class="slide" data-form="arrow">
+            <div class="wrap">
+                <div class="rise">
+                    <span class="eyebrow">Necessidade de capital</span>
+                    <h2>R$ 2,4 milhões em <span class="grad">duas rodadas</span></h2>
+                    <p class="sub">O modelo não fecha com capital próprio. A trajetória de captação está dimensionada
+                        para o que a operação de fato consome, com margem de segurança.</p>
+                </div>
+                <div class="grid g3 rise">
+                    <div class="card">
+                        <div class="k">Aporte dos sócios · hoje</div>
+                        <div class="v c-ind" data-count="150000" data-fmt="money0">R$ 0</div>
+                        <div class="n">Capital próprio dos 4 fundadores. Cobre o setup e os primeiros meses.</div>
+                    </div>
+                    <div class="card">
+                        <div class="k">Pré-seed / Anjo · Ano 1</div>
+                        <div class="v c-cya" data-count="600000" data-fmt="money0">R$ 0</div>
+                        <div class="n">Financia a queima de R$ 305 mil do Ano 1 e o Capex de R$ 100 mil.</div>
+                    </div>
+                    <div class="card">
+                        <div class="k">Seed · Ano 2</div>
+                        <div class="v c-eme" data-count="1800000" data-fmt="money0">R$ 0</div>
+                        <div class="n">Financia o pico de queima e leva a empresa até o break-even sem nova rodada.</div>
+                    </div>
+                </div>
+                <div class="grid g2 rise" style="margin-top:18px">
+                    <div class="card">
+                        <div class="k">Riscos que assumimos</div>
+                        <div class="n" style="margin-top:2px">
+                            <b>1. Churn.</b> Toda a tese de LTV depende de cair para 2,5%/mês. Se estacionar em 4%, o
+                            LTV/CAC do Ano 3 cai de 10× para 6,2×.<br><br>
+                            <b>2. Margem de break-even.</b> 1,8% de folga significa que R$ 50 mil de custo extra no Ano 3
+                            devolve a empresa ao vermelho.<br><br>
+                            <b>3. Custo de inferência.</b> O COGS caindo de 38% para 24% pressupõe eficiência de modelo
+                            que ainda não foi medida em produção.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="k">O que valida ou derruba o modelo</div>
+                        <div class="n" style="margin-top:2px">
+                            <b>Próximo marco:</b> as 5–8 entrevistas em profundidade recomendadas na Entrega 1 devem
+                            testar diretamente a disposição a pagar de <b>R$ 97/mês</b> — a premissa da qual todas as
+                            outras dependem.<br><br>
+                            <b>Métrica de corte:</b> se a coorte piloto do MVP não sustentar 90% de retenção no mês 3,
+                            a premissa de churn cai e o modelo precisa ser refeito antes da captação.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ 15. DOWNLOAD -->
+        <section class="slide" data-form="sphere">
+            <div class="wrap" style="text-align:center">
+                <div class="rise">
+                    <span class="eyebrow">Entregável</span>
+                    <h2 style="font-size:clamp(30px,5vw,58px)">A planilha <span class="grad">completa</span></h2>
+                    <p class="sub" style="margin:16px auto 0">
+                        Modelo FIAP preenchido com as premissas do CareerFlow AI, com todas as fórmulas vivas e as
+                        quatro correções aplicadas. Abra, mude uma premissa e veja o modelo inteiro se recalcular.
+                    </p>
+                </div>
+                <div class="final-cta rise" style="justify-content:center">
+                    <a class="btn btn-cta btn-lg"
+                        href="files/FIAP_Modelo_Projecao_Financeira_MVP.xlsx"
+                        download="CareerFlowAI_Projecao_Financeira_MVP.xlsx">
+                        ↓ Baixar a planilha (.xlsx)
+                    </a>
+                    <a class="btn btn-lg" href="index.html">← Voltar ao projeto</a>
+                </div>
+                <div class="grid g4 rise" style="margin-top:40px;text-align:left">
+                    <div class="card">
+                        <div class="k">Aba 2</div>
+                        <div class="v" style="font-size:17px">📋 Premissas</div>
+                        <div class="n">19 linhas de premissa × 3 anos. Todo o resto é fórmula.</div>
+                    </div>
+                    <div class="card">
+                        <div class="k">Aba 3</div>
+                        <div class="v" style="font-size:17px">📊 Projeção 3 Anos</div>
+                        <div class="n">DRE completa e fluxo de caixa. 4 fórmulas corrigidas.</div>
+                    </div>
+                    <div class="card">
+                        <div class="k">Aba 4</div>
+                        <div class="v" style="font-size:17px">🚀 Dashboard</div>
+                        <div class="n">13 KPIs, 11 com status automático contra benchmarks.</div>
+                    </div>
+                    <div class="card">
+                        <div class="k">Aba 5</div>
+                        <div class="v" style="font-size:17px">📚 Guia</div>
+                        <div class="n">Referência original da FIAP, preservada.</div>
+                    </div>
+                </div>
+                <div class="note rise" style="text-align:left">
+                    <b>Nota metodológica:</b> na aba <i>Projeção 3 Anos</i> do template, as linhas Pessoal, Tecnologia
+                    e G&amp;A referenciavam células trocadas da aba Premissas, e o EBITDA subtraía as despesas — que já
+                    são negativas — em vez de somá-las. As quatro referências foram corrigidas no arquivo entregue;
+                    nenhuma fórmula foi substituída por valor fixo. Memorial de cálculo completo em
+                    <a href="llms-full.txt" style="color:#a5b4fc">llms-full.txt</a>.
+                </div>
+                <p class="sub rise" style="margin:34px auto 0;font-size:12.5px;color:var(--dim)">
+                    CareerFlow AI · TCC FIAP 2026 · Luiz Ihara · Filipe Fragoso · Daniel Caminha · Pedro Martins
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ------------------------------------------------------------- HUD -->
+    <div class="hud hud-tl">
+        <span class="brand">Career<span>AI</span></span>
+        <span style="opacity:.4">/</span>
+        <span>Projeção Financeira</span>
+    </div>
+
+    <div class="hud hud-tr">
+        <a class="btn btn-cta" href="files/FIAP_Modelo_Projecao_Financeira_MVP.xlsx"
+            download="CareerFlowAI_Projecao_Financeira_MVP.xlsx">↓ Planilha</a>
+    </div>
+
+    <div class="hud hud-bl">
+        <span class="count"><b id="cur">1</b> / <span id="tot">15</span></span>
+        <div class="dots" id="dots" role="tablist" aria-label="Navegação de slides"></div>
+    </div>
+
+    <div class="hud hud-br">
+        <button class="nav-arrow" id="prev" aria-label="Slide anterior">←</button>
+        <button class="nav-arrow" id="next" aria-label="Próximo slide">→</button>
+    </div>
+
+    <div class="hud hud-bar"><i id="bar"></i></div>
+
+    <div class="hint" id="hint">
+        Use <kbd>←</kbd> <kbd>→</kbd> para navegar &nbsp;·&nbsp; <kbd>F</kbd> tela cheia
+    </div>
+
+    <!-- ===================================================== DECK (clássico) -->
+    <script>
+        (function () {
+            'use strict';
+
+            var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+            var idx = 0;
+            var dotsEl = document.getElementById('dots');
+            var barEl = document.getElementById('bar');
+            var curEl = document.getElementById('cur');
+            var hintEl = document.getElementById('hint');
+
+            document.getElementById('tot').textContent = slides.length;
+
+            // ------------------------------------------------- KPIs da tabela
+            var KPIS = [
+                ['MRR — Receita Recorrente Mensal', 'R$ 17.121', 'R$ 75.143', 'R$ 230.580', '> R$ 80K no Ano 3', 'ok', '✅ Ótimo'],
+                ['ARR — Receita Anual Recorrente', 'R$ 205.452', 'R$ 901.716', 'R$ 2.766.960', '> R$ 1M no Ano 3', 'ok', '✅ Ótimo'],
+                ['Clientes ativos', '138', '437', '1.020', '> 300 no Ano 3', 'ok', '✅ Ótimo'],
+                ['Churn mensal', '6,0%', '4,0%', '2,5%', '< 3% SaaS B2B', 'mid', '🟡 Aceitável'],
+                // CAC e LTV não têm fórmula de status na planilha — são insumos do LTV/CAC
+                ['CAC — Custo por cliente', 'R$ 528', 'R$ 725', 'R$ 757', '< LTV / 3', '', '—'],
+                ['LTV — Valor do cliente', 'R$ 1.617', 'R$ 3.475', 'R$ 7.560', '> 3× o CAC', '', '—'],
+                ['LTV / CAC', '3,06×', '4,79×', '9,98×', '> 5× excelente', 'ok', '✅ Excelente'],
+                ['Payback', '5,4 m', '5,2 m', '4,0 m', '< 6 meses ideal', 'ok', '✅ Rápido'],
+                ['Margem bruta', '62%', '70%', '76%', '60–80% SaaS', 'ok', '✅ Saudável'],
+                ['EBITDA', '−R$ 304.947', '−R$ 508.936', '+R$ 50.194', 'Positivo no Ano 2 ou 3', 'ok', '✅ Lucrativo'],
+                ['EBITDA Margin', '−148%', '−56%', '+1,8%', '> 15% no Ano 3', 'mid', '🟡 Break-even'],
+                ['Runway', '13,6 m', '38,6 m', '∞', '> 18 meses', 'ok', '✅ Confortável'],
+                ['Crescimento YoY', '—', '+339%', '+207%', '> 80% no Ano 3', 'ok', '✅ Alta velocidade']
+            ];
+
+            var tb = document.getElementById('kpi-body');
+            KPIS.forEach(function (k) {
+                var tr = document.createElement('tr');
+                tr.innerHTML =
+                    '<td>' + k[0] + '</td>' +
+                    '<td class="num">' + k[1] + '</td>' +
+                    '<td class="num">' + k[2] + '</td>' +
+                    '<td class="num" style="color:#fff;font-weight:600">' + k[3] + '</td>' +
+                    '<td style="text-align:left;color:var(--dim);font-size:.9em">' + k[4] + '</td>' +
+                    '<td style="text-align:left">' + (k[5]
+                        ? '<span class="pill p-' + k[5] + '">' + k[6] + '</span>'
+                        : '<span style="color:var(--dim)">' + k[6] + '</span>') + '</td>';
+                tb.appendChild(tr);
+            });
+
+            // ------------------------------------------------------ formatação
+            var nf = function (n, d) {
+                return n.toLocaleString('pt-BR', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 });
+            };
+            var FMT = {
+                money0: function (v) { return 'R$ ' + nf(Math.round(v)); },
+                int: function (v) { return nf(Math.round(v)); },
+                pct0: function (v) { return nf(Math.round(v)) + '%'; },
+                x1: function (v) { return nf(v, 1) + '×'; },
+                x2: function (v) { return nf(v, 2) + '×'; },
+                m1: function (v) { return nf(v, 1) + ' meses'; }
+            };
+
+            // contagem animada dos números grandes
+            function countUp(el) {
+                var target = parseFloat(el.getAttribute('data-count'));
+                var fmt = FMT[el.getAttribute('data-fmt')] || FMT.int;
+                var dur = 1100, t0 = null;
+                // token: invalida animações antigas deste mesmo elemento
+                var token = (el.__tok = (el.__tok || 0) + 1);
+
+                function step(ts) {
+                    if (el.__tok !== token) return;
+                    if (t0 === null) t0 = ts;
+                    var p = Math.min((ts - t0) / dur, 1);
+                    var e = 1 - Math.pow(1 - p, 3);
+                    el.textContent = fmt(target * e);
+                    if (p < 1) requestAnimationFrame(step);
+                    else el.textContent = fmt(target);
+                }
+                requestAnimationFrame(step);
+
+                // rede de segurança: em aba de fundo o rAF é suspenso e a contagem
+                // ficaria congelada no meio. O timeout garante o valor final.
+                clearTimeout(el.__ct);
+                el.__ct = setTimeout(function () {
+                    if (el.__tok === token) { el.__tok++; el.textContent = fmt(target); }
+                }, dur + 250);
+            }
+
+            // --------------------------------------------------------- dots
+            slides.forEach(function (s, i) {
+                var b = document.createElement('button');
+                b.setAttribute('role', 'tab');
+                b.setAttribute('aria-label', 'Slide ' + (i + 1));
+                b.addEventListener('click', function () { go(i); });
+                dotsEl.appendChild(b);
+            });
+            var dotBtns = Array.prototype.slice.call(dotsEl.children);
+
+            // ----------------------------------------------------- navegação
+            // mostra o slide n e sincroniza todo o HUD (usado também no boot)
+            var showTimer;
+            function activate(n) {
+                idx = n;
+                var s = slides[idx];
+                s.scrollTop = 0;
+                s.classList.remove('shown');
+                s.classList.add('active');
+
+                // garante o estado final da animação de entrada mesmo se ela não rodar
+                clearTimeout(showTimer);
+                showTimer = setTimeout(function () { s.classList.add('shown'); }, 1300);
+
+                dotBtns.forEach(function (b, i) { b.setAttribute('aria-current', i === idx ? 'true' : 'false'); });
+                barEl.style.width = ((idx + 1) / slides.length * 100) + '%';
+                curEl.textContent = idx + 1;
+                document.getElementById('prev').disabled = idx === 0;
+                document.getElementById('next').disabled = idx === slides.length - 1;
+
+                // reinicia a contagem dos números deste slide
+                s.querySelectorAll('[data-count]').forEach(countUp);
+
+                if (window.__bg) window.__bg.morph(s.getAttribute('data-form'));
+                if (idx > 0 && hintEl) hintEl.classList.add('gone');
+                history.replaceState(null, '', '#' + (idx + 1));
+            }
+
+            function go(n) {
+                n = Math.max(0, Math.min(slides.length - 1, n));
+                if (n === idx) return;
+
+                var old = idx;
+                slides[old].classList.add('leaving');
+                slides[old].classList.remove('active', 'shown');
+                setTimeout(function () { slides[old].classList.remove('leaving'); }, 500);
+
+                activate(n);
+            }
+
+            document.getElementById('next').addEventListener('click', function () { go(idx + 1); });
+            document.getElementById('prev').addEventListener('click', function () { go(idx - 1); });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.metaKey || e.ctrlKey || e.altKey) return;
+                switch (e.key) {
+                    case 'ArrowRight': case 'PageDown': case ' ': e.preventDefault(); go(idx + 1); break;
+                    case 'ArrowLeft': case 'PageUp': e.preventDefault(); go(idx - 1); break;
+                    case 'Home': e.preventDefault(); go(0); break;
+                    case 'End': e.preventDefault(); go(slides.length - 1); break;
+                    case 'f': case 'F':
+                        if (document.fullscreenElement) document.exitFullscreen();
+                        else document.documentElement.requestFullscreen();
+                        break;
+                }
+            });
+
+            // swipe no mobile
+            var tx = 0, ty = 0;
+            document.addEventListener('touchstart', function (e) {
+                tx = e.changedTouches[0].clientX; ty = e.changedTouches[0].clientY;
+            }, { passive: true });
+            document.addEventListener('touchend', function (e) {
+                var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+                if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.6) go(idx + (dx < 0 ? 1 : -1));
+            }, { passive: true });
+
+            // ======================================================= GRÁFICOS
+            var SVGNS = 'http://www.w3.org/2000/svg';
+            function el(t, a) {
+                var n = document.createElementNS(SVGNS, t);
+                for (var k in a) n.setAttribute(k, a[k]);
+                return n;
+            }
+            function svgRoot(host, w, h) {
+                var s = el('svg', { viewBox: '0 0 ' + w + ' ' + h, role: 'img' });
+                host.appendChild(s);
+                return s;
+            }
+            function defsGrad(svg, id, c1, c2) {
+                var d = el('defs'), g = el('linearGradient', { id: id, x1: '0', y1: '1', x2: '0', y2: '0' });
+                g.appendChild(el('stop', { offset: '0%', 'stop-color': c1 }));
+                g.appendChild(el('stop', { offset: '100%', 'stop-color': c2 }));
+                d.appendChild(g); svg.appendChild(d);
+            }
+            var ANOS = ['ANO 1', 'ANO 2', 'ANO 3'];
+            var brl = function (v) {
+                if (Math.abs(v) >= 1e6) return 'R$ ' + nf(v / 1e6, 2).replace('.', ',') + ' M';
+                if (Math.abs(v) >= 1e3) return 'R$ ' + nf(v / 1e3) + ' K';
+                return 'R$ ' + nf(v);
+            };
+
+            // --- barras empilhadas: receita linha1 + linha2
+            function stackedChart(hostId, series, colors, labels, fmt) {
+                var host = document.getElementById(hostId);
+                if (!host) return;
+                var W = 1000, H = 330, PL = 74, PR = 24, PT = 34, PB = 46;
+                var svg = svgRoot(host, W, H);
+                defsGrad(svg, hostId + '-g0', colors[0][0], colors[0][1]);
+                defsGrad(svg, hostId + '-g1', colors[1][0], colors[1][1]);
+
+                var totals = [0, 1, 2].map(function (i) { return series[0][i] + series[1][i]; });
+                var max = Math.max.apply(null, totals) * 1.16;
+                var y = function (v) { return PT + (H - PT - PB) * (1 - v / max); };
+
+                for (var g = 0; g <= 4; g++) {
+                    var gv = max * g / 4;
+                    svg.appendChild(el('line', { x1: PL, x2: W - PR, y1: y(gv), y2: y(gv), class: 'ax' }));
+                    var t = el('text', { x: PL - 12, y: y(gv) + 4, class: 'axl', 'text-anchor': 'end' });
+                    t.textContent = fmt(gv); svg.appendChild(t);
+                }
+
+                var bw = 118, step = (W - PL - PR) / 3;
+                for (var i = 0; i < 3; i++) {
+                    var cx = PL + step * i + step / 2;
+                    var acc = 0;
+                    for (var s = 0; s < 2; s++) {
+                        var v = series[s][i];
+                        var hh = (H - PT - PB) * v / max;
+                        var yy = y(acc + v);
+                        var r = el('rect', {
+                            x: cx - bw / 2, y: yy, width: bw, height: Math.max(hh, 1),
+                            fill: 'url(#' + hostId + '-g' + s + ')', class: 'bar',
+                            rx: s === 1 ? 5 : 0
+                        });
+                        r.style.transitionDelay = (0.12 * i + 0.08 * s) + 's';
+                        r.style.transformOrigin = cx + 'px ' + y(acc) + 'px';
+                        svg.appendChild(r);
+                        acc += v;
+                    }
+                    var lt = el('text', { x: cx, y: y(acc) - 13, class: 'vlbl', 'text-anchor': 'middle' });
+                    lt.textContent = fmt(acc);
+                    lt.setAttribute('class', 'vlbl fadein');
+                    svg.appendChild(lt);
+                    var xt = el('text', { x: cx, y: H - 16, class: 'axl', 'text-anchor': 'middle' });
+                    xt.textContent = ANOS[i]; svg.appendChild(xt);
+                }
+
+                // legenda
+                var lg = el('g');
+                for (var l = 0; l < 2; l++) {
+                    lg.appendChild(el('rect', { x: PL + l * 260, y: 6, width: 11, height: 11, rx: 3, fill: colors[l][1] }));
+                    var tx2 = el('text', { x: PL + l * 260 + 18, y: 16, class: 'axl' });
+                    tx2.textContent = labels[l]; lg.appendChild(tx2);
+                }
+                svg.appendChild(lg);
+            }
+
+            // --- composição 100% (mix de receita por ano)
+            function mixChart(hostId, series, colors, labels) {
+                var host = document.getElementById(hostId);
+                if (!host) return;
+                var W = 1000, H = 206, PL = 84, PR = 16, PT = 34, BH = 34, GAP = 22;
+                var svg = svgRoot(host, W, H);
+                var full = W - PL - PR;
+
+                for (var i = 0; i < 3; i++) {
+                    var tot = series[0][i] + series[1][i];
+                    var yy = PT + i * (BH + GAP);
+                    var g = el('g', { class: 'barx' });
+                    g.style.transformOrigin = PL + 'px ' + (yy + BH / 2) + 'px';
+                    g.style.transitionDelay = (i * 0.13) + 's';
+
+                    var x = PL;
+                    for (var s = 0; s < 2; s++) {
+                        var frac = series[s][i] / tot, w = full * frac;
+                        g.appendChild(el('rect', {
+                            x: x, y: yy, width: w, height: BH, fill: colors[s],
+                            rx: 4, opacity: s ? '.85' : '1'
+                        }));
+                        // % só cabe dentro do segmento se ele for largo o bastante
+                        if (w > 58) {
+                            var pl = el('text', {
+                                x: x + w / 2, y: yy + BH / 2 + 5, 'text-anchor': 'middle',
+                                class: 'vlbl', fill: s ? '#062a33' : '#ffffff'
+                            });
+                            pl.setAttribute('font-size', '13');
+                            pl.textContent = nf(frac * 100, 1) + '%';
+                            g.appendChild(pl);
+                        }
+                        x += w;
+                    }
+                    svg.appendChild(g);
+
+                    var yl = el('text', { x: PL - 14, y: yy + BH / 2 + 4, class: 'axl', 'text-anchor': 'end' });
+                    yl.setAttribute('fill', '#e7ecff');
+                    yl.textContent = ANOS[i]; svg.appendChild(yl);
+                }
+
+                var lg = el('g');
+                for (var l = 0; l < 2; l++) {
+                    lg.appendChild(el('rect', { x: PL + l * 260, y: 6, width: 11, height: 11, rx: 3, fill: colors[l] }));
+                    var t = el('text', { x: PL + l * 260 + 18, y: 16, class: 'axl' });
+                    t.textContent = labels[l]; lg.appendChild(t);
+                }
+                svg.appendChild(lg);
+            }
+
+            // --- linha + área (clientes)
+            function lineChart(hostId, vals, color, fmt) {
+                var host = document.getElementById(hostId);
+                if (!host) return;
+                var W = 1000, H = 300, PL = 74, PR = 30, PT = 30, PB = 44;
+                var svg = svgRoot(host, W, H);
+                var max = Math.max.apply(null, vals) * 1.2;
+                var y = function (v) { return PT + (H - PT - PB) * (1 - v / max); };
+                var step = (W - PL - PR) / 2;
+                var x = function (i) { return PL + step * i; };
+
+                for (var g = 0; g <= 4; g++) {
+                    var gv = max * g / 4;
+                    svg.appendChild(el('line', { x1: PL, x2: W - PR, y1: y(gv), y2: y(gv), class: 'ax' }));
+                    var t = el('text', { x: PL - 12, y: y(gv) + 4, class: 'axl', 'text-anchor': 'end' });
+                    t.textContent = fmt(gv); svg.appendChild(t);
+                }
+
+                var d = 'M' + x(0) + ',' + y(vals[0]) + ' L' + x(1) + ',' + y(vals[1]) + ' L' + x(2) + ',' + y(vals[2]);
+                // fill-opacity (e não opacity) porque .fadein controla o opacity via CSS
+                var area = el('path', {
+                    d: d + ' L' + x(2) + ',' + y(0) + ' L' + x(0) + ',' + y(0) + ' Z',
+                    fill: color, 'fill-opacity': '.15', class: 'fadein'
+                });
+                svg.appendChild(area);
+
+                var p = el('path', { d: d, fill: 'none', stroke: color, 'stroke-width': 3.5, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', class: 'ln' });
+                svg.appendChild(p);
+                try { p.style.setProperty('--len', p.getTotalLength()); } catch (e) { p.style.setProperty('--len', '1400'); }
+
+                for (var i = 0; i < 3; i++) {
+                    var c = el('circle', { cx: x(i), cy: y(vals[i]), r: 7, fill: '#060814', stroke: color, 'stroke-width': 3.5, class: 'dot' });
+                    c.style.transitionDelay = (0.7 + i * 0.22) + 's';
+                    svg.appendChild(c);
+                    var lb = el('text', { x: x(i), y: y(vals[i]) - 20, class: 'vlbl fadein', 'text-anchor': i === 0 ? 'start' : (i === 2 ? 'end' : 'middle') });
+                    lb.textContent = fmt(vals[i]); svg.appendChild(lb);
+                    var xt = el('text', { x: x(i), y: H - 14, class: 'axl', 'text-anchor': i === 0 ? 'start' : (i === 2 ? 'end' : 'middle') });
+                    xt.textContent = ANOS[i]; svg.appendChild(xt);
+                }
+            }
+
+            // --- barras agrupadas (custos por categoria)
+            function groupedChart(hostId, cats, colors) {
+                var host = document.getElementById(hostId);
+                if (!host) return;
+                // viewBox mais baixo => com max-height o SVG renderiza mais largo
+                var W = 1000, H = 215, PL = 74, PR = 24, PT = 26, PB = 42;
+                var svg = svgRoot(host, W, H);
+                var max = 0;
+                cats.forEach(function (c) { c.v.forEach(function (v) { if (v > max) max = v; }); });
+                max *= 1.18;
+                var y = function (v) { return PT + (H - PT - PB) * (1 - v / max); };
+
+                for (var g = 0; g <= 4; g++) {
+                    var gv = max * g / 4;
+                    svg.appendChild(el('line', { x1: PL, x2: W - PR, y1: y(gv), y2: y(gv), class: 'ax' }));
+                    var t = el('text', { x: PL - 12, y: y(gv) + 4, class: 'axl', 'text-anchor': 'end' });
+                    t.textContent = 'R$ ' + nf(gv / 1000) + 'K'; svg.appendChild(t);
+                }
+
+                var slot = (W - PL - PR) / cats.length, bw = 21, gap = 6;
+                cats.forEach(function (c, ci) {
+                    var cx = PL + slot * ci + slot / 2;
+                    var x0 = cx - (bw * 3 + gap * 2) / 2;
+                    c.v.forEach(function (v, i) {
+                        var r = el('rect', {
+                            x: x0 + i * (bw + gap), y: y(v), width: bw,
+                            height: Math.max((H - PT - PB) * v / max, 1),
+                            rx: 4, fill: colors[i], class: 'bar'
+                        });
+                        r.style.transitionDelay = (ci * 0.07 + i * 0.05) + 's';
+                        r.style.transformOrigin = 'center ' + y(0) + 'px';
+                        svg.appendChild(r);
+                    });
+                    var xt = el('text', { x: cx, y: H - 22, class: 'axl', 'text-anchor': 'middle' });
+                    xt.textContent = c.n; svg.appendChild(xt);
+                });
+
+                var lg = el('g');
+                for (var l = 0; l < 3; l++) {
+                    lg.appendChild(el('rect', { x: PL + l * 110, y: 4, width: 11, height: 11, rx: 3, fill: colors[l] }));
+                    var tx2 = el('text', { x: PL + l * 110 + 18, y: 14, class: 'axl' });
+                    tx2.textContent = ANOS[l]; lg.appendChild(tx2);
+                }
+                svg.appendChild(lg);
+            }
+
+            // --- waterfall da DRE
+            function waterfall(hostId, steps) {
+                var host = document.getElementById(hostId);
+                if (!host) return;
+                var W = 1000, H = 340, PL = 66, PR = 20, PT = 44, PB = 62;
+                var svg = svgRoot(host, W, H);
+                var run = 0, max = 0;
+                steps.forEach(function (s) {
+                    if (s.t === 'abs') { run = s.v; } else { run += s.v; }
+                    if (run > max) max = run;
+                });
+                max *= 1.14;
+                var y = function (v) { return PT + (H - PT - PB) * (1 - v / max); };
+                var slot = (W - PL - PR) / steps.length, bw = Math.min(slot * 0.62, 58);
+
+                run = 0;
+                steps.forEach(function (s, i) {
+                    var cx = PL + slot * i + slot / 2;
+                    var from, to;
+                    if (s.t === 'abs') { from = 0; to = s.v; run = s.v; }
+                    else { from = run; to = run + s.v; run = to; }
+                    var top = Math.max(from, to), bot = Math.min(from, to);
+                    var color = s.t === 'abs' ? (i === 0 ? '#6366f1' : '#34d399') : (s.v < 0 ? '#fb7185' : '#34d399');
+                    var r = el('rect', {
+                        x: cx - bw / 2, y: y(top), width: bw,
+                        height: Math.max(y(bot) - y(top), 2), rx: 4, fill: color, class: 'bar', opacity: '.92'
+                    });
+                    r.style.transitionDelay = (i * 0.075) + 's';
+                    r.style.transformOrigin = 'center ' + y(bot) + 'px';
+                    svg.appendChild(r);
+
+                    if (i < steps.length - 1) {
+                        var cn = el('line', {
+                            x1: cx + bw / 2, x2: cx + slot - bw / 2, y1: y(to), y2: y(to),
+                            stroke: '#ffffff', 'stroke-opacity': '.26', 'stroke-width': 1, 'stroke-dasharray': '3 3', class: 'fadein'
+                        });
+                        svg.appendChild(cn);
+                    }
+
+                    var vl = el('text', { x: cx, y: y(top) - 9, class: 'vlbl fadein', 'text-anchor': 'middle' });
+                    vl.setAttribute('font-size', '11');
+                    vl.textContent = (s.v > 0 && s.t !== 'abs' ? '+' : '') + brl(s.v);
+                    if (s.t !== 'abs' && s.v < 0) vl.setAttribute('fill', '#fda4af');
+                    svg.appendChild(vl);
+
+                    // rótulo em duas linhas
+                    var parts = s.n.split('|');
+                    parts.forEach(function (p, pi) {
+                        var xt = el('text', { x: cx, y: H - 34 + pi * 13, class: 'axl', 'text-anchor': 'middle' });
+                        xt.setAttribute('font-size', '10');
+                        if (s.t === 'abs') xt.setAttribute('fill', '#e7ecff');
+                        xt.textContent = p; svg.appendChild(xt);
+                    });
+                });
+            }
+
+            // --- barras divergentes (EBITDA)
+            function divergingChart(hostId, vals) {
+                var host = document.getElementById(hostId);
+                if (!host) return;
+                var W = 1000, H = 300, PL = 84, PR = 24, PT = 26, PB = 40;
+                var svg = svgRoot(host, W, H);
+                var lo = Math.min.apply(null, vals) * 1.25, hi = Math.max.apply(null, vals) * 1.9;
+                if (hi <= 0) hi = Math.abs(lo) * .3;
+                var y = function (v) { return PT + (H - PT - PB) * (1 - (v - lo) / (hi - lo)); };
+                var zero = y(0);
+
+                for (var g = 0; g <= 4; g++) {
+                    var gv = lo + (hi - lo) * g / 4;
+                    svg.appendChild(el('line', { x1: PL, x2: W - PR, y1: y(gv), y2: y(gv), class: 'ax' }));
+                    var t = el('text', { x: PL - 12, y: y(gv) + 4, class: 'axl', 'text-anchor': 'end' });
+                    t.textContent = brl(gv); svg.appendChild(t);
+                }
+                svg.appendChild(el('line', { x1: PL, x2: W - PR, y1: zero, y2: zero, stroke: 'rgba(255,255,255,.35)', 'stroke-width': 1.5 }));
+
+                var step = (W - PL - PR) / 3, bw = 120;
+                vals.forEach(function (v, i) {
+                    var cx = PL + step * i + step / 2;
+                    var top = v >= 0 ? y(v) : zero;
+                    var r = el('rect', {
+                        x: cx - bw / 2, y: top, width: bw, height: Math.max(Math.abs(y(v) - zero), 2),
+                        rx: 5, fill: v >= 0 ? '#34d399' : '#fb7185', opacity: '.9', class: 'bar'
+                    });
+                    r.style.transitionDelay = (i * 0.12) + 's';
+                    r.style.transformOrigin = 'center ' + zero + 'px';
+                    svg.appendChild(r);
+
+                    var vl = el('text', { x: cx, y: v >= 0 ? y(v) - 12 : zero + Math.abs(y(v) - zero) + 20, class: 'vlbl fadein', 'text-anchor': 'middle' });
+                    vl.setAttribute('fill', v >= 0 ? '#6ee7b7' : '#fda4af');
+                    vl.textContent = (v >= 0 ? '+' : '') + brl(v); svg.appendChild(vl);
+
+                    // rótulos do eixo sempre na base, não colados na linha do zero
+                    var xt = el('text', { x: cx, y: H - 12, class: 'axl', 'text-anchor': 'middle' });
+                    xt.textContent = ANOS[i]; svg.appendChild(xt);
+                });
+            }
+
+            // --- caixa (barras) + runway (linha)
+            function cashChart(hostId, caixa, runway) {
+                var host = document.getElementById(hostId);
+                if (!host) return;
+                var W = 1000, H = 192, PL = 78, PR = 78, PT = 24, PB = 32;
+                var svg = svgRoot(host, W, H);
+                defsGrad(svg, hostId + '-cg', 'rgba(99,102,241,.28)', 'rgba(99,102,241,.95)');
+                var max = Math.max.apply(null, caixa) * 1.25;
+                var y = function (v) { return PT + (H - PT - PB) * (1 - v / max); };
+                var rwMax = 48;
+                var y2 = function (v) { return PT + (H - PT - PB) * (1 - Math.min(v, rwMax) / rwMax); };
+
+                for (var g = 0; g <= 4; g++) {
+                    var gv = max * g / 4;
+                    svg.appendChild(el('line', { x1: PL, x2: W - PR, y1: y(gv), y2: y(gv), class: 'ax' }));
+                    var t = el('text', { x: PL - 12, y: y(gv) + 4, class: 'axl', 'text-anchor': 'end' });
+                    t.textContent = brl(gv); svg.appendChild(t);
+                    var t2 = el('text', { x: W - PR + 12, y: y2(rwMax * g / 4) + 4, class: 'axl' });
+                    t2.setAttribute('fill', '#fcd34d');
+                    t2.textContent = nf(rwMax * g / 4) + ' m'; svg.appendChild(t2);
+                }
+
+                var step = (W - PL - PR) / 3, bw = 118;
+                caixa.forEach(function (v, i) {
+                    var cx = PL + step * i + step / 2;
+                    var r = el('rect', {
+                        x: cx - bw / 2, y: y(v), width: bw, height: Math.max((H - PT - PB) * v / max, 2),
+                        rx: 5, fill: 'url(#' + hostId + '-cg)', class: 'bar'
+                    });
+                    r.style.transitionDelay = (i * 0.1) + 's';
+                    r.style.transformOrigin = 'center ' + y(0) + 'px';
+                    svg.appendChild(r);
+                    // rótulo dentro da barra: evita colidir com a linha de runway
+                    var vl = el('text', { x: cx, y: y(v) + 21, class: 'vlbl fadein', 'text-anchor': 'middle' });
+                    vl.setAttribute('fill', '#e7ecff');
+                    vl.textContent = brl(v); svg.appendChild(vl);
+                    var xt = el('text', { x: cx, y: H - 14, class: 'axl', 'text-anchor': 'middle' });
+                    xt.textContent = ANOS[i]; svg.appendChild(xt);
+                });
+
+                // linha de runway (Ano 3 = infinito, plotado no topo da escala)
+                var pts = runway.map(function (v, i) {
+                    return (PL + step * i + step / 2) + ',' + y2(v);
+                });
+                var p = el('path', { d: 'M' + pts.join(' L'), fill: 'none', stroke: '#fbbf24', 'stroke-width': 2.5, 'stroke-dasharray': '6 5', class: 'fadein', 'stroke-linecap': 'round' });
+                svg.appendChild(p);
+                runway.forEach(function (v, i) {
+                    var cx = PL + step * i + step / 2;
+                    var c = el('circle', { cx: cx, cy: y2(v), r: 5.5, fill: '#060814', stroke: '#fbbf24', 'stroke-width': 3, class: 'dot' });
+                    c.style.transitionDelay = (0.8 + i * 0.15) + 's';
+                    svg.appendChild(c);
+                    var lb = el('text', { x: cx + 16, y: y2(v) + 4, class: 'vlbl fadein' });
+                    lb.setAttribute('fill', '#fcd34d'); lb.setAttribute('font-size', '11');
+                    lb.textContent = v >= rwMax ? '∞' : nf(v, 1).replace('.', ',') + ' m';
+                    svg.appendChild(lb);
+                });
+                var lgd = el('text', { x: W - PR + 12, y: PT - 12, class: 'axl' });
+                lgd.setAttribute('fill', '#fcd34d'); lgd.textContent = 'runway'; svg.appendChild(lgd);
+            }
+
+            // --- tesoura CAC vs LTV
+            function scissorChart(hostId, cac, ltv) {
+                var host = document.getElementById(hostId);
+                if (!host) return;
+                var W = 1000, H = 290, PL = 80, PR = 90, PT = 30, PB = 42;
+                var svg = svgRoot(host, W, H);
+                var max = Math.max.apply(null, ltv) * 1.18;
+                var y = function (v) { return PT + (H - PT - PB) * (1 - v / max); };
+                var step = (W - PL - PR) / 2, x = function (i) { return PL + step * i; };
+
+                for (var g = 0; g <= 4; g++) {
+                    var gv = max * g / 4;
+                    svg.appendChild(el('line', { x1: PL, x2: W - PR, y1: y(gv), y2: y(gv), class: 'ax' }));
+                    var t = el('text', { x: PL - 12, y: y(gv) + 4, class: 'axl', 'text-anchor': 'end' });
+                    t.textContent = 'R$ ' + nf(gv); svg.appendChild(t);
+                }
+
+                // área entre as curvas = margem por cliente
+                var fill = el('path', {
+                    d: 'M' + x(0) + ',' + y(ltv[0]) + ' L' + x(1) + ',' + y(ltv[1]) + ' L' + x(2) + ',' + y(ltv[2]) +
+                        ' L' + x(2) + ',' + y(cac[2]) + ' L' + x(1) + ',' + y(cac[1]) + ' L' + x(0) + ',' + y(cac[0]) + ' Z',
+                    fill: '#6366f1', 'fill-opacity': '.14', class: 'fadein'
+                });
+                svg.appendChild(fill);
+
+                [[ltv, '#818cf8', 'LTV'], [cac, '#fbbf24', 'CAC']].forEach(function (set, si) {
+                    var vals = set[0], col = set[1];
+                    var d = 'M' + x(0) + ',' + y(vals[0]) + ' L' + x(1) + ',' + y(vals[1]) + ' L' + x(2) + ',' + y(vals[2]);
+                    var p = el('path', { d: d, fill: 'none', stroke: col, 'stroke-width': 3.5, 'stroke-linecap': 'round', class: 'ln' });
+                    svg.appendChild(p);
+                    try { p.style.setProperty('--len', p.getTotalLength()); } catch (e) { p.style.setProperty('--len', '1400'); }
+                    for (var i = 0; i < 3; i++) {
+                        var c = el('circle', { cx: x(i), cy: y(vals[i]), r: 6, fill: '#060814', stroke: col, 'stroke-width': 3, class: 'dot' });
+                        c.style.transitionDelay = (0.75 + i * 0.2 + si * 0.1) + 's';
+                        svg.appendChild(c);
+                    }
+                    var lb = el('text', { x: x(2) + 14, y: y(vals[2]) + 4, class: 'vlbl fadein' });
+                    lb.setAttribute('fill', col);
+                    lb.textContent = set[2] + ' ' + brl(vals[2]); svg.appendChild(lb);
+                });
+
+                for (var i = 0; i < 3; i++) {
+                    var xt = el('text', { x: x(i), y: H - 14, class: 'axl', 'text-anchor': i === 0 ? 'start' : (i === 2 ? 'end' : 'middle') });
+                    xt.textContent = ANOS[i] + '  ·  ' + [3.06, 4.79, 9.98][i].toString().replace('.', ',') + '×';
+                    svg.appendChild(xt);
+                }
+            }
+
+            // ------------------------------------------------ instanciação
+            // slide 3 mostra a COMPOSIÇÃO (%); slide 6 mostra o crescimento absoluto
+            mixChart('ch-mix',
+                [[160632, 728916, 2313360], [44820, 172800, 453600]],
+                ['#6366f1', '#22d3ee'],
+                ['Assinatura Pro', 'Deep Research + B2B']);
+
+            stackedChart('ch-receita',
+                [[160632, 728916, 2313360], [44820, 172800, 453600]],
+                [['rgba(99,102,241,.35)', '#6366f1'], ['rgba(34,211,238,.35)', '#22d3ee']],
+                ['Assinatura Pro', 'Deep Research + B2B'], brl);
+
+            lineChart('ch-clientes', [138, 437, 1020], '#22d3ee', function (v) { return nf(Math.round(v)); });
+
+            groupedChart('ch-custos', [
+                { n: 'Pessoal', v: [18000, 46000, 72000] },
+                { n: 'Marketing', v: [7500, 22000, 40000] },
+                { n: 'Vendas', v: [2000, 7000, 13000] },
+                { n: 'Tecnologia', v: [4500, 8500, 14000] },
+                { n: 'G&A', v: [3000, 5500, 9000] }
+            ], ['#4338ca', '#818cf8', '#22d3ee']);
+
+            waterfall('ch-waterfall', [
+                { n: 'Receita|total', v: 2766960, t: 'abs' },
+                { n: 'COGS|24%', v: -664070 },
+                { n: 'Lucro|bruto', v: 2102890, t: 'abs' },
+                { n: 'Pessoal', v: -864000 },
+                { n: 'Marketing', v: -480000 },
+                { n: 'Vendas', v: -156000 },
+                { n: 'Tecnologia', v: -168000 },
+                { n: 'G&A', v: -108000 },
+                { n: 'Impostos|10%', v: -276696 },
+                { n: 'EBITDA', v: 50194, t: 'abs' }
+            ]);
+
+            divergingChart('ch-ebitda', [-304947, -508936, 50194]);
+            cashChart('ch-caixa', [345053, 1636117, 1686311], [13.58, 38.58, 999]);
+            scissorChart('ch-unit', [528, 725, 757], [1617, 3475, 7560]);
+
+            // ---------------------------------------------------- inicializa
+            var start = parseInt((location.hash || '#1').slice(1), 10);
+            if (isNaN(start) || start < 1 || start > slides.length) start = 1;
+            activate(start - 1);
+
+            // permite navegar colando #n na barra de endereços
+            addEventListener('hashchange', function () {
+                var n = parseInt((location.hash || '#1').slice(1), 10);
+                if (!isNaN(n)) go(n - 1);
+            });
+
+            setTimeout(function () { if (hintEl) hintEl.classList.add('gone'); }, 9000);
+        })();
+    </script>
+
+    <!-- ============================================= FUNDO 3D (three.js) -->
+    <script type="importmap">
+        { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js" } }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            const canvas = document.getElementById('gl');
+            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+            renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+            renderer.setSize(innerWidth, innerHeight);
+
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x060814, 0.028);
+            const camera = new THREE.PerspectiveCamera(58, innerWidth / innerHeight, 0.1, 200);
+            camera.position.set(0, 0, 30);
+
+            const N = innerWidth < 700 ? 2600 : 5200;
+
+            /* ---------- formações: cada uma preenche pos[i*3..] e cor ---------- */
+            const C_IND = new THREE.Color('#6366f1');
+            const C_CYA = new THREE.Color('#22d3ee');
+            const C_EME = new THREE.Color('#34d399');
+            const C_ROS = new THREE.Color('#fb7185');
+            const C_AMB = new THREE.Color('#fbbf24');
+            const C_VIO = new THREE.Color('#a855f7');
+
+            const rnd = (a, b) => a + Math.random() * (b - a);
+
+            const FORMS = {
+                // esfera preenchida — capa e encerramento
+                sphere(i, n, p, c) {
+                    const y = 1 - (i / (n - 1)) * 2;
+                    const r = Math.sqrt(Math.max(0, 1 - y * y));
+                    const th = i * 2.399963;            // ângulo áureo
+                    const R = 12 * Math.cbrt(rnd(0.55, 1));
+                    p.set(Math.cos(th) * r * R, y * R, Math.sin(th) * r * R);
+                    c.copy(C_IND).lerp(C_CYA, (y + 1) / 2);
+                },
+                // dupla hélice — duas linhas de receita
+                helix(i, n, p, c) {
+                    const strand = i % 2, t = (i / n) * Math.PI * 9;
+                    const off = strand ? Math.PI : 0;
+                    p.set(Math.cos(t + off) * 7.5 + rnd(-.5, .5), (i / n - .5) * 34, Math.sin(t + off) * 7.5 + rnd(-.5, .5));
+                    c.copy(strand ? C_CYA : C_IND);
+                },
+                // toro — premissas girando em torno do modelo
+                torus(i, n, p, c) {
+                    const u = rnd(0, Math.PI * 2), v = rnd(0, Math.PI * 2), R = 13, r = 3.6;
+                    p.set((R + r * Math.cos(v)) * Math.cos(u), (R + r * Math.cos(v)) * Math.sin(u) * .55, r * Math.sin(v));
+                    c.copy(C_IND).lerp(C_VIO, Math.cos(v) * .5 + .5);
+                },
+                // curva exponencial — crescimento da base
+                curve(i, n, p, c) {
+                    const t = i / n, x = (t - .5) * 40;
+                    const yy = Math.pow(t, 2.7) * 26 - 9;
+                    p.set(x + rnd(-.7, .7), yy + rnd(-1.6, 1.6), rnd(-5, 5));
+                    c.copy(C_IND).lerp(C_CYA, t);
+                },
+                // colunas 3D — receita por ano
+                bars(i, n, p, c) {
+                    const b = i % 3, hgt = [5, 12, 26][b], t = (i / n);
+                    p.set((b - 1) * 11 + rnd(-3.2, 3.2), rnd(-11, -11 + hgt), rnd(-3.2, 3.2));
+                    c.copy(C_IND).lerp(C_CYA, b / 2);
+                },
+                // anel/donut — margem bruta
+                ring(i, n, p, c) {
+                    const a = rnd(0, Math.PI * 2), R = rnd(9, 13.5);
+                    p.set(Math.cos(a) * R, Math.sin(a) * R, rnd(-2.2, 2.2));
+                    const t = (a / (Math.PI * 2));
+                    c.copy(t < .24 ? C_ROS : t < .5 ? C_AMB : C_EME);
+                },
+                // camadas empilhadas — estrutura de custos
+                stack(i, n, p, c) {
+                    const layer = i % 5;
+                    p.set(rnd(-17, 17), -10 + layer * 5.2 + rnd(-.9, .9), rnd(-6, 6));
+                    c.copy(C_IND).lerp(C_CYA, layer / 4);
+                },
+                // degraus descendentes — waterfall da DRE
+                waterfall(i, n, p, c) {
+                    const s = i % 8, x = -19 + s * 5.4;
+                    const tops = [13, 9.5, 9.5, 5, 1.5, -.5, -2.5, -4.5];
+                    p.set(x + rnd(-2.1, 2.1), rnd(-11, tops[s]), rnd(-3.4, 3.4));
+                    c.copy(s === 0 ? C_IND : s === 7 ? C_EME : C_ROS).lerp(C_VIO, .18);
+                },
+                // curva J — EBITDA
+                jcurve(i, n, p, c) {
+                    const t = i / n, x = (t - .5) * 40;
+                    const yy = 22 * (t * t * t * 2.4 - t * 1.15) + 1;
+                    p.set(x + rnd(-.8, .8), yy + rnd(-1.7, 1.7), rnd(-5, 5));
+                    c.copy(yy < 0 ? C_ROS : C_EME).lerp(C_IND, .25);
+                },
+                // reservatórios — caixa e runway
+                cash(i, n, p, c) {
+                    const b = i % 3, hgt = [7, 24, 25][b];
+                    p.set((b - 1) * 12 + rnd(-3.6, 3.6), rnd(-12, -12 + hgt), rnd(-3.6, 3.6));
+                    c.copy(C_IND).lerp(C_EME, b / 2);
+                },
+                // dois grupos afastando-se — CAC vs LTV
+                twin(i, n, p, c) {
+                    const g = i % 2, t = i / n;
+                    const spread = 3 + t * 15;
+                    p.set((t - .5) * 36, (g ? 1 : -1) * spread * .8 + rnd(-1.4, 1.4), rnd(-5, 5));
+                    c.copy(g ? C_IND : C_AMB);
+                },
+                // malha regular — dashboard de KPIs
+                grid(i, n, p, c) {
+                    const cols = 46, r = Math.floor(i / cols), col = i % cols;
+                    p.set((col - cols / 2) * .92, (r - (n / cols) / 2) * .92, Math.sin(col * .4) * Math.cos(r * .4) * 3);
+                    c.copy(C_IND).lerp(C_CYA, (col / cols));
+                },
+                // seta ascendente — o ask
+                arrow(i, n, p, c) {
+                    const t = i / n;
+                    if (t < .68) {           // haste diagonal
+                        const u = t / .68;
+                        p.set(-16 + u * 26, -13 + u * 22, rnd(-2.4, 2.4));
+                        p.x += rnd(-1.5, 1.5); p.y += rnd(-1.5, 1.5);
+                    } else {                 // ponta
+                        const u = (t - .68) / .32, a = rnd(0, Math.PI * 2);
+                        p.set(10 + Math.cos(a) * (1 - u) * 6, 9 + Math.sin(a) * (1 - u) * 6, rnd(-2.4, 2.4));
+                    }
+                    c.copy(C_IND).lerp(C_EME, t);
+                }
+            };
+
+            /* ---------- buffers ---------- */
+            const cur = new Float32Array(N * 3);
+            const tgt = new Float32Array(N * 3);
+            const curC = new Float32Array(N * 3);
+            const tgtC = new Float32Array(N * 3);
+            const seed = new Float32Array(N);
+            for (let i = 0; i < N; i++) seed[i] = 0.55 + Math.random() * 0.85;
+
+            const _p = new THREE.Vector3(), _c = new THREE.Color();
+
+            function build(name) {
+                const fn = FORMS[name] || FORMS.sphere;
+                for (let i = 0; i < N; i++) {
+                    fn(i, N, _p, _c);
+                    tgt[i * 3] = _p.x; tgt[i * 3 + 1] = _p.y; tgt[i * 3 + 2] = _p.z;
+                    tgtC[i * 3] = _c.r; tgtC[i * 3 + 1] = _c.g; tgtC[i * 3 + 2] = _c.b;
+                }
+            }
+
+            build('sphere');
+            cur.set(tgt); curC.set(tgtC);
+            // começa disperso, converge na abertura
+            for (let i = 0; i < N * 3; i++) cur[i] += (Math.random() - .5) * 90;
+
+            const geo = new THREE.BufferGeometry();
+            geo.setAttribute('position', new THREE.BufferAttribute(cur, 3));
+            geo.setAttribute('color', new THREE.BufferAttribute(curC, 3));
+
+            // sprite circular suave gerado em canvas
+            const cv = document.createElement('canvas');
+            cv.width = cv.height = 64;
+            const cx2 = cv.getContext('2d');
+            const grd = cx2.createRadialGradient(32, 32, 0, 32, 32, 32);
+            grd.addColorStop(0, 'rgba(255,255,255,1)');
+            grd.addColorStop(.35, 'rgba(255,255,255,.65)');
+            grd.addColorStop(1, 'rgba(255,255,255,0)');
+            cx2.fillStyle = grd; cx2.fillRect(0, 0, 64, 64);
+            const sprite = new THREE.CanvasTexture(cv);
+
+            const mat = new THREE.PointsMaterial({
+                size: innerWidth < 700 ? .30 : .24,
+                map: sprite,
+                vertexColors: true,
+                transparent: true,
+                opacity: .88,
+                depthWrite: false,
+                blending: THREE.AdditiveBlending,
+                sizeAttenuation: true
+            });
+
+            const pts = new THREE.Points(geo, mat);
+            scene.add(pts);
+
+            window.__bg = { morph: (name) => build(name) };
+
+            /* ---------- interação ---------- */
+            let mx = 0, my = 0, tmx = 0, tmy = 0;
+            addEventListener('pointermove', (e) => {
+                tmx = (e.clientX / innerWidth - .5) * 2;
+                tmy = (e.clientY / innerHeight - .5) * 2;
+            }, { passive: true });
+
+            addEventListener('resize', () => {
+                camera.aspect = innerWidth / innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(innerWidth, innerHeight);
+            });
+
+            const clock = new THREE.Clock();
+            function frame() {
+                const dt = Math.min(clock.getDelta(), .05);
+                const t = clock.elapsedTime;
+
+                // convergência suave, com velocidade própria por partícula
+                for (let i = 0; i < N; i++) {
+                    const k = 1 - Math.pow(1 - Math.min(dt * 2.6 * seed[i], .95), 1);
+                    const i3 = i * 3;
+                    cur[i3] += (tgt[i3] - cur[i3]) * k;
+                    cur[i3 + 1] += (tgt[i3 + 1] - cur[i3 + 1]) * k;
+                    cur[i3 + 2] += (tgt[i3 + 2] - cur[i3 + 2]) * k;
+                    const kc = Math.min(dt * 2.2, .9);
+                    curC[i3] += (tgtC[i3] - curC[i3]) * kc;
+                    curC[i3 + 1] += (tgtC[i3 + 1] - curC[i3 + 1]) * kc;
+                    curC[i3 + 2] += (tgtC[i3 + 2] - curC[i3 + 2]) * kc;
+                }
+                geo.attributes.position.needsUpdate = true;
+                geo.attributes.color.needsUpdate = true;
+
+                pts.rotation.y = t * .045;
+                pts.rotation.x = Math.sin(t * .19) * .07;
+
+                mx += (tmx - mx) * .04;
+                my += (tmy - my) * .04;
+                camera.position.x = mx * 4.5;
+                camera.position.y = -my * 3.2;
+                camera.lookAt(0, 0, 0);
+
+                renderer.render(scene, camera);
+                requestAnimationFrame(frame);
+            }
+            frame();
+
+            // aplica a formação do slide já ativo
+            const act = document.querySelector('.slide.active');
+            if (act) build(act.getAttribute('data-form'));
+        }
+    </script>
+</body>
+
+</html>

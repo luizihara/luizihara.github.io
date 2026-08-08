@@ -1,0 +1,329 @@
+# CareerFlow AI — Memorial da Projeção Financeira de 3 Anos
+
+Documento completo da projeção financeira do MVP do CareerFlow AI, TCC do MBA FIAP 2026,
+disciplina de Empreendedorismo. Todos os valores derivam da planilha
+`files/FIAP_Modelo_Projecao_Financeira_MVP.xlsx` (modelo oficial da FIAP preenchido pelo grupo).
+
+**Grupo:** Luiz Ihara (RM368484), Filipe Fragoso (RM368500), Daniel Caminha (RM366740),
+Pedro Martins (RM368543). **Orientação:** Prof. Ricardo Esposto.
+
+**Apresentação:** https://luizihara.github.io/fiap.tcc/projecao-financeira.html
+**Planilha:** https://luizihara.github.io/fiap.tcc/files/FIAP_Modelo_Projecao_Financeira_MVP.xlsx
+
+Moeda: Real (R$). Horizonte: 3 anos. Estágio: MVP / pré-seed.
+
+---
+
+## 1. O negócio em uma página
+
+O CareerFlow AI é uma plataforma de gestão ativa de carreira com IA para profissionais
+sêniores de tecnologia (35–45 anos). A tese: esse profissional vive a "erosão da relevância"
+— competências que sustentavam sua senioridade perdem valor de mercado com o avanço da IA —
+e as alternativas disponíveis não resolvem. Mentoria humana com headhunters custa
+R$ 1.500–6.000/mês e é episódica; plataformas de curso entregam conteúdo genérico sem direção.
+
+A solução opera em três frentes: diagnóstico profundo cruzando rastro digital com tendências
+de mercado (Deep Research); o Skill Analogy Engine, motor de correspondência semântica que
+traduz competências entre setores; e um mentor virtual 24/7 no WhatsApp com memória histórica
+dos objetivos do usuário.
+
+Arquitetura: orquestração via N8N, Mixture of Experts (MoE) para roteamento de modelos,
+banco vetorial para memória de longo prazo, front em Next.js/V0.dev.
+
+---
+
+## 2. Modelo de receita
+
+Duas linhas, com a assinatura carregando o crescimento e ganhando participação ao longo do tempo.
+
+**Linha 1 — Assinatura CareerFlow Pro (SaaS mensal recorrente).**
+Mentor virtual 24/7, diário conversacional com memória e diagnóstico contínuo.
+Representa 78,2% da receita no Ano 1 e 83,6% no Ano 3.
+
+**Linha 2 — Deep Research Reports + licenças B2B (pay-per-use).**
+Relatórios avulsos de pesquisa profunda e licenças white-label para empresas que usam a
+ferramenta como instrumento de retenção de lideranças. 21,8% da receita no Ano 1, 16,4% no Ano 3.
+
+Composição da receita por ano:
+
+| Linha | Ano 1 | Ano 2 | Ano 3 |
+|---|---|---|---|
+| Assinatura Pro | R$ 160.632 (78,2%) | R$ 728.916 (80,8%) | R$ 2.313.360 (83,6%) |
+| Deep Research + B2B | R$ 44.820 (21,8%) | R$ 172.800 (19,2%) | R$ 453.600 (16,4%) |
+| **Receita total** | **R$ 205.452** | **R$ 901.716** | **R$ 2.766.960** |
+
+---
+
+## 3. Premissas de entrada (aba "Premissas")
+
+São 19 linhas de premissa × 3 anos. Todo o resto da planilha é fórmula derivada destas entradas.
+
+### 3.1 Receita
+
+| Premissa | Ano 1 | Ano 2 | Ano 3 | Racional |
+|---|---|---|---|---|
+| Ticket médio da assinatura (R$/mês) | 97 | 139 | 189 | Preço acompanha a maturidade do produto (Skill Analogy Engine, simulador de roleplay). No Ano 3, R$ 189 é ~1/8 do piso da mentoria humana (R$ 1.500/mês) |
+| Novos clientes por mês | 18 | 40 | 70 | Ano 1 orgânico via marketing de autoridade no LinkedIn; a partir do Ano 2, mídia paga estruturada + viral loop |
+| Churn mensal | 6,0% | 4,0% | 2,5% | Cai à medida que a memória de longo prazo cria lock-in |
+| Ticket Deep Research / B2B (R$) | 249 | 320 | 420 | Blend de relatório avulso e pacote corporativo |
+| Transações Deep Research / mês | 15 | 45 | 90 | Cross-sell sobre a própria base de assinantes |
+
+### 3.2 Custos operacionais (R$ por mês)
+
+| Categoria | Ano 1 | Ano 2 | Ano 3 | % da receita Ano 3 |
+|---|---|---|---|---|
+| Pessoal e encargos | 18.000 | 46.000 | 72.000 | 31,2% |
+| Marketing e aquisição | 7.500 | 22.000 | 40.000 | 17,3% |
+| Vendas e comissões | 2.000 | 7.000 | 13.000 | 5,6% |
+| Tecnologia e infraestrutura | 4.500 | 8.500 | 14.000 | 6,1% |
+| Administrativo / G&A | 3.000 | 5.500 | 9.000 | 3,9% |
+| **Total operacional / mês** | **35.000** | **89.000** | **148.000** | **64,2%** |
+
+Pessoal cresce 4× enquanto a receita cresce 13,5× — é a tese de time enxuto alavancado por IA.
+No Ano 1 os sócios mantêm pró-labore reduzido; no Ano 2 passam a dedicação integral com duas
+contratações; no Ano 3 a equipe fica em torno de 7 pessoas.
+
+### 3.3 Margem, impostos, investimento e capital
+
+| Premissa | Ano 1 | Ano 2 | Ano 3 |
+|---|---|---|---|
+| COGS sobre receita | 38% | 30% | 24% |
+| Margem bruta resultante | 62% | 70% | 76% |
+| Imposto sobre receita | 6% | 8% | 10% |
+| Investimento em tecnologia/produto (R$) | 60.000 | 0 | 0 |
+| Investimento em marketing/lançamento (R$) | 25.000 | 0 | 0 |
+| Outros investimentos iniciais (R$) | 15.000 | 0 | 0 |
+| **Total de investimento (Capex)** | **100.000** | **0** | **0** |
+| Capital próprio dos sócios (R$) | 150.000 | 0 | 0 |
+| Captação externa no ano (R$) | 600.000 | 1.800.000 | 0 |
+
+O COGS é o custo direto de entrega — tokens de inferência, chamadas de Deep Research,
+processamento por usuário. A queda de 38% para 24% pressupõe cache de prompts, roteamento MoE
+(tarefas simples migram para modelos menores) e ganho de escala. É uma premissa ainda não
+medida em produção e está listada como risco na seção 8.
+
+O imposto progride conforme o faturamento sobe dentro das faixas do Simples Nacional.
+
+---
+
+## 4. Modelo de cálculo
+
+As fórmulas abaixo são exatamente as da planilha entregue. Nenhum valor foi digitado à mão nas
+abas calculadas: todas as células de resultado são fórmulas vivas e recalculáveis.
+
+**Base de clientes** (líquida de cancelamentos, com o churn incidindo sobre a média do ano):
+
+```
+Clientes(Ano 1) = novos_mês × 12 − ARRED(novos_mês × 6 × churn × 12; 0)
+Clientes(Ano N) = Clientes(Ano N−1) + novos_mês × 12
+                  − ARRED((Clientes(Ano N−1) + novos_mês × 6) × churn × 12; 0)
+```
+
+Ano 1: 216 clientes conquistados − 78 cancelamentos = **138**
+Ano 2: 138 + 480 − 181 = **437**
+Ano 3: 437 + 840 − 257 = **1.020**
+
+**Receita, resultado e caixa:**
+
+```
+Receita Linha 1   = Clientes × ticket_assinatura × 12
+Receita Linha 2   = ticket_deep_research × transações_mês × 12
+Receita total     = Linha 1 + Linha 2
+COGS              = − COGS% × Receita total
+Lucro bruto       = Receita total + COGS
+Impostos          = Receita total × imposto%
+EBITDA            = Lucro bruto − (custo operacional mensal × 12) − Impostos
+Caixa final       = Caixa inicial + Captação − Capex + EBITDA
+Runway (meses)    = Caixa final ÷ |EBITDA| × 12     (apenas quando EBITDA < 0)
+```
+
+**Unit economics:**
+
+```
+CAC     = (marketing_mês + vendas_mês) ÷ novos_clientes_mês
+LTV     = ticket_assinatura ÷ churn_mensal
+LTV/CAC = LTV ÷ CAC
+Payback = CAC ÷ ticket_assinatura     (em meses)
+MRR     = Receita total ÷ 12
+```
+
+---
+
+## 5. Demonstração de resultado (DRE)
+
+| Linha | Ano 1 | Ano 2 | Ano 3 |
+|---|---|---|---|
+| Receita total | 205.452,00 | 901.716,00 | 2.766.960,00 |
+| (−) COGS | −78.071,76 | −270.514,80 | −664.070,40 |
+| **Lucro bruto** | **127.380,24** | **631.201,20** | **2.102.889,60** |
+| Margem bruta | 62,0% | 70,0% | 76,0% |
+| (−) Pessoal | −216.000,00 | −552.000,00 | −864.000,00 |
+| (−) Marketing e aquisição | −90.000,00 | −264.000,00 | −480.000,00 |
+| (−) Vendas e comissões | −24.000,00 | −84.000,00 | −156.000,00 |
+| (−) Tecnologia e infraestrutura | −54.000,00 | −102.000,00 | −168.000,00 |
+| (−) Administrativo / G&A | −36.000,00 | −66.000,00 | −108.000,00 |
+| (−) Impostos sobre receita | −12.327,12 | −72.137,28 | −276.696,00 |
+| **EBITDA** | **−304.946,88** | **−508.936,08** | **+50.193,60** |
+| Margem EBITDA | −148,4% | −56,4% | +1,8% |
+
+Leitura do Ano 3: a margem bruta de 76% gera R$ 2,10 M; a estrutura consome R$ 1,78 M e os
+impostos R$ 276,7 mil, sobrando R$ 50,2 mil. É uma **curva J clássica**: dois anos de queima
+planejada para construir base e produto, e a virada no Ano 3.
+
+**Este não é um negócio lucrativo no Ano 3 — é um negócio que atinge o break-even operacional
+crescendo 207% ao ano.** A margem de 1,8% é deliberadamente apertada e honesta: para um MVP em
+estágio seed, o benchmark do próprio modelo FIAP pede "EBITDA positivo a partir do Ano 2 ou 3",
+e é isso que o modelo entrega, sem inflar premissas para simular lucratividade.
+
+---
+
+## 6. Fluxo de caixa
+
+| Linha | Ano 1 | Ano 2 | Ano 3 |
+|---|---|---|---|
+| Caixa no início do ano | 150.000,00 | 345.053,12 | 1.636.117,04 |
+| (+) Captação externa | 600.000,00 | 1.800.000,00 | 0,00 |
+| (−) Investimento / Capex | −100.000,00 | 0,00 | 0,00 |
+| (+/−) EBITDA do ano | −304.946,88 | −508.936,08 | +50.193,60 |
+| **Caixa final do ano** | **345.053,12** | **1.636.117,04** | **1.686.310,64** |
+| Runway (meses) | 13,6 | 38,6 | n/a (EBITDA positivo) |
+
+O caixa inicial do Ano 1 é o capital próprio dos quatro sócios (R$ 150.000).
+
+Sobre o runway do Ano 3: com EBITDA positivo não há queima a financiar, então o conceito não se
+aplica. A fórmula do template registra o valor convencional **999** nessa célula — não é um
+número real, é um marcador de "não aplicável".
+
+**Necessidade total de capital externo: R$ 2,4 milhões**, em duas rodadas:
+- Pré-seed / anjo no Ano 1 (R$ 600 mil): financia a queima de R$ 305 mil e o Capex de R$ 100 mil.
+- Seed no Ano 2 (R$ 1,8 M): financia o pico de queima e leva a empresa até o break-even sem
+  necessidade de nova rodada.
+
+---
+
+## 7. Indicadores para o investidor (13 KPIs)
+
+| KPI | Ano 1 | Ano 2 | Ano 3 | Benchmark | Status Ano 3 |
+|---|---|---|---|---|---|
+| MRR — receita recorrente mensal | R$ 17.121 | R$ 75.143 | R$ 230.580 | > R$ 80 K no Ano 3 | Ótimo (2,9× a meta) |
+| ARR — receita anual recorrente | R$ 205.452 | R$ 901.716 | R$ 2.766.960 | > R$ 1 M no Ano 3 | Ótimo (2,8× a meta) |
+| Clientes ativos | 138 | 437 | 1.020 | > 300 no Ano 3 | Ótimo (3,4× a meta) |
+| Churn mensal | 6,0% | 4,0% | 2,5% | < 3% SaaS B2B | Aceitável |
+| CAC — custo por cliente | R$ 528 | R$ 725 | R$ 757 | < LTV / 3 | sem status na planilha |
+| LTV — valor do cliente | R$ 1.617 | R$ 3.475 | R$ 7.560 | > 3× o CAC | sem status na planilha |
+| LTV / CAC | 3,06× | 4,79× | 9,98× | > 5× excelente | Excelente |
+| Payback | 5,4 meses | 5,2 meses | 4,0 meses | < 6 meses ideal | Rápido |
+| Margem bruta | 62% | 70% | 76% | 60–80% SaaS | Saudável |
+| EBITDA | −R$ 304.947 | −R$ 508.936 | +R$ 50.194 | positivo no Ano 2 ou 3 | Lucrativo |
+| Margem EBITDA | −148% | −56% | +1,8% | > 15% no Ano 3 | Break-even |
+| Runway | 13,6 meses | 38,6 meses | n/a | > 18 meses | Confortável |
+| Crescimento YoY | — | +338,9% | +206,9% | > 80% no Ano 3 | Alta velocidade |
+
+Placar: das 11 linhas com avaliação automática na planilha, **nove ficam verdes e duas amarelas
+(churn e margem EBITDA); nenhuma vermelha**. CAC e LTV não têm fórmula de status no template —
+são insumos do LTV/CAC.
+
+### Unit economics em detalhe
+
+O CAC sobe apenas 44% em três anos (R$ 528 → R$ 757) porque a aquisição é ancorada em marketing
+de autoridade no LinkedIn e no viral loop, não só em mídia paga. O LTV cresce 4,7×
+(R$ 1.617 → R$ 7.560).
+
+Decomposição do crescimento do LTV, já que LTV = ticket ÷ churn:
+- efeito da queda do churn (6,0% → 2,5%): **2,40×**
+- efeito do aumento de ticket (R$ 97 → R$ 189): **1,95×**
+- efeito combinado: 2,40 × 1,95 = **4,68×**
+
+A retenção pesa mais que o preço — é por isso que churn, e não aquisição, é o KPI que o time
+persegue.
+
+---
+
+## 8. Riscos declarados e critérios de validação
+
+**1. Churn é a premissa mais sensível.** Toda a tese de LTV depende de cair para 2,5%/mês. Se
+estacionar em 4%, o LTV do Ano 3 cai para R$ 4.725 e o LTV/CAC de 9,98× para **6,24×** — ainda
+saudável, mas a tese perde folga.
+
+**2. A margem de break-even é apertada.** 1,8% de folga significa que R$ 50 mil de custo extra
+no Ano 3 devolvem a empresa ao vermelho. A disciplina de custos é o principal risco de execução.
+
+**3. Custo de inferência não validado.** O COGS caindo de 38% para 24% pressupõe eficiência de
+modelo que ainda não foi medida em produção.
+
+**4. Runway do Ano 1 é justo.** 13,6 meses fica acima do limite crítico de 12, mas abaixo dos 18
+recomendados. É o que torna a rodada seed do Ano 2 não opcional.
+
+**Próximo marco de validação:** as 5–8 entrevistas em profundidade recomendadas no feedback do
+Entregável Parcial 1 devem testar diretamente a disposição a pagar de R$ 97/mês — a premissa da
+qual todas as outras dependem.
+
+**Métrica de corte:** se a coorte piloto do MVP não sustentar 90% de retenção no mês 3, a
+premissa de churn cai e o modelo precisa ser refeito antes de qualquer captação.
+
+---
+
+## 9. Correções aplicadas ao template da FIAP
+
+O arquivo `FIAP_Modelo_Projecao_Financeira_MVP.xlsx` distribuído continha quatro fórmulas com
+referências incorretas na aba `📊 Projeção 3 Anos`. Elas foram corrigidas no arquivo entregue.
+Registro completo para conferência:
+
+| Célula | Linha da DRE | Fórmula no template | Célula que ela lia | Fórmula corrigida |
+|---|---|---|---|---|
+| C15 | Pessoal | `=-'Premissas'!C24*12` | Marketing | `=-'Premissas'!C23*12` |
+| C18 | Tecnologia e Infra | `=-'Premissas'!C27*12` | Administrativo | `=-'Premissas'!C26*12` |
+| C19 | Administrativo / G&A | `=-'Premissas'!C28*12` | **% de imposto** | `=-'Premissas'!C27*12` |
+| C21 | EBITDA | `=C13-C15-C16-C17-C18-C19-C20` | — | `=C13+C15+C16+C17+C18+C19+C20` |
+
+Efeitos no template original:
+- O custo de pessoal não entrava na DRE, e o de marketing entrava duas vezes.
+- O custo de tecnologia não entrava; o de administrativo entrava no lugar dele.
+- O G&A lia o *percentual* de imposto, resultando em R$ 0,72 por ano (6% × 12).
+- As linhas de despesa da aba já são negativas. Subtraí-las invertia o sinal e **somava** os
+  custos ao lucro bruto, produzindo um EBITDA maior que o próprio lucro bruto — margem
+  operacional de ~98% no template original.
+
+Com as premissas deste grupo e sem as correções, o EBITDA do Ano 3 apareceria como
+**+R$ 3.603.586,80** (margem operacional de 130% sobre a receita) em vez dos **+R$ 50.193,60**
+reais.
+
+Nenhuma fórmula foi substituída por valor fixo. As 145 fórmulas do arquivo continuam vivas, as
+cinco abas originais foram preservadas na ordem, e o arquivo tem `fullCalcOnLoad` ativo — o Excel
+refaz todas as contas ao abrir.
+
+---
+
+## 10. Como conferir os números
+
+1. Abra a planilha. O Excel recalcula tudo automaticamente ao abrir.
+2. Altere qualquer célula de entrada na aba `📋 Premissas` (as de preenchimento).
+3. As abas `📊 Projeção 3 Anos` e `🚀 Dashboard Investidor` se atualizam por fórmula.
+
+Exemplos de sensibilidade para testar:
+- Churn do Ano 3 de 2,5% → 4,0%: LTV/CAC cai de 9,98× para 6,24×.
+- Ticket do Ano 1 de R$ 97 → R$ 79: testa o cenário em que a disposição a pagar é menor.
+- Pessoal do Ano 3 de R$ 72 mil → R$ 78 mil/mês: o EBITDA volta a ficar negativo.
+
+Todos os valores deste memorial foram conferidos contra um recálculo independente do modelo a
+partir apenas das células de entrada: 124 valores verificados, sem divergência.
+
+---
+
+## 11. Outras entregas do TCC
+
+- **Entregável Parcial 1 — Definição e validação do problema** (`index-2.html`): nota 8,50.
+  Feedback do professor apontou ausência de validação primária e risco de persona única.
+- **Entregável Parcial 2 — Estratégia e modelo de negócios** (`entrega-parcial-2.html`):
+  nota 10,00. Contém mapa de empatia da persona "Líder em Risco", declaração de problema em
+  5W2H, Canvas de Proposta de Valor (VPC), Business Model Canvas (BMC) completo, análise de
+  concorrência e estratégia de diferenciação pelo framework ERRC.
+- **Projeção financeira** (`projecao-financeira.html` + planilha): este documento.
+
+Modelo de negócio em resumo (blocos do BMC relevantes para a projeção):
+- **Fontes de receita:** freemium (diagnóstico básico), assinatura Pro (mentor + diário),
+  relatórios de Deep Research pay-per-use, e expansão B2B white-label.
+- **Canais:** Web App, API de WhatsApp via N8N, LinkedIn como marketing de autoridade,
+  indicações (viral loop).
+- **Estrutura de custos:** consumo de tokens de IA, desenvolvimento low-code, marketing de
+  aquisição (CAC).

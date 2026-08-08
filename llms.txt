@@ -5,6 +5,7 @@
 ## Content Available
 
 * [Full Resume & Portfolio](llms-full.txt) - The complete text of Luiz's resume, including about me, experience, skills, and projects.
+* [CareerFlow AI — FIAP MBA capstone (TCC)](fiap.tcc/llms.txt) - Index of the capstone project, including the 3-year financial projection for the MVP. Full memo at [fiap.tcc/llms-full.txt](fiap.tcc/llms-full.txt). In Portuguese.
 
 ## About the site
 This is the personal portfolio and resume of Luiz Ihara. The main page is `index.html`. It is built to be accessible to humans and LLMs.

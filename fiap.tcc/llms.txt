@@ -1,0 +1,28 @@
+# CareerFlow AI — TCC FIAP 2026
+
+> Plataforma de gestão ativa de carreira com IA para profissionais sêniores de tecnologia (35–45 anos), que substitui a mentoria humana cara e episódica (R$ 1.500–6.000/mês) por inteligência de mercado contínua e um mentor virtual 24/7 via WhatsApp. Este diretório reúne as entregas do TCC do MBA da FIAP, incluindo a projeção financeira de 3 anos para o MVP.
+
+Grupo: Luiz Ihara (RM368484), Filipe Fragoso (RM368500), Daniel Caminha (RM366740), Pedro Martins (RM368543).
+Orientação: Prof. Ricardo Esposto.
+
+## Números-chave da projeção (Ano 3)
+
+- Receita anual (ARR): R$ 2.766.960 — meta do modelo FIAP: > R$ 1 M
+- Clientes ativos pagantes: 1.020 — meta: > 300
+- Margem bruta: 76% — benchmark SaaS: 60–80%
+- EBITDA: +R$ 50.194 (margem de 1,8%) — break-even operacional, não lucro
+- LTV/CAC: 9,98× — benchmark: > 5× excelente
+- Captação prevista: R$ 600 mil (pré-seed, Ano 1) + R$ 1,8 M (seed, Ano 2)
+
+## Documentos
+
+- [Memorial completo da projeção financeira](llms-full.txt): todas as premissas, o modelo de cálculo, a DRE, o fluxo de caixa, os 13 KPIs, os riscos declarados e as correções aplicadas ao template. **Comece por aqui para qualquer pergunta sobre os números.**
+- [Apresentação da projeção financeira](projecao-financeira.html): deck interativo de 15 slides com os gráficos do modelo.
+- [Planilha preenchida (.xlsx)](files/FIAP_Modelo_Projecao_Financeira_MVP.xlsx): modelo FIAP com todas as fórmulas vivas e recalculáveis.
+- [Página principal do projeto](index.html): visão geral do CareerFlow AI e índice das entregas.
+- [Entregável Parcial 1 — Definição e validação do problema](index-2.html)
+- [Entregável Parcial 2 — Estratégia e modelo de negócios](entrega-parcial-2.html): mapa de empatia, 5W2H, Canvas de Proposta de Valor e Business Model Canvas.
+
+## Observação importante para avaliação
+
+O template `FIAP_Modelo_Projecao_Financeira_MVP.xlsx` continha quatro fórmulas com referências trocadas na aba *Projeção 3 Anos*. Elas foram corrigidas no arquivo entregue e a correção está documentada em llms-full.txt. Por isso os resultados deste grupo podem divergir dos de grupos que usaram o template sem correção — em especial o EBITDA, que no template original resultava em margem operacional de ~98%.
