@@ -1,0 +1,18 @@
+Professor Rogério,
+
+Segue a entrega do Desafio de Performance BPA.
+
+A apresentação com o memorial da solução — diagnóstico do gargalo, cenário TO-BE e a análise econômica — está disponível em:
+https://luizihara.github.io/fiap.reengenharia-de-software/
+
+O modelo do Bizagi (Carros.bpm) pode ser baixado diretamente em:
+https://luizihara.github.io/fiap.reengenharia-de-software/Carros.bpm
+(o botão de download também está no último slide da apresentação)
+
+Fico à disposição para qualquer dúvida.
+
+Atenciosamente,
+Luiz Ihara - RM368484
+Filipe Fragoso - RM368500
+Daniel Caminha - RM366740
+Pedro Martins - RM368543
