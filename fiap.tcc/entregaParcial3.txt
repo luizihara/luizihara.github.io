@@ -1,0 +1,28 @@
+Prezado Professor Ricardo Esposto,
+
+Gostaríamos de informar que o "Entregável Parcial 3 — Projeção Financeira e Modelo de Negócios" do projeto CareerFlow AI já está disponível para sua avaliação.
+
+Disponibilizamos abaixo os links para acesso direto a todos os recursos desenvolvidos nesta etapa do TCC:
+
+1. Apresentação Executiva da Projeção Financeira:
+https://luizihara.github.io/fiap.tcc/projecao-financeira.html
+
+2. Download da Planilha de Modelo Financeiro (Excel com fórmulas dinâmicas):
+https://luizihara.github.io/fiap.tcc/files/FIAP_Modelo_Projecao_Financeira_MVP.xlsx
+
+3. Protótipo Interativo / Aplicação em Produção:
+https://careerflow.com.br/
+
+4. Portal Principal do Projeto (Visão Geral e Documentação Completa):
+https://luizihara.github.io/fiap.tcc/index.html
+
+Integrantes do Grupo:
+- Luiz Ihara (RM368484)
+- Filipe Fragoso (RM368500)
+- Daniel Caminha (RM366740)
+- Pedro Martins (RM368543)
+
+Agradecemos o acompanhamento e permanecemos à inteira disposição para eventuais esclarecimentos e orientações.
+
+Atenciosamente,
+Grupo CareerFlow AI
