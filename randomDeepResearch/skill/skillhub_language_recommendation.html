@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Ranking personalizado dos cursos de idiomas disponíveis no SkillHub." />
+    <title>Seu ranking de idiomas · SkillHub</title>
+    <style>
+      :root {
+        --ink: #10231e;
+        --muted: #60736e;
+        --paper: #f6f7f3;
+        --panel: rgba(255, 255, 255, 0.82);
+        --line: #dbe4df;
+        --green: #145c4b;
+        --green-2: #1f8067;
+        --mint: #ccebdc;
+        --yellow: #f3c969;
+        --coral: #ef7e66;
+        --shadow: 0 18px 50px rgba(23, 66, 52, 0.1);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 88% 6%, rgba(204, 235, 220, 0.85), transparent 25rem),
+          radial-gradient(circle at 5% 35%, rgba(243, 201, 105, 0.18), transparent 22rem),
+          var(--paper);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      .shell { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
+
+      header { padding: 58px 0 28px; }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--green);
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        width: 28px;
+        height: 3px;
+        border-radius: 99px;
+        background: var(--coral);
+        content: "";
+      }
+
+      h1 {
+        max-width: 760px;
+        margin: 16px 0 14px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2.7rem, 7vw, 5.8rem);
+        font-weight: 500;
+        letter-spacing: -0.07em;
+        line-height: 0.95;
+      }
+
+      h1 em { color: var(--green-2); font-style: normal; }
+
+      .intro {
+        max-width: 730px;
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(1rem, 2vw, 1.2rem);
+      }
+
+      .assumption {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        max-width: 850px;
+        margin: 26px 0 0;
+        padding: 15px 17px;
+        border: 1px solid rgba(20, 92, 75, 0.18);
+        border-radius: 14px;
+        background: rgba(204, 235, 220, 0.42);
+        color: #31544a;
+        font-size: 0.92rem;
+      }
+
+      .assumption strong { color: var(--green); white-space: nowrap; }
+
+      .recommendations {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin: 22px 0 48px;
+      }
+
+      .spotlight {
+        position: relative;
+        min-height: 220px;
+        padding: 24px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: 20px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .spotlight::after {
+        position: absolute;
+        right: -28px;
+        bottom: -42px;
+        width: 130px;
+        height: 130px;
+        border: 18px solid rgba(204, 235, 220, 0.7);
+        border-radius: 50%;
+        content: "";
+      }
+
+      .spotlight:nth-child(2)::after { border-color: rgba(243, 201, 105, 0.34); }
+      .spotlight:nth-child(3)::after { border-color: rgba(239, 126, 102, 0.28); }
+
+      .spotlight .label {
+        color: var(--green-2);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .spotlight h2 {
+        max-width: 290px;
+        margin: 13px 0 8px;
+        font-size: 1.2rem;
+        line-height: 1.15;
+      }
+
+      .spotlight p { position: relative; z-index: 1; max-width: 300px; margin: 0; color: var(--muted); font-size: 0.9rem; }
+
+      .spotlight .rank { position: absolute; top: 18px; right: 22px; color: var(--green); font-size: 2rem; font-weight: 800; opacity: 0.2; }
+
+      .table-section { padding-bottom: 72px; }
+
+      .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 18px; }
+      .section-heading h2 { margin: 0; font-size: clamp(1.6rem, 3vw, 2.35rem); letter-spacing: -0.04em; }
+      .section-heading p { max-width: 490px; margin: 0; color: var(--muted); font-size: 0.92rem; text-align: right; }
+
+      .toolbar {
+        display: grid;
+        grid-template-columns: minmax(200px, 1fr) 170px 190px auto;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+
+      input, select, button {
+        min-height: 44px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+
+      input, select { width: 100%; padding: 0 13px; }
+      input:focus, select:focus, button:focus { outline: 3px solid rgba(31, 128, 103, 0.2); outline-offset: 2px; }
+
+      button { padding: 0 14px; cursor: pointer; }
+      button:hover { border-color: var(--green-2); color: var(--green); }
+
+      .result-count { color: var(--muted); font-size: 0.84rem; text-align: right; white-space: nowrap; }
+
+      .table-wrap { overflow: auto; border: 1px solid var(--line); border-radius: 18px; background: rgba(255, 255, 255, 0.78); box-shadow: 0 10px 36px rgba(23, 66, 52, 0.06); }
+
+      table { width: 100%; min-width: 930px; border-collapse: collapse; }
+      th { padding: 13px 16px; border-bottom: 1px solid var(--line); background: #f1f5f1; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.08em; text-align: left; text-transform: uppercase; }
+      td { padding: 14px 16px; border-bottom: 1px solid #e7eeea; vertical-align: top; font-size: 0.9rem; }
+      tbody tr:last-child td { border-bottom: 0; }
+      tbody tr:hover { background: #f7fbf8; }
+
+      .rank-cell { width: 62px; color: var(--green); font-weight: 800; }
+      .course-name { max-width: 320px; font-weight: 750; line-height: 1.25; }
+      .course-id { display: block; margin-top: 4px; color: #8a9b96; font-size: 0.72rem; font-weight: 500; }
+      .provider { color: var(--muted); }
+      .format { display: inline-block; padding: 4px 8px; border-radius: 99px; background: #e8f4ee; color: var(--green); font-size: 0.73rem; font-weight: 750; white-space: nowrap; }
+      .format.live { background: #fff3d8; color: #795718; }
+      .hours { white-space: nowrap; }
+      .why { max-width: 300px; color: var(--muted); font-size: 0.83rem; }
+
+      footer { padding: 0 0 38px; color: var(--muted); font-size: 0.82rem; }
+      footer p { margin: 0; }
+
+      .empty { padding: 30px; color: var(--muted); text-align: center; }
+
+      @media (max-width: 800px) {
+        header { padding-top: 34px; }
+        .recommendations { grid-template-columns: 1fr; }
+        .spotlight { min-height: 170px; }
+        .section-heading { display: block; }
+        .section-heading p { margin-top: 8px; text-align: left; }
+        .toolbar { grid-template-columns: 1fr 1fr; }
+        .toolbar input { grid-column: 1 / -1; }
+        .result-count { text-align: left; }
+      }
+
+      @media (max-width: 480px) {
+        .shell { width: min(100% - 24px, 1180px); }
+        h1 { font-size: 3.3rem; }
+        .assumption { display: block; }
+        .assumption strong { display: block; margin-bottom: 5px; }
+        .toolbar { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <div class="eyebrow">SkillHub · language</div>
+        <h1>O idioma que pode mover seu próximo <em>salto</em>.</h1>
+        <p class="intro">Li os 63 itens disponíveis e organizei uma trilha de decisão: primeiro o que tende a gerar mais utilidade prática, depois as alternativas por idioma, formato e profundidade.</p>
+        <div class="assumption">
+          <strong>Como personalizei</strong>
+          <span>O arquivo não informa seu objetivo final. Então usei como hipótese uma pessoa lusófona buscando retorno profissional e autonomia de comunicação. Por isso, inglês, contexto de negócios, conversação ao vivo e conteúdo amplo sobem no ranking. “Pior” aqui significa menor prioridade geral para essa hipótese — não menor qualidade.</span>
+        </div>
+      </header>
+
+      <section class="recommendations" aria-label="Três recomendações principais">
+        <article class="spotlight">
+          <span class="rank">01</span>
+          <div class="label">Minha escolha principal</div>
+          <h2>Inglês — Business: Vídeo-aula, Rápida e Onde Você Estiver!</h2>
+          <p>Fluency Academy · 150h · sob demanda. É a combinação mais completa de idioma prioritário, contexto profissional e volume de estudo.</p>
+        </article>
+        <article class="spotlight">
+          <span class="rank">02</span>
+          <div class="label">Para destravar a fala</div>
+          <h2>Inglês · Cambly</h2>
+          <p>6h ao vivo. Menos profundidade, mas alto valor imediato para transformar conhecimento passivo em conversa real.</p>
+        </article>
+        <article class="spotlight">
+          <span class="rank">04</span>
+          <div class="label">Para criar rotina</div>
+          <h2>Inglês — Prática Imersiva 24h e Aulas em Grupo Ilimitadas</h2>
+          <p>Berlitz · sob demanda. Uma opção forte para criar rotina, exposição e prática recorrente sem depender de um curso curto.</p>
+        </article>
+      </section>
+
+      <section class="table-section" aria-labelledby="ranking-title">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Mapa completo</div>
+            <h2 id="ranking-title">Do melhor encaixe ao menor</h2>
+          </div>
+          <p>Use a busca e os filtros para transformar o ranking geral em uma shortlist que faça sentido para seu momento.</p>
+        </div>
+
+        <div class="toolbar" aria-label="Filtros do ranking">
+          <input id="search" type="search" placeholder="Buscar curso, idioma ou instituição" aria-label="Buscar curso, idioma ou instituição" />
+          <select id="language" aria-label="Filtrar por idioma"><option value="">Todos os idiomas</option></select>
+          <select id="format" aria-label="Filtrar por formato"><option value="">Todos os formatos</option><option value="live">Ao vivo</option><option value="on-demand">Sob demanda</option></select>
+          <button id="reset" type="button">Limpar filtros</button>
+          <div id="result-count" class="result-count" aria-live="polite"></div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Curso</th>
+                <th>Instituição</th>
+                <th>Duração</th>
+                <th>Formato</th>
+                <th>Por que está aqui</th>
+              </tr>
+            </thead>
+            <tbody id="ranking-body"></tbody>
+          </table>
+          <div id="empty" class="empty" hidden>Nenhum curso corresponde aos filtros atuais.</div>
+        </div>
+      </section>
+
+      <footer>
+        <p>Base: <code>output/skillhub_language.md</code> · 63 itens · todos marcados como cobertos pelo plano. O ranking usa somente os dados disponíveis no arquivo e uma leitura editorial explícita.</p>
+      </footer>
+    </main>
+
+    <script>
+      const courses = [
+        [12847421, "Inglês - Business: Vídeo-aula, Rápida e Onde Você Estiver!", "Fluency Academy", "150", "on-demand", "Inglês + negócios + 150h: melhor combinação para retorno profissional."],
+        [7496739, "Inglês", "Cambly", "6", "live", "Prática oral ao vivo: ótimo para começar a falar já."],
+        [12847417, "Inglês", "Fluency Academy", "12", "live", "Curso curto e ao vivo para criar ritmo de conversação."],
+        [11327806, "Inglês - Prática Imersiva 24h e Aulas em Grupo Ilimitadas", "Berlitz", "Não informado", "on-demand", "Imersão e grupos ilimitados favorecem consistência e fala."],
+        [11327807, "Inglês - Prática Imersiva 24h", "Berlitz", "Não informado", "on-demand", "Exposição imersiva; sobe pela flexibilidade, apesar da duração não informada."],
+        [12847415, "Inglês Avançado", "English Pass", "30", "live", "Boa escolha se você já está em nível intermediário e quer avançar."],
+        [3971657, "CNA Go - Aulas em Grupo + Aulas Online Ilimitadas", "CNA GO", "1000", "on-demand", "Volume e acesso amplo para transformar idioma em hábito."],
+        [7496710, "Plataforma de Inglês - Vídeo-aula", "Fluentify", "1000", "on-demand", "Grande biblioteca; excelente para autonomia, menos direcionada a negócios."],
+        [12847414, "Inglês Intermediário", "English Pass", "30", "live", "Rota objetiva para consolidar a base antes do avançado."],
+        [11327804, "Inglês", "Fluentify", "26", "live", "Carga ao vivo equilibrada para ganhar prática com orientação."],
+        [12847525, "Inglês", "CNA", "32", "live", "Carga ao vivo sólida e mais estruturada que opções muito curtas."],
+        [12847422, "Inglês", "Cel.lep", "33", "live", "Boa carga ao vivo para manter progressão consistente."],
+        [12846394, "Inglês", "UpCIV", "16", "live", "Opção compacta para testar compromisso com o idioma."],
+        [13018096, "Inglês", "Fluentia Idiomas", "16", "live", "Alternativa ao vivo de carga intermediária."],
+        [7236434, "Inglês", "vc_tb", "26", "live", "Carga relevante ao vivo; fica abaixo das opções com contexto mais claro."],
+        [13132879, "Inglês - Coaching", "Scopum Idiomas", "15", "live", "Coaching pode acelerar foco, mas a carga informada é menor."],
+        [12847416, "Inglês Iniciante", "English Pass", "30", "live", "Boa porta de entrada se a base ainda estiver começando."],
+        [7753167, "Espanhol - Prática Imersiva 24h e chat em Grupo ao vivo", "Berlitz", "Não informado", "on-demand", "Melhor rota de espanhol para combinar imersão e contato com grupo."],
+        [7753161, "Espanhol - Prática Imersiva 24h", "Berlitz", "Não informado", "on-demand", "Imersão forte para um segundo idioma próximo do português."],
+        [2319182, "Plataforma de Espanhol - Vídeo-aula", "Fluentify", "1000", "on-demand", "Muito conteúdo e flexibilidade para construir uma segunda língua."],
+        [5218069, "Espanhol na Medida: Vídeo-aula, Rápida e Onde Você Estiver!", "Fluency Academy", "150", "on-demand", "Trilha extensa e flexível para estudar espanhol com autonomia."],
+        [7494514, "Espanhol", "CNA", "80", "live", "Carga ao vivo consistente; bom equilíbrio entre prática e estrutura."],
+        [11317152, "Espanhol", "Fluency Academy", "55", "live", "Carga ao vivo acima da média para um idioma de alta proximidade."],
+        [12847423, "Espanhol", "Cel.lep", "33", "live", "Boa carga ao vivo para conversação e manutenção de ritmo."],
+        [7336916, "Espanhol", "Aliança América", "24", "live", "Opção ao vivo objetiva para iniciar o segundo idioma."],
+        [7236436, "Espanhol", "vc_tb", "26", "live", "Carga ao vivo equilibrada para praticar um segundo idioma."],
+        [7238185, "Espanhol", "Fluentify", "26", "live", "Carga ao vivo equilibrada e idioma de alta utilidade regional."],
+        [7236430, "Inglês e Espanhol", "vc_tb", "26", "live", "Dois idiomas no mesmo item, mas menor foco por idioma."],
+        [12846395, "Espanhol", "UpCIV", "16", "live", "Formato curto para experimentar espanhol com orientação."],
+        [13132877, "Espanhol - Coaching", "Scopum Idiomas", "15", "live", "Acompanhamento pode ajudar no foco, com carga enxuta."],
+        [12289038, "Espanhol", "Wizard", "13", "live", "Alternativa compacta de aula ao vivo."],
+        [8483906, "Aula Particular de Espanhol + Plataforma + Nivelamento", "Preply", "3", "live", "Personalização e nivelamento são valiosos, mas há poucas horas."],
+        [7753165, "Francês - Prática Imersiva 24h e chat em Grupo ao vivo", "Berlitz", "Não informado", "on-demand", "Melhor opção de francês para combinar imersão e interação."],
+        [7753158, "Francês - Prática Imersiva 24h", "Berlitz", "Não informado", "on-demand", "Imersão de francês com flexibilidade, sem duração detalhada."],
+        [5218071, "Francês na Medida: Vídeo-aula, Rápida e Onde Você Estiver!", "Fluency Academy", "150", "on-demand", "Trilha profunda e flexível para um idioma de maior investimento."],
+        [12846396, "Francês", "UpCIV", "16", "live", "Curso ao vivo compacto para experimentar francês."],
+        [13132878, "Francês - Coaching", "Scopum Idiomas", "15", "live", "Foco guiado, com menos volume de horas."],
+        [8483895, "Aula Particular de Francês + Nivelamento", "Preply", "5", "live", "Personalização e nivelamento ajudam, mas o pacote é curto."],
+        [7753164, "Alemão - Prática Imersiva 24h e chat em Grupo ao vivo", "Berlitz", "Não informado", "on-demand", "Boa experiência de imersão e grupo para um idioma mais exigente."],
+        [7753160, "Alemão - Prática Imersiva 24h", "Berlitz", "Não informado", "on-demand", "Imersão flexível; exige mais constância do que idiomas próximos."],
+        [5218070, "Alemão na Medida: Vídeo-aula, Rápida e Onde Você Estiver!", "Fluency Academy", "150", "on-demand", "Volume alto e flexibilidade para uma meta específica de alemão."],
+        [8483877, "Aula Particular de Alemão", "Preply", "5", "live", "Boa personalização para experimentar antes de assumir uma trilha longa."],
+        [5218075, "Italiano na Medida: Vídeo-aula, Rápida e Onde Você Estiver!", "Fluency Academy", "150", "on-demand", "Trilha extensa para um idioma próximo, mas menos prioritário na hipótese."],
+        [8483908, "Aula Particular de Italiano", "Preply", "3", "live", "Aula individual útil para testar objetivo, com pacote pequeno."],
+        [5218068, "Coreano na Medida: Vídeo-aula, Rápida e Onde Você Estiver!", "Fluency Academy", "150", "on-demand", "Volume alto para uma meta cultural ou profissional bem definida."],
+        [8483893, "Aula Particular de Coreano", "Preply", "5", "live", "Personalização ajuda em um idioma distante, mas o pacote é inicial."],
+        [5218076, "Japonês na Medida: Vídeo-aula, Rápida e Onde Você Estiver!", "Fluency Academy", "150", "on-demand", "Trilha longa para uma meta específica; exige compromisso maior."],
+        [10964188, "Aula Particular de Japonês", "Preply", "10", "live", "Mais horas individuais que outras aulas curtas para testar o idioma."],
+        [5218077, "Mandarim: na Medida: Vídeo-aula, Rápida e Onde Você Estiver!", "Fluency Academy", "150", "on-demand", "Conteúdo amplo para uma escolha de longo prazo e objetivo claro."],
+        [8483879, "Aula Particular de Chinês", "Preply", "5", "live", "Acompanhamento individual pode reduzir a fricção inicial."],
+        [8483873, "Aula Particular de Árabe", "Preply", "5", "live", "Boa porta de entrada personalizada para uma meta bastante específica."],
+        [8483886, "Aula Particular de Holandês", "Preply", "5", "live", "Vale se houver destino ou projeto ligado ao idioma."],
+        [8483884, "Aula Particular de Hebraico", "Preply", "5", "live", "Opção personalizada para um objetivo específico."],
+        [8483896, "Aula Particular de Indonésio", "Preply", "5", "live", "Curso de experimentação; prioridade baixa sem objetivo definido."],
+        [8483903, "Aula Particular de Polonês", "Preply", "5", "live", "Aula individual para uma necessidade ou interesse particular."],
+        [8483904, "Aula Particular de Sueco", "Preply", "5", "live", "Faz sentido sobretudo com plano de viagem, estudo ou mudança."],
+        [8483871, "Aula Particular de Dinamarquês", "Preply", "5", "live", "Boa personalização, mas baixa prioridade na hipótese geral."],
+        [8483883, "Aula Particular de Grego", "Preply", "5", "live", "Útil para uma meta específica; poucas horas para criar fluência."],
+        [8483874, "Aula Particular de Turco", "Preply", "5", "live", "Experimentação personalizada para um objetivo particular."],
+        [8483885, "Aula Particular de Norueguês", "Preply", "5", "live", "Mais interessante com um projeto ligado à Noruega."],
+        [8483872, "Aula Particular de Indiano", "Preply", "5", "live", "Interpretei “Indiano” como o nome exibido no catálogo; confirme o idioma exato antes de iniciar."],
+        [13132876, "Português - Coaching", "Scopum Idiomas", "15", "live", "Só sobe se o objetivo for aperfeiçoar português, escrita ou apresentação."],
+        [8483907, "Aula Particular de Português", "Preply", "3", "live", "Pode ser muito útil para uma necessidade pontual, mas não para ampliar repertório de idiomas."],
+      ];
+
+      const languageNames = ["Inglês", "Espanhol", "Francês", "Alemão", "Italiano", "Coreano", "Japonês", "Mandarim", "Chinês", "Árabe", "Holandês", "Hebraico", "Indonésio", "Polonês", "Sueco", "Dinamarquês", "Turco", "Grego", "Norueguês", "Português", "Indiano"];
+      const getLanguage = (name) => languageNames.find((item) => name.includes(item)) || "Outro";
+
+      const rows = courses.map((course, index) => ({
+        rank: index + 1,
+        id: course[0],
+        name: course[1],
+        institution: course[2],
+        hours: course[3],
+        format: course[4],
+        why: course[5],
+        language: getLanguage(course[1]),
+      }));
+
+      const body = document.querySelector("#ranking-body");
+      const empty = document.querySelector("#empty");
+      const search = document.querySelector("#search");
+      const language = document.querySelector("#language");
+      const format = document.querySelector("#format");
+      const resultCount = document.querySelector("#result-count");
+
+      const normalize = (value) => value.toLocaleLowerCase("pt-BR").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      const languageOptions = [...new Set(rows.map((row) => row.language))].sort((a, b) => a.localeCompare(b, "pt-BR"));
+      languageOptions.forEach((item) => language.insertAdjacentHTML("beforeend", `<option value="${item}">${item}</option>`));
+
+      function render() {
+        const query = normalize(search.value.trim());
+        const selectedLanguage = language.value;
+        const selectedFormat = format.value;
+        const filtered = rows.filter((row) => {
+          const haystack = normalize(`${row.name} ${row.institution} ${row.language}`);
+          return (!query || haystack.includes(query)) && (!selectedLanguage || row.language === selectedLanguage) && (!selectedFormat || row.format === selectedFormat);
+        });
+
+        body.innerHTML = filtered.map((row) => `
+          <tr>
+            <td class="rank-cell">${String(row.rank).padStart(2, "0")}</td>
+            <td><div class="course-name">${row.name}</div><span class="course-id">ID ${row.id}</span></td>
+            <td class="provider">${row.institution}</td>
+            <td class="hours">${row.hours === "Não informado" ? row.hours : `${row.hours}h`}</td>
+            <td><span class="format ${row.format === "live" ? "live" : ""}">${row.format === "live" ? "Ao vivo" : "Sob demanda"}</span></td>
+            <td class="why">${row.why}</td>
+          </tr>
+        `).join("");
+
+        empty.hidden = filtered.length !== 0;
+        resultCount.textContent = `${filtered.length} de ${rows.length} cursos`;
+      }
+
+      [search, language, format].forEach((control) => control.addEventListener("input", render));
+      document.querySelector("#reset").addEventListener("click", () => {
+        search.value = "";
+        language.value = "";
+        format.value = "";
+        render();
+        search.focus();
+      });
+      render();
+    </script>
+  </body>
+</html>

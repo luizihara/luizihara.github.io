@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Curadoria visual de cursos do SkillHub para o próximo passo profissional." />
+    <title>A constelação de cursos · SkillHub</title>
+    <style>
+      :root {
+        --ink: #f7f5ec;
+        --muted: #aeb9b0;
+        --night: #101b26;
+        --night-2: #172733;
+        --line: rgba(247, 245, 236, .14);
+        --lime: #d7ee87;
+        --orange: #ff9a67;
+        --blue: #8bd7e5;
+        --violet: #c9a7ff;
+        --card: rgba(255,255,255,.065);
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 84% 12%, rgba(139, 215, 229, .18), transparent 23rem),
+          radial-gradient(circle at 12% 28%, rgba(201, 167, 255, .13), transparent 25rem),
+          var(--night);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      .shell { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
+      header { padding: 54px 0 26px; }
+      .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--lime); font-size: .74rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+      .eyebrow::before { width: 25px; height: 3px; border-radius: 99px; background: var(--orange); content: ""; }
+      h1 { max-width: 850px; margin: 17px 0 15px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(3rem, 8vw, 7.2rem); font-weight: 500; letter-spacing: -.08em; line-height: .88; }
+      h1 em { color: var(--lime); font-style: normal; }
+      .intro { max-width: 760px; margin: 0; color: var(--muted); font-size: clamp(1rem, 2vw, 1.18rem); }
+      .thesis { display: grid; grid-template-columns: auto 1fr; gap: 13px; max-width: 900px; margin-top: 25px; padding: 16px 18px; border: 1px solid rgba(215,238,135,.25); border-radius: 15px; background: rgba(215,238,135,.08); color: #d9e3d9; font-size: .92rem; }
+      .thesis strong { color: var(--lime); white-space: nowrap; }
+
+      .route { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 26px 0 54px; }
+      .route-card { min-height: 154px; padding: 18px; border: 1px solid var(--line); border-radius: 17px; background: linear-gradient(155deg, rgba(255,255,255,.1), rgba(255,255,255,.035)); }
+      .route-card .number { color: var(--orange); font-size: .76rem; font-weight: 850; letter-spacing: .14em; }
+      .route-card h2 { margin: 23px 0 5px; font-size: 1.02rem; }
+      .route-card p { margin: 0; color: var(--muted); font-size: .78rem; }
+
+      .plan { display: grid; grid-template-columns: .75fr 1.25fr; gap: 20px; align-items: stretch; margin-bottom: 56px; }
+      .plan-copy, .plan-steps { border: 1px solid var(--line); border-radius: 20px; background: rgba(255,255,255,.055); }
+      .plan-copy { padding: 27px; }
+      .plan-copy h2 { max-width: 330px; margin: 0 0 12px; font-family: Georgia, "Times New Roman", serif; font-size: 2.25rem; font-weight: 500; letter-spacing: -.05em; line-height: 1; }
+      .plan-copy p { margin: 0; color: var(--muted); font-size: .9rem; }
+      .plan-steps { display: grid; grid-template-columns: repeat(4, 1fr); padding: 19px; }
+      .step { padding: 8px 15px; border-left: 1px solid var(--line); }
+      .step:first-child { border-left: 0; }
+      .step b { display: block; margin-bottom: 16px; color: var(--lime); font-size: .75rem; }
+      .step strong { display: block; margin-bottom: 7px; font-size: .88rem; line-height: 1.2; }
+      .step span { color: var(--muted); font-size: .77rem; }
+
+      .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 18px; }
+      .section-heading h2 { margin: 0; font-size: clamp(1.7rem, 4vw, 2.8rem); letter-spacing: -.06em; }
+      .section-heading p { max-width: 430px; margin: 0; color: var(--muted); font-size: .88rem; text-align: right; }
+      .filters { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 19px; }
+      button { border: 1px solid var(--line); border-radius: 999px; padding: 8px 13px; background: transparent; color: var(--muted); font: inherit; font-size: .78rem; cursor: pointer; }
+      button:hover, button.active { border-color: var(--lime); background: rgba(215,238,135,.11); color: var(--lime); }
+      .count { margin-left: auto; align-self: center; color: var(--muted); font-size: .8rem; }
+
+      .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; padding-bottom: 68px; }
+      .course { position: relative; min-height: 240px; padding: 21px; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--card); transition: transform .2s ease, border-color .2s ease, background .2s ease; }
+      .course:hover { transform: translateY(-3px); border-color: rgba(215,238,135,.55); background: rgba(255,255,255,.1); }
+      .course::after { position: absolute; right: -34px; bottom: -45px; width: 115px; height: 115px; border: 15px solid rgba(139,215,229,.13); border-radius: 50%; content: ""; }
+      .course:nth-child(4n+2)::after { border-color: rgba(255,154,103,.14); }
+      .course:nth-child(4n+3)::after { border-color: rgba(201,167,255,.14); }
+      .course:nth-child(4n+4)::after { border-color: rgba(215,238,135,.13); }
+      .course-top { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 24px; }
+      .path { color: var(--lime); font-size: .69rem; font-weight: 850; letter-spacing: .11em; text-transform: uppercase; }
+      .hours { color: var(--muted); font-size: .74rem; white-space: nowrap; }
+      .course h3 { max-width: 320px; margin: 0 0 10px; font-size: 1.02rem; line-height: 1.18; }
+      .institution { margin: 0 0 14px; color: var(--orange); font-size: .82rem; font-weight: 700; }
+      .course-note { position: relative; z-index: 1; max-width: 330px; margin: 0; color: var(--muted); font-size: .79rem; }
+      .empty { grid-column: 1 / -1; padding: 35px; border: 1px dashed var(--line); border-radius: 18px; color: var(--muted); text-align: center; }
+      footer { padding: 0 0 36px; color: var(--muted); font-size: .78rem; }
+
+      @media (max-width: 900px) {
+        .route, .grid { grid-template-columns: repeat(2, 1fr); }
+        .plan { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 620px) {
+        .shell { width: min(100% - 24px, 1180px); }
+        header { padding-top: 34px; }
+        h1 { font-size: 3.7rem; }
+        .thesis { display: block; }
+        .thesis strong { display: block; margin-bottom: 6px; }
+        .route, .grid, .plan-steps { grid-template-columns: 1fr; }
+        .route-card { min-height: auto; }
+        .plan-steps { gap: 11px; }
+        .step { padding: 13px 0; border-top: 1px solid var(--line); border-left: 0; }
+        .step:first-child { border-top: 0; }
+        .section-heading { display: block; }
+        .section-heading p { margin-top: 8px; text-align: left; }
+        .count { margin-left: 0; width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <div class="eyebrow">SkillHub · course · 34.146 opções</div>
+        <h1>Seu próximo curso não é um curso. É uma <em>sequência</em>.</h1>
+        <p class="intro">Eu atravessei um catálogo enorme e montei uma pequena constelação para o que parece ser seu momento: comunicar melhor, liderar com mais intenção, ganhar alcance em inglês e manter uma porta aberta para tecnologia.</p>
+        <div class="thesis"><strong>Minha leitura sobre você</strong><span>Você não está procurando apenas “mais conteúdo”. Está juntando peças: idioma, comunicação, mentoria e formação. Esta página transforma isso em uma trilha curta o bastante para começar e ampla o bastante para não te prender a uma única identidade profissional.</span></div>
+      </header>
+
+      <section class="route" aria-label="As quatro órbitas da curadoria">
+        <article class="route-card"><div class="number">01 · NÚCLEO</div><h2>Fale com clareza</h2><p>Assertividade, oratória, feedback e persuasão.</p></article>
+        <article class="route-card"><div class="number">02 · COMANDO</div><h2>Lidere o movimento</h2><p>Autoliderança, times, produtividade e influência.</p></article>
+        <article class="route-card"><div class="number">03 · ALCANCE</div><h2>Amplie a sua voz</h2><p>Inglês profissional para sair da bolha local.</p></article>
+        <article class="route-card"><div class="number">04 · HORIZONTE</div><h2>Abra uma segunda frente</h2><p>Cloud e JavaScript como curiosidade técnica com potencial.</p></article>
+      </section>
+
+      <section class="plan" aria-labelledby="plan-title">
+        <div class="plan-copy">
+          <div class="eyebrow">Ritual de 30 dias</div>
+          <h2 id="plan-title">Uma semana por vez.</h2>
+          <p>Se eu tivesse que te entregar uma sequência de início, seria esta. O resto da constelação fica disponível quando surgir energia — não como uma cobrança.</p>
+        </div>
+        <div class="plan-steps">
+          <div class="step"><b>SEMANA 01</b><strong>Comunicação Assertiva</strong><span>Base para dizer, pedir e discordar.</span></div>
+          <div class="step"><b>SEMANA 02</b><strong>Comunicação Eficaz</strong><span>Reuniões, e-mails e apresentações.</span></div>
+          <div class="step"><b>SEMANA 03</b><strong>Autoliderança</strong><span>Transformar intenção em rotina.</span></div>
+          <div class="step"><b>SEMANA 04</b><strong>Inglês profissional</strong><span>Levar sua voz para outros contextos.</span></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="collection-title">
+        <div class="section-heading">
+          <div><div class="eyebrow">A coleção</div><h2 id="collection-title">20 cursos para guardar</h2></div>
+          <p>Não estão em ordem de “melhor” para “pior”. São peças com funções diferentes dentro da sua possível trajetória.</p>
+        </div>
+        <div class="filters" aria-label="Filtrar a coleção">
+          <button class="active" data-filter="all" type="button">Todos</button>
+          <button data-filter="nucleo" type="button">Núcleo</button>
+          <button data-filter="comando" type="button">Comando</button>
+          <button data-filter="alcance" type="button">Alcance</button>
+          <button data-filter="horizonte" type="button">Horizonte</button>
+          <span id="count" class="count" aria-live="polite"></span>
+        </div>
+        <div id="grid" class="grid"></div>
+      </section>
+
+      <footer>
+        <p>Base: <code>output/skillhub_course.md</code>. Curadoria feita a partir dos títulos, instituições, formatos e durações do catálogo; não é uma avaliação de qualidade institucional.</p>
+      </footer>
+    </main>
+
+    <script>
+      const courses = [
+        { id: "5101619", name: "Comunicação Assertiva", institution: "FM2S", hours: "8", path: "nucleo", note: "O primeiro músculo: colocar uma ideia no mundo sem perder clareza nem respeito." },
+        { id: "5105822", name: "Comunicação Eficaz: Técnicas para Reuniões, Emails, Apresentações + Certificado", institution: "Aprende Aí", hours: "4", path: "nucleo", note: "A ponte entre saber se comunicar e ser entendido no trabalho cotidiano." },
+        { id: "5092742", name: "Comunicação e Oratória", institution: "Conquer Assinaturas", hours: "10", path: "nucleo", note: "Para transformar presença, estrutura e fala em uma ferramenta profissional." },
+        { id: "5105836", name: "Comunicação 5.0: da Oratória ao Feedback", institution: "Aprende Aí", hours: "4", path: "nucleo", note: "Une a fala pública ao momento mais delicado: devolver e receber feedback." },
+        { id: "5101620", name: "Comunicação Não Violenta", institution: "FM2S", hours: "8", path: "nucleo", note: "Uma camada de escuta e negociação para conversas que não cabem em scripts." },
+        { id: "7929589", name: "Persuasive Communication", institution: "Coursera for Business · IESE Business School", hours: "19", path: "nucleo", note: "Quando clareza precisa virar adesão, influência e movimento." },
+        { id: "5092737", name: "Argumentação Persuasiva", institution: "Conquer Assinaturas", hours: "1", path: "nucleo", note: "Um módulo curto para testar a prática de defender ideias com mais estrutura." },
+        { id: "12298777", name: "Comunicação Estratégica na Liderança: como Engajar e Influenciar Pessoas", institution: "Alura", hours: "8", path: "comando", note: "O ponto em que comunicação deixa de ser habilidade pessoal e vira alavanca de time." },
+        { id: "1771059", name: "Lideranças do Futuro", institution: "Perestroika", hours: "4", path: "comando", note: "Uma provocação compacta para pensar liderança além do cargo." },
+        { id: "12298935", name: "Autoliderança: Planejando o Desenvolvimento Pessoal", institution: "Alura", hours: "8", path: "comando", note: "Sem autogestão, até o melhor plano de estudos vira uma aba esquecida." },
+        { id: "5489109", name: "Gestão de Times e Autoliderança", institution: "Tera", hours: "8", path: "comando", note: "Conecta o governo de si ao cuidado com o ritmo de outras pessoas." },
+        { id: "5105849", name: "Hiper-produtividade e Autogestão para Tarefas e Projetos", institution: "Aprende Aí · com Leandro Serain, da IBM", hours: "2", path: "comando", note: "Um empurrão operacional para tirar projetos da cabeça e colocá-los em andamento." },
+        { id: "618438", name: "Autogestão para o Sucesso", institution: "NRicci", hours: "5", path: "comando", note: "Outra porta de entrada para transformar intenção em cadência." },
+        { id: "5104247", name: "Inteligência Emocional para Tempos Remotos", institution: "Descomplica", hours: "30", path: "comando", note: "Uma trilha mais longa para trabalhar energia, limites e presença no trabalho." },
+        { id: "5497036", name: "Speak English Professionally: In Person, Online & On the Phone", institution: "Coursera for Business · Georgia Institute of Technology", hours: "16", path: "alcance", note: "A continuação lógica da sua curadoria de idiomas: usar inglês em situações profissionais." },
+        { id: "7644296", name: "Inglês Fundamental", institution: "UNIVANGUARD", hours: "60", path: "alcance", note: "Base mais extensa caso você queira consolidar o idioma antes da etapa profissional." },
+        { id: "11735220", name: "Propósito de vida", institution: "Pecege", hours: "9", path: "alcance", note: "Não é produtividade: é decidir para onde vale a pena levar toda essa energia." },
+        { id: "7834934", name: "Cloud Computing Fundamentals", institution: "Coursera for Business · Birla Institute of Technology & Science, Pilani", hours: "136", path: "horizonte", note: "Uma aposta de horizonte: tecnologia suficiente para abrir novas conversas e possibilidades." },
+        { id: "5092747", name: "Javascript Básico", institution: "Conquer Assinaturas", hours: "25", path: "horizonte", note: "Um experimento concreto para entender a lógica por trás de produtos digitais." },
+        { id: "5092782", name: "PNL", institution: "Conquer Assinaturas", hours: "10", path: "horizonte", note: "A órbita mais experimental da seleção: explore se a curiosidade falar mais alto." }
+      ];
+
+      const pathNames = { nucleo: "Núcleo", comando: "Comando", alcance: "Alcance", horizonte: "Horizonte" };
+      const grid = document.querySelector("#grid");
+      const count = document.querySelector("#count");
+      const escapeHtml = (value) => String(value || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+
+      function render(filter) {
+        const visible = filter === "all" ? courses : courses.filter((course) => course.path === filter);
+        grid.innerHTML = visible.map((course) => "<article class='course'><div class='course-top'><span class='path'>" + escapeHtml(pathNames[course.path]) + "</span><span class='hours'>" + escapeHtml(course.hours) + "h</span></div><h3>" + escapeHtml(course.name) + "</h3><p class='institution'>" + escapeHtml(course.institution) + "</p><p class='course-note'>" + escapeHtml(course.note) + "</p></article>").join("");
+        count.textContent = visible.length + " cursos na órbita";
+        if (!visible.length) grid.innerHTML = "<div class='empty'>Nenhum curso nesta órbita.</div>";
+      }
+
+      document.querySelectorAll("[data-filter]").forEach((button) => button.addEventListener("click", () => {
+        document.querySelectorAll("[data-filter]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        render(button.dataset.filter);
+      }));
+      render("all");
+    </script>
+  </body>
+</html>
