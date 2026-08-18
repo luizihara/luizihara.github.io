@@ -581,19 +581,19 @@
             color: var(--badge-bg);
         }
 
-        .project-mini-card.transformation-feature {
+        .project-mini-card.career-feature {
             position: relative;
             isolation: isolate;
             min-height: 220px;
             overflow: hidden;
-            color: #f4f5ff;
-            border-color: rgba(255, 232, 31, 0.52);
-            background: #03040a;
-            box-shadow: inset 0 0 50px rgba(105, 217, 255, 0.06);
+            color: #e2e8f0;
+            border-color: rgba(99, 102, 241, 0.55);
+            background: #0f172a;
+            box-shadow: inset 0 0 60px rgba(99, 102, 241, 0.09);
         }
 
-        .transformation-feature::before,
-        .transformation-feature::after {
+        .career-feature::before,
+        .career-feature::after {
             content: "";
             position: absolute;
             inset: 0;
@@ -601,42 +601,139 @@
             pointer-events: none;
         }
 
-        .transformation-feature::before {
-            background: url('fiap.transformacaomodelosdenegocio/og.png') center / cover no-repeat;
-            opacity: 0.5;
-            transition: transform 0.55s ease, opacity 0.55s ease;
+        .career-feature::before {
+            background:
+                radial-gradient(circle at 8% 0%, rgba(79, 70, 229, 0.34), transparent 40%),
+                radial-gradient(circle at 78% 8%, rgba(6, 182, 212, 0.2), transparent 35%),
+                radial-gradient(circle at 100% 100%, rgba(126, 34, 206, 0.22), transparent 45%);
         }
 
-        .transformation-feature::after {
+        .career-feature::after {
             z-index: -1;
-            background: linear-gradient(90deg, rgba(3, 4, 10, 0.98) 0%, rgba(3, 4, 10, 0.86) 46%, rgba(3, 4, 10, 0.2) 100%);
+            opacity: 0.22;
+            background-image:
+                linear-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+            background-size: 30px 30px;
+            mask-image: linear-gradient(90deg, transparent 0%, black 58%, black 100%);
         }
 
-        .transformation-feature .project-feature-title {
-            max-width: 620px;
-            color: #ffe81f;
+        .career-feature .project-feature-title,
+        .career-feature .project-feature-copy,
+        .career-feature .project-feature-meta {
+            max-width: calc(100% - 330px);
+        }
+
+        .career-feature .project-feature-title {
             font-size: 1.28rem;
+            color: #a5b4fc;
+            background: linear-gradient(90deg, #c7d2fe, #67e8f9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .transformation-feature .project-feature-copy {
-            max-width: 640px;
-            color: #e0e4f5;
+        .career-feature .project-feature-badge {
+            color: #a5b4fc;
+            border-color: rgba(129, 140, 248, 0.55);
+            background: rgba(99, 102, 241, 0.12);
         }
 
-        .transformation-feature .project-feature-meta {
-            color: #9ee8ff;
+        .career-feature .project-feature-copy {
+            color: #cbd5e1;
         }
 
-        .project-mini-card.transformation-feature:hover {
-            color: #f4f5ff;
-            border-color: #ffe81f;
-            background: #03040a;
-            box-shadow: 0 14px 38px rgba(0, 0, 0, 0.35), 0 0 24px rgba(255, 232, 31, 0.12);
+        .career-feature .project-feature-meta {
+            color: #67e8f9;
         }
 
-        .transformation-feature:hover::before {
-            opacity: 0.68;
-            transform: scale(1.035);
+        .project-mini-card.career-feature:hover {
+            color: #e2e8f0;
+            border-color: #818cf8;
+            background: #111b32;
+            box-shadow: 0 14px 38px rgba(15, 23, 42, 0.38), 0 0 28px rgba(99, 102, 241, 0.18);
+        }
+
+        .career-feature-ui {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            bottom: 24px;
+            width: 278px;
+            padding: 18px;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            background: rgba(15, 23, 42, 0.62);
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            pointer-events: none;
+        }
+
+        .career-ui-head {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .career-ui-head i {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #6366f1;
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.8);
+        }
+
+        .career-ui-head b {
+            margin-left: auto;
+            color: #64748b;
+            font-size: 0.58rem;
+            letter-spacing: 0.1em;
+        }
+
+        .career-ui-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .career-ui-body i {
+            display: block;
+            height: 8px;
+            border-radius: 999px;
+            background: rgba(148, 163, 184, 0.16);
+        }
+
+        .career-ui-body i:nth-child(1) { width: 76%; }
+        .career-ui-body i:nth-child(2) { width: 48%; }
+        .career-ui-body i:nth-child(3) {
+            width: 100%;
+            height: 42px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 8px;
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.18), rgba(6, 182, 212, 0.1));
+        }
+
+        .career-ui-foot {
+            color: #67e8f9;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        @media (max-width: 700px) {
+            .career-feature .project-feature-title,
+            .career-feature .project-feature-copy,
+            .career-feature .project-feature-meta {
+                max-width: 100%;
+            }
+
+            .career-feature-ui {
+                display: none;
+            }
         }
 
         /* i18n Logic - Classes */
@@ -853,6 +950,22 @@
             .project-feature-badge {
                 border: none !important;
                 padding: 0 !important;
+            }
+
+            .career-feature,
+            .career-feature .project-feature-copy,
+            .career-feature .project-feature-meta {
+                color: #000000 !important;
+            }
+
+            .career-feature .project-feature-title {
+                color: #000000 !important;
+                background: none !important;
+                -webkit-text-fill-color: #000000 !important;
+            }
+
+            .career-feature-ui {
+                display: none !important;
             }
 
             .project-grid {
@@ -1609,27 +1722,32 @@
                 </div>
 
                 <div class="project-grid">
-                    <a href="fiap.transformacaomodelosdenegocio/index.html"
-                        class="project-mini-card project-feature-card transformation-feature"
-                        aria-label="Abrir A Força da Transformação">
-                        <span class="project-feature-title lang-pt">🚀 A Força da Transformação</span>
-                        <span class="project-feature-title lang-en">🚀 The Force of Transformation</span>
-                        <span class="project-feature-title lang-es">🚀 La Fuerza de la Transformación</span>
-                        <span class="project-feature-title lang-it">🚀 La Forza della Trasformazione</span>
+                    <a href="fiap.tcc/index.html"
+                        class="project-mini-card project-feature-card career-feature"
+                        aria-label="Abrir TCC Career AI">
+                        <span class="project-feature-title lang-pt">Career AI · Seu mentor de carreira potencializado por IA</span>
+                        <span class="project-feature-title lang-en">Career AI · Your AI-powered career mentor</span>
+                        <span class="project-feature-title lang-es">Career AI · Tu mentor de carrera potenciado por IA</span>
+                        <span class="project-feature-title lang-it">Career AI · Il tuo mentor di carriera potenziato dall'IA</span>
 
-                        <span class="project-feature-badge lang-pt">Novo • experiência 3D</span>
-                        <span class="project-feature-badge lang-en">New • 3D experience</span>
-                        <span class="project-feature-badge lang-es">Nuevo • experiencia 3D</span>
-                        <span class="project-feature-badge lang-it">Nuovo • esperienza 3D</span>
+                        <span class="project-feature-badge lang-pt">TCC • MVP 2026</span>
+                        <span class="project-feature-badge lang-en">Capstone • MVP 2026</span>
+                        <span class="project-feature-badge lang-es">Proyecto final • MVP 2026</span>
+                        <span class="project-feature-badge lang-it">Progetto finale • MVP 2026</span>
 
-                        <span class="project-feature-copy lang-pt">Uma jornada espacial pelos cases Nubank, iFood e Natura, com 11 missões sobre escala, operação, inovação e novos modelos de negócio com IA.</span>
-                        <span class="project-feature-copy lang-en">A space journey through the Nubank, iFood, and Natura cases, with 11 missions about scale, operations, innovation, and new AI business models.</span>
-                        <span class="project-feature-copy lang-es">Un viaje espacial por los casos Nubank, iFood y Natura, con 11 misiones sobre escala, operaciones, innovación y nuevos modelos de negocio con IA.</span>
-                        <span class="project-feature-copy lang-it">Un viaggio spaziale nei casi Nubank, iFood e Natura, con 11 missioni su scala, operazioni, innovazione e nuovi modelli di business con IA.</span>
+                        <span class="project-feature-copy lang-pt">Plataforma de inteligência estratégica para profissionais de tecnologia que buscam relevância, combate à obsolescência e direção na era da IA.</span>
+                        <span class="project-feature-copy lang-en">A strategic intelligence platform for technology professionals seeking relevance, resilience against obsolescence, and direction in the AI era.</span>
+                        <span class="project-feature-copy lang-es">Una plataforma de inteligencia estratégica para profesionales de tecnología que buscan relevancia, combatir la obsolescencia y encontrar dirección en la era de la IA.</span>
+                        <span class="project-feature-copy lang-it">Una piattaforma di intelligenza strategica per professionisti della tecnologia che cercano rilevanza, contrasto all'obsolescenza e direzione nell'era dell'IA.</span>
 
-                        <span class="project-feature-meta">Nubank • iFood • Natura • 11 missões • Three.js</span>
+                        <span class="project-feature-meta">Diagnóstico • Mentoria contínua • N8N + Mixture of Experts</span>
+
+                        <span class="career-feature-ui" aria-hidden="true">
+                            <span class="career-ui-head"><i></i><i></i><i></i><b>CAREER AI</b></span>
+                            <span class="career-ui-body"><i></i><i></i><i></i></span>
+                            <span class="career-ui-foot">ANALISANDO PERFIL E GAPS...</span>
+                        </span>
                     </a>
-                    <a href="fiap.tcc/index.html" class="project-mini-card tcc-highlight">🎯 TCC: Career AI</a>
                 </div>
 
                 <div class="project-category-header">Vibe Coding Executivo</div>
@@ -1793,6 +1911,17 @@
                         </div>
                         <div class="project-grid">
                             <a href="fiap.reengenharia-de-software/index.html" class="project-mini-card">🔄 Desafio BPA</a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="project-category-header" style="margin-top: 0;">
+                            <span class="lang-pt">Transformação de Modelos de Negócio</span>
+                            <span class="lang-en">Business Model Transformation</span>
+                            <span class="lang-es">Transformación de Modelos de Negocio</span>
+                            <span class="lang-it">Trasformazione dei Modelli di Business</span>
+                        </div>
+                        <div class="project-grid">
+                            <a href="fiap.transformacaomodelosdenegocio/index.html" class="project-mini-card">🚀 A Força da Transformação</a>
                         </div>
                     </div>
                 </div>
