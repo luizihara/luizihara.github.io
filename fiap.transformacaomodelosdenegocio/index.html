@@ -1,414 +1,268 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Transformação de Modelos de Negócio: uma apresentação interativa sobre IA, Platform Engineering e decisões de construção na nstech.">
-    <title>Transformação de Modelos de Negócio · FIAP</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#03040a">
+    <meta name="description" content="Análise interativa dos casos Nubank, iFood e Natura sobre transformação de modelos de negócio com inteligência artificial.">
+    <meta property="og:title" content="A Força da Transformação · FIAP">
+    <meta property="og:description" content="Nubank, iFood e Natura em uma jornada pela escala, operação e inovação com IA.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://luizihara.github.io/fiap.transformacaomodelosdenegocio/og.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A Força da Transformação · FIAP">
+    <meta name="twitter:description" content="Nubank, iFood e Natura em uma jornada pela escala, operação e inovação com IA.">
+    <meta name="twitter:image" content="https://luizihara.github.io/fiap.transformacaomodelosdenegocio/og.png">
+    <title>A Força da Transformação · FIAP</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --ink: #f6f4f0;
-            --muted: #929097;
-            --bg: #070707;
-            --surface: rgba(21, 20, 23, .82);
-            --surface-2: #111014;
-            --pink: #ed145b;
-            --pink-soft: rgba(237, 20, 91, .16);
-            --lime: #c9ff2f;
-            --cyan: #5be7ff;
-            --line: rgba(246, 244, 240, .13);
-            --mono: 'DM Mono', monospace;
-            --sans: 'Space Grotesk', sans-serif;
-        }
-
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; background: var(--bg); }
-        body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); overflow-x: hidden; }
-        body::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 4; opacity: .08; background-image: linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.15) 1px, transparent 1px); background-size: 42px 42px; mask-image: linear-gradient(to bottom, black, transparent 80%); }
-        a { color: inherit; }
-        button { font: inherit; }
-        .wrap { width: min(1180px, calc(100% - 48px)); margin: 0 auto; position: relative; z-index: 2; }
-        .mono { font-family: var(--mono); }
-        .pink { color: var(--pink); }
-        .lime { color: var(--lime); }
-        .cyan { color: var(--cyan); }
-        .eyebrow { display: flex; align-items: center; gap: 10px; color: var(--pink); font: 500 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; }
-        .eyebrow::before { content: ''; width: 28px; height: 2px; background: var(--pink); }
-        .small-label { color: var(--muted); font: 400 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
-
-        #hero-scene { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .84; }
-        .hero { min-height: 790px; position: relative; display: flex; flex-direction: column; isolation: isolate; }
-        .hero::after { content: ''; position: absolute; inset: 0; z-index: 1; background: radial-gradient(circle at 72% 42%, transparent 0 18%, rgba(7,7,7,.28) 50%, var(--bg) 90%); pointer-events: none; }
-        .topbar { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; position: relative; z-index: 3; }
-        .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; letter-spacing: -.06em; text-decoration: none; }
-        .brand b { color: var(--pink); }
-        .brand-mark { width: 25px; height: 25px; border: 3px solid var(--pink); transform: rotate(45deg); position: relative; }
-        .brand-mark::after { content: ''; position: absolute; width: 7px; height: 7px; background: var(--lime); left: 6px; top: 6px; }
-        .top-actions { display: flex; gap: 9px; align-items: center; }
-        .back-link { border: 1px solid var(--line); background: rgba(7,7,7,.65); color: var(--ink); border-radius: 999px; padding: 9px 14px; font: 500 11px var(--mono); text-decoration: none; cursor: pointer; transition: .25s ease; }
-        .back-link:hover { border-color: var(--pink); color: white; transform: translateY(-2px); }
-        .hero-content { display: grid; grid-template-columns: minmax(0, .9fr) minmax(360px, .7fr); gap: 40px; align-items: center; flex: 1; position: relative; z-index: 3; padding: 44px 0 88px; }
-        .hero-copy h1 { max-width: 770px; margin: 22px 0 25px; font-size: clamp(50px, 8vw, 104px); line-height: .92; letter-spacing: -.085em; font-weight: 700; }
-        .hero-copy h1 em { color: var(--pink); font-style: normal; }
-        .hero-copy .lead { max-width: 570px; color: #c5c2c8; font-size: clamp(17px, 2vw, 21px); line-height: 1.45; margin: 0; }
-        .hero-meta { display: flex; gap: 26px; flex-wrap: wrap; margin-top: 34px; padding-top: 17px; border-top: 1px solid var(--line); }
-        .hero-meta strong { display: block; font: 500 15px var(--mono); color: var(--ink); margin-top: 4px; }
-        .hero-visual { justify-self: end; width: min(410px, 100%); aspect-ratio: 1; position: relative; display: grid; place-items: center; }
-        .orbit-label { position: absolute; font: 500 10px var(--mono); color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
-        .orbit-label.one { top: 7%; left: 9%; color: var(--lime); }
-        .orbit-label.two { right: 2%; top: 47%; color: var(--cyan); }
-        .orbit-label.three { left: 24%; bottom: 5%; color: var(--pink); }
-        .hero-orbit { position: absolute; width: 82%; height: 38%; border: 1px solid rgba(201,255,47,.5); border-radius: 50%; transform: rotate(-25deg); box-shadow: 0 0 50px rgba(201,255,47,.12); animation: orbit 9s linear infinite; }
-        .hero-orbit:nth-of-type(2) { width: 62%; height: 90%; border-color: rgba(91,231,255,.32); transform: rotate(56deg); animation-duration: 13s; animation-direction: reverse; }
-        .hero-orbit:nth-of-type(3) { width: 94%; height: 54%; border-color: rgba(237,20,91,.28); transform: rotate(12deg); animation-duration: 17s; }
-        .hero-core { width: 106px; height: 106px; border: 1px solid var(--pink); background: radial-gradient(circle at 35% 30%, #ff5d91, var(--pink) 38%, #610522 100%); transform: rotate(45deg); box-shadow: 0 0 45px rgba(237,20,91,.65), 0 0 120px rgba(237,20,91,.22); animation: corePulse 3s ease-in-out infinite; }
-        .hero-core::after { content: 'IA'; display: grid; place-items: center; width: 100%; height: 100%; transform: rotate(-45deg); color: #fff; font: 700 25px var(--mono); letter-spacing: -.1em; }
-        @keyframes orbit { to { transform: rotate(335deg) rotate(-25deg); } }
-        @keyframes corePulse { 50% { scale: 1.08; box-shadow: 0 0 60px rgba(237,20,91,.8), 0 0 150px rgba(237,20,91,.3); } }
-
-        section { padding: 112px 0; position: relative; }
-        .section-head { display: flex; justify-content: space-between; gap: 30px; align-items: end; margin-bottom: 42px; }
-        .section-head h2 { max-width: 680px; margin: 15px 0 0; font-size: clamp(34px, 5vw, 66px); line-height: .98; letter-spacing: -.07em; }
-        .section-head p { max-width: 330px; color: var(--muted); line-height: 1.55; margin: 0; font-size: 14px; }
-        .manifesto { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 31px 0 37px; font-size: clamp(25px, 3.5vw, 46px); line-height: 1.08; letter-spacing: -.05em; }
-        .manifesto .quiet { color: #66636b; }
-
-        .context-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
-        .panel { background: linear-gradient(145deg, rgba(30,28,34,.88), rgba(11,11,12,.82)); border: 1px solid var(--line); padding: 27px; position: relative; overflow: hidden; }
-        .panel::before { content: ''; position: absolute; width: 140px; height: 140px; border-radius: 50%; background: var(--pink); opacity: .08; filter: blur(30px); right: -40px; top: -40px; }
-        .context-panel { min-height: 320px; }
-        .context-panel h3 { font-size: 29px; letter-spacing: -.05em; margin: 20px 0 12px; max-width: 470px; }
-        .context-panel p { color: #b0adb4; line-height: 1.65; max-width: 620px; margin: 0; }
-        .context-aside { display: grid; gap: 18px; grid-template-rows: 1fr 1fr; }
-        .signal { display: flex; flex-direction: column; justify-content: space-between; min-height: 150px; }
-        .signal .number { font: 500 42px var(--mono); letter-spacing: -.12em; color: var(--lime); }
-        .signal p { margin: 12px 0 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
-        .tag { display: inline-flex; align-self: start; border: 1px solid rgba(201,255,47,.42); color: var(--lime); padding: 5px 8px; font: 500 10px var(--mono); text-transform: uppercase; letter-spacing: .08em; }
-
-        .model-layout { display: grid; grid-template-columns: .75fr 1.25fr; gap: 18px; align-items: stretch; }
-        .decision-nav { display: grid; gap: 9px; align-content: start; }
-        .decision-tab { text-align: left; color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); padding: 18px; cursor: pointer; transition: .25s ease; }
-        .decision-tab:hover, .decision-tab.active { border-color: var(--pink); background: linear-gradient(100deg, rgba(237,20,91,.18), rgba(17,16,20,.96)); color: white; transform: translateX(6px); }
-        .decision-tab .tab-top { display: flex; align-items: center; justify-content: space-between; font: 500 11px var(--mono); text-transform: uppercase; }
-        .decision-tab h3 { margin: 13px 0 0; color: var(--ink); font-size: 19px; letter-spacing: -.04em; }
-        .decision-tab p { margin: 8px 0 0; font-size: 12px; line-height: 1.45; }
-        .decision-tab.active p { color: #c9c4ca; }
-        .decision-detail { min-height: 480px; display: grid; grid-template-columns: .95fr 1.05fr; gap: 26px; align-items: center; }
-        .decision-detail h3 { font-size: clamp(30px, 4vw, 52px); letter-spacing: -.07em; line-height: .98; margin: 15px 0 18px; }
-        .decision-detail .detail-text { color: #b7b3ba; line-height: 1.6; font-size: 15px; }
-        .detail-list { display: grid; gap: 10px; margin-top: 24px; }
-        .detail-list div { display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start; font-size: 13px; line-height: 1.4; }
-        .detail-list i { display: block; width: 8px; height: 8px; background: var(--lime); margin-top: 5px; box-shadow: 0 0 12px var(--lime); }
-        .decision-visual { position: relative; height: 340px; display: grid; place-items: center; }
-        #platform-scene { position: absolute; inset: 0; width: 100%; height: 100%; }
-        .decision-orb { width: 145px; height: 145px; border: 1px solid var(--pink); border-radius: 50%; position: relative; background: radial-gradient(circle at 35% 28%, rgba(255,255,255,.9), var(--pink) 6%, #5c0626 42%, transparent 67%); box-shadow: 0 0 46px rgba(237,20,91,.5); animation: float 4s ease-in-out infinite; }
-        .decision-orb::before, .decision-orb::after { content: ''; position: absolute; inset: -18px; border: 1px solid rgba(201,255,47,.45); border-radius: 50%; transform: rotate(65deg); }
-        .decision-orb::after { inset: -35px; border-color: rgba(91,231,255,.28); transform: rotate(-35deg) scaleX(.5); }
-        @keyframes float { 50% { transform: translateY(-11px) rotate(5deg); } }
-        .orbit-chip { position: absolute; font: 500 10px var(--mono); color: var(--muted); border: 1px solid var(--line); background: rgba(7,7,7,.8); padding: 7px 9px; }
-        .orbit-chip.a { top: 16%; left: 6%; color: var(--lime); }
-        .orbit-chip.b { right: 1%; top: 48%; color: var(--cyan); }
-        .orbit-chip.c { bottom: 9%; left: 18%; color: var(--pink); }
-
-        .case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
-        .case { min-height: 250px; padding: 22px; border: 1px solid var(--line); background: var(--surface-2); position: relative; overflow: hidden; transition: .3s ease; }
-        .case:hover { border-color: var(--lime); transform: translateY(-8px); }
-        .case::after { content: ''; position: absolute; width: 170px; height: 170px; right: -75px; bottom: -75px; border: 1px solid rgba(201,255,47,.3); border-radius: 50%; box-shadow: 0 0 0 18px rgba(201,255,47,.04), 0 0 0 36px rgba(201,255,47,.03); }
-        .case .case-index { font: 500 11px var(--mono); color: var(--pink); }
-        .case h3 { margin: 34px 0 11px; font-size: 26px; letter-spacing: -.06em; }
-        .case p { color: var(--muted); font-size: 13px; line-height: 1.55; max-width: 235px; }
-        .case strong { display: block; color: var(--lime); font: 500 11px var(--mono); margin-top: 22px; text-transform: uppercase; }
-
-        .architecture { background: #0b0b0c; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-        .architecture-wrap { display: grid; grid-template-columns: .82fr 1.18fr; gap: 40px; align-items: center; }
-        .architecture h2 { max-width: 530px; font-size: clamp(34px, 5vw, 68px); line-height: .96; letter-spacing: -.075em; margin: 17px 0 24px; }
-        .architecture-copy p { max-width: 470px; color: #aaa6ae; line-height: 1.65; }
-        .golden-path { margin-top: 27px; display: grid; gap: 13px; }
-        .path-row { display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: center; }
-        .path-row i { width: 18px; height: 18px; border: 1px solid var(--pink); display: block; transform: rotate(45deg); }
-        .path-row:last-child i { border-color: var(--lime); background: var(--lime); box-shadow: 0 0 17px rgba(201,255,47,.55); }
-        .path-row span { font-size: 14px; }
-        .path-row small { display: block; margin-top: 2px; color: var(--muted); font: 400 10px var(--mono); }
-        .arch-visual { min-height: 530px; position: relative; border: 1px solid var(--line); background: radial-gradient(circle at center, rgba(237,20,91,.08), transparent 55%), #080809; overflow: hidden; }
-        #arch-scene { width: 100%; height: 100%; position: absolute; inset: 0; }
-        .arch-caption { position: absolute; top: 17px; left: 19px; right: 19px; display: flex; justify-content: space-between; color: var(--muted); font: 500 10px var(--mono); text-transform: uppercase; pointer-events: none; }
-        .arch-status { position: absolute; bottom: 17px; left: 19px; color: var(--lime); font: 500 10px var(--mono); pointer-events: none; }
-        .arch-status::before { content: '●'; margin-right: 7px; animation: blink 1s infinite; }
-        @keyframes blink { 50% { opacity: .2; } }
-
-        .score-panel { display: grid; grid-template-columns: .8fr 1.2fr; gap: 20px; align-items: stretch; }
-        .score-card { background: linear-gradient(135deg, var(--pink), #78072f); padding: 28px; min-height: 245px; display: flex; flex-direction: column; justify-content: space-between; }
-        .score-card h3 { font-size: 29px; line-height: 1.02; letter-spacing: -.06em; margin: 0; max-width: 250px; }
-        .score-card .score { font: 500 74px var(--mono); letter-spacing: -.12em; }
-        .score-copy { border: 1px solid var(--line); padding: 27px; background: var(--surface-2); }
-        .score-copy h3 { margin: 0 0 17px; font-size: 24px; letter-spacing: -.05em; }
-        .score-copy p { color: var(--muted); line-height: 1.6; margin: 0; }
-        .metric-row { display: flex; align-items: center; gap: 11px; margin-top: 24px; font: 500 11px var(--mono); }
-        .metric-row span { width: 110px; color: var(--ink); }
-        .meter { height: 7px; flex: 1; background: #29242a; }
-        .meter i { display: block; height: 100%; width: 82%; background: var(--lime); }
-        .metric-row:nth-of-type(3) .meter i { width: 64%; background: var(--cyan); }
-        .metric-row:nth-of-type(4) .meter i { width: 91%; background: var(--pink); }
-
-        .closing { text-align: center; padding: 145px 0 100px; }
-        .closing h2 { max-width: 900px; margin: 18px auto 23px; font-size: clamp(43px, 7vw, 91px); line-height: .9; letter-spacing: -.09em; }
-        .closing p { max-width: 580px; margin: 0 auto; color: var(--muted); line-height: 1.6; }
-        .closing .back-link { display: inline-block; margin-top: 32px; color: var(--lime); border-color: rgba(201,255,47,.45); }
-        footer { border-top: 1px solid var(--line); color: var(--muted); padding: 19px 0 30px; font: 400 10px var(--mono); display: flex; justify-content: space-between; gap: 18px; }
-
-        .visit-toast { position: fixed; right: 22px; bottom: 22px; z-index: 20; display: flex; align-items: flex-start; gap: 13px; max-width: min(360px, calc(100vw - 44px)); padding: 15px 17px; background: linear-gradient(145deg, rgba(30,28,34,.98), rgba(11,11,12,.98)); border: 1px solid rgba(237,20,91,.52); border-radius: 17px; box-shadow: 0 18px 45px rgba(0,0,0,.45); backdrop-filter: blur(12px); opacity: 0; transform: translateY(16px) scale(.97); pointer-events: none; transition: opacity .45s ease, transform .45s ease; }
-        .visit-toast.is-visible { opacity: 1; transform: none; pointer-events: auto; }
-        .visit-toast::after { content: ''; position: absolute; right: 27px; bottom: -8px; width: 15px; height: 15px; transform: rotate(45deg); background: #0d0d0e; border-right: 1px solid rgba(237,20,91,.52); border-bottom: 1px solid rgba(237,20,91,.52); }
-        .visit-toast-icon { flex: 0 0 auto; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 11px; color: #fff; background: var(--pink); box-shadow: 0 0 20px rgba(237,20,91,.4); }
-        .visit-toast-label { display: block; margin-bottom: 4px; color: var(--muted); font: 500 9px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
-        .visit-toast p { margin: 0; color: #e6e2e7; font-size: 13px; line-height: 1.45; }
-        .visit-toast a { color: var(--lime); font-weight: 700; text-decoration: none; }
-        .visit-toast a:hover { text-decoration: underline; }
-        .visit-toast-close { position: absolute; top: 6px; right: 8px; border: 0; padding: 2px 5px; color: var(--muted); background: transparent; cursor: pointer; }
-        .visit-toast-close:hover { color: #fff; }
-
-        @media (max-width: 850px) {
-            .wrap { width: min(100% - 30px, 650px); }
-            .hero { min-height: auto; }
-            .hero-content, .context-grid, .model-layout, .architecture-wrap, .score-panel { grid-template-columns: 1fr; }
-            .hero-content { padding-top: 84px; }
-            .hero-visual { justify-self: center; width: min(360px, 88vw); margin-top: 20px; }
-            .section-head { display: block; }
-            .section-head p { margin-top: 20px; }
-            .decision-detail { grid-template-columns: 1fr; padding: 26px; }
-            .decision-visual { min-height: 260px; order: -1; }
-            .case-grid { grid-template-columns: 1fr; }
-            .case { min-height: 190px; }
-            .arch-visual { min-height: 390px; }
-            .topbar { align-items: flex-start; }
-            .top-actions { flex-wrap: wrap; justify-content: flex-end; }
-        }
-        @media (max-width: 480px) {
-            .wrap { width: calc(100% - 26px); }
-            section { padding: 78px 0; }
-            .hero-copy h1 { font-size: 54px; }
-            .hero-meta { gap: 15px; }
-            .panel, .score-copy, .score-card { padding: 21px; }
-            .decision-tab { padding: 14px; }
-            footer { display: block; line-height: 1.8; }
-            footer span:last-child { display: block; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&amp;family=Rajdhani:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./mission.css">
 </head>
-
 <body>
-    <main>
-        <section class="hero">
-            <canvas id="hero-scene" aria-hidden="true"></canvas>
-            <div class="wrap">
-                <div class="topbar">
-                    <a class="brand" href="../index.html" aria-label="Luiz Ihara — home"><span class="brand-mark"></span>FIAP <b>/ MBA</b></a>
-                    <div class="top-actions">
-                        <a class="back-link" href="../index.html">← voltar à home</a>
-                    </div>
-                </div>
-                <div class="hero-content">
-                    <div class="hero-copy">
-                        <div class="eyebrow"><span>transformação de modelos de negócio</span></div>
-                        <h1><span>A plataforma é o <em>modelo.</em></span></h1>
-                        <p class="lead"><span>Uma leitura aplicada para a nstech: onde IA deixa de ser ferramenta e passa a ser uma capacidade econômica da organização.</span></p>
-                        <div class="hero-meta">
-                            <div><span class="small-label">contexto</span><strong>nstech / Platform Engineering</strong></div>
-                            <div><span class="small-label">lente</span><strong>Fazer · Comprar · Integrar</strong></div>
-                        </div>
-                    </div>
-                    <div class="hero-visual" aria-label="Visualização 3D de uma plataforma conectando estratégia, dados e execução">
-                        <div class="hero-orbit"></div><div class="hero-orbit"></div><div class="hero-orbit"></div><div class="hero-core"></div>
-                        <span class="orbit-label one">dados próprios</span><span class="orbit-label two">governança</span><span class="orbit-label three">execução</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <canvas id="galaxy" aria-hidden="true"></canvas>
+    <div class="space-haze" aria-hidden="true"></div>
+    <div class="warp-flash" id="warp-flash" aria-hidden="true"></div>
 
-        <section id="thesis">
-            <div class="wrap">
-                <div class="section-head"><div><div class="eyebrow"><span>a pergunta da aula</span></div><h2><span>Por que fazer — ou não fazer — cada solução?</span></h2></div><p><span>A resposta madura não copia Nubank, iFood ou Natura. Ela entende qual ativo próprio muda a economia do negócio.</span></p></div>
-                <div class="manifesto">Não adicionar IA a ferramentas antigas. <span class="quiet">Transformar IA em uma capability da organização.</span></div>
-                <div class="context-grid" style="margin-top:18px;">
-                    <article class="panel context-panel"><span class="tag">nstech / agora</span><h3><span>O backstage é mais do que catálogo. É uma tese de negócio.</span></h3><p><span>Ao criar a plataforma interna de engenharia, a nstech já está desenhando uma camada comum para acelerar decisões, reduzir fricção e tornar boas práticas repetíveis.</span></p></article>
-                    <div class="context-aside"><article class="panel signal"><span class="small-label">01 / princípio</span><span class="number">DADOS → DECISÃO</span><p><span>Dados próprios valem quando mudam a decisão e a economia unitária.</span></p></article><article class="panel signal"><span class="small-label">02 / postura</span><span class="number">LIMITES ≠ FREIO</span><p><span>Governança não reduz velocidade: torna a velocidade confiável.</span></p></article></div>
-                </div>
-            </div>
-        </section>
+    <header class="site-header">
+        <a class="brand" href="#top" aria-label="Ir para o início">
+            <span class="brand-sigil" aria-hidden="true"><i></i></span>
+            <span><small>FIAP · MBA</small>AI LEADERSHIP</span>
+        </a>
+        <nav class="top-nav" aria-label="Navegação principal">
+            <a href="#cases">Os 3 cases</a>
+            <a href="#missions">11 missões</a>
+            <a href="#framework">Framework 2.0</a>
+        </nav>
+        <a class="home-link" href="../index.html">Base principal <span aria-hidden="true">↗</span></a>
+    </header>
 
-        <section id="decisions">
-            <div class="wrap">
-                <div class="section-head"><div><div class="eyebrow"><span>a decisão aplicada</span></div><h2><span>Três movimentos. Uma lógica.</span></h2></div><p><span>Clique nos movimentos para explorar o racional executivo por trás de cada escolha.</span></p></div>
-                <div class="model-layout">
-                    <div class="decision-nav" role="tablist" aria-label="Decisões estratégicas">
-                        <button class="decision-tab active" type="button" data-decision="platform" role="tab"><div class="tab-top"><span>01 / fazer</span><span class="lime"><span>FAZER</span></span></div><h3><span>Plataforma corporativa de IA</span></h3><p><span>Inspirada no iFood. A capacidade vira produto interno.</span></p></button>
-                        <button class="decision-tab" type="button" data-decision="agents" role="tab"><div class="tab-top"><span>02 / ampliar</span><span class="cyan"><span>COM LIMITES</span></span></div><h3><span>Agentes para engenharia</span></h3><p><span>Inspirado no Nubank. Autonomia com quality gates.</span></p></button>
-                        <button class="decision-tab" type="button" data-decision="llm" role="tab"><div class="tab-top"><span>03 / adiar</span><span class="pink"><span>NÃO AGORA</span></span></div><h3><span>LLM próprio vertical</span></h3><p><span>A tese não fecha a conta — ainda.</span></p></button>
-                    </div>
-                    <article class="panel decision-detail" id="decision-detail" aria-live="polite"><div><div class="eyebrow" id="detail-kicker">FAZER / CAPACIDADE</div><h3 id="detail-title">Plataforma corporativa de IA</h3><p class="detail-text" id="detail-text">Em vez de cada squad escolher sua ferramenta, modelo e forma de usar IA, a plataforma oferece capacidades compartilhadas — seguras, governadas e prontas para escalar.</p><div class="detail-list" id="detail-list"><div><i></i><span>RAG sobre padrões, documentação e conhecimento interno</span></div><div><i></i><span>Agentes para código, incidentes, infraestrutura e ambientes</span></div><div><i></i><span>Uma experiência consistente dentro dos Golden Paths do Backstage</span></div></div></div><div class="decision-visual"><canvas id="platform-scene" aria-hidden="true"></canvas><div class="decision-orb"></div><span class="orbit-chip a">governança</span><span class="orbit-chip b">escala</span><span class="orbit-chip c">dados nstech</span></div></article>
-                </div>
-            </div>
-        </section>
-
-        <section id="cases">
-            <div class="wrap">
-                <div class="section-head"><div><div class="eyebrow"><span>DNA dos cases</span></div><h2><span>Não copie o case. Copie o princípio.</span></h2></div><p><span>Cada empresa construiu onde tinha uma vantagem difícil de replicar.</span></p></div>
-                <div class="case-grid"><article class="case"><span class="case-index">01 / NUBANK</span><h3>Engenharia + dados financeiros</h3><p><span>Agentes para migrar milhões de linhas, reduzir custo e ampliar eficiência.</span></p><strong>construir onde escala</strong></article><article class="case"><span class="case-index">02 / IFOOD</span><h3>Marketplace + operação</h3><p><span>IA integrada à jornada, com dados proprietários que melhoram intenção e contexto.</span></p><strong>construir onde diferencia</strong></article><article class="case"><span class="case-index">03 / NATURA</span><h3>Relações + biodiversidade</h3><p><span>Ativos centrais que não são apenas tecnológicos: rede, confiança e origem.</span></p><strong>proteger o que é único</strong></article></div>
-            </div>
-        </section>
-
-        <section class="architecture" id="architecture">
-            <div class="wrap architecture-wrap"><div class="architecture-copy"><div class="eyebrow"><span>a tese em arquitetura</span></div><h2><span>Capability como produto interno.</span></h2><p><span>O Backstage se torna a superfície. A inteligência, a governança e a automação ficam por baixo — acessíveis como plataforma, não como projeto isolado.</span></p><div class="golden-path"><div class="path-row"><i></i><span><b>Descobrir</b><small>catálogo · contexto · responsabilidade</small></span></div><div class="path-row"><i></i><span><b>Decidir</b><small>políticas · modelos · limites</small></span></div><div class="path-row"><i></i><span><b>Entregar</b><small>golden path · quality gates · observabilidade</small></span></div><div class="path-row"><i></i><span><b>Aprender</b><small>feedback · métricas · economia</small></span></div></div></div><div class="arch-visual"><div class="arch-caption"><span>topologia da plataforma / ao vivo</span><span>three.js / grafo 3D</span></div><canvas id="arch-scene" aria-label="Grafo 3D da plataforma de engenharia"></canvas><div class="arch-status">RACIOCÍNIO SISTÊMICO / ATIVO</div></div></div>
-        </section>
-
-        <section id="verdict">
-            <div class="wrap"><div class="section-head"><div><div class="eyebrow"><span>a régua executiva</span></div><h2><span>A pergunta não é “dá para fazer?”.</span></h2></div><p><span>É onde a tecnologia muda o jeito como o negócio cria, entrega e captura valor.</span></p></div><div class="score-panel"><article class="score-card"><span class="small-label" style="color:#ffd2df">nstech / aderência estratégica</span><h3><span>Aposta recomendada para agora.</span></h3><div class="score">8.7<span style="font-size:27px;letter-spacing:0">/10</span></div></article><article class="score-copy"><h3><span>Construir a camada. Comprar o modelo. Governar o risco.</span></h3><p><span>A decisão combina velocidade de entrada, dados exclusivos e capacidade de execução. O modelo próprio pode vir depois — quando existir volume, sinal e uma economia que justifique sua existência.</span></p><div class="metric-row"><span>alavancagem da plataforma</span><div class="meter"><i></i></div><b>82%</b></div><div class="metric-row"><span>vantagem de dados</span><div class="meter"><i></i></div><b>64%</b></div><div class="metric-row"><span>confiança humana</span><div class="meter"><i></i></div><b>91%</b></div></article></div></div>
-        </section>
-
-        <section class="closing"><div class="wrap"><div class="eyebrow" style="justify-content:center"><span>conclusão</span></div><h2><span>A transformação começa quando a IA ganha um lugar no modelo.</span></h2><p><span>Na nstech, a Platform Engineering pode ser esse lugar: uma infraestrutura de decisão, execução e aprendizado contínuo.</span></p><a class="back-link" href="../index.html"><span>voltar para todos os projetos ↗</span></a></div></section>
-    </main>
-    <aside class="visit-toast" id="visit-toast" role="status" aria-live="polite">
-        <button class="visit-toast-close" id="visit-toast-close" type="button" aria-label="Fechar aviso">✕</button>
-        <span class="visit-toast-icon" aria-hidden="true">✦</span>
-        <div>
-            <span class="visit-toast-label">Obrigado pela visita</span>
-            <p>Você está visitando o site de <a href="https://luizihara.github.io" target="_blank" rel="noopener">luizihara.github.io</a> 👋</p>
-        </div>
+    <aside class="mission-rail" aria-label="Progresso do trabalho">
+        <span class="rail-label">MISSÃO</span>
+        <div class="rail-line"><i id="rail-progress"></i></div>
+        <a href="#q1" aria-label="Questão 1">01</a><a href="#q2" aria-label="Questão 2">02</a><a href="#q3" aria-label="Questão 3">03</a>
+        <a href="#q4" aria-label="Questão 4">04</a><a href="#q5" aria-label="Questão 5">05</a><a href="#q6" aria-label="Questão 6">06</a>
+        <a href="#q7" aria-label="Questão 7">07</a><a href="#q8" aria-label="Questão 8">08</a><a href="#q9" aria-label="Questão 9">09</a>
+        <a href="#q10" aria-label="Questão 10">10</a><a href="#q11" aria-label="Questão 11">11</a>
     </aside>
-    <footer class="wrap"><span>FIAP MBA · LIDERANÇA DE NEGÓCIOS COM IA</span><span>Luiz Ihara · 2026 · <span>transformação aplicada</span></span></footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
-    <script>
-        (() => {
-            const sceneCanvases = [
-                [document.getElementById('hero-scene'), 'hero'],
-                [document.getElementById('platform-scene'), 'platform'],
-                [document.getElementById('arch-scene'), 'platform']
-            ];
+    <main id="top">
+        <section class="hero section-shell">
+            <div class="hero-grid">
+                <div class="hero-copy reveal">
+                    <div class="chapter-tag"><span>TRABALHO FINAL</span><b>AULA 02 · 2026</b></div>
+                    <h1>A FORÇA DA<br><em>TRANSFORMAÇÃO</em></h1>
+                    <p class="hero-lead">Três empresas. Três ativos impossíveis de copiar. Uma mesma pergunta: <strong>onde a IA muda a economia do negócio?</strong></p>
+                    <div class="hero-actions">
+                        <a class="primary-btn" href="#cases">INICIAR JORNADA <span aria-hidden="true">↓</span></a>
+                        <button class="hyperdrive-btn" id="hyperdrive" type="button"><i aria-hidden="true"></i><span>ATIVAR HIPERESPAÇO</span></button>
+                        <a class="text-btn" href="file/Aula 02 - 2ABL - Transformação de Modelo de Negócios.pdf" target="_blank" rel="noopener">MATERIAL DA AULA <span aria-hidden="true">↗</span></a>
+                    </div>
+                </div>
+                <div class="hero-orbit-wrap reveal" aria-label="Visualização tridimensional dos três casos">
+                    <canvas id="case-universe"></canvas>
+                    <div class="orbit-title"><span>SISTEMA</span><b>ECONOMIA DA IA</b></div>
+                    <button class="planet-label planet-nu" data-case="nubank" type="button"><i></i><span>NUBANK<small>DECISÃO</small></span></button>
+                    <button class="planet-label planet-food" data-case="ifood" type="button"><i></i><span>IFOOD<small>COORDENAÇÃO</small></span></button>
+                    <button class="planet-label planet-natura" data-case="natura" type="button"><i></i><span>NATURA<small>RELAÇÃO</small></span></button>
+                    <div class="drag-hint">ARRASTE PARA EXPLORAR · 3D</div>
+                </div>
+            </div>
+            <div class="course-strip reveal">
+                <div><span>DISCIPLINA</span><b>Transformação de Modelos de Negócio</b></div>
+                <div><span>PROFESSOR</span><b>Rafael Piassa Gonçalves</b></div>
+                <div class="course-status"><i></i><b>ANÁLISE EM ÓRBITA</b></div>
+            </div>
+        </section>
 
-            function fallbackScene(canvas, mode) {
-                const ctx = canvas.getContext('2d');
-                const particles = Array.from({ length: mode === 'hero' ? 90 : 28 }, (_, index) => ({
-                    x: .08 + Math.random() * .84, y: .12 + Math.random() * .76, vx: (Math.random() - .5) * .00035, vy: (Math.random() - .5) * .00035,
-                    radius: mode === 'hero' ? 1.2 : (index % 6 === 0 ? 4.2 : 2.5), phase: Math.random() * Math.PI * 2,
-                    color: ['#ed145b', '#c9ff2f', '#5be7ff'][index % 3]
-                }));
-                function frame() {
-                    const width = canvas.clientWidth || canvas.parentElement.clientWidth;
-                    const height = canvas.clientHeight || canvas.parentElement.clientHeight;
-                    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-                    if (canvas.width !== width * dpr || canvas.height !== height * dpr) { canvas.width = width * dpr; canvas.height = height * dpr; }
-                    const time = performance.now() * .001;
-                    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, width, height); ctx.globalAlpha = 1;
-                    if (mode !== 'hero') {
-                        const cx = width * .5, cy = height * .5;
-                        ctx.save(); ctx.translate(cx, cy); ctx.rotate(time * .12); ctx.strokeStyle = 'rgba(201,255,47,.22)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.ellipse(0, 0, width * .29, height * .12, 0, 0, Math.PI * 2); ctx.stroke(); ctx.rotate(Math.PI / 2.4); ctx.strokeStyle = 'rgba(91,231,255,.18)'; ctx.beginPath(); ctx.ellipse(0, 0, width * .2, height * .35, 0, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
-                        const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.min(width, height) * .23); glow.addColorStop(0, 'rgba(237,20,91,.25)'); glow.addColorStop(1, 'rgba(237,20,91,0)'); ctx.fillStyle = glow; ctx.fillRect(0, 0, width, height);
-                    }
-                    particles.forEach(point => { point.x = Math.max(.04, Math.min(.96, point.x + point.vx)); point.y = Math.max(.06, Math.min(.94, point.y + point.vy)); });
-                    particles.forEach((point, index) => { particles.slice(index + 1).forEach(other => { const dx = point.x - other.x, dy = point.y - other.y, distance = Math.sqrt(dx * dx + dy * dy); if (distance < .23) { ctx.strokeStyle = `rgba(237,20,91,${(1 - distance / .23) * .33})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(point.x * width, point.y * height); ctx.lineTo(other.x * width, other.y * height); ctx.stroke(); } }); });
-                    particles.forEach(point => { const pulse = 1 + Math.sin(time * 1.7 + point.phase) * .18; ctx.fillStyle = point.color; ctx.globalAlpha = .9; ctx.beginPath(); ctx.arc(point.x * width, point.y * height, point.radius * pulse, 0, Math.PI * 2); ctx.fill(); });
-                    if (mode !== 'hero') { const cx = width * .5, cy = height * .5; ctx.fillStyle = '#ed145b'; ctx.globalAlpha = .92; ctx.beginPath(); ctx.arc(cx, cy, 8 + Math.sin(time * 2) * 2, 0, Math.PI * 2); ctx.fill(); ctx.strokeStyle = 'rgba(237,20,91,.55)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(cx, cy, 20 + Math.sin(time) * 4, 0, Math.PI * 2); ctx.stroke(); }
-                    requestAnimationFrame(frame);
-                }
-                frame();
-            }
+        <section class="team-section section-shell reveal" aria-labelledby="team-title">
+            <div class="section-index"><span>EQUIPE</span><b>04 TRIPULANTES</b></div>
+            <div class="team-grid">
+                <h2 id="team-title">A tripulação<br>da missão.</h2>
+                <div class="crew-list">
+                    <div class="crew"><span>LI</span><p><b>Luiz Ihara</b><small>RM368484</small></p></div>
+                    <div class="crew"><span>FF</span><p><b>Filipe Fragoso</b><small>RM368500</small></p></div>
+                    <div class="crew"><span>DC</span><p><b>Daniel Caminha</b><small>RM366740</small></p></div>
+                    <div class="crew"><span>PM</span><p><b>Pedro Martins</b><small>RM368543</small></p></div>
+                </div>
+            </div>
+        </section>
 
-            if (!window.THREE) { sceneCanvases.forEach(([canvas, mode]) => fallbackScene(canvas, mode)); return; }
-            function makeScene(canvas, mode) {
-                const scene = new THREE.Scene(); scene.fog = new THREE.FogExp2(0x070707, mode === 'hero' ? 0.0013 : 0.0032);
-                const camera = new THREE.PerspectiveCamera(45, 1, .1, 1000); camera.position.set(0, 0, mode === 'hero' ? 70 : 42);
-                const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true }); renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-                const group = new THREE.Group(); scene.add(group);
-                const colors = [0xed145b, 0xc9ff2f, 0x5be7ff, 0xffffff];
-                const points = [];
-                const count = mode === 'hero' ? 520 : 130;
-                const pGeo = new THREE.BufferGeometry(); const pos = new Float32Array(count * 3); const col = new Float32Array(count * 3);
-                for (let i = 0; i < count; i++) { const r = mode === 'hero' ? 28 + Math.random() * 50 : 10 + Math.random() * 22; const a = Math.random() * Math.PI * 2; const b = Math.acos(2 * Math.random() - 1); pos[i*3] = r * Math.sin(b) * Math.cos(a); pos[i*3+1] = r * Math.sin(b) * Math.sin(a); pos[i*3+2] = r * Math.cos(b); const c = new THREE.Color(colors[i % colors.length]); col[i*3] = c.r; col[i*3+1] = c.g; col[i*3+2] = c.b; }
-                pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3)); pGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
-                group.add(new THREE.Points(pGeo, new THREE.PointsMaterial({ size: mode === 'hero' ? .22 : .34, vertexColors: true, transparent: true, opacity: .72, blending: THREE.AdditiveBlending })));
-                if (mode !== 'hero') {
-                    const nodeMat = [new THREE.MeshBasicMaterial({color:0xed145b}), new THREE.MeshBasicMaterial({color:0xc9ff2f}), new THREE.MeshBasicMaterial({color:0x5be7ff})];
-                    for (let i = 0; i < 18; i++) { const node = new THREE.Mesh(new THREE.IcosahedronGeometry(i % 5 === 0 ? .85 : .32, 1), nodeMat[i % 3]); node.position.set((Math.random()-.5)*28, (Math.random()-.5)*17, (Math.random()-.5)*13); node.userData.homeY = node.position.y; node.userData.phase = Math.random() * Math.PI * 2; group.add(node); points.push(node); }
-                    const lineMat = new THREE.LineBasicMaterial({color:0xed145b, transparent:true, opacity:.27});
-                    for (let i = 0; i < points.length; i++) for (let j = i+1; j < points.length; j++) if (points[i].position.distanceTo(points[j].position) < 9) { const geo = new THREE.BufferGeometry().setFromPoints([points[i].position, points[j].position]); group.add(new THREE.Line(geo, lineMat)); }
-                } else {
-                    const core = new THREE.Mesh(new THREE.IcosahedronGeometry(11, 2), new THREE.MeshBasicMaterial({color:0xed145b, wireframe:true, transparent:true, opacity:.28})); group.add(core);
-                    const halo = new THREE.Mesh(new THREE.SphereGeometry(5.5, 24, 24), new THREE.MeshBasicMaterial({color:0xed145b, transparent:true, opacity:.06})); group.add(halo);
-                }
-                function resize() { const w = canvas.clientWidth || canvas.parentElement.clientWidth, h = canvas.clientHeight || canvas.parentElement.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
-                new ResizeObserver(resize).observe(canvas.parentElement); resize();
-                function animate() { requestAnimationFrame(animate); const t = performance.now() * .001; group.rotation.y = t * (mode === 'hero' ? .18 : .42); group.rotation.x = Math.sin(t * .7) * .08; group.rotation.z = Math.cos(t * .43) * .035; points.forEach((node, index) => { node.rotation.x += .006; node.rotation.y += .009; node.position.y = node.userData.homeY + Math.sin(t * 1.25 + node.userData.phase) * .42; node.scale.setScalar(1 + Math.sin(t * 1.7 + index) * .08); }); renderer.render(scene, camera); } animate();
-            }
-            sceneCanvases.forEach(([canvas, mode]) => makeScene(canvas, mode));
-        })();
-    </script>
-    <script>
-        const decisionContent = {
-            platform: {
-                kicker: 'FAZER / CAPACIDADE',
-                title: 'Plataforma corporativa de IA',
-                text: 'Em vez de cada squad escolher sua ferramenta, modelo e forma de usar IA, a plataforma oferece capacidades compartilhadas — seguras, governadas e prontas para escalar.',
-                items: [
-                    'RAG sobre padrões, documentação e conhecimento interno',
-                    'Agentes para código, incidentes, infraestrutura e ambientes',
-                    'Uma experiência consistente dentro dos Golden Paths do Backstage'
-                ]
-            },
-            agents: {
-                kicker: 'AMPLIAR / COM LIMITES',
-                title: 'Agentes para engenharia',
-                text: 'Agentes assumem trabalho repetitivo e de alto volume. A autonomia cresce por evidência — nunca por entusiasmo.',
-                items: [
-                    'Migração de legados, testes e atualização de dependências',
-                    'PRs, quality gates e aprovação humana como contrato',
-                    'Observabilidade para medir resultado e conter risco'
-                ]
-            },
-            llm: {
-                kicker: 'ADIAR / ECONOMIA',
-                title: 'LLM próprio vertical',
-                text: 'Não agora. O investimento em dados, GPUs, MLOps, avaliação e manutenção ainda não supera o valor da hipótese para Platform Engineering.',
-                items: [
-                    'Começar com modelos existentes via camada corporativa controlada',
-                    'Esperar volume, dados exclusivos e sinal de diferenciação',
-                    'Construir apenas quando a economia unitária pedir'
-                ]
-            }
-        };
-        const tabs = document.querySelectorAll('.decision-tab');
-        const detailKicker = document.getElementById('detail-kicker');
-        const detailTitle = document.getElementById('detail-title');
-        const detailText = document.getElementById('detail-text');
-        const detailList = document.getElementById('detail-list');
+        <section class="cases section-shell" id="cases" aria-labelledby="cases-title">
+            <header class="section-heading reveal">
+                <div class="chapter-tag"><span>MAPA DA GALÁXIA</span><b>03 CASES</b></div>
+                <h2 id="cases-title">A IA orbita o<br><em>ativo central.</em></h2>
+                <p>As três empresas avançam pela mesma sequência — fundação de dados, eficiência no core e receita nova — mas protegem vantagens radicalmente diferentes.</p>
+            </header>
+            <div class="case-cards">
+                <article class="case-card nu reveal" id="case-nubank">
+                    <div class="planet-visual"><i></i><span>01</span></div><div class="case-top"><span>NUBANK</span><b>FINTECH · DECISÃO</b></div>
+                    <h3>Inteligência que<br>gera margem.</h3><p>Crédito, risco, antifraude, atendimento e engenharia transformados por modelos próprios e dados financeiros em escala.</p>
+                    <dl><div><dt>ATIVO CENTRAL</dt><dd>Comportamento financeiro</dd></div><div><dt>PILAR</dt><dd>Produtividade tech + risco</dd></div><div><dt>NÃO TERCEIRIZA</dt><dd>Dados + engenharia</dd></div></dl>
+                </article>
+                <article class="case-card food reveal" id="case-ifood">
+                    <div class="planet-visual"><i></i><span>02</span></div><div class="case-top"><span>IFOOD</span><b>MARKETPLACE · FLUXO</b></div>
+                    <h3>Inteligência que<br>coordena.</h3><p>IA como sistema operacional do marketplace: intenção, catálogo, logística, agentes e monetização em um loop de dados.</p>
+                    <dl><div><dt>ATIVO CENTRAL</dt><dd>Intenção + logística</dd></div><div><dt>PILAR</dt><dd>Plataforma + LCM</dd></div><div><dt>NÃO TERCEIRIZA</dt><dd>Dados + audiência</dd></div></dl>
+                </article>
+                <article class="case-card natura reveal" id="case-natura">
+                    <div class="planet-visual"><i></i><span>03</span></div><div class="case-top"><span>NATURA</span><b>BELEZA · RELAÇÃO</b></div>
+                    <h3>Inteligência que<br>amplifica vínculos.</h3><p>Dados e IA fortalecem consultoras, personalização, fábrica, logística e finanças sem substituir a rede humana.</p>
+                    <dl><div><dt>ATIVO CENTRAL</dt><dd>Relações + biodiversidade</dd></div><div><dt>PILAR</dt><dd>Canal + eficiência</dd></div><div><dt>NÃO TERCEIRIZA</dt><dd>Rede + origem</dd></div></dl>
+                </article>
+            </div>
+        </section>
 
-        function showDecision(name) {
-            const content = decisionContent[name];
-            if (!content) return;
-            tabs.forEach(tab => {
-                const active = tab.dataset.decision === name;
-                tab.classList.toggle('active', active);
-                tab.setAttribute('aria-selected', String(active));
-            });
-            detailKicker.textContent = content.kicker;
-            detailTitle.textContent = content.title;
-            detailText.textContent = content.text;
-            detailList.innerHTML = content.items.map(item => `<div><i></i><span>${item}</span></div>`).join('');
-        }
+        <section class="missions" id="missions">
+            <div class="chapter-divider section-shell reveal"><span>CAPÍTULO I</span><h2>ANÁLISES<br>COMPARATIVAS</h2><p>O que converge, o que diverge e qual é o ponto principal de cada empresa.</p></div>
 
-        tabs.forEach(tab => tab.addEventListener('click', () => showDecision(tab.dataset.decision)));
-        showDecision('platform');
-    </script>
-    <script>
-        const visitToast = document.getElementById('visit-toast');
-        const visitToastClose = document.getElementById('visit-toast-close');
-        window.setTimeout(() => visitToast.classList.add('is-visible'), 850);
-        visitToastClose.addEventListener('click', () => visitToast.classList.remove('is-visible'));
-    </script>
+            <article class="mission section-shell" id="q1" data-question="01">
+                <header class="mission-head reveal"><span>QUESTÃO 01</span><h2>O que elas possuem<br><em>em comum?</em></h2></header>
+                <div class="common-grid reveal">
+                    <div><b>01</b><h3>Dados proprietários</h3><p>O diferencial nasce de sinais que só cada empresa possui: transações, intenção de compra ou relações da rede.</p></div>
+                    <div><b>02</b><h3>IA no core</h3><p>A tecnologia já participa da decisão central do negócio, não apenas de tarefas periféricas.</p></div>
+                    <div><b>03</b><h3>Plataforma para escalar</h3><p>Modelos, APIs, governança e componentes compartilhados transformam pilotos em capacidade organizacional.</p></div>
+                    <div><b>04</b><h3>Humano ampliado</h3><p>Atendentes, engenheiros, restaurantes e consultoras ganham contexto e velocidade; o desenho não é simplesmente substituir pessoas.</p></div>
+                    <div><b>05</b><h3>Loop de aprendizado</h3><p>Cada interação gera dado, que melhora a decisão, que melhora a experiência e produz novos dados.</p></div>
+                    <div><b>06</b><h3>Receita além da eficiência</h3><p>Depois de reduzir atrito, as três criam serviços adjacentes sobre o mesmo ativo central.</p></div>
+                </div>
+                <p class="mission-verdict reveal"><span>LEITURA DO GRUPO</span> A maturidade aparece quando dados próprios viram <strong>decisões melhores, processos redesenhados e novas receitas</strong> — e não quando apenas se adiciona um copiloto.</p>
+            </article>
+
+            <article class="mission section-shell" id="q2" data-question="02">
+                <header class="mission-head reveal"><span>QUESTÃO 02</span><h2>O que elas possuem<br><em>de diferente?</em></h2></header>
+                <div class="comparison-wrap reveal" tabindex="0" aria-label="Tabela comparativa das três empresas">
+                    <table class="comparison-table"><thead><tr><th>Dimensão</th><th class="nu-color">Nubank</th><th class="food-color">iFood</th><th class="natura-color">Natura</th></tr></thead><tbody>
+                        <tr><th>Unidade de valor</th><td>Decisão financeira</td><td>Pedido coordenado</td><td>Relação que converte</td></tr>
+                        <tr><th>Estratégia tech</th><td>Constrói no core; compra no horizontal</td><td>Constrói modelo vertical e plataforma interna</td><td>Compõe na nuvem sobre dado governado</td></tr>
+                        <tr><th>Tempo da operação</th><td>Risco em milissegundos e ciclos de crédito</td><td>Tempo real, dos três lados do marketplace</td><td>Ciclos de venda, produção e relacionamento</td></tr>
+                        <tr><th>Nova receita</th><td>Private Banker, NuCel, shopping</td><td>Pago, Ads, Clube, SaaS</td><td>Emana Pay, ingredientes, personalização</td></tr>
+                        <tr><th>Risco dominante</th><td>Crédito, fraude e explicabilidade</td><td>Preço, equilíbrio da rede e antitruste</td><td>Adoção na ponta e integração Natura–Avon</td></tr>
+                        <tr><th>Papel humano</th><td>Supervisão e exceção</td><td>Orquestração do ecossistema</td><td>Confiança e vínculo como diferencial</td></tr>
+                    </tbody></table>
+                </div>
+            </article>
+
+            <article class="mission section-shell" id="q3" data-question="03">
+                <header class="mission-head reveal"><span>QUESTÃO 03</span><h2>Qual é o ponto principal<br><em>de cada uma?</em></h2></header>
+                <div class="signal-triad reveal">
+                    <div class="signal nu"><span>NUBANK</span><strong>DECIDIR</strong><p>Modelos melhores transformam risco em inclusão e margem. Seu centro é a precisão da decisão financeira.</p></div>
+                    <div class="signal food"><span>IFOOD</span><strong>COORDENAR</strong><p>Quanto melhor conecta consumidor, restaurante e entregador, mais forte fica o marketplace.</p></div>
+                    <div class="signal natura"><span>NATURA</span><strong>AMPLIFICAR</strong><p>A tecnologia vale quando fortalece relações, personaliza a venda e materializa a biodiversidade.</p></div>
+                </div>
+                <blockquote class="big-quote reveal">Não existe uma “melhor IA”. Existe a IA que <em>muda a equação</em> do seu negócio.</blockquote>
+            </article>
+
+            <div class="chapter-divider section-shell reveal"><span>CAPÍTULO II</span><h2>ANÁLISE<br>EXPLORATÓRIA</h2><p>Capacidades além do material e apostas que ainda podem ser feitas.</p></div>
+
+            <article class="mission section-shell" id="q4" data-question="04">
+                <header class="mission-head reveal"><span>QUESTÃO 04</span><h2>Que outras capacidades<br><em>elas possuem?</em></h2></header>
+                <div class="intel-cards">
+                    <article class="intel-card reveal"><span class="intel-id nu-bg">NU / FORA DO DECK</span><h3>AI Private Banker em escala real</h3><p>Além da tese apresentada em aula, as funcionalidades já alcançam mais de 15 milhões de usuários ativos mensais. O nuFormer também passou a atuar em cartão no Brasil e México e em empréstimos no Brasil.</p><a href="https://international.nubank.com.br/pt-br/companhia/nu-holdings-ltd-divulga-resultados-financeiros-do-primeiro-trimestre-de-2026/" target="_blank" rel="noopener">FONTE OFICIAL · NU 1T26 ↗</a></article>
+                    <article class="intel-card reveal"><span class="intel-id food-bg">IFOOD / FORA DO DECK</span><h3>GenAI como infraestrutura massiva</h3><p>A Genplat chegou a 4 trilhões de tokens por mês; mais de 200 serviços usam IA generativa e mais de 60% do código produzido recebe apoio de IA. O LCM responde por 90% das interações generativas.</p><a href="https://institucional.ifood.com.br/releases/ifood-12-milhoes-pedidos/" target="_blank" rel="noopener">FONTE OFICIAL · IFOOD 2026 ↗</a></article>
+                    <article class="intel-card reveal"><span class="intel-id natura-bg">NATURA / FORA DO DECK</span><h3>IA conectando ciência e impacto</h3><p>A Natura firmou parceria para combinar bioativos próprios com moléculas de longevidade cutânea descobertas por IA, conectando sua biodiversidade a uma nova frente de inovação científica.</p><a href="https://ri.natura.com.br/noticias/natura-e-debut-fecham-parceria-para-levar-ativos-de-longevidade-descobertos-por-ia-a-america-latina/" target="_blank" rel="noopener">FONTE OFICIAL · NATURA 2026 ↗</a></article>
+                </div>
+                <p class="source-note reveal">Dados externos consultados em agosto de 2026. A análise diferencia explicitamente o conteúdo do material de aula das atualizações exploratórias.</p>
+            </article>
+
+            <article class="mission section-shell" id="q5" data-question="05">
+                <header class="mission-head reveal"><span>QUESTÃO 05</span><h2>O que poderiam fazer<br><em>que ainda não fizeram?</em></h2></header>
+                <div class="future-grid">
+                    <article class="future-card reveal"><div class="future-num">01</div><span>NUBANK</span><h3>Gêmeo financeiro consentido</h3><p>Um simulador pessoal que testa cenários — dívida, reserva, renda, crédito e metas — antes de executar qualquer decisão.</p><ul><li>Valor: prevenção, não só reação</li><li>Base: nuFormer + Private Banker</li><li>Limite: consentimento e explicabilidade</li></ul></article>
+                    <article class="future-card reveal"><div class="future-num">02</div><span>IFOOD</span><h3>Autopiloto do restaurante</h3><p>Um agente autorizado a ajustar cardápio, estoque, campanhas, preço e capacidade dentro de guardrails definidos pelo parceiro.</p><ul><li>Valor: margem do restaurante</li><li>Base: LCM + logística + Ads</li><li>Limite: autonomia reversível</li></ul></article>
+                    <article class="future-card reveal"><div class="future-num">03</div><span>NATURA</span><h3>Passaporte vivo do produto</h3><p>Uma identidade digital que conecta origem do bioativo, impacto, autenticidade, recomendação e logística reversa.</p><ul><li>Valor: confiança verificável</li><li>Base: biodiversidade + rede</li><li>Limite: rastreabilidade ponta a ponta</li></ul></article>
+                </div>
+                <div class="doctrine reveal"><span>PRINCÍPIO DA AULA</span><p>Construir quando o dado próprio altera a economia unitária. Comprar quando a capacidade é horizontal. Integrar quando velocidade vale mais do que diferenciação.</p></div>
+            </article>
+
+            <div class="chapter-divider section-shell reveal"><span>CAPÍTULO III</span><h2>BASE NA<br>VIVÊNCIA</h2><p>O paralelo com a experiência profissional e o que poderia ter sido melhor.</p></div>
+
+            <article class="mission experience section-shell" id="q6" data-question="06">
+                <header class="mission-head reveal"><span>QUESTÃO 06</span><h2>O que já vivi de<br><em>mais parecido?</em></h2></header>
+                <div class="experience-grid reveal">
+                    <div class="experience-copy"><span class="context-pill">NSTECH · PLATFORM ENGINEERING</span><h3>A plataforma interna como capacidade compartilhada.</h3><p>Na nstech, o movimento mais próximo dos cases é tratar Platform Engineering e Backstage como um produto interno: catálogo, padrões, automações e caminhos dourados que reduzem fricção para vários times.</p><p>Isso se aproxima do iFood pela lógica de plataforma, do Nubank pelo ganho de produtividade da engenharia e da Natura pela necessidade de respeitar contextos humanos e diferentes níveis de maturidade.</p></div>
+                    <div class="flow-map" aria-label="Fluxo da plataforma interna"><div><span>01</span><b>DESCOBRIR</b><small>catálogo · contexto</small></div><i></i><div><span>02</span><b>DECIDIR</b><small>políticas · limites</small></div><i></i><div><span>03</span><b>ENTREGAR</b><small>golden paths · gates</small></div><i></i><div><span>04</span><b>APRENDER</b><small>métricas · feedback</small></div></div>
+                </div>
+            </article>
+
+            <article class="mission section-shell" id="q7" data-question="07">
+                <header class="mission-head reveal"><span>QUESTÃO 07</span><h2>O que poderia ser melhor<br><em>na experiência?</em></h2></header>
+                <div class="lessons-grid reveal">
+                    <div><span>ANTES</span><p>Começar pela ferramenta ou arquitetura.</p><strong>DEPOIS</strong><p>Começar pela decisão que precisa melhorar e pela métrica econômica.</p></div>
+                    <div><span>ANTES</span><p>Tratar adoção como comunicação e treinamento pontual.</p><strong>DEPOIS</strong><p>Desenhar incentivo, suporte, comunidade e mudança do fluxo de trabalho.</p></div>
+                    <div><span>ANTES</span><p>Lançar uma capability e medir acessos.</p><strong>DEPOIS</strong><p>Medir lead time, qualidade, retrabalho, risco e valor capturado.</p></div>
+                    <div><span>ANTES</span><p>Governança chegando no final.</p><strong>DEPOIS</strong><p>Guardrails, observabilidade e responsabilidade desde o primeiro piloto.</p></div>
+                </div>
+                <p class="mission-verdict reveal"><span>APRENDIZADO</span> Uma plataforma só escala quando o caminho recomendado é também o caminho mais fácil — e quando a organização consegue provar que ele melhora o resultado.</p>
+            </article>
+
+            <div class="chapter-divider section-shell reveal"><span>CAPÍTULO IV</span><h2>EXERCÍCIOS<br>DE AULA</h2><p>Oportunidades informacionais e o ambiente necessário para escala e inovação.</p></div>
+
+            <article class="mission section-shell" id="q8" data-question="08">
+                <header class="mission-head reveal"><span>QUESTÃO 08</span><h2>Oportunidades no nível<br><em>informacional básico.</em></h2></header>
+                <div class="opportunity-grid reveal">
+                    <article><span>REUNIÕES</span><h3>Da conversa à ação</h3><p>Transcrever, resumir, separar decisões, donos, prazos e riscos; atualizar automaticamente o acompanhamento.</p><small>HOJE · Meet/Teams + LLM + Jira</small></article>
+                    <article><span>DOCUMENTOS</span><h3>Leitura com contexto</h3><p>Comparar contratos, políticas e procedimentos; localizar conflitos; gerar perguntas e trilhas de auditoria.</p><small>HOJE · RAG + permissões + citações</small></article>
+                    <article><span>ENGENHARIA</span><h3>Conhecimento acessível</h3><p>Explicar serviços, incidentes, padrões e dependências a partir do catálogo técnico e da documentação interna.</p><small>HOJE · Backstage + RAG corporativo</small></article>
+                    <article><span>DADOS</span><h3>Perguntar em linguagem natural</h3><p>Transformar perguntas de negócio em consultas controladas, visualizações e hipóteses para análise humana.</p><small>HOJE · semantic layer + text-to-SQL</small></article>
+                    <article><span>ATENDIMENTO</span><h3>Resposta assistida</h3><p>Resumir histórico, sugerir solução, classificar urgência e registrar o desfecho sem perder a supervisão humana.</p><small>HOJE · copiloto + base de conhecimento</small></article>
+                    <article><span>APRESENTAÇÕES</span><h3>História antes do slide</h3><p>Estruturar argumento, testar consistência, adaptar linguagem e produzir um primeiro rascunho visual revisável.</p><small>HOJE · LLM multimodal + template</small></article>
+                </div>
+                <div class="quick-win-filter reveal"><span>FILTRO DE QUICK WIN</span><b>Frequente</b><i>×</i><b>Doloroso</b><i>×</i><b>Mensurável</b><i>×</i><b>Baixo risco</b></div>
+            </article>
+
+            <article class="mission scale-section section-shell" id="q9" data-question="09">
+                <header class="mission-head reveal"><span>QUESTÃO 09</span><h2>Como criar o ambiente<br><em>correto para escalar?</em></h2></header>
+                <div class="scale-layout">
+                    <div class="scale-scene-wrap reveal"><canvas id="scale-scene" aria-label="Visualização tridimensional das camadas de escala"></canvas><span>ARQUITETURA DE ESCALA · 3D</span></div>
+                    <div class="scale-steps">
+                        <article class="reveal"><b>01</b><div><span>NORTE</span><h3>Ambição ligada à cadeia de valor</h3><p>Escolher onde IA melhora uma decisão central; declarar resultado, limite e responsável.</p></div></article>
+                        <article class="reveal"><b>02</b><div><span>FUNDAÇÃO</span><h3>Dados, plataforma e acesso</h3><p>Identidade, qualidade de dados, APIs, modelos aprovados, segurança e custo observável.</p></div></article>
+                        <article class="reveal"><b>03</b><div><span>OPERAÇÃO</span><h3>Produto, não projeto</h3><p>Times multidisciplinares, golden paths, avaliação contínua, human-in-the-loop e suporte real.</p></div></article>
+                        <article class="reveal"><b>04</b><div><span>CULTURA</span><h3>Liberdade com guardrails</h3><p>Letramento, comunidade, incentivo à experimentação e autonomia proporcional à evidência.</p></div></article>
+                        <article class="reveal"><b>05</b><div><span>ECONOMIA</span><h3>Mensurar e realocar</h3><p>Valor, adoção, qualidade, risco e custo por tarefa; interromper o que não aprende nem entrega.</p></div></article>
+                    </div>
+                </div>
+                <div class="scale-equation reveal"><span>ESCALA CONFIÁVEL</span><strong>PLATAFORMA</strong><i>+</i><strong>GOVERNANÇA</strong><i>+</i><strong>PRODUTO</strong><i>+</i><strong>CULTURA</strong></div>
+            </article>
+
+            <div class="chapter-divider section-shell reveal"><span>CAPÍTULO V</span><h2>CONCLUSÃO</h2><p>A reflexão final e uma atualização do framework de adoção de IA.</p></div>
+
+            <article class="mission reflection section-shell" id="q10" data-question="10">
+                <header class="mission-head reveal"><span>QUESTÃO 10</span><h2>O que mudou na vida<br><em>profissional e pessoal?</em></h2></header>
+                <div class="reflection-grid reveal"><blockquote>“Passei a enxergar IA menos como ferramenta e mais como uma nova forma de <em>desenhar trabalho, decisões e valor.</em>”</blockquote><div><p>Profissionalmente, o principal deslocamento foi sair da pergunta “qual tecnologia usar?” para “qual decisão precisa mudar?”. Isso muda a forma de priorizar, medir e arquitetar soluções.</p><p>Pessoalmente, o conteúdo reforçou que delegar tarefas à IA não significa delegar julgamento. Curiosidade, repertório, ética e responsabilidade ficam ainda mais importantes.</p><p>A lição dos três cases é simples e exigente: escala sustentável nasce quando tecnologia, modelo operacional e identidade do negócio apontam para a mesma direção.</p></div></div>
+            </article>
+
+            <article class="mission framework section-shell" id="q11" data-question="11">
+                <header class="mission-head reveal"><span>QUESTÃO 11 · PONTO EXTRA</span><h2>Framework de Adoção<br><em>de IA · órbita 2.0</em></h2></header>
+                <div class="framework-intro reveal"><p>O roadmap da aula continua válido, mas ganha três mudanças: <strong>valor antes do caso de uso</strong>, <strong>governança desde a descoberta</strong> e <strong>autonomia conquistada por evidência</strong>.</p><div class="framework-legend"><span><i class="phase-info"></i>APROPRIAR</span><span><i class="phase-scale"></i>ESCALAR</span><span><i class="phase-create"></i>CRIAR</span></div></div>
+                <div class="framework-map reveal"><div class="framework-line"></div>
+                    <article data-phase="info"><b>01</b><span>VALOR</span><h3>Decisão e ativo central</h3><p>Definir qual economia queremos mudar.</p></article>
+                    <article data-phase="info"><b>02</b><span>PROVA</span><h3>Quick win instrumentado</h3><p>Hipótese, baseline, owner e prazo.</p></article>
+                    <article data-phase="info"><b>03</b><span>PRONTIDÃO</span><h3>Diagnóstico sociotécnico</h3><p>Dados, processo, risco e comportamento.</p></article>
+                    <article data-phase="info"><b>04</b><span>REFERÊNCIA</span><h3>Benchmark por princípio</h3><p>Aprender sem copiar a solução.</p></article>
+                    <article data-phase="scale"><b>05</b><span>PORTFÓLIO</span><h3>Pilares e cadeia de valor</h3><p>Priorizar pelo valor e dependências.</p></article>
+                    <article data-phase="scale"><b>06</b><span>AMBIÇÃO</span><h3>Com, para e por IA</h3><p>Assistir, redesenhar ou reinventar.</p></article>
+                    <article data-phase="scale"><b>07</b><span>PLATAFORMA</span><h3>Prontidão para execução</h3><p>Dados, modelos, guardrails e talento.</p></article>
+                    <article data-phase="scale"><b>08</b><span>OPERAÇÃO</span><h3>Governança adaptativa</h3><p>Medir valor, qualidade, risco e custo.</p></article>
+                    <article data-phase="create"><b>09</b><span>ESCALA</span><h3>Replicar o que aprende</h3><p>Produto interno e comunicação de valor.</p></article>
+                    <article data-phase="create"><b>10</b><span>VANGUARDA</span><h3>Autonomia progressiva</h3><p>Novos modelos e liderança contínua.</p></article>
+                </div>
+                <div class="gates reveal"><span>3 GATES TRANSVERSAIS</span><div><b>G1</b><p>Valor provado</p></div><div><b>G2</b><p>Risco controlado</p></div><div><b>G3</b><p>Aprendizado incorporado</p></div></div>
+            </article>
+        </section>
+
+        <section class="finale section-shell">
+            <div class="finale-copy reveal"><span>TRANSMISSÃO FINAL</span><h2>A TECNOLOGIA<br>NÃO É O DESTINO.</h2><p>O destino é uma organização capaz de transformar seus ativos únicos em decisões melhores, experiências relevantes e valor que se renova.</p><a class="primary-btn" href="#top">VOLTAR AO INÍCIO <span aria-hidden="true">↑</span></a></div>
+            <p class="final-statement reveal">CONSTRUIR ONDE DIFERENCIA.<br>INTEGRAR ONDE ACELERA.<br><em>GOVERNAR PARA CONFIAR.</em></p>
+        </section>
+    </main>
+
+    <aside class="visit-toast" id="visit-toast" aria-live="polite"><button id="visit-close" type="button" aria-label="Fechar mensagem">×</button><span class="transmission-dot" aria-hidden="true"></span><div><small>TRANSMISSÃO RECEBIDA</small><p>Você está visitando <a href="https://luizihara.github.io" target="_blank" rel="noopener">luizihara.github.io</a></p></div></aside>
+    <footer class="site-footer section-shell"><div><span>FIAP · AI LEADERSHIP · 2026</span><p>Transformação de Modelos de Negócio</p></div><div><span>PROFESSOR</span><p>Rafael Piassa Gonçalves</p></div><div><span>TRIPULAÇÃO</span><p>Luiz · Filipe · Daniel · Pedro</p></div></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
+    <script src="./mission.js"></script>
 </body>
 </html>
