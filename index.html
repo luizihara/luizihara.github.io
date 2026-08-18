@@ -581,6 +581,64 @@
             color: var(--badge-bg);
         }
 
+        .project-mini-card.transformation-feature {
+            position: relative;
+            isolation: isolate;
+            min-height: 220px;
+            overflow: hidden;
+            color: #f4f5ff;
+            border-color: rgba(255, 232, 31, 0.52);
+            background: #03040a;
+            box-shadow: inset 0 0 50px rgba(105, 217, 255, 0.06);
+        }
+
+        .transformation-feature::before,
+        .transformation-feature::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .transformation-feature::before {
+            background: url('fiap.transformacaomodelosdenegocio/og.png') center / cover no-repeat;
+            opacity: 0.5;
+            transition: transform 0.55s ease, opacity 0.55s ease;
+        }
+
+        .transformation-feature::after {
+            z-index: -1;
+            background: linear-gradient(90deg, rgba(3, 4, 10, 0.98) 0%, rgba(3, 4, 10, 0.86) 46%, rgba(3, 4, 10, 0.2) 100%);
+        }
+
+        .transformation-feature .project-feature-title {
+            max-width: 620px;
+            color: #ffe81f;
+            font-size: 1.28rem;
+        }
+
+        .transformation-feature .project-feature-copy {
+            max-width: 640px;
+            color: #e0e4f5;
+        }
+
+        .transformation-feature .project-feature-meta {
+            color: #9ee8ff;
+        }
+
+        .project-mini-card.transformation-feature:hover {
+            color: #f4f5ff;
+            border-color: #ffe81f;
+            background: #03040a;
+            box-shadow: 0 14px 38px rgba(0, 0, 0, 0.35), 0 0 24px rgba(255, 232, 31, 0.12);
+        }
+
+        .transformation-feature:hover::before {
+            opacity: 0.68;
+            transform: scale(1.035);
+        }
+
         /* i18n Logic - Classes */
         .lang-pt,
         .lang-en,
@@ -1551,6 +1609,26 @@
                 </div>
 
                 <div class="project-grid">
+                    <a href="fiap.transformacaomodelosdenegocio/index.html"
+                        class="project-mini-card project-feature-card transformation-feature"
+                        aria-label="Abrir A Força da Transformação">
+                        <span class="project-feature-title lang-pt">🚀 A Força da Transformação</span>
+                        <span class="project-feature-title lang-en">🚀 The Force of Transformation</span>
+                        <span class="project-feature-title lang-es">🚀 La Fuerza de la Transformación</span>
+                        <span class="project-feature-title lang-it">🚀 La Forza della Trasformazione</span>
+
+                        <span class="project-feature-badge lang-pt">Novo • experiência 3D</span>
+                        <span class="project-feature-badge lang-en">New • 3D experience</span>
+                        <span class="project-feature-badge lang-es">Nuevo • experiencia 3D</span>
+                        <span class="project-feature-badge lang-it">Nuovo • esperienza 3D</span>
+
+                        <span class="project-feature-copy lang-pt">Uma jornada espacial pelos cases Nubank, iFood e Natura, com 11 missões sobre escala, operação, inovação e novos modelos de negócio com IA.</span>
+                        <span class="project-feature-copy lang-en">A space journey through the Nubank, iFood, and Natura cases, with 11 missions about scale, operations, innovation, and new AI business models.</span>
+                        <span class="project-feature-copy lang-es">Un viaje espacial por los casos Nubank, iFood y Natura, con 11 misiones sobre escala, operaciones, innovación y nuevos modelos de negocio con IA.</span>
+                        <span class="project-feature-copy lang-it">Un viaggio spaziale nei casi Nubank, iFood e Natura, con 11 missioni su scala, operazioni, innovazione e nuovi modelli di business con IA.</span>
+
+                        <span class="project-feature-meta">Nubank • iFood • Natura • 11 missões • Three.js</span>
+                    </a>
                     <a href="fiap.tcc/index.html" class="project-mini-card tcc-highlight">🎯 TCC: Career AI</a>
                 </div>
 
@@ -1715,17 +1793,6 @@
                         </div>
                         <div class="project-grid">
                             <a href="fiap.reengenharia-de-software/index.html" class="project-mini-card">🔄 Desafio BPA</a>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="project-category-header" style="margin-top: 0;">
-                            <span class="lang-pt">Transformação de Modelos de Negócio</span>
-                            <span class="lang-en">Business Model Transformation</span>
-                            <span class="lang-es">Transformación de Modelos de Negocio</span>
-                            <span class="lang-it">Trasformazione dei Modelli di Business</span>
-                        </div>
-                        <div class="project-grid">
-                            <a href="fiap.transformacaomodelosdenegocio/index.html" class="project-mini-card">🧬 Plataforma como Modelo</a>
                         </div>
                     </div>
                 </div>
