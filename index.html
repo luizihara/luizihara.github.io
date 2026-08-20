@@ -496,6 +496,17 @@
             margin-bottom: 20px;
         }
 
+        .project-subject-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .project-subject-grid > div {
+            min-width: 0;
+        }
+
         .project-mini-card {
             background-color: var(--card-bg);
             color: var(--text-color);
@@ -725,6 +736,10 @@
         }
 
         @media (max-width: 700px) {
+            .project-subject-grid {
+                grid-template-columns: 1fr;
+            }
+
             .career-feature .project-feature-title,
             .career-feature .project-feature-copy,
             .career-feature .project-feature-meta {
@@ -1879,7 +1894,7 @@
                     <a href="fiap.vibecodeexecutivo/EnglishSchool/index.html" class="project-mini-card">📚 English</a>
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div class="project-subject-grid">
                     <div>
                         <div class="project-category-header" style="margin-top: 0;">
                             <span class="lang-pt">Capacitação Organizacional IA</span>
@@ -1911,8 +1926,7 @@
                     </div>
                 </div>
 
-                <div
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div class="project-subject-grid">
                     <div>
                         <div class="project-category-header" style="margin-top: 0;">
                             <span class="lang-pt">Implementação de Agentes</span>
@@ -1941,8 +1955,7 @@
                     </div>
                 </div>
 
-                <div
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div class="project-subject-grid">
                     <div>
                         <div class="project-category-header" style="margin-top: 0;">
                             <span class="lang-pt">Gestão de Produtos</span>
@@ -1975,8 +1988,7 @@
                     </div>
                 </div>
 
-                <div
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div class="project-subject-grid">
                     <div>
                         <div class="project-category-header" style="margin-top: 0;">
                             <span class="lang-pt">Orquestração e Integração de Agentes</span>
@@ -2006,8 +2018,7 @@
                     </div>
                 </div>
 
-                <div
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div class="project-subject-grid">
                     <div>
                         <div class="project-category-header" style="margin-top: 0;">
                             <span class="lang-pt">Agentes em Operações Empresariais</span>
@@ -2039,6 +2050,17 @@
                         </div>
                         <div class="project-grid">
                             <a href="fiap.transformacaomodelosdenegocio/index.html" class="project-mini-card">🚀 A Força da Transformação</a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="project-category-header" style="margin-top: 0;">
+                            <span class="lang-pt">Estratégias Setoriais de Implementação</span>
+                            <span class="lang-en">Sector Implementation Strategies</span>
+                            <span class="lang-es">Estrategias Sectoriales de Implementación</span>
+                            <span class="lang-it">Strategie Settoriali di Implementazione</span>
+                        </div>
+                        <div class="project-grid">
+                            <a href="fiap.estrategias-setoriais-de-implementacao/index.html" class="project-mini-card">🩺 IA na Saúde</a>
                         </div>
                     </div>
                 </div>

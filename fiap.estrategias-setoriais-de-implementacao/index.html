@@ -503,6 +503,73 @@
       box-shadow: 0 10px 40px rgba(20, 20, 30, .12);
       backdrop-filter: blur(16px);
     }
+
+    .visit-badge {
+      position: fixed;
+      z-index: 43;
+      right: 1.2rem;
+      bottom: 5.8rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      max-width: min(390px, calc(100vw - 2.4rem));
+      padding: .9rem 1rem;
+      border: 1px solid rgba(237, 20, 91, .3);
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, .94);
+      color: var(--ink);
+      box-shadow: 0 18px 55px rgba(20, 20, 30, .14);
+      backdrop-filter: blur(16px);
+      animation: badge-in .55s cubic-bezier(.2, .8, .2, 1) .8s both;
+    }
+
+    .visit-badge::after {
+      content: "";
+      position: absolute;
+      right: 2.15rem;
+      bottom: -7px;
+      width: 12px;
+      height: 12px;
+      border-right: 1px solid rgba(237, 20, 91, .3);
+      border-bottom: 1px solid rgba(237, 20, 91, .3);
+      background: rgba(255, 255, 255, .94);
+      transform: rotate(45deg);
+    }
+
+    .visit-badge-icon {
+      display: grid;
+      place-items: center;
+      flex: 0 0 34px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #fff0f5;
+      font-size: 1rem;
+    }
+
+    .visit-badge p { margin: 0; font-size: .78rem; line-height: 1.4; }
+    .visit-badge a { color: var(--fiap); font-weight: 800; text-underline-offset: 3px; }
+    .visit-badge-close {
+      display: grid;
+      place-items: center;
+      flex: 0 0 28px;
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: var(--soft);
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+    }
+    .visit-badge-close:hover { background: var(--ink); color: white; }
+
+    @keyframes badge-in {
+      from { opacity: 0; transform: translateY(18px) scale(.97); }
+      to { opacity: 1; transform: none; }
+    }
     .presentation-controls button { display: grid; place-items: center; width: 38px; height: 38px; border: 0; border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; }
     .presentation-controls button:hover { background: var(--ink); color: white; }
     .chapter-counter { min-width: 84px; padding: 0 .45rem; color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: .58rem; text-align: center; text-transform: uppercase; }
@@ -542,6 +609,7 @@
       .student { grid-template-columns: 40px 1fr; }
       .student code { grid-column: 2; }
       .presentation-controls { right: .7rem; bottom: .7rem; }
+      .visit-badge { right: .7rem; bottom: 5.1rem; max-width: calc(100vw - 1.4rem); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -793,6 +861,12 @@
     <div class="chapter-counter"><strong id="chapterTitle">Abertura</strong><span id="chapterTime">00:00 · 1/9</span></div>
     <button id="nextChapter" type="button" aria-label="Próximo capítulo">→</button>
   </div>
+
+  <aside class="visit-badge" id="visitBadge" role="status" aria-live="polite">
+    <span class="visit-badge-icon" aria-hidden="true">🌐</span>
+    <p>Você está visitando o site de <a href="https://luizihara.github.io/" target="_blank" rel="noopener noreferrer">luizihara.github.io</a></p>
+    <button class="visit-badge-close" id="visitBadgeClose" type="button" aria-label="Fechar mensagem">×</button>
+  </aside>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
@@ -1326,6 +1400,15 @@
         else await document.exitFullscreen();
       } catch (error) {
         console.warn("Tela cheia não disponível.", error);
+      }
+    });
+
+    document.getElementById("visitBadgeClose").addEventListener("click", () => {
+      const badge = document.getElementById("visitBadge");
+      if (gsap && !reducedMotion) {
+        gsap.to(badge, { y: 16, opacity: 0, duration: .3, ease: "power2.in", onComplete: () => badge.remove() });
+      } else {
+        badge.remove();
       }
     });
   </script>
