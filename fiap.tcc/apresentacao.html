@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0d1118">
+  <meta name="description" content="CareerFlow AI — apresentação executiva do TCC MBA FIAP 2026.">
+  <title>CareerFlow AI — Apresentação TCC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #05070d;
+      --ink: #f5f7ff;
+      --muted: #95a0b8;
+      --line: rgba(255,255,255,.12);
+      --card: rgba(10,14,26,.68);
+      --violet: #9b87f5;
+      --cyan: #55d9ff;
+      --green: #60e6ad;
+      --amber: #ffca75;
+      --rose: #ff7597;
+      --ease: cubic-bezier(.22,1,.36,1);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--bg); }
+    body { color: var(--ink); font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; }
+    button, a { font: inherit; }
+    a { color: inherit; }
+    button { color: inherit; }
+    ::selection { background: rgba(85,217,255,.3); }
+
+    #webgl, .noise, .vignette, .grid-glow { position: fixed; inset: 0; pointer-events: none; }
+    #webgl { z-index: 0; width: 100%; height: 100%; opacity: .88; }
+    .grid-glow {
+      z-index: 1;
+      background:
+        linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(circle at 70% 44%, black 0%, transparent 68%);
+      opacity: .5;
+    }
+    .vignette { z-index: 2; background: radial-gradient(circle at 58% 44%, transparent 0 30%, rgba(5,7,13,.2) 60%, rgba(5,7,13,.86) 100%); }
+    .noise {
+      z-index: 3; opacity: .045;
+      background:
+        repeating-radial-gradient(circle at 13% 27%, rgba(255,255,255,.22) 0 .5px, transparent .7px 3px),
+        repeating-radial-gradient(circle at 81% 63%, rgba(255,255,255,.14) 0 .45px, transparent .7px 4px);
+      background-size: 7px 9px, 11px 13px;
+      mix-blend-mode: soft-light;
+    }
+
+    .brand {
+      position: fixed; z-index: 20; top: 28px; left: 34px;
+      display: flex; align-items: center; gap: 11px; letter-spacing: -.03em;
+      font-family: Manrope, sans-serif; font-size: 16px; font-weight: 800;
+    }
+    .brand-mark { width: 24px; height: 24px; position: relative; transform: rotate(45deg); }
+    .brand-mark::before, .brand-mark::after { content: ""; position: absolute; border: 1px solid var(--cyan); border-radius: 5px; inset: 0; }
+    .brand-mark::after { inset: 6px; background: var(--cyan); box-shadow: 0 0 22px rgba(85,217,255,.7); }
+    .brand em { color: var(--cyan); font-style: normal; }
+    .brand-sub { color: var(--muted); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; margin-left: 3px; }
+
+    .deck { position: relative; z-index: 5; width: 100%; height: 100%; }
+    .slide {
+      --accent: var(--cyan);
+      position: absolute; inset: 0; padding: clamp(82px, 11vh, 118px) clamp(46px, 7vw, 110px) clamp(72px, 10vh, 94px);
+      display: grid; align-items: center; visibility: hidden; opacity: 0; pointer-events: none;
+      transform: translate3d(5%, 0, 0) scale(.985); filter: blur(10px);
+      transition: opacity .62s var(--ease), transform .75s var(--ease), filter .65s var(--ease), visibility 0s .75s;
+    }
+    .slide.active { visibility: visible; opacity: 1; pointer-events: auto; transform: none; filter: none; transition-delay: 0s; }
+    .slide.before { transform: translate3d(-4%, 0, 0) scale(.985); }
+    .slide-inner { width: min(1500px, 100%); margin: auto; position: relative; }
+    .content-narrow { width: min(860px, 61vw); }
+    .content-wide { width: min(1400px, 100%); }
+
+    .eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 32px; height: 1px; background: currentColor; box-shadow: 0 0 12px currentColor; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: Manrope, sans-serif; }
+    h1 { font-size: clamp(48px, 7.1vw, 112px); line-height: .94; letter-spacing: -.065em; margin-bottom: 28px; max-width: 1120px; }
+    h2 { font-size: clamp(38px, 5.05vw, 76px); line-height: 1.01; letter-spacing: -.055em; margin-bottom: 22px; max-width: 1050px; }
+    h3 { font-size: clamp(17px, 1.45vw, 23px); letter-spacing: -.025em; margin-bottom: 10px; }
+    .lead { color: #c7cfdd; font-size: clamp(17px, 1.65vw, 25px); line-height: 1.48; max-width: 800px; }
+    .muted { color: var(--muted); }
+    .accent { color: var(--accent); }
+    .gradient-text { color: transparent; background: linear-gradient(105deg, #fff 10%, var(--accent) 85%); -webkit-background-clip: text; background-clip: text; }
+    .serif-quote { font-family: Manrope, sans-serif; font-weight: 500; letter-spacing: -.04em; }
+    .big-number { font-family: Manrope, sans-serif; font-size: clamp(52px, 7.6vw, 118px); font-weight: 800; line-height: .9; letter-spacing: -.07em; }
+    .small-label { color: var(--muted); text-transform: uppercase; letter-spacing: .13em; font-size: 10px; font-weight: 700; }
+
+    .pill-row { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 28px; }
+    .pill { border: 1px solid var(--line); background: rgba(255,255,255,.045); padding: 9px 13px; border-radius: 999px; font-size: 12px; color: #cbd3e2; backdrop-filter: blur(12px); }
+    .pill strong { color: var(--ink); }
+    .tag { display: inline-flex; align-items: center; gap: 7px; padding: 6px 10px; border-radius: 8px; border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent); background: color-mix(in srgb, var(--accent) 10%, transparent); color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+    .tag::before { content:""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; }
+
+    .cards { display: grid; gap: 14px; }
+    .cards.two { grid-template-columns: repeat(2, 1fr); }
+    .cards.three { grid-template-columns: repeat(3, 1fr); }
+    .cards.four { grid-template-columns: repeat(4, 1fr); }
+    .card {
+      position: relative; overflow: hidden; min-height: 128px; padding: clamp(18px, 2vw, 28px);
+      border-radius: 18px; border: 1px solid var(--line); background: linear-gradient(145deg, rgba(21,27,44,.75), rgba(7,10,18,.58));
+      box-shadow: 0 24px 80px rgba(0,0,0,.22); backdrop-filter: blur(18px);
+    }
+    .card::after { content:""; position:absolute; width: 110px; height: 110px; top:-60px; right:-50px; border-radius:50%; background:var(--accent); filter:blur(40px); opacity:.11; }
+    .card p { color: var(--muted); font-size: clamp(12px, 1.02vw, 15px); line-height: 1.48; margin: 0; }
+    .card b { color: #f5f7ff; }
+    .card-index { display: block; color: var(--accent); font-family: Manrope,sans-serif; font-weight: 800; font-size: 12px; margin-bottom: 28px; }
+    .card.metric { min-height: 145px; display:flex; flex-direction:column; justify-content:space-between; }
+    .metric strong { font-family: Manrope,sans-serif; font-size: clamp(30px, 3.25vw, 52px); letter-spacing:-.055em; line-height:1; }
+    .metric span { color:var(--muted); font-size:12px; }
+
+    .split { display: grid; grid-template-columns: minmax(0,1.06fr) minmax(320px,.94fr); gap: clamp(28px, 6vw, 90px); align-items: center; }
+    .stage-right { min-height: 440px; }
+    .glass-callout { border-left: 2px solid var(--accent); background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 10%, transparent), transparent); padding: 18px 22px; margin-top: 28px; max-width: 720px; color: #d9dfeb; line-height: 1.5; font-size: clamp(14px,1.25vw,18px); }
+
+    .persona { display:grid; grid-template-columns: 125px 1fr; gap: 24px; align-items:center; margin: 28px 0; }
+    .persona-orb { width:112px; aspect-ratio:1; border-radius:50%; border:1px solid rgba(85,217,255,.45); background:radial-gradient(circle at 37% 32%,rgba(255,255,255,.22),rgba(85,217,255,.09) 40%,rgba(155,135,245,.08) 70%,transparent); box-shadow:inset 0 0 42px rgba(85,217,255,.08),0 0 60px rgba(85,217,255,.09); display:grid; place-items:center; font:800 28px Manrope; color:var(--cyan); }
+    .signal-list { display:grid; gap:12px; }
+    .signal { display:grid; grid-template-columns: 74px 1fr; gap:16px; align-items:center; font-size:14px; color:#cbd2df; }
+    .signal b { color:var(--accent); font-size:10px; letter-spacing:.12em; text-transform:uppercase; }
+    .signal-line { height:1px; background:linear-gradient(90deg,var(--accent),transparent); }
+
+    .compare { display:grid; grid-template-columns: 1fr 1fr 1.08fr; gap:12px; margin-top:28px; }
+    .compare .card { min-height:230px; }
+    .price { font:800 clamp(28px,3vw,48px) Manrope; letter-spacing:-.05em; margin:12px 0 18px; }
+    .compare .featured { border-color:color-mix(in srgb,var(--accent) 48%,transparent); background:linear-gradient(150deg,color-mix(in srgb,var(--accent) 16%,#0d1220),rgba(7,10,18,.72)); transform:translateY(-10px); }
+    .check-list { display:grid; gap:9px; color:var(--muted); font-size:12px; }
+    .check-list span::before { content:"↳"; color:var(--accent); margin-right:8px; }
+
+    .product-core { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:28px; }
+    .core-step { position:relative; padding:24px; min-height:210px; border:1px solid var(--line); border-radius:18px; background:rgba(8,12,22,.68); }
+    .core-step:not(:last-child)::after { content:""; position:absolute; right:-17px; top:50%; width:17px; height:1px; background:linear-gradient(90deg,var(--accent),transparent); }
+    .core-step .num { color:var(--accent); font:800 12px Manrope; }
+    .core-step h3 { margin-top:38px; }
+    .core-step p { color:var(--muted); font-size:13px; line-height:1.5; }
+
+    .architecture { display:flex; align-items:center; gap:12px; justify-content:center; margin-top:36px; }
+    .arch-node { flex:1; min-height:104px; padding:18px; border:1px solid var(--line); border-radius:15px; background:rgba(10,14,24,.68); text-align:center; display:grid; place-items:center; }
+    .arch-node b { display:block; font:700 14px Manrope; }
+    .arch-node small { color:var(--muted); font-size:10px; margin-top:4px; }
+    .arch-arrow { color:var(--accent); font-size:17px; }
+
+    .analogy { display:grid; grid-template-columns:1fr 160px 1fr; gap:22px; align-items:center; margin-top:34px; }
+    .role { padding:28px; border:1px solid var(--line); border-radius:20px; background:rgba(8,12,22,.74); }
+    .role small { color:var(--accent); text-transform:uppercase; letter-spacing:.14em; font-weight:700; }
+    .role h3 { font-size:clamp(22px,2.2vw,34px); margin:13px 0; }
+    .role p { color:var(--muted); font-size:13px; line-height:1.5; }
+    .bridge { text-align:center; color:var(--accent); }
+    .bridge-line { height:1px; background:linear-gradient(90deg,transparent,var(--accent),transparent); position:relative; margin:16px 0; }
+    .bridge-line::after { content:"›"; position:absolute; right:-3px; top:-11px; font-size:22px; }
+
+    .matrix { display:grid; grid-template-columns:1.2fr repeat(3,1fr); border:1px solid var(--line); border-radius:18px; overflow:hidden; margin-top:26px; background:rgba(7,10,18,.7); }
+    .matrix > div { padding:13px 16px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); font-size:12px; color:var(--muted); }
+    .matrix > div:nth-child(4n) { border-right:0; }
+    .matrix .head { color:#f5f7ff; font-weight:700; background:rgba(255,255,255,.035); }
+    .matrix .hero-col { color:var(--green); background:rgba(96,230,173,.045); font-weight:600; }
+    .matrix .label { color:#dbe1ec; font-weight:600; }
+
+    .errc { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:30px; }
+    .errc .card { min-height:260px; }
+    .errc h3 { font-size:19px; color:var(--accent); }
+    .errc ul { margin:26px 0 0; padding:0; list-style:none; color:var(--muted); font-size:13px; line-height:1.55; }
+    .errc li + li { margin-top:8px; }
+
+    .revenue-stack { display:flex; height:70px; border-radius:14px; overflow:hidden; margin:24px 0 14px; border:1px solid var(--line); }
+    .revenue-stack div { display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; }
+    .rev-pro { width:83.6%; background:linear-gradient(90deg,rgba(85,217,255,.75),rgba(155,135,245,.82)); color:#071019; }
+    .rev-b2b { flex:1; background:rgba(255,202,117,.28); color:var(--amber); }
+    .business-grid { display:grid; grid-template-columns:1.15fr .85fr; gap:20px; margin-top:30px; }
+    .business-grid .card { min-height:285px; }
+    .channel-list { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:20px; }
+    .channel-list span { padding:12px; border-radius:10px; background:rgba(255,255,255,.04); border:1px solid var(--line); font-size:12px; }
+
+    .timeline { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:48px; position:relative; }
+    .timeline::before { content:""; position:absolute; top:8px; left:7%; right:7%; height:1px; background:linear-gradient(90deg,var(--accent),rgba(255,255,255,.12)); }
+    .milestone { position:relative; padding:32px 28px 0 0; }
+    .milestone::before { content:""; position:absolute; top:2px; left:0; width:12px; height:12px; border:2px solid var(--accent); border-radius:50%; background:var(--bg); box-shadow:0 0 16px color-mix(in srgb,var(--accent) 75%,transparent); }
+    .milestone time { color:var(--accent); font:700 11px Manrope; text-transform:uppercase; letter-spacing:.11em; }
+    .milestone h3 { margin:10px 0 7px; }
+    .milestone p { color:var(--muted); font-size:12px; line-height:1.45; max-width:230px; }
+
+    .bars { display:flex; align-items:flex-end; gap:26px; height:270px; padding:0 4%; border-bottom:1px solid var(--line); margin-top:22px; }
+    .bar-group { flex:1; height:100%; display:flex; align-items:flex-end; gap:7px; position:relative; }
+    .bar { flex:1; height:calc(var(--h) * 1%); min-height:4px; border-radius:7px 7px 0 0; transform-origin:bottom; transform:scaleY(0); transition:transform 1.1s var(--ease) var(--delay,0s); position:relative; }
+    .active .bar { transform:scaleY(1); }
+    .bar.revenue { background:linear-gradient(#55d9ff,#4477e8); box-shadow:0 -10px 30px rgba(85,217,255,.17); }
+    .bar.ebitda { background:linear-gradient(#60e6ad,#1b9d6d); }
+    .bar.negative { background:linear-gradient(#ff7597,#a63056); }
+    .bar-group label { position:absolute; bottom:-32px; left:0; right:0; text-align:center; font-size:11px; color:var(--muted); }
+    .bar-value { position:absolute; top:-28px; left:50%; transform:translateX(-50%); white-space:nowrap; font:700 10px Manrope; color:#dfe5ee; }
+    .chart-legend { display:flex; gap:18px; margin-top:43px; font-size:11px; color:var(--muted); }
+    .chart-legend span::before { content:""; width:8px; height:8px; display:inline-block; border-radius:2px; background:var(--c); margin-right:7px; }
+
+    .kpi-hero { display:grid; grid-template-columns:.8fr 1.2fr; gap:44px; align-items:center; }
+    .ratio { width:min(290px,28vw); aspect-ratio:1; border-radius:50%; display:grid; place-items:center; position:relative; background:conic-gradient(var(--green) 0 90%,rgba(255,255,255,.07) 90%); margin:auto; }
+    .ratio::before { content:""; position:absolute; inset:16px; border-radius:50%; background:#090d17; box-shadow:inset 0 0 40px rgba(96,230,173,.08); }
+    .ratio-content { position:relative; text-align:center; }
+    .ratio-content strong { display:block; font:800 clamp(45px,5vw,72px) Manrope; letter-spacing:-.07em; }
+    .ratio-content small { color:var(--muted); text-transform:uppercase; letter-spacing:.12em; }
+    .kpi-list { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+    .kpi { padding:18px; border:1px solid var(--line); border-radius:14px; background:rgba(8,12,22,.64); }
+    .kpi strong { font:800 28px Manrope; letter-spacing:-.04em; color:var(--accent); }
+    .kpi span { display:block; color:var(--muted); font-size:11px; margin-top:4px; }
+
+    .jcurve { display:grid; grid-template-columns:1fr 1fr; gap:45px; align-items:center; }
+    .curve-plot { position:relative; height:330px; border-left:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .curve-path { position:absolute; inset:0; overflow:hidden; }
+    .curve-path::before { content:""; position:absolute; width:82%; height:78%; left:8%; top:4%; border:3px solid transparent; border-left-color:var(--cyan); border-bottom-color:var(--cyan); border-radius:0 0 0 95%; transform:skewX(-22deg) rotate(-10deg); filter:drop-shadow(0 0 9px rgba(85,217,255,.5)); }
+    .zero-line { position:absolute; left:0; right:0; top:46%; height:1px; background:rgba(255,255,255,.15); }
+    .curve-point { position:absolute; width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 18px var(--accent); }
+    .curve-point span { position:absolute; left:14px; top:-5px; white-space:nowrap; color:#dfe6ef; font-size:10px; }
+
+    .risk-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:28px; }
+    .risk { display:grid; grid-template-columns:54px 1fr; gap:16px; padding:20px; border:1px solid var(--line); border-radius:16px; background:rgba(8,12,22,.7); }
+    .risk-num { width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:color-mix(in srgb,var(--accent) 12%,transparent); border:1px solid color-mix(in srgb,var(--accent) 28%,transparent); color:var(--accent); font:800 13px Manrope; }
+    .risk h3 { font-size:15px; margin:0 0 5px; }
+    .risk p { margin:0; color:var(--muted); font-size:11px; line-height:1.45; }
+
+    .validation { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:30px; }
+    .validation .card { min-height:230px; }
+    .validation strong { display:block; font:800 clamp(38px,4vw,62px) Manrope; color:var(--accent); letter-spacing:-.055em; margin:18px 0 10px; }
+
+    .team { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:30px; }
+    .member { position:relative; min-height:325px; overflow:hidden; border-radius:18px; border:1px solid var(--line); background:#0b101c; }
+    .member img { width:100%; height:100%; object-fit:cover; object-position:center 23%; opacity:.72; filter:saturate(.75) contrast(1.03); transition:transform 1s var(--ease),opacity .4s; }
+    .member:hover img { transform:scale(1.035); opacity:.9; }
+    .member::after { content:""; position:absolute; inset:35% 0 0; background:linear-gradient(transparent,rgba(5,7,13,.96)); }
+    .member-info { position:absolute; z-index:2; left:18px; right:18px; bottom:16px; }
+    .member-info b { display:block; font:700 16px Manrope; }
+    .member-info span { color:var(--accent); font-size:10px; letter-spacing:.1em; }
+
+    .closing { text-align:center; width:min(1180px,100%); margin:auto; }
+    .closing h2 { margin-left:auto; margin-right:auto; font-size:clamp(48px,7vw,106px); }
+    .closing .lead { margin-left:auto; margin-right:auto; }
+    .closing-links { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:34px; }
+    .closing-links a { text-decoration:none; padding:12px 17px; border:1px solid var(--line); border-radius:999px; background:rgba(8,12,22,.7); color:#d7deea; font-size:12px; }
+    .closing-links a:hover { border-color:var(--accent); color:var(--accent); }
+
+    .slide-source { position:absolute; left:0; bottom:-46px; color:#677188; font-size:9px; letter-spacing:.015em; }
+    .slide-source a { text-decoration:none; border-bottom:1px solid transparent; }
+    .slide-source a:hover { color:#aab4c7; border-color:currentColor; }
+
+    .deck-ui { position:fixed; z-index:30; inset:auto 30px 24px 30px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; pointer-events:none; }
+    .progress-wrap { display:flex; align-items:center; gap:12px; }
+    .progress { width:min(220px,20vw); height:2px; background:rgba(255,255,255,.1); border-radius:99px; overflow:hidden; }
+    .progress-bar { display:block; height:100%; width:0; background:linear-gradient(90deg,var(--cyan),var(--violet)); box-shadow:0 0 13px var(--cyan); transition:width .55s var(--ease); }
+    .counter { color:var(--muted); font:700 10px Manrope; letter-spacing:.08em; min-width:42px; }
+    .controls { pointer-events:auto; display:flex; align-items:center; gap:8px; background:rgba(8,12,22,.62); border:1px solid var(--line); border-radius:999px; padding:6px; backdrop-filter:blur(16px); }
+    .control { width:34px; height:34px; display:grid; place-items:center; border:0; border-radius:50%; background:transparent; cursor:pointer; color:#b7c0d0; transition:.2s; }
+    .control:hover { background:rgba(255,255,255,.08); color:#fff; }
+    .hint { justify-self:end; color:#687288; font-size:9px; letter-spacing:.11em; text-transform:uppercase; }
+    .hint kbd { display:inline-grid; place-items:center; min-width:22px; height:22px; padding:0 5px; border:1px solid rgba(255,255,255,.16); border-radius:5px; color:#aeb7c6; margin-left:5px; font:600 10px Manrope; }
+
+    .help { position:fixed; z-index:60; inset:0; display:grid; place-items:center; background:rgba(2,4,9,.78); backdrop-filter:blur(20px); opacity:0; visibility:hidden; transition:.3s; }
+    .help.open { opacity:1; visibility:visible; }
+    .help-card { width:min(560px,calc(100vw - 40px)); padding:34px; border:1px solid var(--line); border-radius:22px; background:#0b101b; box-shadow:0 30px 100px #000; }
+    .help-card h3 { font-size:24px; }
+    .shortcuts { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:22px; }
+    .shortcut { display:flex; justify-content:space-between; gap:18px; padding:12px; border-radius:10px; background:rgba(255,255,255,.035); color:var(--muted); font-size:12px; }
+    .shortcut kbd { color:var(--cyan); }
+    .close-help { margin-top:22px; width:100%; padding:12px; border-radius:10px; border:1px solid var(--line); background:rgba(255,255,255,.05); cursor:pointer; }
+
+    .overview .slide { visibility:visible; opacity:1; filter:none; pointer-events:auto; transform:none; position:relative; inset:auto; width:calc(25vw - 24px); height:calc((25vw - 24px) * .5625); min-height:170px; padding:28px; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#080c15; cursor:pointer; transition:.25s; }
+    .overview .deck { z-index:40; height:100%; overflow:auto; display:flex; flex-wrap:wrap; align-content:flex-start; gap:12px; padding:70px 18px 28px; background:rgba(3,5,10,.93); }
+    .overview .slide:hover { border-color:var(--cyan); transform:translateY(-3px); }
+    .overview .slide-inner { transform:scale(.24); transform-origin:top left; width:416%; }
+    .overview .stage-right, .overview .slide-source { display:none; }
+    .overview .brand, .overview .deck-ui { z-index:50; }
+
+    @media (max-width: 900px) {
+      .slide { padding-left:28px; padding-right:28px; }
+      .content-narrow { width:100%; }
+      .split, .business-grid, .jcurve, .kpi-hero { grid-template-columns:1fr; }
+      .stage-right { display:none; }
+      .cards.four, .errc, .team { grid-template-columns:repeat(2,1fr); }
+      .architecture { flex-wrap:wrap; }
+      .arch-node { min-width:30%; }
+      .matrix > div { padding:9px; font-size:10px; }
+      .hint { display:none; }
+      .overview .slide { width:calc(50vw - 24px); height:calc((50vw - 24px)*.5625); }
+    }
+
+    @media (max-height: 720px) {
+      .slide { padding-top:72px; padding-bottom:58px; }
+      .eyebrow { margin-bottom:10px; }
+      h2 { font-size:clamp(34px,4.6vw,62px); margin-bottom:14px; }
+      .lead { font-size:clamp(14px,1.4vw,20px); }
+      .card { padding:17px; min-height:110px; }
+      .cards { gap:10px; }
+      .compare .card { min-height:195px; }
+      .product-core { margin-top:18px; }
+      .core-step { min-height:175px; padding:18px; }
+      .core-step h3 { margin-top:24px; }
+      .architecture { margin-top:20px; }
+      .arch-node { min-height:80px; padding:12px; }
+      .errc { margin-top:18px; }
+      .errc .card { min-height:220px; }
+      .bars { height:220px; }
+      .risk-grid { margin-top:16px; }
+      .risk { padding:14px; }
+      .team { margin-top:18px; }
+      .member { min-height:265px; }
+      .slide-source { bottom:-34px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; scroll-behavior:auto!important; }
+      #webgl { opacity:.4; }
+    }
+
+    /* Direção executiva: editorial, plana e deliberadamente contida. */
+    :root {
+      --bg: #f3f1eb;
+      --ink: #101621;
+      --muted: #626a76;
+      --line: rgba(16,22,33,.14);
+      --card: rgba(255,255,255,.76);
+      --cyan: #2457f5;
+      --violet: #6843d9;
+      --green: #167c62;
+      --amber: #a86716;
+      --rose: #bd493e;
+    }
+    html, body { background:var(--bg); color:var(--ink); }
+    body { background:radial-gradient(circle at 88% 10%,#fff 0,rgba(255,255,255,.72) 18%,transparent 44%),var(--bg); }
+    #webgl { opacity:.82; transition:opacity .65s ease; }
+    .vignette, .noise { display:none; }
+    .grid-glow {
+      opacity:1; mask-image:none; background:
+        linear-gradient(90deg,transparent 0 64.8%,rgba(16,22,33,.08) 64.85%,transparent 64.92%),
+        linear-gradient(rgba(16,22,33,.055) 1px,transparent 1px);
+      background-size:100% 100%,100% 80px;
+    }
+    .brand { top:27px; left:clamp(28px,5.2vw,82px); gap:9px; color:#101621; font-size:14px; letter-spacing:-.02em; }
+    .brand-mark { width:18px; height:18px; transform:rotate(45deg); }
+    .brand-mark::before { border-color:#2457f5; border-radius:2px; }
+    .brand-mark::after { inset:6px; border:0; border-radius:1px; background:#2457f5; box-shadow:none; }
+    .brand em { color:#2457f5; }
+    .brand-sub { color:#7b818a; font-size:9px; letter-spacing:.14em; }
+    .slide { --accent:#2457f5!important; padding:clamp(82px,10vh,104px) clamp(42px,5.2vw,82px) clamp(70px,9vh,88px); transform:translate3d(1.2%,0,0); filter:none; transition:opacity .42s ease,transform .55s var(--ease),visibility 0s .55s; }
+    .slide[data-scene="fracture"], .slide[data-scene="risks"] { --accent:#bd493e!important; }
+    .slide[data-scene="metrics"], .slide[data-scene="target"] { --accent:#167c62!important; }
+    .slide[data-scene="jcurve"], .slide[data-scene="revenue"] { --accent:#9c6315!important; }
+    .slide.before { transform:translate3d(-.8%,0,0); }
+    .slide-inner { width:min(1320px,100%); }
+    .content-wide { width:min(1280px,100%); }
+    .content-narrow { width:min(820px,61vw); }
+    .split { grid-template-columns:minmax(0,1.16fr) minmax(300px,.84fr); gap:clamp(30px,5vw,72px); }
+    .stage-right { min-height:400px; }
+    .eyebrow { color:var(--accent); font-size:10px; letter-spacing:.16em; margin-bottom:16px; }
+    .eyebrow::before { width:24px; background:currentColor; box-shadow:none; }
+    h1 { font-size:clamp(46px,6.25vw,92px); line-height:.98; letter-spacing:-.058em; margin-bottom:24px; }
+    h2 { font-size:clamp(36px,4.45vw,66px); line-height:1.03; letter-spacing:-.052em; margin-bottom:18px; }
+    h3 { letter-spacing:-.025em; }
+    .lead { color:#4e5662; font-size:clamp(16px,1.45vw,22px); line-height:1.5; }
+    .muted { color:var(--muted); }
+    .accent { color:var(--accent); }
+    .gradient-text { color:var(--accent); background:none; -webkit-text-fill-color:currentColor; }
+    .big-number { color:var(--accent); }
+    .pill-row { gap:8px; margin-top:24px; }
+    .pill { border-color:rgba(16,22,33,.14); background:rgba(255,255,255,.62); color:#525a66; padding:8px 12px; backdrop-filter:none; }
+    .pill strong { color:#111722; }
+    .tag { border-radius:3px; background:rgba(36,87,245,.07); border-color:rgba(36,87,245,.22); }
+    .card, .core-step, .role, .arch-node, .risk, .kpi {
+      border-color:rgba(16,22,33,.13); border-radius:6px; background:rgba(255,255,255,.72); box-shadow:none; backdrop-filter:none;
+    }
+    .card::after { display:none; }
+    .card p, .core-step p, .role p, .risk p, .kpi span { color:#656d78; }
+    .card b { color:#111722; }
+    .card-index { margin-bottom:22px; }
+    .glass-callout { border-left:3px solid var(--accent); background:rgba(255,255,255,.5); color:#4e5662; padding:16px 20px; margin-top:24px; }
+    .persona-orb { border-color:rgba(36,87,245,.35); background:#fff; box-shadow:0 0 0 12px rgba(36,87,245,.045); color:#2457f5; }
+    .signal { color:#4f5865; }
+    .signal-line { background:linear-gradient(90deg,var(--accent),transparent); }
+    .compare { gap:10px; }
+    .compare .card { min-height:220px; }
+    .compare .featured { color:#fff; border-color:#111722; background:#111722; transform:translateY(-8px); }
+    .compare .featured h3, .compare .featured .check-list { color:#e8ebef; }
+    .compare .featured .card-index, .compare .featured .accent { color:#7fa0ff; }
+    .price { color:#111722; }
+    .featured .price { color:#fff; }
+    .check-list { color:#69717b; }
+    .product-core { gap:10px; }
+    .core-step { background:rgba(255,255,255,.76); }
+    .core-step:not(:last-child)::after { background:#2457f5; opacity:.45; }
+    .architecture { gap:8px; }
+    .arch-node { background:rgba(255,255,255,.8); min-height:96px; }
+    .arch-node small { color:#717985; }
+    .analogy { grid-template-columns:1fr 140px 1fr; }
+    .role { background:rgba(255,255,255,.8); }
+    .matrix { border-radius:6px; background:rgba(255,255,255,.62); }
+    .matrix > div { color:#606975; }
+    .matrix .head { color:#101621; background:rgba(16,22,33,.045); }
+    .matrix .hero-col { color:#167c62; background:rgba(22,124,98,.055); }
+    .matrix .label { color:#202733; }
+    .errc { gap:10px; }
+    .errc .card { min-height:230px; }
+    .errc ul { color:#666e79; }
+    .revenue-stack { border-radius:4px; height:58px; }
+    .rev-pro { background:#2457f5; color:#fff; }
+    .rev-b2b { background:#e7dccb; color:#744b13; }
+    .channel-list span { border-radius:3px; background:rgba(16,22,33,.035); }
+    .timeline::before { background:linear-gradient(90deg,var(--accent),rgba(16,22,33,.15)); }
+    .milestone::before { background:var(--bg); box-shadow:none; }
+    .milestone p { color:#666f7a; }
+    .bars { border-color:rgba(16,22,33,.18); }
+    .bar.revenue { background:#2457f5; box-shadow:none; }
+    .bar.ebitda { background:#167c62; }
+    .bar.negative { background:#bd493e; }
+    .bar-value { color:#303744; }
+    .ratio { background:conic-gradient(#167c62 0 90%,rgba(16,22,33,.08) 90%); }
+    .ratio::before { background:#f7f6f1; box-shadow:none; }
+    .curve-plot { border-color:rgba(16,22,33,.18); }
+    .zero-line { background:rgba(16,22,33,.16); }
+    .curve-path::before { border-left-color:#2457f5; border-bottom-color:#2457f5; filter:none; }
+    .curve-point { box-shadow:0 0 0 5px rgba(36,87,245,.08); }
+    .curve-point span { color:#3d4653; }
+    .risk-num { border-radius:4px; }
+    .team { gap:10px; }
+    .member { border-radius:6px; border-color:rgba(16,22,33,.16); background:#d9d9d5; }
+    .member img { opacity:.88; filter:grayscale(.15) saturate(.75) contrast(1.02); }
+    .member::after { background:linear-gradient(transparent,rgba(15,20,29,.92)); }
+    .member-info { color:#fff; }
+    .member-info span { color:#aebfff; }
+    .closing-links a { border-radius:3px; background:rgba(255,255,255,.65); color:#303844; }
+    .slide-source { color:#858b93; }
+    .slide-source a:hover { color:#39414d; }
+    .deck-ui { inset:auto clamp(24px,5.2vw,82px) 22px; }
+    .progress { background:rgba(16,22,33,.12); }
+    .progress-bar { background:#2457f5; box-shadow:none; }
+    .counter { color:#6d747e; }
+    .controls { background:rgba(255,255,255,.78); border-color:rgba(16,22,33,.13); border-radius:5px; padding:3px; backdrop-filter:blur(12px); box-shadow:0 8px 30px rgba(16,22,33,.07); }
+    .control { width:32px; height:32px; border-radius:3px; color:#4d5661; }
+    .control:hover { background:#101621; color:#fff; }
+    .hint { color:#858b94; }
+    .hint kbd { border-color:rgba(16,22,33,.16); color:#5d6570; }
+    .help { background:rgba(243,241,235,.86); }
+    .help-card { border-color:rgba(16,22,33,.15); border-radius:8px; background:#fbfaf6; box-shadow:0 30px 100px rgba(16,22,33,.2); }
+    .shortcut { border-radius:3px; background:rgba(16,22,33,.04); }
+    .shortcut kbd { color:#2457f5; }
+    .close-help { border-radius:3px; border-color:rgba(16,22,33,.15); background:#101621; color:#fff; }
+    .overview .slide { border-radius:5px; background:#f3f1eb; }
+    .overview .deck { background:rgba(236,234,228,.97); }
+
+    /* Dark mode mantém a mesma linguagem editorial e o mesmo contraste de palco. */
+    body.dark {
+      --bg:#0d1118; --ink:#f2f0e9; --muted:#a1a8b2; --line:rgba(255,255,255,.14); --card:rgba(24,30,40,.8);
+      background:radial-gradient(circle at 88% 10%,#1b2230 0,rgba(27,34,48,.55) 18%,transparent 44%),#0d1118;
+      color:var(--ink);
+    }
+    body.dark .grid-glow { background:
+      linear-gradient(90deg,transparent 0 64.8%,rgba(255,255,255,.09) 64.85%,transparent 64.92%),
+      linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px); background-size:100% 100%,100% 80px; }
+    body.dark .brand { color:#f2f0e9; }
+    body.dark .brand-sub { color:#8f97a3; }
+    body.dark .lead, body.dark .glass-callout { color:#b5bcc6; }
+    body.dark .muted, body.dark .card p, body.dark .core-step p, body.dark .role p,
+    body.dark .risk p, body.dark .kpi span, body.dark .milestone p { color:#9ea6b1; }
+    body.dark .pill { border-color:rgba(255,255,255,.15); background:rgba(255,255,255,.055); color:#b7bec8; }
+    body.dark .pill strong, body.dark .card b { color:#f4f2ec; }
+    body.dark .card, body.dark .core-step, body.dark .role, body.dark .arch-node,
+    body.dark .risk, body.dark .kpi { border-color:rgba(255,255,255,.13); background:rgba(21,27,37,.78); }
+    body.dark .glass-callout { background:rgba(255,255,255,.035); }
+    body.dark .persona-orb { border-color:rgba(112,145,255,.48); background:#171d27; box-shadow:0 0 0 12px rgba(112,145,255,.055); color:#8ba7ff; }
+    body.dark .signal { color:#b6bdc7; }
+    body.dark .compare .featured { border-color:#f0eee8; background:#f0eee8; color:#121722; }
+    body.dark .compare .featured h3, body.dark .compare .featured .check-list { color:#343c48; }
+    body.dark .compare .featured .card-index, body.dark .compare .featured .accent { color:#2457f5; }
+    body.dark .price { color:#f2f0e9; }
+    body.dark .featured .price { color:#111722; }
+    body.dark .check-list, body.dark .errc ul { color:#9ea6b1; }
+    body.dark .arch-node small { color:#949da9; }
+    body.dark .channel-list span { background:rgba(255,255,255,.045); }
+    body.dark .matrix { background:rgba(20,26,36,.72); }
+    body.dark .matrix > div { color:#aeb6c1; }
+    body.dark .matrix .head { color:#f1efe9; background:rgba(255,255,255,.05); }
+    body.dark .matrix .label { color:#dce0e6; }
+    body.dark .matrix .hero-col { color:#71d2b4; background:rgba(30,152,116,.09); }
+    body.dark .rev-b2b { background:#433a2e; color:#f0c47f; }
+    body.dark .bar-value, body.dark .curve-point span { color:#d0d5dc; }
+    body.dark .ratio::before { background:#111720; }
+    body.dark .bars, body.dark .curve-plot { border-color:rgba(255,255,255,.18); }
+    body.dark .zero-line { background:rgba(255,255,255,.16); }
+    body.dark .slide-source { color:#7f8793; }
+    body.dark .slide-source a:hover { color:#cbd0d7; }
+    body.dark .progress { background:rgba(255,255,255,.13); }
+    body.dark .counter, body.dark .hint { color:#8f97a2; }
+    body.dark .hint kbd { border-color:rgba(255,255,255,.17); color:#b1b8c2; }
+    body.dark .controls { background:rgba(20,26,36,.84); border-color:rgba(255,255,255,.13); box-shadow:0 8px 30px rgba(0,0,0,.24); }
+    body.dark .control { color:#bec5ce; }
+    body.dark .control:hover { background:#f0eee8; color:#111722; }
+    body.dark .closing-links a { background:rgba(255,255,255,.055); border-color:rgba(255,255,255,.14); color:#d6dae0; }
+    body.dark .help { background:rgba(7,10,15,.86); }
+    body.dark .help-card { background:#151b25; border-color:rgba(255,255,255,.14); box-shadow:0 30px 100px #000; }
+    body.dark .shortcut { background:rgba(255,255,255,.045); }
+    body.dark .close-help { background:#f0eee8; color:#111722; border-color:#f0eee8; }
+    body.dark.overview .slide { background:#111720; }
+    body.dark.overview .deck { background:rgba(9,13,19,.98); }
+    body.dark .member { background:#1a202a; }
+
+    @media (max-height:720px) {
+      .compare .card { min-height:185px; }
+      .errc .card { min-height:205px; }
+    }
+  </style>
+</head>
+<body class="dark">
+  <script>
+    try {
+      if (localStorage.getItem('careerflow-theme') === 'light') document.body.classList.remove('dark');
+    } catch (_) {}
+  </script>
+  <canvas id="webgl" aria-hidden="true"></canvas>
+  <div class="grid-glow" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <div class="brand" aria-label="CareerFlow AI">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span>CareerFlow<em>.ai</em></span>
+    <span class="brand-sub">TCC · MBA FIAP 2026</span>
+  </div>
+
+  <main class="deck" id="deck" aria-live="polite">
+    <section class="slide active" data-scene="origin" style="--accent:#55d9ff" aria-label="Slide 1: Abertura">
+      <div class="slide-inner split">
+        <div>
+          <div class="eyebrow">TCC · Empreendedorismo · FIAP 2026</div>
+          <h1>Seu próximo cargo não deveria ser um <span class="gradient-text">palpite.</span></h1>
+          <p class="lead">CareerFlow AI transforma experiência acumulada em direção estratégica — com diagnóstico profundo, inteligência de mercado e mentoria contínua.</p>
+          <div class="pill-row">
+            <span class="pill"><strong>IA</strong> aplicada à carreira</span>
+            <span class="pill"><strong>24/7</strong> no WhatsApp</span>
+            <span class="pill"><strong>MVP</strong> em produção</span>
+          </div>
+        </div>
+        <div class="stage-right"></div>
+        <div class="slide-source">Fontes: <a href="index.html">Portal do projeto</a> · <a href="https://www.careerflow.com.br/">MVP CareerFlow AI</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="fracture" style="--accent:#ff7597" aria-label="Slide 2: O problema">
+      <div class="slide-inner split">
+        <div>
+          <div class="eyebrow">01 · A mudança de contexto</div>
+          <h2>Senioridade já não é uma linha de chegada.</h2>
+          <p class="lead">A IA acelera a perda de valor de competências que antes sustentavam uma carreira inteira. O TCC nomeia esse fenômeno de <b class="accent">Erosão da Relevância.</b></p>
+          <div class="glass-callout">O profissional não sofre apenas com “falta de emprego”. Ele sofre com a ausência de direção estratégica para decidir <b>o que preservar, o que abandonar e para onde evoluir.</b></div>
+        </div>
+        <div class="stage-right"></div>
+        <div class="slide-source">Fonte: <a href="entrega-parcial-2.html">Entregável Parcial 2 — Aprofundamento do problema</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="freeze" style="--accent:#9b87f5" aria-label="Slide 3: Zero Kelvin">
+      <div class="slide-inner content-narrow">
+        <div class="eyebrow">O estado “Zero Kelvin”</div>
+        <div class="big-number gradient-text">0 K</div>
+        <h2 class="serif-quote">“Alta competência.<br>Movimento de carreira cessado.”</h2>
+        <p class="lead">Entre execução técnica e liderança, o sênior vê caminhos demais — e clareza de menos. Compra cursos, otimiza o LinkedIn por intuição e sente que está apenas <b>“enxugando gelo”.</b></p>
+        <div class="slide-source">Fonte: <a href="entregaParcial-2.md">Relatório Estratégico — “Zero Kelvin”</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="persona" style="--accent:#55d9ff" aria-label="Slide 4: Persona">
+      <div class="slide-inner split">
+        <div>
+          <div class="eyebrow">02 · Persona prioritária</div>
+          <h2>O “Líder em Risco”</h2>
+          <div class="persona">
+            <div class="persona-orb">35—45</div>
+            <div>
+              <h3>Profissional sênior de tecnologia</h3>
+              <p class="muted">Trajetória consolidada, alto custo de oportunidade e uma encruzilhada entre especialização e liderança.</p>
+            </div>
+          </div>
+          <div class="signal-list">
+            <div class="signal"><b>Vê</b><span>Layoffs de perfis experientes e “IA Staff Engineers” multiplicando produtividade.</span></div>
+            <div class="signal"><b>Ouve</b><span>Mentorias a R$ 1,5 mil–6 mil/mês e ruído sobre quais tecnologias priorizar.</span></div>
+            <div class="signal"><b>Sente</b><span>Medo da obsolescência, fadiga de decisão e isolamento nas escolhas críticas.</span></div>
+          </div>
+        </div>
+        <div class="stage-right"></div>
+        <div class="slide-source">Fonte: <a href="entrega-parcial-2.html">Mapa de Empatia — Líder em Risco</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="split" style="--accent:#ffca75" aria-label="Slide 5: Lacuna de mercado">
+      <div class="slide-inner content-wide">
+        <div class="eyebrow">03 · A lacuna de mercado</div>
+        <h2>Entre conselho caro e conteúdo sem direção.</h2>
+        <div class="compare">
+          <article class="card">
+            <span class="card-index">A · Headhunters / Coaches</span>
+            <h3>Personalização alta</h3>
+            <div class="price">R$ 1,5k–6k<span class="muted" style="font-size:13px">/mês</span></div>
+            <div class="check-list"><span>Agenda e baixa disponibilidade</span><span>Sessões episódicas</span><span>Barreira financeira</span></div>
+          </article>
+          <article class="card">
+            <span class="card-index">B · Cursos / LMS</span>
+            <h3>Conteúdo abundante</h3>
+            <div class="price">Genérico</div>
+            <div class="check-list"><span>Sem diagnóstico individual</span><span>Direção fragmentada</span><span>Baixa responsabilização</span></div>
+          </article>
+          <article class="card featured">
+            <span class="card-index">C · CareerFlow AI</span>
+            <h3>Career Intelligence contínua</h3>
+            <div class="price accent">24/7</div>
+            <div class="check-list"><span>Diagnóstico profundo</span><span>Memória histórica</span><span>Direção personalizada</span></div>
+          </article>
+        </div>
+        <div class="slide-source">Fontes: <a href="index-2.html">Definição estratégica</a> · <a href="entrega-parcial-2.html">Matriz comparativa</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="core" style="--accent:#60e6ad" aria-label="Slide 6: Proposta de valor">
+      <div class="slide-inner content-wide">
+        <div class="eyebrow">04 · Proposta de valor</div>
+        <h2>Não é um repositório de cursos.<br><span class="gradient-text">É um motor de decisão.</span></h2>
+        <div class="product-core">
+          <article class="core-step"><span class="num">01</span><h3>Diagnóstico profundo</h3><p>Cruza rastro digital, assessment proprietário e tendências de mercado para produzir um “Raio-X” realista.</p></article>
+          <article class="core-step"><span class="num">02</span><h3>Skill Analogy Engine™</h3><p>Traduz competências entre setores e torna visível o valor silencioso acumulado pelo profissional.</p></article>
+          <article class="core-step"><span class="num">03</span><h3>Mentor virtual 24/7</h3><p>Conversa via WhatsApp, guarda memória dos objetivos e ajuda antes de decisões e reuniões críticas.</p></article>
+        </div>
+        <div class="slide-source">Fonte: <a href="entrega-parcial-2.html">Canvas de Proposta de Valor</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="network" style="--accent:#9b87f5" aria-label="Slide 7: Como funciona">
+      <div class="slide-inner content-wide">
+        <div class="eyebrow">05 · Como a inteligência flui</div>
+        <h2>Do rastro digital<br>ao próximo movimento.</h2>
+        <div class="architecture">
+          <div class="arch-node"><div><b>LinkedIn + Assessment</b><small>contexto do profissional</small></div></div>
+          <div class="arch-arrow">›</div>
+          <div class="arch-node"><div><b>Deep Research</b><small>tendências e mercado</small></div></div>
+          <div class="arch-arrow">›</div>
+          <div class="arch-node"><div><b>MoE + N8N</b><small>orquestração de agentes</small></div></div>
+          <div class="arch-arrow">›</div>
+          <div class="arch-node"><div><b>Vector DB</b><small>memória de longo prazo</small></div></div>
+          <div class="arch-arrow">›</div>
+          <div class="arch-node"><div><b>Web + WhatsApp</b><small>ação no momento certo</small></div></div>
+        </div>
+        <div class="glass-callout">Mixture of Experts roteia cada tarefa para o modelo adequado — base da eficiência prevista de custo e da personalização em escala.</div>
+        <div class="slide-source">Fontes: <a href="index.html">Arquitetura do produto</a> · <a href="llms-full.txt">Memorial financeiro — arquitetura e COGS</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="bridge" style="--accent:#55d9ff" aria-label="Slide 8: Skill Analogy Engine">
+      <div class="slide-inner content-wide">
+        <div class="eyebrow">A diferenciação proprietária</div>
+        <h2>Experiência não expira.<br><span class="gradient-text">Ela muda de contexto.</span></h2>
+        <div class="analogy">
+          <article class="role"><small>Experiência de origem</small><h3>Arquiteto de Dados Bancário</h3><p>Governança, resiliência, escala, gestão de risco e decisões em ambientes regulados.</p></article>
+          <div class="bridge"><span class="tag">Skill Analogy</span><div class="bridge-line"></div><small>tradução semântica<br>intersetorial</small></div>
+          <article class="role"><small>Novo valor visível</small><h3>Head de Logística no Varejo</h3><p>A mesma lógica aplicada onde a competência é mais escassa — e, portanto, potencialmente mais valiosa.</p></article>
+        </div>
+        <div class="slide-source">Fonte: <a href="entregaParcial-2.md">Mapa de Valor — exemplo do Skill Analogy Engine™</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="matrix" style="--accent:#60e6ad" aria-label="Slide 9: Posicionamento">
+      <div class="slide-inner content-wide">
+        <div class="eyebrow">06 · Posicionamento competitivo</div>
+        <h2>Uma nova camada: Career Intelligence.</h2>
+        <div class="matrix">
+          <div class="head">Critério</div><div class="head">Headhunters</div><div class="head">Cursos / LMS</div><div class="head hero-col">CareerFlow AI</div>
+          <div class="label">Preço</div><div>Elevado</div><div>Baixo / médio</div><div class="hero-col">Médio · assinatura</div>
+          <div class="label">Disponibilidade</div><div>Baixa · agenda</div><div>Alta · gravado</div><div class="hero-col">Total · 24/7</div>
+          <div class="label">Personalização</div><div>Alta · humana</div><div>Nula · genérica</div><div class="hero-col">Altíssima · MoE + dados</div>
+          <div class="label">Diagnóstico</div><div>Analógico</div><div>Inexistente</div><div class="hero-col">Profundo · Deep Research</div>
+        </div>
+        <div class="slide-source">Fonte: <a href="entrega-parcial-2.html">Análise de concorrência — matriz comparativa</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="orbit" style="--accent:#ffca75" aria-label="Slide 10: Estratégia ERRC">
+      <div class="slide-inner content-wide">
+        <div class="eyebrow">07 · Framework ERRC</div>
+        <h2>Redesenhando as regras do jogo.</h2>
+        <div class="errc">
+          <article class="card" style="--accent:#ff7597"><h3>Eliminar</h3><ul><li>Agendamento humano</li><li>Sessões caras e episódicas</li><li>Dependência de nomes licenciados</li></ul></article>
+          <article class="card" style="--accent:#ffca75"><h3>Reduzir</h3><ul><li>Custo de conselho executivo</li><li>Tempo em cursos irrelevantes</li><li>Fricção do diagnóstico</li></ul></article>
+          <article class="card" style="--accent:#55d9ff"><h3>Elevar</h3><ul><li>Precisão via rastro digital</li><li>Velocidade diante de crises</li><li>Clareza intersetorial</li></ul></article>
+          <article class="card" style="--accent:#60e6ad"><h3>Criar</h3><ul><li>Skill Analogy Engine™</li><li>Diário conversacional</li><li>Roleplay executivo</li></ul></article>
+        </div>
+        <div class="slide-source">Fonte: <a href="entrega-parcial-2.html">Estratégia de Diferenciação — ERRC</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="revenue" style="--accent:#55d9ff" aria-label="Slide 11: Modelo de negócios">
+      <div class="slide-inner content-wide">
+        <div class="eyebrow">08 · Modelo de negócios</div>
+        <h2>Receita recorrente no centro.<br>Expansão B2B na borda.</h2>
+        <div class="business-grid">
+          <article class="card">
+            <span class="small-label">Composição da receita · Ano 3</span>
+            <div class="revenue-stack"><div class="rev-pro">83,6% · Pro</div><div class="rev-b2b">16,4%</div></div>
+            <p><b>CareerFlow Pro:</b> mentor, diário e diagnóstico contínuo. <b>Deep Research + B2B:</b> relatórios avulsos e licenças white-label para retenção de lideranças.</p>
+          </article>
+          <article class="card">
+            <span class="small-label">Canais do ecossistema</span>
+            <div class="channel-list"><span>Web App</span><span>WhatsApp</span><span>LinkedIn</span><span>Viral loop</span></div>
+            <p style="margin-top:18px">Freemium abre o funil; assinatura e pay-per-use monetizam; white-label amplia o mercado.</p>
+          </article>
+        </div>
+        <div class="slide-source">Fontes: <a href="entrega-parcial-2.html">Business Model Canvas</a> · <a href="llms-full.txt">Memorial — modelo de receita</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="timeline" style="--accent:#9b87f5" aria-label="Slide 12: Roadmap">
+      <div class="slide-inner content-wide">
+        <div class="eyebrow">09 · Caminho de execução</div>
+        <h2>Da hipótese ao MVP.</h2>
+        <div class="timeline">
+          <article class="milestone"><time>Mai · 2026</time><h3>Validação</h3><p>Entrevistas e teste da hipótese central com profissionais de tecnologia.</p></article>
+          <article class="milestone"><time>Jul · 2026</time><h3>Protótipo</h3><p>Experiência responsiva e jornada conversacional colocadas em teste.</p></article>
+          <article class="milestone"><time>Ago · 2026</time><h3>Business Plan</h3><p>Modelo de negócio, premissas e viabilidade financeira estruturados.</p></article>
+          <article class="milestone"><time>Set · 2026</time><h3>MVP</h3><p>Web App e WhatsApp integrados para validar retenção e disposição a pagar.</p></article>
+        </div>
+        <div class="glass-callout">O produto já possui protótipo interativo em produção — evidência de capacidade técnica para executar a visão.</div>
+        <div class="slide-source">Fontes: <a href="entregaParcial-2.md">5W2H — roadmap</a> · <a href="https://www.careerflow.com.br/">MVP em produção</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="bars" style="--accent:#55d9ff" aria-label="Slide 13: Crescimento financeiro">
+      <div class="slide-inner content-wide">
+        <div class="eyebrow">10 · Projeção de três anos</div>
+        <h2>Crescimento de receita até o break-even.</h2>
+        <div class="bars" aria-label="Receita e EBITDA projetados por ano">
+          <div class="bar-group"><div class="bar revenue" style="--h:7.4;--delay:.1s"><span class="bar-value">R$ 205 mil</span></div><div class="bar negative" style="--h:11;--delay:.18s"><span class="bar-value">−305 mil</span></div><label>Ano 1</label></div>
+          <div class="bar-group"><div class="bar revenue" style="--h:32.6;--delay:.24s"><span class="bar-value">R$ 902 mil</span></div><div class="bar negative" style="--h:18.4;--delay:.32s"><span class="bar-value">−509 mil</span></div><label>Ano 2</label></div>
+          <div class="bar-group"><div class="bar revenue" style="--h:100;--delay:.38s"><span class="bar-value">R$ 2,77 mi</span></div><div class="bar ebitda" style="--h:4;--delay:.48s"><span class="bar-value">+R$ 50 mil</span></div><label>Ano 3</label></div>
+        </div>
+        <div class="chart-legend"><span style="--c:#55d9ff">Receita total</span><span style="--c:#ff7597">EBITDA negativo</span><span style="--c:#60e6ad">EBITDA positivo</span></div>
+        <div class="slide-source">Fonte: <a href="projecao-financeira.html#1">Projeção Financeira — DRE</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="metrics" style="--accent:#60e6ad" aria-label="Slide 14: Unit economics">
+      <div class="slide-inner content-wide kpi-hero">
+        <div>
+          <div class="eyebrow">11 · Unit economics · Ano 3</div>
+          <div class="ratio"><div class="ratio-content"><strong>9,98×</strong><small>LTV / CAC</small></div></div>
+        </div>
+        <div>
+          <h2>A retenção faz a economia funcionar.</h2>
+          <p class="lead">O LTV cresce 4,7× em três anos. A queda do churn pesa mais que o aumento de preço — por isso, retenção é o KPI central.</p>
+          <div class="kpi-list">
+            <div class="kpi"><strong>R$ 7.560</strong><span>LTV projetado</span></div>
+            <div class="kpi"><strong>R$ 757</strong><span>CAC projetado</span></div>
+            <div class="kpi"><strong>4,0 meses</strong><span>Payback</span></div>
+            <div class="kpi"><strong>2,5%</strong><span>Churn mensal</span></div>
+          </div>
+        </div>
+        <div class="slide-source">Fonte: <a href="projecao-financeira.html#1">Dashboard do Investidor — unit economics</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="jcurve" style="--accent:#ffca75" aria-label="Slide 15: Curva J e capital">
+      <div class="slide-inner content-wide jcurve">
+        <div>
+          <div class="eyebrow">12 · Caixa e capital</div>
+          <h2>Uma curva J deliberada — e honesta.</h2>
+          <p class="lead">Dois anos de investimento constroem base e produto. A operação vira positiva no Ano 3, com margem EBITDA de <b class="accent">1,8%</b>.</p>
+          <div class="cards two" style="margin-top:28px">
+            <div class="card metric"><span>Capital externo total</span><strong>R$ 2,4 mi</strong></div>
+            <div class="card metric"><span>Caixa final · Ano 3</span><strong>R$ 1,69 mi</strong></div>
+          </div>
+        </div>
+        <div class="curve-plot" aria-label="Curva J do EBITDA">
+          <div class="zero-line"></div><div class="curve-path"></div>
+          <div class="curve-point" style="left:8%;top:52%;--accent:#ff7597"><span>Ano 1 · −305k</span></div>
+          <div class="curve-point" style="left:43%;top:74%;--accent:#ff7597"><span>Ano 2 · −509k</span></div>
+          <div class="curve-point" style="left:87%;top:29%;--accent:#60e6ad"><span>Ano 3 · +50k</span></div>
+        </div>
+        <div class="slide-source">Fonte: <a href="projecao-financeira.html#1">Projeção Financeira — fluxo de caixa e DRE</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="risks" style="--accent:#ff7597" aria-label="Slide 16: Riscos">
+      <div class="slide-inner content-wide">
+        <div class="eyebrow">13 · Riscos declarados</div>
+        <h2>O que precisa ser verdade.</h2>
+        <div class="risk-grid">
+          <article class="risk"><div class="risk-num">01</div><div><h3>Churn é a premissa mais sensível</h3><p>Se ficar em 4%, LTV/CAC cai de 9,98× para 6,24× — ainda saudável, mas com menos folga.</p></div></article>
+          <article class="risk"><div class="risk-num">02</div><div><h3>Break-even apertado</h3><p>R$ 50 mil de custo adicional no Ano 3 devolvem a operação ao vermelho.</p></div></article>
+          <article class="risk"><div class="risk-num">03</div><div><h3>Custo de inferência não validado</h3><p>A queda de COGS de 38% para 24% depende de eficiência de modelo ainda não medida em produção.</p></div></article>
+          <article class="risk"><div class="risk-num">04</div><div><h3>Runway inicial justo</h3><p>13,6 meses no Ano 1 tornam a rodada seed do Ano 2 parte necessária do plano.</p></div></article>
+        </div>
+        <div class="slide-source">Fonte: <a href="llms-full.txt">Memorial Financeiro — riscos e critérios de validação</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="target" style="--accent:#60e6ad" aria-label="Slide 17: Validação">
+      <div class="slide-inner content-wide">
+        <div class="eyebrow">14 · Critério de verdade</div>
+        <h2>Antes de escalar,<br>o MVP precisa provar retenção.</h2>
+        <div class="validation">
+          <article class="card"><span class="small-label">Próximo marco</span><strong>5–8</strong><h3>entrevistas em profundidade</h3><p>Testar diretamente a dor, a segmentação da persona e a disposição a pagar R$ 97/mês.</p></article>
+          <article class="card"><span class="small-label">Métrica de corte</span><strong>90%</strong><h3>retidos no mês 3</h3><p>Se a coorte piloto não sustentar esse patamar, a premissa de churn deve ser refeita antes da captação.</p></article>
+        </div>
+        <div class="glass-callout">A evolução do TCC incorpora o principal feedback da primeira entrega: sair da validação secundária e confrontar a hipótese com o público real.</div>
+        <div class="slide-source">Fontes: <a href="feedbacks/entrega1.md">Feedback do Entregável 1</a> · <a href="llms-full.txt">Critérios de validação</a></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="constellation" style="--accent:#9b87f5" aria-label="Slide 18: Equipe">
+      <div class="slide-inner content-wide">
+        <div class="eyebrow">15 · O time</div>
+        <h2>Quatro perspectivas.<br>Uma tese em execução.</h2>
+        <div class="team">
+          <article class="member"><img src="team/LuizIhara.jpeg" alt="Luiz Ihara"><div class="member-info"><b>Luiz Ihara</b><span>RM368484</span></div></article>
+          <article class="member"><img src="team/FilipeFragoso.jpeg" alt="Filipe Fragoso"><div class="member-info"><b>Filipe Fragoso</b><span>RM368500</span></div></article>
+          <article class="member"><img src="team/DanielCaminha.jpeg" alt="Daniel Caminha"><div class="member-info"><b>Daniel Caminha</b><span>RM366740</span></div></article>
+          <article class="member"><img src="team/PedroMartins.jpeg" alt="Pedro Martins"><div class="member-info"><b>Pedro Martins</b><span>RM368543</span></div></article>
+        </div>
+        <div class="slide-source">Fonte: <a href="index.html">Portal do Projeto — integrantes</a> · Orientação: Prof. Ricardo Esposto</div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="finale" style="--accent:#55d9ff" aria-label="Slide 19: Encerramento">
+      <div class="slide-inner closing">
+        <div class="eyebrow" style="justify-content:center">CareerFlow AI</div>
+        <h2>Experiência é potência.<br><span class="gradient-text">Direção é movimento.</span></h2>
+        <p class="lead">Uma inteligência de carreira que revela valor, reduz ruído e acompanha cada decisão — do diagnóstico ao próximo cargo.</p>
+        <div class="closing-links">
+          <a href="https://www.careerflow.com.br/" target="_blank" rel="noopener">careerflow.com.br ↗</a>
+          <a href="index.html">Portal do TCC</a>
+          <a href="projecao-financeira.html#1">Projeção financeira</a>
+        </div>
+        <div class="pill-row" style="justify-content:center;margin-top:28px"><span class="pill"><strong>Obrigado.</strong> Perguntas?</span></div>
+        <div class="slide-source" style="left:50%;transform:translateX(-50%);white-space:nowrap">Conteúdo elaborado exclusivamente a partir dos entregáveis e do MVP do TCC CareerFlow AI.</div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="deck-ui" aria-label="Controles da apresentação">
+    <div class="progress-wrap"><span class="counter" id="counter">01 / 19</span><div class="progress"><span class="progress-bar" id="progressBar"></span></div></div>
+    <div class="controls">
+      <button class="control" id="prev" aria-label="Slide anterior" title="Slide anterior (←)">←</button>
+      <button class="control" id="overviewBtn" aria-label="Visão geral" title="Visão geral (O)">▦</button>
+      <button class="control" id="themeBtn" aria-label="Ativar modo escuro" title="Alternar tema (D)">◐</button>
+      <button class="control" id="next" aria-label="Próximo slide" title="Próximo slide (→)">→</button>
+    </div>
+    <div class="hint">Navegar <kbd>←</kbd><kbd>→</kbd> · tema <kbd>D</kbd> · tela cheia <kbd>F</kbd></div>
+  </nav>
+
+  <aside class="help" id="help" aria-hidden="true">
+    <div class="help-card">
+      <h3>Controles da apresentação</h3>
+      <p class="muted">Use o teclado, os botões ou deslize na tela.</p>
+      <div class="shortcuts">
+        <div class="shortcut"><span>Avançar / voltar</span><kbd>← → / espaço</kbd></div>
+        <div class="shortcut"><span>Primeiro / último</span><kbd>Home / End</kbd></div>
+        <div class="shortcut"><span>Tela cheia</span><kbd>F</kbd></div>
+        <div class="shortcut"><span>Visão geral</span><kbd>O</kbd></div>
+        <div class="shortcut"><span>Claro / escuro</span><kbd>D</kbd></div>
+        <div class="shortcut"><span>Ocultar interface</span><kbd>U</kbd></div>
+        <div class="shortcut"><span>Fechar</span><kbd>Esc</kbd></div>
+      </div>
+      <button class="close-help" id="closeHelp">Entendi</button>
+    </div>
+  </aside>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    (() => {
+      'use strict';
+      const slides = [...document.querySelectorAll('.slide')];
+      const counter = document.getElementById('counter');
+      const progressBar = document.getElementById('progressBar');
+      const help = document.getElementById('help');
+      const themeBtn = document.getElementById('themeBtn');
+      let index = Math.max(0, Math.min(slides.length - 1, Number(location.hash.slice(1)) - 1 || 0));
+      let overview = false;
+      let uiVisible = true;
+      let touchX = 0;
+      let darkMode = (() => {
+        try {
+          const savedTheme = localStorage.getItem('careerflow-theme');
+          return savedTheme ? savedTheme === 'dark' : true;
+        } catch (_) { return true; }
+      })();
+
+      function go(next, push = true) {
+        index = Math.max(0, Math.min(slides.length - 1, next));
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+          slide.classList.toggle('before', i < index);
+          slide.setAttribute('aria-hidden', i === index ? 'false' : 'true');
+        });
+        counter.textContent = `${String(index + 1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}`;
+        progressBar.style.width = `${((index + 1) / slides.length) * 100}%`;
+        document.title = `${String(index + 1).padStart(2,'0')} · CareerFlow AI — TCC`;
+        if (push) history.replaceState(null, '', `#${index + 1}`);
+        updateScene(slides[index].dataset.scene, index);
+      }
+
+      function toggleOverview(force) {
+        overview = typeof force === 'boolean' ? force : !overview;
+        document.body.classList.toggle('overview', overview);
+        if (!overview) go(index, false);
+      }
+
+      function toggleHelp(force) {
+        const open = typeof force === 'boolean' ? force : !help.classList.contains('open');
+        help.classList.toggle('open', open);
+        help.setAttribute('aria-hidden', open ? 'false' : 'true');
+      }
+
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+        else document.exitFullscreen?.();
+      }
+
+      function applyTheme(dark, save = true) {
+        darkMode = dark;
+        document.body.classList.toggle('dark', darkMode);
+        themeBtn.textContent = darkMode ? '☀' : '◐';
+        themeBtn.setAttribute('aria-label', darkMode ? 'Ativar modo claro' : 'Ativar modo escuro');
+        themeBtn.title = darkMode ? 'Ativar modo claro (D)' : 'Ativar modo escuro (D)';
+        document.querySelector('meta[name="theme-color"]').content = darkMode ? '#0d1118' : '#f3f1eb';
+        if (save) { try { localStorage.setItem('careerflow-theme', darkMode ? 'dark' : 'light'); } catch (_) {} }
+        updateThreeTheme();
+      }
+
+      document.getElementById('prev').addEventListener('click', () => go(index - 1));
+      document.getElementById('next').addEventListener('click', () => go(index + 1));
+      document.getElementById('overviewBtn').addEventListener('click', () => toggleOverview());
+      themeBtn.addEventListener('click', () => applyTheme(!darkMode));
+      document.getElementById('closeHelp').addEventListener('click', () => toggleHelp(false));
+      help.addEventListener('click', e => { if (e.target === help) toggleHelp(false); });
+      slides.forEach((s, i) => s.addEventListener('click', () => { if (overview) { index = i; toggleOverview(false); } }));
+
+      addEventListener('keydown', e => {
+        if (help.classList.contains('open')) { if (e.key === 'Escape' || e.key.toLowerCase() === 'h') toggleHelp(false); return; }
+        if (overview && e.key === 'Escape') { toggleOverview(false); return; }
+        const key = e.key.toLowerCase();
+        if (['arrowright','arrowdown','pagedown',' '].includes(key)) { e.preventDefault(); go(index + 1); }
+        else if (['arrowleft','arrowup','pageup','backspace'].includes(key)) { e.preventDefault(); go(index - 1); }
+        else if (key === 'home') go(0);
+        else if (key === 'end') go(slides.length - 1);
+        else if (key === 'f') toggleFullscreen();
+        else if (key === 'o') toggleOverview();
+        else if (key === 'd') applyTheme(!darkMode);
+        else if (key === 'h' || key === '?') toggleHelp();
+        else if (key === 'u') { uiVisible = !uiVisible; document.querySelector('.deck-ui').style.opacity = uiVisible ? '1' : '0'; document.querySelector('.brand').style.opacity = uiVisible ? '1' : '0'; }
+      });
+
+      addEventListener('touchstart', e => { touchX = e.changedTouches[0].screenX; }, {passive:true});
+      addEventListener('touchend', e => { const dx = e.changedTouches[0].screenX - touchX; if (Math.abs(dx) > 55) go(index + (dx < 0 ? 1 : -1)); }, {passive:true});
+      addEventListener('hashchange', () => go(Number(location.hash.slice(1)) - 1 || 0, false));
+
+      // Three.js como motion design 2D: uma trajetória executiva, não uma cena 3D.
+      let scene, camera, renderer, clock, routeCurve, rocket, flame, stars, dataDust;
+      let routePast, routeFuture, routePastGeometry, pulse, pulseMaterial, markerGroup;
+      let rocketProgress = 0, targetProgress = 0, accentColor = 0x2457f5;
+      const viewHeight = 10;
+      const wideScenes = new Set(['split','core','network','bridge','matrix','orbit','revenue','timeline','bars','risks','constellation']);
+      const modeColors = { fracture:0xbd493e, risks:0xbd493e, metrics:0x167c62, target:0x167c62, revenue:0x9c6315, jcurve:0x9c6315 };
+
+      function makeRocket() {
+        const group = new THREE.Group();
+        const dark = new THREE.MeshBasicMaterial({color:0x111722});
+        const accent = new THREE.MeshBasicMaterial({color:accentColor});
+        const white = new THREE.MeshBasicMaterial({color:0xffffff});
+
+        const bodyShape = new THREE.Shape();
+        bodyShape.moveTo(0,-.58);
+        bodyShape.bezierCurveTo(.28,-.4,.34,.22,0,.78);
+        bodyShape.bezierCurveTo(-.34,.22,-.28,-.4,0,-.58);
+        const body = new THREE.Mesh(new THREE.ShapeGeometry(bodyShape),dark);
+
+        const leftFin = new THREE.Shape(); leftFin.moveTo(-.18,-.2); leftFin.lineTo(-.47,-.55); leftFin.lineTo(-.14,-.5); leftFin.closePath();
+        const rightFin = new THREE.Shape(); rightFin.moveTo(.18,-.2); rightFin.lineTo(.47,-.55); rightFin.lineTo(.14,-.5); rightFin.closePath();
+        const finL = new THREE.Mesh(new THREE.ShapeGeometry(leftFin),accent);
+        const finR = new THREE.Mesh(new THREE.ShapeGeometry(rightFin),accent);
+        const windowRing = new THREE.Mesh(new THREE.RingGeometry(.105,.16,32),white); windowRing.position.y=.2;
+        const windowCore = new THREE.Mesh(new THREE.CircleGeometry(.095,32),accent); windowCore.position.set(0,.2,.01);
+        const flameShape = new THREE.Shape(); flameShape.moveTo(-.11,-.52); flameShape.quadraticCurveTo(0,-1.05,.11,-.52); flameShape.closePath();
+        flame = new THREE.Mesh(new THREE.ShapeGeometry(flameShape),accent); flame.position.z=-.01;
+
+        group.add(flame,finL,finR,body,windowRing,windowCore);
+        group.userData.accentMaterials=[accent,windowCore.material];
+        group.userData.bodyMaterial=dark;
+        group.userData.detailMaterial=white;
+        group.scale.setScalar(.58);
+        return group;
+      }
+
+      function buildRoute() {
+        const aspect = innerWidth / innerHeight;
+        const right = aspect > 1.25 ? Math.min(viewHeight*aspect*.36,6.15) : 2.15;
+        routeCurve = new THREE.CatmullRomCurve3([
+          new THREE.Vector3(right-.15,-5.6,0), new THREE.Vector3(right+.6,-3.65,0),
+          new THREE.Vector3(right-.38,-1.8,0), new THREE.Vector3(right+.38,.1,0),
+          new THREE.Vector3(right-.5,2.1,0), new THREE.Vector3(right+.24,3.9,0),
+          new THREE.Vector3(right-.18,5.7,0)
+        ]);
+        routeFuture.geometry.dispose();
+        routeFuture.geometry = new THREE.BufferGeometry().setFromPoints(routeCurve.getPoints(160));
+        markerGroup.clear();
+        [0,.18,.36,.54,.72,.9,1].forEach((u,i)=>{
+          const ring = new THREE.Mesh(new THREE.RingGeometry(i===6?.07:.045,i===6?.105:.07,28),new THREE.MeshBasicMaterial({color:i===6?0x111722:0x7b8490,transparent:true,opacity:i===6?.62:.34}));
+          ring.userData.final=i===6;
+          ring.position.copy(routeCurve.getPoint(u)); markerGroup.add(ring);
+        });
+        if(rocket) updateThreeTheme();
+      }
+
+      function initThree() {
+        if (!window.THREE) { document.getElementById('webgl').style.display='none'; return; }
+        scene = new THREE.Scene();
+        const aspect = innerWidth/innerHeight;
+        camera = new THREE.OrthographicCamera(-viewHeight*aspect/2,viewHeight*aspect/2,viewHeight/2,-viewHeight/2,-10,10);
+        camera.position.z=5;
+        renderer = new THREE.WebGLRenderer({canvas:document.getElementById('webgl'),alpha:true,antialias:true,powerPreference:'low-power'});
+        renderer.setPixelRatio(Math.min(devicePixelRatio,1.6)); renderer.setSize(innerWidth,innerHeight);
+        clock = new THREE.Clock();
+
+        const starPositions=[];
+        for(let i=0;i<150;i++){starPositions.push((Math.random()-.5)*viewHeight*aspect,(Math.random()-.5)*viewHeight,0);}
+        const starGeo=new THREE.BufferGeometry(); starGeo.setAttribute('position',new THREE.Float32BufferAttribute(starPositions,3));
+        stars=new THREE.Points(starGeo,new THREE.PointsMaterial({color:0x6d7682,size:.022,transparent:true,opacity:.24})); scene.add(stars);
+
+        const dustPositions=[];
+        for(let i=0;i<70;i++){dustPositions.push((Math.random()-.5)*2,-5+Math.random()*10,0);}
+        const dustGeo=new THREE.BufferGeometry(); dustGeo.setAttribute('position',new THREE.Float32BufferAttribute(dustPositions,3));
+        dataDust=new THREE.Points(dustGeo,new THREE.PointsMaterial({color:accentColor,size:.035,transparent:true,opacity:.16})); scene.add(dataDust);
+
+        routeFuture=new THREE.Line(new THREE.BufferGeometry(),new THREE.LineBasicMaterial({color:0x77808b,transparent:true,opacity:.16})); scene.add(routeFuture);
+        routePastGeometry=new THREE.BufferGeometry();
+        routePastGeometry.setAttribute('position',new THREE.BufferAttribute(new Float32Array(161*3),3));
+        routePast=new THREE.Line(routePastGeometry,new THREE.LineBasicMaterial({color:accentColor,transparent:true,opacity:.58})); scene.add(routePast);
+        markerGroup=new THREE.Group(); scene.add(markerGroup);
+        rocket=makeRocket(); scene.add(rocket);
+        pulseMaterial=new THREE.MeshBasicMaterial({color:accentColor,transparent:true,opacity:.22});
+        pulse=new THREE.Mesh(new THREE.RingGeometry(.36,.375,40),pulseMaterial); scene.add(pulse);
+        buildRoute();
+        updateThreeTheme();
+        addEventListener('resize',resizeThree);
+        animate();
+      }
+
+      function resizeThree(){
+        if(!renderer)return;
+        const aspect=innerWidth/innerHeight;
+        camera.left=-viewHeight*aspect/2; camera.right=viewHeight*aspect/2; camera.top=viewHeight/2; camera.bottom=-viewHeight/2; camera.updateProjectionMatrix();
+        renderer.setSize(innerWidth,innerHeight); renderer.setPixelRatio(Math.min(devicePixelRatio,1.6)); buildRoute();
+      }
+
+      function updateScene(mode,i) {
+        targetProgress=(i+1.2)/(slides.length+.8);
+        accentColor=modeColors[mode]||0x2457f5;
+        const color=new THREE.Color(accentColor);
+        if(routePast) routePast.material.color.copy(color);
+        if(dataDust) dataDust.material.color.copy(color);
+        if(pulseMaterial) pulseMaterial.color.copy(color);
+        if(rocket) rocket.userData.accentMaterials.forEach(m=>m.color.copy(color));
+        document.getElementById('webgl').style.opacity=wideScenes.has(mode)?'.34':'.72';
+      }
+
+      function updateThreeTheme() {
+        if (!rocket) return;
+        const dark=document.body.classList.contains('dark');
+        rocket.userData.bodyMaterial.color.setHex(dark?0xf2f0e9:0x111722);
+        rocket.userData.detailMaterial.color.setHex(dark?0x111722:0xffffff);
+        stars.material.color.setHex(dark?0xb3bac4:0x6d7682);
+        routeFuture.material.color.setHex(dark?0xa8b0bb:0x77808b);
+        markerGroup.children.forEach(marker=>marker.material.color.setHex(marker.userData.final?(dark?0xf2f0e9:0x111722):(dark?0x9da6b2:0x7b8490)));
+      }
+
+      function animate(){
+        if(!renderer)return;
+        requestAnimationFrame(animate);
+        const t=clock.getElapsedTime();
+        rocketProgress+=(targetProgress-rocketProgress)*.045;
+        const point=routeCurve.getPoint(Math.max(0,Math.min(1,rocketProgress)));
+        const tangent=routeCurve.getTangent(Math.max(0,Math.min(.999,rocketProgress)));
+        rocket.position.copy(point); rocket.rotation.z=Math.atan2(tangent.y,tangent.x)-Math.PI/2;
+        flame.scale.y=.82+Math.sin(t*8)*.16; flame.material.opacity=.9;
+        pulse.position.copy(point); const pulseScale=1+(t%1.8)*.75; pulse.scale.setScalar(pulseScale); pulseMaterial.opacity=.18*(1-(t%1.8)/1.8);
+
+        const count=Math.max(2,Math.floor(rocketProgress*160));
+        const attr=routePastGeometry.attributes.position;
+        for(let i=0;i<count;i++){const p=routeCurve.getPoint(i/160);attr.setXYZ(i,p.x,p.y,p.z);}
+        attr.needsUpdate=true; routePastGeometry.setDrawRange(0,count);
+
+        const dustAttr=dataDust.geometry.attributes.position;
+        const routeX=point.x;
+        for(let i=0;i<dustAttr.count;i++){
+          let y=dustAttr.getY(i)+.003+(i%7)*.00035;
+          if(y>5)y=-5;
+          dustAttr.setY(i,y); dustAttr.setX(i,routeX-1.05+(i%11)*.19+Math.sin(t*.35+i)*.025);
+        }
+        dustAttr.needsUpdate=true;
+        stars.position.y=Math.sin(t*.12)*.025;
+        renderer.render(scene,camera);
+      }
+
+      applyTheme(darkMode, false);
+      initThree();
+      go(index, false);
+    })();
+  </script>
+</body>
+</html>
