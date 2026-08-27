@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ed145b">
+  <meta name="description" content="Comparativo das jornadas de bem-estar corporativo de Wellhub e TotalPass — Experiências de Produto, FIAP.">
+  <title>Bem-estar em movimento — Wellhub × TotalPass</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": "Bem-estar em movimento — Wellhub × TotalPass",
+      "headline": "Comparação das jornadas do cliente de Wellhub e TotalPass",
+      "description": "Apresentação acadêmica interativa que compara as jornadas AS IS de duas plataformas concorrentes de bem-estar corporativo e propõe melhorias compartilhadas para transformar acesso ao benefício em hábito sustentável.",
+      "abstract": "O trabalho analisa a experiência B2B2C da pessoa colaboradora desde a comunicação do benefício pelo RH, passando por elegibilidade, pesquisa, escolha do plano, ativação, primeiro acesso, uso continuado, percepção de valor, suporte e compartilhamento. A tese central é que oferecer acesso e amplitude de rede não basta: a experiência precisa orientar a escolha, garantir confiança antes do primeiro acesso, apoiar os primeiros 21 dias e facilitar um recomeço sem culpa. As conclusões são hipóteses de design baseadas em pesquisa documental e análise heurística, não resultados de pesquisa de campo.",
+      "inLanguage": "pt-BR",
+      "learningResourceType": "Apresentação acadêmica interativa em HTML",
+      "educationalUse": "Trabalho da disciplina Experiências de Produto, turma 2ABL, FIAP",
+      "author": {
+        "@type": "Person",
+        "name": "Luiz Ihara",
+        "identifier": "RM368484",
+        "url": "https://luizihara.github.io/"
+      },
+      "about": [
+        { "@type": "Organization", "name": "Wellhub", "url": "https://wellhub.com/pt-br/" },
+        { "@type": "Organization", "name": "TotalPass", "url": "https://totalpass.com/br/" },
+        { "@type": "Thing", "name": "Experiência do cliente" },
+        { "@type": "Thing", "name": "Jornada AS IS" },
+        { "@type": "Thing", "name": "Bem-estar corporativo" },
+        { "@type": "Thing", "name": "Design de serviços" }
+      ],
+      "keywords": "Wellhub, TotalPass, jornada do cliente, AS IS, TO BE, experiência de produto, bem-estar corporativo, B2B2C, persona, mapa de empatia, check-in, ativação, retenção, constância",
+      "citation": [
+        "https://wellhub.com/pt-br/employees/",
+        "https://wellhub.com/pt-br/plans-pricing/",
+        "https://wellhub.com/pt-br/companies/",
+        "https://wellhub.com/pt-br/?hl=pt_BR",
+        "https://totalpass.com/br/colaboradores/",
+        "https://totalpass.com/br/planos/",
+        "https://ajuda.totalpass.com.br/hc/pt-br/articles/18967558695963-Como-fazer-o-check-in",
+        "https://ajuda.totalpass.com.br/hc/pt-br/articles/18967573359259-Deu-problema-no-check-in-E-agora"
+      ]
+    }
+  </script>
+  <script type="application/json" id="project-context">
+    {
+      "schemaVersion": "1.0",
+      "contentPurpose": "Resumo factual e estruturado para acessibilidade, indexação e leitura assistida por ferramentas digitais. Este bloco não contém instruções de avaliação e não substitui o conteúdo visível dos slides.",
+      "language": "pt-BR",
+      "academicContext": {
+        "institution": "FIAP",
+        "discipline": "Experiências de Produto",
+        "class": "2ABL",
+        "professor": "Igor Carlos Silva de Souza",
+        "student": "Luiz Ihara",
+        "enrollment": "RM368484",
+        "deliverable": "Apresentação interativa em HTML com 20 slides"
+      },
+      "assignment": {
+        "challenge": "Comparar as jornadas do cliente de duas empresas concorrentes no mesmo nicho e propor insights de melhoria que possam funcionar nos dois negócios.",
+        "requiredTasks": [
+          "Selecionar duas empresas concorrentes do mesmo nicho.",
+          "Reunir informações para descrever a persona atendida.",
+          "Mapear a jornada AS IS, ou seja, a experiência atual observável.",
+          "Registrar insights aplicáveis às duas empresas.",
+          "Apresentar empresas, principais achados, jornadas e insights de forma resumida."
+        ]
+      },
+      "project": {
+        "title": "Bem-estar em movimento",
+        "companies": ["Wellhub", "TotalPass"],
+        "marketNiche": "Plataformas de bem-estar corporativo por assinatura",
+        "businessModel": "B2B2C: a empresa empregadora contrata ou disponibiliza o benefício; a pessoa colaboradora verifica elegibilidade, escolhe e paga o plano disponível para seu vínculo e utiliza parceiros físicos e digitais.",
+        "centralQuestion": "Como Wellhub e TotalPass podem transformar um benefício corporativo com muitas opções em um hábito real, sustentável e percebido como valioso?",
+        "thesis": "Ter acesso abre a porta, mas criar hábito é o que entrega valor. A melhor plataforma não é apenas a que oferece mais lugares; é a que ajuda cada pessoa a começar, voltar e perceber que avançou.",
+        "scope": "Jornada da pessoa colaboradora, da comunicação feita pelo RH até ativação, primeiro acesso, constância, recuperação de falhas e percepção de valor.",
+        "outOfScope": [
+          "Jornada comercial completa de venda para o RH.",
+          "Experiência operacional detalhada das academias parceiras.",
+          "Comparação financeira de market share ou rentabilidade.",
+          "Conclusões estatísticas sobre satisfação de clientes."
+        ]
+      },
+      "researchApproach": {
+        "type": "Desk research e análise heurística",
+        "researchDate": "2026-08-26",
+        "evidence": [
+          "Sites oficiais das empresas.",
+          "Páginas de planos e preços.",
+          "Páginas destinadas a colaboradores e empresas.",
+          "Central de ajuda e documentação de check-in da TotalPass."
+        ],
+        "interpretationRule": "Fatos diretamente observáveis são associados às fontes. Emoções, notas comparativas, gargalos e oportunidades são hipóteses de design que precisam ser validadas com entrevistas, observação e dados comportamentais.",
+        "importantComparisonCaveat": "Os números de rede têm escopos diferentes: a Wellhub comunica indicadores globais, enquanto a TotalPass comunica indicadores do Brasil. Eles contextualizam amplitude declarada, mas não constituem comparação direta de market share."
+      },
+      "companySummaries": {
+        "Wellhub": {
+          "positioning": "Benefício corporativo de bem-estar com rede global e flexibilidade.",
+          "offer": "Atividades físicas, academias, estúdios, mindfulness, terapia, nutrição, sono e serviços digitais em uma assinatura elegível pelo vínculo empresarial.",
+          "declaredScale": "Mais de 110 mil academias e estúdios na rede global e mais de 14 mil aulas e aplicativos declarados globalmente.",
+          "experienceEmphasis": "Amplitude de ecossistema, variedade de modalidades, flexibilidade para mudar ou pausar o plano e possibilidade de incluir familiares conforme condições aplicáveis."
+        },
+        "TotalPass": {
+          "positioning": "Ecossistema nacional de bem-estar corporativo com variedade física, mental e nutricional.",
+          "offer": "Academias, estúdios, mais de 250 modalidades declaradas, terapia, nutrição, aplicativos e recursos de engajamento.",
+          "declaredScale": "Mais de 35 mil academias e parceiros no Brasil, distribuídos em diferentes faixas de planos.",
+          "experienceEmphasis": "Ampla rede brasileira, até três dependentes conforme condições, ausência de fidelidade ou taxa de cancelamento informada e check-in com geolocalização confirmado pelo parceiro."
+        }
+      },
+      "persona": {
+        "type": "Proto-persona composta para orientar a análise",
+        "name": "Beatriz Nogueira",
+        "age": 33,
+        "occupation": "Coordenadora de Product Ops",
+        "location": "São Paulo",
+        "workModel": "Híbrido",
+        "monthlyIncome": "R$ 8,2 mil",
+        "behaviors": ["Mobile first", "Pesquisa academias perto de casa e do trabalho", "Compara planos e modalidades", "Adia quando a escolha fica complexa"],
+        "goals": ["Voltar a se movimentar", "Encontrar algo compatível com agenda imprevisível", "Construir constância sem rigidez", "Perceber valor no benefício"],
+        "painPoints": ["Excesso de opções sem orientação", "Dúvida sobre qual plano inclui cada parceiro", "Insegurança no primeiro acesso", "Culpa ao perder frequência", "Risco de transformar uma pausa em abandono"],
+        "representativeQuote": "Não preciso de mais uma lista de academias. Preciso descobrir o que cabe na minha rotina sem me sentir culpada quando falhar."
+      },
+      "asIsJourneyFramework": {
+        "definition": "Representação da experiência atual observável ou inferida a partir das evidências disponíveis.",
+        "companiesMappedSeparately": true,
+        "maps": [
+          "Wellhub — pré-uso",
+          "Wellhub — uso",
+          "Wellhub — pós-uso",
+          "TotalPass — pré-uso",
+          "TotalPass — uso",
+          "TotalPass — pós-uso"
+        ],
+        "preUseStages": ["Conscientização", "Pesquisa", "Decisão"],
+        "useStages": ["Compra ou aquisição", "Primeiro acesso ou uso", "Uso continuado"],
+        "postUseStages": ["Lembrança e percepção de valor", "Feedback e avaliação", "Compartilhamento"],
+        "rowsAnalyzed": ["História", "Ações", "Pontos de contato", "Emoções", "Gargalos e pontos de dor", "Oportunidades e responsáveis", "Insights e responsáveis"]
+      },
+      "keyFindings": [
+        {
+          "finding": "Amplitude não equivale a orientação.",
+          "explanation": "As duas plataformas apresentam redes e serviços amplos, mas a pessoa ainda precisa cruzar plano, localização, horário, modalidade, orçamento e objetivo para descobrir o que realmente cabe em sua vida."
+        },
+        {
+          "finding": "O primeiro acesso é o principal momento de validação da promessa.",
+          "explanation": "Elegibilidade, plano, parceiro, reserva, geolocalização e recepção precisam concordar. Uma falha diante da catraca gera vulnerabilidade e pode interromper a adoção."
+        },
+        {
+          "finding": "Flexibilidade reduz barreiras, mas não cria constância sozinha.",
+          "explanation": "Trocar ou pausar planos e escolher diferentes modalidades ajuda a adaptar o serviço, porém o catálogo não conduz automaticamente à formação de hábito."
+        },
+        {
+          "finding": "Uma ausência curta pode virar abandono.",
+          "explanation": "Sem uma rota gentil de retorno, semanas corridas produzem culpa, sensação de desperdício e cancelamento de um hábito ainda frágil."
+        },
+        {
+          "finding": "A responsabilidade por falhas pode ficar fragmentada.",
+          "explanation": "Problemas podem envolver plataforma, empresa empregadora, plano, pagamento ou parceiro. A pessoa não deveria diagnosticar o ecossistema antes de receber ajuda."
+        }
+      ],
+      "momentsOfTruth": [
+        { "moment": "Antes da assinatura", "question": "Qual plano realmente cabe na minha rotina?", "risk": "Plano escolhido sem contexto." },
+        { "moment": "Na primeira entrada", "question": "A promessa funciona na catraca?", "risk": "Incompatibilidade de plano, localização, reserva ou operação do parceiro." },
+        { "moment": "Depois da empolgação", "question": "Como voltar após falhar?", "risk": "A queda de frequência se transforma em abandono." }
+      ],
+      "sharedImprovementInsights": [
+        {
+          "name": "Plano que cabe na vida",
+          "proposal": "Recomendar opções considerando casa, trabalho, horários, objetivo e orçamento, explicando por que cada opção foi indicada.",
+          "owners": ["Produto", "Dados", "Pricing"]
+        },
+        {
+          "name": "Confiança antes da catraca",
+          "proposal": "Criar um pré-check que valide elegibilidade, plano, unidade, agendamento, GPS e regras antes de a pessoa sair de casa.",
+          "owners": ["Operações de parceiros", "Plataforma", "CX"]
+        },
+        {
+          "name": "Primeiros 21 dias guiados",
+          "proposal": "Oferecer trilha leve e adaptável que ajude no primeiro uso, celebre retornos iniciais e reduza a pressão de fazer tudo perfeitamente.",
+          "owners": ["Engajamento", "Design comportamental"]
+        },
+        {
+          "name": "Recomeço, não cobrança",
+          "proposal": "Ao detectar queda de frequência, oferecer meta menor, opção digital, pausa ou nova rota, evitando mensagens de culpa.",
+          "owners": ["CRM", "Produto", "Dados", "Saúde"]
+        }
+      ],
+      "toBeJourney": [
+        { "stage": "Descobrir", "futureExperience": "RH apresenta a proposta, a plataforma confirma elegibilidade e traduz o benefício para o contexto da pessoa." },
+        { "stage": "Escolher", "futureExperience": "Um mecanismo de plano-fit apresenta três opções justificadas por localização, agenda, modalidade, objetivo e orçamento." },
+        { "stage": "Começar", "futureExperience": "Pré-check, unidade compatível e primeira atividade reservada garantem um primeiro acesso sem ambiguidade." },
+        { "stage": "Sustentar", "futureExperience": "Jornada de 21 dias, progresso privado e modo recomeço adaptam o serviço quando a rotina muda." }
+      ],
+      "implementationRoadmap": [
+        { "period": "0–30 dias", "goal": "Localizar o abandono", "activities": "Entrevistar recém-ativados e inativos; analisar suporte, falhas de check-in e funil de escolha do plano." },
+        { "period": "31–60 dias", "goal": "Testar escolha e acesso sem dúvida", "activities": "Prototipar plano-fit e pré-check com empresas e parceiros selecionados." },
+        { "period": "61–90 dias", "goal": "Construir constância", "activities": "Pilotar onboarding de 21 dias e modo recomeço em uma coorte corporativa." }
+      ],
+      "successMetrics": [
+        "Conversão de elegibilidade para ativação.",
+        "Percentual de pessoas com primeiro check-in em até sete dias.",
+        "Retenção ativa em quatro semanas.",
+        "Taxa de falha de check-in.",
+        "Customer Effort Score após recuperação de falha.",
+        "Retenção do plano em 90 dias."
+      ],
+      "limitations": [
+        "Não foram realizadas entrevistas, testes de usabilidade ou observação presencial.",
+        "A persona é uma hipótese composta, não um indivíduo entrevistado.",
+        "As emoções e notas da matriz são interpretações qualitativas.",
+        "Disponibilidade, preços, rede e serviços podem variar por empresa contratante, localização, plano e data.",
+        "Os insights devem ser validados antes de implementação em escala."
+      ],
+      "slideGuide": {
+        "1": "Capa e identificação acadêmica.",
+        "2": "Tese central: acesso é começo; constância entrega valor.",
+        "3": "Escopo do desafio.",
+        "4": "Método, evidências e limites.",
+        "5": "Resumo das empresas e do nicho.",
+        "6": "Proto-persona Beatriz Nogueira.",
+        "7": "Mapa de empatia.",
+        "8-10": "Jornada AS IS da Wellhub: pré-uso, uso e pós-uso.",
+        "11-13": "Jornada AS IS da TotalPass: pré-uso, uso e pós-uso.",
+        "14": "Matriz comparativa heurística.",
+        "15": "Três momentos da verdade.",
+        "16": "Quatro insights compartilhados.",
+        "17": "Jornada futura TO BE.",
+        "18": "Roadmap de implementação em 90 dias.",
+        "19": "Métricas e conclusão.",
+        "20": "Fontes e rastreabilidade."
+      },
+      "interactionAndVisualDesign": {
+        "style": "Apresentação em HTML inspirada na linguagem visual da FIAP em light mode.",
+        "navigation": "Setas do teclado, botões, swipe e clique na metade esquerda ou direita da tela.",
+        "progressMetaphor": "A partir do slide 5, personagens de Wellhub e TotalPass avançam por uma trilha diagonal do canto inferior esquerdo ao superior direito, um ponto por slide. Em slides exclusivos de uma empresa, somente seu personagem aparece; no último slide, ambos chegam ao topo.",
+        "accessibility": "Controles possuem rótulos, links preservam comportamento próprio, movimentos respeitam prefers-reduced-motion e a apresentação pode ser impressa ou salva em PDF."
+      },
+      "sources": [
+        { "id": 1, "organization": "Wellhub", "topic": "Colaboradores, elegibilidade, flexibilidade e ecossistema", "url": "https://wellhub.com/pt-br/employees/" },
+        { "id": 2, "organization": "Wellhub", "topic": "Planos, rede e modalidades", "url": "https://wellhub.com/pt-br/plans-pricing/" },
+        { "id": 3, "organization": "Wellhub", "topic": "Proposta corporativa para empresas", "url": "https://wellhub.com/pt-br/companies/" },
+        { "id": 4, "organization": "Wellhub", "topic": "Modelo do benefício no Brasil", "url": "https://wellhub.com/pt-br/?hl=pt_BR" },
+        { "id": 5, "organization": "TotalPass", "topic": "Benefícios para colaboradores, modalidades e dependentes", "url": "https://totalpass.com/br/colaboradores/" },
+        { "id": 6, "organization": "TotalPass", "topic": "Faixas de planos e rede", "url": "https://totalpass.com/br/planos/" },
+        { "id": 7, "organization": "TotalPass", "topic": "Como realizar check-in", "url": "https://ajuda.totalpass.com.br/hc/pt-br/articles/18967558695963-Como-fazer-o-check-in" },
+        { "id": 8, "organization": "TotalPass", "topic": "Problemas e causas de falha no check-in", "url": "https://ajuda.totalpass.com.br/hc/pt-br/articles/18967573359259-Deu-problema-no-check-in-E-agora" }
+      ]
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;600&display=swap');
+
+    :root {
+      --pink: #ed145b;
+      --pink-dark: #b40d43;
+      --pink-soft: #fff0f5;
+      --ink: #151515;
+      --muted: #686868;
+      --line: #dadada;
+      --paper: #f8f7f4;
+      --white: #ffffff;
+      --green: #15956b;
+      --amber: #d97706;
+      --red: #d4414c;
+      --shadow: 0 24px 80px rgba(20, 20, 20, .14);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+    body {
+      background: #e9e8e4;
+      color: var(--ink);
+      font-family: Inter, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, a { font: inherit; }
+    button { color: inherit; }
+    a { color: inherit; }
+
+    .deck {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      isolation: isolate;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      width: 100%;
+      height: 100%;
+      padding: clamp(28px, 4vw, 64px) clamp(30px, 6vw, 96px) clamp(28px, 4vw, 54px);
+      background:
+        linear-gradient(90deg, transparent calc(100% - 1px), rgba(0,0,0,.025) 1px) 0 0 / 8.333% 100%,
+        var(--paper);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(40px);
+      transition: opacity .45s ease, transform .55s cubic-bezier(.2,.75,.2,1), visibility .45s;
+      overflow: hidden;
+    }
+    .slide.active { opacity: 1; visibility: visible; transform: translateX(0); z-index: 2; }
+    .slide.before { transform: translateX(-40px); }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 7px;
+      height: 100%;
+      background: var(--pink);
+    }
+
+    .topline, .footer {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .topline {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: "Roboto Mono", monospace;
+      font-size: 11px;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+    .brand { color: var(--pink); font-family: Inter, sans-serif; font-size: 17px; font-weight: 900; letter-spacing: -.05em; }
+    .section-code { white-space: nowrap; }
+    .footer {
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-family: "Roboto Mono", monospace;
+      font-size: 10px;
+      letter-spacing: .04em;
+    }
+    .footer strong { color: var(--ink); font-weight: 600; }
+
+    .content {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 0;
+      padding: clamp(24px, 4vh, 46px) 0;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--pink);
+      font-family: "Roboto Mono", monospace;
+      font-size: clamp(10px, .9vw, 13px);
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { letter-spacing: -.055em; }
+    h1 { margin-bottom: 24px; font-size: clamp(58px, 8.8vw, 138px); line-height: .82; font-weight: 900; }
+    h2 { margin-bottom: 24px; max-width: 1050px; font-size: clamp(38px, 5.4vw, 82px); line-height: .94; font-weight: 900; }
+    h3 { margin-bottom: 10px; font-size: clamp(18px, 1.75vw, 28px); line-height: 1.05; font-weight: 800; }
+    .accent { color: var(--pink); }
+    .outline { color: transparent; -webkit-text-stroke: 1.5px var(--ink); }
+    .company-name {
+      --company-line: var(--pink);
+      --underline-delay: .14s;
+      position: relative;
+      display: inline-block;
+      white-space: nowrap;
+    }
+    .company-name.wellhub-name { --company-line: #5b4191; }
+    .company-name.totalpass-name { --company-line: #26a968; }
+    .company-name::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -.08em;
+      height: clamp(2px, .07em, 5px);
+      background: var(--company-line);
+      border-radius: 999px;
+      transform: scaleX(0);
+      transform-origin: left center;
+    }
+    .slide.active .company-name::after {
+      animation: companyUnderline .68s cubic-bezier(.2,.78,.2,1) var(--underline-delay) forwards;
+    }
+    @keyframes companyUnderline {
+      0% { transform: scaleX(0); opacity: .2; }
+      70% { transform: scaleX(1.06); opacity: 1; }
+      100% { transform: scaleX(1); opacity: 1; }
+    }
+    .lead { max-width: 850px; margin-bottom: 0; color: #343434; font-size: clamp(16px, 1.55vw, 24px); line-height: 1.45; }
+    .small { font-size: 12px; line-height: 1.5; color: var(--muted); }
+
+    .cover .content { justify-content: flex-end; padding-bottom: 5vh; }
+    .cover::after {
+      content: "×";
+      position: absolute;
+      right: 3.2vw;
+      top: 10vh;
+      color: var(--pink);
+      font-size: clamp(110px, 20vw, 320px);
+      font-weight: 300;
+      line-height: .7;
+      opacity: .12;
+    }
+    .cover-meta {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      align-items: end;
+      justify-content: start;
+      gap: clamp(30px, 6vw, 90px);
+      margin-top: 46px;
+    }
+    .meta-label { display: block; margin-bottom: 6px; color: var(--muted); font-family: "Roboto Mono", monospace; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+    .meta-value { font-size: clamp(13px, 1.2vw, 18px); font-weight: 700; }
+
+    .start-cue {
+      position: absolute;
+      right: clamp(22px, 3.4vw, 56px);
+      top: 50%;
+      z-index: 6;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      color: var(--pink);
+      cursor: pointer;
+      transform: translateY(-50%);
+    }
+    .start-cue-label { font-family: "Roboto Mono", monospace; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .start-cue-arrow {
+      display: grid;
+      place-items: center;
+      width: clamp(54px, 5vw, 72px);
+      height: clamp(54px, 5vw, 72px);
+      background: var(--pink);
+      border: 1px solid var(--pink);
+      border-radius: 50%;
+      color: white;
+      font-size: clamp(25px, 2.5vw, 38px);
+      line-height: 1;
+      box-shadow: 0 14px 36px rgba(237,20,91,.24);
+      animation: cueNudge 1.6s cubic-bezier(.2,.75,.2,1) infinite;
+    }
+    .start-cue:hover .start-cue-arrow, .start-cue:focus-visible .start-cue-arrow { background: var(--ink); border-color: var(--ink); }
+    .start-cue:focus-visible { outline: 2px solid var(--pink); outline-offset: 7px; }
+    @keyframes cueNudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(9px); } }
+
+    .site-bubble {
+      position: absolute;
+      right: clamp(30px, 6vw, 96px);
+      bottom: clamp(78px, 10vh, 104px);
+      z-index: 5;
+      min-width: 230px;
+      padding: 13px 17px;
+      background: var(--ink);
+      color: white;
+      border-radius: 3px;
+      box-shadow: 0 14px 36px rgba(0,0,0,.16);
+      font-family: "Roboto Mono", monospace;
+      text-decoration: none;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .site-bubble::after {
+      content: "";
+      position: absolute;
+      right: 18px;
+      bottom: -10px;
+      width: 0;
+      height: 0;
+      border-top: 11px solid var(--ink);
+      border-left: 11px solid transparent;
+    }
+    .site-bubble span { display: block; margin-bottom: 4px; color: #bdbdbd; font-size: 8px; letter-spacing: .08em; text-transform: uppercase; }
+    .site-bubble strong { color: white; font-size: 12px; }
+    .site-bubble:hover, .site-bubble:focus-visible { background: var(--pink); transform: translateY(-2px); outline: none; }
+    .site-bubble:hover::after, .site-bubble:focus-visible::after { border-top-color: var(--pink); }
+
+    .split { display: grid; grid-template-columns: 1.05fr .95fr; align-items: stretch; gap: clamp(24px, 4vw, 64px); }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(14px, 2vw, 26px); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.7vw, 24px); }
+
+    .card {
+      position: relative;
+      padding: clamp(18px, 2vw, 30px);
+      background: rgba(255,255,255,.83);
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.04);
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      left: -1px;
+      top: -1px;
+      width: 24px;
+      height: 3px;
+      background: var(--pink);
+    }
+    .card-kicker { margin-bottom: 20px; color: var(--pink); font-family: "Roboto Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+    .card p { margin-bottom: 0; color: #4b4b4b; font-size: clamp(12px, 1vw, 15px); line-height: 1.45; }
+    .big-number { display: block; margin-bottom: 12px; color: var(--pink); font-size: clamp(36px, 4vw, 62px); font-weight: 900; letter-spacing: -.07em; line-height: .9; }
+
+    .statement {
+      padding-left: 24px;
+      border-left: 4px solid var(--pink);
+      font-size: clamp(25px, 3.2vw, 50px);
+      font-weight: 800;
+      letter-spacing: -.045em;
+      line-height: 1.08;
+    }
+
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 6px 10px;
+      background: white;
+      border: 1px solid var(--line);
+      color: #444;
+      font-family: "Roboto Mono", monospace;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .pill.pink { background: var(--pink); border-color: var(--pink); color: white; }
+
+    .method-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 12px; }
+    .method-step { position: relative; padding: 22px 22px 20px 0; border-top: 2px solid var(--ink); }
+    .method-step:not(:last-child)::after { content: "→"; position: absolute; right: 14px; top: 20px; color: var(--pink); font-size: 20px; }
+    .method-step span { display: block; margin-bottom: 22px; color: var(--pink); font-family: "Roboto Mono", monospace; font-size: 11px; }
+    .method-step h3 { max-width: 180px; font-size: clamp(17px, 1.5vw, 23px); }
+    .method-step p { max-width: 200px; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
+
+    .company-card { min-height: 290px; display: flex; flex-direction: column; justify-content: space-between; }
+    .wordmark { margin-bottom: 24px; font-size: clamp(36px, 5vw, 74px); font-weight: 900; letter-spacing: -.08em; }
+    .wordmark.wellhub { color: #5b4191; }
+    .wordmark.totalpass { color: #26d07c; }
+    .company-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 24px; }
+    .company-stats div { padding-top: 12px; border-top: 1px solid var(--line); }
+    .company-stats strong { display: block; font-size: clamp(18px, 2vw, 30px); letter-spacing: -.05em; }
+    .company-stats span { color: var(--muted); font-size: 10px; line-height: 1.35; }
+
+    .persona { display: grid; grid-template-columns: .65fr 1.35fr; gap: clamp(28px, 5vw, 74px); align-items: center; }
+    .avatar-wrap { position: relative; aspect-ratio: 1; display: grid; place-items: center; max-width: 370px; background: var(--pink-soft); border: 1px solid #f3b1c8; border-radius: 50%; }
+    .avatar-wrap::before, .avatar-wrap::after { content: ""; position: absolute; border: 1px solid var(--pink); border-radius: 50%; }
+    .avatar-wrap::before { inset: 8%; opacity: .35; }
+    .avatar-wrap::after { inset: 18%; opacity: .18; }
+    .avatar-initials { position: relative; z-index: 2; color: var(--pink); font-size: clamp(54px, 8vw, 116px); font-weight: 900; letter-spacing: -.1em; }
+    .persona-name { margin-bottom: 8px; font-size: clamp(36px, 5vw, 72px); font-weight: 900; letter-spacing: -.065em; line-height: .95; }
+    .persona-quote { margin: 22px 0 0; padding-left: 18px; border-left: 3px solid var(--pink); color: #3b3b3b; font-size: clamp(15px, 1.4vw, 22px); font-style: italic; line-height: 1.4; }
+
+    .empathy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .empathy-grid .card { padding: clamp(14px, 1.6vw, 22px); min-height: 126px; }
+    .empathy-grid h3 { margin-bottom: 7px; font-size: clamp(15px, 1.25vw, 20px); }
+    .empathy-grid .center-card { background: var(--pink); color: white; border-color: var(--pink); }
+    .empathy-grid .center-card::before { background: white; }
+    .empathy-grid .center-card p, .empathy-grid .center-card .card-kicker { color: white; }
+
+    .stage-track { display: grid; grid-template-columns: repeat(9, 1fr); gap: 6px; margin-top: 28px; }
+    .stage { position: relative; min-height: 112px; padding: 14px 9px; background: white; border: 1px solid var(--line); }
+    .stage::before { content: attr(data-n); display: block; margin-bottom: 14px; color: var(--pink); font-family: "Roboto Mono", monospace; font-size: 10px; }
+    .stage strong { display: block; font-size: clamp(9px, .82vw, 13px); line-height: 1.2; }
+    .phase-band { display: grid; grid-template-columns: 3fr 3fr 3fr; gap: 6px; margin-top: 8px; }
+    .phase-band span { padding: 8px 10px; background: var(--ink); color: white; font-family: "Roboto Mono", monospace; font-size: 9px; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
+    .phase-band span:nth-child(2) { background: var(--pink); }
+
+    .journey-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .journey-card { min-height: 220px; padding: clamp(15px, 1.6vw, 22px); background: rgba(255,255,255,.86); border: 1px solid var(--line); }
+    .journey-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 13px; }
+    .journey-head h3 { margin: 0; font-size: clamp(15px, 1.25vw, 20px); letter-spacing: -.035em; }
+    .emotion { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; font-family: "Roboto Mono", monospace; font-size: 8px; font-weight: 600; text-transform: uppercase; }
+    .emotion::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .emotion.good { color: var(--green); }
+    .emotion.mid { color: var(--amber); }
+    .emotion.bad { color: var(--red); }
+    .journey-line { margin: 0 0 8px; color: #4d4d4d; font-size: clamp(9px, .8vw, 12px); line-height: 1.35; }
+    .journey-line b { color: var(--ink); }
+    .pain { margin-top: 12px; padding: 9px 10px; background: #fff2f3; border-left: 3px solid var(--red); color: #7f2931; font-size: clamp(9px, .78vw, 11px); line-height: 1.35; }
+    .journey-grid.six { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .journey-grid.six .journey-card { min-height: 165px; }
+
+    .map-slide .content { justify-content: flex-start; padding: 16px 0 12px; }
+    .map-slide .map-heading { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 12px; }
+    .map-slide .map-heading h2 { margin: 0; font-size: clamp(30px, 3.8vw, 58px); line-height: .92; }
+    .map-slide .map-heading .eyebrow { margin-bottom: 7px; }
+    .map-company {
+      flex: 0 0 auto;
+      color: var(--pink);
+      font-size: clamp(24px, 3vw, 44px);
+      font-weight: 900;
+      letter-spacing: -.07em;
+    }
+    .map-company.wellhub { color: #5b4191; }
+    .map-company.totalpass { color: #26a968; }
+    .journey-table-wrap { width: 100%; overflow-x: auto; border: 1px solid #cfcfcf; background: white; }
+    .journey-table {
+      width: 100%;
+      min-width: 880px;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: clamp(8px, .67vw, 10.5px);
+    }
+    .journey-table col.row-label { width: 13%; }
+    .journey-table col.stage-col { width: 29%; }
+    .journey-table th, .journey-table td { border: 1px solid #dedede; vertical-align: middle; }
+    .journey-table .phase-title th {
+      padding: 7px 10px;
+      background: var(--pink);
+      color: white;
+      border-color: var(--pink);
+      font-family: "Roboto Mono", monospace;
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .journey-table .phase-title .as-is { background: var(--ink); border-color: var(--ink); text-align: left; }
+    .journey-table .stage-head th {
+      padding: 10px 9px;
+      background: #858585;
+      color: white;
+      font-family: "Roboto Mono", monospace;
+      font-size: 9px;
+      letter-spacing: .035em;
+      text-transform: uppercase;
+    }
+    .journey-table .stage-head th:first-child { background: #6e6e6e; text-align: left; }
+    .journey-table .row-head {
+      padding: 8px 10px;
+      background: #858585;
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: left;
+    }
+    .journey-table td { padding: 7px 9px; color: #373737; line-height: 1.28; }
+    .journey-table td b { color: var(--ink); }
+    .journey-table .story-cell { background: #f5f5f3; font-weight: 600; }
+    .journey-table .action-cell { background: #e8f1ff; }
+    .journey-table .contact-cell { background: #fbfbfb; }
+    .journey-table .emotion-cell { padding: 5px 9px; background: white; text-align: center; }
+    .journey-table .emotion-cell .face { display: inline-block; margin-right: 5px; font-size: 16px; vertical-align: middle; }
+    .journey-table .pain-cell { background: #ffe4e7; color: #7d2c34; }
+    .journey-table .backstage-title th {
+      padding: 4px 10px;
+      background: #353f94;
+      color: white;
+      font-family: "Roboto Mono", monospace;
+      font-size: 8px;
+      font-style: italic;
+      font-weight: 500;
+      letter-spacing: .05em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+    .journey-table .opportunity-head { background: #f2d400; color: #282100; }
+    .journey-table .opportunity-cell { background: #fff0a6; }
+    .journey-table .insight-head { background: #aadd22; color: #233000; }
+    .journey-table .insight-cell { background: #dff59b; }
+    .journey-table .responsible { display: block; margin-top: 3px; color: #555; font-family: "Roboto Mono", monospace; font-size: 7.5px; font-weight: 600; text-transform: uppercase; }
+    .map-legend { display: flex; justify-content: flex-end; gap: 10px; margin-top: 7px; color: var(--muted); font-family: "Roboto Mono", monospace; font-size: 7px; text-transform: uppercase; }
+    .map-legend span::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 4px; vertical-align: -1px; }
+    .map-legend .lg-action::before { background: #b8d2fa; }
+    .map-legend .lg-pain::before { background: #ff9ba4; }
+    .map-legend .lg-opportunity::before { background: #ffe36b; }
+    .map-legend .lg-insight::before { background: #afe557; }
+
+    .matrix { width: 100%; border-collapse: collapse; background: rgba(255,255,255,.75); font-size: clamp(9px, .8vw, 12px); }
+    .matrix th, .matrix td { padding: 12px 14px; border: 1px solid var(--line); text-align: left; vertical-align: middle; }
+    .matrix thead th { background: var(--ink); color: white; font-family: "Roboto Mono", monospace; font-size: 9px; letter-spacing: .06em; text-transform: uppercase; }
+    .matrix tbody th { width: 21%; font-weight: 700; }
+    .score { display: inline-block; width: 100%; padding: 6px 7px; text-align: center; font-family: "Roboto Mono", monospace; font-size: 9px; font-weight: 700; }
+    .score.high { background: #dff5ec; color: #0d6e4e; }
+    .score.mid { background: #fff1d6; color: #9a5700; }
+    .score.low { background: #ffe1e4; color: #a52834; }
+
+    .insight-card { display: grid; grid-template-rows: auto 1fr auto; min-height: 250px; }
+    .insight-index { color: var(--pink); font-family: "Roboto Mono", monospace; font-size: 11px; }
+    .owner { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-family: "Roboto Mono", monospace; font-size: 9px; text-transform: uppercase; }
+
+    .blueprint { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px; }
+    .blueprint-step { position: relative; min-height: 210px; padding: 22px 18px; background: white; border: 1px solid var(--line); }
+    .blueprint-step:not(:last-child)::after { content: "→"; position: absolute; right: -16px; top: 50%; z-index: 3; display: grid; place-items: center; width: 22px; height: 22px; background: var(--pink); color: white; border-radius: 50%; transform: translateY(-50%); }
+    .blueprint-step span { color: var(--pink); font-family: "Roboto Mono", monospace; font-size: 10px; }
+    .blueprint-step h3 { margin-top: 24px; }
+    .blueprint-step p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
+
+    .roadmap { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .roadmap-item { padding: 20px; background: white; border-top: 5px solid var(--pink); }
+    .roadmap-item .time { color: var(--pink); font-family: "Roboto Mono", monospace; font-size: 10px; font-weight: 600; text-transform: uppercase; }
+    .roadmap-item h3 { margin: 22px 0 9px; }
+    .roadmap-item p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
+
+    .source-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; padding: 0; margin: 8px 0 0; list-style: none; }
+    .source-list li { padding: 10px 0; border-top: 1px solid var(--line); font-size: clamp(9px, .78vw, 12px); line-height: 1.35; }
+    .source-list a { text-decoration-color: var(--pink); text-underline-offset: 3px; }
+    .source-list span { display: block; margin-bottom: 4px; color: var(--pink); font-family: "Roboto Mono", monospace; font-size: 9px; }
+
+    .overview {
+      position: fixed;
+      inset: 0;
+      z-index: 45;
+      display: none;
+      overflow-y: auto;
+      padding: 38px;
+      background: rgba(248,247,244,.98);
+    }
+    .overview.open { display: block; }
+    .overview-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .overview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+    .overview-item { min-height: 118px; padding: 18px; background: white; border: 1px solid var(--line); text-align: left; cursor: pointer; }
+    .overview-item:hover, .overview-item:focus-visible { border-color: var(--pink); outline: 2px solid var(--pink-soft); }
+    .overview-item span { display: block; margin-bottom: 28px; color: var(--pink); font-family: "Roboto Mono", monospace; font-size: 10px; }
+    .overview-item strong { font-size: 14px; }
+
+    .controls {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 30;
+      display: flex;
+      gap: 6px;
+      padding: 6px;
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(0,0,0,.1);
+      box-shadow: 0 8px 30px rgba(0,0,0,.12);
+      backdrop-filter: blur(14px);
+    }
+    .control-btn {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      font-family: "Roboto Mono", monospace;
+      font-size: 16px;
+    }
+    .control-btn:hover, .control-btn:focus-visible { background: var(--pink); color: white; outline: none; }
+    .control-btn:disabled { opacity: .25; cursor: default; background: transparent; color: inherit; }
+    .slide-count { display: grid; place-items: center; min-width: 54px; color: var(--muted); font-family: "Roboto Mono", monospace; font-size: 10px; }
+
+    .progress { position: fixed; left: 0; bottom: 0; z-index: 40; width: 100%; height: 4px; background: rgba(0,0,0,.08); }
+    .progress-bar { display: block; width: 0; height: 100%; background: var(--pink); transition: width .35s ease; }
+
+    #wellnessScene {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      opacity: .56;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+
+    .help {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      place-items: center;
+      background: rgba(20,20,20,.72);
+      backdrop-filter: blur(12px);
+    }
+    .help.open { display: grid; }
+    .help-panel { width: min(560px, calc(100vw - 40px)); padding: 34px; background: var(--paper); box-shadow: var(--shadow); }
+    .shortcut-grid { display: grid; grid-template-columns: auto 1fr; gap: 12px 18px; margin-top: 22px; font-size: 14px; }
+    kbd { min-width: 44px; padding: 5px 8px; background: white; border: 1px solid var(--line); text-align: center; font-family: "Roboto Mono", monospace; font-size: 11px; }
+
+    @media (max-width: 760px) {
+      .slide { padding: 22px 26px 26px 30px; overflow-y: auto; }
+      .content { justify-content: flex-start; padding: 26px 0 76px; }
+      .cover .content { justify-content: flex-start; }
+      .split, .grid-2, .grid-3, .persona, .empathy-grid, .journey-grid, .journey-grid.six, .blueprint, .roadmap, .source-list { grid-template-columns: 1fr; }
+      .method-flow { grid-template-columns: 1fr 1fr; }
+      .stage-track { grid-template-columns: repeat(3, 1fr); }
+      .phase-band { display: none; }
+      .company-card { min-height: 220px; }
+      .avatar-wrap { max-width: 230px; }
+      .map-slide .map-heading { align-items: flex-start; }
+      .journey-table { min-width: 900px; }
+      .cover-meta { grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
+      .start-cue { right: 16px; top: auto; bottom: 88px; }
+      .start-cue-label { display: none; }
+      .site-bubble { right: 26px; bottom: 88px; min-width: 210px; }
+      .section-code { display: none; }
+      h1 { font-size: clamp(50px, 18vw, 80px); }
+      h2 { font-size: clamp(36px, 11vw, 56px); }
+      .footer { padding-right: 130px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide, .progress-bar { transition: none; }
+      .start-cue-arrow { animation: none; }
+      .company-name::after { animation: none !important; transform: scaleX(1); }
+    }
+
+    @media print {
+      @page { size: 16in 9in; margin: 0; }
+      html, body { overflow: visible; background: white; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .deck { height: auto; }
+      .slide { position: relative; inset: auto; width: 16in; height: 9in; break-after: page; opacity: 1; visibility: visible; transform: none !important; }
+      .controls, .progress, .help, #wellnessScene, .start-cue { display: none !important; }
+      .company-name::after { animation: none !important; transform: scaleX(1) !important; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="wellnessScene" aria-hidden="true"></canvas>
+  <main class="deck" id="deck" aria-label="Apresentação Bem-estar em movimento">
+    <section class="slide cover active" data-title="Capa">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">EXPERIÊNCIAS DE PRODUTO / 2ABL</span></header>
+      <div class="content">
+        <p class="eyebrow">Comparativo de jornada do cliente</p>
+        <h1>Bem-estar<br>em <span class="accent">movimento.</span></h1>
+        <p class="lead">Como Wellhub e TotalPass podem transformar um benefício corporativo em hábito real.</p>
+        <div class="cover-meta">
+          <div><span class="meta-label">Aluno</span><span class="meta-value">Luiz Ihara</span></div>
+          <div><span class="meta-label">Matrícula</span><span class="meta-value">RM368484</span></div>
+          <div><span class="meta-label">Professor</span><span class="meta-value">Igor Carlos Silva de Souza</span></div>
+        </div>
+      </div>
+      <button class="start-cue" id="startCue" type="button" aria-label="Avançar para o próximo slide">
+        <span class="start-cue-label">Começar</span><span class="start-cue-arrow" aria-hidden="true">→</span>
+      </button>
+      <footer class="footer"><span>FIAP / 2026</span><span><strong>01</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide" data-title="Tese">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">01 / PONTO DE PARTIDA</span></header>
+      <div class="content split">
+        <div>
+          <p class="eyebrow">A tese em uma frase</p>
+          <h2>O acesso é só o começo.<br>A <span class="accent">constância</span> é a entrega.</h2>
+        </div>
+        <div style="display:flex; align-items:center">
+          <p class="statement">Ter acesso abre a porta. Criar hábito é o que entrega valor.</p>
+        </div>
+      </div>
+      <footer class="footer"><span>Wellhub × TotalPass</span><span><strong>02</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide" data-title="Escopo">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">01 / PONTO DE PARTIDA</span></header>
+      <div class="content">
+        <p class="eyebrow">O desafio</p>
+        <h2>Duas plataformas. Um mesmo desafio: <span class="accent">constância.</span></h2>
+        <div class="grid-3">
+          <article class="card"><span class="big-number">01</span><h3>Comparar</h3><p>As jornadas AS IS de Wellhub e TotalPass no modelo de benefício corporativo.</p></article>
+          <article class="card"><span class="big-number">02</span><h3>Compreender</h3><p>Como elegibilidade, plano, rede parceira e rotina moldam a experiência.</p></article>
+          <article class="card"><span class="big-number">03</span><h3>Transformar</h3><p>O acesso disponível em um hábito sustentável, mensurável e percebido.</p></article>
+        </div>
+      </div>
+      <footer class="footer"><span>Objetivo da entrega</span><span><strong>03</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide" data-title="Método">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">01 / PONTO DE PARTIDA</span></header>
+      <div class="content">
+        <p class="eyebrow">Método e limites</p>
+        <h2>Uma leitura <span class="accent">heurística</span>, não uma pesquisa de campo.</h2>
+        <div class="method-flow">
+          <div class="method-step"><span>01</span><h3>Recorte</h3><p>Jornada B2B2C da pessoa colaboradora, da comunicação do RH ao hábito.</p></div>
+          <div class="method-step"><span>02</span><h3>Evidências</h3><p>Sites oficiais, planos, páginas para colaboradores e centrais de ajuda.</p></div>
+          <div class="method-step"><span>03</span><h3>Síntese</h3><p>Proto-persona, mapa de empatia e jornada AS IS em nove etapas.</p></div>
+          <div class="method-step"><span>04</span><h3>Hipóteses</h3><p>Oportunidades para ativação, primeiro acesso, constância e recuperação.</p></div>
+        </div>
+        <p class="small" style="margin-top:22px">Leitura realizada em 26 ago. 2026. As emoções e notas são hipóteses de design e devem ser validadas com entrevistas, observação e dados comportamentais.</p>
+      </div>
+      <footer class="footer"><span>Desk research + análise heurística</span><span><strong>04</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide" data-title="Empresas">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">02 / QUEM COMPETE</span></header>
+      <div class="content">
+        <p class="eyebrow">Mesmo nicho, promessas distintas</p>
+        <div class="grid-2">
+          <article class="card company-card">
+            <div><div class="wordmark wellhub">Wellhub</div><h3>Rede global + flexibilidade</h3><p>Benefício corporativo que reúne atividades físicas, mindfulness, terapia, nutrição e sono em uma única assinatura.</p></div>
+            <div class="company-stats"><div><strong>110 mil+</strong><span>academias e estúdios na rede global</span></div><div><strong>14 mil+</strong><span>aulas e apps declarados globalmente</span></div></div>
+          </article>
+          <article class="card company-card">
+            <div><div class="wordmark totalpass">TotalPass</div><h3>Ecossistema nacional + variedade</h3><p>Plataforma de bem-estar corporativo com academias, modalidades, terapia, nutrição e aplicativos digitais.</p></div>
+            <div class="company-stats"><div><strong>35 mil+</strong><span>academias e parceiros no Brasil</span></div><div><strong>250+</strong><span>modalidades declaradas</span></div></div>
+          </article>
+        </div>
+        <p class="small" style="margin-top:14px">Os números têm escopos diferentes e contextualizam as redes declaradas por cada marca; não representam comparação direta de market share. Fontes [1], [2], [5] e [6].</p>
+      </div>
+      <footer class="footer"><span>Categoria: bem-estar corporativo</span><span><strong>05</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide" data-title="Proto-persona">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">03 / PERSONA</span></header>
+      <div class="content persona">
+        <div class="avatar-wrap" aria-label="Representação abstrata da proto-persona"><span class="avatar-initials">BN</span></div>
+        <div>
+          <p class="eyebrow">Proto-persona principal</p>
+          <div class="persona-name">Beatriz<br><span class="accent">Nogueira.</span></div>
+          <p class="lead">33 anos · coordenadora de Product Ops · São Paulo · rotina híbrida · renda de R$ 8,2 mil.</p>
+          <div class="pill-row"><span class="pill pink">Quer voltar a se mover</span><span class="pill">Agenda imprevisível</span><span class="pill">Mobile first</span><span class="pill">Valoriza flexibilidade</span></div>
+          <p class="persona-quote">“Não preciso de mais uma lista de academias. Preciso descobrir o que cabe na minha rotina sem me sentir culpada quando falhar.”</p>
+        </div>
+      </div>
+      <footer class="footer"><span>Hipótese composta: colaboradora elegível ao benefício</span><span><strong>06</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide" data-title="Mapa de empatia">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">03 / PERSONA</span></header>
+      <div class="content">
+        <p class="eyebrow">Mapa de empatia</p>
+        <h2>Opções não faltam.<br>Falta uma <span class="accent">rotina possível.</span></h2>
+        <div class="empathy-grid">
+          <article class="card"><span class="card-kicker">Vê</span><h3>Catálogo abundante</h3><p>Planos, academias, modalidades e apps — mas pouca orientação contextual.</p></article>
+          <article class="card center-card"><span class="card-kicker">Pensa e sente</span><h3>“Vou usar de verdade?”</h3><p>Empolgação inicial convive com culpa, cansaço e medo de desperdiçar dinheiro.</p></article>
+          <article class="card"><span class="card-kicker">Ouve</span><h3>RH e colegas</h3><p>Campanhas internas, desafios, recomendações de academias e histórias de disciplina.</p></article>
+          <article class="card"><span class="card-kicker">Diz</span><h3>“Qual plano inclui?”</h3><p>Questiona rede, unidade, horário, reserva, dependentes e regras de acesso.</p></article>
+          <article class="card"><span class="card-kicker">Faz</span><h3>Pesquisa e adia</h3><p>Explora o mapa, salva opções, tenta encaixar horários e abandona quando complica.</p></article>
+          <article class="card"><span class="card-kicker">Precisa fazer</span><h3>Criar constância</h3><p>Escolher uma opção viável, realizar o primeiro acesso e voltar mesmo após falhar.</p></article>
+        </div>
+      </div>
+      <footer class="footer"><span>Dores: escolha, acesso, culpa e abandono</span><span><strong>07</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide map-slide" data-title="Wellhub — pré-uso">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">04 / JORNADA AS IS — WELLHUB</span></header>
+      <div class="content">
+        <div class="map-heading"><div><p class="eyebrow">Mapa da jornada</p><h2>Pré-<span class="accent">uso</span></h2></div><div class="map-company wellhub">Wellhub</div></div>
+        <div class="journey-table-wrap"><table class="journey-table" aria-label="Jornada AS IS do Wellhub no pré-uso"><colgroup><col class="row-label"><col class="stage-col"><col class="stage-col"><col class="stage-col"></colgroup><tbody>
+          <tr class="phase-title"><th class="as-is">AS IS</th><th colspan="3">Pré-uso</th></tr>
+          <tr class="stage-head"><th>Etapas da jornada</th><th>Conscientização</th><th>Pesquisa</th><th>Decisão</th></tr>
+          <tr><th class="row-head">História</th><td class="story-cell">O RH anuncia o Wellhub e Beatriz percebe que pode retomar o autocuidado.</td><td class="story-cell">Ela verifica elegibilidade, planos, academias próximas, apps e atividades.</td><td class="story-cell">Tenta escolher um plano que caiba no orçamento e na agenda real.</td></tr>
+          <tr><th class="row-head">Ações</th><td class="action-cell">Abre o comunicado; conversa com colegas; acessa a página para colaboradores.</td><td class="action-cell">Cria conta; explora mapa; compara planos; busca academia perto de casa e trabalho.</td><td class="action-cell">Lista opções favoritas; confere inclusão; calcula custo e frequência provável.</td></tr>
+          <tr><th class="row-head">Pontos de contato</th><td class="contact-cell">E-mail do RH · intranet · colegas · página Wellhub</td><td class="contact-cell">Site · app · mapa · planos · perfis de parceiros</td><td class="contact-cell">Comparador · rede do plano · assinatura</td></tr>
+          <tr><th class="row-head">Emoções</th><td class="emotion-cell"><span class="face">✨</span> Esperançosa</td><td class="emotion-cell"><span class="face">🤔</span> Sobrecarregada</td><td class="emotion-cell"><span class="face">😬</span> Insegura</td></tr>
+          <tr><th class="row-head">Gargalos / pontos de dor</th><td class="pain-cell">A comunicação vende amplitude, mas não traduz o benefício para sua rotina.</td><td class="pain-cell">Detalhes específicos de rede e plano dependem de elegibilidade e localização. [1][2]</td><td class="pain-cell">Escolher exige cruzar preço, unidade, modalidade, horário e intenção de uso.</td></tr>
+          <tr class="backstage-title"><th colspan="4">Ações nos bastidores</th></tr>
+          <tr><th class="row-head opportunity-head">Oportunidades e responsáveis</th><td class="opportunity-cell">Comunicar por momento de vida, não por volume de rede.<span class="responsible">RH do cliente + CRM</span></td><td class="opportunity-cell">Reduzir o trabalho de cruzar local, plano e agenda.<span class="responsible">Discovery + Dados</span></td><td class="opportunity-cell">Ajudar a dimensionar o plano pela rotina provável.<span class="responsible">Pricing + Growth</span></td></tr>
+          <tr><th class="row-head insight-head">Insights e responsáveis</th><td class="insight-cell">Quiz “o que cabe na sua semana?” dentro do lançamento.<span class="responsible">Engajamento + RH</span></td><td class="insight-cell">Mapa de rotina: casa, trabalho, horários e modalidades.<span class="responsible">Produto + UX</span></td><td class="insight-cell">Simulador plano ideal com 3 opções e justificativa.<span class="responsible">Dados + Assinatura</span></td></tr>
+        </tbody></table></div>
+        <div class="map-legend"><span class="lg-action">Ações</span><span class="lg-pain">Dores</span><span class="lg-opportunity">Oportunidades</span><span class="lg-insight">Insights</span></div>
+      </div>
+      <footer class="footer"><span>Ponto crítico: muita rede, pouca orientação</span><span><strong>08</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide map-slide" data-title="Wellhub — uso">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">04 / JORNADA AS IS — WELLHUB</span></header>
+      <div class="content">
+        <div class="map-heading"><div><p class="eyebrow">Mapa da jornada</p><h2><span class="accent">Uso</span></h2></div><div class="map-company wellhub">Wellhub</div></div>
+        <div class="journey-table-wrap"><table class="journey-table" aria-label="Jornada AS IS do Wellhub durante o uso"><colgroup><col class="row-label"><col class="stage-col"><col class="stage-col"><col class="stage-col"></colgroup><tbody>
+          <tr class="phase-title"><th class="as-is">AS IS</th><th colspan="3">Uso</th></tr>
+          <tr class="stage-head"><th>Etapas da jornada</th><th>Compra / aquisição</th><th>Primeiro acesso / uso</th><th>Uso continuado</th></tr>
+          <tr><th class="row-head">História</th><td class="story-cell">Beatriz confirma o vínculo corporativo, escolhe o plano e ativa a assinatura.</td><td class="story-cell">Decide testar uma aula perto do trabalho e enfrenta o primeiro acesso.</td><td class="story-cell">Alterna academia, estúdio e apps enquanto tenta construir frequência.</td></tr>
+          <tr><th class="row-head">Ações</th><td class="action-cell">Valida elegibilidade; cadastra pagamento; assina; considera dependentes.</td><td class="action-cell">Busca parceiro; confere regras; reserva quando necessário; realiza check-in.</td><td class="action-cell">Explora opções; repete favoritas; muda ou pausa o plano conforme a rotina.</td></tr>
+          <tr><th class="row-head">Pontos de contato</th><td class="contact-cell">Cadastro · vínculo da empresa · plano · pagamento</td><td class="contact-cell">App · perfil do parceiro · reserva · recepção</td><td class="contact-cell">Check-ins · apps parceiros · histórico · notificações</td></tr>
+          <tr><th class="row-head">Emoções</th><td class="emotion-cell"><span class="face">🙌</span> Comprometida</td><td class="emotion-cell"><span class="face">😰</span> Exposta</td><td class="emotion-cell"><span class="face">🌗</span> Oscilante</td></tr>
+          <tr><th class="row-head">Gargalos / pontos de dor</th><td class="pain-cell">O vínculo corporativo adiciona dependências que não existem numa academia comum.</td><td class="pain-cell">A primeira ida combina regras do app e do parceiro diante da recepção.</td><td class="pain-cell">Flexibilidade ajuda, mas o catálogo não garante constância; a pausa vira abandono. [1]</td></tr>
+          <tr class="backstage-title"><th colspan="4">Ações nos bastidores</th></tr>
+          <tr><th class="row-head opportunity-head">Oportunidades e responsáveis</th><td class="opportunity-cell">Transformar ativação em compromisso leve e claro.<span class="responsible">Onboarding + Billing</span></td><td class="opportunity-cell">Eliminar surpresa no primeiro parceiro.<span class="responsible">Partner ops + CX</span></td><td class="opportunity-cell">Reconhecer queda de frequência antes da desistência.<span class="responsible">Engagement + Dados</span></td></tr>
+          <tr><th class="row-head insight-head">Insights e responsáveis</th><td class="insight-cell">Meta inicial escolhida: 2 movimentos por semana.<span class="responsible">Produto + Behavioral design</span></td><td class="insight-cell">“Primeiro acesso garantido”: regras e plano pré-validados.<span class="responsible">Rede + Produto</span></td><td class="insight-cell">Modo recomeço: reduzir meta, sugerir digital ou pausar sem culpa.<span class="responsible">CRM + Conteúdo</span></td></tr>
+        </tbody></table></div>
+        <div class="map-legend"><span class="lg-action">Ações</span><span class="lg-pain">Dores</span><span class="lg-opportunity">Oportunidades</span><span class="lg-insight">Insights</span></div>
+      </div>
+      <footer class="footer"><span>Ponto crítico: o primeiro acesso valida a promessa</span><span><strong>09</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide map-slide" data-title="Wellhub — pós-uso">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">04 / JORNADA AS IS — WELLHUB</span></header>
+      <div class="content">
+        <div class="map-heading"><div><p class="eyebrow">Mapa da jornada</p><h2>Pós-<span class="accent">uso</span></h2></div><div class="map-company wellhub">Wellhub</div></div>
+        <div class="journey-table-wrap"><table class="journey-table" aria-label="Jornada AS IS do Wellhub no pós-uso"><colgroup><col class="row-label"><col class="stage-col"><col class="stage-col"><col class="stage-col"></colgroup><tbody>
+          <tr class="phase-title"><th class="as-is">AS IS</th><th colspan="3">Pós-uso</th></tr>
+          <tr class="stage-head"><th>Etapas da jornada</th><th>Lembrança / valor</th><th>Feedback / avaliação</th><th>Compartilhamento</th></tr>
+          <tr><th class="row-head">História</th><td class="story-cell">Após algumas semanas, Beatriz julga se o plano virou saúde ou apenas cobrança.</td><td class="story-cell">Avalia parceiros e procura suporte quando acesso, cobrança ou reserva falham.</td><td class="story-cell">Comenta com colegas e considera incluir familiares quando percebe valor.</td></tr>
+          <tr><th class="row-head">Ações</th><td class="action-cell">Conta check-ins; compara custo; observa energia, humor e consistência.</td><td class="action-cell">Avalia experiência; descreve incidente; acompanha atendimento.</td><td class="action-cell">Recomenda parceiro; conversa no trabalho; convida familiar quando elegível.</td></tr>
+          <tr><th class="row-head">Pontos de contato</th><td class="contact-cell">Histórico · cobrança · corpo · rotina</td><td class="contact-cell">Avaliação · suporte · parceiro · RH</td><td class="contact-cell">Colegas · família · campanhas internas</td></tr>
+          <tr><th class="row-head">Emoções</th><td class="emotion-cell"><span class="face">💪</span> Orgulhosa</td><td class="emotion-cell"><span class="face">😓</span> Desgastada</td><td class="emotion-cell"><span class="face">🤝</span> Embaixadora</td></tr>
+          <tr><th class="row-head">Gargalos / pontos de dor</th><td class="pain-cell">Valor aparece como quantidade de acessos, mas o ganho de bem-estar é difuso.</td><td class="pain-cell">Responsabilidade pode se fragmentar entre plataforma, parceiro e empresa.</td><td class="pain-cell">Compartilhar saúde e frequência exige privacidade e cuidado com comparação.</td></tr>
+          <tr class="backstage-title"><th colspan="4">Ações nos bastidores</th></tr>
+          <tr><th class="row-head opportunity-head">Oportunidades e responsáveis</th><td class="opportunity-cell">Traduzir uso em progresso pessoal, não ranking.<span class="responsible">Insights + Saúde</span></td><td class="opportunity-cell">Manter um único dono para o problema.<span class="responsible">CX + Partner ops</span></td><td class="opportunity-cell">Incentivar apoio sem expor dados individuais.<span class="responsible">Privacy + Engagement</span></td></tr>
+          <tr><th class="row-head insight-head">Insights e responsáveis</th><td class="insight-cell">Retrospectiva privada: constância, variedade e sensação percebida.<span class="responsible">Dados + Produto</span></td><td class="insight-cell">Ticket contextual já leva check-in, plano e parceiro.<span class="responsible">Care + Automação</span></td><td class="insight-cell">Desafio coletivo opt-in baseado em participação, não performance.<span class="responsible">RH + Comunidade</span></td></tr>
+        </tbody></table></div>
+        <div class="map-legend"><span class="lg-action">Ações</span><span class="lg-pain">Dores</span><span class="lg-opportunity">Oportunidades</span><span class="lg-insight">Insights</span></div>
+      </div>
+      <footer class="footer"><span>Ponto crítico: transformar uso em valor percebido</span><span><strong>10</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide map-slide" data-title="TotalPass — pré-uso">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">04 / JORNADA AS IS — TOTALPASS</span></header>
+      <div class="content">
+        <div class="map-heading"><div><p class="eyebrow">Mapa da jornada</p><h2>Pré-<span class="accent">uso</span></h2></div><div class="map-company totalpass">TotalPass</div></div>
+        <div class="journey-table-wrap"><table class="journey-table" aria-label="Jornada AS IS da TotalPass no pré-uso"><colgroup><col class="row-label"><col class="stage-col"><col class="stage-col"><col class="stage-col"></colgroup><tbody>
+          <tr class="phase-title"><th class="as-is">AS IS</th><th colspan="3">Pré-uso</th></tr>
+          <tr class="stage-head"><th>Etapas da jornada</th><th>Conscientização</th><th>Pesquisa</th><th>Decisão</th></tr>
+          <tr><th class="row-head">História</th><td class="story-cell">A empresa apresenta a TotalPass e Beatriz enxerga uma chance de recomeçar.</td><td class="story-cell">Ela explora planos TP, academias, modalidades e serviços físico, mental e nutricional.</td><td class="story-cell">Tenta descobrir o menor plano que inclui sua unidade favorita e sua rotina.</td></tr>
+          <tr><th class="row-head">Ações</th><td class="action-cell">Acessa o comunicado; baixa o app; confirma que o benefício é corporativo.</td><td class="action-cell">Consulta mapa; compara códigos de plano; busca Smart Fit, estúdios e apps.</td><td class="action-cell">Compara abrangência, preço, serviços e dependentes; seleciona o plano.</td></tr>
+          <tr><th class="row-head">Pontos de contato</th><td class="contact-cell">RH · intranet · página de colaboradores · app</td><td class="contact-cell">Mapa · planos TP · parceiros · modalidades</td><td class="contact-cell">Comparador · unidade · preço · assinatura</td></tr>
+          <tr><th class="row-head">Emoções</th><td class="emotion-cell"><span class="face">🌱</span> Motivada</td><td class="emotion-cell"><span class="face">🧩</span> Confusa</td><td class="emotion-cell"><span class="face">🧐</span> Cautelosa</td></tr>
+          <tr><th class="row-head">Gargalos / pontos de dor</th><td class="pain-cell">O benefício depende da contratação e das condições negociadas pela empresa.</td><td class="pain-cell">Onze faixas e diferentes inclusões aumentam o trabalho de comparação. [5][6]</td><td class="pain-cell">Uma academia pode exigir plano superior; disponibilidade e valores variam por empresa.</td></tr>
+          <tr class="backstage-title"><th colspan="4">Ações nos bastidores</th></tr>
+          <tr><th class="row-head opportunity-head">Oportunidades e responsáveis</th><td class="opportunity-cell">Ligar lançamento do benefício a uma primeira meta.<span class="responsible">Employer success + RH</span></td><td class="opportunity-cell">Traduzir códigos TP em perfis de uso.<span class="responsible">Growth + Conteúdo</span></td><td class="opportunity-cell">Evitar upgrade descoberto somente na catraca.<span class="responsible">Rede + Pricing</span></td></tr>
+          <tr><th class="row-head insight-head">Insights e responsáveis</th><td class="insight-cell">Convite “escolha seu primeiro movimento” em vez de só cadastro.<span class="responsible">CRM + Onboarding</span></td><td class="insight-cell">Comparador por objetivo: começar, equilíbrio ou saúde integrada.<span class="responsible">Produto + UX</span></td><td class="insight-cell">Selo “seu plano libera esta unidade” em todo o fluxo.<span class="responsible">Discovery + Dados</span></td></tr>
+        </tbody></table></div>
+        <div class="map-legend"><span class="lg-action">Ações</span><span class="lg-pain">Dores</span><span class="lg-opportunity">Oportunidades</span><span class="lg-insight">Insights</span></div>
+      </div>
+      <footer class="footer"><span>Ponto crítico: plano técnico × necessidade humana</span><span><strong>11</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide map-slide" data-title="TotalPass — uso">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">04 / JORNADA AS IS — TOTALPASS</span></header>
+      <div class="content">
+        <div class="map-heading"><div><p class="eyebrow">Mapa da jornada</p><h2><span class="accent">Uso</span></h2></div><div class="map-company totalpass">TotalPass</div></div>
+        <div class="journey-table-wrap"><table class="journey-table" aria-label="Jornada AS IS da TotalPass durante o uso"><colgroup><col class="row-label"><col class="stage-col"><col class="stage-col"><col class="stage-col"></colgroup><tbody>
+          <tr class="phase-title"><th class="as-is">AS IS</th><th colspan="3">Uso</th></tr>
+          <tr class="stage-head"><th>Etapas da jornada</th><th>Compra / aquisição</th><th>Primeiro acesso / uso</th><th>Uso continuado</th></tr>
+          <tr><th class="row-head">História</th><td class="story-cell">Beatriz vincula a conta à empresa, escolhe o TP adequado e ativa o plano.</td><td class="story-cell">Chega à academia e precisa validar localização, check-in e liberação na recepção.</td><td class="story-cell">Passa a combinar academias, apps e desafios enquanto tenta voltar toda semana.</td></tr>
+          <tr><th class="row-head">Ações</th><td class="action-cell">Cadastra-se; escolhe plano; paga; adiciona dependente quando deseja.</td><td class="action-cell">Ativa localização; seleciona unidade; faz check-in; aguarda confirmação.</td><td class="action-cell">Realiza acessos; agenda aulas; usa apps; acompanha desafios e muda de plano.</td></tr>
+          <tr><th class="row-head">Pontos de contato</th><td class="contact-cell">App · vínculo corporativo · plano · pagamento</td><td class="contact-cell">Geolocalização · check-in · recepção · token [7]</td><td class="contact-cell">Mapa · histórico · parceiros digitais · GymRats</td></tr>
+          <tr><th class="row-head">Emoções</th><td class="emotion-cell"><span class="face">✅</span> Decidida</td><td class="emotion-cell"><span class="face">😳</span> Vulnerável</td><td class="emotion-cell"><span class="face">🔥</span> Engajada</td></tr>
+          <tr><th class="row-head">Gargalos / pontos de dor</th><td class="pain-cell">Condições do benefício e plano dependem do acordo corporativo.</td><td class="pain-cell">GPS, compatibilidade de plano e confirmação da academia podem bloquear a entrada. [7][8]</td><td class="pain-cell">Desafios ajudam, mas o engajamento pode virar comparação ou perder força.</td></tr>
+          <tr class="backstage-title"><th colspan="4">Ações nos bastidores</th></tr>
+          <tr><th class="row-head opportunity-head">Oportunidades e responsáveis</th><td class="opportunity-cell">Confirmar tudo que ficará liberado antes de cobrar.<span class="responsible">Billing + Produto</span></td><td class="opportunity-cell">Dar certeza de acesso antes da pessoa sair de casa.<span class="responsible">Partner ops + Plataforma</span></td><td class="opportunity-cell">Usar comunidade como apoio, não pressão.<span class="responsible">Engagement + Trust</span></td></tr>
+          <tr><th class="row-head insight-head">Insights e responsáveis</th><td class="insight-cell">Resumo de ativação: plano, unidade favorita e próxima ação.<span class="responsible">Onboarding + CRM</span></td><td class="insight-cell">Pré-check: plano + GPS + status do parceiro em um semáforo.<span class="responsible">Dados + CX</span></td><td class="insight-cell">Desafios privados de constância com metas adaptáveis.<span class="responsible">GymRats + Produto</span></td></tr>
+        </tbody></table></div>
+        <div class="map-legend"><span class="lg-action">Ações</span><span class="lg-pain">Dores</span><span class="lg-opportunity">Oportunidades</span><span class="lg-insight">Insights</span></div>
+      </div>
+      <footer class="footer"><span>Ponto crítico: a catraca é o momento da verdade</span><span><strong>12</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide map-slide" data-title="TotalPass — pós-uso">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">04 / JORNADA AS IS — TOTALPASS</span></header>
+      <div class="content">
+        <div class="map-heading"><div><p class="eyebrow">Mapa da jornada</p><h2>Pós-<span class="accent">uso</span></h2></div><div class="map-company totalpass">TotalPass</div></div>
+        <div class="journey-table-wrap"><table class="journey-table" aria-label="Jornada AS IS da TotalPass no pós-uso"><colgroup><col class="row-label"><col class="stage-col"><col class="stage-col"><col class="stage-col"></colgroup><tbody>
+          <tr class="phase-title"><th class="as-is">AS IS</th><th colspan="3">Pós-uso</th></tr>
+          <tr class="stage-head"><th>Etapas da jornada</th><th>Lembrança / valor</th><th>Feedback / avaliação</th><th>Compartilhamento</th></tr>
+          <tr><th class="row-head">História</th><td class="story-cell">Beatriz compara o que pagou com a frequência, a variedade e o bem-estar percebido.</td><td class="story-cell">Quando o check-in falha, tenta descobrir se o problema é GPS, plano, academia ou conta.</td><td class="story-cell">Convida dependentes e participa de desafios quando se sente acolhida.</td></tr>
+          <tr><th class="row-head">Ações</th><td class="action-cell">Conta acessos; avalia evolução; decide manter, trocar, pausar ou cancelar.</td><td class="action-cell">Consulta FAQ; verifica requisitos; fala com suporte; tenta novamente.</td><td class="action-cell">Adiciona até três dependentes; compartilha conquistas e recomenda parceiros.</td></tr>
+          <tr><th class="row-head">Pontos de contato</th><td class="contact-cell">Histórico · cobrança · planos · rotina</td><td class="contact-cell">FAQ · Fale Conosco · academia · RH [8]</td><td class="contact-cell">Dependentes · GymRats · colegas · família</td></tr>
+          <tr><th class="row-head">Emoções</th><td class="emotion-cell"><span class="face">📈</span> Realizada</td><td class="emotion-cell"><span class="face">😤</span> Frustrada</td><td class="emotion-cell"><span class="face">🫶</span> Apoiadora</td></tr>
+          <tr><th class="row-head">Gargalos / pontos de dor</th><td class="pain-cell">Sem narrativa de progresso, baixa frequência parece desperdício e gera churn.</td><td class="pain-cell">A pessoa precisa diagnosticar o ecossistema antes de pedir ajuda.</td><td class="pain-cell">O plano do dependente e o vínculo continuam ligados ao titular e à empresa. [5]</td></tr>
+          <tr class="backstage-title"><th colspan="4">Ações nos bastidores</th></tr>
+          <tr><th class="row-head opportunity-head">Oportunidades e responsáveis</th><td class="opportunity-cell">Mostrar evolução sem transformar saúde em cobrança.<span class="responsible">Dados + Saúde</span></td><td class="opportunity-cell">Diagnosticar automaticamente falhas de acesso.<span class="responsible">Support tech + Partner ops</span></td><td class="opportunity-cell">Fortalecer apoio com privacidade e autonomia.<span class="responsible">Community + Privacy</span></td></tr>
+          <tr><th class="row-head insight-head">Insights e responsáveis</th><td class="insight-cell">Balanço mensal: constância, modalidades e sensação pós-atividade.<span class="responsible">Produto + Insights</span></td><td class="insight-cell">Suporte recebe GPS, plano e status do parceiro automaticamente.<span class="responsible">Care + Dados</span></td><td class="insight-cell">Círculos opt-in de colegas/dependentes com metas individuais.<span class="responsible">GymRats + Trust</span></td></tr>
+        </tbody></table></div>
+        <div class="map-legend"><span class="lg-action">Ações</span><span class="lg-pain">Dores</span><span class="lg-opportunity">Oportunidades</span><span class="lg-insight">Insights</span></div>
+      </div>
+      <footer class="footer"><span>Ponto crítico: recuperar acesso sem culpar o usuário</span><span><strong>13</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide" data-title="Comparativo">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">05 / PRINCIPAIS ACHADOS</span></header>
+      <div class="content">
+        <p class="eyebrow">Síntese comparativa</p>
+        <h2>Redes diferentes.<br>O mesmo desafio de <span class="accent">adesão.</span></h2>
+        <table class="matrix" aria-label="Comparação heurística entre Wellhub e TotalPass">
+          <thead><tr><th>Critério</th><th>Wellhub</th><th>TotalPass</th><th>Leitura</th></tr></thead>
+          <tbody>
+            <tr><th>Amplitude de bem-estar</th><td><span class="score high">FORTE</span></td><td><span class="score high">FORTE</span></td><td>As duas vão além da academia e combinam opções físicas e digitais.</td></tr>
+            <tr><th>Descoberta do plano</th><td><span class="score mid">MÉDIO</span></td><td><span class="score mid">MÉDIO</span></td><td>Grande variedade aumenta a necessidade de orientação personalizada.</td></tr>
+            <tr><th>Confiança no primeiro acesso</th><td><span class="score mid">MÉDIO</span></td><td><span class="score mid">MÉDIO</span></td><td>A experiência depende do app, do plano e da operação do parceiro.</td></tr>
+            <tr><th>Flexibilidade da assinatura</th><td><span class="score high">FORTE</span></td><td><span class="score high">FORTE</span></td><td>Planos flexíveis reduzem barreira, mas não resolvem a falta de hábito.</td></tr>
+            <tr><th>Apoio à constância</th><td><span class="score mid">MÉDIO</span></td><td><span class="score mid">MÉDIO</span></td><td>Catálogo, apps e desafios ajudam; ainda falta uma jornada adaptativa de recomeço.</td></tr>
+          </tbody>
+        </table>
+        <p class="small" style="margin-top:12px">Notas qualitativas, baseadas na análise heurística deste trabalho; não são benchmark quantitativo nem pesquisa de satisfação.</p>
+      </div>
+      <footer class="footer"><span>Hipóteses para validação</span><span><strong>14</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide" data-title="Momentos da verdade">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">05 / PRINCIPAIS ACHADOS</span></header>
+      <div class="content">
+        <p class="eyebrow">Três momentos da verdade</p>
+        <h2>O hábito quebra quando a experiência exige <span class="accent">energia demais.</span></h2>
+        <div class="grid-3">
+          <article class="card"><span class="card-kicker">Antes da assinatura</span><span class="big-number">FIT?</span><h3>Plano sem contexto</h3><p>A pessoa vê muitas possibilidades, mas não sabe qual combinação cabe na sua semana real.</p></article>
+          <article class="card"><span class="card-kicker">Na primeira entrada</span><span class="big-number">GO?</span><h3>A catraca testa a promessa</h3><p>Plano, localização, reserva e recepção precisam concordar no momento mais vulnerável.</p></article>
+          <article class="card"><span class="card-kicker">Depois da empolgação</span><span class="big-number">↻</span><h3>Faltar vira abandono</h3><p>Sem uma rota gentil de retorno, duas semanas corridas podem encerrar um hábito ainda frágil.</p></article>
+        </div>
+      </div>
+      <footer class="footer"><span>Clareza → primeiro movimento → constância</span><span><strong>15</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide" data-title="Insights">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">06 / INSIGHTS</span></header>
+      <div class="content">
+        <p class="eyebrow">Melhorias para ambos os negócios</p>
+        <h2>Quatro movimentos.<br>Um hábito mais <span class="accent">possível.</span></h2>
+        <div class="grid-3">
+          <article class="card insight-card"><span class="insight-index">INSIGHT / 01</span><div><h3>Plano que cabe na vida</h3><p>Recomendar opções a partir de casa, trabalho, horários, objetivo e orçamento — explicando o porquê de cada escolha.</p></div><div class="owner">Owner: Produto + Dados + Pricing</div></article>
+          <article class="card insight-card"><span class="insight-index">INSIGHT / 02</span><div><h3>Confiança antes da catraca</h3><p>Um pré-check valida elegibilidade, plano, unidade, agendamento, GPS e regras antes de a pessoa sair de casa.</p></div><div class="owner">Owner: Parceiros + Plataforma + CX</div></article>
+          <article class="card insight-card"><span class="insight-index">INSIGHT / 03</span><div><h3>Primeiros 21 dias guiados</h3><p>Uma trilha leve e adaptável celebra os primeiros retornos e reduz a pressão de “fazer tudo certo”.</p></div><div class="owner">Owner: Engajamento + Design comportamental</div></article>
+        </div>
+        <div class="card" style="margin-top:12px; padding:15px 22px"><b class="accent">04 / Recomeço, não cobrança:</b> ao detectar queda de frequência, oferecer meta menor, opção digital, pausa ou uma nova rota — sem culpa.</div>
+      </div>
+      <footer class="footer"><span>Aplicáveis a Wellhub e TotalPass</span><span><strong>16</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide" data-title="Jornada TO BE">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">07 / JORNADA TO BE</span></header>
+      <div class="content">
+        <p class="eyebrow">Blueprint de experiência</p>
+        <h2>Do benefício ao hábito,<br>sem depender de <span class="accent">força de vontade.</span></h2>
+        <div class="blueprint">
+          <article class="blueprint-step"><span>01 / DESCOBRIR</span><h3>Traduzir o benefício</h3><p>RH apresenta a proposta; a plataforma confirma elegibilidade e conecta o benefício à rotina real.</p></article>
+          <article class="blueprint-step"><span>02 / ESCOLHER</span><h3>Encontrar o plano-fit</h3><p>Três opções justificadas por localização, agenda, modalidade, objetivo e orçamento.</p></article>
+          <article class="blueprint-step"><span>03 / COMEÇAR</span><h3>Garantir o primeiro acesso</h3><p>Pré-check, unidade compatível e primeira atividade reservada em um fluxo sem ambiguidade.</p></article>
+          <article class="blueprint-step"><span>04 / SUSTENTAR</span><h3>Adaptar sem punir</h3><p>Jornada de 21 dias, progresso privado e modo recomeço quando a rotina apertar.</p></article>
+        </div>
+      </div>
+      <footer class="footer"><span>Princípio: orientar antes do primeiro acesso; acompanhar depois</span><span><strong>17</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide" data-title="Roadmap">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">08 / IMPLEMENTAÇÃO</span></header>
+      <div class="content">
+        <p class="eyebrow">Roadmap recomendado</p>
+        <h2>Testar pequeno.<br>Aprender <span class="accent">rápido.</span></h2>
+        <div class="roadmap">
+          <article class="roadmap-item"><span class="time">0–30 dias / Entender</span><h3>Localizar o abandono</h3><p>Entrevistas com recém-ativados e inativos, análise de suporte, falhas de check-in e funil de escolha do plano.</p></article>
+          <article class="roadmap-item"><span class="time">31–60 dias / Testar</span><h3>Escolha e acesso sem dúvida</h3><p>Protótipo do plano-fit e pré-check de acesso com um grupo selecionado de empresas e parceiros.</p></article>
+          <article class="roadmap-item"><span class="time">61–90 dias / Pilotar</span><h3>Construir constância</h3><p>Onboarding de 21 dias e modo recomeço em uma coorte corporativa, com metas adaptáveis.</p></article>
+        </div>
+        <div class="pill-row" style="margin-top:18px"><span class="pill pink">Produto</span><span class="pill">Design</span><span class="pill">Dados</span><span class="pill">Operações de parceiros</span><span class="pill">Employer Success</span><span class="pill">Care</span><span class="pill">Privacidade</span></div>
+      </div>
+      <footer class="footer"><span>Sequência: entender → testar → escalar</span><span><strong>18</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide" data-title="Métricas e conclusão">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">09 / FECHAMENTO</span></header>
+      <div class="content split">
+        <div>
+          <p class="eyebrow">Como saber se funcionou</p>
+          <h2>Menos fricção.<br>Mais <span class="accent">constância.</span></h2>
+          <div class="pill-row"><span class="pill pink">Elegibilidade → ativação</span><span class="pill">1º check-in em 7 dias</span><span class="pill">Retenção ativa em 4 semanas</span><span class="pill">Falha de check-in</span><span class="pill">CES da recuperação</span><span class="pill">Retenção do plano em 90 dias</span></div>
+        </div>
+        <div style="display:flex; flex-direction:column; justify-content:center; gap:22px">
+          <p class="statement">A melhor plataforma não é a que oferece mais lugares para ir.</p>
+          <p class="lead">É a que ajuda cada pessoa a começar, voltar e perceber que avançou.</p>
+        </div>
+      </div>
+      <footer class="footer"><span>Luiz Ihara / RM368484</span><span><strong>19</strong> — 20</span></footer>
+    </section>
+
+    <section class="slide" data-title="Fontes">
+      <header class="topline"><span class="brand">FIAP</span><span class="section-code">10 / REFERÊNCIAS</span></header>
+      <div class="content">
+        <p class="eyebrow">Fontes consultadas</p>
+        <h2 style="margin-bottom:16px">Evidências e <span class="accent">rastreabilidade.</span></h2>
+        <ol class="source-list">
+          <li><span>[1] WELLHUB / COLABORADORES</span><a href="https://wellhub.com/pt-br/employees/" target="_blank" rel="noopener">Elegibilidade, assinatura, flexibilidade, família e ecossistema de bem-estar</a></li>
+          <li><span>[2] WELLHUB / PLANOS</span><a href="https://wellhub.com/pt-br/plans-pricing/" target="_blank" rel="noopener">Planos, rede, modalidades e condições de acesso</a></li>
+          <li><span>[3] WELLHUB / EMPRESAS</span><a href="https://wellhub.com/pt-br/companies/" target="_blank" rel="noopener">Proposta de valor corporativa e visão para RH</a></li>
+          <li><span>[4] WELLHUB / BRASIL</span><a href="https://wellhub.com/pt-br/?hl=pt_BR" target="_blank" rel="noopener">Modelo do benefício e amplitude da plataforma</a></li>
+          <li><span>[5] TOTALPASS / COLABORADORES</span><a href="https://totalpass.com/br/colaboradores/" target="_blank" rel="noopener">Benefícios, modalidades, dependentes e flexibilidade</a></li>
+          <li><span>[6] TOTALPASS / PLANOS</span><a href="https://totalpass.com/br/planos/" target="_blank" rel="noopener">Faixas de planos, rede e variação por contrato empresarial</a></li>
+          <li><span>[7] TOTALPASS / CENTRAL DE AJUDA</span><a href="https://ajuda.totalpass.com.br/hc/pt-br/articles/18967558695963-Como-fazer-o-check-in" target="_blank" rel="noopener">Fluxo de check-in com geolocalização e confirmação na recepção</a></li>
+          <li><span>[8] TOTALPASS / CENTRAL DE AJUDA</span><a href="https://ajuda.totalpass.com.br/hc/pt-br/articles/18967573359259-Deu-problema-no-check-in-E-agora" target="_blank" rel="noopener">Causas documentadas de falha no check-in e recuperação</a></li>
+        </ol>
+        <p class="small" style="margin-top:14px">Elaboração: Luiz Ihara, RM368484 · Experiências de Produto · Turma 2ABL · Prof. Igor Carlos Silva de Souza.</p>
+      </div>
+      <a class="site-bubble" href="https://luizihara.github.io/" target="_blank" rel="noopener" aria-label="Abrir o site luizihara.github.io em uma nova aba"><span>Você está acessando</span><strong>luizihara.github.io</strong></a>
+      <footer class="footer"><span>Obrigado.</span><span><strong>20</strong> — 20</span></footer>
+    </section>
+  </main>
+
+  <nav class="controls" aria-label="Controles da apresentação">
+    <button class="control-btn" id="prevBtn" type="button" aria-label="Slide anterior">←</button>
+    <span class="slide-count" id="slideCount" aria-live="polite">01 / 20</span>
+    <button class="control-btn" id="nextBtn" type="button" aria-label="Próximo slide">→</button>
+    <button class="control-btn" id="gridBtn" type="button" aria-label="Ver todos os slides">▦</button>
+    <button class="control-btn" id="fullBtn" type="button" aria-label="Tela cheia">⛶</button>
+    <button class="control-btn" id="helpBtn" type="button" aria-label="Ajuda">?</button>
+  </nav>
+  <div class="progress" aria-hidden="true"><span class="progress-bar" id="progressBar"></span></div>
+
+  <aside class="overview" id="overview" role="dialog" aria-modal="true" aria-labelledby="overviewTitle">
+    <div class="overview-header">
+      <div><p class="eyebrow" style="margin-bottom:6px">Visão geral</p><h3 id="overviewTitle" style="margin:0">Todos os slides</h3></div>
+      <button class="control-btn" id="closeOverview" type="button" aria-label="Fechar visão geral">×</button>
+    </div>
+    <div class="overview-grid" id="overviewGrid"></div>
+  </aside>
+
+  <aside class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <div class="help-panel">
+      <p class="eyebrow">Navegação</p>
+      <h3 id="helpTitle">Atalhos da apresentação</h3>
+      <div class="shortcut-grid">
+        <kbd>← →</kbd><span>Anterior / próximo slide</span>
+        <kbd>Home</kbd><span>Primeiro slide</span>
+        <kbd>End</kbd><span>Último slide</span>
+        <kbd>F</kbd><span>Entrar ou sair da tela cheia</span>
+        <kbd>G</kbd><span>Abrir grade de slides</span>
+        <kbd>P</kbd><span>Imprimir ou salvar como PDF</span>
+        <kbd>Esc</kbd><span>Fechar esta ajuda</span>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    (() => {
+      const slides = [...document.querySelectorAll('.slide')];
+      slides.forEach(slide => {
+        let occurrence = 0;
+        const walker = document.createTreeWalker(slide, NodeFilter.SHOW_TEXT, {
+          acceptNode(node) {
+            if (!/\b(?:Wellhub|TotalPass)\b/i.test(node.nodeValue)) return NodeFilter.FILTER_REJECT;
+            if (node.parentElement?.closest('.company-name')) return NodeFilter.FILTER_REJECT;
+            return NodeFilter.FILTER_ACCEPT;
+          }
+        });
+        const matchingNodes = [];
+        while (walker.nextNode()) matchingNodes.push(walker.currentNode);
+        matchingNodes.forEach(node => {
+          const fragment = document.createDocumentFragment();
+          const pattern = /\b(Wellhub|TotalPass)\b/gi;
+          let cursor = 0;
+          for (const match of node.nodeValue.matchAll(pattern)) {
+            fragment.append(document.createTextNode(node.nodeValue.slice(cursor, match.index)));
+            const company = document.createElement('span');
+            const isWellhub = match[0].toLowerCase() === 'wellhub';
+            company.className = `company-name ${isWellhub ? 'wellhub-name' : 'totalpass-name'}`;
+            company.style.setProperty('--underline-delay', `${.14 + Math.min(occurrence, 6) * .07}s`);
+            company.textContent = match[0];
+            fragment.append(company);
+            occurrence += 1;
+            cursor = match.index + match[0].length;
+          }
+          fragment.append(document.createTextNode(node.nodeValue.slice(cursor)));
+          node.replaceWith(fragment);
+        });
+      });
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const startCue = document.getElementById('startCue');
+      const fullBtn = document.getElementById('fullBtn');
+      const gridBtn = document.getElementById('gridBtn');
+      const helpBtn = document.getElementById('helpBtn');
+      const help = document.getElementById('help');
+      const overview = document.getElementById('overview');
+      const overviewGrid = document.getElementById('overviewGrid');
+      const closeOverview = document.getElementById('closeOverview');
+      const count = document.getElementById('slideCount');
+      const progress = document.getElementById('progressBar');
+      let current = Math.max(0, Math.min(slides.length - 1, Number(location.hash.replace('#', '')) - 1 || 0));
+
+      const pad = value => String(value).padStart(2, '0');
+      function render(updateHash = true) {
+        slides.forEach((slide, index) => {
+          slide.classList.toggle('active', index === current);
+          slide.classList.toggle('before', index < current);
+          slide.setAttribute('aria-hidden', index === current ? 'false' : 'true');
+        });
+        count.textContent = `${pad(current + 1)} / ${pad(slides.length)}`;
+        progress.style.width = `${((current + 1) / slides.length) * 100}%`;
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === slides.length - 1;
+        document.title = `${slides[current].dataset.title} — Bem-estar em movimento`;
+        if (updateHash) history.replaceState(null, '', `#${current + 1}`);
+        window.dispatchEvent(new CustomEvent('deck:slidechange', {
+          detail: { index: current, title: slides[current].dataset.title }
+        }));
+      }
+      function go(delta) { current = Math.max(0, Math.min(slides.length - 1, current + delta)); render(); }
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+        else document.exitFullscreen?.();
+      }
+      function toggleOverview(force) {
+        const shouldOpen = typeof force === 'boolean' ? force : !overview.classList.contains('open');
+        overview.classList.toggle('open', shouldOpen);
+        if (shouldOpen) overview.querySelector('.overview-item')?.focus();
+      }
+
+      slides.forEach((slide, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'overview-item';
+        button.innerHTML = `<span>${pad(index + 1)}</span><strong>${slide.dataset.title}</strong>`;
+        button.addEventListener('click', () => { current = index; render(); toggleOverview(false); });
+        overviewGrid.appendChild(button);
+      });
+
+      prevBtn.addEventListener('click', () => go(-1));
+      nextBtn.addEventListener('click', () => go(1));
+      startCue.addEventListener('click', () => go(1));
+      gridBtn.addEventListener('click', () => toggleOverview());
+      closeOverview.addEventListener('click', () => toggleOverview(false));
+      fullBtn.addEventListener('click', toggleFullscreen);
+      helpBtn.addEventListener('click', () => help.classList.add('open'));
+      help.addEventListener('click', e => { if (e.target === help) help.classList.remove('open'); });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') { help.classList.remove('open'); toggleOverview(false); }
+        else if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); go(1); }
+        else if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); go(-1); }
+        else if (e.key === 'Home') { current = 0; render(); }
+        else if (e.key === 'End') { current = slides.length - 1; render(); }
+        else if (e.key.toLowerCase() === 'f') toggleFullscreen();
+        else if (e.key.toLowerCase() === 'g') toggleOverview();
+        else if (e.key.toLowerCase() === 'p') window.print();
+        else if (e.key === '?') help.classList.add('open');
+      });
+      window.addEventListener('hashchange', () => {
+        const target = Number(location.hash.replace('#', '')) - 1;
+        if (Number.isInteger(target) && target >= 0 && target < slides.length) { current = target; render(false); }
+      });
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let ignoreClickUntil = 0;
+      document.addEventListener('click', event => {
+        if (Date.now() < ignoreClickUntil) return;
+        if (overview.classList.contains('open') || help.classList.contains('open')) return;
+        if (event.target.closest('a, button, input, textarea, select, summary, [contenteditable="true"], [role="dialog"]')) return;
+        if (window.getSelection()?.toString()) return;
+        go(event.clientX >= window.innerWidth / 2 ? 1 : -1);
+      });
+      document.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+      document.addEventListener('touchend', e => {
+        if (overview.classList.contains('open') || help.classList.contains('open')) return;
+        const dx = e.changedTouches[0].screenX - touchStartX;
+        const dy = e.changedTouches[0].screenY - touchStartY;
+        if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+          ignoreClickUntil = Date.now() + 500;
+          go(dx < 0 ? 1 : -1);
+        }
+      }, { passive: true });
+      render(false);
+    })();
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+
+    const canvas = document.getElementById('wellnessScene');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, .1, 100);
+    camera.position.z = 10;
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' });
+    renderer.setClearColor(0x000000, 0);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    const palette = {
+      ink: 0x202020,
+      paper: 0xf8f7f4,
+      skin: 0xd69b73,
+      route: 0xed145b,
+      wellhub: 0x5b4191,
+      wellhubAccent: 0xd8385e,
+      totalpass: 0x26d07c,
+      totalpassAccent: 0x8254ff
+    };
+
+    let width = innerWidth;
+    let height = innerHeight;
+    let currentMode = 'both';
+    let frameId = 0;
+    let displayedProgress = 0;
+    let targetProgress = 0;
+    let progressStart = 0;
+    let transitionStart = 0;
+    let hasSynced = false;
+    const firstClimbSlide = 4;
+    const lastClimbSlide = 19;
+
+    function material(color, opacity = 1) {
+      return new THREE.MeshBasicMaterial({ color, transparent: opacity < 1, opacity, depthTest: false });
+    }
+
+    function rectangle(w, h, color, x = 0, y = 0, z = 1, opacity = 1) {
+      const mesh = new THREE.Mesh(new THREE.PlaneGeometry(w, h), material(color, opacity));
+      mesh.position.set(x, y, z);
+      return mesh;
+    }
+
+    function circle(radius, color, x = 0, y = 0, z = 1, opacity = 1) {
+      const mesh = new THREE.Mesh(new THREE.CircleGeometry(radius, 28), material(color, opacity));
+      mesh.position.set(x, y, z);
+      return mesh;
+    }
+
+    function line(points, color, z = 1, opacity = 1) {
+      const geometry = new THREE.BufferGeometry().setFromPoints(points.map(([x, y]) => new THREE.Vector3(x, y, z)));
+      return new THREE.Line(geometry, new THREE.LineBasicMaterial({ color, transparent: opacity < 1, opacity, depthTest: false }));
+    }
+
+    function label(text) {
+      const labelCanvas = document.createElement('canvas');
+      labelCanvas.width = 220;
+      labelCanvas.height = 90;
+      const context = labelCanvas.getContext('2d');
+      context.fillStyle = '#ffffff';
+      context.font = `900 ${text.length > 1 ? 36 : 48}px Inter, Arial, sans-serif`;
+      context.textAlign = 'center';
+      context.textBaseline = 'middle';
+      context.fillText(text, 110, 47);
+      const texture = new THREE.CanvasTexture(labelCanvas);
+      texture.colorSpace = THREE.SRGBColorSpace;
+      texture.minFilter = THREE.LinearFilter;
+      const mesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(20, 8),
+        new THREE.MeshBasicMaterial({ map: texture, transparent: true, depthTest: false })
+      );
+      mesh.position.set(0, 30, 8);
+      return mesh;
+    }
+
+    function limb(length, thickness, color, x, y, z, reachesUp = false) {
+      const pivot = new THREE.Group();
+      pivot.position.set(x, y, z);
+      const shape = rectangle(thickness, length, color, 0, reachesUp ? length / 2 : -length / 2, 0);
+      pivot.add(shape);
+      return pivot;
+    }
+
+    function makeAthlete(brand) {
+      const isWellhub = brand === 'wellhub';
+      const primary = isWellhub ? palette.wellhub : palette.totalpass;
+      const accent = isWellhub ? palette.wellhubAccent : palette.totalpassAccent;
+      const root = new THREE.Group();
+
+      const halo = circle(23, primary, 0, 30, 0, .055);
+      root.add(halo);
+
+      const backArm = limb(22, 5, palette.skin, -4, 40, 2);
+      const backLeg = limb(28, 6, palette.ink, -3, 19, 2);
+      const frontArm = limb(22, 5, palette.skin, 4, 40, 6);
+      const frontLeg = limb(29, 6, accent, 3, 19, 6);
+      root.add(backArm, backLeg, frontArm, frontLeg);
+
+      const backpack = rectangle(12, 22, accent, -9, 32, 3, .92);
+      backpack.rotation.z = -.08;
+      root.add(backpack);
+      const torso = rectangle(18, 27, primary, 0, 31, 5);
+      root.add(torso);
+      const brandLabel = label(isWellhub ? 'W' : 'TP');
+      root.add(brandLabel);
+      root.add(circle(7.5, palette.skin, 1, 52, 6));
+      root.add(rectangle(10, 3, accent, 2, 57, 7));
+
+      const sparkles = new THREE.Group();
+      for (let i = 0; i < 5; i += 1) {
+        const dot = circle(1.8 - i * .18, i % 2 ? accent : primary, -18 - i * 9, -8 - i * 6, 1, .5);
+        sparkles.add(dot);
+      }
+      root.add(sparkles);
+
+      root.userData = {
+        brand,
+        primary,
+        accent,
+        backArm,
+        frontArm,
+        backLeg,
+        frontLeg,
+        brandLabel,
+        sparkles,
+        phase: isWellhub ? .08 : .58
+      };
+      return root;
+    }
+
+    const track = new THREE.Group();
+    const checkpoints = new THREE.Group();
+    scene.add(track, checkpoints);
+
+    const wellhubAthlete = makeAthlete('wellhub');
+    const totalpassAthlete = makeAthlete('totalpass');
+    scene.add(wellhubAthlete, totalpassAthlete);
+
+    function routeBounds() {
+      return {
+        start: {
+          x: -width / 2 + Math.max(54, Math.min(92, width * .07)),
+          y: -height / 2 + 64
+        },
+        end: {
+          x: width / 2 - Math.max(68, Math.min(112, width * .085)),
+          y: height / 2 - 72
+        }
+      };
+    }
+
+    function routePoint(progress) {
+      const { start, end } = routeBounds();
+      return {
+        x: THREE.MathUtils.lerp(start.x, end.x, progress),
+        y: THREE.MathUtils.lerp(start.y, end.y, progress) + Math.sin(progress * Math.PI * 3) * 10
+      };
+    }
+
+    function rebuildTrack() {
+      track.clear();
+      checkpoints.clear();
+      const route = [];
+      const totalSteps = lastClimbSlide - firstClimbSlide;
+      for (let index = 0; index <= totalSteps; index += 1) {
+        const progress = index / totalSteps;
+        const point = routePoint(progress);
+        route.push([point.x, point.y]);
+      }
+      track.add(line(route, palette.route, 0, .2));
+      route.forEach(([x, y], index) => {
+        const marker = new THREE.Group();
+        const brandColor = index % 2 ? palette.totalpass : palette.wellhub;
+        marker.add(circle(7, palette.paper, 0, 0, 1, .96));
+        const dot = circle(4.2, brandColor, 0, 0, 2, .72);
+        marker.add(dot);
+        marker.position.set(x, y, 0);
+        marker.userData = { index, dot };
+        checkpoints.add(marker);
+      });
+    }
+
+    function modeForSlide(title = '', index = 0) {
+      if (index < 4) return 'none';
+      if (title.startsWith('Wellhub')) return 'wellhub';
+      if (title.startsWith('TotalPass')) return 'totalpass';
+      return 'both';
+    }
+
+    function syncMode(title, index) {
+      currentMode = modeForSlide(title, index);
+      const showTrack = currentMode !== 'none';
+      track.visible = showTrack;
+      checkpoints.visible = showTrack;
+      wellhubAthlete.visible = currentMode === 'both' || currentMode === 'wellhub';
+      totalpassAthlete.visible = currentMode === 'both' || currentMode === 'totalpass';
+      const nextProgress = THREE.MathUtils.clamp(
+        (index - firstClimbSlide) / (lastClimbSlide - firstClimbSlide),
+        0,
+        1
+      );
+      if (!hasSynced) {
+        displayedProgress = nextProgress;
+        targetProgress = nextProgress;
+        progressStart = nextProgress;
+        hasSynced = true;
+      } else {
+        progressStart = displayedProgress;
+        targetProgress = nextProgress;
+        transitionStart = performance.now();
+      }
+    }
+
+    function resize() {
+      width = innerWidth;
+      height = innerHeight;
+      camera.left = -width / 2;
+      camera.right = width / 2;
+      camera.top = height / 2;
+      camera.bottom = -height / 2;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height, false);
+      rebuildTrack();
+    }
+
+    function advance(athlete, progress, time, laneOffset = 0, isMoving = false) {
+      const { start, end } = routeBounds();
+      const point = routePoint(progress);
+      const pathX = end.x - start.x;
+      const pathY = end.y - start.y;
+      const pathLength = Math.hypot(pathX, pathY) || 1;
+      const normalX = -pathY / pathLength;
+      const normalY = pathX / pathLength;
+      const reach = isMoving ? Math.sin(time * .018 + athlete.userData.phase * 11) : 0;
+      const sway = isMoving ? Math.sin(time * .009 + athlete.userData.phase * 8) * 1.5 : 0;
+      const scale = width < 700 ? .5 : Math.min(.68, width / 1750);
+
+      athlete.position.set(
+        point.x + normalX * laneOffset + sway,
+        point.y + normalY * laneOffset,
+        0
+      );
+      athlete.scale.setScalar(scale);
+      athlete.rotation.z = -.1 + reach * .025;
+      athlete.userData.brandLabel.scale.x = 1;
+      athlete.userData.frontArm.rotation.z = .38 * reach;
+      athlete.userData.backArm.rotation.z = -.38 * reach;
+      athlete.userData.frontLeg.rotation.z = -.34 * reach;
+      athlete.userData.backLeg.rotation.z = .34 * reach;
+      athlete.userData.sparkles.children.forEach((dot, index) => {
+        dot.scale.setScalar(isMoving ? .72 + Math.abs(Math.sin(time * .012 + index)) * .65 : .72);
+      });
+    }
+
+    function draw(time = 0) {
+      const duration = reduceMotion.matches ? 0 : 720;
+      const elapsed = duration ? THREE.MathUtils.clamp((time - transitionStart) / duration, 0, 1) : 1;
+      const eased = 1 - Math.pow(1 - elapsed, 3);
+      displayedProgress = THREE.MathUtils.lerp(progressStart, targetProgress, eased);
+      const isMoving = elapsed < 1 && Math.abs(targetProgress - progressStart) > .0001;
+      const split = currentMode === 'both';
+      advance(wellhubAthlete, displayedProgress, time, split ? -18 : 0, isMoving);
+      advance(totalpassAthlete, displayedProgress, time, split ? 18 : 0, isMoving);
+      const reachedStep = Math.round(displayedProgress * (lastClimbSlide - firstClimbSlide));
+      checkpoints.children.forEach(marker => {
+        const reached = marker.userData.index <= reachedStep;
+        marker.scale.setScalar(reached ? 1 : .72);
+        marker.userData.dot.material.opacity = reached ? .78 : .18;
+      });
+      renderer.render(scene, camera);
+      if (!reduceMotion.matches) frameId = requestAnimationFrame(draw);
+    }
+
+    function refreshMotion() {
+      cancelAnimationFrame(frameId);
+      frameId = reduceMotion.matches ? 0 : requestAnimationFrame(draw);
+      if (reduceMotion.matches) draw();
+    }
+
+    window.addEventListener('deck:slidechange', event => syncMode(event.detail.title, event.detail.index));
+    window.addEventListener('resize', resize, { passive: true });
+    reduceMotion.addEventListener?.('change', refreshMotion);
+    resize();
+    const initialSlide = document.querySelector('.slide.active');
+    const initialIndex = [...document.querySelectorAll('.slide')].indexOf(initialSlide);
+    syncMode(initialSlide?.dataset.title || '', initialIndex);
+    refreshMotion();
+  </script>
+</body>
+</html>
