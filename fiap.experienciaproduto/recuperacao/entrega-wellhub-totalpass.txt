@@ -1,0 +1,38 @@
+APRESENTAÇÃO — EXPERIÊNCIAS DE PRODUTO
+Wellhub × TotalPass: Bem-estar em movimento
+
+Aluno: Luiz Ihara
+Matrícula: RM368484
+Turma: 2ABL
+Professor: Igor Carlos Silva de Souza
+
+Olá, professor!
+
+A apresentação deste trabalho foi concluída e está disponível no endereço abaixo:
+
+https://luizihara.github.io/fiap.experienciaproduto/recuperacao/index.html
+
+O projeto apresenta uma análise comparativa das jornadas do cliente da Wellhub e da TotalPass, duas empresas concorrentes do segmento de bem-estar corporativo.
+
+O trabalho parte de uma proto-persona e acompanha sua experiência desde o conhecimento do benefício oferecido pela empresa, passando pela pesquisa e escolha do plano, ativação, primeiro acesso, uso continuado, percepção de valor e possíveis dificuldades de suporte.
+
+As jornadas AS IS das duas empresas foram organizadas em mapas comparativos, contemplando:
+
+- História da persona em cada etapa;
+- Ações realizadas;
+- Pontos de contato;
+- Emoções percebidas;
+- Gargalos e pontos de dor;
+- Oportunidades de melhoria;
+- Insights e áreas responsáveis.
+
+A principal conclusão é que disponibilizar uma grande rede de academias, estúdios e serviços não é suficiente para criar valor duradouro. A experiência também precisa ajudar a pessoa a escolher o plano adequado, realizar o primeiro acesso com confiança, construir constância e recomeçar sem culpa quando a rotina mudar.
+
+Com base nos principais achados, a apresentação propõe melhorias que podem ser aplicadas aos dois negócios, incluindo recomendação contextual de planos, pré-check de acesso, acompanhamento dos primeiros 21 dias e uma jornada de recomeço mais acolhedora.
+
+A apresentação foi desenvolvida como um site interativo. Para navegar, basta clicar no lado direito ou esquerdo da tela, utilizar as setas do teclado ou os controles disponíveis no canto inferior direito.
+
+Obrigado pela avaliação!
+
+Luiz Ihara
+RM368484
