@@ -1,0 +1,104 @@
+# A Força da Transformação — Natura, iFood e Nubank
+
+Documento textual complementar para acessibilidade, indexação e leitura automatizada.
+Idioma: português do Brasil.
+Disciplina: AI Leadership — Transformação de Modelos de Negócio, FIAP MBA.
+Professor: Rafael Piassa Gonçalves.
+Autores: Luiz Ihara (RM368484), Filipe Fragoso (RM368500), Daniel Caminha (RM366740) e Pedro Martins (RM368543).
+Última atualização: 27 de agosto de 2026.
+
+## Objetivo e tese central
+
+Este trabalho compara Natura, iFood e Nubank em relação ao desenvolvimento, à operação e à escala de soluções tecnológicas e de inteligência artificial. A tese do grupo é que a escala sustentável não nasce da adoção isolada de uma ferramenta. Ela surge quando dados proprietários, tecnologia, modelo operacional, governança e identidade do negócio trabalham sobre uma decisão ou fluxo central de valor.
+
+As três empresas compartilham uma lógica de evolução: primeiro organizam dados e conhecimento; depois aplicam IA ao núcleo da operação; por fim, transformam essa capacidade em novos serviços, receitas ou vantagens difíceis de copiar. A principal diferença está no ativo que cada empresa amplifica. No Nubank, a IA melhora decisões financeiras. No iFood, coordena um ecossistema de múltiplos participantes. Na Natura, fortalece relações humanas, personalização e biodiversidade.
+
+## 1. O que as empresas possuem em comum?
+
+As três possuem dados proprietários gerados pelo uso recorrente de seus produtos e canais. A IA participa do core do negócio, em vez de permanecer restrita a tarefas periféricas. Elas usam plataformas, APIs, modelos compartilhados e governança para transformar pilotos em capacidade organizacional. O trabalho humano é ampliado por contexto e velocidade, e não simplesmente substituído. Cada interação alimenta um ciclo de aprendizagem: o dado melhora a decisão, a decisão melhora a experiência e a nova experiência gera mais dados. Depois de obter eficiência, as empresas também procuram receitas adjacentes sobre o mesmo ativo central.
+
+## 2. O que elas possuem de diferente?
+
+Nubank: sua unidade de valor é a decisão financeira; constrói internamente as capacidades que diferenciam crédito, risco e experiência, enquanto pode comprar recursos horizontais; opera decisões em milissegundos e também acompanha ciclos de crédito; o humano supervisiona e trata exceções.
+
+iFood: sua unidade de valor é o pedido coordenado; constrói modelos verticais e plataformas internas para conectar consumidor, restaurante e entregador; opera em tempo real nos três lados do marketplace; o humano participa da orquestração do ecossistema.
+
+Natura: sua unidade de valor é a relação que converte; combina serviços de nuvem com dados governados; trabalha com adoção na ponta, integração Natura–Avon e ciclos físicos de produção e distribuição; consultoras, confiança e vínculo continuam sendo diferenciais centrais.
+
+## 3. Qual é o ponto principal de cada empresa?
+
+Nubank — decidir: modelos mais precisos transformam risco em inclusão financeira e margem.
+iFood — coordenar: quanto melhor conecta demanda, oferta e logística, mais forte fica o marketplace.
+Natura — amplificar: a tecnologia cria valor quando fortalece relações, personaliza a venda e materializa a biodiversidade.
+
+Síntese: não existe uma única “melhor IA”; existe a IA capaz de mudar a equação específica do negócio.
+
+## 4. Quais capacidades adicionais não estavam no material da aula?
+
+Nubank: platform thinking para expansão internacional, com plataformas compartilhadas e camadas configuráveis por mercado, além de experiências multimodais personalizadas por IA.
+
+iFood: Physical AI na primeira milha por meio da robô ADA, que combina visão computacional, sensores, mapas e decisão em tempo real. Um operador pode monitorar até cem robôs, enquanto o entregador mantém a responsabilidade pela última milha.
+
+Natura: produção cosmética personalizada em sandbox regulatório da Anvisa, incluindo fragrâncias apoiadas por experiência conversacional e bases preparadas de acordo com tom e subtom de pele.
+
+## 5. O que elas poderiam fazer que ainda não fizeram?
+
+As propostas são hipóteses autorais; o grupo não identificou anúncios públicos das soluções completas até agosto de 2026.
+
+Nubank — gêmeo financeiro consentido: simulador opt-in que testa cenários de dívida, reserva, renda, crédito e metas sem movimentar dinheiro. Deve medir aderência ao plano, confiança e inadimplência evitada. Só avança com explicabilidade, consentimento e resultado superior ao baseline. Os riscos centrais são indução financeira e uso indevido de dados sensíveis.
+
+iFood — autopiloto do restaurante: agente autorizado a ajustar cardápio, estoque, campanhas, preço e capacidade dentro de limites definidos pelo parceiro. O piloto deve medir margem, desperdício, cancelamento e reversibilidade. Só avança se houver ganho econômico sem reduzir autonomia ou confiança. Os riscos incluem preço abusivo, desequilíbrio da rede e ações irreversíveis.
+
+Natura — passaporte vivo do produto: identidade digital que conecta origem do bioativo, impacto, autenticidade, recomendação e logística reversa. O piloto deve começar em uma linha e usar QR por lote com origem auditável. Deve medir conversão, devolução, reciclagem e confiança. Os riscos são dado incompleto, greenwashing e custo por unidade.
+
+Princípio usado: construir quando o dado próprio altera a economia unitária; comprar quando a capacidade é horizontal; integrar quando velocidade vale mais do que diferenciação.
+
+## 6. O que o grupo já fez ou viu de perto de mais parecido?
+
+Na nstech, a experiência mais próxima foi tratar Platform Engineering e Backstage como produto interno. Catálogo, padrões, automações e caminhos recomendados reduzem fricção para vários times. A experiência se aproxima do iFood pela lógica de plataforma, do Nubank pela produtividade de engenharia e da Natura pela necessidade de respeitar contextos humanos e diferentes níveis de maturidade. O ciclo observado foi: descobrir necessidades, decidir políticas e limites, entregar golden paths e gates, e aprender com métricas e feedback.
+
+## 7. O que poderia ser melhor nessa experiência?
+
+O ponto de partida deveria ser a decisão a melhorar e a métrica econômica, e não a ferramenta ou a arquitetura. A adoção precisa combinar incentivos, suporte, comunidade e mudança do fluxo de trabalho, em vez de depender apenas de comunicação e treinamento pontual. A avaliação deve medir lead time, qualidade, retrabalho, risco e valor capturado, não apenas acessos. Guardrails, observabilidade e responsabilidades precisam existir desde o primeiro piloto. Uma plataforma escala quando o caminho recomendado também é o mais fácil e quando a organização consegue provar seu resultado.
+
+## 8. Oportunidades atuais no nível informacional básico com IA
+
+Reuniões: transcrever conversas, separar decisões, responsáveis, prazos e riscos e atualizar o acompanhamento.
+Documentos: comparar contratos, políticas e procedimentos, localizar conflitos e gerar trilhas auditáveis com citações.
+Engenharia: responder sobre serviços, incidentes, padrões e dependências a partir de catálogo técnico e documentação interna.
+Dados: converter perguntas de negócio em consultas controladas, visualizações e hipóteses para análise humana.
+Atendimento: resumir histórico, sugerir solução, classificar urgência e registrar o desfecho com supervisão humana.
+Apresentações: estruturar o argumento, testar consistência e gerar um rascunho visual revisável.
+
+Casos específicos apresentados no material da aula: AskNu, busca corporativa com RAG usada por cerca de cinco mil funcionários por mês; Groceries Data Assistant do iFood, que reduziu uma tarefa recorrente de análise de aproximadamente trinta para cinco minutos; busca semântica da Natura, usada por mais de um milhão de consultoras e capaz de sustentar cerca de quatrocentas buscas por minuto.
+
+## 9. Como criar o ambiente correto para escala operacional e inovação com IA?
+
+1. Norte: escolher uma decisão central da cadeia de valor e declarar resultado, limite e responsável.
+2. Fundação: oferecer identidade, dados de qualidade, APIs, modelos aprovados, segurança e custo observável.
+3. Operação: tratar IA como produto contínuo, com times multidisciplinares, golden paths, avaliação, supervisão humana e suporte.
+4. Cultura: combinar letramento, comunidade e experimentação com guardrails e autonomia proporcional à evidência.
+5. Economia: medir valor, adoção, qualidade, risco e custo por tarefa; realocar recursos e interromper iniciativas que não aprendem nem entregam.
+
+## 10. Reflexão final
+
+Profissionalmente, o grupo passou da pergunta “qual tecnologia usar?” para “qual decisão precisa mudar?”. Isso altera priorização, métricas e arquitetura. Pessoalmente, ficou claro que delegar tarefas à IA não significa delegar julgamento: curiosidade, repertório, ética e responsabilidade se tornam ainda mais importantes. A principal lição é que a escala sustentável nasce quando tecnologia, modelo operacional e identidade do negócio apontam para a mesma direção.
+
+## 11. Atualização do Framework de Adoção de IA — Órbita 2.0
+
+O framework preserva o roadmap da aula e acrescenta três princípios: valor antes do caso de uso; governança desde a descoberta; autonomia conquistada por evidência.
+
+Fase Apropriar: (1) definir a decisão e o ativo central; (2) criar quick win com hipótese, baseline, responsável e prazo; (3) diagnosticar dados, processo, risco e comportamento; (4) aprender com benchmarks sem copiar soluções.
+
+Fase Escalar: (5) priorizar o portfólio pela cadeia de valor e por dependências; (6) escolher entre trabalhar com IA, redesenhar para IA ou criar por IA; (7) preparar dados, modelos, guardrails e talentos; (8) operar com governança adaptativa e métricas de valor, qualidade, risco e custo.
+
+Fase Criar: (9) replicar o que aprende por meio de produtos internos e comunicação de valor; (10) avançar para autonomia progressiva e novos modelos de negócio, mantendo liderança e aprendizagem contínuas.
+
+## Fontes principais
+
+- Material da disciplina: “Aula 02 — Transformação de Modelo de Negócios”, consolidado até junho de 2026 e disponível na pasta file do site.
+- Nubank, julho de 2026: platform thinking, IA e expansão com produtos localizados.
+- iFood, agosto de 2025: robô ADA e Physical AI aplicada à primeira milha.
+- Natura, agosto de 2026: personalização cosmética e sandbox regulatório da Anvisa.
+
+Para a experiência visual completa, consulte index.html. Para as fontes clicáveis e a relação entre evidências e argumentos, consulte a seção “Referências consultadas” no final da página.

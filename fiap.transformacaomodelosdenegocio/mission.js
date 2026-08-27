@@ -49,6 +49,16 @@
         reveals.forEach((item) => item.classList.add('is-visible'));
     }
 
+    const revealHashTarget = () => {
+        if (!window.location.hash) return;
+        const target = document.querySelector(window.location.hash);
+        if (!target) return;
+        if (target.classList.contains('reveal')) target.classList.add('is-visible');
+        target.querySelectorAll('.reveal').forEach((item) => item.classList.add('is-visible'));
+    };
+    window.addEventListener('hashchange', revealHashTarget);
+    window.requestAnimationFrame(revealHashTarget);
+
     const railLinks = [...document.querySelectorAll('.mission-rail a')];
     const missions = [...document.querySelectorAll('.mission[data-question]')];
     const progress = document.getElementById('rail-progress');

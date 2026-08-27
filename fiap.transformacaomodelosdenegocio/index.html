@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#03040a">
     <meta name="description" content="Análise interativa dos casos Nubank, iFood e Natura sobre transformação de modelos de negócio com inteligência artificial.">
+    <meta name="author" content="Luiz Ihara, Filipe Fragoso, Daniel Caminha e Pedro Martins">
+    <meta name="keywords" content="inteligência artificial, transformação de modelos de negócio, escala operacional, inovação, Nubank, iFood, Natura, FIAP">
     <meta property="og:title" content="A Força da Transformação · FIAP">
     <meta property="og:description" content="Nubank, iFood e Natura em uma jornada pela escala, operação e inovação com IA.">
     <meta property="og:type" content="website">
@@ -13,6 +15,47 @@
     <meta name="twitter:title" content="A Força da Transformação · FIAP">
     <meta name="twitter:description" content="Nubank, iFood e Natura em uma jornada pela escala, operação e inovação com IA.">
     <meta name="twitter:image" content="https://luizihara.github.io/fiap.transformacaomodelosdenegocio/og.png">
+    <link rel="alternate" type="text/plain" href="./llms.txt" title="Resumo acadêmico para leitura automatizada">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "A Força da Transformação: Natura, iFood e Nubank",
+      "description": "Análise comparativa, exploratória e aplicada sobre o desenvolvimento e a escala das soluções e operações tecnológicas de Natura, iFood e Nubank.",
+      "abstract": "O trabalho demonstra que as três empresas escalam inteligência artificial a partir de dados proprietários, tecnologia integrada ao negócio, plataformas reutilizáveis, governança e ciclos contínuos de aprendizagem. A diferença está no ativo que cada uma amplifica: decisão financeira no Nubank, coordenação do marketplace no iFood e relacionamento humano-comercial na Natura. A análise também propõe oportunidades atuais, um ambiente de escala responsável e uma atualização do Framework de Adoção de IA.",
+      "inLanguage": "pt-BR",
+      "educationalLevel": "Pós-graduação / MBA",
+      "learningResourceType": "Trabalho acadêmico",
+      "dateModified": "2026-08-27",
+      "keywords": [
+        "inteligência artificial",
+        "transformação de modelos de negócio",
+        "escala operacional",
+        "inovação",
+        "Nubank",
+        "iFood",
+        "Natura"
+      ],
+      "author": [
+        { "@type": "Person", "name": "Luiz Ihara", "identifier": "RM368484" },
+        { "@type": "Person", "name": "Filipe Fragoso", "identifier": "RM368500" },
+        { "@type": "Person", "name": "Daniel Caminha", "identifier": "RM366740" },
+        { "@type": "Person", "name": "Pedro Martins", "identifier": "RM368543" }
+      ],
+      "contributor": {
+        "@type": "Person",
+        "name": "Rafael Piassa Gonçalves",
+        "jobTitle": "Professor"
+      },
+      "hasPart": [
+        { "@type": "Article", "name": "Análise comparativa", "description": "Pontos comuns, diferenças e foco estratégico de cada empresa." },
+        { "@type": "Article", "name": "Análise exploratória", "description": "Capacidades adicionais e propostas ainda não implementadas." },
+        { "@type": "Article", "name": "Análise com base na vivência", "description": "Experiências profissionais do grupo e oportunidades de melhoria." },
+        { "@type": "Article", "name": "Análise com base nos exercícios de aula", "description": "Casos atuais de IA e condições para escala operacional e inovação." },
+        { "@type": "Article", "name": "Conclusão e Framework 2.0", "description": "Reflexão final e atualização do framework de adoção de IA." }
+      ]
+    }
+    </script>
     <title>A Força da Transformação · FIAP</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,7 +76,7 @@
         <nav class="top-nav" aria-label="Navegação principal">
             <a href="#cases">Os 3 cases</a>
             <a href="#missions">11 missões</a>
-            <a href="#framework">Framework 2.0</a>
+            <a href="#q11">Framework 2.0</a>
         </nav>
         <a class="home-link" href="../index.html">Base principal <span aria-hidden="true">↗</span></a>
     </header>
@@ -81,10 +124,22 @@
             <div class="team-grid">
                 <h2 id="team-title">A tripulação<br>da missão.</h2>
                 <div class="crew-list">
-                    <div class="crew"><span>LI</span><p><b>Luiz Ihara</b><small>RM368484</small></p></div>
-                    <div class="crew"><span>FF</span><p><b>Filipe Fragoso</b><small>RM368500</small></p></div>
-                    <div class="crew"><span>DC</span><p><b>Daniel Caminha</b><small>RM366740</small></p></div>
-                    <div class="crew"><span>PM</span><p><b>Pedro Martins</b><small>RM368543</small></p></div>
+                    <figure class="crew">
+                        <div class="crew-photo"><img src="./team/LuizIhara.png" alt="Retrato de Luiz Ihara" width="1086" height="1448" loading="lazy" decoding="async"></div>
+                        <figcaption><b>Luiz Ihara</b><small>RM368484</small></figcaption>
+                    </figure>
+                    <figure class="crew">
+                        <div class="crew-photo"><img src="./team/FilipeFragoso.png" alt="Retrato de Filipe Fragoso" width="1086" height="1448" loading="lazy" decoding="async"></div>
+                        <figcaption><b>Filipe Fragoso</b><small>RM368500</small></figcaption>
+                    </figure>
+                    <figure class="crew">
+                        <div class="crew-photo"><img src="./team/DanielCaminha.png" alt="Retrato de Daniel Caminha" width="1086" height="1448" loading="lazy" decoding="async"></div>
+                        <figcaption><b>Daniel Caminha</b><small>RM366740</small></figcaption>
+                    </figure>
+                    <figure class="crew">
+                        <div class="crew-photo"><img src="./team/PedroMartins.png" alt="Retrato de Pedro Martins" width="1086" height="1448" loading="lazy" decoding="async"></div>
+                        <figcaption><b>Pedro Martins</b><small>RM368543</small></figcaption>
+                    </figure>
                 </div>
             </div>
         </section>
@@ -159,19 +214,20 @@
             <article class="mission section-shell" id="q4" data-question="04">
                 <header class="mission-head reveal"><span>QUESTÃO 04</span><h2>Que outras capacidades<br><em>elas possuem?</em></h2></header>
                 <div class="intel-cards">
-                    <article class="intel-card reveal"><span class="intel-id nu-bg">NU / FORA DO DECK</span><h3>AI Private Banker em escala real</h3><p>Além da tese apresentada em aula, as funcionalidades já alcançam mais de 15 milhões de usuários ativos mensais. O nuFormer também passou a atuar em cartão no Brasil e México e em empréstimos no Brasil.</p><a href="https://international.nubank.com.br/pt-br/companhia/nu-holdings-ltd-divulga-resultados-financeiros-do-primeiro-trimestre-de-2026/" target="_blank" rel="noopener">FONTE OFICIAL · NU 1T26 ↗</a></article>
-                    <article class="intel-card reveal"><span class="intel-id food-bg">IFOOD / FORA DO DECK</span><h3>GenAI como infraestrutura massiva</h3><p>A Genplat chegou a 4 trilhões de tokens por mês; mais de 200 serviços usam IA generativa e mais de 60% do código produzido recebe apoio de IA. O LCM responde por 90% das interações generativas.</p><a href="https://institucional.ifood.com.br/releases/ifood-12-milhoes-pedidos/" target="_blank" rel="noopener">FONTE OFICIAL · IFOOD 2026 ↗</a></article>
-                    <article class="intel-card reveal"><span class="intel-id natura-bg">NATURA / FORA DO DECK</span><h3>IA conectando ciência e impacto</h3><p>A Natura firmou parceria para combinar bioativos próprios com moléculas de longevidade cutânea descobertas por IA, conectando sua biodiversidade a uma nova frente de inovação científica.</p><a href="https://ri.natura.com.br/noticias/natura-e-debut-fecham-parceria-para-levar-ativos-de-longevidade-descobertos-por-ia-a-america-latina/" target="_blank" rel="noopener">FONTE OFICIAL · NATURA 2026 ↗</a></article>
+                    <article class="intel-card reveal"><span class="intel-id nu-bg">NU / FORA DO DECK</span><h3>Plataforma global, produto local</h3><p>O Nu passou a explicitar o <em>platform thinking</em> como alavanca de expansão: plataformas compartilhadas, com níveis de abstração configuráveis para cada mercado, aceleram produtos localizados e experiências multimodais personalizadas por IA.</p><a href="https://international.nubank.com.br/pt-br/companhia/novo-cpo-carl-rivera-detalha-como-experiencias-personalizadas-por-ia-impulsionarao-as-novas-fases-de-expansao-do-nubank/" target="_blank" rel="noopener">FONTE OFICIAL · NU JUL/2026 ↗</a></article>
+                    <article class="intel-card reveal"><span class="intel-id food-bg">IFOOD / FORA DO DECK</span><h3>Physical AI na primeira milha</h3><p>A robô ADA combina visão computacional, sensores, mapas e decisão em tempo real para navegar em shoppings. Um operador pode monitorar até 100 robôs, enquanto o entregador permanece responsável pela última milha.</p><a href="https://institucional.ifood.com.br/inovacao/como-funciona-a-inteligencia-artificial-da-robo-ada/" target="_blank" rel="noopener">FONTE OFICIAL · IFOOD AGO/2025 ↗</a></article>
+                    <article class="intel-card reveal"><span class="intel-id natura-bg">NATURA / FORA DO DECK</span><h3>Produção cosmética sob medida</h3><p>Em sandbox regulatório da Anvisa, a Natura testa fragrâncias criadas por uma experiência conversacional com IA e bases personalizadas produzidas em menos de uma hora a partir do tom e subtom de pele.</p><a href="https://ri.natura.com.br/noticias/natura-sai-na-frente-e-traz-maquinas-de-personalizacao-cosmetica-para-o-mercado-brasileiro/" target="_blank" rel="noopener">FONTE OFICIAL · NATURA AGO/2026 ↗</a></article>
                 </div>
-                <p class="source-note reveal">Dados externos consultados em agosto de 2026. A análise diferencia explicitamente o conteúdo do material de aula das atualizações exploratórias.</p>
+                <p class="source-note reveal">Fontes oficiais consultadas em agosto de 2026. As três capacidades acima não aparecem no material da aula, consolidado até junho de 2026.</p>
             </article>
 
             <article class="mission section-shell" id="q5" data-question="05">
                 <header class="mission-head reveal"><span>QUESTÃO 05</span><h2>O que poderiam fazer<br><em>que ainda não fizeram?</em></h2></header>
+                <p class="hypothesis-note reveal"><span>HIPÓTESES AUTORAIS</span> Não identificamos anúncios públicos destas soluções completas até agosto de 2026. Cada aposta começa como quick win informacional, conquista autonomia por evidência e só então avança para escala operacional.</p>
                 <div class="future-grid">
-                    <article class="future-card reveal"><div class="future-num">01</div><span>NUBANK</span><h3>Gêmeo financeiro consentido</h3><p>Um simulador pessoal que testa cenários — dívida, reserva, renda, crédito e metas — antes de executar qualquer decisão.</p><ul><li>Valor: prevenção, não só reação</li><li>Base: nuFormer + Private Banker</li><li>Limite: consentimento e explicabilidade</li></ul></article>
-                    <article class="future-card reveal"><div class="future-num">02</div><span>IFOOD</span><h3>Autopiloto do restaurante</h3><p>Um agente autorizado a ajustar cardápio, estoque, campanhas, preço e capacidade dentro de guardrails definidos pelo parceiro.</p><ul><li>Valor: margem do restaurante</li><li>Base: LCM + logística + Ads</li><li>Limite: autonomia reversível</li></ul></article>
-                    <article class="future-card reveal"><div class="future-num">03</div><span>NATURA</span><h3>Passaporte vivo do produto</h3><p>Uma identidade digital que conecta origem do bioativo, impacto, autenticidade, recomendação e logística reversa.</p><ul><li>Valor: confiança verificável</li><li>Base: biodiversidade + rede</li><li>Limite: rastreabilidade ponta a ponta</li></ul></article>
+                    <article class="future-card reveal"><div class="future-num">01</div><span>NUBANK</span><h3>Gêmeo financeiro consentido</h3><p>Um simulador pessoal que testa dívida, reserva, renda, crédito e metas antes de qualquer decisão real.</p><ul><li><b>Roadmap:</b> 02 Prova → 06 Ambição → 08 Governança</li><li><b>Piloto:</b> simulação opt-in, sem movimentar dinheiro</li><li><b>KPI:</b> aderência ao plano, confiança e inadimplência evitada</li><li><b>Gate:</b> recomendação explicável, consentida e superior ao baseline</li><li><b>Risco:</b> indução financeira e uso indevido de dados sensíveis</li></ul></article>
+                    <article class="future-card reveal"><div class="future-num">02</div><span>IFOOD</span><h3>Autopiloto do restaurante</h3><p>Um agente autorizado a ajustar cardápio, estoque, campanhas, preço e capacidade dentro dos limites definidos pelo parceiro.</p><ul><li><b>Roadmap:</b> 02 Prova → 05 Portfólio → 08 Governança</li><li><b>Piloto:</b> parceiros opt-in, uma categoria e uma região</li><li><b>KPI:</b> margem, desperdício, cancelamento e taxa de reversão</li><li><b>Gate:</b> ganho econômico sem reduzir autonomia ou confiança</li><li><b>Risco:</b> preço abusivo, desequilíbrio da rede e ação irreversível</li></ul></article>
+                    <article class="future-card reveal"><div class="future-num">03</div><span>NATURA</span><h3>Passaporte vivo do produto</h3><p>Uma identidade digital que conecta origem do bioativo, impacto, autenticidade, recomendação e logística reversa.</p><ul><li><b>Roadmap:</b> 02 Prova → 05 Cadeia de valor → 09 Escala</li><li><b>Piloto:</b> uma linha, QR por lote e origem auditável</li><li><b>KPI:</b> conversão, devolução, reciclagem e confiança declarada</li><li><b>Gate:</b> rastreabilidade consistente em toda a cadeia-piloto</li><li><b>Risco:</b> dado incompleto, greenwashing e custo por unidade</li></ul></article>
                 </div>
                 <div class="doctrine reveal"><span>PRINCÍPIO DA AULA</span><p>Construir quando o dado próprio altera a economia unitária. Comprar quando a capacidade é horizontal. Integrar quando velocidade vale mais do que diferenciação.</p></div>
             </article>
@@ -210,6 +266,12 @@
                     <article><span>APRESENTAÇÕES</span><h3>História antes do slide</h3><p>Estruturar argumento, testar consistência, adaptar linguagem e produzir um primeiro rascunho visual revisável.</p><small>HOJE · LLM multimodal + template</small></article>
                 </div>
                 <div class="quick-win-filter reveal"><span>FILTRO DE QUICK WIN</span><b>Frequente</b><i>×</i><b>Doloroso</b><i>×</i><b>Mensurável</b><i>×</i><b>Baixo risco</b></div>
+                <div class="current-cases reveal">
+                    <div class="current-cases-head"><span>CASOS ESPECÍFICOS · HOJE</span><p>Aplicações informacionais já operando, com contexto e resultado observável.</p></div>
+                    <article><span>NUBANK · BUSCA INTERNA</span><h3>AskNu e RAG corporativo</h3><p>A busca contextual atende cerca de 5 mil funcionários por mês e reduz o tempo para localizar conhecimento interno confiável.</p><small>MÉTRICA · USUÁRIOS ATIVOS/MÊS</small><a href="file/Aula 02 - 2ABL - Transformação de Modelo de Negócios.pdf#page=26" target="_blank" rel="noopener">MATERIAL DA AULA · P. 26 ↗</a></article>
+                    <article><span>IFOOD · ANÁLISE DE DADOS</span><h3>Groceries Data Assistant</h3><p>O agente transforma perguntas de negócio em análise assistida e reduziu uma tarefa recorrente de aproximadamente 30 para 5 minutos.</p><small>MÉTRICA · TEMPO POR ANÁLISE</small><a href="file/Aula 02 - 2ABL - Transformação de Modelo de Negócios.pdf#page=28" target="_blank" rel="noopener">MATERIAL DA AULA · P. 28 ↗</a></article>
+                    <article><span>NATURA · ACESSO À INFORMAÇÃO</span><h3>Busca semântica para consultoras</h3><p>A solução interpreta intenção e erros de digitação para mais de 1 milhão de consultoras, sustentando cerca de 400 buscas por minuto.</p><small>MÉTRICA · ALCANCE E VOLUME</small><a href="file/Aula 02 - 2ABL - Transformação de Modelo de Negócios.pdf#page=30" target="_blank" rel="noopener">MATERIAL DA AULA · P. 30 ↗</a></article>
+                </div>
             </article>
 
             <article class="mission scale-section section-shell" id="q9" data-question="09">
@@ -231,7 +293,7 @@
 
             <article class="mission reflection section-shell" id="q10" data-question="10">
                 <header class="mission-head reveal"><span>QUESTÃO 10</span><h2>O que mudou na vida<br><em>profissional e pessoal?</em></h2></header>
-                <div class="reflection-grid reveal"><blockquote>“Passei a enxergar IA menos como ferramenta e mais como uma nova forma de <em>desenhar trabalho, decisões e valor.</em>”</blockquote><div><p>Profissionalmente, o principal deslocamento foi sair da pergunta “qual tecnologia usar?” para “qual decisão precisa mudar?”. Isso muda a forma de priorizar, medir e arquitetar soluções.</p><p>Pessoalmente, o conteúdo reforçou que delegar tarefas à IA não significa delegar julgamento. Curiosidade, repertório, ética e responsabilidade ficam ainda mais importantes.</p><p>A lição dos três cases é simples e exigente: escala sustentável nasce quando tecnologia, modelo operacional e identidade do negócio apontam para a mesma direção.</p></div></div>
+                <div class="reflection-grid reveal"><blockquote>“Passamos a enxergar IA menos como ferramenta e mais como uma nova forma de <em>desenhar trabalho, decisões e valor.</em>”</blockquote><div><p>Profissionalmente, nosso principal deslocamento foi sair da pergunta “qual tecnologia usar?” para “qual decisão precisa mudar?”. Isso muda a forma de priorizar, medir e arquitetar soluções.</p><p>Pessoalmente, o conteúdo reforçou para o grupo que delegar tarefas à IA não significa delegar julgamento. Curiosidade, repertório, ética e responsabilidade ficam ainda mais importantes.</p><p>A lição dos três cases é simples e exigente: escala sustentável nasce quando tecnologia, modelo operacional e identidade do negócio apontam para a mesma direção.</p></div></div>
             </article>
 
             <article class="mission framework section-shell" id="q11" data-question="11">
@@ -251,6 +313,17 @@
                 </div>
                 <div class="gates reveal"><span>3 GATES TRANSVERSAIS</span><div><b>G1</b><p>Valor provado</p></div><div><b>G2</b><p>Risco controlado</p></div><div><b>G3</b><p>Aprendizado incorporado</p></div></div>
             </article>
+        </section>
+
+        <section class="references section-shell reveal" id="references" aria-labelledby="references-title">
+            <div><span>BASE DE EVIDÊNCIAS</span><h2 id="references-title">Referências<br><em>consultadas.</em></h2></div>
+            <ol>
+                <li><a href="file/Aula 02 - 2ABL - Transformação de Modelo de Negócios.pdf" target="_blank" rel="noopener"><b>FIAP · Aula 02</b><span>Transformação de Modelo de Negócios · material consolidado até jun/2026</span></a></li>
+                <li><a href="https://international.nubank.com.br/pt-br/companhia/novo-cpo-carl-rivera-detalha-como-experiencias-personalizadas-por-ia-impulsionarao-as-novas-fases-de-expansao-do-nubank/" target="_blank" rel="noopener"><b>Nu · Jul/2026</b><span>IA, platform thinking e expansão com produtos localizados</span></a></li>
+                <li><a href="https://institucional.ifood.com.br/inovacao/como-funciona-a-inteligencia-artificial-da-robo-ada/" target="_blank" rel="noopener"><b>iFood · Ago/2025</b><span>ADA e Physical AI aplicada à primeira milha</span></a></li>
+                <li><a href="https://ri.natura.com.br/noticias/natura-sai-na-frente-e-traz-maquinas-de-personalizacao-cosmetica-para-o-mercado-brasileiro/" target="_blank" rel="noopener"><b>Natura · Ago/2026</b><span>Personalização cosmética e sandbox regulatório da Anvisa</span></a></li>
+                <li><a href="./llms.txt"><b>Leitura automatizada</b><span>Resumo acadêmico estruturado das 11 questões para acessibilidade e ferramentas de IA</span></a></li>
+            </ol>
         </section>
 
         <section class="finale section-shell">
