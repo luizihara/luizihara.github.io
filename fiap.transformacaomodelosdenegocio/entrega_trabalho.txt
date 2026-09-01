@@ -1,0 +1,15 @@
+Prezado professor Rafael,
+
+É com satisfação que apresentamos o trabalho “A Força da Transformação — Natura, iFood e Nubank”, desenvolvido para a disciplina de Transformação de Modelos de Negócio.
+
+Ao longo do projeto, analisamos como essas três empresas transformaram tecnologia, dados e inteligência artificial em capacidades reais de escala. Mais do que comparar soluções, buscamos compreender o que sustenta cada modelo, explorar novas oportunidades e conectar os aprendizados da aula à nossa própria vivência profissional. Como resultado dessa reflexão, também propomos uma atualização do Framework de Adoção de IA, orientada por valor, governança e autonomia conquistada por evidências.
+
+O trabalho completo está disponível em:
+https://luizihara.github.io/fiap.transformacaomodelosdenegocio/index.html
+
+Esperamos que a experiência de leitura transmita não apenas o resultado da nossa pesquisa, mas também a principal transformação provocada por este trabalho: trocar a pergunta “qual tecnologia devemos usar?” por “qual decisão e qual valor queremos transformar?”.
+
+Boa leitura!
+
+Atenciosamente,
+Luiz Ihara, Filipe Fragoso, Daniel Caminha e Pedro Martins

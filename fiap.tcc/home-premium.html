@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080a0f">
+    <title>CareerFlow — Inteligência para decisões de carreira</title>
+    <meta name="description"
+        content="O CareerFlow transforma experiência, sinais de mercado e objetivos profissionais em decisões de carreira com contexto, memória e acompanhamento.">
+    <meta property="og:title" content="CareerFlow — Sua experiência, em movimento">
+    <meta property="og:description"
+        content="Uma leitura profunda da sua trajetória para decidir o próximo movimento com mais clareza e menos ruído.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://luizihara.github.io/fiap.tcc/og-home-premium.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="CareerFlow — Sua experiência, em movimento.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://luizihara.github.io/fiap.tcc/og-home-premium.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #080a0f;
+            --bg-soft: #0d1017;
+            --ink: #f3f1ec;
+            --muted: #9ca2af;
+            --dim: #666d7a;
+            --line: rgba(236, 238, 244, .13);
+            --line-strong: rgba(236, 238, 244, .23);
+            --indigo: #8f91ff;
+            --cyan: #68d8f4;
+            --mint: #8be2bb;
+            --paper: #d9d5cb;
+            --serif: 'Newsreader', Georgia, serif;
+            --sans: 'Manrope', system-ui, sans-serif;
+            --max: 1240px;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            min-width: 320px;
+            overflow-x: hidden;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--sans);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 78% 16%, rgba(97, 102, 241, .15), transparent 33rem),
+                linear-gradient(180deg, #090b11 0%, var(--bg) 72%);
+        }
+
+        #field {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            width: 100%;
+            height: 100%;
+            opacity: .72;
+            pointer-events: none;
+        }
+
+        .vignette {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 72% 70% at 70% 30%, transparent 16%, rgba(8,10,15,.47) 72%),
+                linear-gradient(90deg, rgba(8,10,15,.96) 0%, rgba(8,10,15,.77) 47%, rgba(8,10,15,.2) 100%);
+        }
+
+        a { color: inherit; }
+
+        button, input { font: inherit; }
+
+        .wrap {
+            width: min(calc(100% - 56px), var(--max));
+            margin-inline: auto;
+        }
+
+        .nav {
+            position: fixed;
+            inset: 0 0 auto;
+            z-index: 20;
+            border-bottom: 1px solid transparent;
+            transition: background .3s, border-color .3s, backdrop-filter .3s;
+        }
+
+        .nav.scrolled {
+            border-color: var(--line);
+            background: rgba(8, 10, 15, .78);
+            backdrop-filter: blur(18px);
+        }
+
+        .nav-inner {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -.04em;
+        }
+
+        .brand-mark {
+            width: 24px;
+            height: 24px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .brand-mark::before,
+        .brand-mark::after {
+            content: '';
+            position: absolute;
+            border: 1px solid var(--cyan);
+            border-radius: 6px;
+            transform: rotate(45deg);
+        }
+
+        .brand-mark::before { inset: 1px; opacity: .6; }
+        .brand-mark::after {
+            inset: 7px;
+            background: var(--cyan);
+            box-shadow: 0 0 20px rgba(104, 216, 244, .58);
+        }
+
+        .brand span:last-child { color: var(--cyan); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #b9bec8;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            transition: color .2s;
+        }
+
+        .nav-links a:hover { color: var(--ink); }
+
+        .nav-cta {
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+            border: 1px solid var(--line-strong);
+            border-radius: 999px;
+            background: rgba(255,255,255,.045);
+            color: var(--ink) !important;
+        }
+
+        .hero {
+            min-height: 100svh;
+            display: flex;
+            align-items: center;
+            padding: 138px 0 72px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.04fr) minmax(420px, .96fr);
+            gap: clamp(48px, 7vw, 108px);
+            align-items: center;
+        }
+
+        .kicker {
+            margin: 0 0 26px;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            color: #b7bcc6;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .17em;
+            text-transform: uppercase;
+        }
+
+        .kicker::before {
+            content: '';
+            width: 34px;
+            height: 1px;
+            background: var(--cyan);
+            box-shadow: 0 0 12px rgba(104,216,244,.8);
+        }
+
+        h1, h2, h3, p { margin-top: 0; }
+
+        h1 {
+            margin-bottom: 27px;
+            max-width: 760px;
+            font-size: clamp(52px, 6.8vw, 96px);
+            font-weight: 500;
+            line-height: .94;
+            letter-spacing: -.07em;
+        }
+
+        h1 em {
+            font-family: var(--serif);
+            font-weight: 400;
+            color: var(--paper);
+            letter-spacing: -.045em;
+        }
+
+        .hero-copy {
+            max-width: 610px;
+            margin-bottom: 34px;
+            color: #b5bac5;
+            font-size: clamp(16px, 1.35vw, 19px);
+            line-height: 1.68;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .button {
+            min-height: 52px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0 20px;
+            border: 1px solid var(--line-strong);
+            border-radius: 999px;
+            background: rgba(255,255,255,.035);
+            color: var(--ink);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            transition: transform .25s, border-color .25s, background .25s;
+        }
+
+        .button:hover { transform: translateY(-2px); border-color: rgba(104,216,244,.48); }
+
+        .button.primary {
+            border-color: transparent;
+            background: var(--ink);
+            color: #090b10;
+        }
+
+        .button.primary:hover { background: #fff; }
+
+        .button i { font-style: normal; font-size: 16px; }
+
+        .audience-note {
+            max-width: 490px;
+            margin: 34px 0 0;
+            padding-top: 20px;
+            border-top: 1px solid var(--line);
+            color: var(--dim);
+            font-size: 11px;
+            line-height: 1.65;
+        }
+
+        .audience-note strong { color: #aeb4c0; font-weight: 600; }
+
+        .dossier {
+            position: relative;
+            border: 1px solid var(--line-strong);
+            border-radius: 4px;
+            background: rgba(11, 14, 21, .76);
+            box-shadow: 0 42px 100px -48px rgba(0,0,0,.92);
+            backdrop-filter: blur(22px);
+            transform: rotate(.35deg);
+        }
+
+        .dossier::before {
+            content: '';
+            position: absolute;
+            inset: -1px auto -1px -1px;
+            width: 2px;
+            background: linear-gradient(180deg, transparent, var(--cyan) 24%, var(--indigo) 76%, transparent);
+            box-shadow: 0 0 24px rgba(104,216,244,.35);
+        }
+
+        .dossier-top {
+            min-height: 58px;
+            padding: 0 21px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            border-bottom: 1px solid var(--line);
+            color: var(--dim);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+        }
+
+        .dossier-top span:first-child { color: var(--cyan); }
+
+        .dossier-body { padding: clamp(24px, 4vw, 38px); }
+
+        .profile-line {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            align-items: end;
+            padding-bottom: 27px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .profile-line small,
+        .finding small,
+        .evidence-label {
+            display: block;
+            margin-bottom: 7px;
+            color: var(--dim);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .profile-line h2 {
+            margin: 0;
+            font-family: var(--serif);
+            font-size: clamp(30px, 3.1vw, 43px);
+            font-weight: 400;
+            letter-spacing: -.045em;
+        }
+
+        .status {
+            padding: 7px 10px;
+            border: 1px solid rgba(139,226,187,.27);
+            color: var(--mint);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .finding {
+            padding: 27px 0 25px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .finding h3 {
+            margin-bottom: 10px;
+            font-size: 19px;
+            line-height: 1.35;
+            letter-spacing: -.035em;
+        }
+
+        .finding p {
+            margin: 0;
+            color: #949baa;
+            font-size: 12px;
+            line-height: 1.65;
+        }
+
+        .evidence { padding-top: 25px; }
+
+        .evidence-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .evidence-list li {
+            display: grid;
+            grid-template-columns: 30px 1fr;
+            gap: 12px;
+            align-items: start;
+            padding: 11px 0;
+            color: #c6cad2;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .evidence-list li + li { border-top: 1px solid rgba(255,255,255,.065); }
+
+        .evidence-list b {
+            color: var(--cyan);
+            font-size: 9px;
+            letter-spacing: .08em;
+        }
+
+        .dossier-foot {
+            min-height: 52px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid var(--line);
+        }
+
+        .dossier-foot span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid var(--line);
+            color: var(--dim);
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        .dossier-foot span:last-child { border-right: 0; color: var(--mint); }
+
+        .progress {
+            position: fixed;
+            inset: 0 0 auto;
+            z-index: 40;
+            height: 2px;
+            pointer-events: none;
+        }
+
+        .progress i {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--indigo), var(--cyan), var(--mint));
+            transform: scaleX(0);
+            transform-origin: left;
+            box-shadow: 0 0 14px rgba(104,216,244,.55);
+        }
+
+        .section {
+            position: relative;
+            padding: clamp(106px, 13vw, 190px) 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .section-index {
+            margin: 0 0 19px;
+            color: var(--cyan);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+
+        .section h2 {
+            margin-bottom: 25px;
+            font-size: clamp(43px, 5.7vw, 78px);
+            font-weight: 500;
+            line-height: 1.02;
+            letter-spacing: -.065em;
+        }
+
+        .section h2 em {
+            font-family: var(--serif);
+            font-weight: 400;
+            color: var(--paper);
+        }
+
+        .section-lead {
+            max-width: 650px;
+            color: #aeb4bf;
+            font-size: clamp(16px, 1.5vw, 20px);
+            line-height: 1.68;
+        }
+
+        .quiet-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(360px, .72fr);
+            gap: clamp(56px, 10vw, 150px);
+            align-items: start;
+        }
+
+        .quiet-copy {
+            padding-top: 10px;
+            border-top: 1px solid var(--line-strong);
+        }
+
+        .quiet-copy p {
+            margin: 0;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--line);
+            color: #aab0bc;
+            font-family: var(--serif);
+            font-size: clamp(22px, 2.2vw, 31px);
+            line-height: 1.35;
+            letter-spacing: -.025em;
+        }
+
+        .quiet-copy strong { color: var(--ink); font-weight: 500; }
+
+        .quiet-thesis {
+            margin-top: 39px;
+            padding-left: 22px;
+            border-left: 1px solid var(--cyan);
+            color: #cdd1d8;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .method-grid {
+            display: grid;
+            grid-template-columns: minmax(300px, .72fr) minmax(0, 1.28fr);
+            gap: clamp(50px, 8vw, 112px);
+            align-items: start;
+        }
+
+        .method-copy {
+            position: sticky;
+            top: 116px;
+        }
+
+        .method-copy h2 { font-size: clamp(42px, 5vw, 68px); }
+
+        .method-steps {
+            margin-top: 43px;
+            border-top: 1px solid var(--line);
+        }
+
+        .method-step {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 38px 1fr auto;
+            gap: 14px;
+            align-items: center;
+            padding: 17px 0;
+            border: 0;
+            border-bottom: 1px solid var(--line);
+            background: transparent;
+            color: var(--muted);
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .method-step span:first-child {
+            color: var(--dim);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .1em;
+        }
+
+        .method-step b {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .method-step i {
+            color: var(--dim);
+            font-style: normal;
+        }
+
+        .method-step.active { color: var(--ink); }
+        .method-step.active span:first-child,
+        .method-step.active i { color: var(--cyan); }
+
+        .product-window {
+            min-height: 650px;
+            overflow: hidden;
+            border: 1px solid var(--line-strong);
+            border-radius: 5px;
+            background: rgba(10,13,20,.83);
+            box-shadow: 0 45px 100px -55px #000;
+            backdrop-filter: blur(18px);
+        }
+
+        .window-bar {
+            min-height: 55px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            border-bottom: 1px solid var(--line);
+            color: var(--dim);
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .window-dots { display: flex; gap: 6px; }
+        .window-dots i { width: 5px; height: 5px; border-radius: 50%; background: var(--dim); }
+        .window-dots i:first-child { background: var(--cyan); box-shadow: 0 0 9px var(--cyan); }
+
+        .window-body { position: relative; min-height: 595px; }
+
+        .product-panel {
+            position: absolute;
+            inset: 0;
+            padding: clamp(26px, 4vw, 46px);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(16px);
+            transition: opacity .45s, transform .55s cubic-bezier(.22,1,.36,1), visibility .45s;
+        }
+
+        .product-panel.active { opacity: 1; visibility: visible; transform: none; }
+
+        .panel-kicker {
+            display: block;
+            margin-bottom: 13px;
+            color: var(--cyan);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .product-panel h3 {
+            max-width: 520px;
+            margin-bottom: 10px;
+            font-family: var(--serif);
+            font-size: clamp(32px, 4vw, 49px);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: -.045em;
+        }
+
+        .panel-copy { max-width: 520px; color: var(--muted); font-size: 12px; line-height: 1.65; }
+
+        .source-stack { margin-top: 40px; border-top: 1px solid var(--line); }
+
+        .source-row {
+            min-height: 68px;
+            display: grid;
+            grid-template-columns: 34px 1fr auto;
+            gap: 13px;
+            align-items: center;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .source-icon {
+            width: 27px;
+            height: 27px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--line-strong);
+            border-radius: 50%;
+            color: var(--cyan);
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .source-row b { display: block; margin-bottom: 3px; font-size: 11px; font-weight: 600; }
+        .source-row small { color: var(--dim); font-size: 9px; }
+        .source-row > span:last-child { color: var(--mint); font-size: 9px; }
+
+        .translation-map {
+            margin-top: 40px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .translation-row {
+            min-height: 59px;
+            padding: 0 17px;
+            display: grid;
+            grid-template-columns: minmax(130px,.8fr) 34px minmax(0,1.2fr);
+            gap: 12px;
+            align-items: center;
+            border: 1px solid var(--line);
+            background: rgba(255,255,255,.018);
+            color: #c0c5ce;
+            font-size: 10px;
+        }
+
+        .translation-row i { color: var(--cyan); font-style: normal; text-align: center; }
+        .translation-row strong { color: var(--ink); font-weight: 600; }
+
+        .decision-sheet { margin-top: 38px; border-top: 1px solid var(--line); }
+        .decision-row {
+            display: grid;
+            grid-template-columns: minmax(150px,1fr) 80px 80px 80px;
+            gap: 8px;
+            align-items: center;
+            min-height: 63px;
+            border-bottom: 1px solid var(--line);
+            color: #c0c5ce;
+            font-size: 10px;
+        }
+        .decision-row.head { min-height: 44px; color: var(--dim); font-size: 8px; text-transform: uppercase; letter-spacing: .08em; }
+        .decision-row span:not(:first-child) { text-align: center; }
+        .decision-row.featured { color: var(--ink); }
+        .decision-row.featured span:first-child::after { content: 'direção sugerida'; display: block; margin-top: 4px; color: var(--mint); font-size: 7px; letter-spacing: .09em; text-transform: uppercase; }
+
+        .checkin {
+            margin-top: 40px;
+            padding: 24px;
+            border: 1px solid var(--line);
+            background: rgba(255,255,255,.018);
+        }
+        .checkin-head { display: flex; justify-content: space-between; gap: 20px; color: var(--dim); font-size: 8px; text-transform: uppercase; letter-spacing: .1em; }
+        .checkin blockquote { margin: 24px 0 18px; font-family: var(--serif); font-size: 24px; line-height: 1.35; letter-spacing: -.02em; }
+        .checkin p { margin: 0; padding-left: 17px; border-left: 1px solid var(--cyan); color: #aeb4bf; font-size: 11px; line-height: 1.65; }
+
+        .bridge-section { overflow: hidden; }
+
+        .bridge-intro {
+            max-width: 880px;
+            margin-bottom: 66px;
+        }
+
+        .role-bridge {
+            display: grid;
+            grid-template-columns: minmax(0,1fr) 130px minmax(0,1fr);
+            align-items: stretch;
+            border-top: 1px solid var(--line-strong);
+            border-bottom: 1px solid var(--line-strong);
+        }
+
+        .role {
+            min-height: 350px;
+            padding: clamp(28px, 4vw, 48px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .role:first-child { background: rgba(255,255,255,.018); }
+        .role:last-child { background: linear-gradient(145deg, rgba(104,216,244,.07), rgba(143,145,255,.04)); }
+        .role small { color: var(--dim); font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+        .role h3 { margin: auto 0 20px; font-family: var(--serif); font-size: clamp(34px, 4.2vw, 56px); font-weight: 400; line-height: 1; letter-spacing: -.05em; }
+        .role p { margin: 0; max-width: 470px; color: var(--muted); font-size: 12px; line-height: 1.65; }
+
+        .bridge-arrow {
+            position: relative;
+            display: grid;
+            place-items: center;
+            border-left: 1px solid var(--line);
+            border-right: 1px solid var(--line);
+            color: var(--cyan);
+            font-size: 27px;
+        }
+        .bridge-arrow::before { content: ''; position: absolute; inset: 50% 18px auto; height: 1px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
+        .bridge-arrow span { position: relative; padding: 12px; background: var(--bg); }
+
+        .bridge-caption {
+            margin-top: 22px;
+            color: var(--dim);
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        .mentor-grid {
+            display: grid;
+            grid-template-columns: minmax(0,.82fr) minmax(390px,1.18fr);
+            gap: clamp(56px, 10vw, 140px);
+            align-items: center;
+        }
+
+        .phone {
+            max-width: 540px;
+            justify-self: end;
+            overflow: hidden;
+            border: 1px solid var(--line-strong);
+            border-radius: 28px;
+            background: rgba(12,15,21,.9);
+            box-shadow: 0 42px 100px -55px #000;
+        }
+        .phone-head { min-height: 67px; padding: 0 22px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line); }
+        .mentor-avatar { width: 31px; height: 31px; display: grid; place-items: center; border: 1px solid rgba(104,216,244,.35); border-radius: 50%; color: var(--cyan); font-size: 9px; font-weight: 700; box-shadow: inset 0 0 18px rgba(104,216,244,.08); }
+        .phone-head b { display: block; font-size: 11px; }
+        .phone-head small { color: var(--dim); font-size: 8px; }
+        .messages { padding: 27px 22px 30px; display: grid; gap: 17px; }
+        .message { max-width: 88%; padding: 14px 16px; border: 1px solid var(--line); border-radius: 4px 15px 15px 15px; background: rgba(255,255,255,.035); color: #c7cbd3; font-size: 11px; line-height: 1.62; }
+        .message.user { justify-self: end; border-color: rgba(143,145,255,.23); border-radius: 15px 4px 15px 15px; background: rgba(143,145,255,.09); color: #e3e4ed; }
+        .message small { display: block; margin-top: 8px; color: var(--dim); font-size: 7px; text-align: right; }
+        .memory-note { margin: 0 22px 23px; padding: 12px 14px; border-left: 1px solid var(--mint); background: rgba(139,226,187,.04); color: #89928f; font-size: 8px; line-height: 1.55; }
+
+        .principle-head { max-width: 850px; }
+        .principles { margin-top: 66px; border-top: 1px solid var(--line-strong); }
+        .principle {
+            display: grid;
+            grid-template-columns: 80px minmax(220px,.65fr) minmax(0,1fr);
+            gap: 28px;
+            align-items: center;
+            min-height: 150px;
+            border-bottom: 1px solid var(--line);
+        }
+        .principle > span { color: var(--cyan); font-size: 9px; font-weight: 700; letter-spacing: .11em; }
+        .principle h3 { margin: 0; font-family: var(--serif); font-size: clamp(27px,3vw,39px); font-weight: 400; letter-spacing: -.035em; }
+        .principle p { margin: 0; max-width: 600px; color: var(--muted); font-size: 12px; line-height: 1.65; }
+
+        .horizon {
+            overflow: hidden;
+            background: rgba(255,255,255,.015);
+        }
+        .horizon-grid { display: grid; grid-template-columns: minmax(0,.84fr) minmax(0,1.16fr); gap: 80px; align-items: end; }
+        .discipline-list { border-top: 1px solid var(--line-strong); }
+        .discipline-list span { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid var(--line); color: #b6bbc5; font-family: var(--serif); font-size: 25px; }
+        .discipline-list i { color: var(--dim); font-family: var(--sans); font-size: 9px; font-style: normal; letter-spacing: .1em; text-transform: uppercase; }
+
+        .invitation { padding: clamp(110px, 14vw, 200px) 0; border-top: 1px solid var(--line); text-align: center; }
+        .invitation .section-index { text-align: center; }
+        .invitation h2 { max-width: 940px; margin: 0 auto 25px; font-size: clamp(48px, 7vw, 94px); font-weight: 500; line-height: 1; letter-spacing: -.065em; }
+        .invitation h2 em { font-family: var(--serif); font-weight: 400; color: var(--paper); }
+        .invitation .section-lead { margin: 0 auto; }
+        .invite-form { max-width: 610px; margin: 43px auto 0; display: grid; grid-template-columns: 1fr auto; padding: 5px; border: 1px solid var(--line-strong); border-radius: 999px; background: rgba(255,255,255,.028); }
+        .invite-form input { min-width: 0; height: 52px; padding: 0 18px; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 12px; }
+        .invite-form input::placeholder { color: var(--dim); }
+        .invite-form button { min-height: 52px; padding: 0 21px; border: 0; border-radius: 999px; background: var(--ink); color: #080a0f; font-size: 11px; font-weight: 700; cursor: pointer; }
+        .form-status { min-height: 20px; margin: 13px 0 0; color: var(--mint); font-size: 10px; }
+        .invitation-note { margin: 19px 0 0; color: var(--dim); font-size: 9px; }
+
+        .footer { padding: 34px 0; border-top: 1px solid var(--line); }
+        .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; color: var(--dim); font-size: 9px; line-height: 1.5; }
+        .footer .brand { color: var(--ink); font-size: 13px; }
+
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity .85s, transform .9s cubic-bezier(.22,1,.36,1); }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        .enter {
+            opacity: 0;
+            transform: translateY(22px);
+            animation: enter .9s cubic-bezier(.22,1,.36,1) forwards;
+        }
+
+        .enter:nth-child(2) { animation-delay: .09s; }
+        .enter:nth-child(3) { animation-delay: .18s; }
+        .enter:nth-child(4) { animation-delay: .27s; }
+        .dossier.enter { animation-delay: .22s; }
+
+        @keyframes enter { to { opacity: 1; transform: none; } }
+
+        @media (max-width: 980px) {
+            .hero { min-height: auto; padding-top: 130px; }
+            .hero-grid { grid-template-columns: 1fr; }
+            .hero-copy { max-width: 680px; }
+            .dossier { max-width: 650px; }
+            .vignette { background: linear-gradient(180deg, rgba(8,10,15,.55), rgba(8,10,15,.88)); }
+            .quiet-grid, .method-grid, .mentor-grid, .horizon-grid { grid-template-columns: 1fr; }
+            .method-copy { position: static; }
+            .role-bridge { grid-template-columns: 1fr; }
+            .bridge-arrow { min-height: 90px; border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+            .bridge-arrow span { transform: rotate(90deg); }
+            .phone { justify-self: start; }
+        }
+
+        @media (max-width: 680px) {
+            .wrap { width: min(calc(100% - 30px), var(--max)); }
+            .nav-inner { min-height: 66px; }
+            .nav-links a:not(.nav-cta) { display: none; }
+            h1 { font-size: clamp(48px, 16vw, 72px); }
+            .hero { padding-top: 108px; }
+            .hero-grid { gap: 48px; }
+            .profile-line { grid-template-columns: 1fr; }
+            .status { justify-self: start; }
+            .dossier-foot { grid-template-columns: 1fr; }
+            .dossier-foot span { min-height: 42px; border-right: 0; border-bottom: 1px solid var(--line); }
+            .dossier-foot span:last-child { border-bottom: 0; }
+            .section { padding: 96px 0; }
+            .product-window { min-height: 720px; }
+            .window-body { min-height: 665px; }
+            .product-panel { padding: 25px 20px; }
+            .source-row { grid-template-columns: 32px 1fr; }
+            .source-row > span:last-child { display: none; }
+            .translation-row { grid-template-columns: 1fr; gap: 6px; padding: 14px; }
+            .translation-row i { text-align: left; transform: rotate(90deg); transform-origin: left; }
+            .decision-row { grid-template-columns: minmax(125px,1fr) repeat(3,48px); font-size: 9px; }
+            .role { min-height: 300px; }
+            .principle { grid-template-columns: 38px 1fr; gap: 16px; padding: 27px 0; }
+            .principle p { grid-column: 2; }
+            .invite-form { grid-template-columns: 1fr; border-radius: 18px; }
+            .invite-form button { border-radius: 13px; }
+            .footer-inner { align-items: flex-start; flex-direction: column; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+            .enter { opacity: 1; transform: none; }
+            .reveal { opacity: 1; transform: none; }
+            #field { display: none; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+    <canvas id="field" aria-hidden="true"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <nav class="nav" id="nav" aria-label="Navegação principal">
+        <div class="wrap nav-inner">
+            <a class="brand" href="#inicio" aria-label="CareerFlow — início">
+                <i class="brand-mark" aria-hidden="true"></i>
+                <span>CareerFlow</span><span>AI</span>
+            </a>
+            <div class="nav-links">
+                <a href="#metodo">Como funciona</a>
+                <a href="#diferenca">Por que existe</a>
+                <a class="nav-cta" href="#convite">Solicitar acesso</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <header class="hero" id="inicio">
+            <div class="wrap hero-grid">
+                <div>
+                    <p class="kicker enter">Inteligência de carreira, com contexto</p>
+                    <h1 class="enter">Sua experiência já diz para onde você pode ir. <em>Falta ligar os pontos.</em></h1>
+                    <p class="hero-copy enter">O CareerFlow reúne o que você construiu, o que o mercado está pedindo e
+                        o que você quer preservar. O resultado é um próximo movimento que faz sentido — e um plano para
+                        chegar lá.</p>
+                    <div class="enter">
+                        <div class="actions">
+                            <a class="button primary" href="#convite">Solicitar acesso <i>↗</i></a>
+                            <a class="button" href="#metodo">Conhecer o método <i>↓</i></a>
+                        </div>
+                        <p class="audience-note"><strong>Começamos por carreiras em tecnologia.</strong> O método foi
+                            pensado para chegar a qualquer área em que experiência, contexto e reputação importem.</p>
+                    </div>
+                </div>
+
+                <aside class="dossier enter" aria-label="Exemplo de leitura de carreira produzida pelo CareerFlow">
+                    <div class="dossier-top">
+                        <span>Leitura de carreira</span>
+                        <span>Dossiê CF–0427</span>
+                    </div>
+                    <div class="dossier-body">
+                        <div class="profile-line">
+                            <div><small>Experiência de origem</small><h2>Staff Engineer</h2></div>
+                            <span class="status">Trajetória ativa</span>
+                        </div>
+                        <div class="finding">
+                            <small>Hipótese de próximo movimento</small>
+                            <h3>Estratégia de plataforma e liderança técnica</h3>
+                            <p>Seu valor não está apenas no código. Ele aparece nas decisões de arquitetura, na redução
+                                de risco e na influência que você exerce quando o caminho ainda não está claro.</p>
+                        </div>
+                        <div class="evidence">
+                            <span class="evidence-label">Evidências que sustentam a hipótese</span>
+                            <ol class="evidence-list">
+                                <li><b>01</b><span>Conduziu sistemas críticos em ambientes regulados.</span></li>
+                                <li><b>02</b><span>Transformou decisões técnicas em impacto de negócio.</span></li>
+                                <li><b>03</b><span>Elevou a autonomia de outros times sem autoridade formal.</span></li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="dossier-foot">
+                        <span>Diagnóstico</span><span>Direção</span><span>Acompanhamento</span>
+                    </div>
+                </aside>
+            </div>
+        </header>
+
+        <section class="section" id="diferenca" data-form="grid">
+            <div class="wrap quiet-grid">
+                <div class="reveal">
+                    <p class="section-index">01 · Por que o CareerFlow existe</p>
+                    <h2>A carreira ficou mais barulhenta. As decisões, <em>mais caras.</em></h2>
+                    <p class="section-lead">Depois de uma década de trabalho, trocar de função, aceitar uma liderança
+                        ou mudar de setor já não é uma escolha simples. Há reputação, renda, identidade e tempo em jogo.</p>
+                    <p class="quiet-thesis">O risco não está apenas em parar de aprender. Está em investir energia na
+                        direção errada e perceber tarde demais.</p>
+                </div>
+                <div class="quiet-copy reveal">
+                    <p><strong>Conteúdo ensina.</strong> Raramente diz o que merece sua atenção agora.</p>
+                    <p><strong>Recrutamento avalia uma vaga.</strong> Não cuida da coerência da sua trajetória.</p>
+                    <p><strong>Uma boa conversa ajuda.</strong> Mas quase sempre começa sem memória do que veio antes.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="metodo" data-form="helix">
+            <div class="wrap method-grid">
+                <div class="method-copy reveal">
+                    <p class="section-index">02 · O método</p>
+                    <h2>Clareza antes de <em>movimento.</em></h2>
+                    <p class="section-lead">O CareerFlow organiza sinais dispersos, traduz experiência e acompanha a
+                        decisão ao longo do tempo.</p>
+                    <div class="method-steps" role="tablist" aria-label="Etapas do método CareerFlow">
+                        <button class="method-step active" type="button" role="tab" aria-selected="true" data-step="0">
+                            <span>01</span><b>Leitura</b><i>↗</i>
+                        </button>
+                        <button class="method-step" type="button" role="tab" aria-selected="false" data-step="1">
+                            <span>02</span><b>Tradução</b><i>↗</i>
+                        </button>
+                        <button class="method-step" type="button" role="tab" aria-selected="false" data-step="2">
+                            <span>03</span><b>Decisão</b><i>↗</i>
+                        </button>
+                        <button class="method-step" type="button" role="tab" aria-selected="false" data-step="3">
+                            <span>04</span><b>Acompanhamento</b><i>↗</i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-window reveal">
+                    <div class="window-bar">
+                        <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                        <span>CareerFlow · Dossiê privado</span>
+                    </div>
+                    <div class="window-body">
+                        <article class="product-panel active" role="tabpanel" data-panel="0">
+                            <span class="panel-kicker">01 · Leitura</span>
+                            <h3>Começa pelo que você já viveu.</h3>
+                            <p class="panel-copy">Você escolhe quais fontes entram. O CareerFlow reúne histórico,
+                                entregas, contexto e ambição antes de sugerir qualquer caminho.</p>
+                            <div class="source-stack">
+                                <div class="source-row"><span class="source-icon">CV</span><span><b>Histórico profissional</b><small>Cargos, projetos e mudanças de escopo</small></span><span>Incluído</span></div>
+                                <div class="source-row"><span class="source-icon">IN</span><span><b>Perfil público</b><small>Narrativa, repertório e posicionamento</small></span><span>Incluído</span></div>
+                                <div class="source-row"><span class="source-icon">GH</span><span><b>Portfólio técnico</b><small>Sinais de profundidade e colaboração</small></span><span>Opcional</span></div>
+                                <div class="source-row"><span class="source-icon">12</span><span><b>Conversa inicial</b><small>Objetivos, limites e momento de vida</small></span><span>12 min</span></div>
+                            </div>
+                        </article>
+
+                        <article class="product-panel" role="tabpanel" data-panel="1" hidden>
+                            <span class="panel-kicker">02 · Tradução</span>
+                            <h3>O cargo fica. A capacidade aparece.</h3>
+                            <p class="panel-copy">O Skill Analogy Engine procura o valor transferível por trás das
+                                tarefas. É assim que uma experiência deixa de pertencer a um único setor.</p>
+                            <div class="translation-map">
+                                <div class="translation-row"><span>Arquitetura distribuída</span><i>→</i><strong>Decidir sob dependências complexas</strong></div>
+                                <div class="translation-row"><span>Incidentes críticos</span><i>→</i><strong>Conduzir risco sob pressão</strong></div>
+                                <div class="translation-row"><span>RFCs e padrões</span><i>→</i><strong>Influenciar sem autoridade formal</strong></div>
+                                <div class="translation-row"><span>Ambiente regulado</span><i>→</i><strong>Equilibrar velocidade e governança</strong></div>
+                            </div>
+                        </article>
+
+                        <article class="product-panel" role="tabpanel" data-panel="2" hidden>
+                            <span class="panel-kicker">03 · Decisão</span>
+                            <h3>Opções comparáveis. Consequências visíveis.</h3>
+                            <p class="panel-copy">Cada hipótese é confrontada com aderência, custo da transição e o
+                                tipo de rotina que ela cria. A decisão continua sendo sua.</p>
+                            <div class="decision-sheet" aria-label="Exemplo ilustrativo de comparação de movimentos">
+                                <div class="decision-row head"><span>Movimento</span><span>Aderência</span><span>Risco</span><span>Energia</span></div>
+                                <div class="decision-row featured"><span>Estratégia de plataforma</span><span>92</span><span>baixo</span><span>alta</span></div>
+                                <div class="decision-row"><span>Gestão de engenharia</span><span>81</span><span>médio</span><span>média</span></div>
+                                <div class="decision-row"><span>Consultoria independente</span><span>74</span><span>alto</span><span>alta</span></div>
+                                <div class="decision-row"><span>Especialização em IA</span><span>68</span><span>médio</span><span>baixa</span></div>
+                            </div>
+                        </article>
+
+                        <article class="product-panel" role="tabpanel" data-panel="3" hidden>
+                            <span class="panel-kicker">04 · Acompanhamento</span>
+                            <h3>Uma decisão não termina no plano.</h3>
+                            <p class="panel-copy">O mentor mantém a memória dos objetivos, das conversas e das escolhas
+                                que você descartou. O contexto cresce junto com a carreira.</p>
+                            <div class="checkin">
+                                <div class="checkin-head"><span>Check-in de trajetória</span><span>Semana 06</span></div>
+                                <blockquote>“Você queria ampliar influência sem assumir gestão direta. Isso ainda é verdade?”</blockquote>
+                                <p>Nas últimas duas semanas, suas decisões reforçaram a hipótese de liderança técnica.
+                                    Há uma conversa pendente com sua diretora e duas evidências novas para levar.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section bridge-section" data-form="bridge">
+            <div class="wrap">
+                <div class="bridge-intro reveal">
+                    <p class="section-index">03 · Skill Analogy Engine</p>
+                    <h2>Seu histórico não cabe no nome do <em>cargo.</em></h2>
+                    <p class="section-lead">Boa parte do valor de um profissional experiente fica escondida no
+                        contexto em que ele trabalhou. Traduzir esse valor abre movimentos que uma busca por palavras-chave não encontra.</p>
+                </div>
+                <div class="role-bridge reveal">
+                    <article class="role">
+                        <small>Experiência de origem</small>
+                        <h3>Arquiteto de dados bancário</h3>
+                        <p>Governança, resiliência, escala, gestão de risco e decisões em um ambiente altamente regulado.</p>
+                    </article>
+                    <div class="bridge-arrow" aria-hidden="true"><span>→</span></div>
+                    <article class="role">
+                        <small>Valor traduzido</small>
+                        <h3>Liderança de operações complexas</h3>
+                        <p>A mesma competência ganha outro nome em logística, saúde, varejo ou infraestrutura crítica.</p>
+                    </article>
+                </div>
+                <p class="bridge-caption reveal">Exemplo de hipótese intersetorial. O CareerFlow apresenta evidências,
+                    lacunas e custos da transição antes de recomendar um movimento.</p>
+            </div>
+        </section>
+
+        <section class="section" data-form="ring">
+            <div class="wrap mentor-grid">
+                <div class="reveal">
+                    <p class="section-index">04 · Mentor com memória</p>
+                    <h2>Contexto na hora em que ele <em>faz diferença.</em></h2>
+                    <p class="section-lead">Uma conversa difícil, uma proposta inesperada, uma reunião de promoção.
+                        O plano deixa de ser um documento esquecido e passa a acompanhar o trabalho real.</p>
+                </div>
+                <div class="phone reveal" aria-label="Exemplo de conversa com o mentor CareerFlow">
+                    <div class="phone-head"><span class="mentor-avatar">CF</span><span><b>CareerFlow</b><small>Memória de trajetória ativa</small></span></div>
+                    <div class="messages">
+                        <div class="message user">Entro em uma 1:1 com a diretora em vinte minutos. Quero pedir para liderar a plataforma. O que levo?<small>08:42</small></div>
+                        <div class="message">Leve três episódios: a migração sem downtime, o acordo entre os times de dados e produto e a redução dos incidentes no último trimestre. Juntos, eles mostram direção técnica, influência e resultado.<small>08:43</small></div>
+                        <div class="message user">E como eu abro a conversa sem parecer que estou cobrando uma promoção?<small>08:44</small></div>
+                        <div class="message">Comece pelo problema que você já está resolvendo: “A plataforma precisa de uma responsabilidade clara entre times. Eu já venho ocupando parte desse espaço e gostaria de discutir como formalizá-lo.”<small>08:44</small></div>
+                    </div>
+                    <p class="memory-note">Contexto recuperado: objetivo de liderança técnica · preferência por influência sem gestão direta · revisão de trajetória há 12 dias</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" data-form="stack">
+            <div class="wrap">
+                <div class="principle-head reveal">
+                    <p class="section-index">05 · O que torna a experiência premium</p>
+                    <h2>Premium, aqui, significa <em>critério.</em></h2>
+                    <p class="section-lead">Menos respostas instantâneas. Mais cuidado com a leitura, com a memória e
+                        com as consequências de cada recomendação.</p>
+                </div>
+                <div class="principles reveal">
+                    <article class="principle"><span>01</span><h3>Evidência antes de conselho</h3><p>Cada hipótese precisa apontar para fatos da sua trajetória e sinais reconhecíveis do mercado.</p></article>
+                    <article class="principle"><span>02</span><h3>Continuidade, não sessões soltas</h3><p>Objetivos, decisões e mudanças de contexto permanecem disponíveis para as próximas conversas.</p></article>
+                    <article class="principle"><span>03</span><h3>Discrição por desenho</h3><p>Você decide quais fontes entram no diagnóstico e o que pode compor a memória da sua trajetória.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section horizon" data-form="horizon">
+            <div class="wrap horizon-grid">
+                <div class="reveal">
+                    <p class="section-index">06 · Onde começa. Onde pode chegar.</p>
+                    <h2>Nasce em tecnologia. <em>Não termina nela.</em></h2>
+                    <p class="section-lead">Desenvolvedores, especialistas e líderes técnicos formam o primeiro
+                        recorte. O método foi pensado para carreiras em que repertório e julgamento valem mais do que
+                        uma lista de tarefas.</p>
+                </div>
+                <div class="discipline-list reveal" aria-label="Áreas futuras de aplicação do método">
+                    <span>Engenharia e Produto <i>Primeiro recorte</i></span>
+                    <span>Dados e Segurança <i>Expansão natural</i></span>
+                    <span>Finanças e Jurídico <i>Carreiras complexas</i></span>
+                    <span>Saúde e Operações <i>Horizonte do método</i></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="invitation" id="convite" data-form="sphere">
+            <div class="wrap reveal">
+                <p class="section-index">Acesso fundador</p>
+                <h2>Para quem precisa tomar uma decisão <em>real.</em></h2>
+                <p class="section-lead">Estamos formando a primeira coorte com profissionais experientes de tecnologia.
+                    Poucas pessoas, conversas próximas e espaço para influenciar o produto.</p>
+                <form class="invite-form" id="inviteForm">
+                    <label for="email" class="sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Seu melhor e-mail</label>
+                    <input id="email" name="email" type="email" autocomplete="email" placeholder="Seu melhor e-mail" required>
+                    <button type="submit">Quero participar</button>
+                </form>
+                <p class="form-status" id="formStatus" aria-live="polite"></p>
+                <p class="invitation-note">Sem sequência automática de e-mails. O primeiro contato será uma conversa.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="wrap footer-inner">
+            <a class="brand" href="#inicio"><i class="brand-mark" aria-hidden="true"></i><span>CareerFlow</span><span>AI</span></a>
+            <span>Inteligência para decisões de carreira · Projeto MBA FIAP · 2026</span>
+        </div>
+    </footer>
+
+    <script>
+        (() => {
+            'use strict';
+            const nav = document.getElementById('nav');
+            const progressBar = document.getElementById('progressBar');
+
+            const syncScroll = () => {
+                nav.classList.toggle('scrolled', scrollY > 20);
+                const max = document.documentElement.scrollHeight - innerHeight;
+                progressBar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+            };
+
+            addEventListener('scroll', syncScroll, { passive: true });
+            syncScroll();
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: .13 });
+            document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
+
+            const steps = [...document.querySelectorAll('.method-step')];
+            const panels = [...document.querySelectorAll('.product-panel')];
+
+            function showStep(index) {
+                steps.forEach((step, stepIndex) => {
+                    const active = stepIndex === index;
+                    step.classList.toggle('active', active);
+                    step.setAttribute('aria-selected', String(active));
+                });
+                panels.forEach((panel, panelIndex) => {
+                    const active = panelIndex === index;
+                    if (active) panel.hidden = false;
+                    requestAnimationFrame(() => panel.classList.toggle('active', active));
+                    if (!active) setTimeout(() => { if (!panel.classList.contains('active')) panel.hidden = true; }, 460);
+                });
+            }
+
+            steps.forEach((step, index) => step.addEventListener('click', () => showStep(index)));
+
+            const form = document.getElementById('inviteForm');
+            const formStatus = document.getElementById('formStatus');
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const email = form.elements.email.value.trim();
+                if (!email) return;
+                formStatus.textContent = 'Recebido. A próxima etapa é uma conversa, não uma campanha.';
+                form.reset();
+            });
+        })();
+    </script>
+
+    <script type="importmap">
+        { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js" } }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            const canvas = document.getElementById('field');
+            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+            renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+            renderer.setSize(innerWidth, innerHeight);
+
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x080a0f, .03);
+            const camera = new THREE.PerspectiveCamera(58, innerWidth / innerHeight, .1, 180);
+            camera.position.set(5, 0, 31);
+
+            const total = innerWidth < 700 ? 1800 : 3900;
+            const positions = new Float32Array(total * 3);
+            const targets = new Float32Array(total * 3);
+            const colors = new Float32Array(total * 3);
+            const indigo = new THREE.Color('#8f91ff');
+            const cyan = new THREE.Color('#68d8f4');
+            const color = new THREE.Color();
+
+            function setTarget(index, x, y, z) {
+                const i3 = index * 3;
+                targets[i3] = x;
+                targets[i3 + 1] = y;
+                targets[i3 + 2] = z;
+            }
+
+            function build(form) {
+                for (let i = 0; i < total; i++) {
+                    const t = i / total;
+                    const random = () => Math.random() - .5;
+
+                    if (form === 'grid') {
+                        const columns = 52;
+                        const row = Math.floor(i / columns);
+                        const column = i % columns;
+                        setTarget(i, (column - columns / 2) * .75 + 8, (row - total / columns / 2) * .75, Math.sin(column * .35) * Math.cos(row * .31) * 2.8);
+                    } else if (form === 'helix') {
+                        const strand = i % 2;
+                        const angle = t * Math.PI * 10 + (strand ? Math.PI : 0);
+                        setTarget(i, Math.cos(angle) * 7 + 8 + random() * .8, (t - .5) * 34, Math.sin(angle) * 7 + random() * .8);
+                    } else if (form === 'bridge') {
+                        const x = (t - .5) * 38 + 7;
+                        const y = Math.tanh((t - .5) * 4) * 10;
+                        setTarget(i, x + random() * 1.7, y + random() * 2.6, random() * 8);
+                    } else if (form === 'ring') {
+                        const angle = Math.random() * Math.PI * 2;
+                        const radius = 9 + Math.random() * 5;
+                        setTarget(i, Math.cos(angle) * radius + 8, Math.sin(angle) * radius, random() * 4.5);
+                    } else if (form === 'stack') {
+                        const layer = i % 5;
+                        setTarget(i, random() * 34 + 8, -10 + layer * 5 + random() * 1.5, random() * 10);
+                    } else if (form === 'horizon') {
+                        const x = (t - .5) * 40 + 8;
+                        const y = Math.pow(t, 2.35) * 23 - 11;
+                        setTarget(i, x + random() * 1.4, y + random() * 2.4, random() * 9);
+                    } else {
+                        const y = 1 - (i / (total - 1)) * 2;
+                        const radius = Math.sqrt(Math.max(0, 1 - y * y));
+                        const angle = i * 2.399963;
+                        const depth = 7 + Math.random() * 6;
+                        setTarget(i, Math.cos(angle) * radius * depth + 11, y * depth, Math.sin(angle) * radius * depth);
+                    }
+
+                    const i3 = i * 3;
+                    color.copy(indigo).lerp(cyan, (i % 101) / 100);
+                    colors[i3] = color.r;
+                    colors[i3 + 1] = color.g;
+                    colors[i3 + 2] = color.b;
+                }
+            }
+
+            build('sphere');
+            positions.set(targets);
+
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            const dot = document.createElement('canvas');
+            dot.width = dot.height = 48;
+            const ctx = dot.getContext('2d');
+            const glow = ctx.createRadialGradient(24, 24, 0, 24, 24, 24);
+            glow.addColorStop(0, 'rgba(255,255,255,1)');
+            glow.addColorStop(.35, 'rgba(255,255,255,.6)');
+            glow.addColorStop(1, 'rgba(255,255,255,0)');
+            ctx.fillStyle = glow;
+            ctx.fillRect(0, 0, 48, 48);
+
+            const points = new THREE.Points(geometry, new THREE.PointsMaterial({
+                size: innerWidth < 700 ? .32 : .25,
+                map: new THREE.CanvasTexture(dot),
+                vertexColors: true,
+                transparent: true,
+                opacity: .82,
+                depthWrite: false,
+                blending: THREE.AdditiveBlending,
+                sizeAttenuation: true
+            }));
+            scene.add(points);
+
+            const formObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) build(entry.target.dataset.form || 'sphere');
+                });
+            }, { rootMargin: '-38% 0px -38% 0px', threshold: 0 });
+            document.querySelectorAll('[data-form]').forEach((section) => formObserver.observe(section));
+
+            let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+            addEventListener('pointermove', (event) => {
+                targetX = (event.clientX / innerWidth - .5) * 2;
+                targetY = (event.clientY / innerHeight - .5) * 2;
+            }, { passive: true });
+
+            addEventListener('resize', () => {
+                camera.aspect = innerWidth / innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(innerWidth, innerHeight);
+            });
+
+            const clock = new THREE.Clock();
+            function frame() {
+                const time = clock.getElapsedTime();
+                for (let i = 0; i < positions.length; i++) positions[i] += (targets[i] - positions[i]) * .025;
+                geometry.attributes.position.needsUpdate = true;
+                mouseX += (targetX - mouseX) * .035;
+                mouseY += (targetY - mouseY) * .035;
+                points.rotation.y = time * .045 + mouseX * .07;
+                points.rotation.x = Math.sin(time * .18) * .06 + mouseY * .045;
+                camera.position.x = 5 + mouseX * 2.5;
+                camera.position.y = -mouseY * 1.7;
+                camera.lookAt(6, 0, 0);
+                renderer.render(scene, camera);
+                requestAnimationFrame(frame);
+            }
+            frame();
+        }
+    </script>
+</body>
+
+</html>

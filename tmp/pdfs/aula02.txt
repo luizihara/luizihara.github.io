@@ -1,0 +1,457 @@
+AI LEADERSHIP
+
+TRANSFORMAÇÃO
+DE MODELO DE
+NEGÓCIOS
+AULA 02
+ECOSSISTEMAS
+DIGITAIS E A
+TRANSIÇÃO PARA IA
+         • Gravar e transcrever a
+Avisos     aula
+
+         • Câmera, participação e
+           discussão
+
+         • Intervalo, chamada e
+           término
+
+         • Aproveitar as trocas, se
+           aprofundar e se divertir
+ Jornada
+● Aula 01 - Cadeias de valor com IA
+
+● Aula 02 - Ecossistemas digitais e a
+   transição para IA
+   Ramón do Nubank
+
+● Aula 03 - Transformação no Modelo
+   Operacional e Organizacional
+   Francisco da Natura e Daniel da
+   Finch
+
+● Aula 04 - Projeto, Gestão de Risco,
+   Controles e Sustentabilidade
+   Marcelo da QSoft
+Agenda de Hoje
+
+● Recapitulação/ Provocação
+
+● Palestra Ramón do Nubank
+
+● Dúvidas e Aprofundamento
+
+● Intervalo
+
+● Resumo dos Cases
+
+● Hands-On: Analisando o meu
+  contexto x cases
+RECAPITULAÇÃO
+O QUE É
+VALOR?
+Roadmap Estratégico
+Dez movimentos, do ponto zero à liderança de vanguarda.
+
+FASE INICIAL INFORMACIONAL — DO PONTO ZERO À PRIMEIRA VALIDAÇÃO E APROPRIAÇÃO
+
+
+  01      Definição Inicial e Adoção Estratégica de IA            03     Diagnóstico de Maturidade Organizacional
+
+
+          Experimentação e Validação de Oportunidades
+  02      (Quick Wins)                                            04     Benchmarking e Referências de Mercado
+
+
+FASE DE ESCALA OPERACIONAL — DA AMBIÇÃO AOS GANHOS REAIS PARA CONVERGÊNCIA COMPETITIVA E GOVERNANÇA
+
+
+          Definição dos Pilares Estratégicos e                           Avaliação de Maturidade para Execução do
+  05      Cadeia de Valor                                         07     Plano de Transformação
+
+
+          Definição da Ambição Estratégica COM e                         Execução, Governança e Mensuração de
+  06      PARA a IA
+                                                                  08     Resultados
+
+FASE DE CRIAÇÃO E INOVAÇÃO — DOS GANHOS GERAIS À CRIAÇÃO DE MODELO ÚNICO PARA INOVAR
+
+
+  09      Escala, Replicabilidade e Comunicação de Valor          10     Inovação Contínua e Liderança de Vanguarda
+    PARTE 1
+INFORMACIONAL
+ (APROPRIAÇÃO
+     E USO)
+Os Impactos da IA na Produtividade Informacional
+Como a IA está transformando tarefas-chave e otimizando fluxos de trabalho.
+
+
+
+ Reunião: transcrição, ata, organização,                       Apresentação: roteiro, imagem e
+ pauta                                                         apresentação
+ E-mail: resumir, entender, escrever                           Cronograma: diagrama de Gantt, tabela
+
+
+
+
+ Leitura de documento: contratos, termos,                      Pesquisa: benchmark, entendimento de
+ manuais, códigos                                              contexto, conjectura
+ Criação de documento: manuais,                                Auditoria: revisão, aprimoramento,
+ procedimentos                                                 entendimento
+ Marketing: ideias, roteiros, criativos,                       Tabelas: análise, criação de tabela,
+ campanhas                                                     criação de dados estruturados
+Agents, Robots, and Us: Skill
+Partnerships in the Age of AI” (2025)
+   PARTE 2
+OPERACIONAL
+(PROCESSO E
+GOVERNANÇA)
+   PARTE 3
+  CULTURAL
+(INOVAÇÃO E
+  CRIAÇÃO)
+https://news.entrelinhas.ai/p/a-estaca-ja-nao-nos-segura
+Roadmap Estratégico
+Dez movimentos, do ponto zero à liderança de vanguarda.
+
+FASE INICIAL INFORMACIONAL — DO PONTO ZERO À PRIMEIRA VALIDAÇÃO E APROPRIAÇÃO
+
+
+  01      Definição Inicial e Adoção Estratégica de IA            03     Diagnóstico de Maturidade Organizacional
+
+
+          Experimentação e Validação de Oportunidades
+  02      (Quick Wins)                                            04     Benchmarking e Referências de Mercado
+
+
+FASE DE ESCALA OPERACIONAL — DA AMBIÇÃO AOS GANHOS REAIS PARA CONVERGÊNCIA COMPETITIVA E GOVERNANÇA
+
+
+          Definição dos Pilares Estratégicos e                           Avaliação de Maturidade para Execução do
+  05      Cadeia de Valor                                         07     Plano de Transformação
+
+
+          Definição da Ambição Estratégica COM e                         Execução, Governança e Mensuração de
+  06      PARA a IA
+                                                                  08     Resultados
+
+FASE DE CRIAÇÃO E INOVAÇÃO — DOS GANHOS GERAIS À CRIAÇÃO DE MODELO ÚNICO PARA INOVAR
+
+
+  09      Escala, Replicabilidade e Comunicação de Valor          10     Inovação Contínua e Liderança de Vanguarda
+https://www.linkedin.com/pulse/gartner-ai-opportunity-radar-ga
+me-changing-vs-everyday-debipada-nanda-fq3cc/
+PROVOCAÇÕES
+       1. O Desacoplamento Econômico e o Novo Ativo Central
+
+       Em vez de se perguntar como a inteligência artificial pode tornar
+       a empresa mais eficiente, a pergunta de alto nível deve ser:
+       Como a inteligência artificial muda completamente a economia
+       ao desacoplar nosso crescimento do número de funcionários, da
+       propaganda massiva para personalizada, do garoto propaganda
+       para o influencer e avatar? Qual valor central iremos manter
+       quando os produtos, serviços e tarefas não serão um desafio em
+       termos de produção?
+
+       2. A Mudança Radical no Formato do Trabalho
+
+       Reclamamos muito que o trabalho está ficando muito igual, que
+       as pessoas não estão pensando e estamos entregando tudo de
+       forma muito padronizada. Mas será que o formato atual do
+       trabalho vai ser o do futuro? Estamos mudando mais do que
+       apenas ganhar produtividade ou inovar da forma que
+       conhecemos? Ou estamos vivendo uma mudança total na forma
+       de trabalhar — sem cadeira ou mesa pré-definida, onde os
+       rituais e a maneira de se relacionar no ambiente de trabalho
+       serão completamente diferentes com mais debates e reuniões?
+      CONVIDADO
+M.SC RAMON BORTHOLIN
+INTERVALO
+RESUMO DOS
+CASES
+     NUBANK
+     Eﬁciência, produtividade e novos
+     serviços
+     IA no atendimento, no código e no motor de crédito
+
+        Pilar dominante: produtividade tech + precisão de risco
+
+
+     O QUE A IA MUDA NO CASO
+
+       Crédito como core: Hyperplane + nuFormer para ler sequências de
+       transações e melhorar risco, renda e cross-sell.
+       Eficiência operacional: RAG interno, copiloto de atendimento, antifraude com
+       visão e assistentes generativos no cliente.
+       Produtividade de engenharia: migração massiva de código com Devin,
+       reduzindo esforço e liberando capacidade para inovação.
+       Novos serviços: Pix com IA, AI Private Banker, NuCel e personalização
+       financeira em escala.
+
+
+
+
+     NÚMEROS PARA ANCORAR A DISCUSSÃO
+
+
+       12×                                            20×                  55%
+       eficiência em engenharia                       economia de custos   consultas nível 1 resolvidas por IA
+
+
+
+       Mensagem: não é só chatbot; é redesenhar o banco com IA como infraestrutura
+       de decisão e produtividade.
+Fonte: cases de ensino da disciplina, dados consolidados até jun/2026
+Nubank: a inteligência que gera margem não se terceiriza
+Pilar dominante: produtividade tech e precisão de risco — do atendimento ao código
+
+
+
+    nuFormer                                      Hyperplane (2024)                                   Letramento e experimentação
+
+
+    Modelo fundacional próprio lê transações em   M&A de capacidade, não de receita: talento e        Busca corporativa com RAG para 5.000
+    sequência: +1,2% de AUC no maior segmento     tecnologia que encurtaram anos de curva de          funcionários/mês; ciclo de experimento
+    de crédito do Brasil.                         aprendizado.                                        comprimido de meses para um dia.
+
+
+
+
+    Pix com IA                                    Migração com agentes (Devin)                        AskNu, Copiloto e antifraude
+
+
+    Transferência por voz, texto ou imagem; ~10   6 milhões de linhas de código migradas: 12×         45%+ dos atendentes usam diariamente; até
+    milhões de usuários por mês já na camada de   de eficiência em horas de engenharia e 20×          55% do nível 1 sem humano; visão
+    IA do Pix.                                    de economia.                                        computacional contra fraude.
+
+
+
+
+1                                                        Transformação de Modelos de Negócio com IA
+     IFOOD
+
+     Modelo próprio e fábrica de agentes
+     IA como sistema operacional do marketplace
+
+        Pilar dominante: plataforma + modelo vertical de comércio
+
+
+     ONDE ESTÁ A INTELIGÊNCIA
+
+       LCM: modelo vertical para intenção de compra — cardápio, histórico, horário,
+       localização, desconto e probabilidade de conversão.
+       Operação em tempo real: previsão de preparo, alocação de entregadores,
+       rotas, ETA, fraude e moderação de catálogo.
+       Ailo + GenAI platform: conversa e compra guiada, com redução do tempo de
+       finalização e aumento da conversão.
+       Fábrica de agentes: Toqan, agentes internos, automação de análises e
+       suporte a restaurantes; IA deixa de ser só de especialistas.
+       Monetização: iFood Pago, Ads e compra da Advolve para campanhas,
+       criativos e performance em closed loop.
+
+
+
+     NÚMEROS PARA ANCORAR A DISCUSSÃO
+
+
+       180+                                       14 bi                 +48%                8.000
+       modelos proprietários                      previsões/mês         busca vira pedido   meta de agentes internos
+
+
+
+
+Fonte: cases de ensino da disciplina, dados consolidados até jun/2026
+iFood: a IA como infraestrutura invisível — e própria
+Pilar dominante: plataforma e LLM vertical — 100+ modelos em uma única jornada de compra
+
+
+
+    LCM (Large Commerce Model)                      Ailo                                                GenPlat
+
+
+    LLM vertical criado com a Prosus, treinado em   Assistente conversacional no app e no               Plataforma interna de GenAI com RAG via
+    10 trilhões de tokens e até 60× mais barato     WhatsApp: +48% de conversão de busca em             API, governança de modelos e suporte N1
+    que generalistas.                               pedido e −33% no tempo de fechar.                   automatizado entre times.
+
+
+
+
+    Fábrica de agentes                              Rota e tempo de entrega                             Crédito, Ads e Advolve
+
+
+    Meta de 8.000 agentes — um por funcionário.     Prever o preparo do prato elevou o SLA de           iFood Pago financia o restaurante; a compra
+    O Groceries Data Assistant reduziu análises     80% para 90%, otimizou rotas em 12% e               da Advolve automatiza campanhas de ponta a
+    de 30 para 5 minutos.                           cortou a ociosidade pela metade.                    ponta, com ROI acima de 4×.
+
+
+
+
+2                                                          Transformação de Modelos de Negócio com IA
+     NATURA
+
+     Personalização e canal de venda
+     IA para ampliar a rede de relações, não para substituí-la
+
+        Pilar dominante: eficiência + canal de vendas + embedded finance
+
+
+     O QUE SUSTENTA A TRANSFORMAÇÃO
+
+       Fundação de dados: quatro anos saindo de “poças de dados” para data lake e camada
+       Natura AI.
+       Consultoras no centro: Maia, busca semântica e recomendações para personalizar a
+       venda e orientar líderes da rede.
+       Operação e logística: ML para previsão de demanda, ruptura, entrega e eficiência
+       física — inclusive embalagem/caixas como ponto de otimização.
+       Physical AI: agentes no chão de fábrica, voz + análise, com ganhos de produtividade
+       na linha de xampu.
+       Finanças e backoffice: Emana Pay, crédito/score com IA, além de infraestrutura,
+       DevOps/TechOps e D&O como novas frentes de eficiência.
+
+
+
+
+     NÚMEROS PARA ANCORAR A DISCUSSÃO
+
+
+       4 anos                                   1 mi+                              +7,3%                    +20%
+                                                                                                            ticket de usuárias Emana
+       fundação de dados                        consultoras na busca inteligente   produtividade em xampu
+                                                                                                            Pay
+
+
+
+
+Fonte: cases de ensino da disciplina, dados consolidados até jun/2026
+Natura: o dado é a fundação; a rede de relações é o negócio
+Pilar dominante: eficiência e canal de vendas — quatro anos de dados antes de escalar a GenAI
+
+
+
+    Fundação de dados                              Busca Inteligente                                   Maia e personalização
+
+
+    Quatro anos saindo das 'poças de dados' para   Busca semântica na AWS para 1 milhão de             Agente que apoia as líderes: quem tende a
+    data lake e camada Natura AI. Governança       consultoras, ~400 buscas/min: quem digita           cessar a atividade, quem está perto de subir
+    como prioridade, não etapa final.              'caiaque' encontra o Kaiak.                         de nível, onde investir atenção.
+
+
+
+
+    Physical AI na fábrica                         Logística e decisão O&L                             Embedded finance e back-office
+
+
+    Arquitetura multiagente conversa por voz com   ML de previsão de demanda e otimização de           Emana Pay formaliza o crédito da venda
+    o operador da linha: +7,3% de produtividade    decisão — até o tamanho da caixa —                  direta (ticket ~20% maior); TroubOps e SAP
+    só no xampu.                                   reduzindo ruptura e custo de envio.                 AI Core aceleram infra e finanças.
+
+
+
+
+3                                                         Transformação de Modelos de Negócio com IA
+  Síntese dos 3 cases
+  A pergunta central deixa de ser “onde usar IA?” e passa a ser “onde a IA muda a economia do
+  negócio?”
+
+
+
+
+          Nubank                                                                     iFood                                               Natura
+                                                                                                                                         IA amplificando
+          IA no core da decisão                                                      IA como infraestrutura
+                                                                                                                                         relações
+          Crédito, risco, atendimento, antifraude e                                  Modelo vertical de comércio, logística em           Dados fundacionais, consultoras, busca
+          engenharia. Constrói o que gera margem;                                    tempo real, Ailo, agentes e monetização via         semântica, Physical AI, embedded finance e
+          integra o que acelera produtividade.                                       Pago, Ads e SaaS.                                   cadeia de valor sustentável.
+
+
+
+
+          Ativo que não terceiriza                                                   Ativo que não terceiriza                            Ativo que não terceiriza
+
+          dados financeiros + engenharia                                             dados + logística + audiência                       rede de relações + biodiversidade
+
+
+
+
+                                                          A maturidade em IA aparece quando a empresa transforma dados próprios em decisões melhores, processos
+                   Lição para a aula
+                                                          redesenhados e novas receitas — não quando apenas adiciona um copiloto a um fluxo antigo.
+
+
+
+
+Fonte: cases de ensino da disciplina, dados consolidados até jun/2026
+A mesma sequência, três apostas diferentes
+Fundação de dados → eficiência no core → receita nova sobre o mesmo ativo
+
+
+                         Nubank                                            iFood                                      Natura
+Ativo central            Comportamento financeiro de 135 mi de             Intenção de compra e operação logística    Rede de relações e sociobiodiversidade
+                         clientes
+
+
+Estratégia tecnológica   Construir no core, comprar no horizontal          Construir vertical (LCM) e plataforma interna Compor na nuvem sobre dado próprio
+                                                                                                                         governado
+
+
+Onde a IA gera margem    Decisão de crédito e produtividade de             Coordenação em tempo real dos três lados   Produtividade do canal e da fábrica
+                         engenharia
+
+
+Receita nova             AI Private Banker, NuCel, Shopping                Pago, Ads, Clube, SaaS para parceiros      Emana Pay, Natura Ingredientes
+
+
+
+Risco dominante          Ciclo de crédito e ROE alto sustentado            Antitruste e guerra de preços              Integração Avon e adoção desigual na
+                                                                                                                      ponta
+
+
+
+Onde vale construir? Onde o dado próprio muda a economia unitária do negócio.
+4                                                             Transformação de Modelos de Negócio com IA
+HANDS-ON
+COMPARAÇÃO
+    ANALISANDO OS CASES COM O MEU
+             CONTEXTO
+
+Porque eu ou minha empresa faria ou não faria
+          algumas dessas soluções?
+TRABALHO
+FINAL
+             Trabalho Final
+
+Análise da Empresas - Natura/ Ifood/ Nubank
+  Em relação ao desenvolvimento e sucesso da escala das soluções e operações tecnológicas
+
+                                        Análises comparativas
+  1 - O que essas empresas possuem em comum? 2 - O que elas possuem de diferente? 3 - Qual é o ponto
+                                     principal de cada uma delas?
+
+                                            Análise exploratória
+4 - Quais as demais capacidades que elas possuem que não estão no material? 5 - O que elas poderiam fazer
+                           que ainda não fizeram (tente usar o material da aula)?
+
+                                        Análise com base na vivência
+6 - O que já fiz na minha empresa ou já vi de perto de mais parecido? 7 - O que poderia ser melhor na minha
+                                                 experiência?
+
+                                 Análise com base nos exercícios de aula
+ 8 - Quais as oportunidades no nível informacional básico com IA (exemplos e casos específicos de hoje) 9 -
+              Como criar o ambiente correto para a escala operacional e de inovação com a IA?
+
+                                                   Conclusão
+     10 - Reflexão Final sobre o conteúdo do trabalho, o que mudou minha vida profissional e pessoal.
+                        11 - Ponto extra - Atualização do Framework de Adoção de IA
+DISCUSSÃO
+FINAL
+OBRIGADO!
+ ME SIGA NO INSTAGRAM
+ @rafa_piassa
+
+
+
+
+ VAMOS NOS CONECTAR
+ /rafaelpiassa
+
