@@ -1,0 +1,2137 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AgroTech Vale Verde · Estudo de Caso</title>
+<meta name="description" content="Estudo de caso FIAP MBA Tech, disciplina Estratégias Setoriais de Implementação, turma 2ABL. Análise setorial com as 5 Forças de Porter, diagnóstico de maturidade, priorização de iniciativas e roadmap de implementação de IA na AgroTech Vale Verde S.A.">
+<meta name="author" content="Luiz Ihara (RM368484); Filipe Fragoso (RM368500); Daniel Caminha (RM366740); Pedro Martins (RM368543)">
+<meta name="keywords" content="AgroTech Vale Verde, estudo de caso, inteligência artificial, agronegócio, 5 Forças de Porter, maturidade digital, ITD-Br, governança de dados, roadmap de IA, Pilot Purgatory, FIAP MBA Tech, turma 2ABL">
+
+<!--
+================================================================================
+RESUMO ESTRUTURADO DO DOCUMENTO
+Bloco em texto puro para leitura por ferramentas automatizadas, leitores de tela
+e para quem abrir o código-fonte. Reproduz o conteúdo essencial da página, cujo
+corpo principal está em HTML semântico logo abaixo. Duas visualizações são
+renderizadas em WebGL (canvas) e por isso não geram texto no DOM; os dados que
+as alimentam estão descritos aqui e também no bloco <details> "Versão em texto
+corrido", ao final da página.
+================================================================================
+
+TRABALHO ....: Estudo de caso "AgroTech Vale Verde: entre eficiência operacional
+               e transformação orientada por Inteligência Artificial"
+DISCIPLINA ..: Estratégias Setoriais de Implementação
+CURSO .......: FIAP MBA Tech
+TURMA .......: 2ABL
+PROFESSOR ...: Elias Eduardo Bernardo da Silva
+ALUNOS ......: Luiz Ihara      RM368484
+               Filipe Fragoso  RM368500
+               Daniel Caminha  RM366740
+               Pedro Martins   RM368543
+FORMATO .....: Página HTML estática única, sem dependências de build.
+               Visualizações tridimensionais autorais em Three.js r128.
+
+--------------------------------------------------------------------------------
+DADOS DO CASO UTILIZADOS (todos declarados no enunciado)
+--------------------------------------------------------------------------------
+Receita 2025 ................ R$ 480 milhões
+EBITDA médio ................ 12% (equivale a R$ 57,6 mi; base de custo ~R$ 422 mi)
+Área cultivada .............. 85 mil hectares (soja e milho, Centro-Oeste)
+Exportação .................. 35% da produção (Europa e China)
+Fundação .................... 2008
+Perdas por falha operacional  7% da produção (~R$ 33,6 mi)
+Variabilidade climática ..... 10% da produção exposta (~R$ 48 mi)
+Logística ................... 22% do custo total (~R$ 93 mi)
+Acurácia dos pilotos de IA .. 78%, nenhum integrado à operação
+Maturidade digital do setor . 3,1 de 6 (ITD-Br 2024); média nacional 3,7
+Estágio da empresa .......... "Pilot Purgatory"
+
+--------------------------------------------------------------------------------
+QUESTÃO 1 - ANÁLISE SETORIAL E COMPETITIVA (seção #q1)
+--------------------------------------------------------------------------------
+Classificação do setor: maturidade digital BAIXA A MÉDIA-BAIXA (3,1/6, ~52% da
+escala, abaixo da média nacional de 3,7).
+
+Características estruturais consideradas: produto commodity com preço de
+referência internacional (empresa price-taker); setor intensivo em capital e
+insumos com margem estreita; forte exposição a variáveis exógenas (clima,
+câmbio, frete, preço); ciclo de aprendizado anual, já que uma safra equivale a
+um único experimento por ano; limitações de conectividade e coleta de dados no
+campo.
+
+Aplicação das 5 Forças de Porter, com intensidade de 0 a 1 no cenário atual e no
+cenário de difusão da IA no setor (valores maiores = pior para o incumbente):
+
+  FORÇA                              HOJE   COM IA   MOVIMENTO
+  Ameaça de novos entrantes ........ 0,45 -> 0,35    cai
+  Poder dos fornecedores (insumos) . 0,75 -> 0,55    cai
+  Poder dos fornecedores (tecnologia) 0,28 -> 0,62   sobe (força nova)
+  Poder dos compradores ............ 0,70 -> 0,78    sobe
+  Ameaça de substitutos ............ 0,30 -> 0,38    sobe pouco
+  Rivalidade entre concorrentes .... 0,65 -> 0,88    sobe
+
+Leitura: a IA aumenta a pressão competitiva do setor. A rivalidade cresce porque
+a fronteira de custo se desloca para quem adota primeiro. O poder do comprador
+permanece alto, pois rastreabilidade e ESG passam de diferencial a condição de
+acesso. A barreira de entrada sobe apenas para quem organiza seus dados, que são
+um ativo cumulativo e difícil de replicar. O alívio no poder do fornecedor de
+insumos é parcialmente devolvido a um fornecedor novo, a plataforma de
+tecnologia, cujo poder cresce com o lock-in. Conclusão: em commodity a IA gera
+vantagem de custo e acesso a mercado, não prêmio de preço.
+
+--------------------------------------------------------------------------------
+QUESTÃO 2 - DIAGNÓSTICO ORGANIZACIONAL (seção #q2)
+--------------------------------------------------------------------------------
+Classificação: NÍVEL 1 (EXPLORAÇÃO). Média 1,4 em escala de 1 a 5 sobre seis
+dimensões:
+
+  Governança de dados ......... 1,0  (barreira crítica; alvo 4,0)
+  Integração de processos ..... 1,0  (alvo 3,5)
+  Dados ....................... 1,5  (alvo 3,5)
+  Talento ..................... 1,5  (alvo 3,0)
+  Cultura e liderança ......... 1,5  (alvo 3,0)
+  Tecnologia e infraestrutura . 2,0  (alvo 3,5)
+
+Gaps principais: ausência de padronização, ownership, dicionário e SLA de
+qualidade; nenhum modelo incorporado ao fluxo produtivo; IoT parcial e clima de
+fonte externa sem integração; inexistência de time de dados dedicado; decisão
+apoiada na experiência acumulada.
+
+Duas leituras críticas: (a) a acurácia de 78% é insuficiente como critério, pois
+faltam o baseline humano na mesma decisão e o custo assimétrico do erro; (b) a
+diretoria exige evidência consolidada antes de alocar capital, mas essa evidência
+só surge no experimento em condições reais, impasse que ajuda a explicar o Pilot
+Purgatory.
+
+Efeito do perfil conservador: custa ciclos de aprovação longos, pilotos
+subdimensionados e risco de atraso na curva de custo; protege contra compra
+prematura de plataforma e projetos de vitrine. Conversão recomendada: apresentar
+IA como redução de custo e gestão de risco, com stage-gates e sponsor no COO.
+
+--------------------------------------------------------------------------------
+QUESTÃO 3 - OPORTUNIDADES, RISCOS E PRIORIZAÇÃO (seção #q3)
+--------------------------------------------------------------------------------
+Critério de priorização (cinco condições cumulativas): dado já disponível em
+sistema; decisão repetitiva (ao menos semanal); resultado observável em até um
+trimestre; executivo responsável pelo processo e pelo número; decisão reversível.
+
+ONDA 1 (meses 3-9), atende às cinco condições:
+  1. Roteirização, frete e janela de transporte ....... R$ 7,4 a 11,2 mi/ano
+  2. Manutenção preditiva de frota e implementos ..... R$ 3 a 5 mi/ano
+  3. Compras preditivas de insumos e timing .......... R$ 4 a 7 mi/ano
+ONDA 2 (meses 9-18):
+  4. Janela ótima de colheita e secagem
+  5. Rastreabilidade e conformidade ESG (protege 35% da receita exportada)
+  6. Aplicação de insumos a taxa variável (VRT) ...... R$ 4 a 7 mi/ano
+  7. Detecção de pragas e daninhas por imagem
+ONDA 3 (meses 18+):
+  8. Previsão integrada de produtividade
+  9. Comercialização e hedge assistidos
+
+Riscos mapeados, com severidade: dados de baixa qualidade (crítica); Pilot
+Purgatory recorrente (crítica); deriva de modelo e clima atípico (alta); lock-in
+de plataforma (alta); viés e injustiça de decisão (média-alta); conformidade e
+exportação (média-alta); rejeição interna (média); segurança OT/IoT (média).
+Cada risco tem mitigação correspondente prevista no roadmap.
+
+Não priorizar agora: previsão de produtividade da safra, por ter um único ponto
+de validação por ano e depender de dado de solo ainda inexistente. Deve ser
+construída como capacidade em paralelo.
+
+--------------------------------------------------------------------------------
+QUESTÃO 4 - ESTRATÉGIA E ROADMAP (seção #q4)
+--------------------------------------------------------------------------------
+Nível de ambição recomendado: MODERADO, com sequenciamento definido. Descartadas
+a postura conservadora (repetiria o ciclo de pilotos isolados) e a agressiva
+(inviável sem dado padronizado, governança e talento).
+
+Roadmap em 24 meses, seguindo Diagnóstico -> Priorização -> Piloto -> Escala:
+  FASE 0, meses 0-3 .. Diagnóstico e fundação. R$ 2-3 mi. Inventário de dados,
+                       dicionário e SLA, baseline da decisão humana, comitê de
+                       IA e Dados, arquitetura-alvo.
+       GATE G0 ....... Existe dado utilizável e baseline mensurável em 2 casos?
+  FASE 1, meses 3-9 .. Pilotos com prova de valor. R$ 5-7 mi. Dois pilotos
+                       (roteirização/frete e manutenção preditiva), desenho
+                       experimental com grupo de controle, plataforma mínima
+                       viável, apuração auditada pela controladoria.
+       GATE G1 ....... Valor auditado >= R$ 5 mi/ano e adoção >= 70%?
+  FASE 2, meses 9-18 . Escala seletiva. R$ 9-13 mi. VRT, compras preditivas,
+                       rastreabilidade, MLOps, IoT nos talhões de maior variância.
+       GATE G2 ....... Custo logístico por tonelada e perdas na meta? Maturidade
+                       >= 3,0?
+  FASE 3, meses 18-24+ Reposicionamento. Previsão integrada, S&OP agrícola,
+                       dado como ativo defensável.
+
+Governança e gestão de dados: comitê de IA e Dados presidido pelo CEO; contrato
+de dados por domínio com dono de negócio, dicionário, regras de qualidade e SLA;
+gestão de risco de modelo (inventário, validação independente, monitoramento de
+drift, degradação manual); human-in-the-loop calibrado por reversibilidade da
+decisão; conformidade desde o desenho (LGPD, exigências ESG dos compradores,
+regulação de IA); financiamento como opção real, com orçamento por gate.
+
+Indicadores: valor (custo logístico por tonelada, perdas operacionais, impacto em
+EBITDA); processo (% de decisões assistidas, taxa de override, casos em
+produção); técnico (desempenho contra baseline humano, qualidade de dados,
+drift); capacidade (maturidade de 1,4 para 3,0 em 24 meses).
+
+Ordem de grandeza do valor: potencial de R$ 20 a 37 mi/ano em regime, contra
+investimento acumulado de R$ 16 a 23 mi em 24 meses. Esses valores são
+estimativas derivadas dos percentuais do caso, sinalizadas como tal no documento,
+e não constituem projeção financeira auditada.
+
+Recomendação final: aprovar de imediato apenas a Fase 0 e submeter o restante do
+programa aos gates.
+
+================================================================================
+NOTA SOBRE A CONSTRUÇÃO TÉCNICA
+Cena 1 (hero): campo agrícola com 5.476 talhões em InstancedBufferGeometry e
+shaders GLSL próprios; altura e índice de vegetação derivados de ruído fbm; uma
+frente de onda controlada pelo scroll representa a transição do estado atual para
+o otimizado. Cena 2: diagrama tridimensional interativo das 5 Forças, com
+alternância animada entre os dois cenários; os dados estão no array FORCES, no
+script ao final do arquivo. Radar de maturidade e matriz de priorização são
+gerados em tempo de execução a partir dos mesmos dados descritos acima.
+================================================================================
+-->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": "AgroTech Vale Verde: entre eficiência operacional e transformação orientada por Inteligência Artificial",
+  "alternativeHeadline": "Estudo de caso, disciplina Estratégias Setoriais de Implementação, FIAP MBA Tech, turma 2ABL",
+  "inLanguage": "pt-BR",
+  "genre": "Estudo de caso acadêmico",
+  "learningResourceType": "Estudo de caso",
+  "educationalLevel": "Pós-graduação (MBA)",
+  "author": [
+    { "@type": "Person", "name": "Luiz Ihara", "identifier": "RM368484" },
+    { "@type": "Person", "name": "Filipe Fragoso", "identifier": "RM368500" },
+    { "@type": "Person", "name": "Daniel Caminha", "identifier": "RM366740" },
+    { "@type": "Person", "name": "Pedro Martins", "identifier": "RM368543" }
+  ],
+  "publisher": { "@type": "CollegeOrUniversity", "name": "FIAP", "department": "MBA Tech" },
+  "about": [
+    "Inteligência Artificial no agronegócio",
+    "Maturidade digital",
+    "5 Forças de Porter",
+    "Governança de dados",
+    "Roadmap de implementação de IA"
+  ],
+  "mentions": [
+    { "@type": "Person", "name": "Elias Eduardo Bernardo da Silva", "jobTitle": "Professor da disciplina" },
+    { "@type": "Organization", "name": "AgroTech Vale Verde S.A.", "description": "Empresa fictícia do estudo de caso" }
+  ],
+  "abstract": "Resposta às quatro questões de avaliação do caso AgroTech Vale Verde. Questão 1: o agronegócio é classificado em maturidade digital baixa a média-baixa (3,1 de 6 no ITD-Br 2024) e a aplicação das 5 Forças de Porter indica que a difusão da IA aumenta a rivalidade e o poder do comprador, reduz o poder do fornecedor de insumos e cria um novo fornecedor com poder crescente, a plataforma de tecnologia. Questão 2: a empresa é classificada no Nível 1 (Exploração), com média 1,4 em seis dimensões e governança de dados como barreira crítica. Questão 3: a priorização adota cinco condições cumulativas e coloca logística, manutenção preditiva e compras preditivas na primeira onda, adiando a previsão de produtividade. Questão 4: propõe-se ambição moderada, com roadmap de 24 meses em quatro fases e três gates de capital, governança de dados e de risco de modelo, e financiamento por opções reais.",
+  "hasPart": [
+    { "@type": "WebPageElement", "name": "Questão 1: análise setorial e competitiva", "url": "#q1" },
+    { "@type": "WebPageElement", "name": "Questão 2: diagnóstico organizacional", "url": "#q2" },
+    { "@type": "WebPageElement", "name": "Questão 3: oportunidades, riscos e priorização", "url": "#q3" },
+    { "@type": "WebPageElement", "name": "Questão 4: estratégia e roadmap de implementação", "url": "#q4" },
+    { "@type": "WebPageElement", "name": "Recomendação ao conselho", "url": "#decisao" }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --bg:#05080a;
+  --bg-2:#080d10;
+  --panel:rgba(255,255,255,.028);
+  --panel-2:rgba(255,255,255,.045);
+  --line:rgba(255,255,255,.085);
+  --line-2:rgba(255,255,255,.16);
+
+  --txt:#E8EFEC;
+  --txt-2:#A8B6B0;
+  --txt-3:#6E7F79;
+
+  --green:#4ADE80;
+  --green-d:#22C55E;
+  --green-deep:#0d3d29;
+  --cyan:#67E8F9;
+  --amber:#FBBF24;
+  --rose:#FB7185;
+  --violet:#A78BFA;
+
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --serif:'Instrument Serif',Georgia,serif;
+
+  --r:14px;
+  --maxw:1200px;
+  --pad:clamp(20px,5vw,48px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--txt);
+  font-family:var(--sans);font-size:16.5px;line-height:1.68;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+::selection{background:rgba(74,222,128,.28);color:#fff}
+img{max-width:100%}
+a{color:inherit}
+
+/* ============================================================
+   BACKDROP / CANVAS
+   ============================================================ */
+#bg-wrap{position:fixed;inset:0;z-index:0;pointer-events:none}
+#bg-wrap::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(120% 70% at 50% 108%, rgba(20,80,55,.55) 0%, rgba(8,20,16,0) 62%),
+    radial-gradient(80% 50% at 78% 8%, rgba(30,70,90,.30) 0%, rgba(5,8,10,0) 60%),
+    linear-gradient(180deg,#05080a 0%,#060b0c 45%,#040708 100%);
+}
+#bg-wrap::after{ /* grain */
+  content:'';position:absolute;inset:0;opacity:.055;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+#c-field{position:absolute;inset:0;width:100%;height:100%;display:block}
+.scrim{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(100deg,rgba(5,8,10,.93) 0%,rgba(5,8,10,.74) 32%,rgba(5,8,10,.26) 62%,rgba(5,8,10,0) 86%),
+    linear-gradient(180deg,rgba(5,8,10,.85) 0%,rgba(5,8,10,.15) 26%,rgba(5,8,10,0) 55%);
+}
+.veil{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(5,8,10,.985) 0%,rgba(5,8,10,.955) 55%,rgba(5,8,10,.90) 100%);
+  opacity:0;
+}
+main,header,footer{position:relative;z-index:2}
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+#prog{position:fixed;top:0;left:0;height:2px;width:0%;z-index:60;
+  background:linear-gradient(90deg,var(--green),var(--cyan));box-shadow:0 0 14px rgba(74,222,128,.6)}
+nav.dock{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;gap:28px;
+  padding:14px var(--pad);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:linear-gradient(180deg,rgba(5,8,10,.82),rgba(5,8,10,.35));
+  border-bottom:1px solid transparent;transition:border-color .3s,background .3s;
+}
+nav.dock.solid{border-bottom-color:var(--line);background:rgba(5,8,10,.9)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.01em;font-size:14px;white-space:nowrap}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);flex:none}
+.brand small{color:var(--txt-3);font-weight:400}
+nav.dock ul{list-style:none;display:flex;gap:4px;margin:0 0 0 auto;padding:0;flex-wrap:wrap;justify-content:flex-end}
+nav.dock a{
+  text-decoration:none;color:var(--txt-3);font-size:12.5px;letter-spacing:.02em;
+  padding:6px 11px;border-radius:99px;transition:.22s;display:block;white-space:nowrap;
+  font-family:var(--mono);
+}
+nav.dock a:hover{color:var(--txt);background:var(--panel-2)}
+nav.dock a.on{color:#03150d;background:var(--green);font-weight:500}
+@media(max-width:820px){nav.dock ul{display:none}}
+
+/* ============================================================
+   LAYOUT PRIMITIVES
+   ============================================================ */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+section{padding:clamp(72px,10vw,132px) 0;position:relative}
+.eyebrow{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.20em;text-transform:uppercase;
+  color:var(--green);display:flex;align-items:center;gap:12px;margin:0 0 18px;
+}
+.eyebrow::before{content:'';width:26px;height:1px;background:var(--green);opacity:.6}
+h1,h2,h3,h4{letter-spacing:-.028em;line-height:1.1;margin:0}
+h2{font-size:clamp(30px,4.4vw,50px);font-weight:600}
+h3{font-size:clamp(21px,2.4vw,27px);font-weight:600;line-height:1.24}
+h4{font-size:16px;font-weight:600;letter-spacing:-.01em}
+p{margin:0 0 1.05em}
+.lead{font-size:clamp(17px,1.55vw,20px);color:var(--txt-2);line-height:1.62;max-width:66ch}
+.muted{color:var(--txt-2)}
+.dim{color:var(--txt-3)}
+strong{color:#fff;font-weight:600}
+em.hl{font-style:normal;color:var(--green);font-weight:500}
+.sec-head{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:52px;max-width:78ch}
+.qtag{
+  font-family:var(--mono);font-size:12px;color:var(--txt-3);
+  border:1px solid var(--line);border-radius:99px;padding:4px 12px;
+  display:inline-block;justify-self:start;width:-moz-fit-content;width:fit-content;
+}
+hr.rule{border:0;border-top:1px solid var(--line);margin:0}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+header.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 60px}
+.hero-kicker{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--txt-3);
+  margin-bottom:26px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+}
+.hero-kicker b{color:var(--green);font-weight:500}
+h1{
+  font-size:clamp(40px,7.6vw,88px);font-weight:600;line-height:1.02;max-width:16ch;
+  background:linear-gradient(180deg,#fff 20%,#B9CFC6 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+h1 i{font-family:var(--serif);font-style:italic;font-weight:400;
+  background:linear-gradient(180deg,#8CF0B4,#3FA76F);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{margin-top:26px;max-width:60ch}
+.stat-strip{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;
+  margin-top:54px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  backdrop-filter:blur(8px);
+}
+.stat{background:rgba(6,10,12,.72);padding:20px 18px}
+.stat .v{font-family:var(--mono);font-size:clamp(19px,2.3vw,25px);color:#fff;letter-spacing:-.03em;line-height:1.15}
+.stat .v.g{color:var(--green)}.stat .v.a{color:var(--amber)}.stat .v.r{color:var(--rose)}
+.stat .k{font-size:11.5px;color:var(--txt-3);margin-top:7px;letter-spacing:.02em;line-height:1.4}
+.authors{
+  margin-top:24px;display:inline-flex;flex-wrap:wrap;gap:9px 20px;align-items:center;
+  font-family:var(--mono);font-size:11.5px;color:var(--txt-2);letter-spacing:.02em;
+  background:rgba(6,10,12,.72);border:1px solid var(--line);border-radius:12px;
+  padding:12px 18px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+.authors span{white-space:nowrap}
+.authors b{color:var(--txt-3);font-weight:400}
+.authors .al{
+  color:var(--green);letter-spacing:.18em;text-transform:uppercase;font-size:10.5px;
+  border:1px solid rgba(74,222,128,.3);border-radius:99px;padding:3px 10px;
+}
+.scroll-hint{margin-top:34px;display:flex;align-items:center;gap:12px;color:var(--txt-3);font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.scroll-hint .bar{width:1px;height:40px;background:linear-gradient(180deg,var(--green),transparent);animation:drop 2.2s ease-in-out infinite}
+@keyframes drop{0%,100%{opacity:.2;transform:scaleY(.5)}50%{opacity:1;transform:scaleY(1)}}
+
+/* ============================================================
+   CARDS / GRIDS
+   ============================================================ */
+.card{
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
+  border:1px solid var(--line);border-radius:var(--r);padding:26px;
+  transition:border-color .25s,transform .25s,background .25s;
+}
+.card:hover{border-color:var(--line-2)}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.card .ico{
+  width:32px;height:32px;border-radius:9px;display:grid;place-items:center;margin-bottom:16px;
+  font-family:var(--mono);font-size:13px;font-weight:500;
+  background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.24);
+}
+.card p{font-size:14.6px;color:var(--txt-2);margin:10px 0 0;line-height:1.62}
+.card h4+p{margin-top:8px}
+
+/* thesis */
+.thesis{
+  border-left:2px solid var(--green);padding:6px 0 6px 28px;margin:0 0 44px;
+  font-size:clamp(21px,2.7vw,32px);line-height:1.34;font-weight:500;letter-spacing:-.022em;max-width:30ch;
+}
+.thesis span{color:var(--txt-3)}
+
+/* callout */
+.callout{
+  border:1px solid rgba(251,191,36,.28);background:linear-gradient(180deg,rgba(251,191,36,.09),rgba(251,191,36,.02));
+  border-radius:var(--r);padding:24px 26px;
+}
+.callout.g{border-color:rgba(74,222,128,.28);background:linear-gradient(180deg,rgba(74,222,128,.085),rgba(74,222,128,.02))}
+.callout.r{border-color:rgba(251,113,133,.28);background:linear-gradient(180deg,rgba(251,113,133,.085),rgba(251,113,133,.02))}
+.callout .tag{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;display:block}
+.callout.g .tag{color:var(--green)}.callout.r .tag{color:var(--rose)}
+.callout p:last-child{margin-bottom:0}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:rgba(255,255,255,.02)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14.3px}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt-3);font-weight:400;background:rgba(255,255,255,.022)}
+tr:last-child td{border-bottom:0}
+td strong{display:block;margin-bottom:3px}
+td small{color:var(--txt-3);font-size:12.6px;line-height:1.5;display:block}
+.num{font-family:var(--mono);white-space:nowrap}
+.pill{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:99px;border:1px solid var(--line-2);color:var(--txt-2);white-space:nowrap}
+.pill.g{color:var(--green);border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.08)}
+.pill.a{color:var(--amber);border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.08)}
+.pill.r{color:var(--rose);border-color:rgba(251,113,133,.35);background:rgba(251,113,133,.08)}
+.pill.c{color:var(--cyan);border-color:rgba(103,232,249,.35);background:rgba(103,232,249,.08)}
+
+/* ============================================================
+   MATURITY GAUGE (setor)
+   ============================================================ */
+.gauge{position:relative;padding:30px 26px 26px;border:1px solid var(--line);border-radius:var(--r);background:rgba(255,255,255,.022)}
+.gauge .track{position:relative;height:10px;border-radius:99px;background:linear-gradient(90deg,rgba(251,113,133,.35),rgba(251,191,36,.35),rgba(74,222,128,.4));margin:38px 0 10px;overflow:visible}
+.gauge .seg{position:absolute;top:-30px;transform:translateX(-50%);text-align:center;white-space:nowrap}
+.gauge .seg i{display:block;width:1px;height:26px;background:var(--line-2);margin:6px auto 0}
+.gauge .seg b{font-family:var(--mono);font-size:13px;display:block}
+.gauge .seg span{font-size:10.5px;color:var(--txt-3);letter-spacing:.04em}
+.gauge .seg.agro b{color:var(--amber)} .gauge .seg.agro i{background:var(--amber);height:34px}
+.gauge .seg.br b{color:var(--cyan)} .gauge .seg.br i{background:var(--cyan)}
+.gauge .scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--txt-3);margin-top:12px}
+.gauge .fill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:linear-gradient(90deg,rgba(251,191,36,.9),rgba(251,191,36,.15));width:0;transition:width 1.4s cubic-bezier(.16,1,.3,1)}
+
+/* ============================================================
+   PORTER 3D
+   ============================================================ */
+.porter{display:grid;grid-template-columns:1.35fr .9fr;gap:26px;align-items:stretch}
+@media(max-width:1000px){.porter{grid-template-columns:1fr}}
+.stage{
+  position:relative;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  background:radial-gradient(70% 60% at 50% 105%,rgba(20,70,50,.35),rgba(6,10,12,0) 70%),linear-gradient(180deg,#070c0e,#050809);
+  min-height:520px;
+}
+.stage canvas{display:block;width:100%;height:100%}
+.labels{position:absolute;inset:0;pointer-events:none}
+.lbl{
+  position:absolute;transform:translate(-50%,-50%);text-align:center;pointer-events:auto;cursor:pointer;
+  font-size:11.5px;letter-spacing:.02em;line-height:1.25;white-space:nowrap;transition:opacity .2s;
+  padding:5px 10px;border-radius:9px;border:1px solid rgba(255,255,255,.07);
+  background:rgba(6,11,13,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+.lbl b{display:block;font-weight:500;color:#EAF3EF;font-size:12px}
+.lbl u{display:block;text-decoration:none;font-family:var(--mono);font-size:14px;color:var(--green);margin-top:2px;letter-spacing:-.02em}
+.lbl:hover,.lbl.on{background:rgba(10,17,19,.94);border-color:var(--line-2);box-shadow:0 6px 22px rgba(0,0,0,.45)}
+.stage-ui{position:absolute;left:16px;top:16px;right:16px;display:flex;gap:10px;align-items:flex-start;justify-content:space-between;pointer-events:none;flex-wrap:wrap}
+.toggle{
+  pointer-events:auto;display:inline-flex;background:rgba(6,10,12,.78);border:1px solid var(--line);border-radius:99px;padding:3px;
+  backdrop-filter:blur(8px);
+}
+.toggle button{
+  border:0;background:transparent;color:var(--txt-3);font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  padding:7px 14px;border-radius:99px;cursor:pointer;transition:.2s;text-transform:uppercase;
+}
+.toggle button.on{background:var(--green);color:#04170e;font-weight:500}
+.hint{pointer-events:none;font-family:var(--mono);font-size:10.5px;color:var(--txt-3);letter-spacing:.08em;text-transform:uppercase;background:rgba(6,10,12,.6);padding:6px 10px;border-radius:99px;border:1px solid var(--line)}
+@media(max-width:620px){
+  /* em telas estreitas os rótulos viram fichas compactas; o nome aparece no selecionado */
+  .lbl{font-size:10px;padding:3px 7px}
+  .lbl b{display:none;font-size:10.5px}
+  .lbl.on b,.lbl:hover b{display:block}
+  .lbl u{font-size:12.5px;margin-top:0}
+  .hint{display:none}
+  .stage{min-height:0;aspect-ratio:1/1.04}
+}
+.force-panel{display:flex;flex-direction:column;gap:14px}
+.fp-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:4px}
+.fp-head h3{font-size:22px}
+.fp-meter{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;color:var(--txt-3)}
+.fp-bar{width:72px;height:5px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
+.fp-bar i{display:block;height:100%;background:var(--green);transition:width .5s cubic-bezier(.16,1,.3,1)}
+.fp-row{border-left:2px solid var(--line);padding-left:16px}
+.fp-row .t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-3);margin-bottom:6px}
+.fp-row p{font-size:14.4px;color:var(--txt-2);margin:0;line-height:1.6}
+.fp-row.imp{border-left-color:var(--green)}
+.fp-row.imp p{color:var(--txt)}
+
+/* ============================================================
+   RADAR (diagnóstico)
+   ============================================================ */
+.radar-box{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
+@media(max-width:880px){.radar-box{grid-template-columns:1fr}}
+.radar-svg{width:100%;height:auto;overflow:visible}
+.radar-svg .ax{stroke:rgba(255,255,255,.10);stroke-width:1}
+.radar-svg .ring{fill:none;stroke:rgba(255,255,255,.07);stroke-width:1}
+.radar-svg .tgt{fill:rgba(103,232,249,.06);stroke:rgba(103,232,249,.55);stroke-width:1.2;stroke-dasharray:4 4}
+.radar-svg .cur{fill:rgba(251,191,36,.14);stroke:var(--amber);stroke-width:1.6;filter:drop-shadow(0 0 10px rgba(251,191,36,.35))}
+.radar-svg .lb{fill:#9FB0AA;font-size:11px;font-family:'Inter',sans-serif}
+.radar-svg .lv{fill:#fff;font-size:11px;font-family:'JetBrains Mono',monospace}
+.radar-svg .dotp{fill:var(--amber)}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--txt-3);margin-top:14px;font-family:var(--mono)}
+.legend i{display:inline-block;width:18px;height:2px;vertical-align:middle;margin-right:7px}
+.lv-scale{display:flex;gap:1px;margin-top:26px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--line)}
+.lv-scale div{flex:1;background:rgba(6,10,12,.8);padding:12px 14px;font-size:12px;color:var(--txt-3);position:relative}
+.lv-scale div.on{background:rgba(251,191,36,.14);color:var(--txt)}
+.lv-scale b{display:block;font-family:var(--mono);font-size:11px;color:var(--txt-2);margin-bottom:4px;letter-spacing:.06em}
+.lv-scale div.on b{color:var(--amber)}
+
+/* ============================================================
+   MATRIZ DE PRIORIZAÇÃO
+   ============================================================ */
+.matrix-wrap{display:grid;grid-template-columns:1.25fr .85fr;gap:26px;align-items:start}
+@media(max-width:1000px){.matrix-wrap{grid-template-columns:1fr}}
+.matrix{
+  position:relative;aspect-ratio:1/.86;border:1px solid var(--line);border-radius:var(--r);
+  background:
+    linear-gradient(180deg,rgba(74,222,128,.05),rgba(74,222,128,0) 55%),
+    repeating-linear-gradient(0deg,transparent,transparent 24px,rgba(255,255,255,.028) 24px,rgba(255,255,255,.028) 25px),
+    repeating-linear-gradient(90deg,transparent,transparent 24px,rgba(255,255,255,.028) 24px,rgba(255,255,255,.028) 25px);
+  overflow:hidden;
+}
+.quad-lbl{position:absolute;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-3);opacity:.75}
+.mx-axis{position:absolute;background:var(--line-2)}
+.bub{
+  position:absolute;transform:translate(-50%,-50%);border-radius:50%;display:grid;place-items:center;
+  cursor:pointer;border:1px solid;font-family:var(--mono);font-size:12px;font-weight:500;
+  transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s,opacity .2s;
+}
+.bub:hover,.bub.on{transform:translate(-50%,-50%) scale(1.16);z-index:5}
+.bub.w1{background:rgba(74,222,128,.18);border-color:rgba(74,222,128,.6);color:#BFF7D4;box-shadow:0 0 0 0 rgba(74,222,128,.4)}
+.bub.w1.on,.bub.w1:hover{box-shadow:0 0 26px rgba(74,222,128,.45)}
+.bub.w2{background:rgba(103,232,249,.14);border-color:rgba(103,232,249,.5);color:#C7F3FB}
+.bub.w2.on,.bub.w2:hover{box-shadow:0 0 26px rgba(103,232,249,.35)}
+.bub.w3{background:rgba(167,139,250,.13);border-color:rgba(167,139,250,.45);color:#DED3FD}
+.bub.w3.on,.bub.w3:hover{box-shadow:0 0 26px rgba(167,139,250,.3)}
+.axis-cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt-3)}
+.mx-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px}
+.mx-legend span{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--txt-3);font-family:var(--mono)}
+.mx-legend i{width:10px;height:10px;border-radius:50%;display:block}
+.detail{border:1px solid var(--line);border-radius:var(--r);padding:24px;background:rgba(255,255,255,.025);min-height:340px}
+.detail .kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-3);margin-bottom:10px}
+.detail h4{font-size:19px;margin-bottom:10px}
+.detail dl{margin:18px 0 0;display:grid;grid-template-columns:auto 1fr;gap:9px 16px;font-size:13.4px}
+.detail dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt-3);padding-top:3px}
+.detail dd{margin:0;color:var(--txt-2)}
+
+/* ============================================================
+   ROADMAP
+   ============================================================ */
+.rm{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:rgba(255,255,255,.02)}
+.rm-head{display:grid;grid-template-columns:150px 1fr;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt-3)}
+.rm-head .m{display:grid;grid-template-columns:repeat(8,1fr)}
+.rm-head .m span{padding:11px 8px;border-left:1px solid var(--line);text-align:center}
+.rm-head .c0{padding:11px 16px}
+.rm-row{display:grid;grid-template-columns:150px 1fr;border-bottom:1px solid var(--line)}
+.rm-row:last-child{border-bottom:0}
+.rm-row .c0{padding:16px;border-right:1px solid var(--line);font-size:12.5px;color:var(--txt-2)}
+.rm-row .c0 b{display:block;color:#fff;font-size:13.5px;margin-bottom:2px}
+.rm-track{position:relative;padding:16px 12px;min-height:74px;
+  background:repeating-linear-gradient(90deg,transparent,transparent calc(12.5% - 1px),rgba(255,255,255,.05) calc(12.5% - 1px),rgba(255,255,255,.05) 12.5%)}
+.rm-bar{position:absolute;top:16px;height:34px;border-radius:8px;display:flex;align-items:center;padding:0 11px;font-size:11.8px;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  border:1px solid;transition:transform .2s}
+.rm-bar:hover{transform:translateY(-1px)}
+.rm-bar.p0{background:linear-gradient(90deg,rgba(103,232,249,.24),rgba(103,232,249,.08));border-color:rgba(103,232,249,.45);color:#D6F6FC}
+.rm-bar.p1{background:linear-gradient(90deg,rgba(74,222,128,.24),rgba(74,222,128,.07));border-color:rgba(74,222,128,.45);color:#CDF7DC}
+.rm-bar.p2{background:linear-gradient(90deg,rgba(251,191,36,.22),rgba(251,191,36,.06));border-color:rgba(251,191,36,.42);color:#FCEFC7}
+.rm-bar.p3{background:linear-gradient(90deg,rgba(167,139,250,.22),rgba(167,139,250,.06));border-color:rgba(167,139,250,.42);color:#E4DAFE}
+.gate{position:absolute;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,transparent,var(--rose),transparent)}
+.gate b{position:absolute;top:-4px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:9px;color:var(--rose);letter-spacing:.1em;background:#080d0f;padding:1px 5px;border-radius:4px;border:1px solid rgba(251,113,133,.35);white-space:nowrap}
+@media(max-width:760px){.rm-head,.rm-row{grid-template-columns:110px 1fr}.rm-bar{font-size:10.5px;padding:0 7px}}
+
+/* phases */
+.phase-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+@media(max-width:980px){.phase-cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.phase-cards{grid-template-columns:1fr}}
+.ph{background:#070c0e;padding:24px 22px;position:relative}
+.ph::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.ph.p0::before{background:var(--cyan)}.ph.p1::before{background:var(--green)}
+.ph.p2::before{background:var(--amber)}.ph.p3::before{background:var(--violet)}
+.ph .n{font-family:var(--mono);font-size:11px;color:var(--txt-3);letter-spacing:.12em}
+.ph h4{margin:8px 0 4px;font-size:17px}
+.ph .win{font-family:var(--mono);font-size:11.5px;color:var(--txt-3);margin-bottom:14px}
+.ph ul{margin:0;padding-left:16px;font-size:13.5px;color:var(--txt-2);line-height:1.6}
+.ph ul li{margin-bottom:7px}
+.ph ul li::marker{color:var(--txt-3)}
+.ph .gate-note{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--txt-2)}
+.ph .gate-note b{color:var(--rose);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:5px}
+
+/* bullets */
+ul.clean{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+ul.clean li{padding-left:26px;position:relative;font-size:14.8px;color:var(--txt-2);line-height:1.6}
+ul.clean li::before{content:'';position:absolute;left:6px;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--green);opacity:.8}
+ul.clean.x li::before{background:var(--rose)}
+ul.clean li b{color:#fff;font-weight:600}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:#070c0e;padding:22px}
+.kpi .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-3);margin-bottom:14px}
+.kpi ul{margin:0;padding-left:15px;font-size:13.2px;color:var(--txt-2);line-height:1.55}
+.kpi ul li{margin-bottom:8px}
+
+/* decisão final */
+.final{
+  border:1px solid rgba(74,222,128,.3);border-radius:20px;padding:clamp(28px,4vw,52px);
+  background:radial-gradient(120% 140% at 0% 0%,rgba(74,222,128,.10),rgba(6,10,12,.5) 55%);
+}
+.final .big{font-size:clamp(22px,3vw,34px);font-weight:500;letter-spacing:-.025em;line-height:1.3;max-width:26ch;margin-bottom:22px}
+.final .big b{color:var(--green);font-weight:600}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:56px 0 80px;margin-top:40px;background:#040708}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px}
+@media(max-width:800px){.fgrid{grid-template-columns:1fr}}
+footer h5{margin:0 0 12px;font-size:11px;font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--txt-3);font-weight:400}
+footer p,footer li{font-size:13.2px;color:var(--txt-3);line-height:1.65}
+footer ul{list-style:none;padding:0;margin:0;display:grid;gap:7px}
+
+/* versão em texto corrido */
+.plaintext{
+  border:1px solid var(--line);border-radius:var(--r);background:rgba(255,255,255,.022);
+  margin-top:56px;overflow:hidden;
+}
+.plaintext>summary{
+  cursor:pointer;list-style:none;padding:20px 24px;display:flex;align-items:center;gap:12px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-2);
+}
+.plaintext>summary::-webkit-details-marker{display:none}
+.plaintext>summary::before{
+  content:'+';color:var(--green);font-size:16px;line-height:1;width:18px;height:18px;
+  display:grid;place-items:center;border:1px solid rgba(74,222,128,.35);border-radius:5px;flex:none;
+}
+.plaintext[open]>summary::before{content:'−'}
+.plaintext>summary:hover{color:var(--txt)}
+.plaintext .pt-body{padding:4px 24px 26px;border-top:1px solid var(--line)}
+.plaintext h4{margin:24px 0 8px;font-size:14px;color:var(--green)}
+.plaintext h4:first-child{margin-top:18px}
+.plaintext p{font-size:14px;color:var(--txt-2);margin:0 0 10px;max-width:80ch}
+.plaintext pre{
+  font-family:var(--mono);font-size:12.2px;color:var(--txt-2);line-height:1.75;
+  background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:10px;
+  padding:16px 18px;overflow-x:auto;margin:0 0 12px;
+}
+
+/* balão de visita */
+.visit{
+  position:fixed;right:22px;bottom:22px;z-index:80;max-width:310px;
+  display:flex;gap:12px;align-items:flex-start;
+  padding:14px 16px;border-radius:16px 16px 4px 16px;
+  background:rgba(9,15,17,.9);border:1px solid var(--line-2);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 18px 50px rgba(0,0,0,.55);
+  opacity:0;transform:translateY(16px) scale(.96);pointer-events:none;
+  transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1);
+}
+.visit.show{opacity:1;transform:none;pointer-events:auto}
+.visit .av{
+  width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;
+  background:linear-gradient(140deg,rgba(74,222,128,.9),rgba(34,197,94,.55));
+  color:#04170e;font-weight:700;font-size:12px;letter-spacing:-.02em;
+}
+.visit .tx{font-size:12.6px;line-height:1.5;color:var(--txt-2)}
+.visit .tx b{display:block;color:var(--txt-3);font-family:var(--mono);font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px;font-weight:400}
+.visit .tx a{color:var(--green);text-decoration:none;font-weight:500;border-bottom:1px solid rgba(74,222,128,.35)}
+.visit .tx a:hover{border-bottom-color:var(--green)}
+.visit .tx small{display:block;color:var(--txt-3);font-size:11.5px;margin-top:4px;line-height:1.45}
+.visit .x{
+  position:absolute;top:8px;right:9px;width:20px;height:20px;border:0;border-radius:6px;
+  background:transparent;color:var(--txt-3);cursor:pointer;font-size:14px;line-height:1;padding:0;
+}
+.visit .x:hover{background:rgba(255,255,255,.07);color:var(--txt)}
+@media(max-width:620px){.visit{right:12px;bottom:12px;left:12px;max-width:none}}
+@media print{.visit{display:none!important}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}*{animation:none!important}}
+
+/* print */
+@media print{
+  body{background:#fff;color:#111}
+  #bg-wrap,nav.dock,#prog,.veil,.stage,.scroll-hint{display:none!important}
+  section{padding:24px 0;break-inside:avoid}
+  h1,h2,h3{color:#111!important;-webkit-text-fill-color:#111}
+  .card,.tbl-wrap,.callout{border-color:#ccc;background:#fff}
+  .muted,.lead,p{color:#333}
+}
+</style>
+</head>
+<body>
+
+<div class="visit" id="visitBubble" role="status" aria-live="polite">
+  <span class="av">LI</span>
+  <span class="tx">
+    <b>Você está visitando</b>
+    <a href="https://luizihara.github.io" target="_blank" rel="noopener">luizihara.github.io</a>
+    <small>Trabalhos acadêmicos e projetos de Luiz Ihara</small>
+  </span>
+  <button class="x" id="visitClose" aria-label="Fechar aviso" title="Fechar">×</button>
+</div>
+
+<noscript><style>.rv{opacity:1!important;transform:none!important}.stage,.matrix{display:none}</style></noscript>
+<div id="prog"></div>
+<div id="bg-wrap"><canvas id="c-field"></canvas></div>
+<div class="scrim"></div>
+<div class="veil" id="veil"></div>
+
+<nav class="dock" id="dock">
+  <div class="brand"><span class="dot"></span> AgroTech Vale Verde <small>· Estudo de caso</small></div>
+  <ul>
+    <li><a href="#tese">Tese</a></li>
+    <li><a href="#q1">01 · Setor</a></li>
+    <li><a href="#q2">02 · Diagnóstico</a></li>
+    <li><a href="#q3">03 · Priorização</a></li>
+    <li><a href="#q4">04 · Roadmap</a></li>
+    <li><a href="#decisao">Decisão</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-kicker">
+      <span>FIAP MBA Tech</span><span class="dim">/</span>
+      <span>Estratégias Setoriais de Implementação</span><span class="dim">/</span>
+      <span>Turma 2ABL</span><span class="dim">/</span>
+      <b>Estudo de caso</b>
+    </div>
+    <h1>Entre a eficiência operacional e a <i>transformação orientada por IA</i></h1>
+    <p class="lead">
+      O obstáculo da AgroTech Vale Verde está na <strong>organização dos dados</strong> e na
+      <strong>integração dos modelos aos processos de decisão</strong>, e não na qualidade técnica dos algoritmos.
+      Este documento apresenta o diagnóstico do setor e da empresa, a priorização das iniciativas de IA e um
+      roadmap faseado com <em class="hl">gates de capital</em> compatíveis com o apetite a risco da diretoria.
+    </p>
+    <div class="stat-strip">
+      <div class="stat"><div class="v">R$&nbsp;480<span style="font-size:.6em"> mi</span></div><div class="k">Receita anual (2025)</div></div>
+      <div class="stat"><div class="v">12%</div><div class="k">EBITDA médio</div></div>
+      <div class="stat"><div class="v">85<span style="font-size:.6em"> mil ha</span></div><div class="k">Área cultivada · soja e milho</div></div>
+      <div class="stat"><div class="v a">3,1<span style="font-size:.6em">/6</span></div><div class="k">Maturidade digital do agro (ITD-Br 2024) · média nacional 3,7</div></div>
+      <div class="stat"><div class="v r">0</div><div class="k">Pilotos de IA integrados à operação</div></div>
+    </div>
+    <div class="authors">
+      <span class="al">Alunos</span>
+      <span>Luiz Ihara <b>RM368484</b></span>
+      <span>Filipe Fragoso <b>RM368500</b></span>
+      <span>Daniel Caminha <b>RM366740</b></span>
+      <span>Pedro Martins <b>RM368543</b></span>
+    </div>
+    <div class="scroll-hint"><span class="bar"></span> Role para explorar a análise</div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================ TESE ============================ -->
+<section id="tese">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="eyebrow">Sumário executivo</div>
+      <div class="thesis">Em um negócio de commodity, a IA age sobre o custo e sobre o risco da operação <span>e, cada vez mais, sobre a permissão de vender para determinados mercados.</span></div>
+      <p class="lead">
+        A AgroTech é <strong>price-taker</strong> em soja e milho, de modo que não há prêmio de preço a ser capturado com IA.
+        O valor possível está nos números que o próprio caso apresenta: <em class="hl">7% da produção perdida por falhas operacionais</em>,
+        <em class="hl">10% exposta à variabilidade climática não mitigada</em> e <em class="hl">22% do custo total concentrado em logística</em>.
+        Soma-se a isso o acesso a mercados que passaram a exigir rastreabilidade e conformidade ESG. O business case se sustenta,
+        portanto, em <strong>margem e risco</strong>, e não em crescimento de receita, o que aproxima a proposta da linguagem
+        usada por uma diretoria conservadora.
+      </p>
+    </div>
+
+    <div class="grid g3">
+      <div class="card rv">
+        <div class="ico">01</div>
+        <h4>O gargalo é organizacional</h4>
+        <p>Acurácia de 78% já atende a várias decisões agrícolas. Os pilotos pararam antes da operação porque nenhum deles
+        tinha responsável pelo processo, integração ao fluxo de decisão ou meta financeira acordada com a controladoria.
+        O <strong>Pilot Purgatory</strong> descrito no caso tem origem organizacional.</p>
+      </div>
+      <div class="card rv">
+        <div class="ico">02</div>
+        <h4>O ciclo de feedback define a fila</h4>
+        <p>No agronegócio, uma safra equivale a <strong>um experimento por ano</strong>. Modelos de previsão de produtividade
+        têm poucos ciclos de validação, enquanto logística, manutenção e compras geram dados novos toda semana.
+        A velocidade de aprendizado deve pesar mais que a sofisticação do modelo na definição da fila de projetos.</p>
+      </div>
+      <div class="card rv">
+        <div class="ico">03</div>
+        <h4>Conservadorismo compatível com experimentação</h4>
+        <p>A diretoria exige evidência consolidada antes de alocar capital, e esse tipo de evidência só aparece depois do
+        experimento em condições reais. O financiamento por <strong>opções reais</strong> resolve o impasse: orçamento
+        liberado a cada gate, teto de perda definido por fase e apuração do resultado pela controladoria.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============================ Q1 ============================ -->
+<section id="q1">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="qtag">Questão 01</span>
+      <div class="eyebrow">Análise setorial e competitiva</div>
+      <h2>Maturidade baixa e uma tecnologia que desloca a fronteira de custo</h2>
+      <p class="lead">
+        O setor se classifica em <strong>maturidade digital baixa a média-baixa</strong>. O ITD-Br 2024 posiciona o agronegócio
+        em <strong>3,1 de 6</strong>, cerca de 52% da escala, abaixo da média nacional de 3,7 e distante de finanças, tecnologia e varejo.
+        A defasagem decorre menos da oferta de tecnologia e mais das <strong>condições estruturais de absorção</strong> descritas abaixo.
+      </p>
+    </div>
+
+    <div class="gauge rv" style="margin-bottom:34px">
+      <div style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-3)">Índice de Transformação Digital do Brasil · ITD-Br 2024 (escala 1–6)</div>
+      <div class="track" id="gaugeTrack">
+        <div class="fill" id="gaugeFill"></div>
+        <div class="seg agro" style="left:42%"><b>3,1</b><span>Agronegócio</span><i></i></div>
+        <div class="seg br" style="left:54%"><b>3,7</b><span>Média Brasil</span><i></i></div>
+      </div>
+      <div class="scale"><span>1 · inicial</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6 · orientado por dados</span></div>
+    </div>
+
+    <div class="grid g4 rv" style="margin-bottom:56px">
+      <div class="card"><h4>Estrutura de custo</h4><p>Setor intensivo em capital e em insumos, com margem estreita (EBITDA de 12%) e alta recente no preço dos fertilizantes. Reduções pequenas em termos percentuais têm efeito relevante sobre o resultado.</p></div>
+      <div class="card"><h4>Exposição exógena</h4><p>Clima, câmbio, frete e preço internacional respondem por boa parte do resultado. A <strong>capacidade de antecipar esses movimentos</strong> e ajustar decisões pesa mais do que qualquer atributo do produto.</p></div>
+      <div class="card"><h4>Ciclo de aprendizado anual</h4><p>Uma safra por ano significa poucos ciclos de validação. Os modelos dependem de histórico longo, desenho experimental por talhão e simulação, em vez da iteração mensal comum no varejo.</p></div>
+      <div class="card"><h4>Infraestrutura rural</h4><p>Limitações de conectividade e coleta descentralizada restringem a telemetria em tempo real. Os dados existem, porém nascem fora de padrão, o que impede seu uso como <em class="hl">insumo confiável para modelos</em>.</p></div>
+    </div>
+
+    <h3 class="rv" style="margin-bottom:8px">As 5 Forças de Porter sob o efeito da IA</h3>
+    <p class="lead rv" style="margin-bottom:26px">
+      Alterne entre o cenário atual e o cenário de difusão da IA no setor. A altura das colunas representa a
+      <strong>intensidade de cada força</strong>, sendo que valores maiores indicam pior rentabilidade para o incumbente.
+      Clique em uma força para ver a análise correspondente.
+    </p>
+
+    <div class="porter rv">
+      <div class="stage" id="porterStage">
+        <canvas id="c-porter"></canvas>
+        <div class="labels" id="porterLabels"></div>
+        <div class="stage-ui">
+          <div class="toggle" id="scenToggle">
+            <button data-s="0" class="on">Cenário atual</button>
+            <button data-s="1">Com IA em escala</button>
+          </div>
+          <div class="hint">Arraste para girar · clique nas forças</div>
+        </div>
+      </div>
+      <div class="force-panel card" id="forcePanel">
+        <div class="fp-head">
+          <h3 id="fpTitle">Rivalidade entre concorrentes</h3>
+          <div class="fp-meter"><span id="fpVal">0,65</span><span class="fp-bar"><i id="fpBar" style="width:65%"></i></span></div>
+        </div>
+        <div class="fp-row"><div class="t">Hoje</div><p id="fpNow"></p></div>
+        <div class="fp-row"><div class="t">Com IA difundida no setor</div><p id="fpAi"></p></div>
+        <div class="fp-row imp"><div class="t">Implicação para a AgroTech</div><p id="fpImp"></p></div>
+      </div>
+    </div>
+
+    <div class="grid g2 rv" style="margin-top:36px">
+      <div class="callout g">
+        <span class="tag">Conclusão da questão 1</span>
+        <p>A difusão da IA <strong>aumenta</strong> a pressão competitiva do setor. A rivalidade cresce porque a fronteira de custo
+        se desloca para quem adota primeiro, e o poder do comprador continua alto porque rastreabilidade e ESG passam a ser requisito.
+        O alívio se concentra no <strong>fornecedor de insumos</strong>, e parte desse ganho é devolvida a um
+        <strong>novo fornecedor com poder crescente, a plataforma de tecnologia</strong>.</p>
+      </div>
+      <div class="callout">
+        <span class="tag">Assimetria decisiva</span>
+        <p>Os dados proprietários de uma década sobre 85 mil hectares constituem um ativo <strong>cumulativo e difícil de replicar</strong>,
+        capaz de elevar a barreira de entrada em favor de quem os organizar. Hoje esse ativo permanece <strong>latente</strong>, porque
+        sem padronização e governança ele não protege a posição da empresa. A barreira passa a existir depois da fundação de dados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============================ Q2 ============================ -->
+<section id="q2">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="qtag">Questão 02</span>
+      <div class="eyebrow">Diagnóstico organizacional</div>
+      <h2>Nível 1 (Exploração): uma empresa com dados, mas sem ativo de dados</h2>
+      <p class="lead">
+        Na avaliação de seis dimensões em escala de 1 a 5, a AgroTech Vale Verde alcança média <strong>1,4</strong>, o que a
+        posiciona no <strong>Nível 1 (Exploração)</strong>, caracterizado por pilotos sem escala, nenhum modelo em produção e
+        ausência de governança. O caso registra que a empresa possui dados, mas ainda não os transformou em ativo estratégico.
+      </p>
+    </div>
+
+    <div class="radar-box rv">
+      <div>
+        <svg class="radar-svg" id="radar" viewBox="0 0 460 400" role="img" aria-label="Radar de maturidade por dimensão"></svg>
+        <div class="legend">
+          <span><i style="background:var(--amber)"></i>Situação atual (2026)</span>
+          <span><i style="background:var(--cyan);border-top:1px dashed"></i>Alvo em 24–30 meses</span>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:16px">Onde está cada gap</h3>
+        <ul class="clean">
+          <li><b>Governança de dados: 1,0. Barreira crítica.</b> Não há padronização, ownership, dicionário nem SLA de qualidade, de modo que nenhum modelo se torna auditável e nenhum resultado se mantém reprodutível de uma safra para a outra.</li>
+          <li><b>Integração de processos: 1,0.</b> Nenhuma iniciativa foi incorporada ao fluxo produtivo, e os modelos terminam em relatório sem chegar à decisão.</li>
+          <li><b>Dados: 1,5.</b> Há dez anos de histórico produtivo e um ERP consolidado, mas o IoT cobre apenas parte da área, o clima vem de fonte externa e não existe integração entre sistemas.</li>
+          <li><b>Cultura e liderança: 1,5.</b> As decisões se apoiam na experiência acumulada, a tolerância ao erro controlado é baixa e não existem rituais de decisão orientada a dados.</li>
+          <li><b>Talento: 1,5.</b> O caso não descreve time de dados dedicado e aponta a escassez de talentos como barreira do setor.</li>
+          <li><b>Tecnologia e infraestrutura: 2,0.</b> Dimensão mais avançada, sustentada pelo ERP consolidado. Faltam plataforma analítica, pipeline de dados e práticas de MLOps.</li>
+        </ul>
+        <div class="lv-scale">
+          <div class="on"><b>Nível 1</b>Exploração: pilotos, sem escala</div>
+          <div><b>Nível 2</b>Estruturação: fundação de dados</div>
+          <div><b>Nível 3+</b>Escala: IA no processo</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g2 rv" style="margin-top:52px">
+      <div class="callout r">
+        <span class="tag">Leitura crítica · o indicador de 78%</span>
+        <p>A <strong>acurácia de 78%</strong> citada no caso não permite conclusão sem duas informações ausentes: o desempenho do
+        agrônomo experiente na mesma decisão, que serviria de <em class="hl">baseline humano</em>, e o custo assimétrico do erro,
+        já que subaplicar insumo tem consequência diferente de superaplicar. O mesmo percentual pode representar um modelo
+        irrelevante ou um ganho expressivo, conforme a decisão em que for aplicado. Enquanto a avaliação se apoiar em acurácia
+        em lugar do <strong>valor da decisão</strong>, os pilotos seguirão classificados como razoáveis sem chegar à produção.</p>
+      </div>
+      <div class="callout">
+        <span class="tag">O paradoxo da diretoria conservadora</span>
+        <p>A diretoria exige <strong>evidência consolidada antes</strong> de alocar capital, mas em projetos de IA essa evidência
+        surge <strong>no próprio experimento em condições reais</strong>. A exigência de ROI comprovado antes do piloto cria um
+        impasse que ajuda a explicar o Pilot Purgatory: os pilotos são autorizados em escala pequena demais para gerar sinal
+        estatístico e, por consequência, não comprovam nada.</p>
+      </div>
+    </div>
+
+    <div class="grid g3 rv" style="margin-top:22px">
+      <div class="card">
+        <div class="ico" style="background:rgba(251,113,133,.12);border-color:rgba(251,113,133,.24);color:var(--rose)">−</div>
+        <h4>O que o perfil conservador custa</h4>
+        <p>Ciclos de aprovação longos em um domínio cuja janela de execução é a safra, pilotos subdimensionados e resistência
+        à experimentação com erro controlado. O risco final é chegar tarde à curva de custo do setor e perder posição
+        no custo por tonelada, indicador que decide a disputa nesse mercado.</p>
+      </div>
+      <div class="card">
+        <div class="ico">+</div>
+        <h4>O que ele protege</h4>
+        <p>Disciplina de capital e baixa exposição a projetos de vitrine. A empresa dificilmente compraria uma plataforma
+        end-to-end antes de ter dado utilizável, erro caro e frequente no setor. Esse traço sustentou o crescimento e pode
+        ser aproveitado na condução do programa.</p>
+      </div>
+      <div class="card">
+        <div class="ico">=</div>
+        <h4>Como converter em vantagem</h4>
+        <p>Apresentar a IA como instrumento de <strong>redução de custo e gestão de risco</strong>, com stage-gates, teto de perda
+        por fase e resultado auditado pela controladoria. O <strong>sponsor executivo deve ser o COO</strong>, responsável pelo P&amp;L
+        da operação, e não a área de TI. O rigor de método exigido pela diretoria supre o que faltou aos pilotos anteriores.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============================ Q3 ============================ -->
+<section id="q3">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="qtag">Questão 03</span>
+      <div class="eyebrow">Oportunidades, riscos e priorização</div>
+      <h2>Priorização pelo ciclo de feedback e pela prontidão dos dados</h2>
+      <p class="lead">
+        O critério de ordenação combina cinco condições: <strong>dado já disponível, decisão repetitiva, retorno observável em
+        semanas, responsável definido pelo processo e reversibilidade da decisão</strong>. Aplicado ao caso, esse filtro coloca
+        logística e manutenção à frente da previsão de produtividade, iniciativa de maior apelo e de aprendizado mais lento,
+        por ser validada uma vez a cada safra.
+      </p>
+    </div>
+
+    <div class="matrix-wrap rv">
+      <div>
+        <div class="matrix" id="matrix"></div>
+        <div style="display:flex;justify-content:space-between;margin-top:12px">
+          <span class="axis-cap">← menor complexidade / dado pronto</span>
+          <span class="axis-cap">maior complexidade / dado a construir →</span>
+        </div>
+        <div class="mx-legend">
+          <span><i style="background:rgba(74,222,128,.7)"></i>Onda 1 · meses 3–9</span>
+          <span><i style="background:rgba(103,232,249,.7)"></i>Onda 2 · meses 9–18</span>
+          <span><i style="background:rgba(167,139,250,.7)"></i>Onda 3 · meses 18+</span>
+          <span class="dim">tamanho da bolha = valor anual estimado</span>
+        </div>
+      </div>
+      <div class="detail" id="oppDetail"></div>
+    </div>
+
+    <h3 class="rv" style="margin:60px 0 18px">Riscos e como cada um é contido</h3>
+    <div class="tbl-wrap rv">
+      <table>
+        <thead><tr><th style="width:24%">Risco</th><th style="width:8%">Sev.</th><th style="width:34%">Como se manifesta na AgroTech</th><th>Mitigação embutida no roadmap</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Dados de baixa qualidade</strong><small>Risco raiz, que habilita os demais</small></td>
+            <td><span class="pill r">Crítica</span></td>
+            <td>Coleta parcial em campo, clima de fonte externa, sem padronização nem integração. Modelos treinados sobre ruído produzem confiança falsa.</td>
+            <td>Fase 0 inteira dedicada a dicionário, ownership e SLA de qualidade; nenhum caso avança sem <em class="hl">contrato de dados</em> aprovado.</td>
+          </tr>
+          <tr>
+            <td><strong>Pilot Purgatory recorrente</strong><small>Já materializado duas vezes</small></td>
+            <td><span class="pill r">Crítica</span></td>
+            <td>Projetos tecnicamente razoáveis (78%) que nunca entram no processo produtivo e não geram ganho financeiro mensurável.</td>
+            <td>Regra de entrada: só é aprovado o piloto que já nasce com dono do processo, integração ao sistema de decisão e métrica de P&amp;L auditada pelo CFO.</td>
+          </tr>
+          <tr>
+            <td><strong>Deriva de modelo e clima atípico</strong><small>Distribution shift</small></td>
+            <td><span class="pill a">Alta</span></td>
+            <td>Modelo calibrado em safras recentes tende a falhar no evento extremo, situação em que a previsão teria mais valor. Uma safra ruim pode comprometer a credibilidade do programa.</td>
+            <td>Monitoramento de drift, retreino programado, bandas de confiança explícitas na recomendação e human-in-the-loop nas decisões irreversíveis.</td>
+          </tr>
+          <tr>
+            <td><strong>Lock-in de plataforma</strong><small>Novo fornecedor com poder</small></td>
+            <td><span class="pill a">Alta</span></td>
+            <td>Adotar uma suíte end-to-end de fabricante de máquinas ou de insumos transfere a ele o dado e parte da margem, reforçando o poder de fornecedor que se pretendia reduzir.</td>
+            <td>Dado bruto sempre em ambiente próprio; arquitetura com formatos abertos; contratos com cláusula de portabilidade e propriedade dos dados agronômicos.</td>
+          </tr>
+          <tr>
+            <td><strong>Viés e injustiça de decisão</strong><small>Operacional e reputacional</small></td>
+            <td><span class="pill a">Média-alta</span></td>
+            <td>Modelo treinado sobre talhões de melhor infraestrutura recomenda pior para áreas sub-representadas, penalizando sistematicamente certas regiões, parceiros ou arrendatários.</td>
+            <td>Avaliação de desempenho por estrato (talhão, região, safra) e não apenas na média; revisão agronômica obrigatória das exceções.</td>
+          </tr>
+          <tr>
+            <td><strong>Conformidade e exportação</strong><small>Acesso a mercado</small></td>
+            <td><span class="pill a">Média-alta</span></td>
+            <td>35% da produção vai para Europa e China. Exigências de rastreabilidade, ESG e regras de origem podem bloquear acesso antes de qualquer ganho de IA.</td>
+            <td>Rastreabilidade tratada como caso prioritário de dados, e não como projeto isolado de compliance, de forma que o mesmo pipeline atenda modelo e auditoria.</td>
+          </tr>
+          <tr>
+            <td><strong>Rejeição interna</strong><small>Cultural</small></td>
+            <td><span class="pill a">Média</span></td>
+            <td>Agrônomos e gerentes de fazenda interpretam a recomendação automatizada como desautorização da própria experiência e deixam de utilizá-la.</td>
+            <td>Agrônomo como co-autor do modelo (rotula, critica, valida); no ano 1 o sistema <strong>sugere e explica</strong>, o humano decide; KPI de adoção junto ao KPI de acurácia.</td>
+          </tr>
+          <tr>
+            <td><strong>Segurança OT/IoT</strong><small>Continuidade operacional</small></td>
+            <td><span class="pill">Média</span></td>
+            <td>Sensores e maquinário conectados ampliam a superfície de ataque em uma operação que não pode parar na janela de plantio ou colheita.</td>
+            <td>Segmentação de rede, modo degradado manual documentado para cada decisão automatizada, testes de contingência antes de cada safra.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid g2 rv" style="margin-top:26px">
+      <div class="callout g">
+        <span class="tag">Regra de priorização adotada</span>
+        <p>Uma iniciativa entra na Onda 1 apenas se cumprir <strong>as cinco condições</strong>: (1) o dado já existe em sistema;
+        (2) a decisão se repete ao menos semanalmente; (3) o resultado é observável em até um trimestre;
+        (4) há um executivo responsável pelo processo e pelo número; (5) a decisão é reversível. Logística, manutenção e compras
+        atendem às cinco. A previsão de produtividade atende a duas.</p>
+      </div>
+      <div class="callout r">
+        <span class="tag">O que não priorizar agora</span>
+        <p>A <strong>previsão de produtividade da safra</strong> tem impacto alto, porém apresenta um único ponto de validação por
+        ano, depende fortemente do clima e exige dado de solo ainda inexistente. Deve ser construída em paralelo como
+        <em class="hl">capacidade</em>, com a coleta e a organização do dado começando desde já, e entrar na decisão apenas na
+        Onda 3, quando houver histórico padronizado e simulação confiável.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============================ Q4 ============================ -->
+<section id="q4">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="qtag">Questão 04</span>
+      <div class="eyebrow">Estratégia e roadmap de implementação</div>
+      <h2>Abordagem moderada, com governança rígida e prioridade para a fundação de dados</h2>
+      <p class="lead">
+        Entre as três posturas possíveis (conservadora, moderada e agressiva), a recomendação é a
+        <strong>moderada, com sequenciamento definido</strong>. A conservadora repetiria o ciclo de pilotos isolados que a empresa
+        já percorreu duas vezes. A agressiva desconsidera a ausência de dado utilizável e de talento interno, e provavelmente
+        seria rejeitada pela diretoria antes do primeiro desembolso relevante. A moderada concentra a ambição em
+        <strong>um vetor, a fundação de dados</strong>, e mantém rigor nos gates de capital.
+      </p>
+    </div>
+
+    <div class="grid g3 rv" style="margin-bottom:52px">
+      <div class="card"><div class="ico" style="background:rgba(255,255,255,.05);border-color:var(--line);color:var(--txt-3)">A</div><h4>Conservadora <span class="pill">descartada</span></h4><p>Novos pilotos controlados, sem mudança estrutural. Custo e risco aparente baixos, com retorno nulo no histórico recente da empresa. Mantém o problema que se pretende resolver.</p></div>
+      <div class="card" style="border-color:rgba(74,222,128,.4);background:linear-gradient(180deg,rgba(74,222,128,.08),rgba(255,255,255,.015))"><div class="ico">B</div><h4>Moderada <span class="pill g">recomendada</span></h4><p>Fundação de dados, dois casos com valor auditado e escala seletiva liberada por gate. Evolução do Nível 1 para o Nível 3 em 24 meses, com teto de perda definido em cada fase.</p></div>
+      <div class="card"><div class="ico" style="background:rgba(251,113,133,.12);border-color:rgba(251,113,133,.24);color:var(--rose)">C</div><h4>Agressiva <span class="pill r">inviável hoje</span></h4><p>Reposicionamento como empresa orientada a dados em 12 meses. Sem governança, talento e dado padronizado, o investimento se converte em risco reputacional e compromete o apoio interno ao programa.</p></div>
+    </div>
+
+    <h3 class="rv" style="margin-bottom:6px">Roadmap · Diagnóstico → Priorização → Piloto → Escala</h3>
+    <p class="lead rv" style="margin-bottom:22px">Horizonte de 24 meses, com quatro fases e três gates de capital. Em cada gate a diretoria decide continuar, corrigir ou encerrar, segundo critério numérico definido <em class="hl">antes</em> do início da fase.</p>
+
+    <div class="rm rv">
+      <div class="rm-head">
+        <div class="c0">Frente de trabalho</div>
+        <div class="m"><span>T1</span><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span>T8</span></div>
+      </div>
+
+      <div class="rm-row">
+        <div class="c0"><b>Casos de uso</b>IA aplicada à decisão</div>
+        <div class="rm-track">
+          <div class="rm-bar p0" style="left:0.6%;width:11.5%" title="Baseline da decisão humana e seleção dos casos">Baseline</div>
+          <div class="rm-bar p1" style="left:12.9%;width:24.2%" title="Pilotos A (roteirização e frete) e B (manutenção preditiva)">Pilotos A (frete/rota) e B (manutenção)</div>
+          <div class="rm-bar p2" style="left:37.9%;width:36.7%">VRT · compras preditivas · rastreabilidade</div>
+          <div class="rm-bar p3" style="left:75.4%;width:24%">Previsão integrada e S&amp;OP agrícola</div>
+          <div class="gate" style="left:12.5%"><b>G0</b></div>
+          <div class="gate" style="left:37.5%"><b>G1</b></div>
+          <div class="gate" style="left:75%"><b>G2</b></div>
+        </div>
+      </div>
+
+      <div class="rm-row">
+        <div class="c0"><b>Dados</b>Fundação e plataforma</div>
+        <div class="rm-track">
+          <div class="rm-bar p0" style="left:0.6%;width:11.5%" title="Inventário de dados, dicionário e arquitetura-alvo">Inventário</div>
+          <div class="rm-bar p1" style="left:12.9%;width:24.2%" title="Plataforma mínima viável de dados: ERP + frete + telemetria">Plataforma mínima viável de dados</div>
+          <div class="rm-bar p2" style="left:37.9%;width:36.7%">Integração ampla · qualidade · MLOps</div>
+          <div class="rm-bar p3" style="left:75.4%;width:24%">Dado como produto</div>
+        </div>
+      </div>
+
+      <div class="rm-row">
+        <div class="c0"><b>Governança</b>Dados, modelos e risco</div>
+        <div class="rm-track">
+          <div class="rm-bar p0" style="left:0.6%;width:11.5%" title="Comitê de IA e Dados + política de dados">Comitê</div>
+          <div class="rm-bar p1" style="left:12.9%;width:24.2%" title="Gestão de risco de modelo e human-in-the-loop">Risco de modelo · human-in-the-loop</div>
+          <div class="rm-bar p2" style="left:37.9%;width:36.7%" title="Auditoria, monitoramento de drift e conformidade LGPD/ESG/exportação">Auditoria · drift · conformidade</div>
+          <div class="rm-bar p3" style="left:75.4%;width:24%">Reporte verificável</div>
+        </div>
+      </div>
+
+      <div class="rm-row">
+        <div class="c0"><b>Pessoas</b>Talento e cultura</div>
+        <div class="rm-track">
+          <div class="rm-bar p0" style="left:0.6%;width:11.5%" title="Sponsor executivo (COO) e squad núcleo">Sponsor</div>
+          <div class="rm-bar p1" style="left:12.9%;width:24.2%" title="Agrônomos como co-autores dos modelos e literacia de dados">Agrônomos co-autores · literacia</div>
+          <div class="rm-bar p2" style="left:37.9%;width:36.7%">Centro de competência · trilha de carreira</div>
+          <div class="rm-bar p3" style="left:75.4%;width:24%">Modelo operacional definitivo</div>
+        </div>
+      </div>
+
+      <div class="rm-row">
+        <div class="c0"><b>Campo</b>IoT e conectividade</div>
+        <div class="rm-track">
+          <div class="rm-bar p1" style="left:12.9%;width:24.2%" title="Instrumentação IoT dos talhões de maior variância">Instrumentação dos talhões críticos</div>
+          <div class="rm-bar p2" style="left:37.9%;width:36.7%">Expansão seletiva por retorno comprovado</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-cards rv" style="margin-top:26px">
+      <div class="ph p0">
+        <div class="n">FASE 0 · MESES 0–3</div>
+        <h4>Diagnóstico e fundação</h4>
+        <div class="win">Investimento indicativo: R$ 2–3 mi</div>
+        <ul>
+          <li>Inventário de dados e avaliação de maturidade por dimensão</li>
+          <li>Dicionário, ownership e SLA de qualidade dos domínios críticos</li>
+          <li><strong>Baseline da decisão humana</strong> nos 3 casos candidatos</li>
+          <li>Comitê de IA e Dados presidido pelo CEO; sponsor executivo no COO</li>
+          <li>Definição da arquitetura-alvo e da política de propriedade de dados</li>
+        </ul>
+        <div class="gate-note"><b>Gate G0</b>Existe dado utilizável e baseline mensurável para pelo menos 2 casos? Sem isso, não se investe em modelo.</div>
+      </div>
+      <div class="ph p1">
+        <div class="n">FASE 1 · MESES 3–9</div>
+        <h4>Pilotos com prova de valor</h4>
+        <div class="win">Investimento indicativo: R$ 5–7 mi</div>
+        <ul>
+          <li>Dois pilotos apenas: roteirização/frete e manutenção preditiva de frota</li>
+          <li>Desenho experimental com grupo de controle (rotas e máquinas pareadas)</li>
+          <li>Integração ao sistema de decisão, e não a relatório</li>
+          <li>Plataforma mínima viável de dados (ERP + frete + telemetria)</li>
+          <li>Apuração do ganho auditada pela controladoria</li>
+        </ul>
+        <div class="gate-note"><b>Gate G1</b>Valor auditado ≥ R$ 5 mi/ano anualizado e adoção ≥ 70% das decisões elegíveis? A escala depende dessas duas condições.</div>
+      </div>
+      <div class="ph p2">
+        <div class="n">FASE 2 · MESES 9–18</div>
+        <h4>Escala seletiva</h4>
+        <div class="win">Investimento indicativo: R$ 9–13 mi</div>
+        <ul>
+          <li>Expansão dos casos aprovados a toda a operação</li>
+          <li>Aplicação de insumos a taxa variável e compras preditivas</li>
+          <li>Rastreabilidade e ESG como produto de dados</li>
+          <li>IoT restrito aos talhões de maior variabilidade, sem cobrir os 85 mil ha de uma vez</li>
+          <li>MLOps, monitoramento de drift e inventário de modelos</li>
+        </ul>
+        <div class="gate-note"><b>Gate G2</b>Custo logístico por tonelada e perdas operacionais dentro da meta? Maturidade ≥ 3,0?</div>
+      </div>
+      <div class="ph p3">
+        <div class="n">FASE 3 · MESES 18–24+</div>
+        <h4>Reposicionamento</h4>
+        <div class="win">Decisão de capital reaberta no G2</div>
+        <ul>
+          <li>Previsão integrada clima → produtividade → comercialização</li>
+          <li>Decisão assistida no planejamento agrícola e no hedge</li>
+          <li>Dado como ativo defensável e barreira de entrada efetiva</li>
+          <li>Avaliação de monetização (serviços a parceiros e arrendatários)</li>
+        </ul>
+        <div class="gate-note"><b>Condição</b>Só se inicia com fundação de dados em Nível 3 e time próprio consolidado.</div>
+      </div>
+    </div>
+
+    <h3 class="rv" style="margin:60px 0 18px">Governança e gestão de dados: elementos inegociáveis</h3>
+    <div class="grid g3 rv">
+      <div class="card"><h4>Comitê de IA e Dados</h4><p>Presidido pelo CEO, com CFO, COO e o novo Chief Data &amp; Analytics Officer. Decide priorização, aprova gates e é o único fórum autorizado a mover capital entre fases. Cadência mensal na Fase 1.</p></div>
+      <div class="card"><h4>Contrato de dados por domínio</h4><p>Cada domínio (produção, frete, máquinas, clima, insumos) tem um dono de negócio nomeado, dicionário, regras de qualidade e SLA. Sem contrato assinado, o domínio não alimenta modelo em produção.</p></div>
+      <div class="card"><h4>Gestão de risco de modelo</h4><p>Inventário de modelos, validação independente da equipe que os construiu, limites de atuação, monitoramento de drift e plano de degradação manual. A prática vem do setor financeiro e usa uma linguagem de controle familiar a esta diretoria.</p></div>
+      <div class="card"><h4>Human-in-the-loop calibrado</h4><p>Decisões reversíveis e de baixo valor unitário podem ser automatizadas, enquanto decisões irreversíveis como plantio e comercialização permanecem assistidas. O nível de autonomia deve ser definido pela governança, e não pela equipe técnica.</p></div>
+      <div class="card"><h4>Conformidade desde o desenho</h4><p>LGPD nos dados de pessoas, exigências de rastreabilidade e ESG dos compradores europeus e a regulação de IA em consolidação no Brasil e na União Europeia. Todas tratadas como requisito de arquitetura desde o início do projeto.</p></div>
+      <div class="card"><h4>Financiamento como opção real</h4><p>Orçamento aprovado por fase, com teto de perda explícito e direito de encerramento em cada gate. O investimento deixa de ser um compromisso único de risco difuso e passa a ser uma sequência de decisões pequenas e auditáveis, formato compatível com o processo decisório da diretoria.</p></div>
+    </div>
+
+    <h3 class="rv" style="margin:60px 0 18px">Como o sucesso será medido</h3>
+    <div class="kpi-grid rv">
+      <div class="kpi"><div class="lab">Valor · CFO</div><ul><li>Custo logístico por tonelada</li><li>Perdas por falha operacional (% da produção)</li><li>Custo de insumo por hectare corrigido por produtividade</li><li>Impacto em EBITDA auditado por caso</li></ul></div>
+      <div class="kpi"><div class="lab">Processo · COO</div><ul><li>% de decisões elegíveis efetivamente assistidas</li><li>Tempo entre recomendação e execução em campo</li><li>Taxa de override e motivo registrado</li><li>Casos em produção vs. casos em piloto</li></ul></div>
+      <div class="kpi"><div class="lab">Técnico · CDAO</div><ul><li>Desempenho medido <strong>em relação ao baseline humano</strong></li><li>Qualidade e completude por domínio de dados</li><li>Drift detectado e tempo até retreino</li><li>Cobertura de monitoramento dos modelos ativos</li></ul></div>
+      <div class="kpi"><div class="lab">Capacidade · CEO</div><ul><li>Maturidade digital: 1,4 → 3,0 em 24 meses</li><li>Profissionais de dados próprios contratados e retidos</li><li>% da liderança com literacia de dados certificada</li><li>Prontidão de rastreabilidade para exportação</li></ul></div>
+    </div>
+
+    <h3 class="rv" style="margin:60px 0 18px">Ordem de grandeza do valor em jogo</h3>
+    <div class="tbl-wrap rv">
+      <table>
+        <thead><tr><th style="width:30%">Alavanca</th><th style="width:22%">Base declarada no caso</th><th style="width:20%">Meta de captura</th><th>Valor anual estimado</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Logística</strong><small>Roteirização, janela de colheita, armazenagem e frete</small></td><td class="num">22% do custo total ≈ R$ 93 mi<small>base de custo ≈ R$ 422 mi</small></td><td class="num">−8% a −12%</td><td class="num">R$ 7,4 – 11,2 mi</td></tr>
+          <tr><td><strong>Falhas operacionais</strong><small>Manutenção preditiva, janela de aplicação, execução</small></td><td class="num">7% da produção ≈ R$ 33,6 mi</td><td class="num">7% → 5%</td><td class="num">R$ 5 – 9,6 mi</td></tr>
+          <tr><td><strong>Variabilidade climática</strong><small>Mitigação parcial via decisão antecipada e seguro</small></td><td class="num">10% da produção ≈ R$ 48 mi</td><td class="num">mitigar 15–20%</td><td class="num">R$ 4 – 9,6 mi</td></tr>
+          <tr><td><strong>Insumos</strong><small>Taxa variável e compra preditiva</small></td><td class="num">Pressão de custo declarada</td><td class="num">−4% a −6%</td><td class="num">R$ 4 – 7 mi</td></tr>
+          <tr style="background:rgba(74,222,128,.06)"><td><strong>Total potencial em regime</strong><small>a partir do 3º ano, com escala aprovada nos gates</small></td><td class="num dim">n/a</td><td class="num dim">n/a</td><td class="num" style="color:var(--green);font-size:15px">R$ 20 – 37 mi/ano</td></tr>
+          <tr><td><strong>Investimento acumulado</strong><small>24 meses, liberado por fase</small></td><td class="num dim">n/a</td><td class="num dim">n/a</td><td class="num">R$ 16 – 23 mi</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="dim rv" style="font-size:13px;margin-top:12px;max-width:78ch">
+      Estimativas derivadas dos percentuais informados no caso, usadas para ordenar as decisões por magnitude.
+      Não constituem projeção financeira auditada. Cada valor se torna compromisso somente após o baseline da Fase 0,
+      e a validação da captura cabe à controladoria, não à área de tecnologia.
+    </p>
+
+    <div class="callout r rv" style="margin-top:34px">
+      <span class="tag">O que explicitamente não fazer</span>
+      <ul class="clean x" style="margin-top:6px">
+        <li><b>Não comprar plataforma de IA end-to-end antes da fundação de dados.</b> Sem dado padronizado, a suíte se resume a licença cara e lock-in, além de transferir a um fornecedor o ativo que deveria sustentar a barreira de entrada da AgroTech.</li>
+        <li><b>Não instrumentar 85 mil hectares de uma vez.</b> A instrumentação deve seguir a variabilidade e não a área total, começando pelos talhões de maior variância, onde cada sensor gera mais informação.</li>
+        <li><b>Não abrir mais de dois pilotos simultâneos na Fase 1.</b> A restrição relevante está na atenção executiva e no número de pessoas capazes de integrar modelo a processo.</li>
+        <li><b>Não medir sucesso por acurácia.</b> A métrica de aprovação deve ser o ganho auditado no P&amp;L e a adoção pelo time de campo, ficando a acurácia como indicador interno de engenharia.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============================ DECISÃO ============================ -->
+<section id="decisao">
+  <div class="wrap">
+    <div class="final rv">
+      <div class="eyebrow">Recomendação ao conselho</div>
+      <div class="big">Avançar de forma <b>seletiva e faseada</b>, tratando dados como infraestrutura crítica e a IA como disciplina de decisão.</div>
+      <div class="grid g2" style="gap:34px">
+        <div>
+          <p class="muted">
+            A recomendação é aprovar de imediato apenas a <strong>Fase 0</strong>, com três meses de duração, R$ 2 a 3 milhões e
+            teto de perda conhecido. Esse desembolso não contrata nenhum modelo; ele produz a <strong>evidência necessária para
+            decidir</strong> sobre o restante do programa, que foi o elemento ausente nas duas tentativas anteriores.
+          </p>
+          <p class="muted">
+            Manter o modelo atual é defensável no curto prazo e arriscado no médio. Em um setor de commodity, a empresa que
+            reduz custo primeiro pressiona a margem das concorrentes. O ponto crítico para a AgroTech está menos na data de
+            adoção da IA e mais na ausência de dado organizado no momento em que decidir adotá-la.
+          </p>
+        </div>
+        <div>
+          <h4 style="margin-bottom:14px">Primeiros 90 dias</h4>
+          <ul class="clean">
+            <li><b>Semana 1–2.</b> Nomear sponsor executivo (COO) e instalar o Comitê de IA e Dados presidido pelo CEO.</li>
+            <li><b>Semana 3–6.</b> Inventário de dados e contratos por domínio; escolher os 3 casos candidatos.</li>
+            <li><b>Semana 5–8.</b> Medir o <strong>baseline humano</strong> das decisões-alvo, condição para demonstrar qualquer ganho futuro.</li>
+            <li><b>Semana 7–10.</b> Definir arquitetura-alvo e política de propriedade dos dados agronômicos.</li>
+            <li><b>Semana 11–12.</b> Levar ao Gate G0 o desenho experimental dos dois pilotos, com critério de aprovação numérico definido previamente.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid g3" style="margin-top:36px">
+        <div class="card" style="background:rgba(0,0,0,.25)"><h4>Risco da própria recomendação</h4><p>Três meses sem entrega visível de IA podem ser interpretados como lentidão. Para mitigar, a Fase 0 entrega um produto concreto, o baseline das decisões e o inventário de dados, apresentados ao conselho como marco formal.</p></div>
+        <div class="card" style="background:rgba(0,0,0,.25)"><h4>Condição de fracasso assumida</h4><p>Se no G1 o valor auditado ficar abaixo de R$ 5 mi/ano, o programa é reduzido à manutenção da fundação de dados. O encerramento antecipado faz parte do desenho e limita a perda a um valor conhecido.</p></div>
+        <div class="card" style="background:rgba(0,0,0,.25)"><h4>O que muda ao final</h4><p>Ao fim de 24 meses a empresa terá um ativo de dados proprietário sobre 85 mil hectares e uma década de histórico, de caráter cumulativo e difícil de replicar por concorrentes.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <div class="wrap">
+    <details class="plaintext" id="txtVersion">
+      <summary>Versão em texto corrido · conteúdo das visualizações interativas</summary>
+      <div class="pt-body">
+        <p>As duas cenas tridimensionais, o radar de maturidade e a matriz de priorização são desenhados em tempo de
+        execução e não geram texto na página. Os valores que sustentam cada um deles estão reproduzidos abaixo, o que
+        também permite ler o trabalho sem WebGL, imprimi-lo ou consultá-lo por leitor de tela.</p>
+
+        <h4>Questão 1 · intensidade das 5 Forças de Porter (escala 0 a 1)</h4>
+        <pre>FORÇA                                 HOJE    COM IA EM ESCALA
+Ameaça de novos entrantes             0,45  →  0,35
+Poder dos fornecedores (insumos)      0,75  →  0,55
+Poder dos fornecedores (tecnologia)   0,28  →  0,62
+Poder dos compradores                 0,70  →  0,78
+Ameaça de substitutos                 0,30  →  0,38
+Rivalidade entre concorrentes         0,65  →  0,88</pre>
+        <p>Valores maiores indicam pior rentabilidade para o incumbente. A leitura de cada força está no painel ao lado
+        do diagrama, na seção 01.</p>
+
+        <h4>Questão 2 · radar de maturidade (escala 1 a 5)</h4>
+        <pre>DIMENSÃO                      ATUAL   ALVO (24 a 30 meses)
+Dados                          1,5  →  3,5
+Tecnologia e infraestrutura    2,0  →  3,5
+Governança de dados            1,0  →  4,0
+Integração de processos        1,0  →  3,5
+Talento                        1,5  →  3,0
+Cultura e liderança            1,5  →  3,0
+MÉDIA                          1,4  →  3,4  (Nível 1: Exploração)</pre>
+
+        <h4>Questão 3 · matriz de priorização por onda</h4>
+        <pre>ONDA 1 · meses 3 a 9   (dado pronto, ciclo curto, decisão reversível)
+  1. Roteirização, frete e janela de transporte     R$ 7,4 a 11,2 mi/ano
+  2. Manutenção preditiva de frota e implementos    R$ 3 a 5 mi/ano
+  3. Compras preditivas de insumos e timing         R$ 4 a 7 mi/ano
+ONDA 2 · meses 9 a 18
+  4. Janela ótima de colheita e secagem
+  5. Rastreabilidade e conformidade ESG             protege 35% da receita
+  6. Aplicação de insumos a taxa variável (VRT)     R$ 4 a 7 mi/ano
+  7. Detecção de pragas e daninhas por imagem
+ONDA 3 · meses 18 em diante
+  8. Previsão integrada de produtividade
+  9. Comercialização e hedge assistidos</pre>
+
+        <h4>Questão 4 · roadmap e gates</h4>
+        <pre>FASE 0  meses 0 a 3    Diagnóstico e fundação        R$ 2 a 3 mi
+  GATE G0   Existe dado utilizável e baseline mensurável para 2 casos?
+FASE 1  meses 3 a 9    Pilotos com prova de valor    R$ 5 a 7 mi
+  GATE G1   Valor auditado ≥ R$ 5 mi/ano e adoção ≥ 70% das decisões elegíveis?
+FASE 2  meses 9 a 18   Escala seletiva               R$ 9 a 13 mi
+  GATE G2   Custo logístico por tonelada e perdas na meta? Maturidade ≥ 3,0?
+FASE 3  meses 18 a 24+ Reposicionamento              capital reaberto no G2</pre>
+        <p>Um resumo completo do documento em texto puro, incluindo o enunciado de cada questão e a íntegra das
+        conclusões, está no comentário de abertura do código-fonte desta página.</p>
+      </div>
+    </details>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap fgrid">
+    <div>
+      <h5>Identificação</h5>
+      <p style="color:var(--txt-2);margin-bottom:14px">
+        <strong>Alunos</strong><br>
+        Luiz Ihara · RM368484<br>
+        Filipe Fragoso · RM368500<br>
+        Daniel Caminha · RM366740<br>
+        Pedro Martins · RM368543
+      </p>
+      <p>
+        Turma 2ABL · FIAP MBA Tech<br>
+        Disciplina: Estratégias Setoriais de Implementação<br>
+        Professor: Elias Eduardo Bernardo da Silva
+      </p>
+      <p>Resposta ao estudo de caso <strong style="color:var(--txt-2)">"AgroTech Vale Verde: entre eficiência operacional e transformação orientada por Inteligência Artificial"</strong>, cobrindo as quatro questões de avaliação: análise setorial e competitiva, diagnóstico organizacional, priorização de oportunidades e riscos, e estratégia com roadmap de implementação.</p>
+    </div>
+    <div>
+      <h5>Base factual</h5>
+      <ul>
+        <li>Os dados de receita, EBITDA, área cultivada, exportação, ineficiências (7%, 10% e 22%), acurácia (78%) e maturidade setorial (ITD-Br 2024, 3,1 contra 3,7) provêm do próprio caso.</li>
+        <li>Os valores financeiros derivados são estimativas de ordem de grandeza calculadas a partir desses percentuais e estão sinalizadas como tal ao longo do texto.</li>
+        <li>Modelos aplicados: 5 Forças de Porter, escalas de maturidade digital e de IA, e o roadmap Diagnóstico, Priorização, Piloto e Escala.</li>
+      </ul>
+    </div>
+    <div>
+      <h5>Construção da página</h5>
+      <ul>
+        <li>Página estática única, sem dependências de build.</li>
+        <li>Duas cenas WebGL autorais em Three.js: um campo agrícola instanciado com varredura de sensoriamento remoto e um diagrama tridimensional interativo das 5 Forças.</li>
+        <li>Radar de maturidade e matriz de priorização gerados em tempo de execução a partir dos dados da análise.</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ============================================================================
+   0. UTIL
+   ========================================================================== */
+const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clamp = (v,a,b)=>Math.min(b,Math.max(a,v));
+const lerp  = (a,b,t)=>a+(b-a)*t;
+const ease  = t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+
+/* reveal on scroll */
+const io = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv').forEach((el,i)=>{ el.style.transitionDelay=(Math.min(i%4,3)*70)+'ms'; io.observe(el); });
+/* rede de segurança: se o observer nunca disparar, revela tudo */
+addEventListener('load',()=>setTimeout(()=>{
+  if(!document.querySelector('.rv.in')) document.querySelectorAll('.rv').forEach(e=>e.classList.add('in'));
+},2500));
+
+/* progress + nav */
+const prog=document.getElementById('prog'), dock=document.getElementById('dock'), veil=document.getElementById('veil');
+const links=[...document.querySelectorAll('nav.dock a')];
+const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+let scrollY=0, vh=innerHeight;
+function onScroll(){
+  scrollY=window.scrollY||document.documentElement.scrollTop;
+  const h=document.documentElement.scrollHeight-innerHeight;
+  prog.style.width=(h>0?(scrollY/h*100):0)+'%';
+  dock.classList.toggle('solid',scrollY>40);
+  veil.style.opacity=clamp((scrollY-vh*0.32)/(vh*0.62),0,1);
+  let cur=-1;
+  secs.forEach((s,i)=>{ if(s.getBoundingClientRect().top<=innerHeight*0.42) cur=i; });
+  links.forEach((a,i)=>a.classList.toggle('on',i===cur));
+}
+addEventListener('scroll',onScroll,{passive:true});
+addEventListener('resize',()=>{vh=innerHeight;onScroll();});
+onScroll();
+
+/* gauge */
+const gio=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){document.getElementById('gaugeFill').style.width='42%';gio.disconnect();}})},{threshold:.4});
+gio.observe(document.getElementById('gaugeTrack'));
+
+/* balão de visita: aparece após a leitura começar e pode ser dispensado */
+(function visitBubble(){
+  const el=document.getElementById('visitBubble'), x=document.getElementById('visitClose');
+  if(!el) return;
+  let dismissed=false;
+  try{ dismissed=localStorage.getItem('vb-dismissed')==='1'; }catch(e){}
+  if(dismissed){ el.remove(); return; }
+  setTimeout(()=>el.classList.add('show'), RM?300:2200);
+  x.addEventListener('click',()=>{
+    el.classList.remove('show');
+    try{ localStorage.setItem('vb-dismissed','1'); }catch(e){}
+    setTimeout(()=>el.remove(),600);
+  });
+})();
+
+/* ============================================================================
+   1. CENA 1 — CAMPO AGRÍCOLA INSTANCIADO COM VARREDURA DE SENSORIAMENTO
+   ========================================================================== */
+(function field(){
+  const canvas=document.getElementById('c-field');
+  if(!window.THREE){ canvas.style.display='none'; return; }
+  let renderer;
+  try{ renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'}); }
+  catch(e){ canvas.style.display='none'; return; }
+  renderer.setClearColor(0x000000,0);
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.9));
+
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(42,1,.1,400);
+
+  /* ---- ruído (value noise + fbm) ---- */
+  const hash=(x,y)=>{const s=Math.sin(x*127.1+y*311.7)*43758.5453123;return s-Math.floor(s);};
+  function vn(x,y){
+    const xi=Math.floor(x),yi=Math.floor(y),xf=x-xi,yf=y-yi;
+    const u=xf*xf*(3-2*xf),v=yf*yf*(3-2*yf);
+    return hash(xi,yi)*(1-u)*(1-v)+hash(xi+1,yi)*u*(1-v)+hash(xi,yi+1)*(1-u)*v+hash(xi+1,yi+1)*u*v;
+  }
+  function fbm(x,y){let v=0,a=.5,f=1;for(let i=0;i<4;i++){v+=a*vn(x*f,y*f);f*=2;a*=.5;}return v;}
+
+  /* ---- grade de talhões ---- */
+  const N=74, STEP=.62, SIZE=.50, HALF=(N-1)*STEP/2;
+  const COUNT=N*N;
+  const base=new THREE.BoxGeometry(1,1,1);
+  base.translate(0,.5,0);
+  const geo=new THREE.InstancedBufferGeometry();
+  geo.index=base.index; geo.attributes.position=base.attributes.position; geo.attributes.normal=base.attributes.normal;
+  geo.instanceCount=COUNT;
+
+  const aOff=new Float32Array(COUNT*3), aDat=new Float32Array(COUNT*4), aRnd=new Float32Array(COUNT);
+  let k=0;
+  for(let i=0;i<N;i++)for(let j=0;j<N;j++){
+    const x=i*STEP-HALF, z=j*STEP-HALF;
+    /* estado atual: manchas, alta variância, faixas sem cobertura */
+    const patch=fbm(i*.075+11.2,j*.075+4.4);
+    const streak=Math.pow(vn(i*.028,j*.21),1.5);
+    let n0=clamp(patch*1.25*(.45+.75*streak)-.06,0,1);
+    n0*= (vn(i*.5,j*.5)>.86)?.35:1;                       /* falhas operacionais pontuais */
+    /* estado otimizado: média maior, variância menor */
+    const n1=clamp(lerp(n0,.80+.18*fbm(i*.05+31.,j*.05+7.),.86),0,1);
+    const h0=.16+n0*1.55+(hash(i,j)-.5)*.20;
+    const h1=.30+n1*1.85;
+    aOff[k*3]=x; aOff[k*3+1]=0; aOff[k*3+2]=z;
+    aDat[k*4]=h0; aDat[k*4+1]=h1; aDat[k*4+2]=n0; aDat[k*4+3]=n1;
+    aRnd[k]=hash(i*3.1,j*7.7);
+    k++;
+  }
+  geo.setAttribute('aOff',new THREE.InstancedBufferAttribute(aOff,3));
+  geo.setAttribute('aDat',new THREE.InstancedBufferAttribute(aDat,4));
+  geo.setAttribute('aRnd',new THREE.InstancedBufferAttribute(aRnd,1));
+
+  const U={
+    uTime:{value:0}, uProg:{value:0}, uScan:{value:-HALF},
+    uFog:{value:new THREE.Color(0x05080a)}, uSizeX:{value:0.34}, uSizeZ:{value:0.52}
+  };
+
+  const mat=new THREE.ShaderMaterial({
+    uniforms:U,
+    vertexShader:`
+      attribute vec3 aOff; attribute vec4 aDat; attribute float aRnd;
+      uniform float uProg, uTime, uSizeX, uSizeZ;
+      varying vec3 vN, vW; varying float vNdvi, vTop, vRnd, vWave;
+      void main(){
+        float nx = (aOff.x + 23.0) / 46.0;               // 0..1 ao longo de X
+        float w  = clamp((uProg*1.55 - nx)*2.6, 0.0, 1.0);
+        w = w*w*(3.0-2.0*w);
+        float h  = mix(aDat.x, aDat.y, w);
+        float nd = mix(aDat.z, aDat.w, w);
+        // respiração sutil da lavoura
+        h *= 1.0 + 0.035*sin(uTime*0.9 + aOff.x*0.5 + aOff.z*0.35);
+        vec3 p = position * vec3(uSizeX, h, uSizeZ) + aOff;
+        vW = p; vN = normal; vNdvi = nd; vTop = step(0.55, normal.y); vRnd = aRnd; vWave = w;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(p,1.0);
+      }`,
+    fragmentShader:`
+      precision highp float;
+      uniform float uTime, uScan; uniform vec3 uFog;
+      varying vec3 vN, vW; varying float vNdvi, vTop, vRnd, vWave;
+      void main(){
+        vec3 dry  = vec3(0.30,0.225,0.125);
+        vec3 mid  = vec3(0.165,0.305,0.150);
+        vec3 lush = vec3(0.235,0.72,0.41);
+        vec3 c = mix(dry, mid, smoothstep(0.0,0.45,vNdvi));
+        c = mix(c, lush, smoothstep(0.35,1.0,vNdvi));
+        c *= 0.86 + 0.28*vRnd;
+
+        vec3 L = normalize(vec3(0.45,0.86,0.28));
+        float d = max(dot(normalize(vN), L), 0.0);
+        vec3 amb = mix(vec3(0.035,0.055,0.065), vec3(0.07,0.11,0.10), vN.y*0.5+0.5);
+        vec3 col = c * (0.26 + 0.72*d) + amb;
+        col += vec3(0.05,0.16,0.12) * vTop * 0.35;                    // topo mais claro
+
+        // varredura de sensoriamento remoto
+        float band = exp(-pow((vW.z - uScan)/1.35, 2.0));
+        float edge = exp(-pow((vW.z - uScan)/0.16, 2.0));
+        col += vec3(0.16,0.75,0.85) * band * (0.30 + 0.55*vNdvi);
+        col += vec3(0.55,0.95,1.0) * edge * 0.55;
+        // frente da onda de otimização
+        float wf = exp(-pow((vWave-0.5)/0.16,2.0));
+        col += vec3(0.25,0.95,0.55) * wf * 0.16;
+
+        float dist = length(vW - cameraPosition);
+        float fg = 1.0 - exp(-pow(dist*0.0255, 1.95));
+        col = mix(col, uFog, clamp(fg,0.0,1.0));
+        gl_FragColor = vec4(col, 1.0);
+      }`
+  });
+  const mesh=new THREE.Mesh(geo,mat); mesh.frustumCulled=false; scene.add(mesh);
+
+  /* ---- solo ---- */
+  const gmat=new THREE.ShaderMaterial({
+    uniforms:U, transparent:true, depthWrite:false,
+    vertexShader:`varying vec3 vW; void main(){ vW=position; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
+    fragmentShader:`
+      precision highp float; uniform float uScan; varying vec3 vW;
+      void main(){
+        vec2 p = vW.xy;
+        float r = length(p);
+        float grid = min(abs(fract(p.x/6.2)-0.5), abs(fract(p.y/6.2)-0.5));
+        float g = smoothstep(0.49,0.5,1.0-grid*2.0)*0.0;
+        float lines = (1.0-smoothstep(0.0,0.02,grid))*0.10;
+        float band = exp(-pow((-p.y - uScan)/1.6,2.0))*0.22;
+        float fade = 1.0-smoothstep(16.0,54.0,r);
+        vec3 col = vec3(0.03,0.07,0.06)*fade + vec3(0.10,0.30,0.24)*lines*fade + vec3(0.14,0.6,0.68)*band*fade;
+        gl_FragColor = vec4(col, (lines*0.9 + band + 0.16)*fade);
+      }`
+  });
+  const ground=new THREE.Mesh(new THREE.PlaneGeometry(140,140,1,1),gmat);
+  ground.rotation.x=-Math.PI/2; ground.position.y=-0.02; scene.add(ground);
+
+  /* ---- sensores IoT (feixes + pontos) ---- */
+  const SN=22, pts=[], seg=[];
+  for(let i=0;i<SN;i++){
+    const x=(Math.random()*2-1)*HALF*.92, z=(Math.random()*2-1)*HALF*.92;
+    const y=1.4;
+    seg.push(x,y,z, x,y+2.6+Math.random()*1.6, z);
+    pts.push(x,y+2.6+Math.random()*1.6,z);
+  }
+  const lgeo=new THREE.BufferGeometry(); lgeo.setAttribute('position',new THREE.Float32BufferAttribute(seg,3));
+  const lmat=new THREE.ShaderMaterial({
+    uniforms:U, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
+    vertexShader:`varying float vY; varying vec3 vW; void main(){ vY=position.y; vW=position; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
+    fragmentShader:`precision highp float; uniform float uTime,uScan; varying float vY; varying vec3 vW;
+      void main(){ float a=(1.0-smoothstep(1.4,5.2,vY))*0.5;
+        a *= 0.45+0.55*sin(uTime*2.2+vW.x*1.3+vW.z);
+        a += exp(-pow((vW.z-uScan)/2.0,2.0))*0.4;
+        gl_FragColor=vec4(vec3(0.35,0.9,0.95), max(a,0.0)*0.55); }`
+  });
+  scene.add(new THREE.LineSegments(lgeo,lmat));
+  const pgeo=new THREE.BufferGeometry(); pgeo.setAttribute('position',new THREE.Float32BufferAttribute(pts,3));
+  const pmat=new THREE.ShaderMaterial({
+    uniforms:U, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
+    vertexShader:`uniform float uTime; varying vec3 vW; void main(){ vW=position;
+      vec4 mv=modelViewMatrix*vec4(position,1.0); gl_PointSize=(90.0/-mv.z)*(1.0+0.35*sin(uTime*2.4+position.x));
+      gl_Position=projectionMatrix*mv; }`,
+    fragmentShader:`precision highp float; uniform float uTime; varying vec3 vW;
+      void main(){ float d=length(gl_PointCoord-0.5); if(d>0.5) discard;
+        float core=smoothstep(0.5,0.0,d); float ring=smoothstep(0.36,0.30,d)*smoothstep(0.20,0.30,d);
+        float pulse=0.6+0.4*sin(uTime*2.4+vW.z*0.6);
+        gl_FragColor=vec4(vec3(0.5,0.98,0.92), (core*0.35+ring*0.9)*pulse); }`
+  });
+  scene.add(new THREE.Points(pgeo,pmat));
+
+  /* ---- poeira de dados ---- */
+  const DN=380, dp=new Float32Array(DN*3), dr=new Float32Array(DN);
+  for(let i=0;i<DN;i++){ dp[i*3]=(Math.random()*2-1)*30; dp[i*3+1]=Math.random()*10; dp[i*3+2]=(Math.random()*2-1)*30; dr[i]=Math.random(); }
+  const dgeo=new THREE.BufferGeometry();
+  dgeo.setAttribute('position',new THREE.Float32BufferAttribute(dp,3));
+  dgeo.setAttribute('aR',new THREE.Float32BufferAttribute(dr,1));
+  const dmat=new THREE.ShaderMaterial({
+    uniforms:U, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
+    vertexShader:`attribute float aR; uniform float uTime; varying float vA; varying vec3 vW;
+      void main(){ vec3 p=position; p.y=mod(p.y+uTime*(0.25+aR*0.6),11.0); p.x+=sin(uTime*0.3+aR*6.28)*1.4;
+        vW=p; vA=aR; vec4 mv=modelViewMatrix*vec4(p,1.0); gl_PointSize=(26.0/-mv.z)*(0.5+aR);
+        gl_Position=projectionMatrix*mv; }`,
+    fragmentShader:`precision highp float; uniform float uScan; varying float vA; varying vec3 vW;
+      void main(){ float d=length(gl_PointCoord-0.5); if(d>0.5) discard;
+        float a=smoothstep(0.5,0.0,d)*(0.10+0.22*vA);
+        a*=1.0-smoothstep(6.0,11.0,vW.y);
+        a+=exp(-pow((vW.z-uScan)/2.2,2.0))*0.25;
+        gl_FragColor=vec4(mix(vec3(0.35,0.85,0.95),vec3(0.45,1.0,0.65),vA), a); }`
+  });
+  scene.add(new THREE.Points(dgeo,dmat));
+
+  /* ---- loop ---- */
+  let mx=0,my=0,tmx=0,tmy=0;
+  addEventListener('pointermove',e=>{ tmx=(e.clientX/innerWidth-.5); tmy=(e.clientY/innerHeight-.5); },{passive:true});
+  function resize(){
+    const w=canvas.clientWidth||innerWidth, h=canvas.clientHeight||innerHeight;
+    renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix();
+  }
+  addEventListener('resize',resize); resize();
+
+  const clock=new THREE.Clock(); let frame=0;
+  (function tick(){
+    requestAnimationFrame(tick);
+    const t=clock.getElapsedTime();
+    const past=veil.style.opacity && parseFloat(veil.style.opacity)>0.985;
+    frame++;
+    if(past && frame%3!==0) return;             // economia quando o campo está encoberto
+
+    const s=clamp(scrollY/(vh*1.1),0,1);
+    U.uTime.value=t;
+    U.uProg.value=RM?0.75:clamp(0.02+s*1.15,0,1);
+    U.uScan.value=((t*3.2)%(HALF*2.6))-HALF*1.3;
+
+    mx=lerp(mx,tmx,.045); my=lerp(my,tmy,.045);
+    const ang=(RM?0:t*0.030)+mx*0.30;
+    const rad=lerp(29,21,s), hgt=lerp(7.6,15.5,s);
+    camera.position.set(Math.sin(ang)*rad, hgt+my*1.6, Math.cos(ang)*rad);
+    camera.lookAt(0,lerp(5.6,-1.0,s)+my*1.2,0);
+    renderer.render(scene,camera);
+  })();
+})();
+
+/* ============================================================================
+   2. CENA 2 — AS 5 FORÇAS DE PORTER EM 3D (interativa)
+   ========================================================================== */
+const FORCES=[
+ {id:'entrantes', name:'Ameaça de novos entrantes', pos:[0,0,-7.4], col:0x67E8F9, a:[.45,.35],
+  now:'A barreira de capital, terra e escala operacional é alta. Soluções digitais modulares oferecidas como serviço, porém, reduzem o custo de entrada de operadores menores e mais ágeis.',
+  ai:'A ameaça diminui para as empresas que organizam seus dados. O histórico proprietário de solo, clima e produtividade é um ativo cumulativo, difícil de adquirir pronto, e por isso funciona como barreira adicional à entrada.',
+  imp:'A AgroTech possui a matéria-prima dessa barreira, com uma década de histórico sobre 85 mil hectares, mas ainda não a converteu em ativo. O comportamento dessa força depende da decisão que está em análise.'},
+ {id:'fornec', name:'Poder dos fornecedores', pos:[-7.4,0,0], col:0xFBBF24, a:[.75,.55], sub:{name:'Fornecedores de tecnologia', a:[.28,.62], col:0xA78BFA},
+  now:'Poder alto. Há concentração global em fertilizantes, defensivos, sementes e máquinas, e a alta recente no custo de insumos pressiona uma margem de 12% de EBITDA.',
+  ai:'O poder diminui com a definição de dose e época por talhão, a compra preditiva e o melhor timing de aquisição, que reduzem volume consumido e assimetria de informação. Em contrapartida, aparece um fornecedor novo, a plataforma de tecnologia e dados, cujo poder cresce à medida que o lock-in aumenta.',
+  imp:'O ganho se sustenta apenas se a empresa evitar trocar a dependência de insumo pela dependência de plataforma. Isso exige dado bruto em ambiente próprio, formatos abertos e portabilidade prevista em contrato.'},
+ {id:'compra', name:'Poder dos compradores', pos:[7.4,0,0], col:0xFB7185, a:[.70,.78],
+  now:'Poder alto. O preço tem referência internacional, os compradores relevantes são poucos (tradings e grandes importadores) e 35% da produção vai para Europa e China.',
+  ai:'Permanece alto e mais exigente. Rastreabilidade e conformidade ESG passam de diferencial a condição de acesso, e a comparação entre fornecedores fica mais simples para o comprador.',
+  imp:'Nesse ponto a IA protege receita já existente. A rastreabilidade verificável funciona como garantia de acesso ao mercado, e o pipeline de dados que a sustenta serve também aos modelos operacionais.'},
+ {id:'subst', name:'Ameaça de substitutos', pos:[0,0,7.4], col:0x94A3B8, a:[.30,.38],
+  now:'Ameaça baixa no produto, já que soja e milho são difíceis de substituir em escala. O risco relevante está no modelo de negócio.',
+  ai:'Sobe de forma moderada. Originadores digitais, plataformas de intermediação e proteínas alternativas deslocam parte da cadeia, com efeito maior sobre o elo de comercialização do que sobre o grão.',
+  imp:'Prioridade defensiva baixa no horizonte de 24 meses. Ainda assim, convém acompanhar quem passa a controlar a relação com o comprador final.'},
+ {id:'rival', name:'Rivalidade entre concorrentes', pos:[0,0,0], col:0x4ADE80, a:[.65,.88], center:true,
+  now:'Intensidade alta. A concorrência se dá por custo unitário em produto homogêneo, com grandes players avançando em agricultura de precisão e startups oferecendo soluções escaláveis.',
+  ai:'Aumenta. A IA desloca a fronteira de custo do setor. As empresas que capturam ganhos em logística, insumos e perdas operacionais passam a operar com custo menor e pressionam a margem das demais.',
+  imp:'A vantagem obtida é temporária e cumulativa, porque quem começa antes acumula mais dados e amplia a diferença. Adiar a decisão tende a piorar a posição relativa da AgroTech, ainda que os resultados atuais permaneçam estáveis.'}
+];
+
+(function porter(){
+  const canvas=document.getElementById('c-porter'), stage=document.getElementById('porterStage'), lbox=document.getElementById('porterLabels');
+  if(!window.THREE){ stage.style.display='none'; return; }
+  let renderer;
+  try{ renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true}); }catch(e){ stage.style.display='none'; return; }
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.9)); renderer.setClearColor(0x000000,0);
+
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(38,1,.1,200);
+  const MAXH=6.2, U2={uTime:{value:0}};
+
+  const colShader=(hex)=>new THREE.ShaderMaterial({
+    uniforms:{uTime:U2.uTime,uColor:{value:new THREE.Color(hex)},uHot:{value:0}},
+    transparent:true,
+    vertexShader:`varying float vY; varying vec3 vN,vV,vW;
+      void main(){ vY=position.y; vN=normalize(normalMatrix*normal);
+        vec4 wp=modelMatrix*vec4(position,1.0); vW=wp.xyz;
+        vec4 mv=modelViewMatrix*vec4(position,1.0); vV=normalize(-mv.xyz);
+        gl_Position=projectionMatrix*mv; }`,
+    fragmentShader:`precision highp float; uniform vec3 uColor; uniform float uTime,uHot;
+      varying float vY; varying vec3 vN,vV,vW;
+      void main(){
+        vec3 base=mix(uColor*0.055, uColor*1.05, pow(vY,1.25));
+        float fres=pow(1.0-abs(dot(normalize(vN),normalize(vV))),2.2);
+        float stripes=0.5+0.5*sin(vW.y*5.5-uTime*1.6);
+        vec3 col=base+uColor*fres*(0.34+0.75*uHot)+uColor*stripes*0.055;
+        col+=uColor*smoothstep(0.94,1.0,vY)*0.9;
+        float a=0.80+0.18*fres+0.18*uHot;
+        gl_FragColor=vec4(col,min(a,1.0)); }`
+  });
+
+  /* disco de base */
+  const disc=new THREE.Mesh(new THREE.CircleGeometry(13,72),new THREE.ShaderMaterial({
+    uniforms:U2,transparent:true,depthWrite:false,
+    vertexShader:`varying vec2 vP; void main(){ vP=position.xy; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
+    fragmentShader:`precision highp float; uniform float uTime; varying vec2 vP;
+      void main(){ float r=length(vP);
+        float rings=(1.0-smoothstep(0.0,0.03,abs(fract(r/2.6-uTime*0.04)-0.5)-0.47))*0.20;
+        float fade=1.0-smoothstep(4.0,12.6,r);
+        float cross=(1.0-smoothstep(0.0,0.06,min(abs(vP.x),abs(vP.y))))*0.10;
+        gl_FragColor=vec4(vec3(0.16,0.45,0.40),(rings+cross+0.05)*fade); }`
+  }));
+  disc.rotation.x=-Math.PI/2; scene.add(disc);
+
+  const cols=[], arrows=[], rings=[], labels={};
+  const boxGeo=new THREE.BoxGeometry(1.9,1,1.9); boxGeo.translate(0,.5,0);
+
+  FORCES.forEach(f=>{
+    const g=new THREE.Group(); g.position.set(f.pos[0],0,f.pos[2]); scene.add(g);
+    f.group=g;
+    if(f.center){
+      const core=new THREE.Mesh(new THREE.IcosahedronGeometry(1.5,0),new THREE.ShaderMaterial({
+        uniforms:{uTime:U2.uTime,uColor:{value:new THREE.Color(f.col)},uHot:{value:0}},transparent:true,
+        vertexShader:`varying vec3 vN,vV; void main(){ vN=normalize(normalMatrix*normal);
+          vec4 mv=modelViewMatrix*vec4(position,1.0); vV=normalize(-mv.xyz); gl_Position=projectionMatrix*mv; }`,
+        fragmentShader:`precision highp float; uniform vec3 uColor; uniform float uTime,uHot; varying vec3 vN,vV;
+          void main(){ float fres=pow(1.0-abs(dot(normalize(vN),normalize(vV))),1.8);
+            vec3 col=uColor*(0.16+fres*1.35+uHot*0.4);
+            gl_FragColor=vec4(col,0.30+fres*0.65); }`
+      }));
+      core.position.y=1.9; core.userData.id=f.id; g.add(core); f.core=core; cols.push(core);
+      const wire=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(2.15,0)),
+        new THREE.LineBasicMaterial({color:f.col,transparent:true,opacity:.42}));
+      wire.position.y=1.9; g.add(wire); f.wire=wire;
+    }else{
+      const m=colShader(f.col);
+      const col=new THREE.Mesh(boxGeo,m); col.userData.id=f.id; g.add(col); f.col3=col; cols.push(col);
+      if(f.sub){
+        const m2=colShader(f.sub.col);
+        const c2=new THREE.Mesh(boxGeo,m2); c2.userData.id=f.id; c2.scale.set(.72,1,.72); g.add(c2); f.sub3=c2; cols.push(c2);
+      }
+      /* seta apontando ao centro */
+      const dir=new THREE.Vector3(-f.pos[0],0,-f.pos[2]).normalize();
+      const ar=new THREE.Mesh(new THREE.ConeGeometry(.40,1.15,4),
+        new THREE.MeshBasicMaterial({color:f.col,transparent:true,opacity:.5}));
+      ar.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir);
+      ar.position.set(f.pos[0],0.55,f.pos[2]); scene.add(ar); ar.userData={dir,base:new THREE.Vector3(f.pos[0],0.55,f.pos[2]),f};
+      arrows.push(ar);
+    }
+    const ring=new THREE.Mesh(new THREE.RingGeometry(1.5,1.72,54),
+      new THREE.MeshBasicMaterial({color:f.col,transparent:true,opacity:.22,side:THREE.DoubleSide}));
+    ring.rotation.x=-Math.PI/2; ring.position.set(f.pos[0],.02,f.pos[2]); scene.add(ring); rings.push({m:ring,f});
+
+    /* rótulo HTML */
+    const d=document.createElement('div'); d.className='lbl';
+    d.innerHTML='<b>'+f.name+'</b><u data-v></u>';
+    d.addEventListener('click',()=>select(f.id));
+    lbox.appendChild(d); labels[f.id]=d;
+    if(f.sub){
+      const d2=document.createElement('div'); d2.className='lbl';
+      d2.innerHTML='<b style="color:#C3B3FB">+ '+f.sub.name+'</b><u data-v style="color:#A78BFA"></u>';
+      d2.addEventListener('click',()=>select(f.id));
+      lbox.appendChild(d2); labels[f.id+'_sub']=d2;
+    }
+  });
+
+  /* estado */
+  let scen=0, scenT=0, scenTarget=0, hot=null, sel='rival';
+  const iv=f=>lerp(f.a[0],f.a[1],scenT);
+  const ivs=f=>lerp(f.sub.a[0],f.sub.a[1],scenT);
+
+  document.querySelectorAll('#scenToggle button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('#scenToggle button').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on'); scen=+b.dataset.s; scenTarget=scen; updatePanel();
+    });
+  });
+
+  const P={t:document.getElementById('fpTitle'),n:document.getElementById('fpNow'),
+           a:document.getElementById('fpAi'),i:document.getElementById('fpImp'),
+           v:document.getElementById('fpVal'),b:document.getElementById('fpBar')};
+  function updatePanel(){
+    const f=FORCES.find(x=>x.id===sel);
+    P.t.textContent=f.name; P.n.textContent=f.now; P.a.textContent=f.ai; P.i.textContent=f.imp;
+    const v=f.a[scen]; P.v.textContent=v.toFixed(2).replace('.',',');
+    P.b.style.width=(v*100)+'%';
+    P.b.style.background='#'+new THREE.Color(f.col).getHexString();
+    Object.keys(labels).forEach(k=>labels[k].classList.toggle('on',k.replace('_sub','')===sel));
+  }
+  function select(id){ sel=id; updatePanel(); }
+  updatePanel();
+
+  /* órbita manual */
+  let az=0.72, el=0.40, drag=false, px=0, py=0, idle=0;
+  stage.addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;idle=0;stage.setPointerCapture(e.pointerId);});
+  stage.addEventListener('pointerup',e=>{drag=false;});
+  stage.addEventListener('pointerleave',()=>{drag=false;hover(null);});
+  stage.addEventListener('pointermove',e=>{
+    if(drag){ az-=(e.clientX-px)*0.006; el=clamp(el+(e.clientY-py)*0.004,0.16,0.95); px=e.clientX; py=e.clientY; idle=0; }
+    else{
+      const r=canvas.getBoundingClientRect();
+      pointer.x=((e.clientX-r.left)/r.width)*2-1; pointer.y=-((e.clientY-r.top)/r.height)*2+1;
+      raycast();
+    }
+  });
+  canvas.addEventListener('click',()=>{ if(hot) select(hot); });
+
+  const ray=new THREE.Raycaster(), pointer=new THREE.Vector2(-9,-9);
+  function hover(id){ hot=id; canvas.style.cursor=id?'pointer':'grab'; }
+  function raycast(){
+    ray.setFromCamera(pointer,camera);
+    const hit=ray.intersectObjects(cols,false);
+    hover(hit.length?hit[0].object.userData.id:null);
+  }
+
+  let fitDist=22;
+  function resize(){
+    const w=stage.clientWidth,h=stage.clientHeight;
+    renderer.setSize(w,h,false); camera.aspect=w/h;
+    camera.fov = camera.aspect<1 ? 54 : 38;              // retrato: campo mais aberto
+    camera.updateProjectionMatrix();
+    /* enquadra a cena inteira em qualquer proporção de tela */
+    const vf=camera.fov*Math.PI/180;
+    const dV=7.8/Math.tan(vf/2);                        // altura da cena
+    const hf=2*Math.atan(Math.tan(vf/2)*camera.aspect);
+    const dH=10.6/Math.tan(hf/2);                       // largura: colunas + folga p/ rótulos
+    fitDist=Math.max(dV,dH);
+  }
+  addEventListener('resize',resize); resize();
+
+  const v3=new THREE.Vector3(), pv=new THREE.Vector3();
+  const pivot={x:0,y:0};
+  function updatePivot(){
+    pv.set(0,3.0,0).project(camera);
+    pivot.x=(pv.x*.5+.5)*stage.clientWidth; pivot.y=(-pv.y*.5+.5)*stage.clientHeight;
+  }
+  function project(x,y,z,el,push){
+    v3.set(x,y,z).project(camera);
+    const w=stage.clientWidth,h=stage.clientHeight;
+    let sx=(v3.x*.5+.5)*w, sy=(-v3.y*.5+.5)*h;
+    if(push){ const dx=sx-pivot.x, dy=sy-pivot.y, L=Math.hypot(dx,dy)||1;
+      sx+=dx/L*push; sy+=dy/L*push*0.55; }
+    const mw=(el.offsetWidth||150)/2+6, mh=(el.offsetHeight||30)/2+4;
+    sx=clamp(sx,mw,w-mw); sy=clamp(sy,mh+34,h-mh);
+    el.style.left=sx+'px'; el.style.top=sy+'px';
+    el.style.opacity=(v3.z<1)?1:0;
+  }
+
+  const lblPushGet=()=>stage.clientWidth<620?62:46;
+  let lblPush=lblPushGet();
+  addEventListener('resize',()=>{lblPush=lblPushGet();});
+  const clock=new THREE.Clock(); let visible=true;
+  new IntersectionObserver(es=>{visible=es[0].isIntersecting;},{threshold:.02}).observe(stage);
+
+  (function tick(){
+    requestAnimationFrame(tick);
+    if(!visible) return;
+    const t=clock.getElapsedTime(); U2.uTime.value=t;
+    scenT=lerp(scenT,scenTarget,0.07);
+    updatePivot();
+    if(!drag && !RM){ idle+=0.016; if(idle>2.5) az+=0.0016; }
+
+    FORCES.forEach(f=>{
+      const v=iv(f), isHot=(hot===f.id), isSel=(sel===f.id);
+      if(f.center){
+        const s=0.72+v*0.85;
+        f.core.scale.setScalar(s*(1+0.03*Math.sin(t*1.8)));
+        f.wire.scale.setScalar(s*(1+0.05*Math.sin(t*1.2+1)));
+        f.wire.rotation.y=t*0.18; f.wire.rotation.x=t*0.09;
+        f.core.rotation.y=-t*0.24;
+        f.core.material.uniforms.uHot.value=lerp(f.core.material.uniforms.uHot.value,(isHot?1:0)+(isSel?.5:0),.12);
+        f.wire.material.opacity=0.34+0.3*v+(isSel?.18:0);
+        project(f.pos[0],1.9+s*2.3,f.pos[2],labels[f.id]);
+      }else{
+        const h=v*MAXH;
+        f.col3.scale.y=lerp(f.col3.scale.y||h,h,0.12);
+        f.col3.material.uniforms.uHot.value=lerp(f.col3.material.uniforms.uHot.value,(isHot?1:0)+(isSel?.45:0),.12);
+        let top=f.col3.scale.y;
+        if(f.sub3){
+          const hs=ivs(f)*MAXH*0.62;
+          f.sub3.scale.y=lerp(f.sub3.scale.y||hs,hs,0.12);
+          f.sub3.position.y=f.col3.scale.y;
+          f.sub3.material.uniforms.uHot.value=f.col3.material.uniforms.uHot.value;
+          project(f.pos[0],f.col3.scale.y+f.sub3.scale.y+1.15,f.pos[2],labels[f.id+'_sub'],lblPush);
+          const uu=labels[f.id+'_sub'].querySelector('[data-v]');
+          uu.textContent=ivs(f).toFixed(2).replace('.',',');
+          top=f.col3.scale.y;
+        }
+        project(f.pos[0],top+(f.sub3?-0.35:1.15),f.pos[2],labels[f.id],lblPush);
+      }
+      const u=labels[f.id].querySelector('[data-v]');
+      u.textContent=v.toFixed(2).replace('.',',');
+      u.style.color='#'+new THREE.Color(f.col).getHexString();
+    });
+
+    rings.forEach(r=>{ r.m.material.opacity=0.13+0.30*iv(r.f)+((sel===r.f.id)?.2:0); });
+    arrows.forEach(a=>{
+      const v=iv(a.userData.f), k=(t*(0.35+v*0.9))%1;
+      a.position.copy(a.userData.base).addScaledVector(a.userData.dir,k*3.4);
+      a.material.opacity=(0.18+0.6*v)*(1-k*0.8);
+      a.scale.setScalar(0.7+v*0.7);
+    });
+
+    const R=fitDist-el*2.2*Math.min(1,camera.aspect);
+    camera.position.set(Math.sin(az)*Math.cos(el)*R, 3.2+Math.sin(el)*R*0.72, Math.cos(az)*Math.cos(el)*R);
+    camera.lookAt(0,camera.aspect<1?3.9:2.7,0);
+    renderer.render(scene,camera);
+  })();
+})();
+
+/* ============================================================================
+   3. RADAR DE MATURIDADE
+   ========================================================================== */
+(function radar(){
+  const svg=document.getElementById('radar'); if(!svg) return;
+  const dims=[
+    {k:'Dados',v:1.5,t:3.5},{k:'Tecnologia',v:2.0,t:3.5},{k:'Governança',v:1.0,t:4.0},
+    {k:'Processos',v:1.0,t:3.5},{k:'Talento',v:1.5,t:3.0},{k:'Cultura',v:1.5,t:3.0}
+  ];
+  const cx=230,cy=196,R=132,MAX=5,NS='http://www.w3.org/2000/svg';
+  const pt=(i,val)=>{ const a=-Math.PI/2+i*2*Math.PI/dims.length, r=R*val/MAX;
+    return [cx+Math.cos(a)*r, cy+Math.sin(a)*r]; };
+  const el=(n,at)=>{ const e=document.createElementNS(NS,n); for(const k in at) e.setAttribute(k,at[k]); return e; };
+  for(let g=1;g<=MAX;g++){
+    const p=dims.map((_,i)=>pt(i,g).join(',')).join(' ');
+    svg.appendChild(el('polygon',{points:p,class:'ring'}));
+  }
+  dims.forEach((d,i)=>{
+    const [x,y]=pt(i,MAX);
+    svg.appendChild(el('line',{x1:cx,y1:cy,x2:x,y2:y,class:'ax'}));
+    const [lx,ly]=pt(i,MAX+0.72);
+    const tx=el('text',{x:lx,y:ly,class:'lb','text-anchor':Math.abs(lx-cx)<6?'middle':(lx>cx?'start':'end'),'dominant-baseline':'middle'});
+    tx.textContent=d.k; svg.appendChild(tx);
+    const [vx,vy]=pt(i,MAX+1.55);
+    const tv=el('text',{x:vx,y:vy,class:'lv','text-anchor':Math.abs(vx-cx)<6?'middle':(vx>cx?'start':'end'),'dominant-baseline':'middle'});
+    tv.textContent=d.v.toFixed(1).replace('.',','); svg.appendChild(tv);
+  });
+  svg.appendChild(el('polygon',{points:dims.map((d,i)=>pt(i,d.t).join(',')).join(' '),class:'tgt'}));
+  const cur=el('polygon',{points:dims.map((d,i)=>pt(i,0.05).join(',')).join(' '),class:'cur'});
+  svg.appendChild(cur);
+  dims.forEach((d,i)=>{ const c=el('circle',{cx:cx,cy:cy,r:3.2,class:'dotp'}); c.dataset.i=i; svg.appendChild(c); });
+  const dots=[...svg.querySelectorAll('.dotp')];
+  const anim=()=>{ const t0=performance.now();
+    (function step(){
+      const p=clamp((performance.now()-t0)/1100,0,1), e=ease(p);
+      cur.setAttribute('points',dims.map((d,i)=>pt(i,0.05+(d.v-0.05)*e).join(',')).join(' '));
+      dots.forEach((c,i)=>{ const [x,y]=pt(i,0.05+(dims[i].v-0.05)*e); c.setAttribute('cx',x); c.setAttribute('cy',y); });
+      if(p<1) requestAnimationFrame(step);
+    })(); };
+  new IntersectionObserver((es,o)=>{ if(es[0].isIntersecting){ RM?anim():setTimeout(anim,180); o.disconnect(); } },{threshold:.3}).observe(svg);
+})();
+
+/* ============================================================================
+   4. MATRIZ DE PRIORIZAÇÃO
+   ========================================================================== */
+(function matrix(){
+  const box=document.getElementById('matrix'), det=document.getElementById('oppDetail'); if(!box) return;
+  const OPS=[
+    {n:'1',w:1,x:.20,y:.90,s:62,t:'Roteirização, frete e janela de transporte',
+     dado:'ERP, com ordens, romaneios, fretes contratados e tempos de ciclo já registrados',
+     ciclo:'Semanal, com dezenas de decisões por semana',
+     dono:'Diretoria de Operações / Logística',
+     val:'R$ 7,4 – 11,2 mi por ano (−8% a −12% sobre R$ 93 mi)',
+     risc:'Baixo · decisão reversível, sem impacto agronômico irreversível'},
+    {n:'2',w:1,x:.32,y:.60,s:44,t:'Manutenção preditiva de frota e implementos',
+     dado:'Telemetria de máquinas, histórico de paradas e ordens de serviço',
+     ciclo:'Contínuo, com falhas ocorrendo toda semana na janela crítica',
+     dono:'Gerência de Manutenção / Operações',
+     val:'R$ 3 – 5 mi por ano (parcela dos 7% de perdas por falha)',
+     risc:'Baixo · falso positivo custa uma inspeção, não uma safra'},
+    {n:'3',w:1,x:.38,y:.72,s:48,t:'Compras preditivas de insumos e timing',
+     dado:'ERP de compras e séries públicas de preço de fertilizante, câmbio e frete',
+     ciclo:'Mensal, com efeito direto e rastreável na margem',
+     dono:'Diretoria Financeira / Suprimentos',
+     val:'R$ 4 – 7 mi por ano',
+     risc:'Médio-baixo · exige política de limites e decisão humana final'},
+    {n:'4',w:2,x:.50,y:.56,s:40,t:'Janela ótima de colheita e secagem',
+     dado:'Clima, umidade de grão e capacidade de secador e armazém',
+     ciclo:'Sazonal, mas com múltiplas decisões dentro da safra',
+     dono:'Operações agrícolas',
+     val:'Reduz parte das perdas de 7% e do custo de secagem',
+     risc:'Médio · depende de previsão climática de curto prazo'},
+    {n:'5',w:2,x:.60,y:.76,s:52,t:'Rastreabilidade e conformidade ESG',
+     dado:'Integração de origem, insumos aplicados e cadeia de custódia',
+     ciclo:'Por lote embarcado',
+     dono:'Comercial exportação / Qualidade',
+     val:'Protege os 35% da receita exportada; o valor está no acesso ao mercado',
+     risc:'Médio · requisito regulatório crescente na Europa'},
+    {n:'6',w:2,x:.70,y:.82,s:54,t:'Aplicação de insumos a taxa variável (VRT)',
+     dado:'Mapas de solo, produtividade por talhão e IoT, hoje disponíveis apenas em parte',
+     ciclo:'Poucas aplicações por safra',
+     dono:'Agronomia',
+     val:'R$ 4 – 7 mi por ano (−4% a −6% de insumo)',
+     risc:'Médio-alto · erro de dose afeta produtividade; exige validação em faixa'},
+    {n:'7',w:2,x:.62,y:.42,s:34,t:'Detecção de pragas e daninhas por imagem',
+     dado:'Imagens de satélite, já testadas, somadas a imagens de drone a coletar',
+     ciclo:'Quinzenal na safra',
+     dono:'Agronomia',
+     val:'Reduz aplicação corretiva e perda localizada',
+     risc:'Médio · falso negativo tem custo agronômico relevante'},
+    {n:'8',w:3,x:.88,y:.86,s:56,t:'Previsão integrada de produtividade',
+     dado:'Histórico de 10 anos, solo e clima, condicionado à fundação de dados',
+     ciclo:'Anual, com um único ponto de validação por safra',
+     dono:'Planejamento agrícola',
+     val:'Alto, mas realizável só após padronização do histórico',
+     risc:'Alto · aprendizado lento e forte exposição a clima atípico'},
+    {n:'9',w:3,x:.92,y:.62,s:42,t:'Comercialização e hedge assistidos',
+     dado:'Produção prevista, preço, câmbio, basis e custo de carrego',
+     ciclo:'Contínuo, mas decisão de alto valor unitário',
+     dono:'Diretoria Financeira',
+     val:'Alta alavancagem sobre a margem, com risco de erro igualmente alto',
+     risc:'Alto · decisão irreversível, com human-in-the-loop permanente'}
+  ];
+  /* eixos e quadrantes */
+  /* mapeamento: usa toda a área útil; cruz nos limiares reais de decisão */
+  const mapX=x=>7+((x-0.14)/0.80)*86;
+  const mapY=y=>8+(1-((y-0.36)/0.58))*80;
+  const ax1=document.createElement('div'); ax1.className='mx-axis'; ax1.style.cssText='left:0;right:0;top:'+mapY(0.66).toFixed(1)+'%;height:1px;opacity:.45';
+  const ax2=document.createElement('div'); ax2.className='mx-axis'; ax2.style.cssText='top:0;bottom:0;left:'+mapX(0.55).toFixed(1)+'%;width:1px;opacity:.45';
+  box.appendChild(ax1); box.appendChild(ax2);
+  const q=(txt,css)=>{const d=document.createElement('div');d.className='quad-lbl';d.style.cssText=css;d.textContent=txt;box.appendChild(d);};
+  q('Quick wins · fazer primeiro','left:14px;top:12px');
+  q('Apostas estruturantes','right:14px;top:12px;text-align:right');
+  q('Melhoria incremental','left:14px;bottom:12px');
+  q('Adiar / construir capacidade','right:14px;bottom:12px;text-align:right');
+  const vlab=document.createElement('div'); vlab.className='axis-cap';
+  vlab.style.cssText='display:block;margin-bottom:9px';
+  vlab.textContent='↑ impacto no resultado'; box.parentNode.insertBefore(vlab,box);
+
+  OPS.forEach((o,i)=>{
+    const b=document.createElement('div');
+    b.className='bub w'+o.w;
+    b.style.left=mapX(o.x)+'%'; b.style.top=mapY(o.y)+'%';
+    b.style.width=o.s+'px'; b.style.height=o.s+'px';
+    b.textContent=o.n; b.title=o.t;
+    b.addEventListener('click',()=>show(i));
+    b.addEventListener('mouseenter',()=>show(i));
+    box.appendChild(b); o.el=b;
+  });
+  function show(i){
+    OPS.forEach((o,j)=>o.el.classList.toggle('on',i===j));
+    const o=OPS[i];
+    det.innerHTML=
+      '<div class="kicker">Onda '+o.w+' · iniciativa '+o.n+'</div>'+
+      '<h4>'+o.t+'</h4>'+
+      '<dl>'+
+      '<dt>Dado</dt><dd>'+o.dado+'</dd>'+
+      '<dt>Ciclo</dt><dd>'+o.ciclo+'</dd>'+
+      '<dt>Dono</dt><dd>'+o.dono+'</dd>'+
+      '<dt>Valor</dt><dd>'+o.val+'</dd>'+
+      '<dt>Risco</dt><dd>'+o.risc+'</dd>'+
+      '</dl>';
+  }
+  show(0);
+})();
+</script>
+</body>
+</html>

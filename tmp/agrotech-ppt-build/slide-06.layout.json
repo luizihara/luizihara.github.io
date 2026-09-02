@@ -1,0 +1,1382 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/d2heug",
+    "id": "d2heug",
+    "slide": 6,
+    "layoutId": "271f1d7b-6ae8-483f-91f6-c6045be64636",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "e4f9a26f-85f7-49fd-9004-9a4c404af547",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#F1F3EB",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Mono",
+      "Georgia"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "271f1d7b-6ae8-483f-91f6-c6045be64636",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "e4f9a26f-85f7-49fd-9004-9a4c404af547",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "e4f9a26f-85f7-49fd-9004-9a4c404af547",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l83650j6",
+      "id": "1",
+      "bbox": [
+        72,
+        38,
+        1136,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#CBD4C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y5cnulkf",
+      "id": "2",
+      "name": "kicker",
+      "bbox": [
+        72,
+        54,
+        520,
+        18
+      ],
+      "geometry": "rect",
+      "text": "QUESTÃO 3 · PRIORIZAÇÃO",
+      "textPreview": "QUESTÃO 3 · PRIORIZAÇÃO",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "Aptos Mono",
+        "color": "#2E6F50",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "QUESTÃO 3 · PRIORIZAÇÃO"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "QUESTÃO 3 · PRIORIZAÇÃO",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "typeface": "Aptos Mono",
+            "color": "#2E6F50",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "QUESTÃO 3 · PRIORIZAÇÃO",
+              "fontSize": 10,
+              "typeface": "Aptos Mono",
+              "color": "#2E6F50",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z6lo3q10",
+      "id": "3",
+      "name": "page",
+      "bbox": [
+        1134,
+        660,
+        74,
+        16
+      ],
+      "geometry": "rect",
+      "text": "06 / 09",
+      "textPreview": "06 / 09",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "Aptos Mono",
+        "color": "#60706A",
+        "bold": true,
+        "alignment": "right",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "06 / 09"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "06 / 09",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "typeface": "Aptos Mono",
+            "color": "#60706A",
+            "bold": true,
+            "alignment": "right",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "06 / 09",
+              "fontSize": 10,
+              "typeface": "Aptos Mono",
+              "color": "#60706A",
+              "bold": true,
+              "alignment": "right",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cju5sb29",
+      "id": "4",
+      "bbox": [
+        72,
+        138,
+        390,
+        18
+      ],
+      "geometry": "rect",
+      "text": "COMEÇAR ONDE O VALOR É VISÍVEL",
+      "textPreview": "COMEÇAR ONDE O VALOR É VISÍVEL",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "Aptos Mono",
+        "color": "#2E6F50",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "COMEÇAR ONDE O VALOR É VISÍVEL"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "COMEÇAR ONDE O VALOR É VISÍVEL",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "typeface": "Aptos Mono",
+            "color": "#2E6F50",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "COMEÇAR ONDE O VALOR É VISÍVEL",
+              "fontSize": 10,
+              "typeface": "Aptos Mono",
+              "color": "#2E6F50",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dk3m1gju",
+      "id": "5",
+      "name": "title",
+      "bbox": [
+        72,
+        186,
+        386,
+        154
+      ],
+      "geometry": "rect",
+      "text": "A prioridade combina impacto financeiro, dados disponíveis e uma decisão operacional concreta.",
+      "textPreview": "A prioridade combina impacto financeiro, dados disponíveis e uma decisão operacional concreta.",
+      "resolvedFontSize": 28.7,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 45,
+        "typeface": "Georgia",
+        "color": "#2E6F50",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.64,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "A prioridade combina"
+          },
+          {
+            "index": 2,
+            "text": "impacto financeiro, dados"
+          },
+          {
+            "index": 3,
+            "text": "disponíveis e uma decisão"
+          },
+          {
+            "index": 4,
+            "text": "operacional concreta."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "A prioridade combina impacto financeiro, dados disponíveis e uma decisão operacional concreta.",
+          "lineSpacingPercent": 95000,
+          "resolvedTextStyle": {
+            "fontSize": 45,
+            "typeface": "Georgia",
+            "color": "#2E6F50",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 0.95
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "A prioridade combina impacto financeiro, dados disponíveis e uma decisão operacional concreta.",
+              "fontSize": 45,
+              "typeface": "Georgia",
+              "color": "#2E6F50",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 0.95
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qhsnq1kj",
+      "id": "6",
+      "bbox": [
+        72,
+        372,
+        350,
+        72
+      ],
+      "geometry": "rect",
+      "text": "A logística representa 22% do custo operacional: é o melhor ponto de partida para provar valor rapidamente.",
+      "textPreview": "A logística representa 22% do custo operacional: é o melhor ponto de partida para provar valor rapidamente.",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 15,
+        "typeface": "Aptos",
+        "color": "#60706A",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "A logística representa 22% do custo operacional: é"
+          },
+          {
+            "index": 2,
+            "text": "o melhor ponto de partida para provar valor"
+          },
+          {
+            "index": 3,
+            "text": "rapidamente."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "A logística representa 22% do custo operacional: é o melhor ponto de partida para provar valor rapidamente.",
+          "lineSpacingPercent": 120000,
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "typeface": "Aptos",
+            "color": "#60706A",
+            "alignment": "left",
+            "lineSpacing": 1.2
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "A logística representa 22% do custo operacional: é o melhor ponto de partida para provar valor rapidamente.",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#60706A",
+              "alignment": "left",
+              "lineSpacing": 1.2
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bil4z614",
+      "id": "7",
+      "bbox": [
+        550,
+        138,
+        650,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#CBD4C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ofa5ob2d",
+      "id": "8",
+      "bbox": [
+        550,
+        172,
+        65,
+        44
+      ],
+      "geometry": "rect",
+      "text": "01",
+      "textPreview": "01",
+      "resolvedFontSize": 33.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 38,
+        "typeface": "Georgia",
+        "color": "#E96E4C",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.88,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "01"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "01",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 38,
+            "typeface": "Georgia",
+            "color": "#E96E4C",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "01",
+              "fontSize": 38,
+              "typeface": "Georgia",
+              "color": "#E96E4C",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pgjmxwjy",
+      "id": "9",
+      "bbox": [
+        636,
+        170,
+        315,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Otimização logística",
+      "textPreview": "Otimização logística",
+      "resolvedFontSize": 22.73,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 25,
+        "typeface": "Georgia",
+        "color": "#122722",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.91,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Otimização logística"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Otimização logística",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 25,
+            "typeface": "Georgia",
+            "color": "#122722",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Otimização logística",
+              "fontSize": 25,
+              "typeface": "Georgia",
+              "color": "#122722",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tkrepgni",
+      "id": "10",
+      "bbox": [
+        636,
+        212,
+        340,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Rotas, janelas e alocação de transporte.",
+      "textPreview": "Rotas, janelas e alocação de transporte.",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 13,
+        "typeface": "Aptos",
+        "color": "#60706A",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Rotas, janelas e alocação de transporte."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Rotas, janelas e alocação de transporte.",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "typeface": "Aptos",
+            "color": "#60706A",
+            "alignment": "left",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Rotas, janelas e alocação de transporte.",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#60706A",
+              "alignment": "left",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sjidwbmx",
+      "id": "11",
+      "bbox": [
+        987,
+        187,
+        195,
+        28
+      ],
+      "geometry": "rect",
+      "text": "IMPACTO ALTO · COMPLEXIDADE BAIXA",
+      "textPreview": "IMPACTO ALTO · COMPLEXIDADE BAIXA",
+      "resolvedFontSize": 9,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 9,
+        "typeface": "Aptos Mono",
+        "color": "#2E6F50",
+        "bold": true,
+        "alignment": "right",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "IMPACTO ALTO · COMPLEXIDADE BAIXA"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "IMPACTO ALTO · COMPLEXIDADE BAIXA",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 9,
+            "typeface": "Aptos Mono",
+            "color": "#2E6F50",
+            "bold": true,
+            "alignment": "right",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "IMPACTO ALTO · COMPLEXIDADE BAIXA",
+              "fontSize": 9,
+              "typeface": "Aptos Mono",
+              "color": "#2E6F50",
+              "bold": true,
+              "alignment": "right",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ri9wn65c",
+      "id": "12",
+      "bbox": [
+        550,
+        291,
+        650,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#CBD4C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6h0vul4r",
+      "id": "13",
+      "bbox": [
+        550,
+        325,
+        65,
+        44
+      ],
+      "geometry": "rect",
+      "text": "02",
+      "textPreview": "02",
+      "resolvedFontSize": 33.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 38,
+        "typeface": "Georgia",
+        "color": "#E96E4C",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.88,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "02"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "02",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 38,
+            "typeface": "Georgia",
+            "color": "#E96E4C",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "02",
+              "fontSize": 38,
+              "typeface": "Georgia",
+              "color": "#E96E4C",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5grelgnm",
+      "id": "14",
+      "bbox": [
+        636,
+        323,
+        315,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Previsão de produtividade",
+      "textPreview": "Previsão de produtividade",
+      "resolvedFontSize": 22.73,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 25,
+        "typeface": "Georgia",
+        "color": "#122722",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.91,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Previsão de produtividade"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Previsão de produtividade",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 25,
+            "typeface": "Georgia",
+            "color": "#122722",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Previsão de produtividade",
+              "fontSize": 25,
+              "typeface": "Georgia",
+              "color": "#122722",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4fidsbm1",
+      "id": "15",
+      "bbox": [
+        636,
+        365,
+        340,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Risco climático e produtividade por talhão.",
+      "textPreview": "Risco climático e produtividade por talhão.",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 13,
+        "typeface": "Aptos",
+        "color": "#60706A",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Risco climático e produtividade por talhão."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Risco climático e produtividade por talhão.",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "typeface": "Aptos",
+            "color": "#60706A",
+            "alignment": "left",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Risco climático e produtividade por talhão.",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#60706A",
+              "alignment": "left",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/je9wj65g",
+      "id": "16",
+      "bbox": [
+        987,
+        340,
+        195,
+        28
+      ],
+      "geometry": "rect",
+      "text": "IMPACTO ALTO · COMPLEXIDADE MÉDIA",
+      "textPreview": "IMPACTO ALTO · COMPLEXIDADE MÉDIA",
+      "resolvedFontSize": 9,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 9,
+        "typeface": "Aptos Mono",
+        "color": "#2E6F50",
+        "bold": true,
+        "alignment": "right",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "IMPACTO ALTO · COMPLEXIDADE MÉDIA"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "IMPACTO ALTO · COMPLEXIDADE MÉDIA",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 9,
+            "typeface": "Aptos Mono",
+            "color": "#2E6F50",
+            "bold": true,
+            "alignment": "right",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "IMPACTO ALTO · COMPLEXIDADE MÉDIA",
+              "fontSize": 9,
+              "typeface": "Aptos Mono",
+              "color": "#2E6F50",
+              "bold": true,
+              "alignment": "right",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/idgvq14v",
+      "id": "17",
+      "bbox": [
+        550,
+        444,
+        650,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#CBD4C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hc7ehwna",
+      "id": "18",
+      "bbox": [
+        550,
+        478,
+        65,
+        44
+      ],
+      "geometry": "rect",
+      "text": "03",
+      "textPreview": "03",
+      "resolvedFontSize": 33.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 38,
+        "typeface": "Georgia",
+        "color": "#E96E4C",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.88,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "03"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "03",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 38,
+            "typeface": "Georgia",
+            "color": "#E96E4C",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "03",
+              "fontSize": 38,
+              "typeface": "Georgia",
+              "color": "#E96E4C",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wbydormp",
+      "id": "19",
+      "bbox": [
+        636,
+        476,
+        315,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Aplicação de precisão",
+      "textPreview": "Aplicação de precisão",
+      "resolvedFontSize": 22.73,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 25,
+        "typeface": "Georgia",
+        "color": "#122722",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.91,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Aplicação de precisão"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Aplicação de precisão",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 25,
+            "typeface": "Georgia",
+            "color": "#122722",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Aplicação de precisão",
+              "fontSize": 25,
+              "typeface": "Georgia",
+              "color": "#122722",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8v2d4bul",
+      "id": "20",
+      "bbox": [
+        636,
+        518,
+        340,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Avançar após consolidar dados e processo.",
+      "textPreview": "Avançar após consolidar dados e processo.",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 13,
+        "typeface": "Aptos",
+        "color": "#60706A",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Avançar após consolidar dados e processo."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Avançar após consolidar dados e processo.",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "typeface": "Aptos",
+            "color": "#60706A",
+            "alignment": "left",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Avançar após consolidar dados e processo.",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#60706A",
+              "alignment": "left",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9wbedwv6",
+      "id": "21",
+      "bbox": [
+        987,
+        493,
+        195,
+        28
+      ],
+      "geometry": "rect",
+      "text": "IMPACTO ALTO · COMPLEXIDADE ALTA",
+      "textPreview": "IMPACTO ALTO · COMPLEXIDADE ALTA",
+      "resolvedFontSize": 9,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 9,
+        "typeface": "Aptos Mono",
+        "color": "#2E6F50",
+        "bold": true,
+        "alignment": "right",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "IMPACTO ALTO · COMPLEXIDADE ALTA"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "IMPACTO ALTO · COMPLEXIDADE ALTA",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 9,
+            "typeface": "Aptos Mono",
+            "color": "#2E6F50",
+            "bold": true,
+            "alignment": "right",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "IMPACTO ALTO · COMPLEXIDADE ALTA",
+              "fontSize": 9,
+              "typeface": "Aptos Mono",
+              "color": "#2E6F50",
+              "bold": true,
+              "alignment": "right",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mtkv21cf",
+      "id": "22",
+      "bbox": [
+        550,
+        596,
+        650,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#CBD4C6",
+      "lineWidth": 1
+    }
+  ],
+  "composeRuns": []
+}

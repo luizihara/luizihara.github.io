@@ -1,0 +1,540 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/skw8fo",
+    "id": "skw8fo",
+    "slide": 9,
+    "layoutId": "271f1d7b-6ae8-483f-91f6-c6045be64636",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "e4f9a26f-85f7-49fd-9004-9a4c404af547",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#C9E75C",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Mono",
+      "Georgia"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "271f1d7b-6ae8-483f-91f6-c6045be64636",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "e4f9a26f-85f7-49fd-9004-9a4c404af547",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "e4f9a26f-85f7-49fd-9004-9a4c404af547",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kjyxwfud",
+      "id": "1",
+      "bbox": [
+        72,
+        38,
+        1136,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#769D47",
+      "lineWidth": 1
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zipw3ats",
+      "id": "2",
+      "bbox": [
+        72,
+        54,
+        170,
+        18
+      ],
+      "geometry": "rect",
+      "text": "CONCLUSÃO",
+      "textPreview": "CONCLUSÃO",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "Aptos Mono",
+        "color": "#28583F",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONCLUSÃO"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONCLUSÃO",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "typeface": "Aptos Mono",
+            "color": "#28583F",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONCLUSÃO",
+              "fontSize": 10,
+              "typeface": "Aptos Mono",
+              "color": "#28583F",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yhgfu5c7",
+      "id": "3",
+      "name": "title",
+      "bbox": [
+        72,
+        171,
+        1060,
+        85
+      ],
+      "geometry": "rect",
+      "text": "A Vale Verde não precisa apostar tudo na IA.",
+      "textPreview": "A Vale Verde não precisa apostar tudo na IA.",
+      "resolvedFontSize": 46.26,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 58,
+        "typeface": "Georgia",
+        "color": "#122722",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.8,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "A Vale Verde não precisa apostar tudo na IA."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "A Vale Verde não precisa apostar tudo na IA.",
+          "lineSpacingPercent": 92000,
+          "resolvedTextStyle": {
+            "fontSize": 58,
+            "typeface": "Georgia",
+            "color": "#122722",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 0.92
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "A Vale Verde não precisa apostar tudo na IA.",
+              "fontSize": 58,
+              "typeface": "Georgia",
+              "color": "#122722",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 0.92
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/98re9kbu",
+      "id": "4",
+      "bbox": [
+        72,
+        252,
+        1010,
+        80
+      ],
+      "geometry": "rect",
+      "text": "Precisa escalar o que prova valor.",
+      "textPreview": "Precisa escalar o que prova valor.",
+      "resolvedFontSize": 56.99,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 58,
+        "typeface": "Georgia",
+        "color": "#2E6F50",
+        "bold": true,
+        "italic": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.98,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Precisa escalar o que prova"
+          },
+          {
+            "index": 2,
+            "text": "valor."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Precisa escalar o que prova valor.",
+          "lineSpacingPercent": 92000,
+          "resolvedTextStyle": {
+            "fontSize": 58,
+            "typeface": "Georgia",
+            "color": "#2E6F50",
+            "bold": true,
+            "italic": true,
+            "alignment": "left",
+            "lineSpacing": 0.92
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Precisa escalar o que prova valor.",
+              "fontSize": 58,
+              "typeface": "Georgia",
+              "color": "#2E6F50",
+              "bold": true,
+              "italic": true,
+              "alignment": "left",
+              "lineSpacing": 0.92
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/87yx0fu9",
+      "id": "5",
+      "bbox": [
+        72,
+        522,
+        1136,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#769D47",
+      "lineWidth": 1
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7mpw7ato",
+      "id": "6",
+      "bbox": [
+        72,
+        549,
+        520,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Uma ambição moderada, governada por valor e integrada à operação transforma o perfil conservador da liderança em disciplina de execução.",
+      "textPreview": "Uma ambição moderada, governada por valor e integrada à operação transforma o perfil conservador da liderança em disciplina de execução.",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 15,
+        "typeface": "Aptos",
+        "color": "#42594F",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Uma ambição moderada, governada por valor e integrada à operação"
+          },
+          {
+            "index": 2,
+            "text": "transforma o perfil conservador da liderança em disciplina de execução."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Uma ambição moderada, governada por valor e integrada à operação transforma o perfil conservador da liderança em disciplina de execução.",
+          "lineSpacingPercent": 118000,
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "typeface": "Aptos",
+            "color": "#42594F",
+            "alignment": "left",
+            "lineSpacing": 1.18
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Uma ambição moderada, governada por valor e integrada à operação transforma o perfil conservador da liderança em disciplina de execução.",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#42594F",
+              "alignment": "left",
+              "lineSpacing": 1.18
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mlgfy5c3",
+      "id": "7",
+      "bbox": [
+        758,
+        570,
+        450,
+        20
+      ],
+      "geometry": "rect",
+      "text": "AGROTECH VALE VERDE · IA COMO CAPACIDADE ESTRATÉGICA",
+      "textPreview": "AGROTECH VALE VERDE · IA COMO CAPACIDADE ESTRATÉGICA",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "Aptos Mono",
+        "color": "#355D48",
+        "bold": true,
+        "alignment": "right",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "AGROTECH VALE VERDE · IA COMO CAPACIDADE ESTRATÉGICA"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "AGROTECH VALE VERDE · IA COMO CAPACIDADE ESTRATÉGICA",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "typeface": "Aptos Mono",
+            "color": "#355D48",
+            "bold": true,
+            "alignment": "right",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "AGROTECH VALE VERDE · IA COMO CAPACIDADE ESTRATÉGICA",
+              "fontSize": 10,
+              "typeface": "Aptos Mono",
+              "color": "#355D48",
+              "bold": true,
+              "alignment": "right",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pcnex0bq",
+      "id": "8",
+      "bbox": [
+        1134,
+        660,
+        74,
+        16
+      ],
+      "geometry": "rect",
+      "text": "09 / 09",
+      "textPreview": "09 / 09",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "Aptos Mono",
+        "color": "#315E45",
+        "bold": true,
+        "alignment": "right",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "09 / 09"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "09 / 09",
+          "lineSpacingPercent": 110000,
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "typeface": "Aptos Mono",
+            "color": "#315E45",
+            "bold": true,
+            "alignment": "right",
+            "lineSpacing": 1.1
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "09 / 09",
+              "fontSize": 10,
+              "typeface": "Aptos Mono",
+              "color": "#315E45",
+              "bold": true,
+              "alignment": "right",
+              "lineSpacing": 1.1
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

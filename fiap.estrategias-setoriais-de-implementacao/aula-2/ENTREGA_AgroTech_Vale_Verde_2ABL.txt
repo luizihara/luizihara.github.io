@@ -1,0 +1,124 @@
+================================================================================
+
+          FIAP MBA TECH  ·  ESTRATÉGIAS SETORIAIS DE IMPLEMENTAÇÃO
+                              ESTUDO DE CASO
+
+              AgroTech Vale Verde: entre eficiência operacional
+            e transformação orientada por Inteligência Artificial
+
+================================================================================
+
+
+   >>>  O TRABALHO ESTÁ PUBLICADO EM:
+
+        https://luizihara.github.io/fiap.estrategias-setoriais-de-implementacao/aula-2/index.html
+
+
+--------------------------------------------------------------------------------
+IDENTIFICAÇÃO
+--------------------------------------------------------------------------------
+
+   TURMA .......... 2ABL
+   DISCIPLINA ..... Estratégias Setoriais de Implementação
+   PROFESSOR ...... Elias Eduardo Bernardo da Silva
+   CURSO .......... FIAP MBA Tech
+
+   ALUNOS
+
+      Luiz Ihara ............. RM368484
+      Filipe Fragoso ......... RM368500
+      Daniel Caminha ......... RM366740
+      Pedro Martins .......... RM368543
+
+
+--------------------------------------------------------------------------------
+RECADO
+--------------------------------------------------------------------------------
+
+   Professor Elias, tudo bem?
+
+   Em vez de entregar a análise em um documento comum, montamos uma página
+   web única para mostrar os modelos em funcionamento, e não só descrevê-los.
+
+   As 5 Forças de Porter estão em um diagrama tridimensional no qual é possível
+   alternar entre o cenário atual do setor e o cenário de difusão da IA, e
+   acompanhar cada força mudando de intensidade. O radar de maturidade, a matriz
+   de priorização e o roadmap com os gates de capital seguem a mesma ideia: o
+   leitor pode explorar o raciocínio em vez de só ler o resultado dele.
+
+   Para ver, basta abrir o link acima em qualquer navegador atualizado, no
+   computador ou no celular. Não é preciso instalar nada, não há login e a
+   página também funciona sem interação alguma, apenas rolando de cima a baixo.
+
+   As quatro questões estão nas seções 01 a 04, na ordem do enunciado, e a
+   recomendação final fecha o documento. Ao fim da página há um bloco chamado
+   "Versão em texto corrido", que reúne em tabelas de texto todos os números
+   que aparecem nas visualizações, caso seja mais prático para leitura rápida,
+   impressão ou correção.
+
+   Obrigado pela disciplina e pelo caso, que rendeu boas discussões no grupo.
+   Ficamos à disposição para qualquer esclarecimento.
+
+   Um abraço,
+   Luiz, Filipe, Daniel e Pedro
+
+
+--------------------------------------------------------------------------------
+O QUE ESTÁ EM CADA SEÇÃO
+--------------------------------------------------------------------------------
+
+   QUESTÃO 1 · ANÁLISE SETORIAL E COMPETITIVA
+   Classificamos o agronegócio em maturidade digital baixa a média-baixa, com
+   3,1 de 6 no ITD-Br 2024 contra a média nacional de 3,7. Aplicamos as 5 Forças
+   de Porter em dois cenários e concluímos que a difusão da IA aumenta a
+   pressão competitiva: a rivalidade sobe de 0,65 para 0,88 porque a fronteira
+   de custo se desloca para quem adota primeiro, o poder do comprador segue
+   alto porque rastreabilidade e ESG deixam de ser diferencial, e o alívio no
+   poder do fornecedor de insumos é parcialmente devolvido a um fornecedor
+   novo, a plataforma de tecnologia, que sai de 0,28 para 0,62.
+
+   QUESTÃO 2 · DIAGNÓSTICO ORGANIZACIONAL
+   A empresa fica no Nível 1 (Exploração), com média 1,4 em seis dimensões
+   avaliadas de 1 a 5. A governança de dados, em 1,0, é a barreira crítica.
+   Discutimos ainda dois pontos que consideramos centrais: a acurácia de 78%
+   citada no caso não permite conclusão sem o baseline humano e o custo
+   assimétrico do erro; e a exigência de evidência consolidada antes do
+   experimento cria o impasse que ajuda a explicar o Pilot Purgatory.
+
+   QUESTÃO 3 · OPORTUNIDADES, RISCOS E PRIORIZAÇÃO
+   Adotamos cinco condições cumulativas para ordenar a fila (dado disponível,
+   decisão repetitiva, retorno em até um trimestre, responsável definido e
+   decisão reversível). Isso coloca logística, manutenção preditiva e compras
+   preditivas na primeira onda, e adia a previsão de produtividade, que só é
+   validada uma vez por safra. Oito riscos foram mapeados com severidade e com a
+   mitigação correspondente já prevista no roadmap.
+
+   QUESTÃO 4 · ESTRATÉGIA E ROADMAP DE IMPLEMENTAÇÃO
+   Propomos ambição moderada, com sequenciamento definido: 24 meses, quatro
+   fases (Diagnóstico, Piloto, Escala e Reposicionamento) e três gates de
+   capital, com critério numérico fixado antes do início de cada fase.
+   Detalhamos a governança de dados e de risco de modelo, os indicadores por
+   área e o financiamento por opções reais, formato compatível com o perfil
+   conservador da diretoria.
+   A recomendação final é aprovar de imediato apenas a Fase 0.
+
+
+--------------------------------------------------------------------------------
+OBSERVAÇÕES
+--------------------------------------------------------------------------------
+
+   · Todos os dados de receita, EBITDA, área, exportação, ineficiências
+     (7%, 10% e 22%), acurácia (78%) e maturidade setorial provêm do enunciado.
+     Os valores financeiros derivados são estimativas de ordem de grandeza
+     calculadas a partir desses percentuais e estão sinalizadas como tal ao
+     longo do documento.
+
+   · A página é estática, feita sem framework, e as duas cenas tridimensionais
+     foram desenvolvidas pelo grupo em Three.js.
+
+   · O código-fonte traz, logo no início, um resumo completo do trabalho em
+     texto puro, útil para leitura automatizada e para leitores de tela.
+
+================================================================================
+                Entrega referente à aula 2 · Turma 2ABL · FIAP MBA Tech
+================================================================================

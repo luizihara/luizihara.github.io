@@ -1,0 +1,187 @@
+{"kind":"deck","id":"pr/5hfljz","name":"Deck"}
+{"kind":"layout","layoutId":"e4f9a26f-85f7-49fd-9004-9a4c404af547","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"271f1d7b-6ae8-483f-91f6-c6045be64636","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/vle5y4","slide":1,"title":"FIAP MBA TECH · ESTRATÉGIAS SETORIAIS DE IMPLEMENTAÇÃO","textShapes":6}
+{"kind":"shape","id":"sh/l0bmlgru","slide":1,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/yxk3a1s3","slide":1,"bbox":[770,88,430,365]}
+{"kind":"shape","id":"sh/zyt4j69o","slide":1,"bbox":[737,105,496,411]}
+{"kind":"shape","id":"sh/8nm5gba5","slide":1,"bbox":[704,122,562,457]}
+{"kind":"shape","id":"sh/9ovmpgrq","slide":1,"bbox":[671,139,628,503]}
+{"kind":"shape","id":"sh/ml4nelsz","slide":1,"bbox":[638,156,694,549]}
+{"kind":"shape","id":"sh/nmd4nq9k","slide":1,"bbox":[605,173,760,595]}
+{"kind":"shape","id":"sh/4ril4ra1","slide":1,"bbox":[572,190,826,641]}
+{"kind":"textbox","id":"sh/psrmdwrm","slide":1,"text":"FIAP MBA TECH · ESTRATÉGIAS SETORIAIS DE IMPLEMENTAÇÃO","textPreview":"FIAP MBA TECH · ESTRATÉGIAS SETORIAIS DE IMPLEMENTAÇÃO","textChars":54,"textLines":1,"bbox":[72,71,560,18]}
+{"kind":"textbox","id":"sh/5sjax8re","slide":1,"name":"title","text":"Colher eficiência.","textPreview":"Colher eficiência.","textChars":18,"textLines":1,"bbox":[72,220,850,98]}
+{"kind":"textbox","id":"sh/4ra9onqt","slide":1,"text":"Cultivar inteligência.","textPreview":"Cultivar inteligência.","textChars":22,"textLines":1,"bbox":[72,302,850,98]}
+{"kind":"textbox","id":"sh/3q1svi98","slide":1,"text":"AgroTech Vale Verde: entre a excelência operacional e uma transformação orientada por Inteligência Artificial.","textPreview":"AgroTech Vale Verde: entre a excelência operacional e uma transformação orientada por Inteligência Artificial.","textChars":110,"textLines":1,"bbox":[72,432,590,68]}
+{"kind":"textbox","id":"sh/ipsrmd83","slide":1,"text":"ANÁLISE ESTRATÉGICA · ESTUDO DE CASO · 2026","textPreview":"ANÁLISE ESTRATÉGICA · ESTUDO DE CASO · 2026","textChars":43,"textLines":1,"bbox":[72,587,500,18]}
+{"kind":"textbox","id":"sh/dw3a1srq","slide":1,"text":"01 / 09","textPreview":"01 / 09","textChars":7,"textLines":1,"bbox":[1134,660,74,16]}
+{"kind":"notes","id":"nt/vle5y4","slide":1,"text":"[Sources]\n- Estudo de Caso - AgroTech (1).pdf (arquivo fornecido pelo usuário).\n- Recomendações e priorização: análise original a partir do enunciado.\nCapa. Abra com o dilema: manter eficiência comprovada ou criar capacidade de IA."}
+{"kind":"slide","id":"sl/qknx8b","slide":2,"title":"O CONTEXTO DA EMPRESA","textShapes":11}
+{"kind":"shape","id":"sh/alkb2tsb","slide":2,"bbox":[72,38,1136,0]}
+{"kind":"textbox","id":"sh/xobador2","slide":2,"name":"kicker","text":"O CONTEXTO DA EMPRESA","textPreview":"O CONTEXTO DA EMPRESA","textChars":21,"textLines":1,"bbox":[72,54,520,18]}
+{"kind":"textbox","id":"sh/wn2t4jah","slide":2,"name":"page","text":"02 / 09","textPreview":"02 / 09","textChars":7,"textLines":1,"bbox":[1134,660,74,16]}
+{"kind":"textbox","id":"sh/jadsfy9s","slide":2,"name":"title","text":"Uma operação sólida\nem um mercado que\nmudou de ritmo.","textPreview":"Uma operação sólida | em um mercado que | mudou de ritmo.","textChars":53,"textLines":3,"bbox":[72,136,650,250]}
+{"kind":"shape","id":"sh/i9kb6ts7","slide":2,"bbox":[72,465,1136,0]}
+{"kind":"textbox","id":"sh/5cvah8ry","slide":2,"text":"VALE VERDE EM 2025","textPreview":"VALE VERDE EM 2025","textChars":18,"textLines":1,"bbox":[72,495,210,18]}
+{"kind":"textbox","id":"sh/kbmt83ad","slide":2,"text":"Player relevante de soja e milho no Centro-Oeste.","textPreview":"Player relevante de soja e milho no Centro-Oeste.","textChars":49,"textLines":1,"bbox":[72,522,230,40]}
+{"kind":"textbox","id":"sh/7edcji94","slide":2,"text":"85 mil","textPreview":"85 mil","textChars":6,"textLines":1,"bbox":[366,495,225,54]}
+{"kind":"textbox","id":"sh/6d4badsj","slide":2,"text":"hectares cultivados","textPreview":"hectares cultivados","textChars":19,"textLines":1,"bbox":[366,555,185,32]}
+{"kind":"shape","id":"sh/knilobq1","slide":2,"bbox":[617,488,1,0]}
+{"kind":"textbox","id":"sh/lor2hgrm","slide":2,"text":"R$ 480 mi","textPreview":"R$ 480 mi","textChars":9,"textLines":1,"bbox":[641,495,225,54]}
+{"kind":"textbox","id":"sh/yl0jm18v","slide":2,"text":"receita anual","textPreview":"receita anual","textChars":13,"textLines":1,"bbox":[641,555,185,32]}
+{"kind":"shape","id":"sh/jm9kf69g","slide":2,"bbox":[892,488,1,0]}
+{"kind":"textbox","id":"sh/8r2lsvqd","slide":2,"text":"12%","textPreview":"12%","textChars":3,"textLines":1,"bbox":[916,495,225,54]}
+{"kind":"textbox","id":"sh/tsb2l0ri","slide":2,"text":"EBITDA médio","textPreview":"EBITDA médio","textChars":12,"textLines":1,"bbox":[916,555,185,32]}
+{"kind":"notes","id":"nt/qknx8b","slide":2,"text":"[Sources]\n- Estudo de Caso - AgroTech (1).pdf (arquivo fornecido pelo usuário).\n- Recomendações e priorização: análise original a partir do enunciado.\nApresente os dados que mostram uma empresa operacionalmente robusta, antes de discutir a transformação."}
+{"kind":"slide","id":"sl/yhwb75","slide":3,"title":"QUESTÃO 1 · SETOR E COMPETIÇÃO","textShapes":12}
+{"kind":"shape","id":"sh/i9k3apc3","slide":3,"bbox":[72,38,1136,0]}
+{"kind":"textbox","id":"sh/5cb2l4be","slide":3,"name":"kicker","text":"QUESTÃO 1 · SETOR E COMPETIÇÃO","textPreview":"QUESTÃO 1 · SETOR E COMPETIÇÃO","textChars":30,"textLines":1,"bbox":[72,54,520,18]}
+{"kind":"textbox","id":"sh/4b2lczut","slide":3,"name":"page","text":"03 / 09","textPreview":"03 / 09","textChars":7,"textLines":1,"bbox":[1134,660,74,16]}
+{"kind":"textbox","id":"sh/rydknetk","slide":3,"text":"MATURIDADE DIGITAL DO AGRONEGÓCIO","textPreview":"MATURIDADE DIGITAL DO AGRONEGÓCIO","textChars":33,"textLines":1,"bbox":[72,155,340,18]}
+{"kind":"textbox","id":"sh/qxk3e9cz","slide":3,"text":"3,1","textPreview":"3,1","textChars":3,"textLines":1,"bbox":[72,202,360,130]}
+{"kind":"textbox","id":"sh/d0v2pobq","slide":3,"text":"em uma escala de 1 a 6.\nA média brasileira é 3,7.","textPreview":"em uma escala de 1 a 6. | A média brasileira é 3,7.","textChars":49,"textLines":2,"bbox":[72,348,340,64]}
+{"kind":"textbox","id":"sh/szmlgju5","slide":3,"name":"title","text":"A baixa maturidade é uma fragilidade - e uma janela de vantagem para quem aprende primeiro.","textPreview":"A baixa maturidade é uma fragilidade - e uma janela de vantagem para quem aprende primeiro.","textChars":91,"textLines":1,"bbox":[572,157,570,156]}
+{"kind":"textbox","id":"sh/729kbatg","slide":3,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[572,370,28,20]}
+{"kind":"textbox","id":"sh/610j25cv","slide":3,"text":"Clima, solo, produção e logística oferecem alto potencial preditivo.","textPreview":"Clima, solo, produção e logística oferecem alto potencial preditivo.","textChars":68,"textLines":1,"bbox":[614,367,528,42]}
+{"kind":"shape","id":"sh/4z610na5","slide":3,"bbox":[572,418,570,0]}
+{"kind":"textbox","id":"sh/p0f2t8bq","slide":3,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[572,440,28,20]}
+{"kind":"textbox","id":"sh/2xojydsf","slide":3,"text":"Conectividade, integração e governança ainda limitam a captura de valor.","textPreview":"Conectividade, integração e governança ainda limitam a captura de valor.","textChars":72,"textLines":1,"bbox":[614,437,528,42]}
+{"kind":"shape","id":"sh/3yxkrit0","slide":3,"bbox":[572,488,570,0]}
+{"kind":"textbox","id":"sh/cnql4nah","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[572,510,28,20]}
+{"kind":"textbox","id":"sh/doz2xsb2","slide":3,"text":"Rastreabilidade ESG torna capacidade analítica um requisito de mercado.","textPreview":"Rastreabilidade ESG torna capacidade analítica um requisito de mercado.","textChars":71,"textLines":1,"bbox":[614,507,528,42]}
+{"kind":"shape","id":"sh/qlo32dsb","slide":3,"bbox":[572,558,570,0]}
+{"kind":"notes","id":"nt/yhwb75","slide":3,"text":"[Sources]\n- Estudo de Caso - AgroTech (1).pdf (arquivo fornecido pelo usuário).\n- Recomendações e priorização: análise original a partir do enunciado.\nExplique que a IA é especialmente valiosa no agronegócio porque as decisões se repetem e geram dados em escala."}
+{"kind":"slide","id":"sl/hda569","slide":4,"title":"QUESTÃO 1 · 5 FORÇAS DE PORTER","textShapes":23}
+{"kind":"shape","id":"sh/vaxc32h4","slide":4,"bbox":[72,38,1136,0]}
+{"kind":"textbox","id":"sh/wb6twnyp","slide":4,"name":"kicker","text":"QUESTÃO 1 · 5 FORÇAS DE PORTER","textPreview":"QUESTÃO 1 · 5 FORÇAS DE PORTER","textChars":30,"textLines":1,"bbox":[72,54,520,18]}
+{"kind":"textbox","id":"sh/hcfu5sza","slide":4,"name":"page","text":"04 / 09","textPreview":"04 / 09","textChars":7,"textLines":1,"bbox":[1134,660,74,16]}
+{"kind":"textbox","id":"sh/m54bqdgn","slide":4,"name":"title","text":"IA redesenha as forças\nque definem a competição.","textPreview":"IA redesenha as forças | que definem a competição.","textChars":48,"textLines":2,"bbox":[72,106,790,120]}
+{"kind":"shape","id":"sh/76dczih8","slide":4,"bbox":[72,294,210,284]}
+{"kind":"textbox","id":"sh/87mtsnyt","slide":4,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[90,315,44,18]}
+{"kind":"textbox","id":"sh/98vu1sze","slide":4,"text":"Rivalidade","textPreview":"Rivalidade","textChars":10,"textLines":1,"bbox":[90,366,165,38]}
+{"kind":"textbox","id":"sh/618v2hgr","slide":4,"text":"Algoritmos reduzem custo por hectare e aceleram a resposta.","textPreview":"Algoritmos reduzem custo por hectare e aceleram a resposta.","textChars":59,"textLines":1,"bbox":[90,420,168,84]}
+{"kind":"textbox","id":"sh/r2hcbmhc","slide":4,"text":"COMPETIÇÃO AUMENTA","textPreview":"COMPETIÇÃO AUMENTA","textChars":18,"textLines":1,"bbox":[90,540,165,16]}
+{"kind":"shape","id":"sh/vq1wn610","slide":4,"bbox":[299,294,210,284]}
+{"kind":"textbox","id":"sh/upsvu1kf","slide":4,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[317,315,44,18]}
+{"kind":"textbox","id":"sh/hs3epgjq","slide":4,"text":"Entrantes","textPreview":"Entrantes","textChars":9,"textLines":1,"bbox":[317,366,165,38]}
+{"kind":"textbox","id":"sh/wrudwbil","slide":4,"text":"Dados proprietários tornam-se uma barreira difícil de copiar.","textPreview":"Dados proprietários tornam-se uma barreira difícil de copiar.","textChars":61,"textLines":1,"bbox":[317,420,168,84]}
+{"kind":"textbox","id":"sh/julwr61w","slide":4,"text":"BARREIRA AUMENTA","textPreview":"BARREIRA AUMENTA","textChars":16,"textLines":1,"bbox":[317,540,165,16]}
+{"kind":"shape","id":"sh/itcfyl0b","slide":4,"bbox":[526,294,210,284]}
+{"kind":"textbox","id":"sh/5w3etgj2","slide":4,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[544,315,44,18]}
+{"kind":"textbox","id":"sh/4vux0bih","slide":4,"text":"Fornecedores","textPreview":"Fornecedores","textChars":12,"textLines":1,"bbox":[544,366,165,38]}
+{"kind":"textbox","id":"sh/rilwvq18","slide":4,"text":"Previsão e otimização fortalecem negociação de insumos e fretes.","textPreview":"Previsão e otimização fortalecem negociação de insumos e fretes.","textChars":64,"textLines":1,"bbox":[544,420,168,84]}
+{"kind":"textbox","id":"sh/6hcf2l0n","slide":4,"text":"PODER REDUZ","textPreview":"PODER REDUZ","textChars":11,"textLines":1,"bbox":[544,540,165,16]}
+{"kind":"shape","id":"sh/2p07ator","slide":4,"bbox":[753,294,210,284]}
+{"kind":"textbox","id":"sh/nq98jepc","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[771,315,44,18]}
+{"kind":"textbox","id":"sh/oripcj6x","slide":4,"text":"Compradores","textPreview":"Compradores","textChars":11,"textLines":1,"bbox":[771,366,165,38]}
+{"kind":"textbox","id":"sh/psrqlo7i","slide":4,"text":"Rastreabilidade e ESG aumentam a exigência de mercados externos.","textPreview":"Rastreabilidade e ESG aumentam a exigência de mercados externos.","textChars":64,"textLines":1,"bbox":[771,420,168,84]}
+{"kind":"textbox","id":"sh/e1g7698v","slide":4,"text":"PRESSÃO AUMENTA","textPreview":"PRESSÃO AUMENTA","textChars":15,"textLines":1,"bbox":[771,540,165,16]}
+{"kind":"shape","id":"sh/fmp8fepg","slide":4,"bbox":[980,294,210,284]}
+{"kind":"textbox","id":"sh/0nyp8j61","slide":4,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[998,315,44,18]}
+{"kind":"textbox","id":"sh/1orqho7m","slide":4,"text":"Substitutos","textPreview":"Substitutos","textChars":11,"textLines":1,"bbox":[998,366,165,38]}
+{"kind":"textbox","id":"sh/yxkridoz","slide":4,"text":"A IA diferencia o produtor previsível e confiável.","textPreview":"A IA diferencia o produtor previsível e confiável.","textChars":50,"textLines":1,"bbox":[998,420,168,84]}
+{"kind":"textbox","id":"sh/zit8rypk","slide":4,"text":"EFEITO INDIRETO","textPreview":"EFEITO INDIRETO","textChars":15,"textLines":1,"bbox":[998,540,165,16]}
+{"kind":"notes","id":"nt/hda569","slide":4,"text":"[Sources]\n- Estudo de Caso - AgroTech (1).pdf (arquivo fornecido pelo usuário).\n- Recomendações e priorização: análise original a partir do enunciado.\nUse esta leitura para mostrar como cada força é afetada pela IA. Não trate IA como um fim tecnológico."}
+{"kind":"slide","id":"sl/hx0js3","slide":5,"title":"QUESTÃO 2 · DIAGNÓSTICO ORGANIZACIONAL","textShapes":14}
+{"kind":"shape","id":"sh/6p0zedov","slide":5,"bbox":[72,38,1136,0]}
+{"kind":"textbox","id":"sh/tsrip87m","slide":5,"name":"kicker","text":"QUESTÃO 2 · DIAGNÓSTICO ORGANIZACIONAL","textPreview":"QUESTÃO 2 · DIAGNÓSTICO ORGANIZACIONAL","textChars":38,"textLines":1,"bbox":[72,54,520,18]}
+{"kind":"textbox","id":"sh/8rihg361","slide":5,"name":"page","text":"05 / 09","textPreview":"05 / 09","textChars":7,"textLines":1,"bbox":[1134,660,74,16]}
+{"kind":"shape","id":"sh/jmp0jypk","slide":5,"bbox":[72,136,365,440]}
+{"kind":"textbox","id":"sh/y1gzatoz","slide":5,"text":"MATURIDADE ATUAL","textPreview":"MATURIDADE ATUAL","textChars":16,"textLines":1,"bbox":[106,170,220,18]}
+{"kind":"textbox","id":"sh/loril87a","slide":5,"text":"Nível 1\nExploração","textPreview":"Nível 1 | Exploração","textChars":18,"textLines":2,"bbox":[106,238,302,146]}
+{"kind":"textbox","id":"sh/knyhc36p","slide":5,"text":"Pilotos existem, mas não foram incorporados à rotina produtiva nem ligados ao resultado financeiro.","textPreview":"Pilotos existem, mas não foram incorporados à rotina produtiva nem ligados ao resultado financeiro.","textChars":99,"textLines":1,"bbox":[106,463,245,68]}
+{"kind":"textbox","id":"sh/byp0fyp8","slide":5,"name":"title","text":"O problema não é o modelo. É o sistema.","textPreview":"O problema não é o modelo. É o sistema.","textChars":39,"textLines":1,"bbox":[510,145,625,94]}
+{"kind":"shape","id":"sh/axgz6ton","slide":5,"bbox":[510,315,258,0]}
+{"kind":"textbox","id":"sh/crudkzih","slide":5,"text":"Dados","textPreview":"Dados","textChars":5,"textLines":1,"bbox":[510,331,250,28]}
+{"kind":"textbox","id":"sh/ds3ut4z2","slide":5,"text":"Coleta parcial no campo e baixa integração entre ERP, clima, produção e logística.","textPreview":"Coleta parcial no campo e baixa integração entre ERP, clima, produção e logística.","textChars":82,"textLines":1,"bbox":[510,371,255,67]}
+{"kind":"shape","id":"sh/qpcvip0b","slide":5,"bbox":[835,315,258,0]}
+{"kind":"textbox","id":"sh/rqlcruhw","slide":5,"text":"Governança","textPreview":"Governança","textChars":10,"textLines":1,"bbox":[835,331,250,28]}
+{"kind":"textbox","id":"sh/4nadgzi5","slide":5,"text":"Sem padrão de qualidade, responsável definido ou rastreabilidade consistente.","textPreview":"Sem padrão de qualidade, responsável definido ou rastreabilidade consistente.","textChars":77,"textLines":1,"bbox":[835,371,255,67]}
+{"kind":"shape","id":"sh/pojup4zq","slide":5,"bbox":[510,460,258,0]}
+{"kind":"textbox","id":"sh/2lsvep0f","slide":5,"text":"Cultura","textPreview":"Cultura","textChars":7,"textLines":1,"bbox":[510,476,250,28]}
+{"kind":"textbox","id":"sh/3m1cnuhk","slide":5,"text":"Decisão baseada na experiência; baixa prática de experimentação controlada.","textPreview":"Decisão baseada na experiência; baixa prática de experimentação controlada.","textChars":75,"textLines":1,"bbox":[510,516,255,67]}
+{"kind":"shape","id":"sh/ojedsjyp","slide":5,"bbox":[835,460,258,0]}
+{"kind":"textbox","id":"sh/9kne1oza","slide":5,"text":"Liderança","textPreview":"Liderança","textChars":9,"textLines":1,"bbox":[835,476,250,28]}
+{"kind":"textbox","id":"sh/x4zmpkn2","slide":5,"text":"Perfil conservador protege a operação, mas reduz apetite a testes sem retorno visível.","textPreview":"Perfil conservador protege a operação, mas reduz apetite a testes sem retorno visível.","textChars":86,"textLines":1,"bbox":[835,516,255,67]}
+{"kind":"notes","id":"nt/hx0js3","slide":5,"text":"[Sources]\n- Estudo de Caso - AgroTech (1).pdf (arquivo fornecido pelo usuário).\n- Recomendações e priorização: análise original a partir do enunciado.\nDefenda a classificação Nível 1: a tecnologia foi experimentada, mas não há escala, processo ou governança."}
+{"kind":"slide","id":"sl/d2heug","slide":6,"title":"QUESTÃO 3 · PRIORIZAÇÃO","textShapes":17}
+{"kind":"shape","id":"sh/l83650j6","slide":6,"bbox":[72,38,1136,0]}
+{"kind":"textbox","id":"sh/y5cnulkf","slide":6,"name":"kicker","text":"QUESTÃO 3 · PRIORIZAÇÃO","textPreview":"QUESTÃO 3 · PRIORIZAÇÃO","textChars":23,"textLines":1,"bbox":[72,54,520,18]}
+{"kind":"textbox","id":"sh/z6lo3q10","slide":6,"name":"page","text":"06 / 09","textPreview":"06 / 09","textChars":7,"textLines":1,"bbox":[1134,660,74,16]}
+{"kind":"textbox","id":"sh/cju5sb29","slide":6,"text":"COMEÇAR ONDE O VALOR É VISÍVEL","textPreview":"COMEÇAR ONDE O VALOR É VISÍVEL","textChars":30,"textLines":1,"bbox":[72,138,390,18]}
+{"kind":"textbox","id":"sh/dk3m1gju","slide":6,"name":"title","text":"A prioridade combina impacto financeiro, dados disponíveis e uma decisão operacional concreta.","textPreview":"A prioridade combina impacto financeiro, dados disponíveis e uma decisão operacional concreta.","textChars":94,"textLines":1,"bbox":[72,186,386,154]}
+{"kind":"textbox","id":"sh/qhsnq1kj","slide":6,"text":"A logística representa 22% do custo operacional: é o melhor ponto de partida para provar valor rapidamente.","textPreview":"A logística representa 22% do custo operacional: é o melhor ponto de partida para provar valor rapidamente.","textChars":107,"textLines":1,"bbox":[72,372,350,72]}
+{"kind":"shape","id":"sh/bil4z614","slide":6,"bbox":[550,138,650,0]}
+{"kind":"textbox","id":"sh/ofa5ob2d","slide":6,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[550,172,65,44]}
+{"kind":"textbox","id":"sh/pgjmxwjy","slide":6,"text":"Otimização logística","textPreview":"Otimização logística","textChars":20,"textLines":1,"bbox":[636,170,315,30]}
+{"kind":"textbox","id":"sh/tkrepgni","slide":6,"text":"Rotas, janelas e alocação de transporte.","textPreview":"Rotas, janelas e alocação de transporte.","textChars":40,"textLines":1,"bbox":[636,212,340,24]}
+{"kind":"textbox","id":"sh/sjidwbmx","slide":6,"text":"IMPACTO ALTO · COMPLEXIDADE BAIXA","textPreview":"IMPACTO ALTO · COMPLEXIDADE BAIXA","textChars":33,"textLines":1,"bbox":[987,187,195,28]}
+{"kind":"shape","id":"sh/ri9wn65c","slide":6,"bbox":[550,291,650,0]}
+{"kind":"textbox","id":"sh/6h0vul4r","slide":6,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[550,325,65,44]}
+{"kind":"textbox","id":"sh/5grelgnm","slide":6,"text":"Previsão de produtividade","textPreview":"Previsão de produtividade","textChars":25,"textLines":1,"bbox":[636,323,315,30]}
+{"kind":"textbox","id":"sh/4fidsbm1","slide":6,"text":"Risco climático e produtividade por talhão.","textPreview":"Risco climático e produtividade por talhão.","textChars":43,"textLines":1,"bbox":[636,365,340,24]}
+{"kind":"textbox","id":"sh/je9wj65g","slide":6,"text":"IMPACTO ALTO · COMPLEXIDADE MÉDIA","textPreview":"IMPACTO ALTO · COMPLEXIDADE MÉDIA","textChars":33,"textLines":1,"bbox":[987,340,195,28]}
+{"kind":"shape","id":"sh/idgvq14v","slide":6,"bbox":[550,444,650,0]}
+{"kind":"textbox","id":"sh/hc7ehwna","slide":6,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[550,478,65,44]}
+{"kind":"textbox","id":"sh/wbydormp","slide":6,"text":"Aplicação de precisão","textPreview":"Aplicação de precisão","textChars":21,"textLines":1,"bbox":[636,476,315,30]}
+{"kind":"textbox","id":"sh/8v2d4bul","slide":6,"text":"Avançar após consolidar dados e processo.","textPreview":"Avançar após consolidar dados e processo.","textChars":41,"textLines":1,"bbox":[636,518,340,24]}
+{"kind":"textbox","id":"sh/9wbedwv6","slide":6,"text":"IMPACTO ALTO · COMPLEXIDADE ALTA","textPreview":"IMPACTO ALTO · COMPLEXIDADE ALTA","textChars":32,"textLines":1,"bbox":[987,493,195,28]}
+{"kind":"shape","id":"sh/mtkv21cf","slide":6,"bbox":[550,596,650,0]}
+{"kind":"notes","id":"nt/d2heug","slide":6,"text":"[Sources]\n- Estudo de Caso - AgroTech (1).pdf (arquivo fornecido pelo usuário).\n- Recomendações e priorização: análise original a partir do enunciado.\nRecomende iniciar pela logística e manter previsão de produtividade como segundo piloto. Evite ampliar o portfólio antes de provar valor."}
+{"kind":"slide","id":"sl/np9k9d","slide":7,"title":"QUESTÃO 3 · RISCOS QUE DEVEM SER GERIDOS","textShapes":16}
+{"kind":"shape","id":"sh/v6pw3edk","slide":7,"bbox":[72,38,1136,0]}
+{"kind":"textbox","id":"sh/w7yxwju5","slide":7,"name":"kicker","text":"QUESTÃO 3 · RISCOS QUE DEVEM SER GERIDOS","textPreview":"QUESTÃO 3 · RISCOS QUE DEVEM SER GERIDOS","textChars":40,"textLines":1,"bbox":[72,54,520,18]}
+{"kind":"textbox","id":"sh/hsre5ovq","slide":7,"name":"page","text":"07 / 09","textPreview":"07 / 09","textChars":7,"textLines":1,"bbox":[1134,660,74,16]}
+{"kind":"textbox","id":"sh/it0fytcb","slide":7,"name":"title","text":"Escalar sem controle\nreproduz o problema.","textPreview":"Escalar sem controle | reproduz o problema.","textChars":41,"textLines":2,"bbox":[72,138,660,124]}
+{"kind":"textbox","id":"sh/ju9w7ydw","slide":7,"text":"O risco não é testar IA. É transformar uma prova técnica em decisão operacional sem qualidade, donos e critérios.","textPreview":"O risco não é testar IA. É transformar uma prova técnica em decisão operacional sem qualidade, donos e critérios.","textChars":113,"textLines":1,"bbox":[782,157,364,89]}
+{"kind":"shape","id":"sh/4vix03uh","slide":7,"bbox":[72,404,250,0]}
+{"kind":"textbox","id":"sh/5wre9ov2","slide":7,"text":"01 / DADO","textPreview":"01 / DADO","textChars":9,"textLines":1,"bbox":[72,430,210,18]}
+{"kind":"textbox","id":"sh/yxwvmpc7","slide":7,"text":"Baixa qualidade","textPreview":"Baixa qualidade","textChars":15,"textLines":1,"bbox":[72,477,218,38]}
+{"kind":"textbox","id":"sh/zy5wvudc","slide":7,"text":"Resposta: catálogo + padrão + dono.","textPreview":"Resposta: catálogo + padrão + dono.","textChars":35,"textLines":1,"bbox":[72,543,222,42]}
+{"kind":"shape","id":"sh/3i58zqts","slide":7,"bbox":[356,404,250,0]}
+{"kind":"textbox","id":"sh/2hw765c7","slide":7,"text":"02 / PROCESSO","textPreview":"02 / PROCESSO","textChars":13,"textLines":1,"bbox":[356,430,210,18]}
+{"kind":"textbox","id":"sh/pk7q10bi","slide":7,"text":"“Pilot Purgatory”","textPreview":"“Pilot Purgatory”","textChars":17,"textLines":1,"bbox":[356,477,218,38]}
+{"kind":"textbox","id":"sh/4jyp8vux","slide":7,"text":"Resposta: KPI + responsável + rotina.","textPreview":"Resposta: KPI + responsável + rotina.","textChars":37,"textLines":1,"bbox":[356,543,222,42]}
+{"kind":"shape","id":"sh/fe5ovqtg","slide":7,"bbox":[640,404,250,0]}
+{"kind":"textbox","id":"sh/udw72lcv","slide":7,"text":"03 / TECNOLOGIA","textPreview":"03 / TECNOLOGIA","textChars":15,"textLines":1,"bbox":[640,430,210,18]}
+{"kind":"textbox","id":"sh/hgnqx0bm","slide":7,"text":"Dependência","textPreview":"Dependência","textChars":11,"textLines":1,"bbox":[640,477,218,38]}
+{"kind":"textbox","id":"sh/gfep4vu1","slide":7,"text":"Resposta: arquitetura e dados sob controle.","textPreview":"Resposta: arquitetura e dados sob controle.","textChars":43,"textLines":1,"bbox":[640,543,222,42]}
+{"kind":"shape","id":"sh/7alor6tk","slide":7,"bbox":[924,404,250,0]}
+{"kind":"textbox","id":"sh/69c7ylcz","slide":7,"text":"04 / DECISÃO","textPreview":"04 / DECISÃO","textChars":12,"textLines":1,"bbox":[924,430,210,18]}
+{"kind":"textbox","id":"sh/alc7a1wr","slide":7,"text":"Viés e exceção","textPreview":"Viés e exceção","textChars":14,"textLines":1,"bbox":[924,477,218,38]}
+{"kind":"textbox","id":"sh/vml8j6dc","slide":7,"text":"Resposta: humano no circuito.","textPreview":"Resposta: humano no circuito.","textChars":29,"textLines":1,"bbox":[924,543,222,42]}
+{"kind":"notes","id":"nt/np9k9d","slide":7,"text":"[Sources]\n- Estudo de Caso - AgroTech (1).pdf (arquivo fornecido pelo usuário).\n- Recomendações e priorização: análise original a partir do enunciado.\nMostre que cada risco tem uma resposta de gestão. A empresa não deve esperar risco zero."}
+{"kind":"slide","id":"sl/ndk74d","slide":8,"title":"QUESTÃO 4 · ROADMAP DE IMPLEMENTAÇÃO","textShapes":16}
+{"kind":"shape","id":"sh/29g7218z","slide":8,"bbox":[72,38,1136,0]}
+{"kind":"textbox","id":"sh/pc7qdgrq","slide":8,"name":"kicker","text":"QUESTÃO 4 · ROADMAP DE IMPLEMENTAÇÃO","textPreview":"QUESTÃO 4 · ROADMAP DE IMPLEMENTAÇÃO","textChars":36,"textLines":1,"bbox":[72,54,520,18]}
+{"kind":"textbox","id":"sh/obyp4bq5","slide":8,"name":"page","text":"08 / 09","textPreview":"08 / 09","textChars":7,"textLines":1,"bbox":[1134,660,74,16]}
+{"kind":"textbox","id":"sh/f6p87m9o","slide":8,"text":"ESTRATÉGIA RECOMENDADA · EXPANSÃO GRADUAL","textPreview":"ESTRATÉGIA RECOMENDADA · EXPANSÃO GRADUAL","textChars":41,"textLines":1,"bbox":[72,116,490,18]}
+{"kind":"textbox","id":"sh/e5w7yh83","slide":8,"name":"title","text":"Diagnosticar. Priorizar.\nPilotar. Escalar.","textPreview":"Diagnosticar. Priorizar. | Pilotar. Escalar.","textChars":42,"textLines":2,"bbox":[72,154,785,102]}
+{"kind":"shape","id":"sh/187q9wre","slide":8,"bbox":[72,356,250,0]}
+{"kind":"textbox","id":"sh/g7yp0rqt","slide":8,"text":"0 - 90 DIAS","textPreview":"0 - 90 DIAS","textChars":11,"textLines":1,"bbox":[72,382,230,18]}
+{"kind":"textbox","id":"sh/ri5o3m9c","slide":8,"text":"Diagnosticar","textPreview":"Diagnosticar","textChars":12,"textLines":1,"bbox":[72,432,230,38]}
+{"kind":"textbox","id":"sh/6hw7uh8r","slide":8,"text":"Inventário e qualidade dos dados\nDonos e regras de uso\nBaseline de custo e perda","textPreview":"Inventário e qualidade dos dados | Donos e regras de uso | Baseline de custo e perda","textChars":80,"textLines":3,"bbox":[72,490,233,78]}
+{"kind":"shape","id":"sh/872pofyp","slide":8,"bbox":[356,356,250,0]}
+{"kind":"textbox","id":"sh/98vqxkfa","slide":8,"text":"3 - 6 MESES","textPreview":"3 - 6 MESES","textChars":11,"textLines":1,"bbox":[356,382,230,18]}
+{"kind":"textbox","id":"sh/mlk7m5gz","slide":8,"text":"Priorizar","textPreview":"Priorizar","textChars":9,"textLines":1,"bbox":[356,432,230,38]}
+{"kind":"textbox","id":"sh/n6tovaxk","slide":8,"text":"Business case de logística\nPrevisão por talhão\nKPIs aprovados","textPreview":"Business case de logística | Previsão por talhão | KPIs aprovados","textChars":61,"textLines":3,"bbox":[356,490,233,78]}
+{"kind":"shape","id":"sh/0j2pkfyt","slide":8,"bbox":[640,356,250,0]}
+{"kind":"textbox","id":"sh/lkb6t0fe","slide":8,"text":"6 - 12 MESES","textPreview":"6 - 12 MESES","textChars":12,"textLines":1,"bbox":[640,382,230,18]}
+{"kind":"textbox","id":"sh/yhk7i5gn","slide":8,"text":"Pilotar","textPreview":"Pilotar","textChars":7,"textLines":1,"bbox":[640,432,230,38]}
+{"kind":"textbox","id":"sh/zitorax8","slide":8,"text":"Humano no circuito\nGrupo de comparação\nAcurácia e ganho financeiro","textPreview":"Humano no circuito | Grupo de comparação | Acurácia e ganho financeiro","textChars":66,"textLines":3,"bbox":[640,490,233,78]}
+{"kind":"shape","id":"sh/kfmpwzyx","slide":8,"bbox":[924,356,250,0]}
+{"kind":"textbox","id":"sh/5gfq54fi","slide":8,"text":"12+ MESES","textPreview":"12+ MESES","textChars":9,"textLines":1,"bbox":[924,382,230,18]}
+{"kind":"textbox","id":"sh/twb6p47m","slide":8,"text":"Escalar","textPreview":"Escalar","textChars":7,"textLines":1,"bbox":[924,432,230,38]}
+{"kind":"textbox","id":"sh/sv2pgzq1","slide":8,"text":"Integração campo-ERP-logística\nComponentes reutilizáveis\nCapacitação contínua","textPreview":"Integração campo-ERP-logística | Componentes reutilizáveis | Capacitação contínua","textChars":77,"textLines":3,"bbox":[924,490,233,78]}
+{"kind":"notes","id":"nt/ndk74d","slide":8,"text":"[Sources]\n- Estudo de Caso - AgroTech (1).pdf (arquivo fornecido pelo usuário).\n- Recomendações e priorização: análise original a partir do enunciado.\nApresente a sequência como portas de decisão: não escalar até que a fase anterior prove seus critérios."}
+{"kind":"slide","id":"sl/skw8fo","slide":9,"title":"CONCLUSÃO","textShapes":6}
+{"kind":"shape","id":"sh/kjyxwfud","slide":9,"bbox":[72,38,1136,0]}
+{"kind":"textbox","id":"sh/zipw3ats","slide":9,"text":"CONCLUSÃO","textPreview":"CONCLUSÃO","textChars":9,"textLines":1,"bbox":[72,54,170,18]}
+{"kind":"textbox","id":"sh/yhgfu5c7","slide":9,"name":"title","text":"A Vale Verde não precisa apostar tudo na IA.","textPreview":"A Vale Verde não precisa apostar tudo na IA.","textChars":44,"textLines":1,"bbox":[72,171,1060,85]}
+{"kind":"textbox","id":"sh/98re9kbu","slide":9,"text":"Precisa escalar o que prova valor.","textPreview":"Precisa escalar o que prova valor.","textChars":34,"textLines":1,"bbox":[72,252,1010,80]}
+{"kind":"shape","id":"sh/87yx0fu9","slide":9,"bbox":[72,522,1136,0]}
+{"kind":"textbox","id":"sh/7mpw7ato","slide":9,"text":"Uma ambição moderada, governada por valor e integrada à operação transforma o perfil conservador da liderança em disciplina de execução.","textPreview":"Uma ambição moderada, governada por valor e integrada à operação transforma o perfil conservador da liderança em disciplina de execução.","textChars":136,"textLines":1,"bbox":[72,549,520,58]}
+{"kind":"textbox","id":"sh/mlgfy5c3","slide":9,"text":"AGROTECH VALE VERDE · IA COMO CAPACIDADE ESTRATÉGICA","textPreview":"AGROTECH VALE VERDE · IA COMO CAPACIDADE ESTRATÉGICA","textChars":52,"textLines":1,"bbox":[758,570,450,20]}
+{"kind":"textbox","id":"sh/pcnex0bq","slide":9,"text":"09 / 09","textPreview":"09 / 09","textChars":7,"textLines":1,"bbox":[1134,660,74,16]}
+{"kind":"notes","id":"nt/skw8fo","slide":9,"text":"[Sources]\n- Estudo de Caso - AgroTech (1).pdf (arquivo fornecido pelo usuário).\n- Recomendações e priorização: análise original a partir do enunciado.\nFeche reforçando que a estratégia é seletiva e orientada a valor, não uma aposta tecnológica."}
