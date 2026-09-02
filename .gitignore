@@ -24,3 +24,7 @@ chroma_db/
 
 # Streamlit
 .streamlit/
+
+# Artefatos de build temporários (quebram o build do GitHub Pages)
+tmp/
+node_modules/

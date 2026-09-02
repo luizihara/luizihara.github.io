@@ -1,0 +1,161 @@
+================================================================================
+
+          FIAP MBA TECH  ·  ESTRATÉGIAS SETORIAIS DE IMPLEMENTAÇÃO
+                          ANÁLISE SETORIAL DE IA
+
+                  IA na Saúde: maturidade, lacunas, riscos
+                    e oportunidades no mercado brasileiro
+
+================================================================================
+
+
+   >>>  O TRABALHO ESTÁ PUBLICADO EM:
+
+        https://luizihara.github.io/fiap.estrategias-setoriais-de-implementacao/index.html
+
+
+--------------------------------------------------------------------------------
+IDENTIFICAÇÃO
+--------------------------------------------------------------------------------
+
+   TURMA .......... 2ABL
+   DISCIPLINA ..... Estratégias Setoriais de Implementação
+   PROFESSOR ...... Elias Eduardo Bernardo da Silva
+   CURSO .......... FIAP MBA Tech
+   SETOR ANALISADO  Saúde
+
+   ALUNOS
+
+      Luiz Ihara ............. RM368484
+      Filipe Fragoso ......... RM368500
+      Daniel Caminha ......... RM366740
+      Pedro Martins .......... RM368543
+
+
+--------------------------------------------------------------------------------
+ATIVIDADE PROPOSTA
+--------------------------------------------------------------------------------
+
+   A turma foi organizada em seis grupos, cada um responsável por um setor:
+   agronegócio, indústria, serviços, varejo, finanças ou saúde. Simulando uma
+   equipe de consultoria, cada grupo analisou a aplicação da IA no setor
+   designado, considerando o mercado brasileiro, e identificou:
+
+      · Maturidade atual: como a IA é utilizada no setor
+      · Lacunas e desafios: principais obstáculos à adoção e à evolução
+      · Riscos: impactos operacionais, éticos e competitivos
+      · Oportunidades: aplicações com maior potencial de gerar valor
+
+   Nosso grupo ficou com o setor de SAÚDE.
+
+
+--------------------------------------------------------------------------------
+RECADO
+--------------------------------------------------------------------------------
+
+   Professor Elias, tudo bem?
+
+   Montamos a análise como uma apresentação navegável no navegador, em vez de
+   um documento comum. A ideia foi deixar o raciocínio explorável: dá para
+   percorrer os quatro eixos do enunciado na ordem, ou ir direto a um deles
+   pelo menu, e há um modo de apresentação com avanço por seção, caso queira
+   projetar em aula.
+
+   Basta abrir o link acima em qualquer navegador atualizado, no computador ou
+   no celular. Não é preciso instalar nada e não há login.
+
+   O caminho da página segue o enunciado: estágio de uso, leitura de
+   maturidade, gaps críticos, riscos e oportunidades, fechando com uma proposta
+   de estratégia de implementação. As fontes estão listadas ao final.
+
+   Obrigado pela disciplina e pelo tema, que rendeu boas discussões no grupo.
+   Ficamos à disposição para qualquer esclarecimento.
+
+   Um abraço,
+   Luiz, Filipe, Daniel e Pedro
+
+
+--------------------------------------------------------------------------------
+SÍNTESE DA ANÁLISE
+--------------------------------------------------------------------------------
+
+   MATURIDADE ATUAL · média, e fortemente regulada
+   A saúde brasileira já usa IA em ilhas de alto valor, mas a integração ao
+   cuidado ainda é seletiva. Situamos o setor no estágio 3 de 6: o padrão
+   dominante combina copilotos, automações e modelos especializados, com a
+   autoridade clínica permanecendo humana. Por frente de aplicação:
+
+      Diagnóstico assistido ....... em produção
+      Jornada digital ............. em expansão
+      Medicina preditiva .......... em pilotos
+      Agentes clínicos ............ fronteira
+
+   O setor não está parado, está fragmentado: a maturidade varia por
+   instituição, especialidade e caso de uso. Instituições líderes já operam IA
+   dentro do cuidado, enquanto boa parte do mercado ainda testa ferramentas sem
+   integração sistêmica.
+
+   LACUNAS E DESAFIOS
+      GAP 1 · Dados fragmentados (crítico). Prontuários, laboratórios e
+              operadoras mantêm históricos incompletos ou incompatíveis.
+      GAP 2 · Interoperabilidade (alto). Semântica, padrões e integração ao
+              fluxo assistencial limitam a continuidade do cuidado.
+      GAP 3 · Evidência local (alto). Um modelo bom em outro hospital pode
+              degradar quando população, equipamento ou protocolo mudam.
+      GAP 4 · Capital humano (alto). Falta fluência em dados e desenho conjunto
+              entre tecnologia e profissionais de saúde.
+      GAP 5 · Explicabilidade útil (médio). Não basta explicar o modelo, é
+              preciso entregar evidência acionável no momento da decisão.
+      GAP 6 · Escala econômica (médio). Integração, validação e monitoramento
+              contínuo custam mais do que uma prova de conceito.
+
+   RISCOS
+      Operacional ... Alucinação, drift e fadiga de alerta podem degradar a
+                      decisão e criar falsa segurança.
+                      Controle: monitoramento contínuo e plano de fallback.
+      Ético ......... Bases sub-representadas reduzem o desempenho justamente
+                      para os grupos que mais precisam de cuidado.
+                      Controle: métricas de desempenho por subgrupo.
+      Regulatório ... LGPD, software como dispositivo médico (Anvisa RDC
+                      657/2022) e normas profissionais exigem finalidade,
+                      segurança, registro e responsabilização.
+                      Controle: privacy by design.
+      Competitivo ... Dependência de fornecedor e baixa portabilidade ameaçam
+                      margem, continuidade e diferenciação.
+                      Controle: arquitetura reversível.
+
+   OPORTUNIDADES (ordenadas por impacto e viabilidade)
+      Começar agora
+         · Documentação clínica assistida ... impacto alto ....... viab. alta
+         · Previsão de faltas em agenda ..... impacto médio ...... viab. alta
+         · Priorização de exames ............ impacto alto ....... viab. média
+      Próxima fronteira
+         · Risco de deterioração clínica .... impacto muito alto . viab. média
+         · Monitoramento de crônicos ........ impacto alto ....... viab. média
+         · Medicina preditiva populacional .. impacto muito alto . viab. baixa
+
+   ESTRATÉGIA DE IMPLEMENTAÇÃO SUGERIDA
+      Diagnosticar → Pilotar → Validar → Escalar → Evoluir, com quatro pilares
+      de governança: humano no comando, rastreabilidade das decisões, segurança
+      do dado sensível e validação contínua por população, unidade e tempo.
+
+   SÍNTESE
+      A vantagem competitiva não virá de ter a IA que mais sabe, e sim de
+      construir o sistema que melhor decide, explica e cuida.
+
+
+--------------------------------------------------------------------------------
+FONTES E REFERÊNCIAS
+--------------------------------------------------------------------------------
+
+   · Material da aula, Estratégias Setoriais de Implementação,
+     Prof. Elias Bernardo (2026)
+   · Ministério da Saúde, Rede Nacional de Dados em Saúde (RNDS)
+   · OMS, Ethics and governance of artificial intelligence for health
+   · Anvisa, software como dispositivo médico e RDC 657/2022
+   · CFM, Resolução nº 2.314/2022 sobre telemedicina
+   · Enunciado da atividade, análise setorial de IA
+
+================================================================================
+                Entrega referente à aula 1 · Turma 2ABL · FIAP MBA Tech
+================================================================================

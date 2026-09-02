@@ -2,3 +2,11 @@ theme: jekyll-theme-cayman
 title: Luiz R P Ihara
 description: Platform Engineer | DevOps | Quality Engineering | CI/CD | Cloud & Reliability
 google_analytics: UA-157986772-1
+
+# Pastas que o Jekyll não deve ler ao gerar o site
+exclude:
+  - tmp/
+  - node_modules
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
