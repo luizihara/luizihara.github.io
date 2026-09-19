@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise Custo-Benefício & Tecnológica: Creatina em Gomas</title>
+    <!-- Chosen Palette: Slate & Emerald Modern Minimalist -->
+    <!-- Application Structure Plan: 
+         - Architecture designed for consumer decision-making and scientific evaluation.
+         - Section 1: Dashboard Overview with core KPI metrics and summary.
+         - Section 2: Interactive Real-Cost Calculator (allows users to simulate any product label and compute true cost/day for 3g dose).
+         - Section 3: Interactive Market Brand Matrix (search, filter, compare all 9 major commercial brands).
+         - Section 4: Label Deconstruction & Real-Cost Analysis (Chart.js dynamic visualizations for cost/day, bottle duration, and format comparisons).
+         - Section 5: Physicochemical & Pharmacokinetic Deep-Dive (Thermal conversion to creatinine, gelation dynamics).
+         - Section 6: Polyols & Gastrointestinal Impact Analyzer (Maltitol/Sorbitol osmotic burden analysis).
+         - Section 7: Regulatory & ABENUTRI Audit Framework (ANVISA RDC 243/2018 & IN 28/2018 compliance).
+         - Section 8: Final Verdict & Strategic Recommendations (Pragmatic choice vs. Clean Label Premium).
+    -->
+    <!-- Visualization & Content Choices:
+         - Key KPIs -> Dynamic Stat Cards (HTML/Tailwind) -> High-level metric visibility.
+         - Brand Comparison -> Interactive Table & Grid (Vanilla JS filter/sort) -> Instant dynamic searching.
+         - Label Illusion (Gummies/Dose vs Bottle Duration) -> Bar Chart (Chart.js) -> Visual impact of hidden costs.
+         - Daily Cost Comparison (Gummies vs Powder vs Capsule) -> Stacked/Grouped Bar Chart (Chart.js) -> Financial ratio contrast.
+         - Osmotic Load & Polyol Intake -> Horizontal Gauge/Bar (Chart.js) -> Gut tolerance threshold visualization.
+         - Interactive Calculator -> Custom Vanilla JS -> Real-time financial modeling for any custom product.
+         - NO SVG elements or Mermaid JS used. Uses styled HTML, Unicode symbols, and HTML5 Canvas.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+
+        .tab-btn.active {
+            border-bottom-color: #0D9488;
+            color: #0F766E;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-teal-100 selection:text-teal-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl font-black tracking-wider text-teal-400">CREATINA<span
+                        class="text-slate-100 font-light">GUMMY</span></span>
+                <span
+                    class="text-xs bg-teal-900/80 text-teal-300 border border-teal-700/50 px-2.5 py-0.5 rounded-full font-medium">Relatório
+                    Técnico &amp; Dashboard</span>
+            </div>
+            <nav class="flex flex-wrap justify-center gap-1 text-sm font-medium text-slate-300">
+                <button onclick="switchTab('overview')" id="tab-overview"
+                    class="tab-btn px-3 py-1.5 rounded-md hover:text-white transition">Visão Geral</button>
+                <button onclick="switchTab('calculator')" id="tab-calculator"
+                    class="tab-btn px-3 py-1.5 rounded-md hover:text-white transition">Calculadora de Custo</button>
+                <button onclick="switchTab('brands')" id="tab-brands"
+                    class="tab-btn px-3 py-1.5 rounded-md hover:text-white transition">Matriz de Marcas</button>
+                <button onclick="switchTab('charts')" id="tab-charts"
+                    class="tab-btn px-3 py-1.5 rounded-md hover:text-white transition">Análise Gráfica</button>
+                <button onclick="switchTab('science')" id="tab-science"
+                    class="tab-btn px-3 py-1.5 rounded-md hover:text-white transition">Estabilidade &amp; Saúde</button>
+                <button onclick="switchTab('verdict')" id="tab-verdict"
+                    class="tab-btn px-3 py-1.5 rounded-md hover:text-white transition">Veredito</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+        <!-- TAB 1: OVERVIEW SECTION -->
+        <section id="sec-overview" class="tab-content space-y-6">
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+                <div class="max-w-3xl space-y-3">
+                    <span class="text-teal-600 font-semibold tracking-wide uppercase text-xs">Introdução &amp; Contexto
+                        do Mercado</span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Dossiê Técnico: Vale a
+                        Pena Creatina em Goma?</h1>
+                    <p class="text-slate-600 leading-relaxed">
+                        A transição da creatina monohidratada do pó anidro tradicional para matrizes mastigáveis em goma
+                        representa uma forte inovação de conveniência. Contudo, essa mudança introduz desafios
+                        farmacotécnicos severos (risco de conversão em creatinina inerte devido a processamento térmico
+                        e aquoso), sobrecarga intestinal de polióis (maltitol e sorbitol) e uma profunda
+                        <strong>distorção de preços promovida pela arquitetura de rotulagem</strong>. Este painel
+                        interativo desmascara os custos reais por dose clínica efetiva (3g/dia) e aponta as escolhas
+                        mais racionais do mercado.
+                    </p>
+                </div>
+
+                <!-- KPI Metric Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+                    <div class="bg-teal-50/60 border border-teal-100 rounded-xl p-4">
+                        <div class="text-xs font-semibold text-teal-800 uppercase tracking-wider">Custo Diário Médio
+                            (Gomas)</div>
+                        <div class="text-2xl font-black text-teal-900 mt-1">R$ 2,33 <span
+                                class="text-xs font-normal text-slate-500">a</span> R$ 8,99</div>
+                        <div class="text-xs text-teal-700 mt-1">Para dose diária padrão de 3.000 mg</div>
+                    </div>
+                    <div class="bg-amber-50/60 border border-amber-100 rounded-xl p-4">
+                        <div class="text-xs font-semibold text-amber-800 uppercase tracking-wider">Custo Diário Médio
+                            (Pó)</div>
+                        <div class="text-2xl font-black text-amber-900 mt-1">R$ 0,50 <span
+                                class="text-xs font-normal text-slate-500">a</span> R$ 0,80</div>
+                        <div class="text-xs text-amber-700 mt-1">Economia de até 10x em relação à goma</div>
+                    </div>
+                    <div class="bg-rose-50/60 border border-rose-100 rounded-xl p-4">
+                        <div class="text-xs font-semibold text-rose-800 uppercase tracking-wider">Variação de
+                            Durabilidade</div>
+                        <div class="text-2xl font-black text-rose-900 mt-1">15 <span
+                                class="text-xs font-normal text-slate-500">a</span> 30 Dias</div>
+                        <div class="text-xs text-rose-700 mt-1">Embalagens de 90 gomas podem durar só 15 dias</div>
+                    </div>
+                    <div class="bg-indigo-50/60 border border-indigo-100 rounded-xl p-4">
+                        <div class="text-xs font-semibold text-indigo-800 uppercase tracking-wider">Gomas para Dose de
+                            3g</div>
+                        <div class="text-2xl font-black text-indigo-900 mt-1">2 <span
+                                class="text-xs font-normal text-slate-500">a</span> 6 Unidades</div>
+                        <div class="text-xs text-indigo-700 mt-1">Produtos diluídos saturam trato intestinal</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Insight Highlights -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-3">
+                    <div class="flex items-center space-x-2 text-teal-700 font-bold">
+                        <span class="text-xl">&#9733;</span>
+                        <h2>A Pegadinha das Gomas por Dose</h2>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Devido a restrições físico-químicas de gelificação, uma goma raramente comporta mais que 1.500mg
+                        de creatina sem ficar quebradiça ou arenosa. Por isso, marcas de menor concentração exigem até
+                        <strong>6 gomas diárias</strong> para entregar os 3g de creatina. Um pote com 90 gomas parece
+                        durar 3 meses, mas acaba em exatamente 15 dias.
+                    </p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-3">
+                    <div class="flex items-center space-x-2 text-amber-600 font-bold">
+                        <span class="text-xl">&#9888;</span>
+                        <h2>Estabilidade Química &amp; Aquecimento</h2>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        O processo de fabricação de gomas exige cozimento de xaropes aquosos e ácidos a 80°C–125°C. A
+                        creatina exposta a calor e umidade converte-se em <strong>creatinina</strong> (metabólito inerte
+                        sem função ergogênica). Marcas de alta qualidade utilizam adição tardia a frio (&lt;70°C) e
+                        testes de estabilidade exigidos pela ANVISA.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TAB 2: INTERACTIVE REAL-COST CALCULATOR -->
+        <section id="sec-calculator" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+                <div class="max-w-3xl space-y-2 mb-6">
+                    <span class="text-teal-600 font-semibold tracking-wide uppercase text-xs">Simulador Financeiro
+                        Personalizado</span>
+                    <h2 class="text-2xl font-bold text-slate-900">Calculadora da "Pegadinha do Rótulo"</h2>
+                    <p class="text-slate-600 text-sm">
+                        Não seja enganado pelo preço do frasco nem pela quantidade de gomas estampada na frente da
+                        embalagem. Insira os dados de qualquer suplemento de creatina em gomas para calcular o custo
+                        real por dia de protocolo (base de 3,0g/dia de creatina).
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <!-- Form Controls -->
+                    <div class="lg:col-span-6 bg-slate-50 p-6 rounded-xl border border-slate-200 space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Preço do Frasco
+                                (R$)</label>
+                            <input type="number" id="calc-price" value="120.00" step="0.50"
+                                class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-slate-900 font-medium focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                                oninput="calculateRealCost()">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Total de Gomas no
+                                    Frasco</label>
+                                <input type="number" id="calc-total-gummies" value="90" step="1"
+                                    class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-slate-900 font-medium focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                                    oninput="calculateRealCost()">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Gomas Sugeridas/Dia
+                                    (Rótulo)</label>
+                                <input type="number" id="calc-serving-gummies" value="6" step="1"
+                                    class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-slate-900 font-medium focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                                    oninput="calculateRealCost()">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Creatina por Porção do
+                                Rótulo (mg ou g)</label>
+                            <div class="flex space-x-2">
+                                <input type="number" id="calc-creatine-mg" value="3000" step="100"
+                                    class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-slate-900 font-medium focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                                    oninput="calculateRealCost()">
+                                <span
+                                    class="inline-flex items-center px-3 rounded-lg bg-slate-200 text-slate-700 text-xs font-bold">mg</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-1">Ex: Se a porção indicada de 6 gomas entrega 3000mg,
+                                digite 3000.</p>
+                        </div>
+                    </div>
+
+                    <!-- Computed Output Cards -->
+                    <div class="lg:col-span-6 space-y-4">
+                        <div class="bg-slate-900 text-white rounded-xl p-6 space-y-4">
+                            <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider">Resultado do
+                                Diagnóstico</h3>
+
+                            <div class="grid grid-cols-2 gap-4 border-b border-slate-800 pb-4">
+                                <div>
+                                    <span class="text-xs text-slate-400 block">Rendimento Real do Pote</span>
+                                    <span id="res-days" class="text-2xl font-black text-amber-400">15 Dias</span>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-slate-400 block">Gomas p/ 3g de Creatina</span>
+                                    <span id="res-gummies-needed" class="text-2xl font-black text-white">6
+                                        Gomas/dia</span>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <span class="text-xs text-slate-400 block">Custo Real por Dia</span>
+                                    <span id="res-daily-cost" class="text-3xl font-black text-teal-400">R$ 8,00</span>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-slate-400 block">Investimento Mensal (30d)</span>
+                                    <span id="res-monthly-cost" class="text-2xl font-black text-white">R$ 240,00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-teal-50 border border-teal-200 rounded-xl p-4 text-xs text-teal-900 space-y-2">
+                            <div class="font-bold text-teal-950 flex items-center space-x-1">
+                                <span>&#128161;</span>
+                                <span>Comparativo com Creatina em Pó Tradicional</span>
+                            </div>
+                            <p id="res-powder-comparison">
+                                O mesmo protocolo diário com Creatina Monohidratada em Pó (R$0,65/dia) custaria apenas
+                                R$ 19,50/mês. Você está pagando <strong>R$ 220,50 a mais por mês</strong> apenas pela
+                                conveniência da matriz mastigável.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TAB 3: BRAND MATRIX & COMPARISON TABLE -->
+        <section id="sec-brands" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div>
+                        <span class="text-teal-600 font-semibold tracking-wide uppercase text-xs">Mapeamento Completo de
+                            Mercado</span>
+                        <h2 class="text-2xl font-bold text-slate-900">Matriz de Marcas e Análise de Rótulos</h2>
+                        <p class="text-slate-600 text-sm mt-1">Todas as marcas mapeadas pelo estudo, padronizadas para a
+                            dose de 3.000mg diários de creatina.</p>
+                    </div>
+                    <!-- Controls -->
+                    <div class="flex flex-wrap gap-2 w-full md:w-auto">
+                        <input type="text" id="brand-search" placeholder="Buscar marca..."
+                            class="border border-slate-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                            oninput="filterBrands()">
+                        <select id="brand-filter"
+                            class="border border-slate-300 rounded-lg px-3 py-1.5 text-sm font-medium bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                            onchange="filterBrands()">
+                            <option value="all">Todas as Marcas</option>
+                            <option value="recommended">Recomendadas / Destaques</option>
+                            <option value="efficient">Alta Eficiência (2 gomas = 3g)</option>
+                            <option value="alert">Atenção (3 a 6 gomas/dose)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Interactive Data Table -->
+                <div class="overflow-x-auto border border-slate-200 rounded-xl">
+                    <table class="w-full text-left text-sm text-slate-700">
+                        <thead
+                            class="bg-slate-100 text-slate-900 uppercase text-xs font-bold border-b border-slate-200">
+                            <tr>
+                                <th class="py-3 px-4">Marca &amp; Produto</th>
+                                <th class="py-3 px-4 text-center">Frasco</th>
+                                <th class="py-3 px-4 text-center">Gomas/Dose (3g)</th>
+                                <th class="py-3 px-4 text-center">Rendimento Real</th>
+                                <th class="py-3 px-4 text-center">Preço Estimado</th>
+                                <th class="py-3 px-4 text-center">Custo/Dia (3g)</th>
+                                <th class="py-3 px-4 text-center">Avaliação Técnica</th>
+                            </tr>
+                        </thead>
+                        <tbody id="brand-table-body" class="divide-y divide-slate-200 font-medium">
+                            <!-- Populated via Javascript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-xs text-slate-500 mt-3 text-right">* Cotações médias de retalho e e-commerce para
+                    obtenção estrita de 3.000 mg de Creatina Monohidratada.</div>
+            </div>
+        </section>
+
+
+        <!-- TAB 4: CHARTS & FINANCIAL DECONSTRUCTION -->
+        <section id="sec-charts" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-8">
+                <div>
+                    <span class="text-teal-600 font-semibold tracking-wide uppercase text-xs">Visualização de
+                        Dados</span>
+                    <h2 class="text-2xl font-bold text-slate-900">Desconstrução Gráfica do Rótulo</h2>
+                    <p class="text-slate-600 text-sm mt-1">
+                        Esta seção ilustra visualmente a dispersão de custo diário e a relação direta entre o número de
+                        gomas exigido por porção e o esgotamento do pote.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Chart 1 Container -->
+                    <div
+                        class="bg-slate-50 p-4 sm:p-6 rounded-xl border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-base mb-1">Custo Real Diário por Marca (R$)</h3>
+                            <p class="text-xs text-slate-500 mb-4">Padronizado para entrega diária de 3,0g de Creatina
+                                Monohidratada. Comparado ao pó tradicional.</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="chartDailyCost"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart 2 Container -->
+                    <div
+                        class="bg-slate-50 p-4 sm:p-6 rounded-xl border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-base mb-1">Rendimento Real do Frasco (Dias de Uso)
+                            </h3>
+                            <p class="text-xs text-slate-500 mb-4">Demonstração de como marcas com 90 gomas acabam em 15
+                                dias quando exigem 6 gomas por porção.</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="chartBottleDuration"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart 3 Container: Formats Comparison -->
+                <div class="bg-slate-50 p-4 sm:p-6 rounded-xl border border-slate-200">
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-base mb-1">Projeção de Gasto Acumulado em 1 Ano (R$)
+                        </h3>
+                        <p class="text-xs text-slate-500 mb-4">Comparativo direto entre o formato em Pó, Cápsula, Goma
+                            Pragmática e Goma Indulgent/Ineficiente.</p>
+                    </div>
+                    <div class="chart-container max-w-3xl">
+                        <canvas id="chartYearlyCost"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TAB 5: PHYSICOCHEMICAL & HEALTH SCIENCE -->
+        <section id="sec-science" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+                <div>
+                    <span class="text-teal-600 font-semibold tracking-wide uppercase text-xs">Bioquímica e
+                        Farmacotécnica</span>
+                    <h2 class="text-2xl font-bold text-slate-900">Estabilidade Química, Polióis e Absorção</h2>
+                    <p class="text-slate-600 text-sm mt-1">
+                        Compreenda o impacto do processamento industrial de matrizes gelatinosas e os efeitos
+                        gastrointestinais dos adoçantes utilizados.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Degradation Mechanism -->
+                    <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 space-y-3">
+                        <div class="flex items-center space-x-2 text-rose-700 font-bold">
+                            <span class="text-lg">&#128302;</span>
+                            <h3 class="text-base text-slate-900">Ciclização para Creatinina</h3>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            A creatina monohidratada em pó seco possui estabilidade termodinâmica de anos. No entanto,
+                            em meio aquoso, ácido e submetida a temperaturas entre 80°C e 125°C (padrão no cozimento da
+                            calda de goma), a molécula sofre uma reação de cicilização irreversível, perdendo água e
+                            convertendo-se em <strong>creatinina</strong>.
+                        </p>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200 text-xs text-slate-700 space-y-1">
+                            <div class="font-semibold text-slate-900">A Solução Industrial Premium:</div>
+                            <p>Fabricantes de topo utilizam processamento em duplo estágio, adicionando a creatina
+                                micronizada na fase de resfriamento (abaixo de 70°C) e mantendo o pH controlado para
+                                preservar o ativo intacto.</p>
+                        </div>
+                    </div>
+
+                    <!-- Polyols & GI Stress -->
+                    <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 space-y-3">
+                        <div class="flex items-center space-x-2 text-amber-700 font-bold">
+                            <span class="text-lg">&#9878;</span>
+                            <h3 class="text-base text-slate-900">Carga Osmótica e Polióis (Maltitol/Sorbitol)</h3>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Para ofertar versões "Zero Açúcar", a indústria utiliza álcoois de açúcar (polióis). Essas
+                            substâncias possuem absorção incompleta no intestino delgado e transitam para o cólon,
+                            exercendo forte atração osmótica de água e fermentação bacteriana.
+                        </p>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200 text-xs text-slate-700 space-y-1">
+                            <div class="font-semibold text-slate-900">Efeito Acumulativo de Digestão:</div>
+                            <p>Ao ter que ingerir 6 gomas ao dia para atingir a dose ergogênica, o indivíduo inunda o
+                                microbioma com gramas de maltitol e sorbitol, podendo ocasionar diarreia, distensão
+                                abdominal e desconforto crônico.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Polyol Intake Gauge / Chart -->
+                <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+                    <h3 class="font-bold text-slate-900 text-sm mb-1">Inconveniência Gastrointestinal: Estimativa de
+                        Ingestão de Excipientes/Polióis por Dose</h3>
+                    <p class="text-xs text-slate-500 mb-4">Volume total da matriz alimentícia ingerida diariamente para
+                        alcançar 3g de Creatina.</p>
+                    <div class="chart-container max-w-2xl">
+                        <canvas id="chartPolyols"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TAB 6: VERDICT & RECOMMENDATIONS -->
+        <section id="sec-verdict" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+                <div>
+                    <span class="text-teal-600 font-semibold tracking-wide uppercase text-xs">Diretriz Final de
+                        Compra</span>
+                    <h2 class="text-2xl font-bold text-slate-900">Veredito do Especialista: As Melhores Escolhas</h2>
+                    <p class="text-slate-600 text-sm mt-1">
+                        Com base no rigor dos laudos de conformidade (ABENUTRI / ANVISA), integridade da fórmula, custo
+                        diário e viabilidade gastrointestinal, destacam-se duas opções vencedoras.
+                    </p>
+                </div>
+
+                <!-- Recommendation Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Winner 1: Rationality / Cost-Benefit -->
+                    <div
+                        class="bg-gradient-to-br from-teal-50 to-emerald-50 border-2 border-teal-500 rounded-2xl p-6 space-y-4 relative overflow-hidden">
+                        <div
+                            class="absolute top-0 right-0 bg-teal-600 text-white font-bold text-xs px-3 py-1 rounded-bl-lg uppercase tracking-wider">
+                            Melhor Custo-Benefício
+                        </div>
+                        <div class="space-y-1">
+                            <span class="text-xs font-bold text-teal-800 uppercase">Campeã Pragmatica</span>
+                            <h3 class="text-xl font-extrabold text-slate-900">Growth Supplements (G-Gummy)</h3>
+                            <div class="text-sm font-semibold text-teal-700">R$ 3,00 / dia &bull; R$ 89,90 frasco (90
+                                gomas)</div>
+                        </div>
+                        <ul class="text-xs text-slate-700 space-y-2">
+                            <li class="flex items-start"><span class="text-teal-600 mr-1.5 font-bold">&#10003;</span>
+                                <strong>Rendimento Real de 30 Dias:</strong> A embalagem de 90 unidades rende o mês
+                                completo (3 gomas por dia).</li>
+                            <li class="flex items-start"><span class="text-teal-600 mr-1.5 font-bold">&#10003;</span>
+                                <strong>Segurança Laboratorial:</strong> Histórico de aprovação contínua nos testes da
+                                ABENUTRI.</li>
+                            <li class="flex items-start"><span class="text-teal-600 mr-1.5 font-bold">&#10003;</span>
+                                <strong>Sem Açúcar Adicionado:</strong> Excelente controle metabólico a um preço
+                                acessível.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Winner 2: Clean Label Premium -->
+                    <div
+                        class="bg-gradient-to-br from-indigo-50 to-blue-50 border-2 border-indigo-500 rounded-2xl p-6 space-y-4 relative overflow-hidden">
+                        <div
+                            class="absolute top-0 right-0 bg-indigo-600 text-white font-bold text-xs px-3 py-1 rounded-bl-lg uppercase tracking-wider">
+                            Escolha Clean Label Premium
+                        </div>
+                        <div class="space-y-1">
+                            <span class="text-xs font-bold text-indigo-800 uppercase">Máxima Pureza &amp;
+                                Concentração</span>
+                            <h3 class="text-xl font-extrabold text-slate-900">Essential Nutrition (Action Gummy)</h3>
+                            <div class="text-sm font-semibold text-indigo-700">R$ 4,35 / dia &bull; R$ 130,50 frasco (60
+                                gomas)</div>
+                        </div>
+                        <ul class="text-xs text-slate-700 space-y-2">
+                            <li class="flex items-start"><span class="text-indigo-600 mr-1.5 font-bold">&#10003;</span>
+                                <strong>Apenas 2 Gomas/Dia:</strong> Concentra 3g em menor volume de matriz
+                                gastrointestinal.</li>
+                            <li class="flex items-start"><span class="text-indigo-600 mr-1.5 font-bold">&#10003;</span>
+                                <strong>Livre de Xenobióticos:</strong> Sem corantes ou aromas artificiais, utilizando
+                                corantes vegetais.</li>
+                            <li class="flex items-start"><span class="text-indigo-600 mr-1.5 font-bold">&#10003;</span>
+                                <strong>Sinergia de Gelificação:</strong> Matriz balanceada com gelatina e pectina de
+                                alta estabilidade.</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Avoid Warning Banner -->
+                <div class="bg-rose-50 border border-rose-200 rounded-xl p-5 text-xs text-rose-900 space-y-2">
+                    <div class="font-bold text-rose-950 flex items-center space-x-1 text-sm">
+                        <span>&#9888;</span>
+                        <span>Produtos a Evitar ou Usar com Muita Cautela</span>
+                    </div>
+                    <p class="leading-relaxed">
+                        Refuta-se categoricamente a opção por marcas de baixa densidade (como a <strong>Black Skull
+                            Turbo Gummy</strong>), que exigem 6 gomas diárias, reduzem a durabilidade do pote para 15
+                        dias, diluem o ativo com maltodextrina e inflam o custo diário para mais de R$ 6,66 a R$ 8,33.
+                        Da mesma forma, versões ultra-indulgent (como <strong>Desinchá Super Gummy</strong> e
+                        <strong>Caramelo Super Nutrition</strong>) funcionam como sobremesas caras com rendimento de
+                        apenas 20 dias (R$ 7,50 a R$ 8,99/dia).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-6 border-t border-slate-800 mt-auto">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                Análise Técnica e Econômica de Creatina em Goma &bull; Baseado na RDC 243/2018 ANVISA &amp; Laudos
+                ABENUTRI.
+            </div>
+            <div class="text-slate-500">
+                Aviso: Este painel tem caráter meramente informativo e educativo.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Global Data Store derived directly from Technical Report
+        const brandData = [
+            { id: 'growth', name: 'Growth Supplements', product: 'G-Gummy', bottleUnits: 90, doseUnits: 3, doseMg: 3000, realDays: 30, priceMin: 89.90, priceMax: 89.90, dailyMin: 3.00, dailyMax: 3.00, status: 'recommended', tag: 'Melhor Custo-Benefício', notes: 'Aprovada na ABENUTRI, excelente matriz, sem açúcares adicionados.' },
+            { id: 'essential', name: 'Essential Nutrition', product: 'Action Gummy', bottleUnits: 60, doseUnits: 2, doseMg: 3000, realDays: 30, priceMin: 130.50, priceMax: 145.00, dailyMin: 4.35, dailyMax: 4.83, status: 'recommended', tag: 'Clean Label Premium', notes: 'Apenas 2 gomas para 3g, corantes naturais vegetais, alta pureza.' },
+            { id: 'sunflower', name: 'Sunflower', product: 'Gummy Maçã Verde', bottleUnits: 60, doseUnits: 2, doseMg: 3000, realDays: 30, priceMin: 71.50, priceMax: 78.90, dailyMin: 2.38, dailyMax: 2.63, status: 'efficient', tag: 'Econômica Concentrada', notes: 'Baixo custo por dose, 2 gomas por dia com 30 dias de uso.' },
+            { id: 'temvida', name: 'Tem Vida', product: 'Gummy Tutti-Frutti', bottleUnits: 60, doseUnits: 2, doseMg: 3000, realDays: 30, priceMin: 69.90, priceMax: 99.00, dailyMin: 2.33, dailyMax: 3.30, status: 'efficient', tag: 'Opção de Entrada', notes: 'Preço acessível, 2 gomas por dia.' },
+            { id: 'newnutrition', name: 'NewNutrition', product: 'Creatina Gummy', bottleUnits: 60, doseUnits: 2, doseMg: 3000, realDays: 30, priceMin: 139.90, priceMax: 139.90, dailyMin: 4.66, dailyMax: 4.66, status: 'efficient', tag: 'Intermediária Consistente', notes: 'Boa estabilidade térmica e organoléptica.' },
+            { id: 'guday', name: 'Guday', product: 'Gummies Frutas Vermelhas', bottleUnits: 60, doseUnits: 2, doseMg: 3000, realDays: 30, priceMin: 159.90, priceMax: 179.90, dailyMin: 5.33, dailyMax: 5.99, status: 'efficient', tag: 'Fórmula Vegana (Pectina)', notes: 'Utiliza pectina vegetal sem gelatina animal, custo elevado.' },
+            { id: 'desincha', name: 'Desinchá', product: 'Super Gummy Morango', bottleUnits: 60, doseUnits: 3, doseMg: 3000, realDays: 20, priceMin: 119.90, priceMax: 159.90, dailyMin: 5.99, dailyMax: 7.99, status: 'alert', tag: 'Baixo Rendimento (20d)', notes: 'Exige 3 gomas/dia. Frasco dura apenas 20 dias.' },
+            { id: 'supernutrition', name: 'Super Nutrition', product: 'Caramelo de Creatina', bottleUnits: 40, doseUnits: 2, doseMg: 3000, realDays: 20, priceMin: 149.90, priceMax: 179.90, dailyMin: 7.49, dailyMax: 8.99, status: 'alert', tag: 'Confeitaria Premium (20d)', notes: 'Textura de caramelo, frasco com 40 unidades dura só 20 dias.' },
+            { id: 'blackskull', name: 'Black Skull', product: 'Creatine Turbo Gummy', bottleUnits: 90, doseUnits: 6, doseMg: 3000, realDays: 15, priceMin: 100.00, priceMax: 125.00, dailyMin: 6.66, dailyMax: 8.33, status: 'alert', tag: 'Atenção: 6 gomas/dia', notes: 'Incorpora maltodextrina. Pote de 90 gomas dura apenas 15 dias.' }
+        ];
+
+        // Chart Instances
+        let chartDailyCostInstance = null;
+        let chartBottleDurationInstance = null;
+        let chartYearlyCostInstance = null;
+        let chartPolyolsInstance = null;
+
+        // Navigation Switch
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active', 'text-teal-400', 'border-b-2', 'border-teal-400'));
+
+            const targetSec = document.getElementById('sec-' + tabId);
+            const targetBtn = document.getElementById('tab-' + tabId);
+
+            if (targetSec) targetSec.classList.remove('hidden');
+            if (targetBtn) {
+                targetBtn.classList.add('active', 'text-teal-400', 'border-b-2', 'border-teal-400');
+            }
+
+            if (tabId === 'charts' && !chartDailyCostInstance) {
+                initCharts();
+            }
+            if (tabId === 'science' && !chartPolyolsInstance) {
+                initScienceChart();
+            }
+        }
+
+        // Calculator Logic
+        function calculateRealCost() {
+            const price = parseFloat(document.getElementById('calc-price').value) || 0;
+            const totalGummies = parseInt(document.getElementById('calc-total-gummies').value) || 1;
+            const servingGummies = parseInt(document.getElementById('calc-serving-gummies').value) || 1;
+            const creatineMg = parseFloat(document.getElementById('calc-creatine-mg').value) || 1;
+
+            // Target clinical dose = 3000mg
+            const targetDoseMg = 3000;
+            const gummiesPerTargetDose = (servingGummies / creatineMg) * targetDoseMg;
+            const realDays = totalGummies / gummiesPerTargetDose;
+            const dailyCost = price / realDays;
+            const monthlyCost = dailyCost * 30;
+
+            document.getElementById('res-days').innerText = realDays.toFixed(1) + ' Dias';
+            document.getElementById('res-gummies-needed').innerText = gummiesPerTargetDose.toFixed(1) + ' Gomas/dia';
+            document.getElementById('res-daily-cost').innerText = 'R$ ' + dailyCost.toFixed(2);
+            document.getElementById('res-monthly-cost').innerText = 'R$ ' + monthlyCost.toFixed(2);
+
+            const powderDailyCost = 0.65;
+            const diffMonthly = monthlyCost - (powderDailyCost * 30);
+            document.getElementById('res-powder-comparison').innerHTML =
+                `O mesmo protocolo diário com Creatina Monohidratada em Pó (R$0,65/dia) custaria apenas R$ ${(powderDailyCost * 30).toFixed(2)}/mês. ` +
+                `Você está pagando <strong>R$ ${Math.max(0, diffMonthly).toFixed(2)} a mais por mês</strong> pela versão em goma.`;
+        }
+
+        // Render Brand Matrix Table
+        function renderBrandTable(data) {
+            const tbody = document.getElementById('brand-table-body');
+            tbody.innerHTML = '';
+
+            data.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition border-b border-slate-100';
+
+                let badgeColor = 'bg-slate-100 text-slate-800';
+                if (item.status === 'recommended') badgeColor = 'bg-teal-100 text-teal-800 border border-teal-300';
+                if (item.status === 'efficient') badgeColor = 'bg-blue-100 text-blue-800';
+                if (item.status === 'alert') badgeColor = 'bg-rose-100 text-rose-800';
+
+                const priceStr = item.priceMin === item.priceMax ? `R$ ${item.priceMin.toFixed(2)}` : `R$ ${item.priceMin.toFixed(2)} a R$ ${item.priceMax.toFixed(2)}`;
+                const costStr = item.dailyMin === item.dailyMax ? `R$ ${item.dailyMin.toFixed(2)}` : `R$ ${item.dailyMin.toFixed(2)} - ${item.dailyMax.toFixed(2)}`;
+
+                tr.innerHTML = `
+                    <td class="py-3 px-4">
+                        <div class="font-bold text-slate-900">${item.name}</div>
+                        <div class="text-xs text-slate-500">${item.product}</div>
+                    </td>
+                    <td class="py-3 px-4 text-center font-semibold">${item.bottleUnits} gomas</td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="px-2 py-0.5 rounded-md font-bold text-xs ${item.doseUnits >= 4 ? 'bg-rose-100 text-rose-700' : 'bg-slate-100 text-slate-700'}">
+                            ${item.doseUnits} gomas
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-center font-bold ${item.realDays < 30 ? 'text-amber-600' : 'text-teal-700'}">${item.realDays} dias</td>
+                    <td class="py-3 px-4 text-center text-xs text-slate-600">${priceStr}</td>
+                    <td class="py-3 px-4 text-center font-black text-slate-900">${costStr}</td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="text-xs px-2.5 py-1 rounded-full font-bold ${badgeColor}">${item.tag}</span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Filter Brands Logic
+        function filterBrands() {
+            const search = document.getElementById('brand-search').value.toLowerCase();
+            const filter = document.getElementById('brand-filter').value;
+
+            const filtered = brandData.filter(item => {
+                const matchesSearch = item.name.toLowerCase().includes(search) || item.product.toLowerCase().includes(search);
+                let matchesFilter = true;
+                if (filter === 'recommended') matchesFilter = item.status === 'recommended';
+                if (filter === 'efficient') matchesFilter = item.doseUnits === 2;
+                if (filter === 'alert') matchesFilter = item.status === 'alert' || item.doseUnits >= 3;
+                return matchesSearch && matchesFilter;
+            });
+
+            renderBrandTable(filtered);
+        }
+
+        // Initialize Charts
+        function initCharts() {
+            // Chart 1: Daily Cost Comparison
+            const ctx1 = document.getElementById('chartDailyCost').getContext('2d');
+            chartDailyCostInstance = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['Pó (Ref.)', 'Sunflower', 'Tem Vida', 'Growth', 'Essential', 'NewNutr.', 'Guday', 'Desinchá', 'Black Skull', 'Super Nutr.'],
+                    datasets: [{
+                        label: 'Custo Diário Médio (R$ p/ 3g)',
+                        data: [0.65, 2.50, 2.81, 3.00, 4.59, 4.66, 5.66, 6.99, 7.49, 8.24],
+                        backgroundColor: [
+                            '#F59E0B', '#0D9488', '#0D9488', '#0D9488', '#0284C7', '#0284C7', '#6366F1', '#EF4444', '#EF4444', '#EF4444'
+                        ],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) { return 'R$ ' + context.parsed.y.toFixed(2) + ' / dia'; }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { callback: function (val) { return 'R$ ' + val; } }
+                        },
+                        x: {
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 45,
+                                font: { size: 10 }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Bottle Duration (Real Days)
+            const ctx2 = document.getElementById('chartBottleDuration').getContext('2d');
+            chartBottleDurationInstance = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Growth (90un)', 'Essential (60un)', 'Sunflower (60un)', 'Tem Vida (60un)', 'Guday (60un)', 'Desinchá (60un)', 'Super Nutr (40un)', 'Black Skull (90un)'],
+                    datasets: [{
+                        label: 'Rendimento Real (Dias de Uso)',
+                        data: [30, 30, 30, 30, 30, 20, 20, 15],
+                        backgroundColor: ['#0D9488', '#0D9488', '#0D9488', '#0D9488', '#0D9488', '#F59E0B', '#F59E0B', '#EF4444'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) { return context.parsed.y + ' dias de duração real'; }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 35,
+                            ticks: { callback: function (val) { return val + ' dias'; } }
+                        },
+                        x: {
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 45,
+                                font: { size: 10 }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 3: Yearly Cumulative Cost
+            const ctx3 = document.getElementById('chartYearlyCost').getContext('2d');
+            chartYearlyCostInstance = new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: ['Creatina em Pó (300g)', 'Cápsulas Tradicionais', 'Goma Custo-Benefício (Growth)', 'Goma Clean Label (Essential)', 'Goma Ineficiente (Black Skull)'],
+                    datasets: [{
+                        label: 'Gasto Total em 1 Ano (12 meses)',
+                        data: [237.25, 456.00, 1095.00, 1675.00, 2733.75],
+                        backgroundColor: ['#10B981', '#3B82F6', '#0D9488', '#6366F1', '#EF4444'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) { return 'Gasto Anual: R$ ' + context.parsed.y.toFixed(2); }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { callback: function (val) { return 'R$ ' + val; } }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initScienceChart() {
+            const ctx4 = document.getElementById('chartPolyols').getContext('2d');
+            chartPolyolsInstance = new Chart(ctx4, {
+                type: 'bar',
+                data: {
+                    labels: ['Essential (2 gomas)', 'Growth (3 gomas)', 'Guday (2 gomas)', 'Desinchá (3 gomas)', 'Black Skull (6 gomas)'],
+                    datasets: [{
+                        label: 'Massa Total de Gomas Ingeridas Diariamente (Gramas)',
+                        data: [8, 12, 14, 15, 24],
+                        backgroundColor: ['#0284C7', '#0D9488', '#6366F1', '#F59E0B', '#EF4444'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) { return context.parsed.x + 'g de matriz mastigável/dia'; }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: { callback: function (val) { return val + ' g'; } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initial Execution
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('overview');
+            renderBrandTable(brandData);
+            calculateRealCost();
+        });
+    </script>
+</body>
+
+</html>
