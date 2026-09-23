@@ -36,6 +36,30 @@
             transform: translateY(-5px);
             border-color: rgba(99, 102, 241, 0.5);
         }
+
+        /* Logo animado (abertura "uma por vez") */
+        .hero-logo { width: 128px; height: 128px; margin: 0 auto 28px; border-radius: 22%; background: #0F172A;
+            display: grid; place-items: center; cursor: pointer;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, .12), 0 24px 60px rgba(0, 0, 0, .45); }
+        .hero-logo svg { width: 74%; height: 74%; overflow: visible; }
+        .anim .draw { stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; }
+        .anim .core, .anim .head { opacity: 0; transform-box: fill-box; transform-origin: center; }
+        .anim .glow { opacity: 0; }
+        @keyframes lg-draw { 0% { opacity: 0; stroke-dashoffset: 1; } 2% { opacity: 1; } 100% { opacity: 1; stroke-dashoffset: 0; } }
+        @keyframes lg-pop { from { opacity: 0; transform: scale(.2) rotate(-45deg); } to { opacity: 1; transform: none; } }
+        @keyframes lg-rise { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: none; } }
+        @keyframes lg-glow { 0% { opacity: .6; r: 4; } 100% { opacity: 0; r: 24; } }
+        .v1.play .b-left { animation: lg-draw .55s cubic-bezier(.5, 0, .2, 1) forwards .2s; }
+        .v1.play .b-center { animation: lg-draw .5s cubic-bezier(.5, 0, .2, 1) forwards .6s; }
+        .v1.play .b-right { animation: lg-draw .55s cubic-bezier(.5, 0, .2, 1) forwards 1s; }
+        .v1.play .core { animation: lg-pop .35s cubic-bezier(.3, 1.6, .5, 1) forwards 1.5s; }
+        .v1.play .stem { animation: lg-draw .45s cubic-bezier(.6, 0, .2, 1) forwards 1.75s; }
+        .v1.play .head { animation: lg-rise .55s cubic-bezier(.2, 1.4, .4, 1) forwards 2.05s; }
+        .v1.play .glow { animation: lg-glow 1.2s ease-out forwards 2.4s; }
+        @media (prefers-reduced-motion: reduce) {
+            .anim .draw { stroke-dashoffset: 0; opacity: 1; animation: none !important; }
+            .anim .core, .anim .head { opacity: 1; animation: none !important; }
+        }
     </style>
 </head>
 
@@ -54,6 +78,17 @@
 
     <!-- HERO SECTION -->
     <header class="max-w-6xl mx-auto px-4 py-20 text-center">
+        <div class="hero-logo anim v1" id="heroLogo" role="img" aria-label="Logo CareerFlow AI" title="Clique para rever a animação">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path class="draw b-left" pathLength="1" d="M11.5 52C18.5 47 25.5 41 32 34" fill="none" stroke="#A3E635" stroke-width="8" stroke-linecap="square" stroke-linejoin="round" />
+                <path class="draw b-center" pathLength="1" d="M32 53V34" fill="none" stroke="#34D399" stroke-width="8" stroke-linecap="square" />
+                <path class="draw b-right" pathLength="1" d="M52.5 52C45.5 47 38.5 41 32 34" fill="none" stroke="#F8FAFC" stroke-width="8" stroke-linecap="square" stroke-linejoin="round" />
+                <path class="draw stem" pathLength="1" d="M32 34C32 28 32 21 32 14" fill="none" stroke="#A3E635" stroke-width="8" stroke-linecap="square" stroke-linejoin="round" />
+                <path class="head" d="M22.5 16L32 5.5L41.5 16L36 15V18H28V15L22.5 16Z" fill="#A3E635" />
+                <path class="core" d="M32 26C32.8 30.5 35.5 33.2 40 34C35.5 34.8 32.8 37.5 32 42C31.2 37.5 28.5 34.8 24 34C28.5 33.2 31.2 30.5 32 26Z" fill="#0F172A" />
+                <circle class="glow" cx="32" cy="8" r="4" fill="none" stroke="#A3E635" stroke-width="1.5" />
+            </svg>
+        </div>
         <span
             class="inline-block py-1 px-3 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-bold tracking-widest uppercase mb-6 border border-indigo-500/20">
             Gestão Ativa de Carreira
@@ -423,6 +458,14 @@
         </div>
     </section>
 
+    <script>
+        (() => {
+            const logo = document.getElementById('heroLogo');
+            const play = () => { logo.classList.remove('play'); void logo.getBoundingClientRect(); logo.classList.add('play'); };
+            requestAnimationFrame(play);
+            logo.addEventListener('click', play);
+        })();
+    </script>
 </body>
 
 </html>
