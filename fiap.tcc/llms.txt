@@ -1,11 +1,31 @@
 # CareerFlow AI — TCC FIAP 2026
 
-> Plataforma de gestão ativa de carreira com IA para profissionais sêniores de tecnologia (35–45 anos), que substitui a mentoria humana cara e episódica (R$ 1.500–6.000/mês) por inteligência de mercado contínua e um mentor virtual 24/7 via WhatsApp. Este diretório reúne as entregas do TCC do MBA da FIAP, incluindo a projeção financeira de 3 anos para o MVP.
+> Plataforma de gestão ativa de carreira com IA para profissionais sêniores de tecnologia (35+), em duas rotas (sênior → gestão e sênior → especialista). Cruza perfil comportamental, pesquisa de mercado (empresas, vagas, perfis de referência) e um protocolo de mentoria para entregar um plano de carreira acionável e acompanhá-lo semanalmente. Este diretório reúne as entregas do TCC do MBA da FIAP.
 
 Grupo: Luiz Ihara (RM368484), Filipe Fragoso (RM368500), Daniel Caminha (RM366740), Pedro Martins (RM368543).
 Orientação: Prof. Ricardo Esposto.
 
-## Números-chave da projeção (Ano 3)
+## Entrega final (setembro de 2026) — modelo de monetização v2
+
+Revisado após a reunião do grupo de 30/08/2026: o público entra com dor aguda, então a assinatura única da v1 foi substituída por uma escada de preços.
+
+- Diagnóstico grátis (PDF do LinkedIn + perguntas comportamentais) · custo ≈ R$ 0,50
+- Plano de Carreira: R$ 197 pagamento único (R$ 247 no Ano 2, R$ 297 no Ano 3), inclui o 1º mês de tudo · custo ≈ R$ 40
+- Carreira Contínua: R$ 49/mês (R$ 59 → R$ 69) · 35–45% assinam após o Plano · churn 9% → 5,5% · custo ≈ R$ 14/mês
+- Sob demanda: R$ 29–49 por uso (entrevista simulada, CV por vaga, créditos)
+
+Resultados (Ano 1 → 2 → 3): receita R$ 66 mil → R$ 465 mil → R$ 1,57 mi; margem bruta 69% → 77% → 83%; EBITDA −R$ 150 mil → −R$ 280 mil → −R$ 26 mil, com EBITDA mensal positivo a partir do mês 31; 2.873 Planos vendidos e 1.103 assinantes ativos no Ano 3; LTV/CAC 4,3× (CAC R$ 140 pago pela margem da 1ª compra); capital externo R$ 750 mil (anjo R$ 150 mil + seed R$ 600 mil) além de R$ 150 mil dos sócios.
+
+- [Pitch final (apresentação)](apresentacao.html): 20 slides; tecla P ativa o modo pitch de 5 minutos.
+- [Pitch em PDF](files/CareerFlow_AI_Pitch_Deck.pdf)
+- [Planilha FIAP v2 (.xlsx)](files/CareerFlow_AI_Projecao_Financeira_v2.xlsx): aba "🧮 Modelo v2" com os 36 meses por fórmula alimentando Premissas, Projeção e Dashboard. Também em [CSV](files/CareerFlow_AI_Projecao_v2_36_meses.csv).
+- [Mercado em R$](mercado-tam-sam-som.html) e [em pessoas](mercado-pessoas-tam-sam-som.html): TAM R$ 522 mi, SAM R$ 153 mi, SOM R$ 1,49 mi (0,97%), com valor anual por cliente de R$ 1.056 (Plano R$ 297 + 11 × R$ 69).
+- [Fluxos e Jornada](fluxos-jornada.html): mapa da jornada, modos de uso, fluxo de conversão, ciclo semanal e mapa de telas.
+- [Protótipo navegável](https://www.careerflow.com.br/): em Entrar, perfil "Ricardo · Premium" ou winners / fiap2026.
+
+## Entregável Parcial 3 — projeção v1 (agosto de 2026, substituída pela v2)
+
+### Números-chave da projeção v1 (Ano 3)
 
 - Receita anual (ARR): R$ 2.766.960 — meta do modelo FIAP: > R$ 1 M
 - Clientes ativos pagantes: 1.020 — meta: > 300

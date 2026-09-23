@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Fluxos e Jornada — CareerFlow AI</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="description" content="Jornada do usuário, fluxo de monetização, ciclo semanal e mapa de telas do protótipo do CareerFlow AI — TCC MBA FIAP 2026.">
+  <meta name="theme-color" content="#f3f1eb">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@500;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#f3f1eb; --surface:#fbfaf6; --surface-2:#ffffff; --ink:#101621; --muted:#5f6772; --dim:#858b93;
+      --line:rgba(16,22,33,.13); --line-strong:rgba(16,22,33,.24);
+      --blue:#2457f5; --blue-soft:rgba(36,87,245,.08); --green:#167c62; --green-soft:rgba(22,124,98,.09);
+      --amber:#9c6315; --amber-soft:rgba(168,103,22,.1); --rose:#bd493e; --rose-soft:rgba(189,73,62,.09);
+      --hero:#111722; --hero-ink:#f2f0e9; --hero-muted:#c3c9d2; --hero-accent:#7fa0ff;
+      --shadow:0 20px 60px rgba(16,22,33,.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg:#0d1118; --surface:#151b25; --surface-2:#1a212d; --ink:#f2f0e9; --muted:#a1a8b2; --dim:#7f8793;
+        --line:rgba(255,255,255,.13); --line-strong:rgba(255,255,255,.24);
+        --blue:#7f9dff; --blue-soft:rgba(127,157,255,.1); --green:#5fd0a6; --green-soft:rgba(95,208,166,.1);
+        --amber:#e0a656; --amber-soft:rgba(224,166,86,.1); --rose:#ef8a7e; --rose-soft:rgba(239,138,126,.1);
+        --hero:#f0eee8; --hero-ink:#111722; --hero-muted:#3d4552; --hero-accent:#2457f5;
+        --shadow:0 20px 60px rgba(0,0,0,.3);
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg:#0d1118; --surface:#151b25; --surface-2:#1a212d; --ink:#f2f0e9; --muted:#a1a8b2; --dim:#7f8793;
+      --line:rgba(255,255,255,.13); --line-strong:rgba(255,255,255,.24);
+      --blue:#7f9dff; --blue-soft:rgba(127,157,255,.1); --green:#5fd0a6; --green-soft:rgba(95,208,166,.1);
+      --amber:#e0a656; --amber-soft:rgba(224,166,86,.1); --rose:#ef8a7e; --rose-soft:rgba(239,138,126,.1);
+      --hero:#f0eee8; --hero-ink:#111722; --hero-muted:#3d4552; --hero-accent:#2457f5;
+      --shadow:0 20px 60px rgba(0,0,0,.3);
+    }
+
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:"DM Sans",system-ui,sans-serif; -webkit-font-smoothing:antialiased; line-height:1.5; }
+    a { color:inherit; }
+    h1, h2, h3 { font-family:Manrope,sans-serif; letter-spacing:-.035em; margin:0; }
+    p { margin:0; }
+    .wrap { width:min(1180px, calc(100% - 32px)); margin:0 auto; }
+
+    .nav { position:sticky; top:0; z-index:20; background:color-mix(in srgb,var(--bg) 88%,transparent); backdrop-filter:blur(14px); border-bottom:1px solid var(--line); }
+    .nav-inner { height:62px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { display:flex; align-items:center; gap:10px; text-decoration:none; font:800 15px Manrope,sans-serif; letter-spacing:-.02em; }
+    .brand img { width:24px; height:24px; border-radius:6px; }
+    .brand em { font-style:normal; color:var(--blue); }
+    .nav-links { display:flex; align-items:center; gap:18px; font-size:13px; font-weight:600; }
+    .nav-links a { text-decoration:none; color:var(--muted); }
+    .nav-links a:hover { color:var(--ink); }
+    .theme-btn { width:34px; height:34px; border-radius:6px; border:1px solid var(--line); background:var(--surface); color:var(--ink); cursor:pointer; font-size:15px; }
+
+    .eyebrow { display:flex; align-items:center; gap:10px; color:var(--blue); font:700 11px "DM Sans",sans-serif; letter-spacing:.16em; text-transform:uppercase; margin-bottom:14px; }
+    .eyebrow::before { content:""; width:24px; height:1px; background:currentColor; }
+
+    .hero { padding:72px 0 44px; }
+    .hero h1 { font-size:clamp(38px,6vw,72px); line-height:1; letter-spacing:-.055em; max-width:900px; }
+    .hero h1 span { color:var(--blue); }
+    .hero .lead { margin-top:22px; max-width:720px; color:var(--muted); font-size:clamp(16px,1.6vw,20px); }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:26px; }
+    .chip { font-size:12.5px; padding:7px 12px; border:1px solid var(--line); border-radius:999px; background:var(--surface); color:var(--muted); }
+    .chip b { color:var(--ink); }
+    .toc { display:flex; flex-wrap:wrap; gap:6px; margin-top:28px; }
+    .toc a { font-size:12px; font-weight:700; text-decoration:none; padding:8px 12px; border-radius:4px; background:var(--hero); color:var(--hero-ink); }
+    .toc a.ghost { background:transparent; color:var(--ink); border:1px solid var(--line-strong); }
+
+    section.block { padding:56px 0; border-top:1px solid var(--line); scroll-margin-top:62px; }
+    .block-head { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.9fr); gap:32px; align-items:end; margin-bottom:28px; }
+    .block-head h2 { font-size:clamp(28px,3.6vw,44px); line-height:1.05; }
+    .block-head p { color:var(--muted); font-size:15px; }
+
+    /* Jornada */
+    .map-scroll { overflow-x:auto; border:1px solid var(--line); border-radius:8px; background:var(--surface); box-shadow:var(--shadow); }
+    .jmap { width:100%; min-width:980px; border-collapse:collapse; font-size:13px; }
+    .jmap th, .jmap td { padding:14px 16px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); border-right:1px solid var(--line); }
+    .jmap tr > *:last-child { border-right:0; }
+    .jmap tbody tr:last-child > * { border-bottom:0; }
+    .jmap thead th { background:var(--surface-2); padding-top:18px; }
+    .jmap thead th small { display:block; color:var(--blue); font:800 10.5px Manrope,sans-serif; letter-spacing:.08em; text-transform:uppercase; margin-bottom:4px; }
+    .jmap thead th b { font:800 16px Manrope,sans-serif; letter-spacing:-.02em; }
+    .jmap thead th .price { display:block; margin-top:4px; font-weight:600; color:var(--muted); font-size:12px; }
+    .jmap thead th.key { background:var(--hero); color:var(--hero-ink); }
+    .jmap thead th.key small { color:var(--hero-accent); }
+    .jmap thead th.key .price { color:var(--hero-muted); }
+    .jmap tbody th { width:138px; color:var(--dim); font:700 10.5px "DM Sans",sans-serif; letter-spacing:.12em; text-transform:uppercase; background:var(--surface-2); }
+    .jmap td { color:var(--muted); }
+    .jmap td strong { color:var(--ink); font-weight:600; }
+    .jmap ul { margin:0; padding-left:16px; }
+    .jmap li + li { margin-top:3px; }
+    .metric { display:inline-block; font:800 12px Manrope,sans-serif; color:var(--green); background:var(--green-soft); padding:3px 7px; border-radius:3px; }
+    .emotion-row td { padding:6px 0 0; }
+    .emotion { display:block; width:100%; height:130px; }
+    .emotion .curve { fill:none; stroke:var(--blue); stroke-width:2.5; }
+    .emotion .area { fill:var(--blue-soft); }
+    .emotion .base { stroke:var(--line-strong); stroke-dasharray:3 5; }
+    .emotion circle { fill:var(--surface); stroke:var(--blue); stroke-width:2.5; }
+    .emotion text { fill:var(--ink); font:700 12px "DM Sans",sans-serif; }
+    .emotion text.sub { fill:var(--muted); font-weight:500; font-size:11px; }
+
+    /* Modos */
+    .modes { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .mode { padding:26px; border:1px solid var(--line); border-radius:8px; background:var(--surface); }
+    .mode .tag { display:inline-block; font:800 10.5px Manrope,sans-serif; letter-spacing:.1em; text-transform:uppercase; padding:5px 8px; border-radius:3px; }
+    .mode.acute .tag { color:var(--rose); background:var(--rose-soft); }
+    .mode.cont .tag { color:var(--green); background:var(--green-soft); }
+    .mode h3 { font-size:22px; margin:14px 0 6px; }
+    .mode > p { color:var(--muted); font-size:14px; }
+    .path { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:18px; }
+    .path span { font-size:12px; font-weight:600; padding:6px 9px; border:1px solid var(--line); border-radius:4px; background:var(--surface-2); }
+    .path i { font-style:normal; color:var(--dim); }
+    .mode dl { display:grid; grid-template-columns:120px 1fr; gap:8px 14px; margin:20px 0 0; font-size:13px; }
+    .mode dt { color:var(--dim); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:.08em; padding-top:2px; }
+    .mode dd { margin:0; color:var(--muted); }
+    .routes { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+    .route { padding:18px 22px; border-left:3px solid var(--blue); background:var(--surface); border-radius:0 6px 6px 0; }
+    .route small { color:var(--blue); font:800 10.5px Manrope,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+    .route h3 { font-size:17px; margin:6px 0 4px; }
+    .route p { color:var(--muted); font-size:13px; }
+
+    /* Fluxo de monetização */
+    .flow { display:grid; gap:0; }
+    .step { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.85fr); gap:18px; align-items:center; }
+    .node { position:relative; padding:18px 20px; border:1px solid var(--line); border-radius:8px; background:var(--surface); display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:center; }
+    .node .n { width:34px; height:34px; border-radius:6px; display:grid; place-items:center; font:800 13px Manrope,sans-serif; background:var(--blue-soft); color:var(--blue); }
+    .node h3 { font-size:17px; }
+    .node p { color:var(--muted); font-size:13px; margin-top:2px; }
+    .node .val { font:800 15px Manrope,sans-serif; white-space:nowrap; }
+    .node.key { background:var(--hero); color:var(--hero-ink); border-color:var(--hero); }
+    .node.key p { color:var(--hero-muted); }
+    .node.key .n { background:rgba(127,160,255,.18); color:var(--hero-accent); }
+    .gate { position:relative; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.85fr); gap:18px; align-items:center; min-height:64px; }
+    .gate .spine { justify-self:start; margin-left:36px; display:flex; align-items:center; gap:12px; height:100%; min-height:64px; border-left:2px solid var(--line-strong); padding-left:18px; }
+    .gate .q { font-size:12.5px; font-weight:700; color:var(--ink); }
+    .gate .q em { font-style:normal; color:var(--green); background:var(--green-soft); padding:2px 6px; border-radius:3px; margin-left:6px; font-size:12px; }
+    .branch { font-size:12.5px; color:var(--muted); padding:10px 14px; border:1px dashed var(--line-strong); border-radius:6px; }
+    .branch b { color:var(--rose); }
+    .branch.good b { color:var(--green); }
+    .side { font-size:12.5px; color:var(--muted); padding:0 4px; }
+    .side b { color:var(--ink); }
+
+    /* Ciclo semanal */
+    .loop { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; position:relative; }
+    .loop-card { position:relative; padding:18px; border:1px solid var(--line); border-radius:8px; background:var(--surface); }
+    .loop-card:not(:last-child)::after { content:"→"; position:absolute; right:-10px; top:22px; transform:translateX(50%); color:var(--blue); font-weight:700; z-index:1; background:var(--bg); padding:0 2px; }
+    .loop-card .when { font:800 10.5px Manrope,sans-serif; letter-spacing:.1em; text-transform:uppercase; color:var(--blue); }
+    .loop-card h3 { font-size:15.5px; margin:8px 0 5px; }
+    .loop-card p { color:var(--muted); font-size:12.5px; }
+    .loop-back { margin-top:12px; display:flex; align-items:center; gap:10px; font-size:12.5px; color:var(--muted); }
+    .loop-back::before { content:"↺"; font-size:18px; color:var(--blue); }
+    .limits { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:22px; }
+    .limit { padding:16px 18px; border-top:3px solid var(--amber); background:var(--surface); border-radius:0 0 6px 6px; }
+    .limit h3 { font-size:15px; margin-bottom:4px; }
+    .limit p { font-size:12.5px; color:var(--muted); }
+
+    /* Mapa de telas */
+    .access { display:flex; flex-wrap:wrap; align-items:center; gap:10px 22px; padding:16px 20px; margin-bottom:18px; border:1px solid var(--line); border-left:3px solid var(--green); border-radius:6px; background:var(--surface); font-size:13.5px; color:var(--muted); }
+    .access a { font:800 18px Manrope,sans-serif; color:var(--green); text-decoration:none; }
+    .access b { color:var(--ink); }
+    .screens { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .screen { margin:0; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--surface); }
+    .screen img { display:block; width:100%; aspect-ratio:16/10; object-fit:cover; object-position:top; border-bottom:1px solid var(--line); }
+    .screen figcaption { padding:12px 14px 14px; }
+    .screen code { font:600 11px ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--blue); }
+    .screen h3 { font-size:15px; margin:4px 0 3px; display:flex; align-items:center; gap:8px; }
+    .screen p { color:var(--muted); font-size:12.5px; }
+    .lock { font:800 9.5px Manrope,sans-serif; letter-spacing:.08em; text-transform:uppercase; padding:3px 6px; border-radius:3px; color:var(--amber); background:var(--amber-soft); }
+    .free { color:var(--green); background:var(--green-soft); }
+    .screen .num { display:inline-grid; place-items:center; width:20px; height:20px; border-radius:4px; background:var(--hero); color:var(--hero-ink); font:800 10.5px Manrope,sans-serif; margin-right:6px; }
+
+    /* Decisões */
+    .decisions { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+    .decision { display:grid; grid-template-columns:40px 1fr; gap:14px; padding:18px 20px; border:1px solid var(--line); border-radius:8px; background:var(--surface); }
+    .decision .ic { width:40px; height:40px; border-radius:6px; display:grid; place-items:center; font:800 13px Manrope,sans-serif; color:var(--blue); background:var(--blue-soft); }
+    .decision h3 { font-size:16px; margin-bottom:4px; }
+    .decision p { color:var(--muted); font-size:13px; }
+
+    footer { padding:40px 0 56px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; }
+    footer .wrap { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; }
+    footer a { color:var(--muted); }
+
+    @media (max-width: 900px) {
+      .nav-links a.hide-sm { display:none; }
+      .block-head, .modes, .routes, .step, .gate, .decisions, .limits { grid-template-columns:1fr; }
+      .gate { gap:8px; padding:6px 0; }
+      .gate .branch, .gate .side { margin-left:36px; }
+      .loop { grid-template-columns:1fr; }
+      .loop-card:not(:last-child)::after { content:"↓"; right:auto; left:22px; top:auto; bottom:-14px; transform:none; }
+      .screens { grid-template-columns:1fr 1fr; }
+      .node { grid-template-columns:auto 1fr; }
+      .node .val { grid-column:2; }
+    }
+    @media (max-width: 560px) {
+      .screens { grid-template-columns:1fr; }
+      .mode dl { grid-template-columns:1fr; gap:2px; }
+      .mode dd { margin-bottom:8px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html"><img src="favicon.svg" alt="" aria-hidden="true"><span>CareerFlow<em> AI</em></span></a>
+      <nav class="nav-links" aria-label="Navegação">
+        <a class="hide-sm" href="index.html">Portal do TCC</a>
+        <a class="hide-sm" href="apresentacao.html">Apresentação</a>
+        <a href="https://www.careerflow.com.br/" target="_blank" rel="noopener">Protótipo ↗</a>
+        <button class="theme-btn" id="themeBtn" type="button" aria-label="Alternar tema claro/escuro">◐</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="eyebrow">TCC MBA FIAP 2026 · Fluxos e Jornada</div>
+        <h1>Como uma pessoa atravessa o <span>CareerFlow</span>, do primeiro clique ao próximo cargo.</h1>
+        <p class="lead">A jornada foi redesenhada na reunião de 30/08/2026 em torno de uma constatação: nosso público chega com dor aguda e só fica se continuar vendo progresso. Esta página mostra os degraus, as decisões em cada um e as telas que já existem no protótipo.</p>
+        <div class="chips">
+          <span class="chip"><b>4 degraus</b> · grátis → plano → contínuo → sob demanda</span>
+          <span class="chip"><b>2 modos</b> · busca ativa e desenvolvimento contínuo</span>
+          <span class="chip"><b>2 rotas</b> · gestão e especialista</span>
+        </div>
+        <nav class="toc" aria-label="Seções">
+          <a href="#jornada">Mapa da jornada</a>
+          <a class="ghost" href="#modos">Modos e rotas</a>
+          <a class="ghost" href="#fluxo">Fluxo de conversão</a>
+          <a class="ghost" href="#ciclo">Ciclo semanal</a>
+          <a class="ghost" href="#telas">Mapa de telas</a>
+          <a class="ghost" href="#decisoes">Decisões de design</a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="block" id="jornada">
+      <div class="wrap">
+        <div class="block-head">
+          <div><div class="eyebrow">01 · Mapa da jornada</div><h2>Cinco momentos, cada um com uma pergunta diferente na cabeça do usuário.</h2></div>
+          <p>A linha de emoção mostra onde a experiência precisa entregar alívio. O ponto mais baixo é antes do produto; o ponto de virada é o Plano de Carreira.</p>
+        </div>
+        <div class="map-scroll" role="region" aria-label="Mapa da jornada, role horizontalmente" tabindex="0">
+          <table class="jmap">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col"><small>0 · Gatilho</small><b>Descoberta</b><span class="price">—</span></th>
+                <th scope="col"><small>1 · Descobrir</small><b>Diagnóstico grátis</b><span class="price">R$ 0 · 5 minutos</span></th>
+                <th scope="col" class="key"><small>2 · Decidir</small><b>Plano de Carreira</b><span class="price">R$ 197 · pagamento único</span></th>
+                <th scope="col"><small>3 · Evoluir</small><b>Carreira Contínua</b><span class="price">R$ 49/mês</span></th>
+                <th scope="col"><small>4 · Acelerar</small><b>Sob demanda</b><span class="price">R$ 29–49 por uso</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Pergunta do usuário</th>
+                <td><strong>“Estou ficando para trás?”</strong> Layoff, promoção travada ou medo da IA.</td>
+                <td><strong>“Como o mercado me vê?”</strong></td>
+                <td><strong>“Qual é o meu próximo passo, exatamente?”</strong></td>
+                <td><strong>“Estou avançando?”</strong></td>
+                <td><strong>“Estou pronto para esta vaga?”</strong></td>
+              </tr>
+              <tr>
+                <th scope="row">O que ele faz</th>
+                <td>Vê um post no LinkedIn, recebe indicação ou encontra conteúdo sobre carreira em tech.</td>
+                <td>Envia o PDF do LinkedIn (ou currículo) e responde perguntas comportamentais básicas.</td>
+                <td>Faz o teste comportamental completo, a entrevista guiada de conquistas (STAR), define objetivos e critérios (salário, local, modelo).</td>
+                <td>Faz check-in semanal de 5 min, marca tarefas do PDI, lê o clipping e ajusta critérios.</td>
+                <td>Compra uma entrevista simulada ou um CV ajustado quando surge uma vaga concreta.</td>
+              </tr>
+              <tr>
+                <th scope="row">O que entregamos</th>
+                <td>Conteúdo de autoridade e um convite para o diagnóstico.</td>
+                <td><ul><li>Raio-x de forças e lacunas</li><li>SWOT simples</li><li>Leitura geral do mercado</li></ul></td>
+                <td><ul><li>Fit por empresa com vagas abertas</li><li>Perfil de quem chegou onde ele quer chegar</li><li>Sugestões para LinkedIn e CV</li><li>Organizador (Kanban) de job search</li><li>PDI com recursos curados</li><li>1º mês do Contínuo incluso</li></ul></td>
+                <td><ul><li>PDI Smart com progresso e metas</li><li>Clipping de vagas, empresas e eventos</li><li>Fit recalculado quando o mercado muda</li><li>Visibilidade opt-in para headhunters</li></ul></td>
+                <td><ul><li>Mock interview comportamental ou técnica, com nota</li><li>Análise de aderência CV × vaga</li><li>Créditos extras de conversa</li></ul></td>
+              </tr>
+              <tr class="emotion-row">
+                <th scope="row">Emoção</th>
+                <td colspan="5">
+                  <svg class="emotion" viewBox="0 0 1000 130" preserveAspectRatio="none" role="img" aria-label="Curva de emoção: ansiedade na descoberta, curiosidade no diagnóstico, alívio no plano, confiança no contínuo, preparo no sob demanda">
+                    <line class="base" x1="0" x2="1000" y1="70" y2="70"/>
+                    <path class="area" d="M100 104 C 200 104, 200 64, 300 64 S 400 26, 500 26 S 600 40, 700 38 S 800 22, 900 22 L 900 130 L 100 130 Z"/>
+                    <path class="curve" d="M100 104 C 200 104, 200 64, 300 64 S 400 26, 500 26 S 600 40, 700 38 S 800 22, 900 22"/>
+                    <circle cx="100" cy="104" r="6"/><circle cx="300" cy="64" r="6"/><circle cx="500" cy="26" r="6"/><circle cx="700" cy="38" r="6"/><circle cx="900" cy="22" r="6"/>
+                    <text x="100" y="88" text-anchor="middle">ansioso</text>
+                    <text x="300" y="48" text-anchor="middle">curioso</text>
+                    <text x="500" y="12" text-anchor="middle">alívio · clareza</text>
+                    <text x="700" y="62" text-anchor="middle">confiante</text>
+                    <text x="900" y="48" text-anchor="end">preparado</text>
+                  </svg>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Canal</th>
+                <td>LinkedIn, indicação, eventos</td>
+                <td>Web</td>
+                <td>Web</td>
+                <td>Web + WhatsApp / e-mail</td>
+                <td>Web</td>
+              </tr>
+              <tr>
+                <th scope="row">Métrica</th>
+                <td><span class="metric">diagnósticos / mês</span></td>
+                <td><span class="metric">≥ 6% viram Plano</span></td>
+                <td><span class="metric">≤ 5% de reembolso</span></td>
+                <td><span class="metric">≥ 35% assinam · churn ≤ 9%</span></td>
+                <td><span class="metric">10–16% da base / mês</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="modos">
+      <div class="wrap">
+        <div class="block-head">
+          <div><div class="eyebrow">02 · Modos e rotas</div><h2>O mesmo produto atende dois momentos de vida.</h2></div>
+          <p>Quem está em busca ativa paga pela urgência e tende a sair ao ser contratado. Quem está empregado paga pela evolução contínua. A escada de preços foi desenhada para os dois.</p>
+        </div>
+        <div class="modes">
+          <article class="mode acute">
+            <span class="tag">Modo agudo · busca ativa</span>
+            <h3>“Perdi o emprego” ou “preciso sair daqui”</h3>
+            <p>Precisa de foco e velocidade: saber onde aplicar, com qual narrativa, e organizar dezenas de processos.</p>
+            <div class="path"><span>Diagnóstico</span><i>→</i><span>Plano de Carreira</span><i>→</i><span>Kanban + CV por vaga</span><i>→</i><span>Mock interview</span><i>→</i><span>Contratado</span></div>
+            <dl>
+              <dt>Mais usa</dt><dd>Fit por empresa, vagas abertas, organizador de job search, sob demanda.</dd>
+              <dt>Risco</dt><dd>Cancelar ao ser contratado. Resposta: oferecer o Contínuo como “próximo ciclo” de desenvolvimento no novo cargo.</dd>
+            </dl>
+          </article>
+          <article class="mode cont">
+            <span class="tag">Modo contínuo · desenvolvimento</span>
+            <h3>“Estou bem, mas quero o próximo cargo”</h3>
+            <p>Precisa de direção e constância: um plano de desenvolvimento que ande mesmo com a rotina puxando para o operacional.</p>
+            <div class="path"><span>Diagnóstico</span><i>→</i><span>Plano de Carreira</span><i>→</i><span>PDI Smart semanal</span><i>→</i><span>Clipping</span><i>→</i><span>Sob demanda na hora certa</span></div>
+            <dl>
+              <dt>Mais usa</dt><dd>PDI Smart, check-in semanal, clipping de empresas e eventos, recursos curados.</dd>
+              <dt>Risco</dt><dd>Esfriar sem perceber progresso. Resposta: metas curtas, progresso visível e notificação no WhatsApp.</dd>
+            </dl>
+          </article>
+        </div>
+        <div class="routes">
+          <div class="route"><small>Rota A · Gestão</small><h3>Sênior → coordenação ou gerência</h3><p>PDI puxa comunicação, negociação e gestão de conflitos; fit prioriza empresas com trilha de liderança.</p></div>
+          <div class="route"><small>Rota B · Especialista</small><h3>Sênior → staff, principal ou arquiteto</h3><p>PDI puxa arquitetura, IA aplicada e influência técnica; fit prioriza empresas com carreira em Y.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="fluxo">
+      <div class="wrap">
+        <div class="block-head">
+          <div><div class="eyebrow">03 · Fluxo de conversão e monetização</div><h2>Onde a pessoa decide, e o que acontece se ela disser não.</h2></div>
+          <p>As taxas são as premissas do Ano 1 do modelo financeiro v2. Cada “não” tem um caminho de volta, sem prender o cliente.</p>
+        </div>
+        <div class="flow">
+          <div class="step">
+            <div class="node"><span class="n">0</span><div><h3>Descoberta</h3><p>LinkedIn, indicação, eventos de carreira</p></div><span class="val">350 → 3.600 leads/mês</span></div>
+            <div class="side">Aquisição majoritariamente orgânica no Ano 1 (conteúdo dos fundadores). CAC médio de <b>R$ 120–140</b> por Plano vendido.</div>
+          </div>
+          <div class="gate"><div class="spine"><span class="q">Faz o diagnóstico?</span></div><div class="side">Sem cadastro pesado: PDF do LinkedIn e poucas perguntas.</div></div>
+          <div class="step">
+            <div class="node"><span class="n">1</span><div><h3>Diagnóstico grátis</h3><p>Raio-x, SWOT simples, leitura de mercado</p></div><span class="val">R$ 0 · custo ≈ R$ 0,50</span></div>
+            <div class="branch"><b>Não converte:</b> recebe conteúdo e convite para refazer o diagnóstico quando o momento mudar.</div>
+          </div>
+          <div class="gate"><div class="spine"><span class="q">Compra o Plano?<em>6–7%</em></span></div><div></div></div>
+          <div class="step">
+            <div class="node key"><span class="n">2</span><div><h3>Plano de Carreira</h3><p>Setup completo + 1º mês de tudo incluso</p></div><span class="val">R$ 197</span></div>
+            <div class="branch"><b>Arrependimento em 7 dias (CDC):</b> reembolso integral, previsto em ~5% dos Planos. Liberação gradual reduz abuso sem ferir o direito.</div>
+          </div>
+          <div class="gate"><div class="spine"><span class="q">Assina após o mês incluso?<em>35–45%</em></span></div><div></div></div>
+          <div class="step">
+            <div class="node"><span class="n">3</span><div><h3>Carreira Contínua</h3><p>PDI Smart, clipping, fit atualizado</p></div><span class="val">R$ 49–69/mês</span></div>
+            <div class="branch"><b>Não assina:</b> mantém o Plano, o PDI e o Kanban em modo leitura, e pode voltar quando quiser.</div>
+          </div>
+          <div class="gate"><div class="spine"><span class="q">Surge uma oportunidade?</span></div><div class="side">Compra pontual, sem mudar de plano.</div></div>
+          <div class="step">
+            <div class="node"><span class="n">4</span><div><h3>Sob demanda</h3><p>Mock interview, CV por vaga, créditos</p></div><span class="val">R$ 29–49/uso</span></div>
+            <div class="branch"><b>Cancela o Contínuo (churn de 9% a 5,5% ao mês):</b> volta por um novo Plano, com condição especial para ex-clientes.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="ciclo">
+      <div class="wrap">
+        <div class="block-head">
+          <div><div class="eyebrow">04 · Ciclo semanal da Carreira Contínua</div><h2>Um ritual de 5 minutos que mantém o plano vivo.</h2></div>
+          <p>O coach de IA não é um chat genérico: ele segue o PDI, pergunta o que avançou e devolve o próximo passo. Conversa livre existe, mas dentro do tema desenvolvimento.</p>
+        </div>
+        <div class="loop">
+          <div class="loop-card"><span class="when">Segunda</span><h3>Lembrete</h3><p>Notificação no WhatsApp ou e-mail com a meta da semana.</p></div>
+          <div class="loop-card"><span class="when">5 minutos</span><h3>Check-in</h3><p>Texto ou áudio: o que fez, onde travou, o que mudou no trabalho.</p></div>
+          <div class="loop-card"><span class="when">Na hora</span><h3>PDI atualizado</h3><p>Tarefas concluídas viram progresso visível no painel.</p></div>
+          <div class="loop-card"><span class="when">Na hora</span><h3>Próximo passo</h3><p>Uma ação concreta e um recurso curado adequado ao perfil de aprendizagem.</p></div>
+          <div class="loop-card"><span class="when">Sexta</span><h3>Clipping</h3><p>Vagas, notícias das empresas-alvo e eventos da semana.</p></div>
+        </div>
+        <p class="loop-back">E a semana recomeça. A cada ciclo o fit com as empresas-alvo é recalculado.</p>
+        <div class="limits">
+          <div class="limit"><h3>Limite por plano, não por hora</h3><p>Uso “honesto” cabe no plano; créditos extras para quem estiver em fase aguda. Mantém o custo de IA previsível.</p></div>
+          <div class="limit"><h3>Consumo visível</h3><p>Uma barra de uso mostra quanto do mês já foi usado, sem bloqueio surpresa.</p></div>
+          <div class="limit"><h3>Modelo certo para cada tarefa</h3><p>Modelo grande para análise e PDI; modelo leve para reescrever frases e resumir notícias.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="telas">
+      <div class="wrap">
+        <div class="block-head">
+          <div><div class="eyebrow">05 · Mapa de telas do protótipo</div><h2>O caminho já navegável em careerflow.com.br</h2></div>
+          <p>Protótipo em Flutter Web com dados de demonstração. As telas públicas correspondem ao diagnóstico grátis; o espaço “Premium” corresponde ao Plano de Carreira e à Carreira Contínua.</p>
+        </div>
+        <div class="access"><a href="https://www.careerflow.com.br/" target="_blank" rel="noopener">careerflow.com.br ↗</a><span>Em <b>Entrar</b>, escolha o perfil <b>Ricardo · Premium</b> (1 clique) ou use <b>winners / fiap2026</b>. O perfil <b>Visitante · Gratuito</b> mostra os bloqueios.</span></div>
+        <div class="screens">
+          <figure class="screen"><img src="prototipo/home.jpg" alt="Landing com campo para URL do LinkedIn e botão Iniciar avaliação gratuita" loading="lazy"><figcaption><code>/</code><h3><span class="num">1</span>Landing <span class="lock free">grátis</span></h3><p>Entrada pelo LinkedIn e início do diagnóstico gratuito.</p></figcaption></figure>
+          <figure class="screen"><img src="prototipo/assessment.jpg" alt="Etapa de sinais de entrada com opção de enviar PDF exportado do LinkedIn" loading="lazy"><figcaption><code>/assessment</code><h3><span class="num">2</span>Avaliação <span class="lock free">grátis</span></h3><p>Envio do PDF do LinkedIn ou currículo e 4 perguntas iniciais.</p></figcaption></figure>
+          <figure class="screen"><img src="prototipo/diagnosis.jpg" alt="Diagnóstico com radar de competências e insights estratégicos" loading="lazy"><figcaption><code>/diagnosis</code><h3><span class="num">3</span>Diagnóstico <span class="lock free">grátis</span></h3><p>Radar, gaps, resumo executivo e convite para o upgrade.</p></figcaption></figure>
+          <figure class="screen"><img src="prototipo/dashboard.jpg" alt="Painel com prontidão de 67%, próximo melhor passo e análise de lacunas" loading="lazy"><figcaption><code>/dashboard</code><h3><span class="num">4</span>Painel <span class="lock free">todos</span></h3><p>Prontidão, próximo melhor passo e resumo executivo.</p></figcaption></figure>
+          <figure class="screen"><img src="prototipo/fit.jpg" alt="Fit por empresa com percentuais de afinidade" loading="lazy"><figcaption><code>/fit</code><h3><span class="num">5</span>Fit por empresa <span class="lock">premium</span></h3><p>Afinidade por empresa, dimensões do fit e lacunas a trabalhar.</p></figcaption></figure>
+          <figure class="screen"><img src="prototipo/plan.jpg" alt="Plano de ação com linha do tempo semanal e status das tarefas" loading="lazy"><figcaption><code>/plan</code><h3><span class="num">6</span>Plano de ação <span class="lock">premium</span></h3><p>PDI em semanas, status, datas e prioridade da semana.</p></figcaption></figure>
+          <figure class="screen"><img src="prototipo/mentor.jpg" alt="Espaço de mentoria com atalhos recomendados e chat" loading="lazy"><figcaption><code>/mentor</code><h3><span class="num">7</span>Mentoria <span class="lock">premium</span></h3><p>Conversa guiada por atalhos: entrevista, LinkedIn, narrativa.</p></figcaption></figure>
+          <figure class="screen"><img src="prototipo/discovery.jpg" alt="Autoconhecimento com catálogo de testes de perfil" loading="lazy"><figcaption><code>/discovery</code><h3><span class="num">8</span>Autoconhecimento <span class="lock">premium</span></h3><p>Testes de perfil reconhecidos, com progresso e resultados.</p></figcaption></figure>
+          <figure class="screen"><img src="prototipo/deep-dive.jpg" alt="Diagnóstico guiado em formato conversacional" loading="lazy"><figcaption><code>/deep-dive</code><h3><span class="num">9</span>Diagnóstico guiado <span class="lock">premium</span></h3><p>Entrevista conversacional que aprofunda objetivos e conquistas.</p></figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="decisoes">
+      <div class="wrap">
+        <div class="block-head">
+          <div><div class="eyebrow">06 · Decisões de design da jornada</div><h2>O que a reunião de 30/08 mudou na experiência.</h2></div>
+          <p>Cada decisão responde a um risco concreto de custo, confiança ou retenção.</p>
+        </div>
+        <div class="decisions">
+          <article class="decision"><span class="ic">01</span><div><h3>Valor no primeiro dia</h3><p>O diagnóstico grátis precisa surpreender em 5 minutos: é a variável que mais move o resultado financeiro.</p></div></article>
+          <article class="decision"><span class="ic">02</span><div><h3>PDF do LinkedIn em vez de raspagem</h3><p>O usuário exporta o próprio perfil. Menos custo, menos risco jurídico e a mesma informação.</p></div></article>
+          <article class="decision"><span class="ic">03</span><div><h3>Coach com protocolo, não chat livre</h3><p>O acompanhamento segue o PDI. Isso diferencia o produto de um ChatGPT genérico e controla o custo por conversa.</p></div></article>
+          <article class="decision"><span class="ic">04</span><div><h3>WhatsApp para lembrar, web para trabalhar</h3><p>Notificação onde a pessoa já está; sem exigir download de mais um app no MVP.</p></div></article>
+          <article class="decision"><span class="ic">05</span><div><h3>Headhunters só com opt-in</h3><p>Visibilidade para recrutadores independentes é opcional, anonimizada e controlada pelo usuário (LGPD).</p></div></article>
+          <article class="decision"><span class="ic">06</span><div><h3>Fontes de mercado declaradas</h3><p>Fit com empresas vem de GPTW, rankings, reputação e vagas indexadas; a interface diz de onde vem cada sinal.</p></div></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>CareerFlow AI · TCC MBA FIAP 2026 · Luiz Ihara, Filipe Fragoso, Daniel Caminha, Pedro Martins</span>
+      <span><a href="index.html">Portal</a> · <a href="apresentacao.html">Apresentação</a> · <a href="files/CareerFlow_AI_Pitch_Deck.pdf">Pitch em PDF</a></span>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const btn = document.getElementById('themeBtn');
+      const meta = document.querySelector('meta[name="theme-color"]');
+      const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+      const paint = () => { meta.content = isDark() ? '#0d1118' : '#f3f1eb'; btn.textContent = isDark() ? '☀' : '◐'; };
+      try { const saved = localStorage.getItem('careerflow-theme'); if (saved) root.dataset.theme = saved; } catch (_) {}
+      btn.addEventListener('click', () => {
+        root.dataset.theme = isDark() ? 'light' : 'dark';
+        try { localStorage.setItem('careerflow-theme', root.dataset.theme); } catch (_) {}
+        paint();
+      });
+      paint();
+    })();
+  </script>
+</body>
+</html>

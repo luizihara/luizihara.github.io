@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0d1118">
-  <meta name="description" content="CareerFlow AI — apresentação executiva do TCC MBA FIAP 2026.">
+  <meta name="description" content="CareerFlow AI — pitch final do TCC MBA FIAP 2026: problema, solução, público, mercado, modelo de negócio, viabilidade, protótipo e próximos passos.">
   <title>CareerFlow AI — Apresentação TCC</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
@@ -274,7 +277,7 @@
     .overview .stage-right, .overview .slide-source { display:none; }
     .overview .brand, .overview .deck-ui { z-index:50; }
 
-    @media (max-width: 900px) {
+    @media screen and (max-width: 900px) {
       .slide { padding-left:28px; padding-right:28px; }
       .content-narrow { width:100%; }
       .split, .business-grid, .jcurve, .kpi-hero { grid-template-columns:1fr; }
@@ -287,7 +290,7 @@
       .overview .slide { width:calc(50vw - 24px); height:calc((50vw - 24px)*.5625); }
     }
 
-    @media (max-height: 720px) {
+    @media screen and (max-height: 720px) {
       .slide { padding-top:72px; padding-bottom:58px; }
       .eyebrow { margin-bottom:10px; }
       h2 { font-size:clamp(34px,4.6vw,62px); margin-bottom:14px; }
@@ -505,9 +508,212 @@
     body.dark.overview .deck { background:rgba(9,13,19,.98); }
     body.dark .member { background:#1a202a; }
 
-    @media (max-height:720px) {
+    @media screen and (max-height:720px) {
       .compare .card { min-height:185px; }
       .errc .card { min-height:205px; }
+    }
+
+    /* Entrega final — componentes do pitch v2 */
+    .brand-logo { width:22px; height:22px; border-radius:5px; display:block; overflow:visible; }
+
+    /* Abertura do logo (opção 1 · uma por vez) */
+    .anim .draw { stroke-dasharray:1; stroke-dashoffset:1; opacity:0; }
+    .anim .core, .anim .head { opacity:0; transform-box:fill-box; transform-origin:center; }
+    @keyframes lg-draw { 0% { opacity:0; stroke-dashoffset:1; } 2% { opacity:1; } 100% { opacity:1; stroke-dashoffset:0; } }
+    @keyframes lg-pop  { from { opacity:0; transform:scale(.2) rotate(-45deg); } to { opacity:1; transform:none; } }
+    @keyframes lg-rise { from { opacity:0; transform:translateY(9px); } to { opacity:1; transform:none; } }
+    .v1.play .b-left   { animation:lg-draw .55s cubic-bezier(.5,0,.2,1) forwards .2s; }
+    .v1.play .b-center { animation:lg-draw .5s  cubic-bezier(.5,0,.2,1) forwards .6s; }
+    .v1.play .b-right  { animation:lg-draw .55s cubic-bezier(.5,0,.2,1) forwards 1s; }
+    .v1.play .core     { animation:lg-pop .35s cubic-bezier(.3,1.6,.5,1) forwards 1.5s; }
+    .v1.play .stem     { animation:lg-draw .45s cubic-bezier(.6,0,.2,1) forwards 1.75s; }
+    .v1.play .head     { animation:lg-rise .55s cubic-bezier(.2,1.4,.4,1) forwards 2.05s; }
+
+    .intro-stage { display:grid; place-items:center; }
+    .intro-tile { width:min(46vh,30vw); aspect-ratio:1; border-radius:22%; background:#0F172A; display:grid; place-items:center;
+      box-shadow:0 0 0 1px var(--line), 0 30px 90px rgba(16,22,33,.2); }
+    body.dark .intro-tile { box-shadow:0 0 0 1px rgba(255,255,255,.12), 0 30px 90px rgba(0,0,0,.45); }
+    .intro-tile svg { width:74%; height:74%; overflow:visible; }
+    .anim .glow { opacity:0; }
+    @keyframes lg-glow { 0% { opacity:.6; r:4; } 100% { opacity:0; r:24; } }
+    .v1.play .glow { animation:lg-glow 1.2s ease-out forwards 2.4s; }
+    .wm.hide { opacity:0!important; }
+
+    /* Marca d'água que se monta ao longo do pitch (substitui o foguete) */
+    :root { --wm-lime:#65a30d; --wm-mint:#059669; --wm-third:#111722; --wm-op:.13; }
+    body.dark { --wm-lime:#A3E635; --wm-mint:#34D399; --wm-third:#F8FAFC; --wm-op:.16; }
+    .wm { position:fixed; z-index:0; right:3.5vw; top:50%; height:min(78vh,64vw); aspect-ratio:1; transform:translateY(-50%); pointer-events:none; overflow:visible;
+      opacity:var(--wm-op); }
+    .wm path.p { fill:none; stroke-width:8; stroke-linecap:butt; stroke-linejoin:round; }
+    .wm .l, .wm .st { stroke:var(--wm-lime); } .wm .c { stroke:var(--wm-mint); } .wm .r { stroke:var(--wm-third); }
+    .wm .cr { fill:var(--bg); }
+    .wm .hd { fill:var(--wm-lime); }
+    .wm-print { display:none; }
+    .fine { color:var(--muted); font-size:12px; line-height:1.5; margin:16px 0 0; max-width:680px; }
+    .slide[data-scene="pivot"] { --accent:#9c6315!important; }
+    .slide[data-scene="market"], .slide[data-scene="roadmap"], .slide[data-scene="proto"] { --accent:#167c62!important; }
+
+    .subpersonas { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:4px; }
+    .subpersona { padding:16px 18px; border:1px solid var(--line); border-radius:6px; background:rgba(255,255,255,.72); }
+    .subpersona small { color:var(--accent); text-transform:uppercase; letter-spacing:.12em; font-weight:700; font-size:10px; }
+    .subpersona h3 { font-size:16px; margin:6px 0 5px; }
+    .subpersona p { margin:0; font-size:12px; color:#656d78; line-height:1.45; }
+
+    .journey { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:26px; }
+    .stage { padding:20px; border:1px solid var(--line); border-radius:6px; background:rgba(255,255,255,.76); min-height:270px; }
+    .stage-step { color:var(--accent); font:800 11px Manrope; letter-spacing:.06em; text-transform:uppercase; }
+    .stage h3 { margin:14px 0 6px; }
+    .stage p { color:#656d78; font-size:12.5px; line-height:1.45; margin:0; }
+    .stage ul { list-style:none; padding:0; margin:14px 0 0; display:grid; gap:6px; font-size:12px; color:#4f5865; line-height:1.4; }
+    .stage li::before { content:"↳"; color:var(--accent); margin-right:6px; }
+    .stage.hero-stage { background:#111722; border-color:#111722; color:#f2f0e9; transform:translateY(-8px); }
+    .stage.hero-stage p, .stage.hero-stage ul { color:#c9ced6; }
+    .stage.hero-stage .stage-step, .stage.hero-stage li::before { color:#7fa0ff; }
+
+    .cost-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:22px; }
+    .cost-strip div { padding:14px 18px; border-left:3px solid var(--accent); background:rgba(255,255,255,.55); }
+    .cost-strip span { display:block; color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.1em; font-weight:700; }
+    .cost-strip strong { display:block; font:800 clamp(22px,2.2vw,32px) Manrope; letter-spacing:-.04em; margin:6px 0 2px; }
+    .cost-strip small { color:var(--muted); font-size:11px; }
+
+    .proto { display:grid; grid-template-columns:.78fr 1.22fr; gap:clamp(24px,4vw,56px); align-items:center; }
+    .access-card { margin-top:22px; padding:16px 18px; border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:6px; background:rgba(255,255,255,.7); }
+    .access-card .small-label { display:block; }
+    .price-sub { font:600 13px "DM Sans",sans-serif; letter-spacing:0; margin-left:8px; opacity:.75; }
+    .cards.three .metric strong { font-size:clamp(24px,2.5vw,38px); white-space:nowrap; }
+    .access-card a { display:inline-block; margin:6px 0 4px; font:800 clamp(18px,1.8vw,26px) Manrope; letter-spacing:-.03em; color:var(--accent); text-decoration:none; }
+    .access-card p { margin:0; color:#4e5662; font-size:13px; line-height:1.5; }
+    .route-list { display:flex; flex-wrap:wrap; gap:6px; margin-top:16px; }
+    .route-list span { font-size:11px; padding:6px 9px; border:1px solid var(--line); border-radius:3px; color:#525a66; background:rgba(255,255,255,.5); }
+    .gallery { display:grid; gap:8px; }
+    .browser { margin:0; border:1px solid rgba(16,22,33,.18); border-radius:7px; overflow:hidden; background:#0b1020; box-shadow:0 22px 60px rgba(16,22,33,.16); position:relative; }
+    .browser-bar { height:24px; display:flex; align-items:center; gap:5px; padding:0 10px; background:#151b26; }
+    .browser-bar i { width:7px; height:7px; border-radius:50%; background:#3a4252; }
+    .browser-bar span { margin-left:8px; font-size:10px; color:#8b93a0; }
+    .browser img { display:block; width:100%; height:auto; }
+    .thumbs { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .thumbs figcaption { position:absolute; left:8px; bottom:8px; font-size:10px; font-weight:700; color:#fff; background:rgba(8,12,20,.78); padding:3px 7px; border-radius:3px; }
+
+    .funnel { display:grid; gap:8px; margin-top:26px; }
+    .funnel-row { position:relative; display:grid; grid-template-columns:190px 130px 1fr; align-items:center; gap:18px; padding:13px 18px; border:1px solid var(--line); border-radius:6px; background:rgba(255,255,255,.62); overflow:hidden; }
+    .funnel-row::before { content:""; position:absolute; inset:0 auto 0 0; width:var(--w); background:color-mix(in srgb,var(--accent) 11%,transparent); border-right:2px solid color-mix(in srgb,var(--accent) 55%,transparent); }
+    .funnel-row > * { position:relative; }
+    .funnel-row small { color:var(--accent); font-weight:700; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; }
+    .funnel-row b { font:800 clamp(22px,2.2vw,32px) Manrope; letter-spacing:-.045em; }
+    .funnel-row span { color:#5d6570; font-size:13px; }
+    .funnel-row.hero-row { border-color:var(--accent); }
+
+    .ladder { display:grid; grid-template-columns:1fr 1.15fr 1fr 1fr; gap:10px; margin-top:24px; align-items:end; }
+    .ladder article { padding:18px 20px; border:1px solid var(--line); border-radius:6px; background:rgba(255,255,255,.74); min-height:210px; display:flex; flex-direction:column; }
+    .ladder article:nth-child(1) { min-height:180px; }
+    .ladder article:nth-child(2) { min-height:250px; }
+    .ladder article:nth-child(3) { min-height:230px; }
+    .rung { color:var(--accent); font:800 11px Manrope; text-transform:uppercase; letter-spacing:.08em; }
+    .ladder strong { font:800 clamp(28px,3vw,46px) Manrope; letter-spacing:-.055em; margin:10px 0 4px; }
+    .ladder strong em { font-style:normal; font-size:.42em; letter-spacing:0; color:var(--muted); }
+    .ladder small { color:var(--muted); font-size:11px; line-height:1.4; }
+    .ladder p { margin:auto 0 0; padding-top:14px; font-size:12.5px; line-height:1.45; color:#5d6570; }
+    .ladder .hero-rung { background:#111722; border-color:#111722; color:#f2f0e9; }
+    .ladder .hero-rung small, .ladder .hero-rung p { color:#c3c9d2; }
+    .ladder .hero-rung p b { color:#fff; }
+    .ladder .hero-rung .rung { color:#7fa0ff; }
+
+    .fin-grid { display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(24px,4vw,56px); align-items:end; margin-top:10px; }
+    .fin-grid .bars { margin-top:38px; height:250px; }
+    .bar.stack { display:flex; flex-direction:column-reverse; overflow:visible; background:none!important; box-shadow:none!important; }
+    .bar.stack i { display:block; min-height:1px; }
+    .bar.stack i:first-child { border-radius:0; }
+    .bar.stack i:last-child { border-radius:7px 7px 0 0; }
+    .s-setup { background:#2457f5; } .s-rec { background:#7fa0ff; } .s-add { background:#a86716; }
+    .dre { width:100%; border-collapse:collapse; font-size:12.5px; font-variant-numeric:tabular-nums; }
+    .dre th { text-align:right; font:700 10px Manrope; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); padding:0 0 8px; }
+    .dre td { padding:7px 0; border-top:1px solid var(--line); text-align:right; color:#39414d; }
+    .dre td:first-child, .dre th:first-child { text-align:left; color:#5d6570; }
+    .dre tr.total td { font-weight:800; color:#111722; border-top:2px solid #111722; }
+    .dre tr.total + tr td { border-top:2px solid var(--line); }
+
+    .chart-wrap { padding:18px 16px 8px; border:1px solid var(--line); border-radius:6px; background:rgba(255,255,255,.6); }
+    .ebitda-chart { width:100%; height:auto; display:block; }
+    .ebitda-chart .grid { stroke:rgba(16,22,33,.12); stroke-width:1; }
+    .ebitda-chart .year { stroke:rgba(16,22,33,.18); stroke-dasharray:3 4; }
+    .ebitda-chart .axis { fill:#7b818a; font:600 13px "DM Sans",sans-serif; }
+    .ebitda-chart .neg { fill:#bd493e; opacity:.82; }
+    .ebitda-chart .pos { fill:#167c62; }
+    .ebitda-chart .mark { stroke:#167c62; stroke-width:1.2; }
+    .ebitda-chart .note { fill:#167c62; font:700 14px Manrope,sans-serif; }
+
+    .matrix.m3 { grid-template-columns:.8fr 1fr 1.15fr; }
+    .matrix.m3 > div:nth-child(4n) { border-right:1px solid var(--line); }
+    .matrix.m3 > div:nth-child(3n) { border-right:0; }
+
+    .risk-layout { display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(22px,3.5vw,48px); margin-top:24px; align-items:start; }
+    .sens { display:grid; gap:10px; }
+    .sens-row { display:grid; grid-template-columns:minmax(0,1.3fr) 1fr 104px; align-items:center; gap:12px; font-size:12.5px; color:#39414d; }
+    .sens-row i { display:block; height:12px; width:var(--w); background:linear-gradient(90deg,rgba(189,73,62,.35),#bd493e); border-radius:0 3px 3px 0; }
+    .sens-row b { text-align:right; font:800 14px Manrope; color:#bd493e; }
+    .mitigations { display:grid; gap:10px; }
+
+    .timeline .milestone.done::before { background:var(--accent); }
+    .gates { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:30px; }
+    .gates div { padding:16px 18px; border:1px solid var(--line); border-top:3px solid var(--accent); border-radius:4px; background:rgba(255,255,255,.66); }
+    .gates strong { display:block; font:800 clamp(24px,2.5vw,36px) Manrope; letter-spacing:-.045em; color:var(--accent); }
+    .gates span { color:var(--muted); font-size:12px; }
+
+    /* Modo pitch de 5 minutos: esconde slides de apoio */
+    body.pitch .slide.extra { display:none; }
+    .control.on { background:#101621; color:#fff; }
+    body.dark .control.on { background:#f0eee8; color:#111722; }
+
+    body.dark .subpersona, body.dark .stage, body.dark .ladder article, body.dark .funnel-row, body.dark .access-card,
+    body.dark .chart-wrap, body.dark .gates div { border-color:rgba(255,255,255,.13); background:rgba(21,27,37,.78); }
+    body.dark .subpersona p, body.dark .stage p, body.dark .stage ul, body.dark .ladder p, body.dark .funnel-row span,
+    body.dark .access-card p, body.dark .route-list span, body.dark .sens-row, body.dark .dre td { color:#aeb6c1; }
+    body.dark .stage.hero-stage, body.dark .ladder .hero-rung { background:#f0eee8; border-color:#f0eee8; color:#111722; }
+    body.dark .stage.hero-stage p, body.dark .stage.hero-stage ul, body.dark .ladder .hero-rung small, body.dark .ladder .hero-rung p { color:#3d4552; }
+    body.dark .ladder .hero-rung p b { color:#111722; }
+    body.dark .stage.hero-stage .stage-step, body.dark .stage.hero-stage li::before, body.dark .ladder .hero-rung .rung { color:#2457f5; }
+    body.dark .cost-strip div, body.dark .route-list span { background:rgba(255,255,255,.04); }
+    body.dark .route-list span { border-color:rgba(255,255,255,.14); }
+    body.dark .dre td:first-child { color:#9ea6b1; }
+    body.dark .dre tr.total td { color:#f2f0e9; border-top-color:#f2f0e9; }
+    body.dark .s-setup { background:#6f8fff; } body.dark .s-rec { background:#b8c8ff; } body.dark .s-add { background:#e0a656; }
+    body.dark .ebitda-chart .grid { stroke:rgba(255,255,255,.1); }
+    body.dark .ebitda-chart .year { stroke:rgba(255,255,255,.18); }
+    body.dark .ebitda-chart .axis { fill:#8f97a3; }
+    body.dark .ebitda-chart .neg { fill:#e0786c; }
+    body.dark .ebitda-chart .pos, body.dark .ebitda-chart .note { fill:#5fd0a6; }
+    body.dark .ebitda-chart .mark { stroke:#5fd0a6; }
+    body.dark .sens-row b { color:#ef8a7e; }
+    body.dark .browser { border-color:rgba(255,255,255,.16); box-shadow:0 22px 60px rgba(0,0,0,.35); }
+
+    @media screen and (max-height:720px) {
+      .journey { margin-top:16px; } .stage { min-height:230px; padding:15px; }
+      .funnel-row { padding:9px 16px; } .ladder article { min-height:170px!important; }
+      .fin-grid .bars { height:200px; } .gates { margin-top:18px; } .cost-strip { margin-top:14px; }
+    }
+    @media screen and (max-width:900px) {
+      .subpersonas, .journey, .cost-strip, .proto, .ladder, .fin-grid, .risk-layout, .gates { grid-template-columns:1fr; }
+      .funnel-row { grid-template-columns:1fr auto; } .funnel-row span { grid-column:1 / -1; }
+      .sens-row { grid-template-columns:1fr 80px; } .sens-row i { display:none; }
+      .stage.hero-stage { transform:none; }
+      .slide { overflow-y:auto; align-items:start; }
+    }
+
+    /* Versão para PDF: um slide por página, 16:9 */
+    @media print {
+      @page { size:1600px 900px; margin:0; }
+      html, body { width:1600px; height:auto; overflow:visible; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      #webgl, .deck-ui, .help { display:none!important; }
+      .deck { height:auto; }
+      .slide, body.pitch .slide.extra { position:relative!important; inset:auto; display:grid!important; width:1600px; height:900px; visibility:visible!important; opacity:1!important; transform:none!important; filter:none!important; transition:none!important; break-after:page; page-break-after:always; overflow:hidden; }
+      .bar { transform:scaleY(1)!important; transition:none!important; }
+      .wm:not(.wm-print) { display:none!important; }
+      .wm-print { display:block; position:absolute; z-index:0; right:56px; top:50%; height:700px; width:700px; transform:translateY(-50%); opacity:var(--wm-op); overflow:visible; pointer-events:none; }
+      .slide > .slide-inner { position:relative; z-index:1; }
+      .intro-tile .draw { opacity:1!important; stroke-dashoffset:0!important; animation:none!important; }
+      .intro-tile .core, .intro-tile .head { opacity:1!important; animation:none!important; }
+      .intro-stage { background:none!important; opacity:1!important; filter:none!important; }
+      .wm-print.hide { display:none!important; }
     }
   </style>
 </head>
@@ -517,14 +723,29 @@
       if (localStorage.getItem('careerflow-theme') === 'light') document.body.classList.remove('dark');
     } catch (_) {}
   </script>
-  <canvas id="webgl" aria-hidden="true"></canvas>
+  <svg class="wm" id="wm" viewBox="0 0 64 64" aria-hidden="true">
+    <path class="p l" pathLength="1" d="M11.5 52C18.5 47 25.5 41 32 34"/>
+    <path class="p c" pathLength="1" d="M32 53V34"/>
+    <path class="p r" pathLength="1" d="M52.5 52C45.5 47 38.5 41 32 34"/>
+    <path class="p st" pathLength="1" d="M32 34C32 28 32 21 32 14"/>
+    <path class="hd" d="M22.5 16L32 5.5L41.5 16L36 15V18H28V15L22.5 16Z"/>
+    <path class="cr" d="M32 26C32.8 30.5 35.5 33.2 40 34C35.5 34.8 32.8 37.5 32 42C31.2 37.5 28.5 34.8 24 34C28.5 33.2 31.2 30.5 32 26Z"/>
+  </svg>
   <div class="grid-glow" aria-hidden="true"></div>
   <div class="vignette" aria-hidden="true"></div>
   <div class="noise" aria-hidden="true"></div>
 
   <div class="brand" aria-label="CareerFlow AI">
-    <span class="brand-mark" aria-hidden="true"></span>
-    <span>CareerFlow<em>.ai</em></span>
+    <svg class="brand-logo" viewBox="0 0 64 64" aria-hidden="true">
+      <rect width="64" height="64" rx="14" fill="#0F172A"/>
+      <path class="draw b-left" pathLength="1" d="M11.5 52C18.5 47 25.5 41 32 34" fill="none" stroke="#A3E635" stroke-width="8" stroke-linecap="square" stroke-linejoin="round"/>
+      <path class="draw b-center" pathLength="1" d="M32 53V34" fill="none" stroke="#34D399" stroke-width="8" stroke-linecap="square"/>
+      <path class="draw b-right" pathLength="1" d="M52.5 52C45.5 47 38.5 41 32 34" fill="none" stroke="#F8FAFC" stroke-width="8" stroke-linecap="square" stroke-linejoin="round"/>
+      <path class="draw stem" pathLength="1" d="M32 34C32 28 32 21 32 14" fill="none" stroke="#A3E635" stroke-width="8" stroke-linecap="square" stroke-linejoin="round"/>
+      <path class="head" d="M22.5 16L32 5.5L41.5 16L36 15V18H28V15L22.5 16Z" fill="#A3E635"/>
+      <path class="core" d="M32 26C32.8 30.5 35.5 33.2 40 34C35.5 34.8 32.8 37.5 32 42C31.2 37.5 28.5 34.8 24 34C28.5 33.2 31.2 30.5 32 26Z" fill="#0F172A"/>
+    </svg>
+    <span>CareerFlow<em> AI</em></span>
     <span class="brand-sub">TCC · MBA FIAP 2026</span>
   </div>
 
@@ -532,289 +753,369 @@
     <section class="slide active" data-scene="origin" style="--accent:#55d9ff" aria-label="Slide 1: Abertura">
       <div class="slide-inner split">
         <div>
-          <div class="eyebrow">TCC · Empreendedorismo · FIAP 2026</div>
+          <div class="eyebrow">TCC · MBA FIAP 2026 · Pitch final</div>
           <h1>Seu próximo cargo não deveria ser um <span class="gradient-text">palpite.</span></h1>
-          <p class="lead">CareerFlow AI transforma experiência acumulada em direção estratégica — com diagnóstico profundo, inteligência de mercado e mentoria contínua.</p>
+          <p class="lead">O CareerFlow AI cruza perfil comportamental, pesquisa de mercado e um protocolo de mentoria para entregar um plano de carreira acionável e acompanhar sua execução toda semana.</p>
           <div class="pill-row">
-            <span class="pill"><strong>IA</strong> aplicada à carreira</span>
-            <span class="pill"><strong>24/7</strong> no WhatsApp</span>
-            <span class="pill"><strong>MVP</strong> em produção</span>
+            <span class="pill"><strong>Tech 35+</strong> no centro</span>
+            <span class="pill"><strong>Plano de carreira</strong> em um dia</span>
+            <span class="pill"><strong>Protótipo</strong> navegável</span>
           </div>
         </div>
-        <div class="stage-right"></div>
-        <div class="slide-source">Fontes: <a href="index.html">Portal do projeto</a> · <a href="https://www.careerflow.com.br/">MVP CareerFlow AI</a></div>
+        <div class="stage-right intro-stage">
+          <div class="intro-tile anim v1" id="introTile" role="img" aria-label="Logo CareerFlow AI">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path class="draw b-left" pathLength="1" d="M11.5 52C18.5 47 25.5 41 32 34" fill="none" stroke="#A3E635" stroke-width="8" stroke-linecap="square" stroke-linejoin="round"/>
+              <path class="draw b-center" pathLength="1" d="M32 53V34" fill="none" stroke="#34D399" stroke-width="8" stroke-linecap="square"/>
+              <path class="draw b-right" pathLength="1" d="M52.5 52C45.5 47 38.5 41 32 34" fill="none" stroke="#F8FAFC" stroke-width="8" stroke-linecap="square" stroke-linejoin="round"/>
+              <path class="draw stem" pathLength="1" d="M32 34C32 28 32 21 32 14" fill="none" stroke="#A3E635" stroke-width="8" stroke-linecap="square" stroke-linejoin="round"/>
+              <path class="head" d="M22.5 16L32 5.5L41.5 16L36 15V18H28V15L22.5 16Z" fill="#A3E635"/>
+              <path class="core" d="M32 26C32.8 30.5 35.5 33.2 40 34C35.5 34.8 32.8 37.5 32 42C31.2 37.5 28.5 34.8 24 34C28.5 33.2 31.2 30.5 32 26Z" fill="#0F172A"/>
+              <circle class="glow" cx="32" cy="8" r="4" fill="none" stroke="#A3E635" stroke-width="1.5"/>
+            </svg>
+          </div>
+        </div>
+        <div class="slide-source">Fontes: <a href="index.html">Portal do projeto</a> · <a href="https://www.careerflow.com.br/" target="_blank" rel="noopener">Protótipo CareerFlow AI</a></div>
       </div>
     </section>
 
     <section class="slide" data-scene="fracture" style="--accent:#ff7597" aria-label="Slide 2: O problema">
       <div class="slide-inner split">
         <div>
-          <div class="eyebrow">01 · A mudança de contexto</div>
+          <div class="eyebrow">01 · Problema</div>
           <h2>Senioridade já não é uma linha de chegada.</h2>
-          <p class="lead">A IA acelera a perda de valor de competências que antes sustentavam uma carreira inteira. O TCC nomeia esse fenômeno de <b class="accent">Erosão da Relevância.</b></p>
-          <div class="glass-callout">O profissional não sofre apenas com “falta de emprego”. Ele sofre com a ausência de direção estratégica para decidir <b>o que preservar, o que abandonar e para onde evoluir.</b></div>
+          <p class="lead">A IA acelera a perda de valor de competências que antes sustentavam uma carreira inteira. Chamamos esse fenômeno de <b class="accent">erosão da relevância.</b></p>
+          <div class="glass-callout">O profissional não sofre só com a falta de vagas. Falta a ele direção estratégica para decidir <b>o que preservar, o que abandonar e para onde evoluir</b>, com base no mercado real.</div>
         </div>
         <div class="stage-right"></div>
         <div class="slide-source">Fonte: <a href="entrega-parcial-2.html">Entregável Parcial 2 — Aprofundamento do problema</a></div>
       </div>
     </section>
 
-    <section class="slide" data-scene="freeze" style="--accent:#9b87f5" aria-label="Slide 3: Zero Kelvin">
+    <section class="slide extra" data-scene="freeze" style="--accent:#9b87f5" aria-label="Slide 3: Zero Kelvin">
       <div class="slide-inner content-narrow">
         <div class="eyebrow">O estado “Zero Kelvin”</div>
         <div class="big-number gradient-text">0 K</div>
         <h2 class="serif-quote">“Alta competência.<br>Movimento de carreira cessado.”</h2>
-        <p class="lead">Entre execução técnica e liderança, o sênior vê caminhos demais — e clareza de menos. Compra cursos, otimiza o LinkedIn por intuição e sente que está apenas <b>“enxugando gelo”.</b></p>
+        <p class="lead">Entre a execução técnica e a liderança, o sênior vê caminhos demais e clareza de menos. Compra cursos, ajusta o LinkedIn por intuição e sente que está <b>“enxugando gelo”.</b></p>
         <div class="slide-source">Fonte: <a href="entregaParcial-2.md">Relatório Estratégico — “Zero Kelvin”</a></div>
       </div>
     </section>
 
-    <section class="slide" data-scene="persona" style="--accent:#55d9ff" aria-label="Slide 4: Persona">
+    <section class="slide" data-scene="persona" style="--accent:#55d9ff" aria-label="Slide 4: Público-alvo">
       <div class="slide-inner split">
         <div>
-          <div class="eyebrow">02 · Persona prioritária</div>
-          <h2>O “Líder em Risco”</h2>
+          <div class="eyebrow">02 · Público-alvo</div>
+          <h2>O “Líder em Risco”, em duas rotas</h2>
           <div class="persona">
-            <div class="persona-orb">35—45</div>
+            <div class="persona-orb">35+</div>
             <div>
               <h3>Profissional sênior de tecnologia</h3>
-              <p class="muted">Trajetória consolidada, alto custo de oportunidade e uma encruzilhada entre especialização e liderança.</p>
+              <p class="muted">Trajetória consolidada, alto custo de oportunidade e uma encruzilhada entre gestão e especialização.</p>
             </div>
           </div>
-          <div class="signal-list">
-            <div class="signal"><b>Vê</b><span>Layoffs de perfis experientes e “IA Staff Engineers” multiplicando produtividade.</span></div>
-            <div class="signal"><b>Ouve</b><span>Mentorias a R$ 1,5 mil–6 mil/mês e ruído sobre quais tecnologias priorizar.</span></div>
-            <div class="signal"><b>Sente</b><span>Medo da obsolescência, fadiga de decisão e isolamento nas escolhas críticas.</span></div>
+          <div class="subpersonas">
+            <article class="subpersona"><small>Rota A · Gestão</small><h3>Sênior → coordenação</h3><p>Tech lead que quer gerir pessoas e não sabe o que a próxima cadeira exige: comunicação, negociação, gestão de conflitos.</p></article>
+            <article class="subpersona"><small>Rota B · Especialista</small><h3>Sênior → staff / arquiteto</h3><p>Quer liderança técnica sem gerir pessoas. A carreira em Y é pouco visível e os sinais técnicos que o mercado pede mudam rápido.</p></article>
           </div>
+          <p class="fine">Por que tecnologia primeiro: é o público que o time conhece por dentro, sob pressão direta da IA e com renda para investir na carreira. Nicho forte antes de expandir.</p>
         </div>
         <div class="stage-right"></div>
-        <div class="slide-source">Fonte: <a href="entrega-parcial-2.html">Mapa de Empatia — Líder em Risco</a></div>
+        <div class="slide-source">Fontes: <a href="entrega-parcial-2.html">Mapa de Empatia</a> · Feedback do Entregável 1 (segmentar a persona)</div>
       </div>
     </section>
 
-    <section class="slide" data-scene="split" style="--accent:#ffca75" aria-label="Slide 5: Lacuna de mercado">
+    <section class="slide extra" data-scene="split" style="--accent:#ffca75" aria-label="Slide 5: Lacuna de mercado">
       <div class="slide-inner content-wide">
-        <div class="eyebrow">03 · A lacuna de mercado</div>
+        <div class="eyebrow">03 · A lacuna</div>
         <h2>Entre conselho caro e conteúdo sem direção.</h2>
         <div class="compare">
           <article class="card">
-            <span class="card-index">A · Headhunters / Coaches</span>
+            <span class="card-index">A · Mentoria / headhunter</span>
             <h3>Personalização alta</h3>
-            <div class="price">R$ 1,5k–6k<span class="muted" style="font-size:13px">/mês</span></div>
-            <div class="check-list"><span>Agenda e baixa disponibilidade</span><span>Sessões episódicas</span><span>Barreira financeira</span></div>
+            <div class="price">R$ 1,5k–6k<span class="price-sub">/mês</span></div>
+            <div class="check-list"><span>Agenda e baixa disponibilidade</span><span>Uma especialidade por mentor</span><span>Barreira financeira</span></div>
           </article>
           <article class="card">
-            <span class="card-index">B · Cursos / LMS</span>
-            <h3>Conteúdo abundante</h3>
+            <span class="card-index">B · Cursos e ferramentas de vaga</span>
+            <h3>Conteúdo e currículo</h3>
             <div class="price">Genérico</div>
-            <div class="check-list"><span>Sem diagnóstico individual</span><span>Direção fragmentada</span><span>Baixa responsabilização</span></div>
+            <div class="check-list"><span>Sem diagnóstico de perfil</span><span>Sem plano de desenvolvimento</span><span>Sem acompanhamento</span></div>
           </article>
           <article class="card featured">
             <span class="card-index">C · CareerFlow AI</span>
-            <h3>Career Intelligence contínua</h3>
-            <div class="price accent">24/7</div>
-            <div class="check-list"><span>Diagnóstico profundo</span><span>Memória histórica</span><span>Direção personalizada</span></div>
+            <h3>Plano de carreira com IA</h3>
+            <div class="price accent">R$ 197<span class="price-sub">+ R$ 49/mês opcional</span></div>
+            <div class="check-list"><span>Perfil + mercado + protocolo de mentoria</span><span>Empresas e vagas reais</span><span>Acompanhamento semanal</span></div>
           </article>
         </div>
-        <div class="slide-source">Fontes: <a href="index-2.html">Definição estratégica</a> · <a href="entrega-parcial-2.html">Matriz comparativa</a></div>
+        <div class="slide-source">Fontes: <a href="index-2.html">Definição estratégica</a> · <a href="entrega-parcial-2.html">Matriz comparativa</a> · Reunião do grupo de 30/08/2026</div>
       </div>
     </section>
 
-    <section class="slide" data-scene="core" style="--accent:#60e6ad" aria-label="Slide 6: Proposta de valor">
+    <section class="slide" data-scene="core" style="--accent:#60e6ad" aria-label="Slide 6: Solução">
       <div class="slide-inner content-wide">
-        <div class="eyebrow">04 · Proposta de valor</div>
-        <h2>Não é um repositório de cursos.<br><span class="gradient-text">É um motor de decisão.</span></h2>
+        <div class="eyebrow">04 · Solução e proposta de valor</div>
+        <h2>Não é um repositório de cursos.<br><span class="gradient-text">É um plano de carreira que se atualiza.</span></h2>
         <div class="product-core">
-          <article class="core-step"><span class="num">01</span><h3>Diagnóstico profundo</h3><p>Cruza rastro digital, assessment proprietário e tendências de mercado para produzir um “Raio-X” realista.</p></article>
-          <article class="core-step"><span class="num">02</span><h3>Skill Analogy Engine™</h3><p>Traduz competências entre setores e torna visível o valor silencioso acumulado pelo profissional.</p></article>
-          <article class="core-step"><span class="num">03</span><h3>Mentor virtual 24/7</h3><p>Conversa via WhatsApp, guarda memória dos objetivos e ajuda antes de decisões e reuniões críticas.</p></article>
+          <article class="core-step"><span class="num">01 · Perfil</span><h3>Comportamental + conquistas</h3><p>Teste comportamental e uma entrevista guiada (método STAR) revelam objetivos, habilidades e evidências. É a camada de personalização.</p></article>
+          <article class="core-step"><span class="num">02 · Mercado</span><h3>Empresas, vagas e referências</h3><p>Fit com empresas (GPTW, rankings, reputação), vagas indexadas e o perfil de quem já chegou onde a pessoa quer chegar.</p></article>
+          <article class="core-step"><span class="num">03 · Mentoria</span><h3>Protocolo e acompanhamento</h3><p>Um PDI com recursos curados e um coach de IA que faz check-in semanal, cobra avanço e ajusta a rota.</p></article>
         </div>
-        <div class="slide-source">Fonte: <a href="entrega-parcial-2.html">Canvas de Proposta de Valor</a></div>
+        <div class="glass-callout"><b>Job to be done:</b> transformar a pergunta “qual é o meu próximo passo?” em um plano concreto, com vagas, empresas e metas semanais, em um dia e não em meses de mentoria.</div>
+        <div class="slide-source">Fontes: Reunião do grupo de 30/08/2026 · <a href="entrega-parcial-2.html">Canvas de Proposta de Valor</a></div>
       </div>
     </section>
 
-    <section class="slide" data-scene="network" style="--accent:#9b87f5" aria-label="Slide 7: Como funciona">
+    <section class="slide" data-scene="journey" style="--accent:#55d9ff" aria-label="Slide 7: Jornada do produto">
       <div class="slide-inner content-wide">
-        <div class="eyebrow">05 · Como a inteligência flui</div>
-        <h2>Do rastro digital<br>ao próximo movimento.</h2>
+        <div class="eyebrow">05 · Como o cliente usa</div>
+        <h2>Da curiosidade ao hábito, em quatro degraus.</h2>
+        <div class="journey">
+          <article class="stage"><span class="stage-step">1 · Descobrir</span><h3>Diagnóstico grátis</h3><p>5 minutos: PDF do LinkedIn e perguntas comportamentais básicas.</p><ul><li>Raio-x de forças e lacunas</li><li>SWOT simples</li><li>Leitura geral do seu mercado</li></ul></article>
+          <article class="stage hero-stage"><span class="stage-step">2 · Decidir</span><h3>Plano de Carreira</h3><p>Pagamento único. O “setup” completo da carreira, com o 1º mês de tudo incluso.</p><ul><li>Comportamental profundo e entrevista STAR</li><li>Fit por empresa e vagas abertas</li><li>LinkedIn, CV e organizador de job search</li><li>PDI com recursos curados</li></ul></article>
+          <article class="stage"><span class="stage-step">3 · Evoluir</span><h3>Carreira Contínua</h3><p>Assinatura leve para quem quer continuar se desenvolvendo, empregado ou não.</p><ul><li>PDI Smart com check-in semanal</li><li>Clipping de vagas, empresas e eventos</li><li>Fit atualizado e visibilidade opt-in para headhunters</li></ul></article>
+          <article class="stage"><span class="stage-step">4 · Acelerar</span><h3>Sob demanda</h3><p>Compra pontual quando surge uma oportunidade concreta.</p><ul><li>Entrevista simulada (comportamental ou técnica)</li><li>CV ajustado por vaga</li><li>Créditos extras de conversa</li></ul></article>
+        </div>
+        <div class="slide-source">Fontes: <a href="fluxos-jornada.html">Fluxos e Jornada do usuário</a> · Reunião do grupo de 30/08/2026</div>
+      </div>
+    </section>
+
+    <section class="slide extra" data-scene="network" style="--accent:#9b87f5" aria-label="Slide 8: Como funciona">
+      <div class="slide-inner content-wide">
+        <div class="eyebrow">06 · Como a inteligência flui</div>
+        <h2>Dados reais na entrada.<br>Custo previsível na saída.</h2>
         <div class="architecture">
-          <div class="arch-node"><div><b>LinkedIn + Assessment</b><small>contexto do profissional</small></div></div>
+          <div class="arch-node"><div><b>Perfil</b><small>PDF do LinkedIn · comportamental · entrevista STAR</small></div></div>
           <div class="arch-arrow">›</div>
-          <div class="arch-node"><div><b>Deep Research</b><small>tendências e mercado</small></div></div>
+          <div class="arch-node"><div><b>Bases de mercado</b><small>empresas (GPTW, rankings, reputação) · vagas indexadas · perfis de referência anonimizados</small></div></div>
           <div class="arch-arrow">›</div>
-          <div class="arch-node"><div><b>MoE + N8N</b><small>orquestração de agentes</small></div></div>
+          <div class="arch-node"><div><b>Agentes com protocolo</b><small>modelo grande para análise · modelo leve para tarefas · limites por plano</small></div></div>
           <div class="arch-arrow">›</div>
-          <div class="arch-node"><div><b>Vector DB</b><small>memória de longo prazo</small></div></div>
+          <div class="arch-node"><div><b>Memória</b><small>PDI, critérios e histórico do usuário</small></div></div>
           <div class="arch-arrow">›</div>
-          <div class="arch-node"><div><b>Web + WhatsApp</b><small>ação no momento certo</small></div></div>
+          <div class="arch-node"><div><b>Web + WhatsApp</b><small>app, check-in semanal e clipping</small></div></div>
         </div>
-        <div class="glass-callout">Mixture of Experts roteia cada tarefa para o modelo adequado — base da eficiência prevista de custo e da personalização em escala.</div>
-        <div class="slide-source">Fontes: <a href="index.html">Arquitetura do produto</a> · <a href="llms-full.txt">Memorial financeiro — arquitetura e COGS</a></div>
+        <div class="cost-strip">
+          <div><span>Diagnóstico grátis</span><strong>≈ R$ 0,50</strong><small>por diagnóstico</small></div>
+          <div><span>Plano de Carreira</span><strong>≈ R$ 40</strong><small>custo de IA e dados, pagamento único</small></div>
+          <div><span>Carreira Contínua</span><strong>≈ R$ 14/mês</strong><small>uso médio · R$ 25 no uso máximo</small></div>
+        </div>
+        <div class="slide-source">Fontes: estimativa de tokens da reunião de 30/08/2026 · <a href="fluxos-jornada.html">Fluxos e Jornada</a></div>
       </div>
     </section>
 
-    <section class="slide" data-scene="bridge" style="--accent:#55d9ff" aria-label="Slide 8: Skill Analogy Engine">
-      <div class="slide-inner content-wide">
-        <div class="eyebrow">A diferenciação proprietária</div>
-        <h2>Experiência não expira.<br><span class="gradient-text">Ela muda de contexto.</span></h2>
-        <div class="analogy">
-          <article class="role"><small>Experiência de origem</small><h3>Arquiteto de Dados Bancário</h3><p>Governança, resiliência, escala, gestão de risco e decisões em ambientes regulados.</p></article>
-          <div class="bridge"><span class="tag">Skill Analogy</span><div class="bridge-line"></div><small>tradução semântica<br>intersetorial</small></div>
-          <article class="role"><small>Novo valor visível</small><h3>Head de Logística no Varejo</h3><p>A mesma lógica aplicada onde a competência é mais escassa — e, portanto, potencialmente mais valiosa.</p></article>
+    <section class="slide" data-scene="proto" style="--accent:#60e6ad" aria-label="Slide 9: Protótipo">
+      <div class="slide-inner content-wide proto">
+        <div>
+          <div class="eyebrow">07 · Protótipo</div>
+          <h2>Já dá para navegar.</h2>
+          <p class="lead">Protótipo funcional em Flutter Web, com o fluxo público e o espaço de carreira premium (dados de demonstração).</p>
+          <div class="access-card">
+            <span class="small-label">Acesso aberto</span>
+            <a href="https://www.careerflow.com.br/" target="_blank" rel="noopener">careerflow.com.br ↗</a>
+            <p>Em <b>Entrar</b>, escolha o perfil <b>Ricardo · Premium</b> (1 clique) ou use <b>winners / fiap2026</b>.</p>
+          </div>
+          <div class="route-list"><span>Landing</span><span>Diagnóstico</span><span>Painel</span><span>Fit por empresa</span><span>Plano de ação</span><span>Mentoria</span></div>
         </div>
-        <div class="slide-source">Fonte: <a href="entregaParcial-2.md">Mapa de Valor — exemplo do Skill Analogy Engine™</a></div>
+        <div class="gallery">
+          <figure class="browser main-shot"><div class="browser-bar"><i></i><i></i><i></i><span>careerflow.com.br/fit</span></div><img src="prototipo/fit.jpg" alt="Tela Fit por empresa do protótipo: perfil profissional à esquerda e empresas por afinidade com percentual de fit à direita" loading="lazy"></figure>
+          <div class="thumbs">
+            <figure class="browser"><img src="prototipo/dashboard.jpg" alt="Painel com prontidão de 67% e próximo melhor passo" loading="lazy"><figcaption>Painel</figcaption></figure>
+            <figure class="browser"><img src="prototipo/plan.jpg" alt="Plano de ação com linha do tempo semanal" loading="lazy"><figcaption>Plano de ação</figcaption></figure>
+            <figure class="browser"><img src="prototipo/mentor.jpg" alt="Espaço de mentoria com atalhos e chat" loading="lazy"><figcaption>Mentoria</figcaption></figure>
+          </div>
+        </div>
+        <div class="slide-source">Telas capturadas de <a href="https://www.careerflow.com.br/" target="_blank" rel="noopener">careerflow.com.br</a> em 23/09/2026 · <a href="fluxos-jornada.html#telas">Mapa de telas</a></div>
       </div>
     </section>
 
-    <section class="slide" data-scene="matrix" style="--accent:#60e6ad" aria-label="Slide 9: Posicionamento">
+    <section class="slide extra" data-scene="matrix" style="--accent:#60e6ad" aria-label="Slide 10: Posicionamento">
       <div class="slide-inner content-wide">
-        <div class="eyebrow">06 · Posicionamento competitivo</div>
+        <div class="eyebrow">08 · Posicionamento competitivo</div>
         <h2>Uma nova camada: Career Intelligence.</h2>
         <div class="matrix">
-          <div class="head">Critério</div><div class="head">Headhunters</div><div class="head">Cursos / LMS</div><div class="head hero-col">CareerFlow AI</div>
-          <div class="label">Preço</div><div>Elevado</div><div>Baixo / médio</div><div class="hero-col">Médio · assinatura</div>
-          <div class="label">Disponibilidade</div><div>Baixa · agenda</div><div>Alta · gravado</div><div class="hero-col">Total · 24/7</div>
-          <div class="label">Personalização</div><div>Alta · humana</div><div>Nula · genérica</div><div class="hero-col">Altíssima · MoE + dados</div>
-          <div class="label">Diagnóstico</div><div>Analógico</div><div>Inexistente</div><div class="hero-col">Profundo · Deep Research</div>
+          <div class="head">Critério</div><div class="head">Mentoria / headhunter</div><div class="head">Cursos e ferramentas de vaga</div><div class="head hero-col">CareerFlow AI</div>
+          <div class="label">Preço</div><div>R$ 1,5k–6k/mês</div><div>Baixo · assinatura</div><div class="hero-col">R$ 197 + R$ 49/mês opcional</div>
+          <div class="label">Diagnóstico de perfil</div><div>Humano, subjetivo</div><div>Inexistente</div><div class="hero-col">Comportamental + STAR</div>
+          <div class="label">Leitura de mercado</div><div>Rede do mentor</div><div>Lista de vagas</div><div class="hero-col">Fit por empresa + referências</div>
+          <div class="label">Plano de desenvolvimento</div><div>Sim, episódico</div><div>Catálogo genérico</div><div class="hero-col">PDI com recursos curados</div>
+          <div class="label">Acompanhamento</div><div>Sessões agendadas</div><div>Nenhum</div><div class="hero-col">Check-in semanal · 24/7</div>
         </div>
-        <div class="slide-source">Fonte: <a href="entrega-parcial-2.html">Análise de concorrência — matriz comparativa</a></div>
+        <div class="slide-source">Fontes: <a href="entrega-parcial-2.html">Análise de concorrência</a> · Reunião do grupo de 30/08/2026</div>
       </div>
     </section>
 
-    <section class="slide" data-scene="orbit" style="--accent:#ffca75" aria-label="Slide 10: Estratégia ERRC">
+    <section class="slide" data-scene="market" style="--accent:#60e6ad" aria-label="Slide 11: Mercado">
       <div class="slide-inner content-wide">
-        <div class="eyebrow">07 · Framework ERRC</div>
-        <h2>Redesenhando as regras do jogo.</h2>
-        <div class="errc">
-          <article class="card" style="--accent:#ff7597"><h3>Eliminar</h3><ul><li>Agendamento humano</li><li>Sessões caras e episódicas</li><li>Dependência de nomes licenciados</li></ul></article>
-          <article class="card" style="--accent:#ffca75"><h3>Reduzir</h3><ul><li>Custo de conselho executivo</li><li>Tempo em cursos irrelevantes</li><li>Fricção do diagnóstico</li></ul></article>
-          <article class="card" style="--accent:#55d9ff"><h3>Elevar</h3><ul><li>Precisão via rastro digital</li><li>Velocidade diante de crises</li><li>Clareza intersetorial</li></ul></article>
-          <article class="card" style="--accent:#60e6ad"><h3>Criar</h3><ul><li>Skill Analogy Engine™</li><li>Diário conversacional</li><li>Roleplay executivo</li></ul></article>
+        <div class="eyebrow">09 · Mercado</div>
+        <h2>Começar estreito. Capturar pouco. Provar muito.</h2>
+        <div class="funnel">
+          <div class="funnel-row" style="--w:100%"><small>TAM · macrossetor de TIC</small><b>3,24 mi</b><span>profissionais CLT, MEI e informais no Brasil</span></div>
+          <div class="funnel-row" style="--w:62%"><small>SAM · 35–44 anos</small><b>949 mil</b><span>proxy do público “Líder em Risco”</span></div>
+          <div class="funnel-row" style="--w:40%"><small>Em movimento</small><b>516 mil</b><span>consideraram ou fizeram transição no último ano</span></div>
+          <div class="funnel-row" style="--w:24%"><small>Topo de funil · Ano 3</small><b>43,2 mil</b><span>diagnósticos gratuitos (4,6% do SAM)</span></div>
+          <div class="funnel-row hero-row" style="--w:13%"><small>SOM · Ano 3</small><b>2.873</b><span>Planos vendidos + 1.103 assinantes ativos ≈ 0,3% do SAM</span></div>
         </div>
-        <div class="slide-source">Fonte: <a href="entrega-parcial-2.html">Estratégia de Diferenciação — ERRC</a></div>
+        <div class="slide-source">Fontes: <a href="mercado-pessoas-tam-sam-som.html">Mercado em pessoas</a> · Brasscom, Relatório Setorial 2025 · Stack Overflow Developer Survey 2025 · Modelo financeiro v2</div>
       </div>
     </section>
 
-    <section class="slide" data-scene="revenue" style="--accent:#55d9ff" aria-label="Slide 11: Modelo de negócios">
+    <section class="slide" data-scene="revenue" style="--accent:#55d9ff" aria-label="Slide 12: Modelo de negócio">
       <div class="slide-inner content-wide">
-        <div class="eyebrow">08 · Modelo de negócios</div>
-        <h2>Receita recorrente no centro.<br>Expansão B2B na borda.</h2>
-        <div class="business-grid">
-          <article class="card">
-            <span class="small-label">Composição da receita · Ano 3</span>
-            <div class="revenue-stack"><div class="rev-pro">83,6% · Pro</div><div class="rev-b2b">16,4%</div></div>
-            <p><b>CareerFlow Pro:</b> mentor, diário e diagnóstico contínuo. <b>Deep Research + B2B:</b> relatórios avulsos e licenças white-label para retenção de lideranças.</p>
-          </article>
-          <article class="card">
-            <span class="small-label">Canais do ecossistema</span>
-            <div class="channel-list"><span>Web App</span><span>WhatsApp</span><span>LinkedIn</span><span>Viral loop</span></div>
-            <p style="margin-top:18px">Freemium abre o funil; assinatura e pay-per-use monetizam; white-label amplia o mercado.</p>
-          </article>
+        <div class="eyebrow">10 · Modelo de negócio</div>
+        <h2>Cobrar forte na dor aguda.<br>Cobrar leve na continuidade.</h2>
+        <div class="ladder">
+          <article><span class="rung">Diagnóstico</span><strong>Grátis</strong><small>custo ≈ R$ 0,50</small><p><b>Porta de entrada.</b> Gera o lead e mostra valor rápido.</p></article>
+          <article class="hero-rung"><span class="rung">Plano de Carreira</span><strong>R$ 197</strong><small>pagamento único · R$ 247 no Ano 2 e R$ 297 no Ano 3 · custo ≈ R$ 40</small><p><b>Caixa na entrada.</b> A margem da 1ª compra paga o custo de aquisição.</p></article>
+          <article><span class="rung">Carreira Contínua</span><strong>R$ 49<em>/mês</em></strong><small>R$ 59 no Ano 2 e R$ 69 no Ano 3 · custo ≈ R$ 14/mês</small><p><b>Retenção e margem.</b> 35–45% seguem após o 1º mês incluso.</p></article>
+          <article><span class="rung">Sob demanda</span><strong>R$ 29–49</strong><small>por uso · custo ≈ 30%</small><p><b>Expansão.</b> Entrevista simulada, CV por vaga, créditos extras.</p></article>
         </div>
-        <div class="slide-source">Fontes: <a href="entrega-parcial-2.html">Business Model Canvas</a> · <a href="llms-full.txt">Memorial — modelo de receita</a></div>
+        <div class="glass-callout">Por que não uma assinatura única? O público entra com dor aguda e sai quando a resolve. A escada alinha preço a valor, e os limites de uso por plano deixam o custo de IA previsível.</div>
+        <div class="slide-source">Fontes: Reunião do grupo de 30/08/2026 (precificação) · Modelo financeiro v2</div>
       </div>
     </section>
 
-    <section class="slide" data-scene="timeline" style="--accent:#9b87f5" aria-label="Slide 12: Roadmap">
-      <div class="slide-inner content-wide">
-        <div class="eyebrow">09 · Caminho de execução</div>
-        <h2>Da hipótese ao MVP.</h2>
-        <div class="timeline">
-          <article class="milestone"><time>Mai · 2026</time><h3>Validação</h3><p>Entrevistas e teste da hipótese central com profissionais de tecnologia.</p></article>
-          <article class="milestone"><time>Jul · 2026</time><h3>Protótipo</h3><p>Experiência responsiva e jornada conversacional colocadas em teste.</p></article>
-          <article class="milestone"><time>Ago · 2026</time><h3>Business Plan</h3><p>Modelo de negócio, premissas e viabilidade financeira estruturados.</p></article>
-          <article class="milestone"><time>Set · 2026</time><h3>MVP</h3><p>Web App e WhatsApp integrados para validar retenção e disposição a pagar.</p></article>
-        </div>
-        <div class="glass-callout">O produto já possui protótipo interativo em produção — evidência de capacidade técnica para executar a visão.</div>
-        <div class="slide-source">Fontes: <a href="entregaParcial-2.md">5W2H — roadmap</a> · <a href="https://www.careerflow.com.br/">MVP em produção</a></div>
-      </div>
-    </section>
-
-    <section class="slide" data-scene="bars" style="--accent:#55d9ff" aria-label="Slide 13: Crescimento financeiro">
-      <div class="slide-inner content-wide">
-        <div class="eyebrow">10 · Projeção de três anos</div>
-        <h2>Crescimento de receita até o break-even.</h2>
-        <div class="bars" aria-label="Receita e EBITDA projetados por ano">
-          <div class="bar-group"><div class="bar revenue" style="--h:7.4;--delay:.1s"><span class="bar-value">R$ 205 mil</span></div><div class="bar negative" style="--h:11;--delay:.18s"><span class="bar-value">−305 mil</span></div><label>Ano 1</label></div>
-          <div class="bar-group"><div class="bar revenue" style="--h:32.6;--delay:.24s"><span class="bar-value">R$ 902 mil</span></div><div class="bar negative" style="--h:18.4;--delay:.32s"><span class="bar-value">−509 mil</span></div><label>Ano 2</label></div>
-          <div class="bar-group"><div class="bar revenue" style="--h:100;--delay:.38s"><span class="bar-value">R$ 2,77 mi</span></div><div class="bar ebitda" style="--h:4;--delay:.48s"><span class="bar-value">+R$ 50 mil</span></div><label>Ano 3</label></div>
-        </div>
-        <div class="chart-legend"><span style="--c:#55d9ff">Receita total</span><span style="--c:#ff7597">EBITDA negativo</span><span style="--c:#60e6ad">EBITDA positivo</span></div>
-        <div class="slide-source">Fonte: <a href="projecao-financeira.html#1">Projeção Financeira — DRE</a></div>
-      </div>
-    </section>
-
-    <section class="slide" data-scene="metrics" style="--accent:#60e6ad" aria-label="Slide 14: Unit economics">
+    <section class="slide extra" data-scene="metrics" style="--accent:#60e6ad" aria-label="Slide 13: Unit economics">
       <div class="slide-inner content-wide kpi-hero">
         <div>
           <div class="eyebrow">11 · Unit economics · Ano 3</div>
-          <div class="ratio"><div class="ratio-content"><strong>9,98×</strong><small>LTV / CAC</small></div></div>
+          <div class="ratio"><div class="ratio-content"><strong>4,3×</strong><small>LTV / CAC</small></div></div>
         </div>
         <div>
-          <h2>A retenção faz a economia funcionar.</h2>
-          <p class="lead">O LTV cresce 4,7× em três anos. A queda do churn pesa mais que o aumento de preço — por isso, retenção é o KPI central.</p>
+          <h2>O Plano paga a aquisição. A recorrência vira margem.</h2>
+          <p class="lead">Cada cliente adquirido gera R$ 597 de margem de contribuição: o Plano de Carreira e, para 45% deles, cerca de 18 meses de assinatura.</p>
           <div class="kpi-list">
-            <div class="kpi"><strong>R$ 7.560</strong><span>LTV projetado</span></div>
-            <div class="kpi"><strong>R$ 757</strong><span>CAC projetado</span></div>
-            <div class="kpi"><strong>4,0 meses</strong><span>Payback</span></div>
-            <div class="kpi"><strong>2,5%</strong><span>Churn mensal</span></div>
+            <div class="kpi"><strong>R$ 140</strong><span>CAC por Plano vendido</span></div>
+            <div class="kpi"><strong>R$ 210</strong><span>margem do Plano: paga o CAC na 1ª compra</span></div>
+            <div class="kpi"><strong>83%</strong><span>margem bruta</span></div>
+            <div class="kpi"><strong>18 meses</strong><span>vida média do assinante (churn 5,5%)</span></div>
           </div>
         </div>
-        <div class="slide-source">Fonte: <a href="projecao-financeira.html#1">Dashboard do Investidor — unit economics</a></div>
+        <div class="slide-source">Fonte: Modelo financeiro v2 — margem de contribuição líquida de impostos, meios de pagamento e reembolsos</div>
       </div>
     </section>
 
-    <section class="slide" data-scene="jcurve" style="--accent:#ffca75" aria-label="Slide 15: Curva J e capital">
+    <section class="slide" data-scene="bars" style="--accent:#55d9ff" aria-label="Slide 14: Projeção de três anos">
+      <div class="slide-inner content-wide">
+        <div class="eyebrow">12 · Viabilidade · Projeção de três anos</div>
+        <h2>R$ 1,57 mi de receita no Ano 3, com margem bruta de 83%.</h2>
+        <div class="fin-grid">
+          <div>
+            <div class="bars" aria-label="Receita por linha e EBITDA projetados por ano">
+              <div class="bar-group">
+                <div class="bar stack" style="--h:4.2;--delay:.1s"><i class="s-setup" style="flex:71.2"></i><i class="s-rec" style="flex:25.7"></i><i class="s-add" style="flex:3.1"></i><span class="bar-value">R$ 66 mil</span></div>
+                <div class="bar negative" style="--h:9.6;--delay:.18s"><span class="bar-value">−150 mil</span></div><label>Ano 1</label></div>
+              <div class="bar-group">
+                <div class="bar stack" style="--h:29.7;--delay:.24s"><i class="s-setup" style="flex:63.6"></i><i class="s-rec" style="flex:32.5"></i><i class="s-add" style="flex:4"></i><span class="bar-value">R$ 465 mil</span></div>
+                <div class="bar negative" style="--h:17.9;--delay:.32s"><span class="bar-value">−280 mil</span></div><label>Ano 2</label></div>
+              <div class="bar-group">
+                <div class="bar stack" style="--h:100;--delay:.38s"><i class="s-setup" style="flex:54.5"></i><i class="s-rec" style="flex:40.6"></i><i class="s-add" style="flex:4.9"></i><span class="bar-value">R$ 1,57 mi</span></div>
+                <div class="bar negative" style="--h:1.7;--delay:.48s"><span class="bar-value">−26 mil</span></div><label>Ano 3</label></div>
+            </div>
+            <div class="chart-legend"><span style="--c:#2457f5">Plano de Carreira</span><span style="--c:#7fa0ff">Carreira Contínua</span><span style="--c:#a86716">Sob demanda</span><span style="--c:#bd493e">EBITDA</span></div>
+          </div>
+          <table class="dre">
+            <thead><tr><th></th><th>Ano 1</th><th>Ano 2</th><th>Ano 3</th></tr></thead>
+            <tbody>
+              <tr><td>Receita</td><td>66 mil</td><td>465 mil</td><td>1,57 mi</td></tr>
+              <tr><td>Lucro bruto</td><td>46 mil</td><td>360 mil</td><td>1,30 mi</td></tr>
+              <tr><td>Despesas operacionais</td><td>−192 mil</td><td>−602 mil</td><td>−1,17 mi</td></tr>
+              <tr><td>Impostos (Simples)</td><td>−4 mil</td><td>−37 mil</td><td>−157 mil</td></tr>
+              <tr class="total"><td>EBITDA</td><td>−150 mil</td><td>−280 mil</td><td>−26 mil</td></tr>
+              <tr><td>Planos vendidos</td><td>239</td><td>1.197</td><td>2.873</td></tr>
+              <tr><td>Assinantes em dez.</td><td>50</td><td>338</td><td>1.103</td></tr>
+              <tr><td>MRR em dez.</td><td>6,6 mil</td><td>46,7 mil</td><td>155,7 mil</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="slide-source">Fonte: <a href="files/CareerFlow_AI_Projecao_Financeira_v2.xlsx">Planilha FIAP v2 — 36 meses, premissas e cálculo</a> · valores em R$ · planos líquidos de reembolso</div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="jcurve" style="--accent:#ffca75" aria-label="Slide 15: Caixa e capital">
       <div class="slide-inner content-wide jcurve">
         <div>
-          <div class="eyebrow">12 · Caixa e capital</div>
-          <h2>Uma curva J deliberada — e honesta.</h2>
-          <p class="lead">Dois anos de investimento constroem base e produto. A operação vira positiva no Ano 3, com margem EBITDA de <b class="accent">1,8%</b>.</p>
-          <div class="cards two" style="margin-top:28px">
-            <div class="card metric"><span>Capital externo total</span><strong>R$ 2,4 mi</strong></div>
-            <div class="card metric"><span>Caixa final · Ano 3</span><strong>R$ 1,69 mi</strong></div>
+          <div class="eyebrow">13 · Caixa e capital</div>
+          <h2>Break-even no mês 31, com R$ 750 mil de capital externo.</h2>
+          <p class="lead">Como o Plano entra à vista, o caixa sofre menos que em uma assinatura pura. O Ano 3 fecha perto do zero e termina com <b class="accent">+R$ 15,7 mil</b> de EBITDA por mês.</p>
+          <div class="cards three" style="margin-top:24px">
+            <div class="card metric"><span>Sócios · Ano 1</span><strong>R$ 150k</strong></div>
+            <div class="card metric"><span>Anjo · Ano 1</span><strong>R$ 150k</strong></div>
+            <div class="card metric"><span>Seed · Ano 2</span><strong>R$ 600k</strong></div>
+          </div>
+          <p class="fine">Caixa mínimo de R$ 90 mil no fim do Ano 1, antes da seed · caixa final do Ano 3: R$ 384 mil.</p>
+        </div>
+        <div class="chart-wrap">
+          <svg class="ebitda-chart" viewBox="0 0 640 300" role="img" aria-label="EBITDA mensal projetado, 36 meses: negativo até o mês 30, positivo a partir do mês 31"><line class="grid" x1="44" x2="630" y1="18.0" y2="18.0"/><text class="axis" x="36" y="21.0" text-anchor="end">+20k</text><line class="grid" x1="44" x2="630" y1="108.2" y2="108.2"/><text class="axis" x="36" y="111.2" text-anchor="end">0k</text><line class="grid" x1="44" x2="630" y1="198.4" y2="198.4"/><text class="axis" x="36" y="201.4" text-anchor="end">-20k</text><line class="year" x1="239.3" x2="239.3" y1="18" y2="266"/><line class="year" x1="434.7" x2="434.7" y1="18" y2="266"/><rect class="neg" x="46.6" y="108.2" width="11.1" height="60.7" rx="1.5"/><rect class="neg" x="62.9" y="108.2" width="11.1" height="59.7" rx="1.5"/><rect class="neg" x="79.2" y="108.2" width="11.1" height="58.7" rx="1.5"/><rect class="neg" x="95.4" y="108.2" width="11.1" height="57.9" rx="1.5"/><rect class="neg" x="111.7" y="108.2" width="11.1" height="57.1" rx="1.5"/><rect class="neg" x="128.0" y="108.2" width="11.1" height="56.4" rx="1.5"/><rect class="neg" x="144.3" y="108.2" width="11.1" height="55.8" rx="1.5"/><rect class="neg" x="160.5" y="108.2" width="11.1" height="55.2" rx="1.5"/><rect class="neg" x="176.8" y="108.2" width="11.1" height="54.7" rx="1.5"/><rect class="neg" x="193.1" y="108.2" width="11.1" height="54.2" rx="1.5"/><rect class="neg" x="209.4" y="108.2" width="11.1" height="53.8" rx="1.5"/><rect class="neg" x="225.7" y="108.2" width="11.1" height="53.4" rx="1.5"/><rect class="neg" x="241.9" y="108.2" width="11.1" height="135.7" rx="1.5"/><rect class="neg" x="258.2" y="108.2" width="11.1" height="128.8" rx="1.5"/><rect class="neg" x="274.5" y="108.2" width="11.1" height="122.3" rx="1.5"/><rect class="neg" x="290.8" y="108.2" width="11.1" height="116.3" rx="1.5"/><rect class="neg" x="307.0" y="108.2" width="11.1" height="110.7" rx="1.5"/><rect class="neg" x="323.3" y="108.2" width="11.1" height="105.4" rx="1.5"/><rect class="neg" x="339.6" y="108.2" width="11.1" height="100.6" rx="1.5"/><rect class="neg" x="355.9" y="108.2" width="11.1" height="96.1" rx="1.5"/><rect class="neg" x="372.2" y="108.2" width="11.1" height="91.9" rx="1.5"/><rect class="neg" x="388.4" y="108.2" width="11.1" height="88.0" rx="1.5"/><rect class="neg" x="404.7" y="108.2" width="11.1" height="84.4" rx="1.5"/><rect class="neg" x="421.0" y="108.2" width="11.1" height="81.0" rx="1.5"/><rect class="neg" x="437.3" y="108.2" width="11.1" height="107.4" rx="1.5"/><rect class="neg" x="453.5" y="108.2" width="11.1" height="86.2" rx="1.5"/><rect class="neg" x="469.8" y="108.2" width="11.1" height="66.2" rx="1.5"/><rect class="neg" x="486.1" y="108.2" width="11.1" height="47.3" rx="1.5"/><rect class="neg" x="502.4" y="108.2" width="11.1" height="29.4" rx="1.5"/><rect class="neg" x="518.7" y="108.2" width="11.1" height="12.5" rx="1.5"/><rect class="pos" x="534.9" y="104.8" width="11.1" height="3.4" rx="1.5"/><rect class="pos" x="551.2" y="89.7" width="11.1" height="18.5" rx="1.5"/><rect class="pos" x="567.5" y="75.5" width="11.1" height="32.7" rx="1.5"/><rect class="pos" x="583.8" y="62.0" width="11.1" height="46.2" rx="1.5"/><rect class="pos" x="600.0" y="49.3" width="11.1" height="58.9" rx="1.5"/><rect class="pos" x="616.3" y="37.3" width="11.1" height="70.9" rx="1.5"/><text class="axis" x="141.7" y="288" text-anchor="middle">Ano 1</text><text class="axis" x="337.0" y="288" text-anchor="middle">Ano 2</text><text class="axis" x="532.3" y="288" text-anchor="middle">Ano 3</text><line class="mark" x1="540.5" x2="540.5" y1="98.8" y2="34.0"/><text class="note" x="534.5" y="28.0" text-anchor="end">mês 31 · 1º EBITDA positivo</text></svg>
+        </div>
+        <div class="slide-source">Fonte: Modelo financeiro v2 — EBITDA mensal projetado (R$ mil)</div>
+      </div>
+    </section>
+
+    <section class="slide extra" data-scene="pivot" style="--accent:#ffca75" aria-label="Slide 16: Revisão do modelo">
+      <div class="slide-inner content-wide">
+        <div class="eyebrow">14 · O que mudou desde o Entregável 3</div>
+        <h2>Menos receita no papel.<br>Mais aderência a como o cliente compra.</h2>
+        <div class="matrix m3">
+          <div class="head">Premissa</div><div class="head">v1 · agosto</div><div class="head hero-col">v2 · entrega final</div>
+          <div class="label">Estrutura de receita</div><div>Assinatura única de R$ 97 a R$ 189/mês + Deep Research/B2B</div><div class="hero-col">Grátis → Plano R$ 197–297 → Contínuo R$ 49–69/mês → sob demanda</div>
+          <div class="label">Retenção assumida</div><div>Churn de 6% a 2,5% (40 meses de vida)</div><div class="hero-col">35–45% seguem após o Plano · churn de 9% a 5,5%</div>
+          <div class="label">Receita · Ano 3</div><div>R$ 2,77 mi</div><div class="hero-col">R$ 1,57 mi</div>
+          <div class="label">LTV / CAC · Ano 3</div><div>9,98×</div><div class="hero-col">4,3× · CAC pago na 1ª compra</div>
+          <div class="label">Capital externo</div><div>R$ 2,4 mi</div><div class="hero-col">R$ 750 mil</div>
+          <div class="label">B2B</div><div>16% da receita</div><div class="hero-col">Fora da base: upside (headhunters, parcerias)</div>
+        </div>
+        <div class="slide-source">Fontes: <a href="projecao-financeira.html">Projeção v1 (Entregável 3)</a> · Reunião do grupo de 30/08/2026 · Modelo financeiro v2</div>
+      </div>
+    </section>
+
+    <section class="slide extra" data-scene="risks" style="--accent:#ff7597" aria-label="Slide 17: Riscos">
+      <div class="slide-inner content-wide">
+        <div class="eyebrow">15 · Riscos e sensibilidade</div>
+        <h2>O risco mudou de lugar: da retenção para a conversão.</h2>
+        <div class="risk-layout">
+          <div class="sens" aria-label="EBITDA do Ano 3 em cada cenário de estresse">
+            <span class="small-label">EBITDA do Ano 3 se uma premissa piorar · base −R$ 26 mil</span>
+            <div class="sens-row"><span>Conversão grátis → Plano: 7% → 4,5%</span><i style="--w:100%"></i><b>−R$ 289 mil</b></div>
+            <div class="sens-row"><span>Preço do Plano congelado em R$ 197</span><i style="--w:95%"></i><b>−R$ 275 mil</b></div>
+            <div class="sens-row"><span>Plano → Contínuo: 45% → 30%</span><i style="--w:64%"></i><b>−R$ 185 mil</b></div>
+            <div class="sens-row"><span>Reembolsos em 7 dias: 5% → 15%</span><i style="--w:54%"></i><b>−R$ 156 mil</b></div>
+            <div class="sens-row"><span>Churn mensal +3 p.p.</span><i style="--w:35%"></i><b>−R$ 101 mil</b></div>
+          </div>
+          <div class="mitigations">
+            <article class="risk"><div class="risk-num">01</div><div><h3>Valor no primeiro dia</h3><p>O diagnóstico grátis precisa impressionar em 5 minutos. É a variável que mais move o resultado.</p></div></article>
+            <article class="risk"><div class="risk-num">02</div><div><h3>Direito de arrependimento (CDC)</h3><p>Liberação gradual, política de reembolso clara e validação jurídica antes de escalar.</p></div></article>
+            <article class="risk"><div class="risk-num">03</div><div><h3>Custo de IA e dados de vagas</h3><p>Limites por plano, modelo leve para tarefas simples e vagas de fontes indexadas.</p></div></article>
           </div>
         </div>
-        <div class="curve-plot" aria-label="Curva J do EBITDA">
-          <div class="zero-line"></div><div class="curve-path"></div>
-          <div class="curve-point" style="left:8%;top:52%;--accent:#ff7597"><span>Ano 1 · −305k</span></div>
-          <div class="curve-point" style="left:43%;top:74%;--accent:#ff7597"><span>Ano 2 · −509k</span></div>
-          <div class="curve-point" style="left:87%;top:29%;--accent:#60e6ad"><span>Ano 3 · +50k</span></div>
-        </div>
-        <div class="slide-source">Fonte: <a href="projecao-financeira.html#1">Projeção Financeira — fluxo de caixa e DRE</a></div>
+        <div class="slide-source">Fontes: Modelo financeiro v2 (cenários de estresse) · Backlog do protótipo — TASK-004 (cancelamentos) e TASK-005 (dados do LinkedIn)</div>
       </div>
     </section>
 
-    <section class="slide" data-scene="risks" style="--accent:#ff7597" aria-label="Slide 16: Riscos">
+    <section class="slide" data-scene="roadmap" style="--accent:#60e6ad" aria-label="Slide 18: Validação e próximos passos">
       <div class="slide-inner content-wide">
-        <div class="eyebrow">13 · Riscos declarados</div>
-        <h2>O que precisa ser verdade.</h2>
-        <div class="risk-grid">
-          <article class="risk"><div class="risk-num">01</div><div><h3>Churn é a premissa mais sensível</h3><p>Se ficar em 4%, LTV/CAC cai de 9,98× para 6,24× — ainda saudável, mas com menos folga.</p></div></article>
-          <article class="risk"><div class="risk-num">02</div><div><h3>Break-even apertado</h3><p>R$ 50 mil de custo adicional no Ano 3 devolvem a operação ao vermelho.</p></div></article>
-          <article class="risk"><div class="risk-num">03</div><div><h3>Custo de inferência não validado</h3><p>A queda de COGS de 38% para 24% depende de eficiência de modelo ainda não medida em produção.</p></div></article>
-          <article class="risk"><div class="risk-num">04</div><div><h3>Runway inicial justo</h3><p>13,6 meses no Ano 1 tornam a rodada seed do Ano 2 parte necessária do plano.</p></div></article>
+        <div class="eyebrow">16 · Validação e próximos passos</div>
+        <h2>Antes de escalar, o piloto precisa bater quatro números.</h2>
+        <div class="timeline">
+          <article class="milestone done"><time>Ago · 2026 ✓</time><h3>Solução revisada</h3><p>11 respostas de usuários, protótipo navegável e precificação redesenhada.</p></article>
+          <article class="milestone"><time>Set · 2026</time><h3>Pitch no CP05</h3><p>Banca simulada e orientações finais dos professores.</p></article>
+          <article class="milestone"><time>Out · 2026</time><h3>2ª rodada de entrevistas</h3><p>+10 entrevistas com as duas rotas, testando dor e disposição a pagar R$ 197.</p></article>
+          <article class="milestone"><time>Pós-TCC</time><h3>Piloto pago</h3><p>Primeira coorte real medindo conversão, reembolso e custo de IA.</p></article>
         </div>
-        <div class="slide-source">Fonte: <a href="llms-full.txt">Memorial Financeiro — riscos e critérios de validação</a></div>
+        <div class="gates">
+          <div><strong>≥ 6%</strong><span>diagnóstico grátis → Plano</span></div>
+          <div><strong>≥ 35%</strong><span>Plano → Carreira Contínua</span></div>
+          <div><strong>≤ 5%</strong><span>reembolsos em 7 dias</span></div>
+          <div><strong>≤ R$ 40</strong><span>custo de IA por Plano</span></div>
+        </div>
+        <div class="slide-source">Fontes: Feedback do Entregável 1 · Premissas do Ano 1 do modelo financeiro v2</div>
       </div>
     </section>
 
-    <section class="slide" data-scene="target" style="--accent:#60e6ad" aria-label="Slide 17: Validação">
+    <section class="slide extra" data-scene="constellation" style="--accent:#9b87f5" aria-label="Slide 19: Equipe">
       <div class="slide-inner content-wide">
-        <div class="eyebrow">14 · Critério de verdade</div>
-        <h2>Antes de escalar,<br>o MVP precisa provar retenção.</h2>
-        <div class="validation">
-          <article class="card"><span class="small-label">Próximo marco</span><strong>5–8</strong><h3>entrevistas em profundidade</h3><p>Testar diretamente a dor, a segmentação da persona e a disposição a pagar R$ 97/mês.</p></article>
-          <article class="card"><span class="small-label">Métrica de corte</span><strong>90%</strong><h3>retidos no mês 3</h3><p>Se a coorte piloto não sustentar esse patamar, a premissa de churn deve ser refeita antes da captação.</p></article>
-        </div>
-        <div class="glass-callout">A evolução do TCC incorpora o principal feedback da primeira entrega: sair da validação secundária e confrontar a hipótese com o público real.</div>
-        <div class="slide-source">Fontes: <a href="feedbacks/entrega1.md">Feedback do Entregável 1</a> · <a href="llms-full.txt">Critérios de validação</a></div>
-      </div>
-    </section>
-
-    <section class="slide" data-scene="constellation" style="--accent:#9b87f5" aria-label="Slide 18: Equipe">
-      <div class="slide-inner content-wide">
-        <div class="eyebrow">15 · O time</div>
+        <div class="eyebrow">17 · O time</div>
         <h2>Quatro perspectivas.<br>Uma tese em execução.</h2>
         <div class="team">
           <article class="member"><img src="team/LuizIhara.jpeg" alt="Luiz Ihara"><div class="member-info"><b>Luiz Ihara</b><span>RM368484</span></div></article>
@@ -826,31 +1127,33 @@
       </div>
     </section>
 
-    <section class="slide" data-scene="finale" style="--accent:#55d9ff" aria-label="Slide 19: Encerramento">
+    <section class="slide" data-scene="finale" style="--accent:#55d9ff" aria-label="Slide 20: Encerramento">
       <div class="slide-inner closing">
         <div class="eyebrow" style="justify-content:center">CareerFlow AI</div>
         <h2>Experiência é potência.<br><span class="gradient-text">Direção é movimento.</span></h2>
-        <p class="lead">Uma inteligência de carreira que revela valor, reduz ruído e acompanha cada decisão — do diagnóstico ao próximo cargo.</p>
+        <p class="lead">Uma inteligência de carreira que revela valor, reduz ruído e acompanha cada decisão, do diagnóstico ao próximo cargo.</p>
         <div class="closing-links">
-          <a href="https://www.careerflow.com.br/" target="_blank" rel="noopener">careerflow.com.br ↗</a>
+          <a href="https://www.careerflow.com.br/" target="_blank" rel="noopener">Protótipo · careerflow.com.br ↗</a>
+          <a href="fluxos-jornada.html">Fluxos e Jornada</a>
           <a href="index.html">Portal do TCC</a>
-          <a href="projecao-financeira.html#1">Projeção financeira</a>
+          <a href="files/CareerFlow_AI_Pitch_Deck.pdf">Pitch em PDF</a>
         </div>
         <div class="pill-row" style="justify-content:center;margin-top:28px"><span class="pill"><strong>Obrigado.</strong> Perguntas?</span></div>
-        <div class="slide-source" style="left:50%;transform:translateX(-50%);white-space:nowrap">Conteúdo elaborado exclusivamente a partir dos entregáveis e do MVP do TCC CareerFlow AI.</div>
+        <div class="slide-source" style="left:50%;transform:translateX(-50%);white-space:nowrap">Luiz Ihara · Filipe Fragoso · Daniel Caminha · Pedro Martins — MBA FIAP 2026</div>
       </div>
     </section>
   </main>
 
   <nav class="deck-ui" aria-label="Controles da apresentação">
-    <div class="progress-wrap"><span class="counter" id="counter">01 / 19</span><div class="progress"><span class="progress-bar" id="progressBar"></span></div></div>
+    <div class="progress-wrap"><span class="counter" id="counter">01 / 20</span><div class="progress"><span class="progress-bar" id="progressBar"></span></div></div>
     <div class="controls">
       <button class="control" id="prev" aria-label="Slide anterior" title="Slide anterior (←)">←</button>
       <button class="control" id="overviewBtn" aria-label="Visão geral" title="Visão geral (O)">▦</button>
+      <button class="control" id="pitchBtn" aria-label="Modo pitch de 5 minutos" aria-pressed="false" title="Modo pitch de 5 min: só os slides essenciais (P)">5′</button>
       <button class="control" id="themeBtn" aria-label="Ativar modo escuro" title="Alternar tema (D)">◐</button>
       <button class="control" id="next" aria-label="Próximo slide" title="Próximo slide (→)">→</button>
     </div>
-    <div class="hint">Navegar <kbd>←</kbd><kbd>→</kbd> · tema <kbd>D</kbd> · tela cheia <kbd>F</kbd></div>
+    <div class="hint">Navegar <kbd>←</kbd><kbd>→</kbd> · pitch 5 min <kbd>P</kbd> · tema <kbd>D</kbd> · tela cheia <kbd>F</kbd></div>
   </nav>
 
   <aside class="help" id="help" aria-hidden="true">
@@ -863,6 +1166,7 @@
         <div class="shortcut"><span>Tela cheia</span><kbd>F</kbd></div>
         <div class="shortcut"><span>Visão geral</span><kbd>O</kbd></div>
         <div class="shortcut"><span>Claro / escuro</span><kbd>D</kbd></div>
+        <div class="shortcut"><span>Pitch de 5 min</span><kbd>P</kbd></div>
         <div class="shortcut"><span>Ocultar interface</span><kbd>U</kbd></div>
         <div class="shortcut"><span>Fechar</span><kbd>Esc</kbd></div>
       </div>
@@ -870,11 +1174,15 @@
     </div>
   </aside>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
     (() => {
       'use strict';
-      const slides = [...document.querySelectorAll('.slide')];
+      const allSlides = [...document.querySelectorAll('.slide')];
+      const params = new URLSearchParams(location.search);
+      const printMode = params.has('print');
+      let pitch = params.get('pitch') === '1';
+      let slides = pitch ? allSlides.filter(s => !s.classList.contains('extra')) : allSlides;
+      const pitchBtn = document.getElementById('pitchBtn');
       const counter = document.getElementById('counter');
       const progressBar = document.getElementById('progressBar');
       const help = document.getElementById('help');
@@ -886,22 +1194,37 @@
       let darkMode = (() => {
         try {
           const savedTheme = localStorage.getItem('careerflow-theme');
+          if (params.get('theme')) return params.get('theme') === 'dark';
           return savedTheme ? savedTheme === 'dark' : true;
         } catch (_) { return true; }
       })();
 
       function go(next, push = true) {
         index = Math.max(0, Math.min(slides.length - 1, next));
-        slides.forEach((slide, i) => {
-          slide.classList.toggle('active', i === index);
-          slide.classList.toggle('before', i < index);
-          slide.setAttribute('aria-hidden', i === index ? 'false' : 'true');
+        const current = slides[index];
+        allSlides.forEach(slide => {
+          const pos = slides.indexOf(slide);
+          slide.classList.toggle('active', slide === current);
+          slide.classList.toggle('before', pos > -1 && pos < index);
+          slide.setAttribute('aria-hidden', slide === current ? 'false' : 'true');
         });
         counter.textContent = `${String(index + 1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}`;
         progressBar.style.width = `${((index + 1) / slides.length) * 100}%`;
         document.title = `${String(index + 1).padStart(2,'0')} · CareerFlow AI — TCC`;
         if (push) history.replaceState(null, '', `#${index + 1}`);
-        updateScene(slides[index].dataset.scene, index);
+        updateScene(current.dataset.scene, index);
+      }
+
+      function togglePitch(force) {
+        const current = slides[index];
+        pitch = typeof force === 'boolean' ? force : !pitch;
+        slides = pitch ? allSlides.filter(s => !s.classList.contains('extra')) : allSlides;
+        document.body.classList.toggle('pitch', pitch);
+        pitchBtn.classList.toggle('on', pitch);
+        pitchBtn.setAttribute('aria-pressed', String(pitch));
+        let next = slides.indexOf(current);
+        if (next < 0) next = slides.filter(s => allSlides.indexOf(s) < allSlides.indexOf(current)).length - 1;
+        go(Math.max(0, next));
       }
 
       function toggleOverview(force) {
@@ -936,9 +1259,10 @@
       document.getElementById('next').addEventListener('click', () => go(index + 1));
       document.getElementById('overviewBtn').addEventListener('click', () => toggleOverview());
       themeBtn.addEventListener('click', () => applyTheme(!darkMode));
+      pitchBtn.addEventListener('click', () => togglePitch());
       document.getElementById('closeHelp').addEventListener('click', () => toggleHelp(false));
       help.addEventListener('click', e => { if (e.target === help) toggleHelp(false); });
-      slides.forEach((s, i) => s.addEventListener('click', () => { if (overview) { index = i; toggleOverview(false); } }));
+      allSlides.forEach(s => s.addEventListener('click', () => { if (overview && slides.includes(s)) { index = slides.indexOf(s); toggleOverview(false); } }));
 
       addEventListener('keydown', e => {
         if (help.classList.contains('open')) { if (e.key === 'Escape' || e.key.toLowerCase() === 'h') toggleHelp(false); return; }
@@ -951,6 +1275,7 @@
         else if (key === 'f') toggleFullscreen();
         else if (key === 'o') toggleOverview();
         else if (key === 'd') applyTheme(!darkMode);
+        else if (key === 'p') togglePitch();
         else if (key === 'h' || key === '?') toggleHelp();
         else if (key === 'u') { uiVisible = !uiVisible; document.querySelector('.deck-ui').style.opacity = uiVisible ? '1' : '0'; document.querySelector('.brand').style.opacity = uiVisible ? '1' : '0'; }
       });
@@ -959,155 +1284,31 @@
       addEventListener('touchend', e => { const dx = e.changedTouches[0].screenX - touchX; if (Math.abs(dx) > 55) go(index + (dx < 0 ? 1 : -1)); }, {passive:true});
       addEventListener('hashchange', () => go(Number(location.hash.slice(1)) - 1 || 0, false));
 
-      // Three.js como motion design 2D: uma trajetória executiva, não uma cena 3D.
-      let scene, camera, renderer, clock, routeCurve, rocket, flame, stars, dataDust;
-      let routePast, routeFuture, routePastGeometry, pulse, pulseMaterial, markerGroup;
-      let rocketProgress = 0, targetProgress = 0, accentColor = 0x2457f5;
-      const viewHeight = 10;
-      const wideScenes = new Set(['split','core','network','bridge','matrix','orbit','revenue','timeline','bars','risks','constellation']);
-      const modeColors = { fracture:0xbd493e, risks:0xbd493e, metrics:0x167c62, target:0x167c62, revenue:0x9c6315, jcurve:0x9c6315 };
-
-      function makeRocket() {
-        const group = new THREE.Group();
-        const dark = new THREE.MeshBasicMaterial({color:0x111722});
-        const accent = new THREE.MeshBasicMaterial({color:accentColor});
-        const white = new THREE.MeshBasicMaterial({color:0xffffff});
-
-        const bodyShape = new THREE.Shape();
-        bodyShape.moveTo(0,-.58);
-        bodyShape.bezierCurveTo(.28,-.4,.34,.22,0,.78);
-        bodyShape.bezierCurveTo(-.34,.22,-.28,-.4,0,-.58);
-        const body = new THREE.Mesh(new THREE.ShapeGeometry(bodyShape),dark);
-
-        const leftFin = new THREE.Shape(); leftFin.moveTo(-.18,-.2); leftFin.lineTo(-.47,-.55); leftFin.lineTo(-.14,-.5); leftFin.closePath();
-        const rightFin = new THREE.Shape(); rightFin.moveTo(.18,-.2); rightFin.lineTo(.47,-.55); rightFin.lineTo(.14,-.5); rightFin.closePath();
-        const finL = new THREE.Mesh(new THREE.ShapeGeometry(leftFin),accent);
-        const finR = new THREE.Mesh(new THREE.ShapeGeometry(rightFin),accent);
-        const windowRing = new THREE.Mesh(new THREE.RingGeometry(.105,.16,32),white); windowRing.position.y=.2;
-        const windowCore = new THREE.Mesh(new THREE.CircleGeometry(.095,32),accent); windowCore.position.set(0,.2,.01);
-        const flameShape = new THREE.Shape(); flameShape.moveTo(-.11,-.52); flameShape.quadraticCurveTo(0,-1.05,.11,-.52); flameShape.closePath();
-        flame = new THREE.Mesh(new THREE.ShapeGeometry(flameShape),accent); flame.position.z=-.01;
-
-        group.add(flame,finL,finR,body,windowRing,windowCore);
-        group.userData.accentMaterials=[accent,windowCore.material];
-        group.userData.bodyMaterial=dark;
-        group.userData.detailMaterial=white;
-        group.scale.setScalar(.58);
-        return group;
+      // Marca d'água: logo completo e estático ao fundo do slide 2 em diante.
+      // O slide 1 mostra a animação de abertura do logo.
+      const wm = document.getElementById('wm');
+      function paintWatermark(svg, i) {
+        svg.classList.toggle('hide', i === 0);
       }
-
-      function buildRoute() {
-        const aspect = innerWidth / innerHeight;
-        const right = aspect > 1.25 ? Math.min(viewHeight*aspect*.36,6.15) : 2.15;
-        routeCurve = new THREE.CatmullRomCurve3([
-          new THREE.Vector3(right-.15,-5.6,0), new THREE.Vector3(right+.6,-3.65,0),
-          new THREE.Vector3(right-.38,-1.8,0), new THREE.Vector3(right+.38,.1,0),
-          new THREE.Vector3(right-.5,2.1,0), new THREE.Vector3(right+.24,3.9,0),
-          new THREE.Vector3(right-.18,5.7,0)
-        ]);
-        routeFuture.geometry.dispose();
-        routeFuture.geometry = new THREE.BufferGeometry().setFromPoints(routeCurve.getPoints(160));
-        markerGroup.clear();
-        [0,.18,.36,.54,.72,.9,1].forEach((u,i)=>{
-          const ring = new THREE.Mesh(new THREE.RingGeometry(i===6?.07:.045,i===6?.105:.07,28),new THREE.MeshBasicMaterial({color:i===6?0x111722:0x7b8490,transparent:true,opacity:i===6?.62:.34}));
-          ring.userData.final=i===6;
-          ring.position.copy(routeCurve.getPoint(u)); markerGroup.add(ring);
-        });
-        if(rocket) updateThreeTheme();
+      const introTile = document.getElementById('introTile');
+      let lastIntro = -1;
+      function updateScene(mode, i) {
+        paintWatermark(wm, i);
+        if (i === 0 && lastIntro !== 0 && !printMode) { introTile.classList.remove('play'); void introTile.getBoundingClientRect(); introTile.classList.add('play'); }
+        lastIntro = i;
       }
+      function updateThreeTheme() {}
 
-      function initThree() {
-        if (!window.THREE) { document.getElementById('webgl').style.display='none'; return; }
-        scene = new THREE.Scene();
-        const aspect = innerWidth/innerHeight;
-        camera = new THREE.OrthographicCamera(-viewHeight*aspect/2,viewHeight*aspect/2,viewHeight/2,-viewHeight/2,-10,10);
-        camera.position.z=5;
-        renderer = new THREE.WebGLRenderer({canvas:document.getElementById('webgl'),alpha:true,antialias:true,powerPreference:'low-power'});
-        renderer.setPixelRatio(Math.min(devicePixelRatio,1.6)); renderer.setSize(innerWidth,innerHeight);
-        clock = new THREE.Clock();
-
-        const starPositions=[];
-        for(let i=0;i<150;i++){starPositions.push((Math.random()-.5)*viewHeight*aspect,(Math.random()-.5)*viewHeight,0);}
-        const starGeo=new THREE.BufferGeometry(); starGeo.setAttribute('position',new THREE.Float32BufferAttribute(starPositions,3));
-        stars=new THREE.Points(starGeo,new THREE.PointsMaterial({color:0x6d7682,size:.022,transparent:true,opacity:.24})); scene.add(stars);
-
-        const dustPositions=[];
-        for(let i=0;i<70;i++){dustPositions.push((Math.random()-.5)*2,-5+Math.random()*10,0);}
-        const dustGeo=new THREE.BufferGeometry(); dustGeo.setAttribute('position',new THREE.Float32BufferAttribute(dustPositions,3));
-        dataDust=new THREE.Points(dustGeo,new THREE.PointsMaterial({color:accentColor,size:.035,transparent:true,opacity:.16})); scene.add(dataDust);
-
-        routeFuture=new THREE.Line(new THREE.BufferGeometry(),new THREE.LineBasicMaterial({color:0x77808b,transparent:true,opacity:.16})); scene.add(routeFuture);
-        routePastGeometry=new THREE.BufferGeometry();
-        routePastGeometry.setAttribute('position',new THREE.BufferAttribute(new Float32Array(161*3),3));
-        routePast=new THREE.Line(routePastGeometry,new THREE.LineBasicMaterial({color:accentColor,transparent:true,opacity:.58})); scene.add(routePast);
-        markerGroup=new THREE.Group(); scene.add(markerGroup);
-        rocket=makeRocket(); scene.add(rocket);
-        pulseMaterial=new THREE.MeshBasicMaterial({color:accentColor,transparent:true,opacity:.22});
-        pulse=new THREE.Mesh(new THREE.RingGeometry(.36,.375,40),pulseMaterial); scene.add(pulse);
-        buildRoute();
-        updateThreeTheme();
-        addEventListener('resize',resizeThree);
-        animate();
-      }
-
-      function resizeThree(){
-        if(!renderer)return;
-        const aspect=innerWidth/innerHeight;
-        camera.left=-viewHeight*aspect/2; camera.right=viewHeight*aspect/2; camera.top=viewHeight/2; camera.bottom=-viewHeight/2; camera.updateProjectionMatrix();
-        renderer.setSize(innerWidth,innerHeight); renderer.setPixelRatio(Math.min(devicePixelRatio,1.6)); buildRoute();
-      }
-
-      function updateScene(mode,i) {
-        targetProgress=(i+1.2)/(slides.length+.8);
-        accentColor=modeColors[mode]||0x2457f5;
-        const color=new THREE.Color(accentColor);
-        if(routePast) routePast.material.color.copy(color);
-        if(dataDust) dataDust.material.color.copy(color);
-        if(pulseMaterial) pulseMaterial.color.copy(color);
-        if(rocket) rocket.userData.accentMaterials.forEach(m=>m.color.copy(color));
-        document.getElementById('webgl').style.opacity=wideScenes.has(mode)?'.34':'.72';
-      }
-
-      function updateThreeTheme() {
-        if (!rocket) return;
-        const dark=document.body.classList.contains('dark');
-        rocket.userData.bodyMaterial.color.setHex(dark?0xf2f0e9:0x111722);
-        rocket.userData.detailMaterial.color.setHex(dark?0x111722:0xffffff);
-        stars.material.color.setHex(dark?0xb3bac4:0x6d7682);
-        routeFuture.material.color.setHex(dark?0xa8b0bb:0x77808b);
-        markerGroup.children.forEach(marker=>marker.material.color.setHex(marker.userData.final?(dark?0xf2f0e9:0x111722):(dark?0x9da6b2:0x7b8490)));
-      }
-
-      function animate(){
-        if(!renderer)return;
-        requestAnimationFrame(animate);
-        const t=clock.getElapsedTime();
-        rocketProgress+=(targetProgress-rocketProgress)*.045;
-        const point=routeCurve.getPoint(Math.max(0,Math.min(1,rocketProgress)));
-        const tangent=routeCurve.getTangent(Math.max(0,Math.min(.999,rocketProgress)));
-        rocket.position.copy(point); rocket.rotation.z=Math.atan2(tangent.y,tangent.x)-Math.PI/2;
-        flame.scale.y=.82+Math.sin(t*8)*.16; flame.material.opacity=.9;
-        pulse.position.copy(point); const pulseScale=1+(t%1.8)*.75; pulse.scale.setScalar(pulseScale); pulseMaterial.opacity=.18*(1-(t%1.8)/1.8);
-
-        const count=Math.max(2,Math.floor(rocketProgress*160));
-        const attr=routePastGeometry.attributes.position;
-        for(let i=0;i<count;i++){const p=routeCurve.getPoint(i/160);attr.setXYZ(i,p.x,p.y,p.z);}
-        attr.needsUpdate=true; routePastGeometry.setDrawRange(0,count);
-
-        const dustAttr=dataDust.geometry.attributes.position;
-        const routeX=point.x;
-        for(let i=0;i<dustAttr.count;i++){
-          let y=dustAttr.getY(i)+.003+(i%7)*.00035;
-          if(y>5)y=-5;
-          dustAttr.setY(i,y); dustAttr.setX(i,routeX-1.05+(i%11)*.19+Math.sin(t*.35+i)*.025);
-        }
-        dustAttr.needsUpdate=true;
-        stars.position.y=Math.sin(t*.12)*.025;
-        renderer.render(scene,camera);
-      }
+      if (printMode) allSlides.forEach((slide, i) => {
+        const clone = wm.cloneNode(true);
+        clone.removeAttribute('id');
+        clone.setAttribute('class', 'wm wm-print');
+        slide.prepend(clone);
+        paintWatermark(clone, i);
+      });
 
       applyTheme(darkMode, false);
-      initThree();
+      if (pitch) { document.body.classList.add('pitch'); pitchBtn.classList.add('on'); pitchBtn.setAttribute('aria-pressed', 'true'); }
       go(index, false);
     })();
   </script>

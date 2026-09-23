@@ -23,9 +23,9 @@ Dimensão (W/H)	Descrição	Aplicação ao Projeto
 What (O quê?)	Plataforma de Gestão Ativa de Carreira com IA.	Sistema de Market Intelligence para diagnóstico profundo, mentorias e planos de ação.
 Why (Por quê?)	Gap de mercado e barreira de custo humano.	Mentorias humanas (R$ 1.5k-6k) são proibitivas; profissionais sofrem com a Erosão da Relevância.
 Who (Quem?)	Tech Seniors (35-45 anos).	Profissionais buscando transição para liderança ou mobilidade estratégica intersetorial.
-Where (Onde?)	Web App e WhatsApp (N8N).	Web App responsivo (V0.dev/Next.js) e interface de engajamento diário via API de WhatsApp.
+Where (Onde?)	Web App e WhatsApp.	Web App responsivo (V0.dev/Next.js) e interface de engajamento diário via API de WhatsApp.
 When (Quando?)	Roadmap até Setembro/2026.	Validação (Mai/26), Protótipo (Jul/26), Business Plan (Ago/26) e MVP (Set/26).
-How (Como?)	Mixture of Experts (MoE) e N8N.	Fluxo: Extração LinkedIn -> Deep Research -> Normalização -> Mini-assessment proprietário.
+How (Como?)	Mixture of Experts (MoE) e orquestração de agentes de IA.	Fluxo: Extração LinkedIn -> Deep Research -> Normalização -> Mini-assessment proprietário.
 How Much (Quanto?)	Modelo Híbrido Escalável.	Baixo CAPEX (No-code/Low-code); Receita via Assinatura Pro, Tokens e Relatórios Pay-per-use.
 
 
@@ -75,7 +75,7 @@ Afirmação de FIT: O CareerFlow AI resolve a estagnação do sênior ao substit
 
 1. Segmentos de Clientes: Tech Seniors (35-45 anos); Gestores em transição; Profissionais em busca de mobilidade lateral intersetorial.
 2. Proposta de Valor: Gestão ativa de carreira com IA; Skill Analogy Engine (arbitragem de habilidades); Mentor Virtual 24/7 com memória histórica.
-3. Canais: Web App (V0.dev); API de WhatsApp (via N8N); LinkedIn (Marketing de Autoridade); Indicações (Viral Loop).
+3. Canais: Web App (V0.dev); API de WhatsApp; LinkedIn (Marketing de Autoridade); Indicações (Viral Loop).
 4. Relacionamento: Self-service automatizado; Suporte via IA conversacional; Comunidade "Pro" para networking qualificado.
 5. Fontes de Receita: Freemium (Diagnóstico básico); Assinatura Pro (Mentor + Diário); Relatórios de Deep Research (Pay-per-use).
 6. Recursos-Chave: Algoritmos proprietários (MoE); Infraestrutura AWS (Cloud); Base de dados de mercado integrada; Engenharia de Prompts modulares.

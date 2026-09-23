@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0b0f19">
     <title>CareerFlow AI | Mercado — TAM, SAM e SOM</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="description"
         content="Dimensionamento auditável do mercado do CareerFlow AI no Brasil: TAM, SAM, SOM, premissas e cenários de captura.">
     <meta property="og:title" content="CareerFlow AI | Mercado — TAM, SAM e SOM">
     <meta property="og:description"
-        content="R$ 1,12 bi de TAM. R$ 328,6 mi de SAM. Um SOM de 0,70% que conecta mercado e projeção financeira.">
+        content="R$ 522 mi de TAM. R$ 153 mi de SAM. Um SOM de 0,97% que conecta mercado e a projeção financeira v2.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://luizihara.github.io/fiap.tcc/og-mercado-tam-sam-som.png">
     <meta property="og:image:width" content="1200">
@@ -19,7 +22,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="CareerFlow AI | Mercado — TAM, SAM e SOM">
     <meta name="twitter:description"
-        content="R$ 1,12 bi de TAM. R$ 328,6 mi de SAM. Um SOM de 0,70% conectado à projeção financeira.">
+        content="R$ 522 mi de TAM. R$ 153 mi de SAM. Um SOM de 0,97% conectado à projeção financeira v2.">
     <meta name="twitter:image" content="https://luizihara.github.io/fiap.tcc/og-mercado-tam-sam-som.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -935,6 +938,11 @@
             stroke-dashoffset: 0;
         }
 
+        .chart-line-sub { stroke:#45b9ff !important; stroke-dasharray:6 7; opacity:.85; }
+        .visible .chart-line-sub { stroke-dasharray:6 7; stroke-dashoffset:0; }
+        .chart-dot-sub { fill:#45b9ff !important; }
+        .chart-sub-label { fill:#45b9ff; }
+
         .chart-area {
             opacity: 0;
             transition: opacity .8s .5s;
@@ -1451,7 +1459,7 @@
                 <a href="#calculo">A conta</a>
                 <a href="#evidencias">Evidências</a>
                 <a href="#captura">Captura</a>
-                <a class="nav-cta" href="projecao-financeira.html">Projeção financeira ↗</a>
+                <a class="nav-cta" href="apresentacao.html#14">Projeção v2 ↗</a>
             </div>
         </div>
     </nav>
@@ -1460,31 +1468,31 @@
         <header class="hero">
             <div class="wrap hero-grid">
                 <div class="reveal">
-                    <p class="eyebrow">Mercado Brasil · assinatura B2C · base 2025</p>
+                    <p class="eyebrow">Mercado Brasil · Plano + assinatura B2C · base 2025</p>
                     <h1>Mercado não é um palpite. <span class="gradient-text">É um funil mensurável.</span></h1>
-                    <p class="lead">O CareerFlow AI não precisa dominar o mercado para validar a tese. Precisa converter
-                        <strong style="color:var(--ink)">0,70%</strong> do seu público endereçável para chegar aos
-                        1.020 clientes do Ano 3.</p>
+                    <p class="lead">O CareerFlow AI não precisa dominar o mercado para validar a tese. Precisa capturar
+                        <strong style="color:var(--ink)">0,97%</strong> do valor endereçável no Ano 3: 2.873 Planos de
+                        Carreira vendidos e 1.103 assinantes ativos.</p>
                     <div class="hero-actions">
                         <a class="button primary" href="#calculo">Ver a conta completa <span aria-hidden="true">↓</span></a>
                         <button class="button" id="fullscreenBtn" type="button">Modo apresentação <span aria-hidden="true">⛶</span></button>
                     </div>
-                    <p class="hero-note"><span></span> dimensionamento bottom-up · hipóteses visíveis · sem dupla contagem B2B</p>
+                    <p class="hero-note"><span></span> dimensionamento bottom-up · hipóteses visíveis · Sob demanda fora da conta central</p>
                 </div>
 
                 <div class="market-lens reveal" role="img"
-                    aria-label="Camadas de mercado: TAM de R$ 1,12 bilhão, SAM de R$ 328,6 milhões e SOM de R$ 2,31 milhões por ano">
+                    aria-label="Camadas de mercado: TAM de R$ 522 milhões, SAM de R$ 153 milhões e SOM de R$ 1,49 milhão por ano">
                     <div class="orbit tam">
-                        <div class="orbit-label">TAM · Brasil<b>R$ 1,12 bi</b></div>
+                        <div class="orbit-label">TAM · Brasil<b>R$ 522 mi</b></div>
                     </div>
                     <div class="orbit sam">
-                        <div class="orbit-label">SAM · ICP 35–44<b>R$ 328,6 mi</b></div>
+                        <div class="orbit-label">SAM · ICP 35–44<b>R$ 153 mi</b></div>
                     </div>
                     <div class="orbit som">
-                        <div class="orbit-label">SOM · Ano 3<b>R$ 2,31 mi</b></div>
+                        <div class="orbit-label">SOM · Ano 3<b>R$ 1,49 mi</b></div>
                     </div>
                     <div class="lens-core">
-                        <strong>0,70%</strong>
+                        <strong>0,97%</strong>
                         <span>do SAM capturado</span>
                     </div>
                 </div>
@@ -1504,14 +1512,14 @@
                     <p>29,3% do universo, usando survey global como proxy.</p>
                 </article>
                 <article class="metric lime">
-                    <small>Clientes · Ano 3</small>
-                    <strong data-counter="1020" data-format="int">1.020</strong>
-                    <p>Base pagante líquida projetada.</p>
+                    <small>Planos vendidos · Ano 3</small>
+                    <strong data-counter="2873" data-format="int">2.873</strong>
+                    <p>Líquidos de reembolso, mais 1.103 assinantes ativos em dezembro.</p>
                 </article>
                 <article class="metric white">
                     <small>Receita total · Ano 3</small>
-                    <strong>R$ 2,77 mi</strong>
-                    <p>Assinatura + Deep Research + B2B.</p>
+                    <strong>R$ 1,57 mi</strong>
+                    <p>Plano de Carreira + Carreira Contínua + Sob demanda.</p>
                 </article>
             </div>
         </section>
@@ -1521,9 +1529,9 @@
                 <div class="section-head reveal">
                     <p class="eyebrow">01 · A conta que a banca pode refazer</p>
                     <h2>Três camadas. <span class="gradient-text">Uma única unidade econômica.</span></h2>
-                    <p class="lead">Todos os valores usam o ticket maduro de R$ 189/mês da projeção financeira. O
-                        dimensionamento considera somente a assinatura Pro — a receita B2B fica como upside, não como
-                        inflador do mercado.</p>
+                    <p class="lead">Todos os valores usam o valor anual de um cliente engajado no Ano 3 da projeção v2:
+                        Plano de Carreira de R$ 297 mais 11 meses de Carreira Contínua a R$ 69 (o 1º mês vem no Plano),
+                        ou R$ 1.056 por ano. O Sob demanda fica como upside, não como inflador do mercado.</p>
                 </div>
 
                 <div class="equation-grid reveal">
@@ -1532,15 +1540,15 @@
                             <span>TAM</span>
                             <span class="definition">Total Addressable<br>Market</span>
                         </header>
-                        <strong class="big">R$ 1,12 bi</strong>
+                        <strong class="big">R$ 522 mi</strong>
                         <span class="people">494.427 profissionais</span>
                         <div class="formula">
                             <b>494.427</b> pessoas<br>
-                            × R$ <b>189</b> / mês<br>
-                            × <b>12</b> meses
+                            × R$ <b>1.056</b> / ano<br>
+                            (R$ 297 + 11 × R$ 69)
                         </div>
-                        <p>O potencial anual da assinatura se todo profissional de TI formal no setor TIC brasileiro
-                            fosse elegível e assinante.</p>
+                        <p>O potencial anual se todo profissional de TI formal no setor TIC brasileiro comprasse o Plano
+                            e seguisse na assinatura o ano inteiro.</p>
                     </article>
 
                     <article class="equation-card sam">
@@ -1548,11 +1556,11 @@
                             <span>SAM</span>
                             <span class="definition">Serviceable Available<br>Market</span>
                         </header>
-                        <strong class="big">R$ 328,6 mi</strong>
+                        <strong class="big">R$ 153 mi</strong>
                         <span class="people">144.867 profissionais no ICP</span>
                         <div class="formula">
                             494.427 × <b>29,3%</b><br>
-                            × R$ <b>2.268</b> / ano
+                            × R$ <b>1.056</b> / ano
                         </div>
                         <p>O recorte que mais se aproxima da persona “Líder em Risco”: profissional de tecnologia entre
                             35 e 44 anos, faixa usada como proxy do foco 35–45.</p>
@@ -1563,15 +1571,15 @@
                             <span>SOM</span>
                             <span class="definition">Serviceable Obtainable<br>Market</span>
                         </header>
-                        <strong class="big">R$ 2,31 mi</strong>
-                        <span class="people">1.020 clientes no Ano 3</span>
+                        <strong class="big">R$ 1,49 mi</strong>
+                        <span class="people">2.873 Planos + 1.103 assinantes no Ano 3</span>
                         <div class="formula">
-                            <b>1.020</b> assinantes<br>
-                            × R$ <b>189</b> / mês<br>
-                            = <b>0,70%</b> do SAM
+                            R$ <b>853 mil</b> (Plano)<br>
+                            + R$ <b>636 mil</b> (Contínua)<br>
+                            = <b>0,97%</b> do SAM
                         </div>
-                        <p>Não é uma fatia arbitrária: é a base líquida de clientes produzida pelas premissas de
-                            aquisição e churn do modelo financeiro.</p>
+                        <p>Não é uma fatia arbitrária: é a receita do Ano 3 produzida pelas premissas de conversão,
+                            reembolso e churn do modelo financeiro v2.</p>
                     </article>
                 </div>
 
@@ -1663,8 +1671,8 @@
                     </div>
                     <div class="funnel-row" style="--color:var(--lime)">
                         <span class="tag">SOM</span>
-                        <div class="track"><i style="--width:31%"></i><span>Clientes pagantes · Ano 3</span></div>
-                        <span class="value">1.020</span>
+                        <div class="track"><i style="--width:31%"></i><span>Planos vendidos · Ano 3</span></div>
+                        <span class="value">2.873</span>
                     </div>
                     <p class="funnel-caption">Larguras ilustrativas para legibilidade · valores e percentuais acima são os dados de referência.</p>
                 </div>
@@ -1689,9 +1697,9 @@
                     </article>
                     <article class="gtm-card">
                         <small>04 · Oferta</small>
-                        <h3>R$ 189/mês</h3>
-                        <p>No Ano 3, o ticket equivale a cerca de 1/8 do piso de R$ 1.500 da mentoria humana citada no
-                            TCC.</p>
+                        <h3>R$ 297 + R$ 69/mês</h3>
+                        <p>No Ano 3, um ano inteiro de CareerFlow (R$ 1.056) custa menos que um único mês de mentoria
+                            humana, cujo piso é de R$ 1.500.</p>
                     </article>
                 </div>
             </div>
@@ -1702,19 +1710,19 @@
                 <div class="section-head reveal">
                     <p class="eyebrow">04 · Da oportunidade à captura</p>
                     <h2>O SOM é um <span class="gradient-text">plano de capacidade.</span></h2>
-                    <p class="lead">A meta de 1.020 clientes não vem de aplicar um percentual bonito sobre o mercado.
-                        Ela vem do modelo de aquisição, da perda por churn e da capacidade operacional projetada em três
-                        anos.</p>
+                    <p class="lead">As 2.873 vendas do Ano 3 não vêm de aplicar um percentual bonito sobre o mercado.
+                        Elas vêm do volume de diagnósticos, da conversão para o Plano, dos reembolsos e do churn da
+                        assinatura projetados em três anos.</p>
                 </div>
 
                 <div class="capture-grid">
                     <article class="trajectory reveal">
                         <div class="panel-head">
                             <h3>Trajetória de clientes pagantes</h3>
-                            <span>base líquida após churn<br>modelo financeiro FIAP</span>
+                            <span>Planos vendidos no ano e<br>assinantes em dezembro · modelo v2</span>
                         </div>
                         <svg viewBox="0 0 620 300" role="img"
-                            aria-label="Clientes pagantes crescem de 138 no Ano 1 para 437 no Ano 2 e 1.020 no Ano 3">
+                            aria-label="Planos vendidos: 239 no Ano 1, 1.197 no Ano 2 e 2.873 no Ano 3. Assinantes em dezembro: 50, 338 e 1.103">
                             <defs>
                                 <linearGradient id="lineGradient" x1="0" x2="1">
                                     <stop offset="0" stop-color="#45b9ff" />
@@ -1728,31 +1736,36 @@
                             </defs>
                             <g class="chart-grid">
                                 <line x1="52" x2="590" y1="42" y2="42" />
-                                <line x1="52" x2="590" y1="106" y2="106" />
-                                <line x1="52" x2="590" y1="170" y2="170" />
-                                <line x1="52" x2="590" y1="234" y2="234" />
+                                <line x1="52" x2="590" y1="96" y2="96" />
+                                <line x1="52" x2="590" y1="150" y2="150" />
+                                <line x1="52" x2="590" y1="204" y2="204" />
                             </g>
-                            <text class="chart-label" x="10" y="46">1.000</text>
-                            <text class="chart-label" x="17" y="110">750</text>
-                            <text class="chart-label" x="17" y="174">500</text>
-                            <text class="chart-label" x="24" y="238">250</text>
+                            <text class="chart-label" x="10" y="46">3.000</text>
+                            <text class="chart-label" x="10" y="100">2.250</text>
+                            <text class="chart-label" x="10" y="154">1.500</text>
+                            <text class="chart-label" x="24" y="208">750</text>
                             <path class="chart-area" fill="url(#areaGradient)"
-                                d="M90 234 C200 218, 246 202, 316 176 S488 83, 558 39 L558 258 L90 258 Z" />
-                            <path class="chart-line" d="M90 234 C200 218, 246 202, 316 176 S488 83, 558 39" />
-                            <circle class="chart-dot" cx="90" cy="234" r="7" />
-                            <circle class="chart-dot" cx="316" cy="176" r="7" style="transition-delay:.9s" />
-                            <circle class="chart-dot" cx="558" cy="39" r="8" style="transition-delay:1.1s" />
-                            <text class="chart-value" x="75" y="216">138</text>
-                            <text class="chart-value" x="301" y="158">437</text>
-                            <text class="chart-value" x="532" y="20">1.020</text>
+                                d="M90 240.8 C200 232, 246 196, 316 171.8 S488 82, 558 51.1 L558 258 L90 258 Z" />
+                            <path class="chart-line" d="M90 240.8 C200 232, 246 196, 316 171.8 S488 82, 558 51.1" />
+                            <path class="chart-line chart-line-sub" d="M90 254.4 C200 251, 246 241, 316 233.7 S488 200, 558 178.6" />
+                            <circle class="chart-dot" cx="90" cy="240.8" r="7" />
+                            <circle class="chart-dot" cx="316" cy="171.8" r="7" style="transition-delay:.9s" />
+                            <circle class="chart-dot" cx="558" cy="51.1" r="8" style="transition-delay:1.1s" />
+                            <circle class="chart-dot chart-dot-sub" cx="316" cy="233.7" r="5" style="transition-delay:.9s" />
+                            <circle class="chart-dot chart-dot-sub" cx="558" cy="178.6" r="6" style="transition-delay:1.1s" />
+                            <text class="chart-value" x="78" y="224">239</text>
+                            <text class="chart-value" x="292" y="154">1.197</text>
+                            <text class="chart-value" x="526" y="32">2.873</text>
+                            <text class="chart-label chart-sub-label" x="304" y="258">338</text>
+                            <text class="chart-label chart-sub-label" x="600" y="200" text-anchor="end">1.103 assinantes</text>
                             <text class="chart-label" x="74" y="284">ANO 1</text>
                             <text class="chart-label" x="299" y="284">ANO 2</text>
                             <text class="chart-label" x="541" y="284">ANO 3</text>
                         </svg>
                         <div class="trajectory-foot">
-                            <div><small>Ano 1</small><strong>18 novos/mês</strong></div>
-                            <div><small>Ano 2</small><strong>40 novos/mês</strong></div>
-                            <div><small>Ano 3</small><strong>70 novos/mês</strong></div>
+                            <div><small>Ano 1</small><strong>21 Planos/mês</strong></div>
+                            <div><small>Ano 2</small><strong>105 Planos/mês</strong></div>
+                            <div><small>Ano 3</small><strong>252 Planos/mês</strong></div>
                         </div>
                     </article>
 
@@ -1762,26 +1775,26 @@
                             <span>exploração<br>não é previsão</span>
                         </div>
                         <div class="scenario-tabs" role="tablist" aria-label="Cenários de participação no SAM">
-                            <button type="button" role="tab" aria-selected="false" data-share="0.0035"
+                            <button type="button" role="tab" aria-selected="false" data-share="0.01"
                                 data-label="Prudente">Prudente</button>
-                            <button type="button" role="tab" aria-selected="true" data-share="0.0070409356"
+                            <button type="button" role="tab" aria-selected="true" data-share="0.0198320"
                                 data-label="Plano Ano 3">Plano Ano 3</button>
-                            <button type="button" role="tab" aria-selected="false" data-share="0.015"
+                            <button type="button" role="tab" aria-selected="false" data-share="0.04"
                                 data-label="Expansão">Expansão</button>
                         </div>
                         <div class="scenario-output" aria-live="polite">
-                            <span class="share" id="scenarioShare">0,70% do SAM</span>
-                            <strong class="customers" id="scenarioCustomers">1.020</strong>
-                            <span class="unit">clientes pagantes</span>
+                            <span class="share" id="scenarioShare">1,98% do ICP compra no ano</span>
+                            <strong class="customers" id="scenarioCustomers">2.873</strong>
+                            <span class="unit">Planos de Carreira vendidos</span>
                             <div class="scenario-divider"></div>
                             <div class="scenario-kpis">
-                                <div><small>ARR assinatura</small><strong id="scenarioArr">R$ 2,31 mi</strong></div>
-                                <div><small>MRR assinatura</small><strong id="scenarioMrr">R$ 192,8 mil</strong></div>
+                                <div><small>Receita Plano + Contínua</small><strong id="scenarioArr">R$ 1,49 mi</strong></div>
+                                <div><small>Assinantes em dezembro</small><strong id="scenarioMrr">1.103</strong></div>
                             </div>
                         </div>
-                        <p class="scenario-disclaimer">Base: 144.867 profissionais no SAM e ticket de R$ 189/mês. O
-                            cenário “Plano Ano 3” reproduz a projeção entregue; os demais servem apenas para testar a
-                            sensibilidade à participação de mercado.</p>
+                        <p class="scenario-disclaimer">Base: 144.867 profissionais no ICP. Cada Plano vendido gera, no Ano 3,
+                            R$ 518 de receita (Plano + Carreira Contínua) e 0,38 assinante em dezembro. O cenário “Plano
+                            Ano 3” reproduz a projeção v2; os demais servem apenas para testar a sensibilidade.</p>
                     </aside>
                 </div>
             </div>
@@ -1791,34 +1804,34 @@
             <div class="wrap">
                 <div class="section-head reveal">
                     <p class="eyebrow">05 · O que precisa ser verdade</p>
-                    <h2>Mercado grande não corrige <span class="gradient-text">retenção ruim.</span></h2>
-                    <p class="lead">A oportunidade só se transforma em negócio se o MVP provar dor, disposição a
-                        pagar e recorrência. Os próximos marcos do TCC atacam exatamente essas variáveis.</p>
+                    <h2>Mercado grande não corrige <span class="gradient-text">conversão ruim.</span></h2>
+                    <p class="lead">A oportunidade só se transforma em negócio se o piloto provar dor, disposição a
+                        pagar pelo Plano e continuidade na assinatura. São as metas de corte do modelo v2.</p>
                 </div>
                 <div class="truth-grid reveal">
                     <article class="truth-card">
                         <span class="num">01</span>
-                        <h3>5–8 entrevistas profundas</h3>
-                        <p>Validar a persona, separar as subpersonas e testar se “direção de carreira” é uma dor urgente,
-                            não apenas interessante.</p>
+                        <h3>8–10 entrevistas + teste de preço</h3>
+                        <p>Validar as duas rotas (gestão e especialista) e testar se “direção de carreira” é dor urgente
+                            a ponto de pagar R$ 197.</p>
                     </article>
                     <article class="truth-card">
                         <span class="num">02</span>
-                        <h3>R$ 97 de disposição a pagar</h3>
-                        <p>Confirmar o ticket de entrada do Ano 1 antes de assumir a evolução para R$ 189 no produto
-                            maduro.</p>
+                        <h3>≥ 6% viram Plano</h3>
+                        <p>Conversão do diagnóstico grátis para o Plano de Carreira: a variável que mais move o
+                            resultado do modelo.</p>
                     </article>
                     <article class="truth-card">
                         <span class="num">03</span>
-                        <h3>90% retidos no mês 3</h3>
-                        <p>A coorte piloto precisa sustentar a métrica de corte definida no memorial; abaixo disso, o
-                            churn do modelo deve ser refeito.</p>
+                        <h3>≥ 35% seguem na assinatura</h3>
+                        <p>Depois do mês incluso, pelo menos um terço precisa continuar na Carreira Contínua, com
+                            reembolsos em 7 dias abaixo de 5%.</p>
                     </article>
                     <article class="truth-card">
                         <span class="num">04</span>
-                        <h3>0,70% com CAC saudável</h3>
-                        <p>A captura só cria valor se preservar CAC de R$ 757, payback de 4 meses e LTV/CAC próximo de
-                            10× no Ano 3.</p>
+                        <h3>0,97% com CAC pago na 1ª compra</h3>
+                        <p>A captura só cria valor se o CAC de R$ 140 continuar coberto pela margem do Plano (R$ 210),
+                            com LTV/CAC de 4,3× no Ano 3.</p>
                     </article>
                 </div>
             </div>
@@ -1827,11 +1840,11 @@
         <section class="thesis">
             <div class="wrap reveal">
                 <p class="eyebrow" style="justify-content:center">Tese de mercado</p>
-                <h2>O desafio não é encontrar mercado. <span class="gradient-text">É merecer 0,70% dele.</span></h2>
-                <p class="lead">Com um TAM acima de R$ 1 bilhão, um ICP de 144 mil profissionais e um SOM conectado à
-                    capacidade financeira, a próxima prova deixa de ser tamanho — e passa a ser retenção.</p>
+                <h2>O desafio não é encontrar mercado. <span class="gradient-text">É merecer 0,97% dele.</span></h2>
+                <p class="lead">Com um TAM de R$ 522 milhões, um ICP de 144 mil profissionais e um SOM conectado ao
+                    modelo financeiro, a próxima prova deixa de ser tamanho e passa a ser conversão.</p>
                 <div class="hero-actions" style="justify-content:center">
-                    <a class="button primary" href="projecao-financeira.html">Conectar com a projeção financeira ↗</a>
+                    <a class="button primary" href="apresentacao.html#14">Ver a projeção v2 no pitch ↗</a>
                     <a class="button" href="index.html">Voltar ao portal do TCC</a>
                 </div>
             </div>
@@ -1845,8 +1858,9 @@
                     <p class="eyebrow">Notas & fontes</p>
                     <h2>Premissas visíveis.<br>Conclusões auditáveis.</h2>
                     <p class="intro">Valores arredondados para apresentação; cálculos usam as quantidades completas.
-                        Dados de mercado têm base 2025. Consulta realizada em agosto de 2026. O cálculo não inclui o
-                        upside de licenças B2B nem relatórios avulsos no TAM/SAM/SOM central.</p>
+                        Dados de mercado têm base 2025, com consulta em agosto de 2026; valores revisados para o modelo
+                        financeiro v2 em setembro de 2026. O cálculo central não inclui o upside do Sob demanda nem de
+                        parcerias.</p>
                 </div>
                 <ol class="source-list">
                     <li><span><b>Brasscom — Relatório Setorial 2025.</b> 494.427 profissionais de TI em vínculos CLT no
@@ -1865,15 +1879,16 @@
                                 rel="noopener">Carreira ↗</a> · <a
                                 href="https://survey.stackoverflow.co/2025/developers#2-education-and-experience"
                                 target="_blank" rel="noopener">Aprendizado ↗</a></span></li>
-                    <li><span><b>Modelo financeiro CareerFlow AI.</b> Ticket de R$ 189/mês, 1.020 clientes pagantes e R$
-                            2.313.360 de receita de assinatura no Ano 3. Receita total de R$ 2.766.960 ao incluir Deep
-                            Research e B2B. <a href="llms-full.txt">Abrir memorial ↗</a> · <a
-                                href="files/FIAP_Modelo_Projecao_Financeira_MVP.xlsx">Abrir planilha ↗</a></span></li>
+                    <li><span><b>Modelo financeiro v2 CareerFlow AI.</b> No Ano 3: Plano de Carreira a R$ 297, Carreira
+                            Contínua a R$ 69/mês, 2.873 Planos vendidos, 1.103 assinantes e R$ 1.489.314 de receita
+                            Plano + Contínua (R$ 1.565.708 com Sob demanda). <a
+                                href="files/CareerFlow_AI_Projecao_Financeira_v2.xlsx">Abrir planilha ↗</a> · <a
+                                href="files/CareerFlow_AI_Projecao_v2_36_meses.csv">36 meses (.csv) ↗</a></span></li>
                 </ol>
             </div>
             <div class="footer-bottom">
                 <span>CareerFlow AI · TCC MBA FIAP 2026 · Mercado TAM / SAM / SOM</span>
-                <span><a href="apresentacao.html">Apresentação</a> · <a href="entrega-parcial-2.html">Modelo de negócio</a> · <a href="projecao-financeira.html">Finanças</a></span>
+                <span><a href="apresentacao.html">Apresentação</a> · <a href="entrega-parcial-2.html">Modelo de negócio</a> · <a href="apresentacao.html#14">Projeção v2</a></span>
             </div>
         </div>
     </footer>
@@ -1938,7 +1953,8 @@
             updateProgress();
 
             const samPeople = 144867.111;
-            const monthlyTicket = 189;
+            const revenuePerPlan = 1489314 / 2873;   // Ano 3: (receita Plano + Contínua) ÷ Planos vendidos
+            const subsPerPlan = 1103 / 2873;         // Ano 3: assinantes em dezembro ÷ Planos vendidos
             const scenarioButtons = [...document.querySelectorAll('.scenario-tabs button')];
             const scenarioShare = document.getElementById('scenarioShare');
             const scenarioCustomers = document.getElementById('scenarioCustomers');
@@ -1947,15 +1963,15 @@
 
             function selectScenario(button) {
                 const share = Number(button.dataset.share);
-                const customers = Math.round(samPeople * share);
-                const mrr = customers * monthlyTicket;
-                const arr = mrr * 12;
+                const plans = Math.round(samPeople * share);
+                const revenue = plans * revenuePerPlan;
+                const subscribers = Math.round(plans * subsPerPlan);
 
                 scenarioButtons.forEach((item) => item.setAttribute('aria-selected', item === button ? 'true' : 'false'));
-                scenarioShare.textContent = `${formatPct.format(share * 100)}% do SAM`;
-                scenarioCustomers.textContent = formatInt.format(customers);
-                scenarioArr.textContent = formatMoney(arr);
-                scenarioMrr.textContent = formatMoney(mrr);
+                scenarioShare.textContent = `${formatPct.format(share * 100)}% do ICP compra no ano`;
+                scenarioCustomers.textContent = formatInt.format(plans);
+                scenarioArr.textContent = formatMoney(revenue);
+                scenarioMrr.textContent = formatInt.format(subscribers);
             }
 
             scenarioButtons.forEach((button) => button.addEventListener('click', () => selectScenario(button)));

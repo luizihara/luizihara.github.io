@@ -27,7 +27,7 @@ de mercado (Deep Research); o Skill Analogy Engine, motor de correspondência se
 traduz competências entre setores; e um mentor virtual 24/7 no WhatsApp com memória histórica
 dos objetivos do usuário.
 
-Arquitetura: orquestração via N8N, Mixture of Experts (MoE) para roteamento de modelos,
+Arquitetura: orquestração de agentes de IA, Mixture of Experts (MoE) para roteamento de modelos,
 banco vetorial para memória de longo prazo, front em Next.js/V0.dev.
 
 ---
@@ -323,7 +323,7 @@ partir apenas das células de entrada: 124 valores verificados, sem divergência
 Modelo de negócio em resumo (blocos do BMC relevantes para a projeção):
 - **Fontes de receita:** freemium (diagnóstico básico), assinatura Pro (mentor + diário),
   relatórios de Deep Research pay-per-use, e expansão B2B white-label.
-- **Canais:** Web App, API de WhatsApp via N8N, LinkedIn como marketing de autoridade,
+- **Canais:** Web App, API de WhatsApp, LinkedIn como marketing de autoridade,
   indicações (viral loop).
 - **Estrutura de custos:** consumo de tokens de IA, desenvolvimento low-code, marketing de
   aquisição (CAC).

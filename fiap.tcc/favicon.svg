@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>CareerFlow</title>
+  <rect width="64" height="64" rx="14" fill="#0F172A"/>
+  <path d="M32 34C32 28 32 21 32 14" fill="none" stroke="#A3E635" stroke-width="8" stroke-linecap="square" stroke-linejoin="round"/>
+  <path d="M22.5 16L32 5.5L41.5 16L36 15V18H28V15L22.5 16Z" fill="#A3E635"/>
+  <path d="M11.5 52C18.5 47 25.5 41 32 34" fill="none" stroke="#A3E635" stroke-width="8" stroke-linecap="square" stroke-linejoin="round"/>
+  <path d="M32 53V34" fill="none" stroke="#34D399" stroke-width="8" stroke-linecap="square"/>
+  <path d="M52.5 52C45.5 47 38.5 41 32 34" fill="none" stroke="#F8FAFC" stroke-width="8" stroke-linecap="square" stroke-linejoin="round"/>
+  <path d="M32 26C32.8 30.5 35.5 33.2 40 34C35.5 34.8 32.8 37.5 32 42C31.2 37.5 28.5 34.8 24 34C28.5 33.2 31.2 30.5 32 26Z" fill="#0F172A"/>
+</svg>
