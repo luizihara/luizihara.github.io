@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>CareerFlow AI — Pitch Final</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="alternate icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="description" content="CareerFlow AI — pitch final do TCC MBA FIAP 2026 em 5 minutos, com roteiro de fala por slide.">
+<meta name="theme-color" content="#0B1120">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400..800&amp;family=DM+Sans:wght@400..700&amp;display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #04070D; overflow: hidden; }
+  body { font-family: 'DM Sans', Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  #viewport { position: fixed; inset: 0; display: grid; place-items: center; }
+  #stage { position: relative; width: 1920px; height: 1080px; transform-origin: center; flex: none; }
+  .slide { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden;
+    opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility 0s .45s; }
+  .slide.active { opacity: 1; visibility: visible; transition: opacity .45s ease; }
+  .slide p, .slide h1, .slide h2, .slide h3 { margin: 0; }
+  .slide h1, .slide h2, .slide h3 { font-weight: 600; }
+  .slide img { display: block; }
+  .slide table { border-collapse: collapse; }
+  .slide th, .slide td { padding: .55em .7em; border-bottom: 1px solid #243049; text-align: left; font-weight: 400; }
+  .slide th { font-weight: 700; font-size: 24px; letter-spacing: 1px; text-transform: uppercase; }
+  .print-logo { display: none; }
+
+  #ui { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); display: flex; align-items: center; gap: 6px;
+    padding: 6px; border-radius: 999px; background: rgba(11,17,32,.82); border: 1px solid rgba(255,255,255,.12);
+    backdrop-filter: blur(10px); z-index: 10; transition: opacity .3s; font: 600 13px 'DM Sans', sans-serif; color: #B8C0CC; }
+  #ui button { width: 34px; height: 34px; border: 0; border-radius: 50%; background: transparent; color: #F2F1EC; cursor: pointer; font-size: 15px; }
+  #ui button:hover { background: rgba(255,255,255,.1); }
+  #ui button.on { background: #A3E635; color: #0B1120; }
+  #counter { min-width: 64px; text-align: center; font-variant-numeric: tabular-nums; }
+  body.idle #ui { opacity: 0; }
+  #back { position: fixed; left: 16px; top: 14px; z-index: 10; font: 600 13px 'DM Sans', sans-serif; color: #7E8898; text-decoration: none;
+    padding: 8px 12px; border-radius: 8px; background: rgba(11,17,32,.6); transition: opacity .3s; }
+  #back:hover { color: #F2F1EC; }
+  body.idle #back { opacity: 0; }
+
+  #notes { position: fixed; left: 50%; bottom: 70px; transform: translateX(-50%); width: min(980px, calc(100vw - 32px));
+    max-height: 42vh; overflow: auto; z-index: 11; display: none; padding: 18px 22px 20px; border-radius: 14px;
+    background: rgba(7,11,21,.94); border: 1px solid rgba(163,230,53,.35); color: #E6E9EE;
+    font: 15px/1.55 'DM Sans', sans-serif; white-space: pre-wrap; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+  body.show-notes #notes { display: block; }
+  #notes .head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 10px; font-weight: 700; color: #A3E635; white-space: normal; }
+  #clock { font-variant-numeric: tabular-nums; color: #F2F1EC; }
+  #clock.over { color: #FF8A7A; }
+
+  #help { position: fixed; inset: 0; z-index: 20; display: none; place-items: center; background: rgba(4,7,13,.8); }
+  body.show-help #help { display: grid; }
+  #help div { max-width: 460px; padding: 26px 28px; border-radius: 14px; background: #0B1120; border: 1px solid #243049;
+    color: #E6E9EE; font: 15px/1.9 'DM Sans', sans-serif; }
+  #help b { color: #A3E635; display: inline-block; min-width: 110px; }
+
+  @media print {
+    @page { size: 1920px 1080px; margin: 0; }
+    html, body { height: auto; overflow: visible; background: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    #viewport { position: static; display: block; }
+    #stage { transform: none !important; width: 1920px; height: auto; }
+    .slide { position: relative; opacity: 1 !important; visibility: visible !important; transition: none; break-after: page; page-break-after: always; }
+    .embed, #ui, #back, #notes, #help { display: none !important; }
+    .print-logo { display: block; position: absolute; border-radius: 22%; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+  }
+</style>
+</head>
+<body>
+<a id="back" href="index.html">← Portal do TCC</a>
+<div id="viewport"><div id="stage">
+<section data-index="0" class="slide" id="cover" data-transition="fade" style="background:radial-gradient(circle at 80% 45%, #17223B 0%, #0B1120 60%); color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; justify-content:center; gap:40px">
+  <p style="font-size:24px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#A3E635">CareerFlow AI · TCC MBA FIAP 2026</p>
+  <h1 style="font-family:'Sora', Arial, sans-serif; font-size:88px; font-weight:700; line-height:1.08; letter-spacing:-2px; width:1040px; color:#F2F1EC">Ninguém deveria decidir o próximo passo da carreira <span style="color:#A3E635">no escuro.</span></h1>
+  <p style="font-size:32px; line-height:1.45; color:#B8C0CC; width:940px">Um plano de carreira com IA para profissionais sêniores de tecnologia. Em um dia, não em meses de mentoria.</p>
+  <iframe class="embed" title="Logo CareerFlow animado" style="position:absolute; left:1250px; top:250px; width:500px; height:500px; border:0" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;/head&gt;&lt;body&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden}
+body{display:flex;align-items:center;justify-content:center}
+.t{width:92%;aspect-ratio:1;border-radius:22%;background:#0F172A;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(255,255,255,.08),0 40px 90px rgba(0,0,0,.55)}
+svg{width:74%;height:74%;overflow:visible}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;opacity:0}
+.core,.head,.glow{opacity:0;transform-box:fill-box;transform-origin:center}
+@keyframes d{0%{opacity:0;stroke-dashoffset:1}2%{opacity:1}100%{opacity:1;stroke-dashoffset:0}}
+@keyframes p{from{opacity:0;transform:scale(.2) rotate(-45deg)}to{opacity:1;transform:none}}
+@keyframes r{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+@keyframes g{0%{opacity:.6;transform:scale(1)}100%{opacity:0;transform:scale(5)}}
+.play .bl{animation:d .55s cubic-bezier(.5,0,.2,1) forwards .3s}
+.play .bc{animation:d .5s cubic-bezier(.5,0,.2,1) forwards .7s}
+.play .br{animation:d .55s cubic-bezier(.5,0,.2,1) forwards 1.1s}
+.play .core{animation:p .35s cubic-bezier(.3,1.6,.5,1) forwards 1.6s}
+.play .st{animation:d .45s cubic-bezier(.6,0,.2,1) forwards 1.85s}
+.play .head{animation:r .55s cubic-bezier(.2,1.4,.4,1) forwards 2.15s}
+.play .glow{animation:g 1.2s ease-out forwards 2.5s}
+&lt;/style&gt;&lt;div class=&quot;t&quot; id=&quot;t&quot;&gt;&lt;svg viewBox=&quot;0 0 64 64&quot;&gt;&lt;path class=&quot;draw bl&quot; pathLength=&quot;1&quot; d=&quot;M11.5 52C18.5 47 25.5 41 32 34&quot; fill=&quot;none&quot; stroke=&quot;#A3E635&quot; stroke-width=&quot;8&quot; stroke-linecap=&quot;square&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;path class=&quot;draw bc&quot; pathLength=&quot;1&quot; d=&quot;M32 53V34&quot; fill=&quot;none&quot; stroke=&quot;#34D399&quot; stroke-width=&quot;8&quot; stroke-linecap=&quot;square&quot;/&gt;&lt;path class=&quot;draw br&quot; pathLength=&quot;1&quot; d=&quot;M52.5 52C45.5 47 38.5 41 32 34&quot; fill=&quot;none&quot; stroke=&quot;#F8FAFC&quot; stroke-width=&quot;8&quot; stroke-linecap=&quot;square&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;path class=&quot;draw st&quot; pathLength=&quot;1&quot; d=&quot;M32 34C32 28 32 21 32 14&quot; fill=&quot;none&quot; stroke=&quot;#A3E635&quot; stroke-width=&quot;8&quot; stroke-linecap=&quot;square&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;path class=&quot;head&quot; d=&quot;M22.5 16L32 5.5L41.5 16L36 15V18H28V15L22.5 16Z&quot; fill=&quot;#A3E635&quot;/&gt;&lt;path class=&quot;core&quot; d=&quot;M32 26C32.8 30.5 35.5 33.2 40 34C35.5 34.8 32.8 37.5 32 42C31.2 37.5 28.5 34.8 24 34C28.5 33.2 31.2 30.5 32 26Z&quot; fill=&quot;#0F172A&quot;/&gt;&lt;circle class=&quot;glow&quot; cx=&quot;32&quot; cy=&quot;8&quot; r=&quot;4&quot; fill=&quot;none&quot; stroke=&quot;#A3E635&quot; stroke-width=&quot;1.5&quot; vector-effect=&quot;non-scaling-stroke&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;script&gt;
+var t=document.getElementById(&#x27;t&#x27;);function go(){t.classList.remove(&#x27;play&#x27;);void t.offsetWidth;t.classList.add(&#x27;play&#x27;)}go();setInterval(go,14000);
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe><img class="print-logo" src="favicon.svg" alt="" style="position:absolute; left:1250px; top:250px; width:500px; height:500px">
+  <p style="position:absolute; left:128px; bottom:64px; width:1300px; font-size:24px; color:#7E8898">Luiz Ihara · Filipe Fragoso · Daniel Caminha · Pedro Martins</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; color:#7E8898; text-align:right">01</p>
+</section>
+<section data-index="1" class="slide" id="heroi" data-transition="fade" style="background:#0B1120; color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:56px">
+  <p style="font-size:24px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#A3E635">O herói desta história não somos nós</p>
+  <div style="display:flex; gap:64px; align-items:center">
+    <div style="flex:1; display:flex; flex-direction:column; gap:32px">
+      <h2 style="font-family:'Sora', Arial, sans-serif; font-size:96px; font-weight:700; line-height:1.05; letter-spacing:-2px; color:#F2F1EC">Conheça o Ricardo.</h2>
+      <p style="font-size:40px; line-height:1.35; color:#F2F1EC">38 anos. Tech lead. 12 anos de carreira.</p>
+      <p style="font-size:32px; line-height:1.45; color:#B8C0CC; width:760px">Ele quer crescer. Só não sabe para onde: virar gestor ou virar referência técnica?</p>
+    </div>
+    <div style="width:720px; display:flex; flex-direction:column; gap:20px">
+      <div style="display:flex; flex-direction:column; gap:10px; background:#131B2E; border:1px solid #243049; border-radius:24px; padding:36px 40px">
+        <p style="font-size:24px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#34D399">Rota A · Gestão</p>
+        <p style="font-family:'Sora', Arial, sans-serif; font-size:40px; font-weight:600; color:#F2F1EC">Tech lead → coordenação</p>
+        <p style="font-size:26px; color:#B8C0CC">Pessoas, negociação, conflitos: o que a cadeira exige?</p>
+      </div>
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:64px; font-weight:800; color:#A3E635; text-align:center">?</p>
+      <div style="display:flex; flex-direction:column; gap:10px; background:#131B2E; border:1px solid #243049; border-radius:24px; padding:36px 40px">
+        <p style="font-size:24px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#34D399">Rota B · Especialista</p>
+        <p style="font-family:'Sora', Arial, sans-serif; font-size:40px; font-weight:600; color:#F2F1EC">Tech lead → staff / arquiteto</p>
+        <p style="font-size:26px; color:#B8C0CC">Carreira em Y: quais sinais técnicos o mercado pede?</p>
+      </div>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1300px; font-size:24px; color:#7E8898">Persona que representa as duas rotas do público-alvo · CareerFlow AI</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; color:#7E8898; text-align:right">02</p>
+</section>
+<section data-index="2" class="slide" id="problema" data-transition="fade" style="background:#0B1120; color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#FF8A7A">O problema · o Ricardo não está sozinho</p>
+  <div style="display:flex; align-items:center; gap:56px">
+    <p style="font-family:'Sora', Arial, sans-serif; font-size:176px; font-weight:800; line-height:1; letter-spacing:-6px; color:#A3E635; white-space:nowrap">516 mil</p>
+    <p style="font-size:40px; line-height:1.3; color:#F2F1EC; width:760px">profissionais de TI de 35 a 44 anos consideraram ou fizeram uma transição de carreira no último ano.</p>
+  </div>
+  <div style="display:flex; gap:24px">
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px; background:#131B2E; border:1px solid #243049; border-top:4px solid #FF8A7A; border-radius:16px; padding:32px">
+      <p style="font-size:24px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#FF8A7A">Tensão</p>
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:600; line-height:1.25; color:#F2F1EC">A IA mudou o que a próxima cadeira exige.</p>
+      <p style="font-size:26px; line-height:1.4; color:#B8C0CC">Mais de 36% já estudam ferramentas de IA para a carreira.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px; background:#131B2E; border:1px solid #243049; border-top:4px solid #FF8A7A; border-radius:16px; padding:32px">
+      <p style="font-size:24px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#FF8A7A">Risco</p>
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:600; line-height:1.25; color:#F2F1EC">Decidir no escuro custa anos na trilha errada.</p>
+      <p style="font-size:26px; line-height:1.4; color:#B8C0CC">Cursos soltos e LinkedIn ajustado por intuição.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px; background:#131B2E; border:1px solid #243049; border-top:4px solid #FF8A7A; border-radius:16px; padding:32px">
+      <p style="font-size:24px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#FF8A7A">Urgência</p>
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:600; line-height:1.25; color:#F2F1EC">A ajuda que funciona não escala.</p>
+      <p style="font-size:26px; line-height:1.4; color:#B8C0CC">Mentoria humana: R$ 1,5 mil a R$ 6 mil por mês.</p>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1400px; font-size:24px; color:#7E8898">Fontes: Brasscom, Relatório Setorial 2025 · Stack Overflow Developer Survey 2025 (faixa 35–44 como proxy)</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; color:#7E8898; text-align:right">03</p>
+</section>
+<section data-index="3" class="slide" id="porque-agora" data-transition="fade" style="background:#070B15; color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:48px">
+  <p style="font-size:24px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#A3E635">Por que agora</p>
+  <h2 style="font-family:'Sora', Arial, sans-serif; font-size:72px; font-weight:700; line-height:1.1; letter-spacing:-1px; color:#F2F1EC; width:1500px">Pela primeira vez, uma mentoria personalizada cabe em R$ 40.</h2>
+  <div style="display:flex; align-items:center; gap:48px">
+    <div style="flex:1; display:flex; flex-direction:column; gap:8px; padding:40px; border:2px dashed #3A465E; border-radius:24px">
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:112px; font-weight:800; letter-spacing:-3px; color:#7E8898; text-decoration:line-through #7E8898">R$ 1.500</p>
+      <p style="font-size:30px; color:#B8C0CC">por mês: o piso de uma mentoria humana</p>
+    </div>
+    <svg viewBox="0 0 120 60" style="width:120px; height:60px; flex:none" aria-hidden="true"><path d="M0 18H72V0L120 30L72 60V42H0Z" fill="#A3E635"/></svg>
+    <div style="flex:1; display:flex; flex-direction:column; gap:8px; padding:40px; background:#131B2E; border:2px solid #A3E635; border-radius:24px">
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:112px; font-weight:800; letter-spacing:-3px; color:#A3E635">R$ 40</p>
+      <p style="font-size:30px; color:#F2F1EC">custo de IA de um Plano de Carreira completo</p>
+    </div>
+  </div>
+  <div style="display:flex; gap:40px">
+    <p style="flex:1; font-size:28px; line-height:1.4; color:#B8C0CC"><b>IA generativa</b> barata o bastante para analisar perfil e mercado de cada pessoa.</p>
+    <p style="flex:1; font-size:28px; line-height:1.4; color:#B8C0CC"><b>Dados abertos</b> de empresas, vagas e rankings para cruzar com o perfil.</p>
+    <p style="flex:1; font-size:28px; line-height:1.4; color:#B8C0CC"><b>Uma geração de sêniores</b> forçada a se reposicionar ao mesmo tempo.</p>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1300px; font-size:24px; color:#7E8898">Custo de IA estimado por etapa na reunião de produto de 30/08/2026 · modelo financeiro v2</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; color:#7E8898; text-align:right">04</p>
+</section>
+<section data-index="4" class="slide" id="solucao" data-transition="fade" style="background:#A3E635; color:#0B1120; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:48px">
+  <p style="font-size:24px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#1F3A0B">A solução</p>
+  <h2 style="font-family:'Sora', Arial, sans-serif; font-size:96px; font-weight:800; line-height:1.04; letter-spacing:-3px; color:#0B1120; width:1500px">Um plano de carreira em um dia. Não em meses de mentoria.</h2>
+  <div style="display:flex; align-items:center; gap:20px">
+    <p style="flex:1; font-family:'Sora', Arial, sans-serif; font-size:30px; font-weight:600; line-height:1.25; background:#F2F1EC; border-radius:20px; padding:28px 32px; color:#0B1120">Perfil comportamental e conquistas</p>
+    <p style="font-family:'Sora', Arial, sans-serif; font-size:56px; font-weight:800; color:#0B1120">+</p>
+    <p style="flex:1; font-family:'Sora', Arial, sans-serif; font-size:30px; font-weight:600; line-height:1.25; background:#F2F1EC; border-radius:20px; padding:28px 32px; color:#0B1120">Mercado real: empresas, vagas e quem chegou lá</p>
+    <p style="font-family:'Sora', Arial, sans-serif; font-size:56px; font-weight:800; color:#0B1120">+</p>
+    <p style="flex:1; font-family:'Sora', Arial, sans-serif; font-size:30px; font-weight:600; line-height:1.25; background:#F2F1EC; border-radius:20px; padding:28px 32px; color:#0B1120">Coach de IA que cobra avanço toda semana</p>
+  </div>
+  <div style="display:flex; gap:24px">
+    <div style="flex:1; display:flex; flex-direction:column; gap:8px; border-left:6px solid #0B1120; padding:8px 24px">
+      <p style="font-size:24px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#1F3A0B">Antes</p>
+      <p style="font-size:30px; line-height:1.35; color:#0B1120">Cursos soltos, currículo por intuição, decisão no escuro.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:8px; border-left:6px solid #0B1120; padding:8px 24px">
+      <p style="font-size:24px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#1F3A0B">Depois</p>
+      <p style="font-size:30px; line-height:1.35; color:#0B1120">Empresas com fit, vagas abertas e a meta desta semana.</p>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1300px; font-size:24px; color:#1F3A0B">CareerFlow AI · a solução</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; color:#1F3A0B; text-align:right">05</p>
+</section>
+<section data-index="5" class="slide" id="demo" data-transition="fade" style="background:#0B1120; color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; gap:64px; align-items:center">
+  <div style="width:560px; display:flex; flex-direction:column; gap:32px">
+    <p style="font-size:24px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#A3E635">Já funciona</p>
+    <h2 style="font-family:'Sora', Arial, sans-serif; font-size:72px; font-weight:700; line-height:1.1; letter-spacing:-1px; color:#F2F1EC">Este é o plano do Ricardo.</h2>
+    <div style="display:flex; flex-direction:column; gap:20px">
+      <p style="font-size:30px; line-height:1.35; color:#F2F1EC"><span style="color:#A3E635">70%</span> de fit com a empresa-alvo, e por quê</p>
+      <p style="font-size:30px; line-height:1.35; color:#F2F1EC"><span style="color:#A3E635">1</span> meta clara para esta semana</p>
+      <p style="font-size:30px; line-height:1.35; color:#F2F1EC"><span style="color:#A3E635">24/7</span> um coach que conhece o plano dele</p>
+    </div>
+    <p style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:600; color:#0B1120; background:#A3E635; border-radius:999px; padding:16px 32px">careerflow.com.br</p>
+  </div>
+  <div style="flex:1; display:flex; flex-direction:column; gap:20px">
+    <img src="prototipo/fit.jpg" alt="Tela Fit por empresa do protótipo: perfil do Ricardo e empresas com percentual de afinidade" style="width:1040px; height:570px; object-fit:contain; background:#0F172A; border:1px solid #243049; border-radius:20px">
+    <div style="display:flex; gap:20px">
+      <img src="prototipo/plan.jpg" alt="Tela Plano de ação com linha do tempo semanal" style="width:510px; height:190px; object-fit:cover; border:1px solid #243049; border-radius:16px">
+      <img src="prototipo/mentor.jpg" alt="Tela Mentoria com atalhos e chat" style="width:510px; height:190px; object-fit:cover; border:1px solid #243049; border-radius:16px">
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1300px; font-size:24px; color:#7E8898">Protótipo navegável em careerflow.com.br · dados de demonstração</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; color:#7E8898; text-align:right">06</p>
+</section>
+<section data-index="6" class="slide" id="mercado" data-transition="fade" style="background:#0B1120; color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:44px">
+  <p style="font-size:24px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#A3E635">Mercado · calculado de baixo para cima</p>
+  <h2 style="font-family:'Sora', Arial, sans-serif; font-size:72px; font-weight:700; line-height:1.1; letter-spacing:-1px; color:#F2F1EC">Precisamos convencer <span style="color:#A3E635">1 em cada 330.</span></h2>
+  <div style="display:flex; flex-direction:column; gap:14px">
+    <div style="display:flex; align-items:center; gap:32px; background:#131B2E; border:1px solid #243049; border-radius:14px; padding:18px 32px; width:1664px">
+      <p style="width:220px; font-size:24px; font-weight:700; letter-spacing:3px; color:#7FA7FF">TAM</p>
+      <p style="width:300px; font-family:'Sora', Arial, sans-serif; font-size:44px; font-weight:700; color:#F2F1EC">3,24 mi</p>
+      <p style="flex:1; font-size:28px; color:#B8C0CC">profissionais no macrossetor de TIC no Brasil</p>
+    </div>
+    <div style="display:flex; align-items:center; gap:32px; background:#131B2E; border:1px solid #243049; border-radius:14px; padding:18px 32px; width:1480px">
+      <p style="width:220px; font-size:24px; font-weight:700; letter-spacing:3px; color:#B79CFF">SAM</p>
+      <p style="width:300px; font-family:'Sora', Arial, sans-serif; font-size:44px; font-weight:700; color:#F2F1EC">949 mil</p>
+      <p style="flex:1; font-size:28px; color:#B8C0CC">entre 35 e 44 anos</p>
+    </div>
+    <div style="display:flex; align-items:center; gap:32px; background:#131B2E; border:1px solid #243049; border-radius:14px; padding:18px 32px; width:1300px">
+      <p style="width:220px; font-size:24px; font-weight:700; letter-spacing:3px; color:#FFC46B">Em movimento</p>
+      <p style="width:300px; font-family:'Sora', Arial, sans-serif; font-size:44px; font-weight:700; color:#F2F1EC">516 mil</p>
+      <p style="flex:1; font-size:28px; color:#B8C0CC">em transição</p>
+    </div>
+    <div style="display:flex; align-items:center; gap:32px; background:#1C2A12; border:2px solid #A3E635; border-radius:14px; padding:18px 32px; width:1300px">
+      <p style="width:220px; font-size:24px; font-weight:700; letter-spacing:3px; color:#A3E635">SOM · Ano 3</p>
+      <p style="width:300px; font-family:'Sora', Arial, sans-serif; font-size:44px; font-weight:700; color:#A3E635">2.873</p>
+      <p style="flex:1; font-size:28px; color:#F2F1EC">compram o Plano · R$ 1,49 mi</p>
+    </div>
+  </div>
+  <p style="font-size:28px; line-height:1.4; color:#B8C0CC; width:1500px">O SOM não é um percentual bonito: é diagnósticos por mês × conversão × preço, o mesmo cálculo da projeção financeira.</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1400px; font-size:24px; color:#7E8898">Fontes: Brasscom, Relatório Setorial 2025 · Stack Overflow Developer Survey 2025 · modelo financeiro v2</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; color:#7E8898; text-align:right">07</p>
+</section>
+<section data-index="7" class="slide" id="modelo" data-transition="fade" style="background:#0B1120; color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:48px">
+  <p style="font-size:24px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#A3E635">Modelo de negócio</p>
+  <h2 style="font-family:'Sora', Arial, sans-serif; font-size:72px; font-weight:700; line-height:1.1; letter-spacing:-1px; color:#F2F1EC; width:1540px">Um ano de CareerFlow custa menos que <span style="color:#A3E635">um mês de mentoria.</span></h2>
+  <div style="display:flex; gap:20px; align-items:stretch">
+    <div style="flex:1; display:flex; flex-direction:column; gap:10px; background:#131B2E; border:1px solid #243049; border-radius:20px; padding:32px">
+      <p style="font-size:24px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#7E8898">Diagnóstico</p>
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:56px; font-weight:800; color:#F2F1EC">Grátis</p>
+      <p style="font-size:26px; line-height:1.4; color:#B8C0CC">Porta de entrada: gera o lead e mostra valor em 5 minutos.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:10px; background:#F2F1EC; border-radius:20px; padding:32px">
+      <p style="font-size:24px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#3B5A10">Plano de Carreira</p>
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:56px; font-weight:800; color:#0B1120">R$ 197</p>
+      <p style="font-size:26px; line-height:1.4; color:#2A3240">Pagamento único. A margem da 1ª compra paga a aquisição.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:10px; background:#131B2E; border:1px solid #243049; border-radius:20px; padding:32px">
+      <p style="font-size:24px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#34D399">Carreira Contínua</p>
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:56px; font-weight:800; color:#F2F1EC">R$ 49/mês</p>
+      <p style="font-size:26px; line-height:1.4; color:#B8C0CC">Coach semanal e vagas novas. 35–45% continuam.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:10px; background:#131B2E; border:1px solid #243049; border-radius:20px; padding:32px">
+      <p style="font-size:24px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#FFC46B">Sob demanda</p>
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:56px; font-weight:800; color:#F2F1EC">R$ 29+</p>
+      <p style="font-size:26px; line-height:1.4; color:#B8C0CC">Entrevista simulada e CV por vaga quando surge a chance.</p>
+    </div>
+  </div>
+  <p style="font-size:28px; line-height:1.4; color:#B8C0CC; width:1540px">Por que assim: o público entra com dor aguda e sai quando resolve. Cobramos forte na entrada e leve na continuidade.</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1400px; font-size:24px; color:#7E8898">Ano 3: Plano R$ 297 + 11 × R$ 69 = R$ 1.056 por ano · piso da mentoria humana: R$ 1.500 por mês</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; color:#7E8898; text-align:right">08</p>
+</section>
+<section data-index="8" class="slide" id="moat" data-transition="fade" style="background:#070B15; color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:56px">
+  <p style="font-size:24px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#A3E635">Diferencial competitivo</p>
+  <h2 style="font-family:'Sora', Arial, sans-serif; font-size:72px; font-weight:700; line-height:1.1; letter-spacing:-1px; color:#F2F1EC">“Por que o ChatGPT não faz isso?”</h2>
+  <div style="display:flex; gap:24px">
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#131B2E; border:1px solid #243049; border-radius:20px; padding:40px">
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:56px; font-weight:800; color:#A3E635">01</p>
+      <h3 style="font-family:'Sora', Arial, sans-serif; font-size:36px; font-weight:700; line-height:1.2; color:#F2F1EC">Dados que o chat não tem</h3>
+      <p style="font-size:28px; line-height:1.4; color:#B8C0CC">Empresas, vagas e o perfil de quem já chegou lá, estruturados e atualizados.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#131B2E; border:1px solid #243049; border-radius:20px; padding:40px">
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:56px; font-weight:800; color:#A3E635">02</p>
+      <h3 style="font-family:'Sora', Arial, sans-serif; font-size:36px; font-weight:700; line-height:1.2; color:#F2F1EC">Protocolo, não conversa</h3>
+      <p style="font-size:28px; line-height:1.4; color:#B8C0CC">Um PDI com metas semanais e memória do histórico. O chat responde; nós acompanhamos.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#131B2E; border:1px solid #243049; border-radius:20px; padding:40px">
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:56px; font-weight:800; color:#A3E635">03</p>
+      <h3 style="font-family:'Sora', Arial, sans-serif; font-size:36px; font-weight:700; line-height:1.2; color:#F2F1EC">Cada plano melhora o próximo</h3>
+      <p style="font-size:28px; line-height:1.4; color:#B8C0CC">Mais usuários, referências mais precisas por cargo e por empresa.</p>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1400px; font-size:24px; color:#7E8898">Moat em construção: a base de referências cresce com o uso e é o ativo mais difícil de copiar</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; color:#7E8898; text-align:right">09</p>
+</section>
+<section data-index="9" class="slide" id="evidencias" data-transition="fade" style="background:#0B1120; color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:44px">
+  <p style="font-size:24px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#A3E635">Tração e validação</p>
+  <h2 style="font-family:'Sora', Arial, sans-serif; font-size:72px; font-weight:700; line-height:1.1; letter-spacing:-1px; color:#F2F1EC; width:1600px">Ainda não temos receita. Temos um teste claro para ela.</h2>
+  <table style="width:1664px; font-size:28px; color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif">
+    <tr style="background:#131B2E">
+      <th style="width:22%; text-align:left; color:#7E8898">Dimensão</th>
+      <th style="width:39%; text-align:left; color:#7E8898">O que já temos</th>
+      <th style="width:39%; text-align:left; color:#A3E635">Meta de corte do piloto</th>
+    </tr>
+    <tr>
+      <td>Aquisição</td>
+      <td>11 respostas do público-alvo</td>
+      <td>+10 entrevistas e teste do preço de R$ 197</td>
+    </tr>
+    <tr style="background:#0F1628">
+      <td>Conversão</td>
+      <td>Protótipo navegável, 9 telas</td>
+      <td>≥ 6% dos diagnósticos viram Plano</td>
+    </tr>
+    <tr>
+      <td>Retenção</td>
+      <td>PDI e check-in semanal desenhados</td>
+      <td>≥ 35% seguem na assinatura</td>
+    </tr>
+    <tr style="background:#0F1628">
+      <td>Monetização</td>
+      <td>Custo de IA estimado por etapa</td>
+      <td>≤ 5% de reembolso · ≤ R$ 40 de IA por Plano</td>
+    </tr>
+  </table>
+  <p style="font-size:28px; line-height:1.4; color:#B8C0CC; width:1500px">Se o piloto bater os quatro números, o modelo está validado. Se não bater, sabemos exatamente qual premissa refazer.</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1400px; font-size:24px; color:#7E8898">Estrutura de tração: aquisição, conversão, retenção e monetização</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; color:#7E8898; text-align:right">10</p>
+</section>
+<section data-index="10" class="slide" id="numeros" data-transition="fade" style="background:#0B1120; color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:32px">
+  <p style="font-size:24px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#A3E635">Unit economics e projeção · 3 anos</p>
+  <h2 style="font-family:'Sora', Arial, sans-serif; font-size:72px; font-weight:700; line-height:1.1; letter-spacing:-1px; color:#F2F1EC">O Plano paga a aquisição. A assinatura vira margem.</h2>
+  <div style="display:flex; gap:64px; align-items:end">
+    <div style="width:600px; display:flex; flex-direction:column; gap:12px">
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:176px; font-weight:800; line-height:1; letter-spacing:-6px; color:#A3E635">4,3×</p>
+      <p style="font-size:32px; color:#F2F1EC">LTV / CAC no Ano 3</p>
+      <p style="font-size:26px; line-height:1.4; color:#B8C0CC">CAC de R$ 140, coberto pela margem de R$ 210 da primeira compra.</p>
+    </div>
+    <div style="flex:1; display:flex; gap:40px; align-items:end; border-bottom:2px solid #3A465E; padding:0 24px">
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px; align-items:center">
+        <p style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:700; color:#F2F1EC">R$ 66 mil</p>
+        <div style="width:150px; height:13px; background:#34D399; border-radius:8px 8px 0 0"></div>
+        <p style="font-size:24px; color:#7E8898">Ano 1</p>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px; align-items:center">
+        <p style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:700; color:#F2F1EC">R$ 465 mil</p>
+        <div style="width:150px; height:89px; background:#34D399; border-radius:8px 8px 0 0"></div>
+        <p style="font-size:24px; color:#7E8898">Ano 2</p>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px; align-items:center">
+        <p style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:700; color:#A3E635">R$ 1,57 mi</p>
+        <div style="width:150px; height:300px; background:#A3E635; border-radius:8px 8px 0 0"></div>
+        <p style="font-size:24px; color:#7E8898">Ano 3</p>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex; gap:24px">
+    <p style="flex:1; font-size:28px; color:#F2F1EC; background:#131B2E; border-radius:14px; padding:20px 28px"><b>83%</b> de margem bruta</p>
+    <p style="flex:1; font-size:28px; color:#F2F1EC; background:#131B2E; border-radius:14px; padding:20px 28px"><b>Mês 31</b> · EBITDA positivo</p>
+    <p style="flex:1; font-size:28px; color:#F2F1EC; background:#131B2E; border-radius:14px; padding:20px 28px"><b>R$ 750 mil</b> de capital externo</p>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1400px; font-size:24px; color:#7E8898">Receita anual projetada · modelo financeiro v2, 36 meses, planilha FIAP</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; color:#7E8898; text-align:right">11</p>
+</section>
+<section data-index="11" class="slide" id="equipe" data-transition="fade" style="background:#0B1120; color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:48px">
+  <p style="font-size:24px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#A3E635">Equipe</p>
+  <h2 style="font-family:'Sora', Arial, sans-serif; font-size:72px; font-weight:700; line-height:1.1; letter-spacing:-1px; color:#F2F1EC">Quatro fundadores. Uma tese em execução.</h2>
+  <div style="display:flex; gap:40px">
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px">
+      <img src="team/LuizIhara.jpeg" alt="Luiz Ihara" style="width:386px; height:420px; object-fit:cover; border-radius:20px">
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:700; color:#F2F1EC">Luiz Ihara</p>
+      <p style="font-size:24px; color:#A3E635">[papel no projeto]</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px">
+      <img src="team/FilipeFragoso.jpeg" alt="Filipe Fragoso" style="width:386px; height:420px; object-fit:cover; border-radius:20px">
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:700; color:#F2F1EC">Filipe Fragoso</p>
+      <p style="font-size:24px; color:#A3E635">[papel no projeto]</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px">
+      <img src="team/DanielCaminha.jpeg" alt="Daniel Caminha" style="width:386px; height:420px; object-fit:cover; border-radius:20px">
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:700; color:#F2F1EC">Daniel Caminha</p>
+      <p style="font-size:24px; color:#A3E635">[papel no projeto]</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px">
+      <img src="team/PedroMartins.jpeg" alt="Pedro Martins" style="width:386px; height:420px; object-fit:cover; border-radius:20px">
+      <p style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:700; color:#F2F1EC">Pedro Martins</p>
+      <p style="font-size:24px; color:#A3E635">[papel no projeto]</p>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1400px; font-size:24px; color:#7E8898">[Uma frase sobre por que este time resolve este problema] · MBA FIAP 2026 · orientação: Prof. Ricardo Esposto</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; color:#7E8898; text-align:right">12</p>
+</section>
+<section data-index="12" class="slide" id="ask" data-transition="fade" style="background:#070B15; color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:44px">
+  <p style="font-size:24px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#A3E635">O pedido</p>
+  <h2 style="font-family:'Sora', Arial, sans-serif; font-size:76px; font-weight:800; line-height:1.08; letter-spacing:-2px; color:#F2F1EC; width:1600px">Pedimos <span style="color:#A3E635">R$ 150 mil</span> para provar quatro números em 12 meses.</h2>
+  <div style="display:flex; gap:80px">
+    <div style="flex:1; display:flex; flex-direction:column; gap:20px">
+      <p style="font-size:24px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#7E8898">Uso do Ano 1 · R$ 252 mil com os sócios</p>
+      <div style="display:flex; flex-direction:column; gap:8px">
+        <p style="font-size:28px; color:#F2F1EC"><b>43%</b> Equipe</p>
+        <div style="width:344px; height:18px; background:#A3E635; border-radius:9px"></div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px">
+        <p style="font-size:28px; color:#F2F1EC"><b>36%</b> Produto e tecnologia</p>
+        <div style="width:288px; height:18px; background:#34D399; border-radius:9px"></div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px">
+        <p style="font-size:28px; color:#F2F1EC"><b>14%</b> Aquisição de clientes</p>
+        <div style="width:112px; height:18px; background:#7FA7FF; border-radius:9px"></div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px">
+        <p style="font-size:28px; color:#F2F1EC"><b>7%</b> Administrativo e jurídico</p>
+        <div style="width:56px; height:18px; background:#FFC46B; border-radius:9px"></div>
+      </div>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:14px">
+      <p style="font-size:24px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#7E8898">Os quatro números que destravam a seed</p>
+      <p style="font-size:28px; color:#F2F1EC; background:#131B2E; border-left:4px solid #A3E635; border-radius:10px; padding:16px 24px"><b>≥ 6%</b> diagnóstico → Plano</p>
+      <p style="font-size:28px; color:#F2F1EC; background:#131B2E; border-left:4px solid #A3E635; border-radius:10px; padding:16px 24px"><b>≥ 35%</b> Plano → assinatura</p>
+      <p style="font-size:28px; color:#F2F1EC; background:#131B2E; border-left:4px solid #A3E635; border-radius:10px; padding:16px 24px"><b>≤ 5%</b> de reembolso em 7 dias</p>
+      <p style="font-size:28px; color:#F2F1EC; background:#131B2E; border-left:4px solid #A3E635; border-radius:10px; padding:16px 24px"><b>≤ R$ 40</b> de IA por Plano</p>
+      <p style="font-size:28px; color:#A3E635">→ seed de R$ 600 mil no Ano 2</p>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1400px; font-size:24px; color:#7E8898">R$ 150 mil anjo + R$ 150 mil dos sócios · governança: [acordo de sócios, vesting e cap table antes do aporte]</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; color:#7E8898; text-align:right">13</p>
+</section>
+<section data-index="13" class="slide" id="fechamento" data-transition="fade" style="background:radial-gradient(circle at 80% 45%, #17223B 0%, #0B1120 60%); color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; justify-content:center; gap:32px">
+  <h2 style="font-family:'Sora', Arial, sans-serif; font-size:64px; font-weight:600; line-height:1.15; letter-spacing:-1px; color:#B8C0CC; width:1000px">O Ricardo não precisa de mais um curso.</h2>
+  <h1 style="font-family:'Sora', Arial, sans-serif; font-size:128px; font-weight:800; line-height:1.02; letter-spacing:-4px; color:#A3E635; width:1040px">Precisa de direção.</h1>
+  <p style="font-size:36px; line-height:1.4; color:#F2F1EC; width:960px">Experiência é potência. Direção é movimento.</p>
+  <p style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:600; color:#0B1120; background:#A3E635; border-radius:999px; padding:16px 36px; width:420px; text-align:center">careerflow.com.br</p>
+  <iframe class="embed" title="Logo CareerFlow animado" style="position:absolute; left:1250px; top:250px; width:500px; height:500px; border:0" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;/head&gt;&lt;body&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden}
+body{display:flex;align-items:center;justify-content:center}
+.t{width:92%;aspect-ratio:1;border-radius:22%;background:#0F172A;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(255,255,255,.08),0 40px 90px rgba(0,0,0,.55)}
+svg{width:74%;height:74%;overflow:visible}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;opacity:0}
+.core,.head,.glow{opacity:0;transform-box:fill-box;transform-origin:center}
+@keyframes d{0%{opacity:0;stroke-dashoffset:1}2%{opacity:1}100%{opacity:1;stroke-dashoffset:0}}
+@keyframes p{from{opacity:0;transform:scale(.2) rotate(-45deg)}to{opacity:1;transform:none}}
+@keyframes r{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+@keyframes g{0%{opacity:.6;transform:scale(1)}100%{opacity:0;transform:scale(5)}}
+.play .bl{animation:d .55s cubic-bezier(.5,0,.2,1) forwards .3s}
+.play .bc{animation:d .5s cubic-bezier(.5,0,.2,1) forwards .7s}
+.play .br{animation:d .55s cubic-bezier(.5,0,.2,1) forwards 1.1s}
+.play .core{animation:p .35s cubic-bezier(.3,1.6,.5,1) forwards 1.6s}
+.play .st{animation:d .45s cubic-bezier(.6,0,.2,1) forwards 1.85s}
+.play .head{animation:r .55s cubic-bezier(.2,1.4,.4,1) forwards 2.15s}
+.play .glow{animation:g 1.2s ease-out forwards 2.5s}
+&lt;/style&gt;&lt;div class=&quot;t&quot; id=&quot;t&quot;&gt;&lt;svg viewBox=&quot;0 0 64 64&quot;&gt;&lt;path class=&quot;draw bl&quot; pathLength=&quot;1&quot; d=&quot;M11.5 52C18.5 47 25.5 41 32 34&quot; fill=&quot;none&quot; stroke=&quot;#A3E635&quot; stroke-width=&quot;8&quot; stroke-linecap=&quot;square&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;path class=&quot;draw bc&quot; pathLength=&quot;1&quot; d=&quot;M32 53V34&quot; fill=&quot;none&quot; stroke=&quot;#34D399&quot; stroke-width=&quot;8&quot; stroke-linecap=&quot;square&quot;/&gt;&lt;path class=&quot;draw br&quot; pathLength=&quot;1&quot; d=&quot;M52.5 52C45.5 47 38.5 41 32 34&quot; fill=&quot;none&quot; stroke=&quot;#F8FAFC&quot; stroke-width=&quot;8&quot; stroke-linecap=&quot;square&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;path class=&quot;draw st&quot; pathLength=&quot;1&quot; d=&quot;M32 34C32 28 32 21 32 14&quot; fill=&quot;none&quot; stroke=&quot;#A3E635&quot; stroke-width=&quot;8&quot; stroke-linecap=&quot;square&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;path class=&quot;head&quot; d=&quot;M22.5 16L32 5.5L41.5 16L36 15V18H28V15L22.5 16Z&quot; fill=&quot;#A3E635&quot;/&gt;&lt;path class=&quot;core&quot; d=&quot;M32 26C32.8 30.5 35.5 33.2 40 34C35.5 34.8 32.8 37.5 32 42C31.2 37.5 28.5 34.8 24 34C28.5 33.2 31.2 30.5 32 26Z&quot; fill=&quot;#0F172A&quot;/&gt;&lt;circle class=&quot;glow&quot; cx=&quot;32&quot; cy=&quot;8&quot; r=&quot;4&quot; fill=&quot;none&quot; stroke=&quot;#A3E635&quot; stroke-width=&quot;1.5&quot; vector-effect=&quot;non-scaling-stroke&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;script&gt;
+var t=document.getElementById(&#x27;t&#x27;);function go(){t.classList.remove(&#x27;play&#x27;);void t.offsetWidth;t.classList.add(&#x27;play&#x27;)}go();setInterval(go,14000);
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe><img class="print-logo" src="favicon.svg" alt="" style="position:absolute; left:1250px; top:250px; width:500px; height:500px">
+  <p style="position:absolute; left:128px; bottom:64px; width:1300px; font-size:24px; color:#7E8898">Obrigado · Luiz Ihara · Filipe Fragoso · Daniel Caminha · Pedro Martins</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; color:#7E8898; text-align:right">14</p>
+</section>
+<section data-index="14" class="slide" id="faq-a" data-transition="fade" style="background:#111827; color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:48px">
+  <p style="font-size:24px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#FFC46B">Apêndice · perguntas da banca</p>
+  <h2 style="font-family:'Sora', Arial, sans-serif; font-size:64px; font-weight:700; line-height:1.1; letter-spacing:-1px; color:#F2F1EC">Produto e concorrência</h2>
+  <div style="display:flex; gap:24px">
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#0B1120; border:1px solid #2A3550; border-radius:20px; padding:36px">
+      <h3 style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:700; line-height:1.25; color:#A3E635">Por que não usar o ChatGPT?</h3>
+      <p style="font-size:26px; line-height:1.45; color:#D5DAE2">Ele não tem dados estruturados de empresas, vagas e referências, nem acompanha um PDI. O usuário teria que montar tudo sozinho, toda vez. Nós entregamos o plano pronto e cobramos a execução.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#0B1120; border:1px solid #2A3550; border-radius:20px; padding:36px">
+      <h3 style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:700; line-height:1.25; color:#A3E635">Quem é o concorrente direto?</h3>
+      <p style="font-size:26px; line-height:1.45; color:#D5DAE2">Mentoria humana (R$ 1,5 a 6 mil por mês) e ferramentas de currículo e vagas. Nenhuma junta diagnóstico, plano e acompanhamento. [cite aqui o concorrente analisado pelo grupo]</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#0B1120; border:1px solid #2A3550; border-radius:20px; padding:36px">
+      <h3 style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:700; line-height:1.25; color:#A3E635">De onde vêm os dados? E a LGPD?</h3>
+      <p style="font-size:26px; line-height:1.45; color:#D5DAE2">O próprio usuário envia o PDF do LinkedIn, sem raspagem. Perfis de referência são anonimizados, e a visibilidade para headhunters só existe com opt-in.</p>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1400px; font-size:24px; color:#7E8898">Slide de reserva: use só se a pergunta aparecer</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; color:#7E8898; text-align:right">A1</p>
+</section>
+<section data-index="15" class="slide" id="faq-b" data-transition="fade" style="background:#111827; color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:48px">
+  <p style="font-size:24px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#FFC46B">Apêndice · perguntas da banca</p>
+  <h2 style="font-family:'Sora', Arial, sans-serif; font-size:64px; font-weight:700; line-height:1.1; letter-spacing:-1px; color:#F2F1EC">Números e riscos</h2>
+  <div style="display:flex; gap:24px">
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#0B1120; border:1px solid #2A3550; border-radius:20px; padding:36px">
+      <h3 style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:700; line-height:1.25; color:#A3E635">Como chegaram ao CAC de R$ 140?</h3>
+      <p style="font-size:26px; line-height:1.45; color:#D5DAE2">No Ano 1 a aquisição é orgânica, com conteúdo dos fundadores no LinkedIn (CAC de R$ 120). No Ano 3, R$ 140 contra R$ 210 de margem do Plano: a primeira compra paga o CAC.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#0B1120; border:1px solid #2A3550; border-radius:20px; padding:36px">
+      <h3 style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:700; line-height:1.25; color:#A3E635">E o arrependimento de 7 dias?</h3>
+      <p style="font-size:26px; line-height:1.45; color:#D5DAE2">Está no modelo: 5% de reembolso. Liberação gradual do Plano e política clara, validadas com assessoria jurídica antes de escalar.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#0B1120; border:1px solid #2A3550; border-radius:20px; padding:36px">
+      <h3 style="font-family:'Sora', Arial, sans-serif; font-size:32px; font-weight:700; line-height:1.25; color:#A3E635">O caixa aguenta até a seed?</h3>
+      <p style="font-size:26px; line-height:1.45; color:#D5DAE2">O caixa mínimo é de R$ 90 mil no fim do Ano 1, com 7,2 meses de runway. A seed de R$ 600 mil entra no início do Ano 2, condicionada aos quatro números do piloto.</p>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1400px; font-size:24px; color:#7E8898">Slide de reserva: use só se a pergunta aparecer · detalhes na planilha FIAP v2</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; color:#7E8898; text-align:right">A2</p>
+</section>
+</div></div>
+<div id="notes"><div class="head"><span id="notesTitle">Roteiro</span><span id="clock">0:00 / 5:00</span></div><div id="notesBody"></div></div>
+<nav id="ui" aria-label="Controles da apresentação">
+  <button id="prev" type="button" aria-label="Slide anterior" title="Anterior (←)">←</button>
+  <span id="counter">01 / 16</span>
+  <button id="next" type="button" aria-label="Próximo slide" title="Próximo (→)">→</button>
+  <button id="notesBtn" type="button" aria-label="Roteiro de fala" title="Roteiro de fala e cronômetro (N)">✎</button>
+  <button id="fsBtn" type="button" aria-label="Tela cheia" title="Tela cheia (F)">⛶</button>
+  <button id="helpBtn" type="button" aria-label="Atalhos" title="Atalhos (?)">?</button>
+</nav>
+<div id="help"><div>
+  <b>← → espaço</b> navegar<br>
+  <b>Home / End</b> primeiro / último<br>
+  <b>N</b> roteiro de fala + cronômetro<br>
+  <b>R</b> zerar o cronômetro<br>
+  <b>F</b> tela cheia<br>
+  <b>Esc</b> fechar<br>
+  <span style="color:#7E8898">Slides 15 e 16 são o apêndice de perguntas da banca.</span>
+</div></div>
+<script>
+(() => {
+  const NOTES = ["[0:00–0:15 · 15 s] O PORQUÊ PRIMEIRO (Círculo Dourado). Entre em silêncio, olhe para a banca e só então fale.\n\n\"Ninguém deveria decidir o próximo passo da carreira no escuro.\" [pausa de 2 segundos]\n\n\"Nós somos o CareerFlow AI. E hoje eu quero apresentar vocês a alguém que decide no escuro todos os dias.\"\n\nNão diga o nome do produto duas vezes. Não explique tecnologia. O logo se monta sozinho enquanto você fala: deixe ele trabalhar por você.\n\nElevator pitch de reserva (se só houver 30 s): \"Nós ajudamos profissionais sêniores de tecnologia a decidir o próximo passo da carreira com um plano que cruza perfil, mercado real e mentoria com IA, ao contrário de mentorias caras e cursos genéricos.\"", "[0:15–0:40 · 25 s] O CLIENTE É O HERÓI (Jornada do Herói). Conte como história, não como slide.\n\n\"Conheça o Ricardo. 38 anos, tech lead, 12 anos de carreira.\" [pausa]\n\n\"Ele é bom no que faz. E exatamente por isso está preso numa encruzilhada: vira gestor? Ou vira referência técnica, staff, arquiteto?\" [aponte as duas rotas]\n\n\"Ninguém diz ao Ricardo o que o mercado quer dele. Então ele faz o que todo mundo faz: chuta.\"\n\nDica de palco: use a técnica do farol, alternando o olhar entre os avaliadores. O Ricardo vai voltar no fim; guarde o nome.", "[0:40–1:10 · 30 s] O PROBLEMA COMO CONFLITO ECONÔMICO: tensão, risco, urgência. Aversão à perda: fale do custo de NÃO agir.\n\n\"O Ricardo não está sozinho.\" [aponte o número] \"Quinhentos e dezesseis mil profissionais de TI da idade dele consideraram ou fizeram uma transição de carreira no último ano.\" [pausa de 2 segundos: deixe o número pousar]\n\n\"A tensão: a IA mudou o que a próxima cadeira exige.\"\n\"O risco: quem decide no escuro perde anos na trilha errada.\"\n\"A urgência: a ajuda que funciona, a mentoria, custa de mil e quinhentos a seis mil reais por mês. Não escala.\"\n\nFrase de transição: \"Então por que ninguém resolveu isso antes?\"", "[1:10–1:30 · 20 s] TIMING: o que mudou no mundo que torna isso possível AGORA.\n\n\"Porque, até pouco tempo, isso era impossível.\" [aponte o R$ 1.500 riscado]\n\n\"Uma mentoria humana começa em mil e quinhentos reais por mês. Hoje, com IA generativa, a análise que um mentor faria custa quarenta reais para entregar.\" [pausa]\n\n\"A IA ficou barata, os dados de mercado ficaram abertos, e uma geração inteira de sêniores precisa se reposicionar ao mesmo tempo. A janela é agora.\"", "[1:30–1:55 · 25 s] O MOMENTO \"AHA\". Este é o único slide claro do deck: a virada visual da história. Fale mais devagar aqui.\n\n\"O CareerFlow faz em um dia o que uma mentoria leva meses para fazer.\" [pausa]\n\n\"Ele cruza três coisas que hoje vivem separadas: quem o Ricardo é, o que o mercado real está pedindo, e um coach que acompanha a execução toda semana.\"\n\n\"Antes: cursos soltos, currículo por intuição. Depois: empresas com fit, vagas abertas e uma meta clara para esta semana.\"\n\nTransição: \"E isso não está no papel. Já dá para navegar.\"", "[1:55–2:20 · 25 s] PROVA DE QUE FUNCIONA. Callback: é o MESMO Ricardo do slide 2.\n\n\"Este é o plano do Ricardo, no nosso protótipo, que já está no ar.\" [aponte a tela grande]\n\n\"Ele vê que tem setenta por cento de fit com a empresa que quer, e exatamente o que falta para chegar lá. Recebe uma meta para esta semana. E tem um coach que conhece o plano dele e cobra avanço.\"\n\n\"Qualquer um aqui pode abrir agora: careerflow ponto com ponto br.\"\n\nSe a banca permitir, mostre 10 segundos ao vivo; se a internet falhar, esta tela já basta.", "[2:20–2:40 · 20 s] MERCADO É AMBIÇÃO VIÁVEL, NÃO TAMANHO. Âncora no número pequeno, não no grande.\n\n\"São três milhões de profissionais no ecossistema de TI. Quase um milhão na idade do Ricardo. Meio milhão em movimento.\" [desça o funil com a mão]\n\n\"Mas o número que importa é este: para o plano do Ano 3, precisamos convencer uma pessoa em cada trezentas e trinta.\" [pausa]\n\n\"E o cálculo é de baixo para cima: diagnósticos por mês, vezes conversão, vezes preço. É o mesmo cálculo da nossa projeção financeira.\"", "[2:40–3:05 · 25 s] COMO A OPORTUNIDADE VIRA RECEITA. Âncora de preço: compare com a mentoria.\n\n\"Um ano inteiro de CareerFlow custa menos que um único mês de mentoria.\" [pausa: deixe a comparação trabalhar]\n\n\"O diagnóstico é grátis e gera o interesse. O Plano de Carreira custa cento e noventa e sete reais, pagamento único, e a margem dessa primeira compra já paga o custo de aquisição. Quem quer continuar evoluindo assina a Carreira Contínua por quarenta e nove reais por mês. E quando surge uma entrevista, compra sob demanda.\"\n\n\"Cobramos forte na dor aguda e leve na continuidade, porque é assim que esse cliente compra.\"", "[3:05–3:25 · 20 s] O SLIDE QUE PROTEGE A AMBIÇÃO. Faça a pergunta que a banca está pensando antes que ela faça.\n\n\"A pergunta óbvia é: por que o ChatGPT não faz isso?\" [pausa curta]\n\n\"Três razões. Primeiro, dados: o chat não sabe quais empresas e vagas combinam com o Ricardo, nem o perfil de quem já chegou onde ele quer chegar. Segundo, protocolo: o chat responde; nós acompanhamos um plano toda semana. Terceiro, cada plano que entregamos melhora o próximo.\"\n\nSeja honesto se perguntarem: o moat está em construção e cresce com o uso.", "[3:25–3:45 · 20 s] TRAÇÃO É EVIDÊNCIA. Transparência gera mais confiança que número inflado.\n\n\"Vou ser direto: ainda não temos receita.\" [pausa: a honestidade desarma]\n\n\"Temos onze respostas do público-alvo, um protótipo navegável e o custo de IA estimado por etapa. E, mais importante, temos um teste claro: se o piloto bater estes quatro números, seis por cento de conversão, trinta e cinco por cento de assinatura, até cinco por cento de reembolso e até quarenta reais de IA por Plano, o modelo está validado.\"\n\n\"Se não bater, sabemos exatamente qual premissa refazer.\"\n\nATUALIZE ANTES DO CP05: se a 2ª rodada de entrevistas já tiver resultado, troque a linha de Aquisição pelo dado real.", "[3:45–4:10 · 25 s] A NARRATIVA ENCONTRA A MATEMÁTICA. Um número dominante: 4,3×.\n\n\"Agora, os números.\" [aponte o 4,3×]\n\n\"Cada cliente que adquirimos gera quatro vírgula três vezes o que custou para trazê-lo. E o mais importante: o custo de aquisição, cento e quarenta reais, é pago já na primeira compra, que deixa duzentos e dez reais de margem.\"\n\n\"A receita vai de sessenta e seis mil no primeiro ano para um milhão e meio no terceiro, com oitenta e três por cento de margem bruta e EBITDA positivo a partir do mês trinta e um.\"\n\nNão leia os três números de baixo; eles estão ali para quem quiser olhar.", "[4:10–4:25 · 15 s] EQUIPE É ARGUMENTO DE EXECUÇÃO, NÃO BIOGRAFIA. Uma frase por pessoa, no máximo.\n\n\"Somos quatro fundadores, e [frase curta sobre por que este time: experiência em tecnologia, liderança e carreira, vivendo a dor do Ricardo].\"\n\nPreencha os papéis antes de apresentar (ex.: produto, tecnologia, negócio, dados). O que a banca quer ouvir: o time é complementar e consegue aprender, ajustar e entregar.", "[4:25–4:50 · 25 s] O ASK COMO CONCLUSÃO INEVITÁVEL: valor, destino e marcos. Olhe para a banca, não para o slide.\n\n\"E é por isso que estamos aqui.\" [pausa]\n\n\"Pedimos cento e cinquenta mil reais, que somados aos cento e cinquenta mil dos sócios financiam doze meses de piloto. Quase oitenta por cento vai para equipe e produto.\"\n\n\"Com esse dinheiro, provamos os quatro números que vocês acabaram de ver. Batidos os quatro, abrimos a seed de seiscentos mil reais no segundo ano, com o modelo validado.\"\n\nO capital é combustível para provar, não para testar ideias soltas. Confirme a governança (acordo de sócios, vesting) antes de citar.", "[4:50–5:00 · 10 s] CALLBACK: feche com o Ricardo do início. Sem euforia; com convicção.\n\n\"O Ricardo não precisa de mais um curso.\" [pausa]\n\n\"Ele precisa de direção.\" [pausa longa: 3 segundos, olhando para a banca]\n\n\"Obrigado.\"\n\nNão diga \"é isso, pessoal\" nem \"alguma pergunta?\". Espere em silêncio: o silêncio depois da última frase é o que faz ela ficar.", "APÊNDICE: não faz parte dos 5 minutos. Pule direto para cá quando a pergunta vier.\n\nRegra para responder: 1) agradeça a pergunta em 2 palavras; 2) responda em uma frase; 3) dê uma evidência; 4) pare. Respostas curtas passam segurança.", "APÊNDICE: não faz parte dos 5 minutos.\n\nSe a pergunta for sobre churn: \"Assumimos que a maioria sai ao resolver a dor aguda; por isso só 35 a 45% seguem na assinatura e o churn é de 9% a 5,5% ao mês. O modelo não depende de reter para sempre: depende de a primeira compra pagar a aquisição.\""];
+  const slides = [...document.querySelectorAll('.slide')];
+  const stage = document.getElementById('stage');
+  const counter = document.getElementById('counter');
+  const notesBody = document.getElementById('notesBody');
+  const notesTitle = document.getElementById('notesTitle');
+  const clock = document.getElementById('clock');
+  const notesBtn = document.getElementById('notesBtn');
+  let index = Math.min(slides.length - 1, Math.max(0, (parseInt(location.hash.slice(1), 10) || 1) - 1));
+  let started = null;
+
+  function fit() {
+    const s = Math.min(innerWidth / 1920, innerHeight / 1080);
+    stage.style.transform = `scale(${s})`;
+  }
+  function label(i) { return i >= 14 ? `A${i - 13}` : String(i + 1).padStart(2, '0'); }
+  function go(n) {
+    index = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((el, i) => el.classList.toggle('active', i === index));
+    const active = slides[index];
+    active.querySelectorAll('iframe.embed').forEach(f => { f.srcdoc = f.srcdoc; });  // recomeça o logo
+    counter.textContent = `${label(index)} / ${slides.length}`;
+    notesTitle.textContent = `Roteiro · slide ${label(index)}`;
+    notesBody.textContent = NOTES[index] || '';
+    history.replaceState(null, '', `#${index + 1}`);
+    document.title = `${label(index)} · CareerFlow AI — Pitch Final`;
+    if (started === null && index > 0) started = Date.now();
+  }
+  function tick() {
+    const secs = started ? Math.floor((Date.now() - started) / 1000) : 0;
+    clock.textContent = `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')} / 5:00`;
+    clock.classList.toggle('over', secs > 300);
+  }
+  function toggleNotes() {
+    document.body.classList.toggle('show-notes');
+    notesBtn.classList.toggle('on', document.body.classList.contains('show-notes'));
+  }
+  function fullscreen() {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.();
+  }
+
+  document.getElementById('prev').addEventListener('click', () => go(index - 1));
+  document.getElementById('next').addEventListener('click', () => go(index + 1));
+  notesBtn.addEventListener('click', toggleNotes);
+  document.getElementById('fsBtn').addEventListener('click', fullscreen);
+  document.getElementById('helpBtn').addEventListener('click', () => document.body.classList.toggle('show-help'));
+  document.getElementById('help').addEventListener('click', () => document.body.classList.remove('show-help'));
+  addEventListener('keydown', e => {
+    const k = e.key.toLowerCase();
+    if (k === 'escape') { document.body.classList.remove('show-help', 'show-notes'); notesBtn.classList.remove('on'); return; }
+    if (['arrowright', 'arrowdown', 'pagedown', ' '].includes(k)) { e.preventDefault(); go(index + 1); }
+    else if (['arrowleft', 'arrowup', 'pageup', 'backspace'].includes(k)) { e.preventDefault(); go(index - 1); }
+    else if (k === 'home') go(0);
+    else if (k === 'end') go(slides.length - 1);
+    else if (k === 'n') toggleNotes();
+    else if (k === 'f') fullscreen();
+    else if (k === 'r') { started = Date.now(); tick(); }
+    else if (k === '?' || k === 'h') document.body.classList.toggle('show-help');
+  });
+  let tx = 0;
+  addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, { passive: true });
+  addEventListener('touchend', e => { const d = e.changedTouches[0].screenX - tx; if (Math.abs(d) > 50) go(index + (d < 0 ? 1 : -1)); }, { passive: true });
+  let idle;
+  addEventListener('mousemove', () => { document.body.classList.remove('idle'); clearTimeout(idle); idle = setTimeout(() => document.body.classList.add('idle'), 2500); });
+  addEventListener('resize', fit);
+  fit(); go(index); setInterval(tick, 500);
+})();
+</script>
+</body>
+</html>
