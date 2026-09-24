@@ -27,7 +27,7 @@
   .slide table { border-collapse: collapse; }
   .slide th, .slide td { padding: .55em .7em; border-bottom: 1px solid #243049; text-align: left; font-weight: 400; }
   .slide th { font-weight: 700; font-size: 24px; letter-spacing: 1px; text-transform: uppercase; }
-  .print-logo { display: none; }
+  .slide img.print-logo { display: none; }
 
   #ui { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); display: flex; align-items: center; gap: 6px;
     padding: 6px; border-radius: 999px; background: rgba(11,17,32,.82); border: 1px solid rgba(255,255,255,.12);
@@ -64,7 +64,7 @@
     #stage { position: static; transform: none !important; width: 1920px; height: auto; }
     .slide { position: relative; opacity: 1 !important; visibility: visible !important; transition: none; break-after: page; page-break-after: always; }
     .embed, #ui, #back, #notes, #help { display: none !important; }
-    .print-logo { display: block; position: absolute; border-radius: 22%; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+    .slide img.print-logo { display: block; position: absolute; border-radius: 22%; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
   }
 </style>
 </head>
