@@ -1,0 +1,56 @@
+Prezado Professor Ricardo Esposto,
+
+Gostaríamos de informar que o "Entregável Parcial 04 — Protótipo + Pitch Deck" do projeto CareerFlow AI já está disponível para sua avaliação.
+
+Todos os links abaixo são públicos e não exigem permissão de acesso.
+
+1. Protótipo navegável (aplicação em produção):
+https://careerflow.com.br/
+Acesso de demonstração: clique em "Entrar" e escolha o perfil Ricardo (Premium), ou use o usuário winners e a senha fiap2026.
+
+2. Pitch Deck — versão para a banca de 5 minutos (CP05):
+https://luizihara.github.io/fiap.tcc/pitch.html
+14 slides + 2 slides de reserva para perguntas. Navegação pelas setas do teclado; a tecla N abre o roteiro de fala com cronômetro.
+
+3. Pitch Deck de 5 minutos em PDF (16 páginas: 14 slides + 2 de reserva):
+https://luizihara.github.io/fiap.tcc/files/CareerFlow_AI_Pitch_5min.pdf
+
+4. Pitch Deck — apresentação completa:
+https://luizihara.github.io/fiap.tcc/apresentacao.html
+
+5. Apresentação completa em PDF (20 páginas):
+https://luizihara.github.io/fiap.tcc/files/CareerFlow_AI_Pitch_Deck.pdf
+
+6. Fluxos e jornada do usuário (telas e fluxos do protótipo):
+https://luizihara.github.io/fiap.tcc/fluxos-jornada.html
+
+7. Portal principal do projeto (visão geral e todas as entregas):
+https://luizihara.github.io/fiap.tcc/index.html
+
+Onde encontrar cada elemento no pitch de 5 minutos (links 2 e 3):
+- Problema: slides 2 a 4
+- Público-alvo: slide 2 (persona Ricardo, profissional sênior de tecnologia)
+- Solução e proposta de valor: slide 5
+- Protótipo: slide 6 (telas reais da aplicação)
+- Mercado (TAM, SAM e SOM): slide 7
+- Modelo de negócio: slide 8
+- Diferencial competitivo: slide 9
+- Viabilidade (validação, unit economics e projeção de 3 anos): slides 10 e 11
+- Equipe: slide 12
+- Próximos passos e pedido de investimento: slide 13
+
+Materiais de apoio à viabilidade:
+- Planilha de projeção financeira v2 (Excel): https://luizihara.github.io/fiap.tcc/files/CareerFlow_AI_Projecao_Financeira_v2.xlsx
+- Mercado em R$ (TAM, SAM e SOM): https://luizihara.github.io/fiap.tcc/mercado-tam-sam-som.html
+- Mercado em pessoas: https://luizihara.github.io/fiap.tcc/mercado-pessoas-tam-sam-som.html
+
+Integrantes do Grupo:
+- Luiz Ihara (RM368484)
+- Filipe Fragoso (RM368500)
+- Daniel Caminha (RM366740)
+- Pedro Martins (RM368543)
+
+Agradecemos o acompanhamento e permanecemos à inteira disposição para eventuais esclarecimentos e orientações.
+
+Atenciosamente,
+Grupo CareerFlow AI
