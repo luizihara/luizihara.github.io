@@ -41,6 +41,12 @@
     padding: 8px 12px; border-radius: 8px; background: rgba(11,17,32,.6); transition: opacity .3s; }
   #back:hover { color: #F2F1EC; }
   body.idle #back { opacity: 0; }
+  #copyForAi { position: fixed; right: 16px; top: 14px; z-index: 10; padding: 8px 12px;
+    border: 1px solid rgba(255,255,255,.12); border-radius: 8px; background: rgba(11,17,32,.6);
+    color: #B8C0CC; font: 600 13px 'DM Sans', sans-serif; cursor: pointer; opacity: .7;
+    transition: opacity .2s, color .2s, background .2s; }
+  #copyForAi:hover, #copyForAi:focus-visible { opacity: 1; color: #F2F1EC; background: rgba(11,17,32,.9); }
+  #copyForAi[hidden] { display: none; }
 
   #notes { position: fixed; left: 50%; bottom: 70px; transform: translateX(-50%); width: min(980px, calc(100vw - 32px));
     max-height: 42vh; overflow: auto; z-index: 11; display: none; padding: 18px 22px 20px; border-radius: 14px;
@@ -63,13 +69,14 @@
     #viewport { position: static; display: block; }
     #stage { position: static; transform: none !important; width: 1920px; height: auto; }
     .slide { position: relative; opacity: 1 !important; visibility: visible !important; transition: none; break-after: page; page-break-after: always; }
-    .embed, #ui, #back, #notes, #help { display: none !important; }
+    .embed, #ui, #back, #copyForAi, #notes, #help { display: none !important; }
     .slide img.print-logo { display: block; position: absolute; border-radius: 22%; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
   }
 </style>
 </head>
 <body>
 <a id="back" href="index.html">← Portal do TCC</a>
+<button id="copyForAi" type="button" aria-live="polite" title="Copia os 16 slides e o roteiro de fala em Markdown" hidden>Copiar para IA</button>
 <div id="viewport"><div id="stage">
 <section data-index="0" class="slide" id="cover" data-transition="fade" style="background:radial-gradient(circle at 80% 45%, #17223B 0%, #0B1120 60%); color:#F2F1EC; font-family:'DM Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; justify-content:center; gap:40px">
   <p style="font-size:24px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#A3E635">CareerFlow AI · TCC MBA FIAP 2026</p>
@@ -488,12 +495,37 @@
 (() => {
   const NOTES = ["[0:00–0:15 · 15 s] O PORQUÊ PRIMEIRO (Círculo Dourado). Entre em silêncio, olhe para a banca e só então fale.\n\n\"Ninguém deveria decidir o próximo passo da carreira no escuro.\" [pausa de 2 segundos]\n\n\"Nós somos o CareerFlow AI. E hoje eu quero apresentar vocês a alguém que decide no escuro todos os dias.\"\n\nNão diga o nome do produto duas vezes. Não explique tecnologia. O logo se monta sozinho enquanto você fala: deixe ele trabalhar por você.\n\nElevator pitch de reserva (se só houver 30 s): \"Nós ajudamos profissionais sêniores de tecnologia a decidir o próximo passo da carreira com um plano que cruza perfil, mercado real e mentoria com IA, ao contrário de mentorias caras e cursos genéricos.\"", "[0:15–0:40 · 25 s] O CLIENTE É O HERÓI (Jornada do Herói). Conte como história, não como slide.\n\n\"Conheça o Ricardo. 38 anos, tech lead, 12 anos de carreira.\" [pausa]\n\n\"Ele é bom no que faz. E exatamente por isso está preso numa encruzilhada: vira gestor? Ou vira referência técnica, staff, arquiteto?\" [aponte as duas rotas]\n\n\"Ninguém diz ao Ricardo o que o mercado quer dele. Então ele faz o que todo mundo faz: chuta.\"\n\nDica de palco: use a técnica do farol, alternando o olhar entre os avaliadores. O Ricardo vai voltar no fim; guarde o nome.", "[0:40–1:10 · 30 s] O PROBLEMA COMO CONFLITO ECONÔMICO: tensão, risco, urgência. Aversão à perda: fale do custo de NÃO agir.\n\n\"O Ricardo não está sozinho.\" [aponte o número] \"Quinhentos e dezesseis mil profissionais de TI da idade dele consideraram ou fizeram uma transição de carreira no último ano.\" [pausa de 2 segundos: deixe o número pousar]\n\n\"A tensão: a IA mudou o que a próxima cadeira exige.\"\n\"O risco: quem decide no escuro perde anos na trilha errada.\"\n\"A urgência: a ajuda que funciona, a mentoria, custa de mil e quinhentos a seis mil reais por mês. Não escala.\"\n\nFrase de transição: \"Então por que ninguém resolveu isso antes?\"", "[1:10–1:30 · 20 s] TIMING: o que mudou no mundo que torna isso possível AGORA.\n\n\"Porque, até pouco tempo, isso era impossível.\" [aponte o R$ 1.500 riscado]\n\n\"Uma mentoria humana começa em mil e quinhentos reais por mês. Hoje, com IA generativa, a análise que um mentor faria custa quarenta reais para entregar.\" [pausa]\n\n\"A IA ficou barata, os dados de mercado ficaram abertos, e uma geração inteira de sêniores precisa se reposicionar ao mesmo tempo. A janela é agora.\"", "[1:30–1:55 · 25 s] O MOMENTO \"AHA\". Este é o único slide claro do deck: a virada visual da história. Fale mais devagar aqui.\n\n\"O CareerFlow faz em um dia o que uma mentoria leva meses para fazer.\" [pausa]\n\n\"Ele cruza três coisas que hoje vivem separadas: quem o Ricardo é, o que o mercado real está pedindo, e um coach que acompanha a execução toda semana.\"\n\n\"Antes: cursos soltos, currículo por intuição. Depois: empresas com fit, vagas abertas e uma meta clara para esta semana.\"\n\nTransição: \"E isso não está no papel. Já dá para navegar.\"", "[1:55–2:20 · 25 s] PROVA DE QUE FUNCIONA. Callback: é o MESMO Ricardo do slide 2.\n\n\"Este é o plano do Ricardo, no nosso protótipo, que já está no ar.\" [aponte a tela grande]\n\n\"Ele vê que tem setenta por cento de fit com a empresa que quer, e exatamente o que falta para chegar lá. Recebe uma meta para esta semana. E tem um coach que conhece o plano dele e cobra avanço.\"\n\n\"Qualquer um aqui pode abrir agora: careerflow ponto com ponto br.\"\n\nSe a banca permitir, mostre 10 segundos ao vivo; se a internet falhar, esta tela já basta.", "[2:20–2:40 · 20 s] MERCADO É AMBIÇÃO VIÁVEL, NÃO TAMANHO. Âncora no número pequeno, não no grande.\n\n\"São três milhões de profissionais no ecossistema de TI. Quase um milhão na idade do Ricardo. Meio milhão em movimento.\" [desça o funil com a mão]\n\n\"Mas o número que importa é este: para o plano do Ano 3, precisamos convencer uma pessoa em cada trezentas e trinta.\" [pausa]\n\n\"E o cálculo é de baixo para cima: diagnósticos por mês, vezes conversão, vezes preço. É o mesmo cálculo da nossa projeção financeira.\"", "[2:40–3:05 · 25 s] COMO A OPORTUNIDADE VIRA RECEITA. Âncora de preço: compare com a mentoria.\n\n\"Um ano inteiro de CareerFlow custa menos que um único mês de mentoria.\" [pausa: deixe a comparação trabalhar]\n\n\"O diagnóstico é grátis e gera o interesse. O Plano de Carreira custa cento e noventa e sete reais, pagamento único, e a margem dessa primeira compra já paga o custo de aquisição. Quem quer continuar evoluindo assina a Carreira Contínua por quarenta e nove reais por mês. E quando surge uma entrevista, compra sob demanda.\"\n\n\"Cobramos forte na dor aguda e leve na continuidade, porque é assim que esse cliente compra.\"", "[3:05–3:25 · 20 s] O SLIDE QUE PROTEGE A AMBIÇÃO. Faça a pergunta que a banca está pensando antes que ela faça.\n\n\"A pergunta óbvia é: por que o ChatGPT não faz isso?\" [pausa curta]\n\n\"Três razões. Primeiro, dados: o chat não sabe quais empresas e vagas combinam com o Ricardo, nem o perfil de quem já chegou onde ele quer chegar. Segundo, protocolo: o chat responde; nós acompanhamos um plano toda semana. Terceiro, cada plano que entregamos melhora o próximo.\"\n\nSeja honesto se perguntarem: o moat está em construção e cresce com o uso.", "[3:25–3:45 · 20 s] TRAÇÃO É EVIDÊNCIA. Transparência gera mais confiança que número inflado.\n\n\"Vou ser direto: ainda não temos receita.\" [pausa: a honestidade desarma]\n\n\"Temos onze respostas do público-alvo, um protótipo navegável e o custo de IA estimado por etapa. E, mais importante, temos um teste claro: se o piloto bater estes quatro números, seis por cento de conversão, trinta e cinco por cento de assinatura, até cinco por cento de reembolso e até quarenta reais de IA por Plano, o modelo está validado.\"\n\n\"Se não bater, sabemos exatamente qual premissa refazer.\"\n\nATUALIZE ANTES DO CP05: se a 2ª rodada de entrevistas já tiver resultado, troque a linha de Aquisição pelo dado real.", "[3:45–4:10 · 25 s] A NARRATIVA ENCONTRA A MATEMÁTICA. Um número dominante: 4,3×.\n\n\"Agora, os números.\" [aponte o 4,3×]\n\n\"Cada cliente que adquirimos gera quatro vírgula três vezes o que custou para trazê-lo. E o mais importante: o custo de aquisição, cento e quarenta reais, é pago já na primeira compra, que deixa duzentos e dez reais de margem.\"\n\n\"A receita vai de sessenta e seis mil no primeiro ano para um milhão e meio no terceiro, com oitenta e três por cento de margem bruta e EBITDA positivo a partir do mês trinta e um.\"\n\nNão leia os três números de baixo; eles estão ali para quem quiser olhar.", "[4:10–4:25 · 15 s] EQUIPE É ARGUMENTO DE EXECUÇÃO, NÃO BIOGRAFIA. Não leia os cargos: a banca lê.\n\n\"Somos o nosso próprio cliente: quatro profissionais sêniores que já enfrentaram a decisão do Ricardo.\" [pausa]\n\nEmende direto no pedido: \"…e é por isso que estamos aqui.\"\n\nNa banca, cada pergunta tem dono: números e CAC com o Pedro; produto e IA com o Luiz; método comportamental e LGPD com o Daniel (\"isso não é só um ChatGPT?\" é dele); mercado e roadmap com o Filipe.", "[4:25–4:50 · 25 s] O ASK COMO CONCLUSÃO INEVITÁVEL: valor, destino e marcos. Olhe para a banca, não para o slide.\n\n\"E é por isso que estamos aqui.\" [pausa]\n\n\"Pedimos cento e cinquenta mil reais, que somados aos cento e cinquenta mil dos sócios financiam doze meses de piloto. Quase oitenta por cento vai para equipe e produto.\"\n\n\"Com esse dinheiro, provamos os quatro números que vocês acabaram de ver. Batidos os quatro, abrimos a seed de seiscentos mil reais no segundo ano, com o modelo validado.\"\n\nO capital é combustível para provar, não para testar ideias soltas. Confirme a governança (acordo de sócios, vesting) antes de citar.", "[4:50–5:00 · 10 s] CALLBACK: feche com o Ricardo do início. Sem euforia; com convicção.\n\n\"O Ricardo não precisa de mais um curso.\" [pausa]\n\n\"Ele precisa de direção.\" [pausa longa: 3 segundos, olhando para a banca]\n\n\"Obrigado.\"\n\nNão diga \"é isso, pessoal\" nem \"alguma pergunta?\". Espere em silêncio: o silêncio depois da última frase é o que faz ela ficar.", "APÊNDICE: não faz parte dos 5 minutos. Pule direto para cá quando a pergunta vier.\n\nRegra para responder: 1) agradeça a pergunta em 2 palavras; 2) responda em uma frase; 3) dê uma evidência; 4) pare. Respostas curtas passam segurança.", "APÊNDICE: não faz parte dos 5 minutos.\n\nSe a pergunta for sobre churn: \"Assumimos que a maioria sai ao resolver a dor aguda; por isso só 35 a 45% seguem na assinatura e o churn é de 9% a 5,5% ao mês. O modelo não depende de reter para sempre: depende de a primeira compra pagar a aquisição.\""];
   const slides = [...document.querySelectorAll('.slide')];
+  const slideExplanations = [
+    'Abre com a tese central: profissionais sêniores não deveriam decidir a carreira sem direção. Apresenta o produto e a equipe.',
+    'Introduz Ricardo, a persona que conduz a história, e sua decisão entre liderança de pessoas e carreira técnica.',
+    'Dimensiona a dor da transição: mudança nas exigências do mercado, risco de escolher a trilha errada e custo da mentoria humana.',
+    'Explica por que a solução é viável agora: IA generativa, dados de mercado e custo estimado de entrega de um plano.',
+    'Mostra a proposta de valor: juntar perfil, mercado real e acompanhamento semanal em um plano de carreira feito em um dia.',
+    'Demonstra o protótipo com o caso de Ricardo: afinidade com empresa-alvo, plano semanal e coach. As telas usam dados de demonstração.',
+    'Apresenta o funil TAM, SAM, público em movimento e SOM projetado para o terceiro ano, com cálculo de baixo para cima.',
+    'Descreve as quatro ofertas e seus preços: diagnóstico gratuito, plano avulso, assinatura e serviços sob demanda.',
+    'Responde à objeção sobre usar um chat genérico: dados estruturados, protocolo de acompanhamento e base de referências em construção.',
+    'Separa evidência atual de metas do piloto: ainda não há receita; há respostas de pesquisa, protótipo e critérios de validação.',
+    'Mostra a projeção financeira de três anos, a relação LTV/CAC, margem, receita e momento esperado de EBITDA positivo.',
+    'Apresenta os quatro fundadores e vincula suas experiências à capacidade de executar o projeto.',
+    'Formula o pedido de investimento, a alocação prevista dos recursos e os quatro indicadores que condicionam a seed.',
+    'Fecha retomando Ricardo e a mensagem central: ele precisa de direção para transformar experiência em movimento.',
+    'Primeiro slide de reserva para perguntas sobre produto, concorrência, origem dos dados e LGPD.',
+    'Segundo slide de reserva para perguntas sobre CAC, reembolso, caixa e seed.'
+  ];
+  const slideTitles = [
+    'Abertura', 'Ricardo e a decisão de carreira', 'O problema', 'Por que agora',
+    'A solução', 'Protótipo', 'Mercado', 'Modelo de negócio', 'Diferencial competitivo',
+    'Tração e validação', 'Unit economics e projeção', 'Equipe', 'O pedido',
+    'Fechamento', 'Perguntas: produto e concorrência', 'Perguntas: números e riscos'
+  ];
   const stage = document.getElementById('stage');
   const counter = document.getElementById('counter');
   const notesBody = document.getElementById('notesBody');
   const notesTitle = document.getElementById('notesTitle');
   const clock = document.getElementById('clock');
   const notesBtn = document.getElementById('notesBtn');
+  const copyBtn = document.getElementById('copyForAi');
   let index = Math.min(slides.length - 1, Math.max(0, (parseInt(location.hash.slice(1), 10) || 1) - 1));
   let started = null;
 
@@ -502,12 +534,73 @@
     stage.style.transform = `translate(-50%, -50%) scale(${s})`;
   }
   function label(i) { return i >= 14 ? `A${i - 13}` : String(i + 1).padStart(2, '0'); }
+  function slideMarkdown(slide, i) {
+    const content = [];
+    for (const el of slide.querySelectorAll('h1, h2, h3, p, table, img[alt]')) {
+      if (el.closest('table') && el.tagName !== 'TABLE') continue;
+      if (el.classList.contains('print-logo')) continue;
+      if (el.tagName === 'TABLE') {
+        const rows = [...el.rows].map(row => [...row.cells].map(cell => cell.textContent.replace(/\s+/g, ' ').trim()));
+        if (rows.length) {
+          const table = ['| ' + rows[0].join(' | ') + ' |', '| ' + rows[0].map(() => '---').join(' | ') + ' |'];
+          table.push(...rows.slice(1).map(row => '| ' + row.join(' | ') + ' |'));
+          content.push('\n' + table.join('\n') + '\n');
+        }
+        continue;
+      }
+      if (el.tagName === 'IMG') {
+        if (el.alt) content.push(`- Visual: ${el.alt}`);
+        continue;
+      }
+      const value = el.textContent.replace(/\s+/g, ' ').trim();
+      if (!value || value === label(i)) continue;
+      content.push(el.matches('h1, h2, h3') ? `- **${value}**` : `- ${value}`);
+    }
+    const section = i < 14 ? `Slide ${label(i)}` : `Apêndice ${label(i)}`;
+    return `### ${section} — ${slideTitles[i]}\n\n**Papel na narrativa:** ${slideExplanations[i]}\n\n**Conteúdo exibido:**\n\n${content.join('\n')}\n\n**Roteiro de fala e orientação de apresentação:**\n\n${NOTES[i]}`;
+  }
+  function presentationMarkdown() {
+    const intro = `# CareerFlow AI — apresentação completa do pitch final\n\n` +
+      `TCC do MBA FIAP 2026 · Luiz Ihara, Filipe Fragoso, Daniel Caminha e Pedro Martins.\n` +
+      `Apresentação: https://luizihara.github.io/fiap.tcc/pitch.html#1\n` +
+      `Protótipo: https://careerflow.com.br\n\n` +
+      `## Objetivo deste material\n\n` +
+      `Este Markdown reúne os 14 slides do pitch de aproximadamente cinco minutos e os dois slides de reserva para perguntas da banca. Em cada slide há uma explicação do papel na história, todo o texto exibido (inclusive fontes, ressalvas e números) e o roteiro de fala integral da apresentação. As telas do protótipo usam dados de demonstração. Metas, projeções e hipóteses devem ser avaliadas como tais, separadas das evidências já obtidas.\n\n` +
+      `Para revisar com uma IA: procure pontos de melhoria na clareza, na sequência da narrativa, na consistência entre números e fala e na força das evidências. Sugira como ensaiar a apresentação em cinco minutos, quais trechos simplificar e quais perguntas da banca preparar. Não trate metas do piloto ou projeções financeiras como resultados comprovados.\n\n` +
+      `## Pitch principal — slides 01 a 14\n\n`;
+    return intro + slides.map((slide, i) =>
+      (i === 14 ? '## Apêndice — slides de reserva para perguntas\n\n' : '') + slideMarkdown(slide, i)
+    ).join('\n\n---\n\n') + '\n';
+  }
+  async function copyPresentation() {
+    const markdown = presentationMarkdown();
+    try {
+      if (navigator.clipboard?.writeText && window.isSecureContext) {
+        await navigator.clipboard.writeText(markdown);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = markdown;
+        textarea.style.cssText = 'position:fixed;left:-9999px;top:0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        const copied = document.execCommand('copy');
+        textarea.remove();
+        if (!copied) throw new Error('Falha ao copiar');
+      }
+      copyBtn.textContent = 'Copiado ✓';
+    } catch {
+      copyBtn.textContent = 'Não foi possível copiar';
+    }
+    clearTimeout(copyBtn.resetTimer);
+    copyBtn.resetTimer = setTimeout(() => { copyBtn.textContent = 'Copiar para IA'; }, 3000);
+  }
   function go(n) {
     index = Math.max(0, Math.min(slides.length - 1, n));
     slides.forEach((el, i) => el.classList.toggle('active', i === index));
     const active = slides[index];
     active.querySelectorAll('img.embed').forEach(im => { im.src = im.src.split('?')[0] + '?r=' + Date.now(); });  // recomeça o GIF do logo
     counter.textContent = `${label(index)} / ${slides.length}`;
+    copyBtn.hidden = index !== 0;
     notesTitle.textContent = `Roteiro · slide ${label(index)}`;
     notesBody.textContent = NOTES[index] || '';
     history.replaceState(null, '', `#${index + 1}`);
@@ -528,6 +621,7 @@
   }
 
   document.getElementById('prev').addEventListener('click', () => go(index - 1));
+  copyBtn.addEventListener('click', copyPresentation);
   document.getElementById('next').addEventListener('click', () => go(index + 1));
   notesBtn.addEventListener('click', toggleNotes);
   document.getElementById('fsBtn').addEventListener('click', fullscreen);
@@ -535,6 +629,7 @@
   document.getElementById('help').addEventListener('click', () => document.body.classList.remove('show-help'));
   addEventListener('keydown', e => {
     const k = e.key.toLowerCase();
+    if (e.target === copyBtn && (k === ' ' || k === 'enter')) return;
     if (k === 'escape') { document.body.classList.remove('show-help', 'show-notes'); notesBtn.classList.remove('on'); return; }
     if (['arrowright', 'arrowdown', 'pagedown', ' '].includes(k)) { e.preventDefault(); go(index + 1); }
     else if (['arrowleft', 'arrowup', 'pageup', 'backspace'].includes(k)) { e.preventDefault(); go(index - 1); }
